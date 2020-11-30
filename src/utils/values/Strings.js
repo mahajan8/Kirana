@@ -51,6 +51,7 @@ export const Strings = {
   whatsapp: 'Whatsapp',
   moreOptions: 'More Options',
   done: 'Done',
+  notNow: 'Not now',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -94,4 +95,10 @@ export const Strings = {
   referSuccessTitle: 'Congratulations you got 3 free deliveries',
   referSuccessSub:
     'Do you want more? Share your referral code with your friends now.',
+  locationOff: 'Device Location is off',
+  locationOffSub:
+    'Turning on device Location will ensure accurate and hassle free delivery',
+  turnOn: 'Turn on',
+  ownStore: 'Own a kirana store?',
+  joinAsShop: 'Join as a shopkeeper',
 };

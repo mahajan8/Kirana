@@ -49,4 +49,15 @@ export const styles = EStyleSheet.create({
     paddingVertical: 0,
     marginTop: '24rem',
   },
+  ownStore: {
+    lineHeight: '18rem',
+    fontSize: '12rem',
+    color: '#424242',
+    alignSelf: 'center',
+    marginTop: '20vrem',
+    fontWeight: '500',
+  },
+  greenText: {
+    color: Colors.themeGreen,
+  },
 });

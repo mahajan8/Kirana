@@ -11,6 +11,7 @@ import {Strings} from '../../../utils/values/Strings';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import Button from '../../commons/components/Button';
 import {commonStyles} from '../../commons/styles/commonStyles';
+import LocationCheck from '../../commons/components/LocationCheck';
 
 let pages = [
   {title: Strings.introTitle1, subText: Strings.introSubText1},
@@ -86,7 +87,12 @@ const Onboarding = () => {
             // }
           }}
         />
+        <Text style={styles.ownStore}>
+          {Strings.ownStore}
+          <Text style={styles.greenText}> {Strings.joinAsShop}</Text>
+        </Text>
       </View>
+      <LocationCheck />
     </SafeArea>
   );
 };
