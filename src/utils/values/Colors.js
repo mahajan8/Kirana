@@ -1,0 +1,15 @@
+export const Colors = {
+  themeGreen: '#43b02a',
+  introImageBackground: '#ecf6ff',
+  titleText: '#212121',
+  subTitleText: '#616161',
+  seperatorColor: '#eeeeee',
+  borderGray: '#bdbdbd',
+  grayText: '#999999',
+  lightGray: '#9e9e9e',
+  darkGray: '#757575',
+  lightGreen: '#e8f4e2',
+  darkGreen: '#0e492f',
+  white: '#FFF',
+  lightStatusBar: '#fafafa',
+};
