@@ -1,114 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, {Component} from 'react';
+import {Dimensions, LogBox, Text} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Provider} from 'react-redux';
+import AppRouter from './src/utils/Router';
+import store from './src/utils/Store';
+import {Fonts} from './src/utils/values/Fonts';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+// Extended Style Sheet Configuration
+let {height, width} = Dimensions.get('window');
+let [trueWidth, trueHeight] =
+  width > height ? [height, width] : [width, height];
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+EStyleSheet.build({
+  $rem: trueWidth / 360,
+  $vrem: trueHeight / 700,
 });
 
-export default App;
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    if (Text.defaultProps == null) {
+      Text.defaultProps = {};
+    }
+    Text.defaultProps.allowFontScaling = false;
+    LogBox.ignoreAllLogs(true);
+
+    let oldRender = Text.render;
+    Text.render = function (...args) {
+      let origin = oldRender.call(this, ...args);
+      let style = origin.props.style;
+
+      return React.cloneElement(origin, {
+        style: [
+          {
+            fontFamily: style
+              ? style.fontWeight > 600 || style.fontWeight === 'bold'
+                ? Fonts.semiBold
+                : style.fontWeight > 400
+                ? Fonts.medium
+                : Fonts.regular
+              : Fonts.medium,
+          },
+          origin.props.style,
+        ],
+      });
+    };
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    );
+  }
+}

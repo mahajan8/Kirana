@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <circle id="rfbm34qeya" cx="14" cy="14" r="14"/>
+        <mask id="3nl2losh7b" width="28" height="28" x="0" y="0" fill="#fff" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox">
+            <use xlink:href="#rfbm34qeya"/>
+        </mask>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-16 -83) translate(0 74) translate(16 9)">
+                    <circle cx="14" cy="14" r="11" fill="#373737"/>
+                    <use stroke="#212121" stroke-dasharray="1" mask="url(#3nl2losh7b)" xlink:href="#rfbm34qeya"/>
+                    <g fill="#FFF" fill-rule="nonzero">
+                        <path d="M10.912 8.306c-.106-.127-.283-.173-.439-.119-.437.152-.912.23-1.411.23-2.39 0-4.334-1.888-4.334-4.208 0-1.397.71-2.697 1.899-3.479.135-.089.2-.249.163-.402-.036-.154-.166-.27-.328-.294C6.278.008 6.094 0 5.91 0 2.65 0 0 2.574 0 5.74c0 3.164 2.65 5.738 5.91 5.738 2.068 0 3.95-1.02 5.032-2.73.087-.139.075-.315-.03-.442z" transform="translate(8.5 8.5)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

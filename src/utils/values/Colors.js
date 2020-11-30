@@ -1,6 +1,6 @@
 export const Colors = {
   themeGreen: '#43b02a',
-  introImageBackground: '#ecf6ff',
+  lightBlue: '#ecf6ff',
   titleText: '#212121',
   subTitleText: '#616161',
   seperatorColor: '#eeeeee',

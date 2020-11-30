@@ -18,7 +18,7 @@ export const AppConfig = {
     // otpTimer: 40,
   },
   staging: {
-    // baseUrl: 'http://15.206.252.200/api/',
+    baseUrl: 'http://15.206.252.200/api/',
     // mediaBaseUrl: 'https://d3unaxpny5psa2.cloudfront.net/',
     // storageBaseUrl: 'https://kiranakart-dev.s3.ap-south-1.amazonaws.com/',
     // googlePlacesKey: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',

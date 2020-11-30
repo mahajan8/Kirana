@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="117" height="123" viewBox="0 0 117 123">
+    <defs>
+        <path id="py743wrf7a" d="M15.582 0h100v123h-115V15c0-8.284 6.716-15 15-15z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-17 -231) translate(17 231) translate(.418)">
+                    <mask id="fi3ljrdmxb" fill="#fff">
+                        <use xlink:href="#py743wrf7a"/>
+                    </mask>
+                    <path fill="#E8F4E2" d="M-20 52.5L.582-7l50.186.162c35.83.115 64.814 29.194 64.814 65.023 0 35.797-29.018 64.815-64.815 64.815h-2.343c-35.432 0-64.926-27.207-67.78-62.523L-20 52.5z" mask="url(#fi3ljrdmxb)"/>
+                </g>
+                <g>
+                    <text fill="#757575" font-family="Poppins-Regular, Poppins" font-size="10" transform="translate(-17 -231) translate(17 231) translate(25 30)">
+                        <tspan x=".81" y="11">In Store</tspan>
+                    </text>
+                    <g fill="#43B02A">
+                        <path d="M14.222 0H1.778C.8 0 0 .8 0 1.778v12.444C0 15.2.8 16 1.778 16h12.444C15.2 16 16 15.2 16 14.222V1.778C16 .8 15.2 0 14.222 0zm-8 12.444L1.778 8.171l1.244-1.197 3.2 3.077 6.756-6.495 1.244 1.196-8 7.692z" transform="translate(-17 -231) translate(17 231) translate(25 30) translate(45)"/>
+                    </g>
+                </g>
+                <g transform="translate(-17 -231) translate(17 231) translate(21 58)">
+                    <rect width="65" height="30" fill="#F5F5F5" fill-rule="nonzero" stroke="#43B02A" rx="8"/>
+                    <path stroke="#62AD41" stroke-width="1.2" d="M44.5 7L44.5 23"/>
+                    <text fill="#333" font-family="Poppins-Medium, Poppins" font-size="14" font-weight="400">
+                        <tspan x="24" y="20">110</tspan>
+                    </text>
+                    <path fill="#333" fill-rule="nonzero" d="M19.738 11.429c.144 0 .262-.12.262-.268v-.893c0-.148-.118-.268-.262-.268h-6.476c-.144 0-.262.12-.262.268v.999c0 .148.118.268.262.268h1.866c.597 0 1.056.222 1.334.608h-3.2c-.144 0-.262.12-.262.268v.893c0 .147.118.267.262.267h3.473c-.136.806-.72 1.31-1.635 1.31h-1.838c-.144 0-.262.12-.262.267v1.183c0 .075.03.146.084.197l3.611 3.401c.048.046.112.071.178.071h1.806c.239 0 .354-.3.178-.465l-3.3-3.109c1.673-.052 2.868-1.191 3.025-2.855h1.155c.145 0 .263-.12.263-.267v-.893c0-.148-.118-.268-.262-.268h-1.284c-.077-.258-.181-.497-.312-.714h1.596z"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
