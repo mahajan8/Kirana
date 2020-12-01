@@ -22,6 +22,7 @@ const Header = (props) => {
     comp,
     containerStyle,
     onBack,
+    headerRight,
   } = props;
 
   return (
@@ -49,6 +50,10 @@ const Header = (props) => {
         </TouchableOpacity>
 
         {type == 1 && <Text style={styles.type1Title}>{title}</Text>}
+
+        {headerRight && (
+          <View style={styles.headerRightContainer}>{headerRight}</View>
+        )}
       </View>
 
       {type == 0 ? (
@@ -99,6 +104,12 @@ const styles = EStyleSheet.create({
     fontSize: '16rem',
     fontWeight: '500',
     marginLeft: '16rem',
+  },
+  headerRightContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

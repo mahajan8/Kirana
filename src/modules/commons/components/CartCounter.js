@@ -1,0 +1,42 @@
+import React from 'react';
+import {View, Text} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Colors} from '../../../utils/values/Colors';
+import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import Location from '../../../assets/images/location.svg';
+
+const CartCounter = () => {
+  return (
+    <View style={styles.container}>
+      <Location
+        width={EStyleSheet.value('14rem')}
+        height={EStyleSheet.value('14rem')}
+      />
+      <Text style={styles.count}>0</Text>
+    </View>
+  );
+};
+
+const styles = EStyleSheet.create({
+  container: {
+    paddingVertical: '4vrem',
+    paddingHorizontal: '10rem',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: '50rem',
+    backgroundColor: Colors.themeGreen,
+  },
+  count: {
+    fontSize: '14rem',
+    fontWeight: '500',
+    color: Colors.white,
+    marginLeft: '5rem',
+  },
+});
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartCounter);

@@ -1,0 +1,40 @@
+import {Platform} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
+
+export const styles = EStyleSheet.create({
+  container: {
+    paddingTop: '16vrem',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingLeft: '16rem',
+    borderRadius: '8rem',
+    height: '40vrem',
+    marginBottom: '20vrem',
+  },
+  textInput: {
+    fontSize: '12rem',
+    fontFamily: Fonts.medium,
+    color: Colors.titleText,
+    marginHorizontal: '10rem',
+    lineHeight: '20rem',
+    ...(Platform.OS == 'android' && {
+      paddingVertical: 0,
+      paddingHorizontal: 0,
+    }),
+    flex: 1,
+  },
+  nearbyText: {
+    fontSize: '14rem',
+    fontWeight: '900',
+    color: Colors.titleText,
+    marginBottom: '12vrem',
+  },
+  list: {
+    paddingHorizontal: '16rem',
+  },
+});

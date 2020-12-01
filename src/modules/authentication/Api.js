@@ -51,7 +51,7 @@ export const verifyOtp = (pars) => {
           let token = res.data.data.api_token;
           dispatch(setToken(token));
           setAuthToken(token);
-          Actions.reset('onboarding');
+          Actions.reset('searchLocation');
         } else {
           alert(res.data.message);
         }

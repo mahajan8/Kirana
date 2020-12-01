@@ -41,10 +41,9 @@ const SearchLocation = (props) => {
         };
         // props.saveDetails(location);
         // Actions.pop();
-        // Actions.replace('addAddRess', {
-        //   location,
-        //   saveDetails: props.saveDetails,
-        // });
+        Actions.addAddress({
+          location,
+        });
         props.setLocation(location);
       }}
       query={{
@@ -120,10 +119,9 @@ const SearchLocation = (props) => {
           pars,
           (location) => {
             props.setLoading(false);
-            // Actions.replace('addAddRess', {
-            //   location,
-            //   saveDetails: props.saveDetails,
-            // });
+            Actions.addAddress({
+              location,
+            });
             props.setLocation(location);
           },
           () => props.setLoading(false),

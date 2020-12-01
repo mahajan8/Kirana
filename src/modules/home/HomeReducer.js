@@ -1,7 +1,9 @@
 import {SET_LOCATION} from '../onboarding/ActionTypes';
+import {SET_ADDRESS} from './ActionTypes';
 
 const INITIAL_STATE = {
   location: null,
+  addresses: [],
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +12,11 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         location: action.location,
+      };
+    case SET_ADDRESS:
+      return {
+        ...state,
+        addresses: [...state.addresses, action.address],
       };
     default:
       return state;

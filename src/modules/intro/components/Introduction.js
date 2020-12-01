@@ -83,7 +83,7 @@ const Onboarding = () => {
             // if (active != pages.length - 1) {
             //   carousel.current.snapToNext();
             // } else {
-            Actions.selectLanguage();
+            Actions.login();
             // }
           }}
         />

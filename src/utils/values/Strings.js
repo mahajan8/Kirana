@@ -53,6 +53,8 @@ export const Strings = {
   done: 'Done',
   notNow: 'Not now',
   currentLocation: 'Current Location',
+  edit: 'Edit',
+  delete: 'Delete',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -62,6 +64,12 @@ export const Strings = {
   preResend: "I didn't recieve the code ",
   resend: 'Resend Code',
   resendWait: 'Resend Code in ',
+  location: 'Location',
+  address: 'Address',
+  home: 'Home',
+  work: 'Work',
+  other: 'Other',
+  addAddress: 'Add Address',
 
   accepting: 'By continuing, I accept ',
   terms: 'terms of service',
@@ -75,11 +83,13 @@ export const Strings = {
   closeTime: 'Close Time',
   currency: '\u20B9',
 
-  helpSupport: 'Help & Support',
-  sales: 'Sales Report',
-  changeLanguage: 'Change Language',
-  videoGuide: 'Video Guide',
+  myOrders: 'My Orders',
+  addresses: 'Addresses',
+  referFriends: 'Refer Friends',
+  settings: 'Account Settings',
+  support: 'Customer Support',
   termsConditions: 'Terms & Conditions',
+  privacyPolicy: 'Privacy Policy',
   logout: 'Logout',
 
   orders: 'Orders',
@@ -87,6 +97,8 @@ export const Strings = {
   referal: 'Referral Code',
 
   continuePhoneNumber: 'Continue with Phone Number',
+  drawerFreeDeliverySub:
+    'Refer friends and get free deliveries. It’s a Win-Win!',
   referHeadline: 'Refer you friends & Get Free Delivery',
   referSub:
     'Invite your friends and get 3 free delivery and more surprise offers.',
@@ -105,4 +117,11 @@ export const Strings = {
   searchDeliveryLocation: 'Search Delivery Location',
   usingGPS: 'Using GPS',
   searchLocationPlaceHolder: 'Search for area, street name...',
+  addressLine: 'House/Flat/ Block No.',
+  landmark: 'Landmark',
+  saveAddressAs: 'Save your address as',
+  noSavedAddress: 'You don’t have any saved address to show',
+  searchProduct: 'Search Product',
+  nearbyStores: 'Nearby Stores',
+  completeAccSetup: 'Complete account setup',
 };

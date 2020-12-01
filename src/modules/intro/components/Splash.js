@@ -17,7 +17,7 @@ const Splash = (props) => {
       const token = await getAuthToken();
 
       if (token) {
-        Actions.reset('introduction');
+        Actions.reset('drawer');
       } else {
         Actions.reset('introduction');
       }

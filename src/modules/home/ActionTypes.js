@@ -1,0 +1,3 @@
+const SET_ADDRESS = 'SET_ADDRESS';
+
+export {SET_ADDRESS};

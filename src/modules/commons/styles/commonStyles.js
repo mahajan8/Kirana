@@ -2,7 +2,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 export const commonStyles = EStyleSheet.create({
   shadow: {
-    elevation: 3,
+    elevation: 5,
     shadowOffset: {width: 0, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 5,

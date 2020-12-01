@@ -41,7 +41,7 @@ const Button = (props) => {
 
 const styles = EStyleSheet.create({
   button: {
-    borderRadius: 10,
+    borderRadius: '10rem',
     paddingVertical: '15rem',
     justifyContent: 'center',
     alignItems: 'center',
