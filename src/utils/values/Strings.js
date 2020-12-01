@@ -52,6 +52,7 @@ export const Strings = {
   moreOptions: 'More Options',
   done: 'Done',
   notNow: 'Not now',
+  currentLocation: 'Current Location',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -101,4 +102,7 @@ export const Strings = {
   turnOn: 'Turn on',
   ownStore: 'Own a kirana store?',
   joinAsShop: 'Join as a shopkeeper',
+  searchDeliveryLocation: 'Search Delivery Location',
+  usingGPS: 'Using GPS',
+  searchLocationPlaceHolder: 'Search for area, street name...',
 };

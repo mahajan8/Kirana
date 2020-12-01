@@ -7,18 +7,22 @@ import Login from '../modules/authentication/components/Login';
 import VerifyOtp from '../modules/authentication/components/VerifyOtp';
 import Onboarding from '../modules/onboarding/components/Onboarding';
 import Referal from '../modules/onboarding/components/Referal';
+import SearchLocation from '../modules/onboarding/components/SearchLocation';
+import AddAddress from '../modules/home/components/AddAddress';
 
 const AppRouter = () => {
   return (
     <Router backAndroidHandler={() => {}}>
       <Stack key="root" hideNavBar>
-        <Scene key="splash" component={Splash} />
+        {/* <Scene key="splash" component={Splash} />
         <Scene key="introduction" component={Introduction} />
         <Scene key="selectLanguage" component={SelectLanguage} />
         <Scene key="login" component={Login} />
         <Scene key="otp" component={VerifyOtp} />
         <Scene key="onboarding" component={Onboarding} />
-        <Scene key="referal" component={Referal} />
+        <Scene key="referal" component={Referal} /> */}
+        <Scene key="searchLocation" component={SearchLocation} />
+        <Scene key="addAddress" component={AddAddress} />
       </Stack>
     </Router>
   );

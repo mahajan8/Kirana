@@ -24,18 +24,6 @@ const Header = (props) => {
     onBack,
   } = props;
 
-  const createProductButton = () => (
-    <TouchableOpacity
-      style={styles.createButton}
-      onPress={() => Actions.createProduct()}>
-      <View style={styles.plusIcon}>
-        <Text style={styles.plusText}>+</Text>
-      </View>
-
-      <Text style={styles.createProduct}>{Strings.createProduct}</Text>
-    </TouchableOpacity>
-  );
-
   return (
     <View
       style={[
@@ -60,24 +48,7 @@ const Header = (props) => {
           />
         </TouchableOpacity>
 
-        {(type == 1 || type == 2) && (
-          <Text style={styles.type1Title}>{title}</Text>
-        )}
-
-        {type == 2 && (
-          <View style={styles.headerRightContainer}>
-            <TouchableOpacity
-              onPress={() => Actions.searchInventory()}
-              hitSlop={commonStyles.hitSlop}>
-              <Search
-                width={EStyleSheet.value('13rem')}
-                height={EStyleSheet.value('13rem')}
-              />
-            </TouchableOpacity>
-
-            {createProductButton()}
-          </View>
-        )}
+        {type == 1 && <Text style={styles.type1Title}>{title}</Text>}
       </View>
 
       {type == 0 ? (
@@ -128,41 +99,6 @@ const styles = EStyleSheet.create({
     fontSize: '16rem',
     fontWeight: '500',
     marginLeft: '16rem',
-  },
-  headerRightContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  createButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: '7rem',
-    paddingHorizontal: '12rem',
-    borderRadius: '6rem',
-    borderWidth: 1,
-    borderColor: Colors.borderGray,
-    marginLeft: '16rem',
-  },
-  plusIcon: {
-    backgroundColor: Colors.themeGreen,
-    height: '11rem',
-    width: '11rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '10rem',
-  },
-  plusText: {
-    fontSize: '10rem',
-    color: '#FFF',
-  },
-  createProduct: {
-    fontSize: '10rem',
-    marginLeft: '4rem',
-    letterSpacing: '0.07rem',
-    color: Colors.themeGreen,
-    fontWeight: '500',
   },
 });
 

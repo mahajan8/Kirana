@@ -24,7 +24,7 @@ const VerifyOtp = (props) => {
       let pars = {
         mobile: props.number,
         otp_code: otp.current.submitOTP(),
-        user_type: 20,
+        user_type: 30,
       };
       props.verifyOtp(pars);
     }
