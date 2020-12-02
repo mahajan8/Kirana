@@ -32,7 +32,7 @@ const DrawerHeader = (props) => {
           if (onBack) {
             onBack();
           } else {
-            Actions.drawerOpen()
+            Actions.drawerOpen();
           }
         }}
         hitSlop={commonStyles.hitSlop}>

@@ -55,6 +55,10 @@ export const Strings = {
   currentLocation: 'Current Location',
   edit: 'Edit',
   delete: 'Delete',
+  view: 'View',
+  more: 'more',
+  plusAdd: '+ Add',
+  addToCart: 'Add to Cart',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -124,4 +128,5 @@ export const Strings = {
   searchProduct: 'Search Product',
   nearbyStores: 'Nearby Stores',
   completeAccSetup: 'Complete account setup',
+  allItems: 'All Items',
 };
