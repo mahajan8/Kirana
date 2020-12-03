@@ -51,7 +51,7 @@ export const verifyOtp = (pars) => {
           let token = res.data.data.api_token;
           dispatch(setToken(token));
           setAuthToken(token);
-          Actions.reset('searchLocation');
+          Actions.reset('drawer');
         } else {
           alert(res.data.message);
         }
