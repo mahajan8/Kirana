@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -16,15 +17,45 @@ import {styles} from '../styles/addAddressStyles';
 import Input from '../../commons/components/Input';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import CustomMarker from '../../../assets/images/address_map_marker.svg';
-import {setAddress} from '../HomeActions';
+import Location from '../../../assets/images/green_location.svg';
 import {connect} from 'react-redux';
+import {addUpdateAddress} from '../Api';
+import Loader from '../../commons/components/Loader';
 
 const AddAddress = (props) => {
   const [houseNumber, setHouseNumber] = useState('');
   const [landmark, setLandMark] = useState('');
   const [addressType, setAddressType] = useState(null);
+  const [location, setLocation] = useState(props.location);
 
-  let {lat, lng, formatted_address} = props.location;
+  let {lat, lng, formatted_address, short_address} = location;
+
+  let {id, item} = props;
+
+  useEffect(() => {
+    if (id) {
+      setHouseNumber(item.block_address);
+      setLandMark(item.landmark);
+      setAddressType(item.type);
+    }
+  }, []);
+
+  const submitAddress = () => {
+    let pars = {
+      block_address: houseNumber,
+      landmark,
+      location,
+      address_type: addressType,
+    };
+    if (id) {
+      pars = {
+        ...pars,
+        address_id: id,
+      };
+    }
+
+    props.addUpdateAddress(pars);
+  };
 
   return (
     <SafeArea>
@@ -59,13 +90,32 @@ const AddAddress = (props) => {
               </Marker>
             </MapView>
           </View>
-
-          <Input
-            value={formatted_address}
-            edit={false}
-            label={Strings.location}
-            multiline
-          />
+          <View style={styles.locationContainer}>
+            <View style={styles.rowContainer}>
+              <View style={styles.rowContainer}>
+                <Location
+                  width={EStyleSheet.value('12rem')}
+                  height={EStyleSheet.value('14rem')}
+                />
+                <Text style={styles.locationTitle} numberOfLines={1}>
+                  {formatted_address}
+                </Text>
+              </View>
+              <Button
+                label={Strings.change}
+                Style={styles.changeButton}
+                labelStyle={styles.changeButtonLabel}
+                onPress={() => {
+                  if (id) {
+                    Actions.searchLocation({saveLocation: setLocation});
+                  } else {
+                    Actions.pop();
+                  }
+                }}
+              />
+            </View>
+            <Text style={styles.locationSub}>{formatted_address}</Text>
+          </View>
 
           <Input
             value={houseNumber}
@@ -86,13 +136,13 @@ const AddAddress = (props) => {
                 bordered
                 Style={[
                   styles.buttonStyle,
-                  addressType === 0 && styles.selectedButton,
+                  addressType === 10 && styles.selectedButton,
                 ]}
                 labelStyle={[
                   styles.buttonLabel,
-                  addressType !== 0 && styles.unSelectedLabel,
+                  addressType !== 10 && styles.unSelectedLabel,
                 ]}
-                onPress={() => setAddressType(0)}
+                onPress={() => setAddressType(10)}
               />
 
               <Button
@@ -100,13 +150,13 @@ const AddAddress = (props) => {
                 bordered
                 Style={[
                   styles.buttonStyle,
-                  addressType === 1 && styles.selectedButton,
+                  addressType === 20 && styles.selectedButton,
                 ]}
                 labelStyle={[
                   styles.buttonLabel,
-                  addressType !== 1 && styles.unSelectedLabel,
+                  addressType !== 20 && styles.unSelectedLabel,
                 ]}
-                onPress={() => setAddressType(1)}
+                onPress={() => setAddressType(20)}
               />
 
               <Button
@@ -114,30 +164,20 @@ const AddAddress = (props) => {
                 bordered
                 Style={[
                   styles.buttonStyle,
-                  addressType === 2 && styles.selectedButton,
+                  addressType === 30 && styles.selectedButton,
                 ]}
                 labelStyle={[
                   styles.buttonLabel,
-                  addressType !== 2 && styles.unSelectedLabel,
+                  addressType !== 30 && styles.unSelectedLabel,
                 ]}
-                onPress={() => setAddressType(2)}
+                onPress={() => setAddressType(30)}
               />
             </View>
           </View>
-          <Button
-            label={Strings.save}
-            onPress={() => {
-              props.setAddress({
-                location: props.location,
-                houseNumber,
-                landmark,
-                addressType,
-              });
-              Actions.reset('drawer');
-            }}
-          />
+          <Button label={Strings.save} onPress={() => submitAddress()} />
         </ScrollView>
       </KeyboardAvoidingView>
+      <Loader show={props.loading} />
     </SafeArea>
   );
 };
@@ -147,7 +187,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setAddress,
+  addUpdateAddress,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAddress);

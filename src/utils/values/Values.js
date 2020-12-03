@@ -5,3 +5,9 @@ export const unitsList = {
   Millilitres: 4,
   Pieces: 5,
 };
+
+export const addressTypes = {
+  Home: 10,
+  Work: 20,
+  Other: 30,
+};

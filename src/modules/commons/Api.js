@@ -59,7 +59,7 @@ export const getAddressFromLocation = (pars, callback, err) => {
             item.types.includes('locality'),
         );
 
-        let name =
+        let short_address =
           nameIndex != -1
             ? address_components[nameIndex].long_name
             : Strings.unknown;
@@ -68,7 +68,7 @@ export const getAddressFromLocation = (pars, callback, err) => {
           lat: pars.lat,
           lng: pars.lng,
           geometry,
-          name,
+          short_address,
           formatted_address,
         };
         callback(location);

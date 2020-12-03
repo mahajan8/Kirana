@@ -54,8 +54,8 @@ export const styles = EStyleSheet.create({
   },
   noAddressContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: '127vrem',
   },
   noAddressButton: {
     width: '203rem',
@@ -63,5 +63,8 @@ export const styles = EStyleSheet.create({
   container: {
     backgroundColor: '#fafafa',
     flex: 1,
+  },
+  list: {
+    paddingBottom: '20vrem',
   },
 });

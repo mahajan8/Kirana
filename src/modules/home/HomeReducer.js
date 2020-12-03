@@ -16,7 +16,7 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
     case SET_ADDRESS:
       return {
         ...state,
-        addresses: [...state.addresses, action.address],
+        addresses: action.addresses,
       };
     default:
       return state;

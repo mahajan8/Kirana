@@ -91,7 +91,6 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.seperatorColor,
     height: '1vrem',
     marginTop: '14vrem',
-    marginBottom: '20vrem',
   },
   savedAddresses: {
     fontSize: '12rem',
@@ -102,9 +101,35 @@ export const styles = EStyleSheet.create({
   },
   savedAddressContainer: {
     paddingHorizontal: '20rem',
+    marginTop: '20vrem',
   },
   scrollContainer: {
     paddingBottom: '20vrem',
     flexGrow: 1,
+  },
+  addressImageContainer: {
+    width: '68rem',
+    height: '68rem',
+    borderRadius: '8rem',
+    backgroundColor: '#ebebeb',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '16rem',
+  },
+  addressName: {
+    fontSize: '14rem',
+    fontWeight: '500',
+    color: '#333333',
+  },
+  addressLocation: {
+    fontSize: '12rem',
+    fontWeight: '100',
+    color: Colors.darkGray,
+    lineHeight: '20rem',
+    letterSpacing: '0.2rem',
+    width: '220rem',
+  },
+  addressContainer: {
+    marginBottom: '24rem',
   },
 });

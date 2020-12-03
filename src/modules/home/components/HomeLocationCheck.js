@@ -27,7 +27,7 @@ const HomeLocationCheck = (props) => {
     PermissionsAndroid.check(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
     ).then((res) => {
-      if (!res && !props.addresses.length) {
+      if (!res) {
         setVisible(true);
       }
     });

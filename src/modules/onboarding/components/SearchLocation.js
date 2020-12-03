@@ -14,7 +14,7 @@ const SearchLocation = (props) => {
   return (
     <SafeArea>
       <Header noShadow containerStyle={styles.headerContainer} />
-      <Search />
+      <Search setLocation={props.saveLocation ? props.saveLocation : false} />
       <View style={styles.seperator} />
       <Loader show={props.loading} />
     </SafeArea>

@@ -42,4 +42,36 @@ export const styles = EStyleSheet.create({
   selectedButton: {
     borderColor: Colors.themeGreen,
   },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  locationTitle: {
+    fontSize: '16rem',
+    fontWeight: '500',
+    color: Colors.titleText,
+    width: '200rem',
+    marginLeft: '6rem',
+  },
+  locationSub: {
+    fontSize: '12rem',
+    fontWeight: '100',
+    color: Colors.titleText,
+    width: '250rem',
+  },
+  locationContainer: {
+    paddingHorizontal: '20rem',
+    marginTop: '28vrem',
+  },
+  changeButton: {
+    width: '65rem',
+    height: '27vrem',
+    borderRadius: '6rem',
+    backgroundColor: Colors.lightGreen,
+  },
+  changeButtonLabel: {
+    fontSize: '10rem',
+    color: Colors.themeGreen,
+  },
 });

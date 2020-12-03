@@ -15,6 +15,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {styles} from '../styles/searchStyles';
 import SearchIcon from '../../../assets/images/search.svg';
 import Location from '../../../assets/images/location.svg';
+import AddressIcon from '../../../assets/images/address_icon.svg';
 import CurrentLocation from '../../../assets/images/current_location.svg';
 import {Colors} from '../../../utils/values/Colors';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
@@ -23,6 +24,8 @@ import {environment} from '../../../config/EnvConfig';
 import Geolocation from '@react-native-community/geolocation';
 import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 const Search = (props) => {
   let {modal, onSelect} = props;
@@ -41,17 +44,12 @@ const Search = (props) => {
           lat,
           lng,
           geometry: details.geometry,
-          name: details.name,
+          short_address: details.name,
           formatted_address: details.formatted_address,
         };
         // props.saveDetails(location);
         // Actions.pop();
-        if (modal) {
-          onSelect();
-        }
-        Actions.addAddress({
-          location,
-        });
+        saveLocation(location);
         // props.setLocation(location);
       }}
       query={{
@@ -109,9 +107,7 @@ const Search = (props) => {
             if (modal) {
               onSelect();
             }
-            Actions.addAddress({
-              location,
-            });
+            saveLocation(location);
             // props.setLocation(location);
           },
           () => props.setLoading(false),
@@ -122,6 +118,20 @@ const Search = (props) => {
         console.log(error);
       },
     );
+  };
+
+  const saveLocation = (location) => {
+    if (modal) {
+      onSelect();
+    }
+    if (props.setLocation) {
+      props.setLocation(location);
+      Actions.pop();
+    } else {
+      Actions.addAddress({
+        location,
+      });
+    }
   };
 
   return (
@@ -157,18 +167,36 @@ const Search = (props) => {
           )}
         </TouchableOpacity>
         {modal && <View style={styles.modalSeperator} />}
-        {/* <View style={styles.savedAddressContainer}>
+        <View style={styles.savedAddressContainer}>
           <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
-          <View style={styles.itemRow}>
-
-          </View>
-        </View> */}
+          {props.addresses.map((item) => (
+            <TouchableOpacity
+              style={[styles.itemRow, styles.addressContainer]}
+              onPress={onSelect}>
+              <View style={styles.addressImageContainer}>
+                <AddressIcon
+                  width={EStyleSheet.value('21rem')}
+                  height={EStyleSheet.value('24rem')}
+                />
+              </View>
+              <View>
+                <Text style={styles.addressName}>
+                  {getKeyByValue(addressTypes, item.type)}
+                </Text>
+                <Text style={styles.addressLocation}>
+                  {item.location.formatted_address}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  addresses: state.homeReducer.addresses,
 });
 
 const mapDispatchToProps = {
