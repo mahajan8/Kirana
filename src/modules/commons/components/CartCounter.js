@@ -4,12 +4,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import Location from '../../../assets/images/location.svg';
+import Cart from '../../../assets/images/cart.svg';
 
 const CartCounter = () => {
   return (
     <View style={styles.container}>
-      <Location
+      <Cart
         width={EStyleSheet.value('14rem')}
         height={EStyleSheet.value('14rem')}
       />

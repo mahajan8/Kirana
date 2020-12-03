@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
@@ -10,6 +10,8 @@ import {styles} from '../styles/homeStyles';
 import Input from '../../commons/components/Input';
 import Search from '../../../assets/images/search.svg';
 import StoreInfoTile from './StoreInfoTile';
+import HomeLocationCheck from './HomeLocationCheck';
+import SearchLocationModal from './SearchLocationModal';
 
 let stores = [
   {
@@ -69,6 +71,7 @@ let stores = [
 ];
 
 const Home = () => {
+  const [searchVisible, setSearchVisible] = useState(false);
   return (
     <SafeArea>
       <DrawerHeader />
@@ -92,6 +95,11 @@ const Home = () => {
           </View>
         }
         contentContainerStyle={styles.list}
+      />
+      <HomeLocationCheck onSearchPress={() => setSearchVisible(true)} />
+      <SearchLocationModal
+        visible={searchVisible}
+        setVisible={setSearchVisible}
       />
     </SafeArea>
   );

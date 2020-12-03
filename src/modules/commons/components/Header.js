@@ -58,7 +58,7 @@ const Header = (props) => {
 
       {type == 0 ? (
         <View>
-          <Text style={styles.title}>{title}</Text>
+          {title && <Text style={styles.title}>{title}</Text>}
           {subTitle && <Text style={styles.subTitle}>{subTitle}</Text>}
 
           {/* <View style={styles.seperator} /> */}
@@ -75,7 +75,7 @@ const styles = EStyleSheet.create({
     borderColor: Colors.seperatorColor,
     // borderBottomWidth: 1,
     marginBottom: '35rem',
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.white,
   },
   container2: {
     paddingVertical: '12rem',

@@ -115,6 +115,8 @@ export const Strings = {
   locationOff: 'Device Location is off',
   locationOffSub:
     'Turning on device Location will ensure accurate and hassle free delivery',
+  locationOffHome:
+    'Please turn on your device location to ensure hassle free experience',
   turnOn: 'Turn on',
   ownStore: 'Own a kirana store?',
   joinAsShop: 'Join as a shopkeeper',
@@ -129,4 +131,8 @@ export const Strings = {
   nearbyStores: 'Nearby Stores',
   completeAccSetup: 'Complete account setup',
   allItems: 'All Items',
+  turnOnLocation: 'Turn on Device Location',
+  searchManually: 'Seach Location Manually',
+  useCurrentLocation: 'Use Current Location',
+  savedAddresses: 'Saved Addresses',
 };
