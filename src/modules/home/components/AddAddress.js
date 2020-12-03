@@ -57,6 +57,16 @@ const AddAddress = (props) => {
     props.addUpdateAddress(pars);
   };
 
+  const getDisabled = (type) => {
+    let i = props.addresses.findIndex((obj) => obj.type === type);
+
+    if (i >= 0 && item.type !== type) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <SafeArea>
       <KeyboardAvoidingView
@@ -143,6 +153,7 @@ const AddAddress = (props) => {
                   addressType !== 10 && styles.unSelectedLabel,
                 ]}
                 onPress={() => setAddressType(10)}
+                disabled={getDisabled(10)}
               />
 
               <Button
@@ -157,6 +168,7 @@ const AddAddress = (props) => {
                   addressType !== 20 && styles.unSelectedLabel,
                 ]}
                 onPress={() => setAddressType(20)}
+                disabled={getDisabled(20)}
               />
 
               <Button
@@ -171,6 +183,7 @@ const AddAddress = (props) => {
                   addressType !== 30 && styles.unSelectedLabel,
                 ]}
                 onPress={() => setAddressType(30)}
+                disabled={getDisabled(30)}
               />
             </View>
           </View>
@@ -184,6 +197,7 @@ const AddAddress = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  addresses: state.homeReducer.addresses,
 });
 
 const mapDispatchToProps = {

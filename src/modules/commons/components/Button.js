@@ -10,9 +10,9 @@ const Button = (props) => {
     <TouchableOpacity
       style={[
         styles.button,
-        disabled && styles.disabledButton,
         bordered && styles.bordered,
         Style && Style,
+        disabled && styles.disabledButton,
       ]}
       disabled={disabled}
       onPress={() => {
