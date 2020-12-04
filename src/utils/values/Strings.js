@@ -59,6 +59,7 @@ export const Strings = {
   more: 'more',
   plusAdd: '+ Add',
   addToCart: 'Add to Cart',
+  saveAndProceed: 'Save and Proceed',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',

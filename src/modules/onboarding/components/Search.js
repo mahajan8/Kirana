@@ -201,8 +201,8 @@ const Search = (props) => {
             </View>
           )}
         </TouchableOpacity>
-        {modal && <View style={styles.modalSeperator} />}
-        {props.addresses.length && getSavedAddresses()}
+        <View style={modal ? styles.modalSeperator : styles.seperator} />
+        {props.addresses.length && modal ? getSavedAddresses() : null}
       </ScrollView>
     </KeyboardAvoidingView>
   );

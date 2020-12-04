@@ -14,8 +14,8 @@ import HomeLocationCheck from './HomeLocationCheck';
 import SearchLocationModal from './SearchLocationModal';
 import {getAddresses} from '../Api';
 import {connect} from 'react-redux';
-import { getKeyByValue } from '../../../utils/utility/Utils';
-import { addressTypes } from '../../../utils/values/Values';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 let stores = [
   {
@@ -84,7 +84,8 @@ const Home = (props) => {
     if (!addresses.length) {
       props.getAddresses();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let title =
     selectedAddress !== null

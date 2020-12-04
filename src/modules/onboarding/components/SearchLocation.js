@@ -7,7 +7,6 @@ import Header from '../../commons/components/Header';
 import {styles} from '../styles/searchLocationStyles';
 import Loader from '../../commons/components/Loader';
 import {setLoading} from '../../authentication/AuthActions';
-import {setLocation} from '../OnboardingActions';
 import Search from './Search';
 
 const SearchLocation = (props) => {
@@ -15,7 +14,6 @@ const SearchLocation = (props) => {
     <SafeArea>
       <Header noShadow containerStyle={styles.headerContainer} />
       <Search setLocation={props.saveLocation ? props.saveLocation : false} />
-      <View style={styles.seperator} />
       <Loader show={props.loading} />
     </SafeArea>
   );
@@ -28,7 +26,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setLoading,
-  setLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchLocation);

@@ -21,6 +21,7 @@ import Location from '../../../assets/images/green_location.svg';
 import {connect} from 'react-redux';
 import {addUpdateAddress} from '../Api';
 import Loader from '../../commons/components/Loader';
+import {isAnyFieldEmpty} from '../../../utils/utility/Validations';
 
 const AddAddress = (props) => {
   const [houseNumber, setHouseNumber] = useState('');
@@ -193,7 +194,11 @@ const AddAddress = (props) => {
               />
             </View>
           </View>
-          <Button label={Strings.save} onPress={() => submitAddress()} />
+          <Button
+            label={Strings.saveAndProceed}
+            onPress={() => submitAddress()}
+            disabled={isAnyFieldEmpty([houseNumber, landmark]) || !addressType}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
       <Loader show={props.loading} />

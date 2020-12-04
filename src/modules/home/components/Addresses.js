@@ -65,7 +65,7 @@ const Addresses = (props) => {
         title={Strings.addresses}
         type={1}
         headerRight={
-          addresses && (
+          addresses.length ? (
             <Button
               label={Strings.addAddress}
               Style={styles.addButton}
@@ -79,7 +79,7 @@ const Addresses = (props) => {
               }
               onPress={Actions.searchLocation}
             />
-          )
+          ) : null
         }
       />
       <View style={styles.container}>

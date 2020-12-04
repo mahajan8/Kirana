@@ -58,7 +58,8 @@ export const styles = EStyleSheet.create({
     paddingTop: '127vrem',
   },
   noAddressButton: {
-    width: '203rem',
+    width: '204rem',
+    height: '40vrem',
   },
   container: {
     backgroundColor: '#fafafa',
