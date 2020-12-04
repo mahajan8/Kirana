@@ -16,6 +16,8 @@ import StoreProducts from '../modules/store/components/StoreProducts';
 import ProductsBySubCategory from '../modules/store/components/ProductsBySubCategory';
 import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
+import SearchProducts from '../modules/home/components/SearchProducts';
+import SearchProductResults from '../modules/home/components/SearchProductResults';
 
 const AppRouter = () => {
   return (
@@ -35,6 +37,8 @@ const AppRouter = () => {
         <Scene key="productsBySubCategory" component={ProductsBySubCategory} />
         <Scene key="productsList" component={ProductsList} />
         <Scene key="productDetails" component={ProductDetails} />
+        <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="searchProductResults" component={SearchProductResults} />
         <Scene
           key="drawer"
           drawer={true}

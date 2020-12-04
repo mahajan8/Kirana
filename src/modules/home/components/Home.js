@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, FlatList} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
 import SafeArea from '../../commons/components/SafeArea';
-import DrawerHeader from '../../commons/components/DrawerHeader';
+import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/homeStyles';
 import Input from '../../commons/components/Input';
 import Search from '../../../assets/images/search.svg';
@@ -74,23 +74,23 @@ const Home = () => {
   const [searchVisible, setSearchVisible] = useState(false);
   return (
     <SafeArea>
-      <DrawerHeader />
+      <CartHeader />
       <FlatList
         data={stores}
         renderItem={({item}) => <StoreInfoTile store={item} />}
         keyExtractor={(item, index) => `store${index}`}
         ListHeaderComponent={
           <View style={styles.container}>
-            <View style={styles.searchContainer}>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={styles.searchContainer}
+              onPress={() => Actions.searchProducts()}>
               <Search
                 width={EStyleSheet.value('14rem')}
                 height={EStyleSheet.value('14rem')}
               />
-              <TextInput
-                style={styles.textInput}
-                placeholder={Strings.searchProduct}
-              />
-            </View>
+              <Text style={styles.textInput}>{Strings.searchProduct}</Text>
+            </TouchableOpacity>
             <Text style={styles.nearbyText}>{Strings.nearbyStores}</Text>
           </View>
         }

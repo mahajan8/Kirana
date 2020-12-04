@@ -58,9 +58,15 @@ const AddAddress = (props) => {
   };
 
   const getDisabled = (type) => {
+    if (type === 30) {
+      return false;
+    }
     let i = props.addresses.findIndex((obj) => obj.type === type);
 
-    if (i >= 0 && item.type !== type) {
+    if (i >= 0) {
+      if (id && item.type === type) {
+        return false;
+      }
       return true;
     } else {
       return false;

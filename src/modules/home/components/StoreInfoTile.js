@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
@@ -7,8 +7,13 @@ import {Colors} from '../../../utils/values/Colors';
 const StoreInfoTile = (props) => {
   let {name, location, rating, distance} = props.store;
 
+  let {onPress} = props;
+
   return (
-    <View style={[styles.rowContainer, styles.container]}>
+    <TouchableOpacity
+      style={[styles.rowContainer, styles.container]}
+      activeOpacity={1}
+      onPress={onPress && onPress}>
       <Image style={styles.storeImage} source={{uri: getMediaUrl(null)}} />
       <View>
         <Text style={styles.storeName}>{name}</Text>
@@ -21,7 +26,7 @@ const StoreInfoTile = (props) => {
           <Text style={styles.details}>{distance} km</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

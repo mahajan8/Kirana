@@ -135,4 +135,8 @@ export const Strings = {
   searchManually: 'Seach Location Manually',
   useCurrentLocation: 'Use Current Location',
   savedAddresses: 'Saved Addresses',
+  found: 'Found',
+  storesMatching: 'stores matching',
+  itemsMatching: 'items matching',
+  noSearchResults: 'Sorry! We can’t find any product matching your search.',
 };

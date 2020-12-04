@@ -18,15 +18,10 @@ export const styles = EStyleSheet.create({
   },
   textInput: {
     fontSize: '12rem',
-    fontFamily: Fonts.medium,
-    color: Colors.titleText,
+    fontFamily: Fonts.regular,
+    color: Colors.grayText,
     marginHorizontal: '10rem',
-    lineHeight: '20rem',
-    ...(Platform.OS == 'android' && {
-      paddingVertical: 0,
-      paddingHorizontal: 0,
-    }),
-    flex: 1,
+    lineHeight: '16rem',
   },
   nearbyText: {
     fontSize: '14rem',
