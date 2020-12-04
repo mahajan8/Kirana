@@ -15,9 +15,14 @@ import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {Fonts} from '../../../utils/values/Fonts';
 import {connect} from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+import {getAddressFromLocation} from '../../commons/Api';
+import {setLoading} from '../../authentication/AuthActions';
 
 const HomeLocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
+
+  let {setShortAddress, locationTitle} = props;
 
   useEffect(() => {
     checkPermission();
@@ -29,6 +34,10 @@ const HomeLocationCheck = (props) => {
     ).then((res) => {
       if (!res) {
         setVisible(true);
+      } else {
+        if (!locationTitle) {
+          getLocation();
+        }
       }
     });
   };
@@ -41,12 +50,37 @@ const HomeLocationCheck = (props) => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('Granted');
         setVisible(false);
+        getLocation();
       } else {
         console.log('Denied');
       }
     } catch (err) {
       console.warn(err);
     }
+  };
+
+  const getLocation = () => {
+    props.setLoading(true);
+    Geolocation.getCurrentPosition(
+      (info) => {
+        let pars = {
+          lat: info.coords.latitude,
+          lng: info.coords.longitude,
+        };
+        getAddressFromLocation(
+          pars,
+          (location) => {
+            props.setLoading(false);
+            setShortAddress(location.short_address);
+          },
+          () => props.setLoading(false),
+        );
+      },
+      (error) => {
+        props.setLoading(false);
+        console.log(error);
+      },
+    );
   };
 
   return (
@@ -172,6 +206,8 @@ const mapStateToProps = (state) => ({
   addresses: state.homeReducer.addresses,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setLoading,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeLocationCheck);

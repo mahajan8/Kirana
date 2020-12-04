@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  LogBox,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
@@ -26,9 +27,11 @@ import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import {addressTypes} from '../../../utils/values/Values';
+import {setSelectedAddress} from '../../home/HomeActions';
 
 const Search = (props) => {
   let {modal, onSelect} = props;
+  LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
   const renderSearchInput = () => (
     <GooglePlacesAutocomplete
@@ -105,7 +108,8 @@ const Search = (props) => {
           (location) => {
             props.setLoading(false);
             if (modal) {
-              onSelect();
+              onSelect(location);
+              props.setSelectedAddress(null);
             }
             saveLocation(location);
             // props.setLocation(location);
@@ -122,17 +126,48 @@ const Search = (props) => {
 
   const saveLocation = (location) => {
     if (modal) {
-      onSelect();
+      onSelect(location);
+      props.setSelectedAddress(null);
     }
     if (props.setLocation) {
       props.setLocation(location);
       Actions.pop();
-    } else {
+    } else if (!modal) {
       Actions.addAddress({
         location,
       });
     }
   };
+
+  const getSavedAddresses = () => (
+    <View style={styles.savedAddressContainer}>
+      <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
+      {props.addresses.map((item, index) => (
+        <TouchableOpacity
+          key={`address${index}`}
+          style={[styles.itemRow, styles.addressContainer]}
+          onPress={() => {
+            props.setSelectedAddress(index);
+            onSelect(null);
+          }}>
+          <View style={styles.addressImageContainer}>
+            <AddressIcon
+              width={EStyleSheet.value('21rem')}
+              height={EStyleSheet.value('24rem')}
+            />
+          </View>
+          <View>
+            <Text style={styles.addressName}>
+              {getKeyByValue(addressTypes, item.type)}
+            </Text>
+            <Text style={styles.addressLocation}>
+              {item.location.formatted_address}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
 
   return (
     <KeyboardAvoidingView
@@ -167,29 +202,7 @@ const Search = (props) => {
           )}
         </TouchableOpacity>
         {modal && <View style={styles.modalSeperator} />}
-        <View style={styles.savedAddressContainer}>
-          <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
-          {props.addresses.map((item) => (
-            <TouchableOpacity
-              style={[styles.itemRow, styles.addressContainer]}
-              onPress={onSelect}>
-              <View style={styles.addressImageContainer}>
-                <AddressIcon
-                  width={EStyleSheet.value('21rem')}
-                  height={EStyleSheet.value('24rem')}
-                />
-              </View>
-              <View>
-                <Text style={styles.addressName}>
-                  {getKeyByValue(addressTypes, item.type)}
-                </Text>
-                <Text style={styles.addressLocation}>
-                  {item.location.formatted_address}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </View>
+        {props.addresses.length && getSavedAddresses()}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -201,6 +214,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setLoading,
+  setSelectedAddress,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

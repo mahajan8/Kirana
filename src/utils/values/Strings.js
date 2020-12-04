@@ -139,4 +139,5 @@ export const Strings = {
   storesMatching: 'stores matching',
   itemsMatching: 'items matching',
   noSearchResults: 'Sorry! We can’t find any product matching your search.',
+  locationUnavaible: 'Location Unavaible',
 };

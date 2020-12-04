@@ -54,13 +54,12 @@ export const getAddressFromLocation = (pars, callback, err) => {
         let nameIndex = address_components.findIndex(
           (item) =>
             item.types.includes('neighborhood') ||
-            item.types.includes('route') ||
             item.types.includes('sublocality') ||
             item.types.includes('locality'),
         );
 
         let short_address =
-          nameIndex != -1
+          nameIndex !== -1
             ? address_components[nameIndex].long_name
             : Strings.unknown;
 

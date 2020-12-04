@@ -27,7 +27,9 @@ const CartHeader = (props) => {
     searchValue,
     onSearchChange,
     titleComp,
-    inputRef
+    inputRef,
+    title,
+    selectLocation,
   } = props;
 
   return (
@@ -75,17 +77,22 @@ const CartHeader = (props) => {
           />
         </View>
       ) : (
-        <View style={[styles.locationContainer, styles.rowContainer]}>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={[styles.locationContainer, styles.rowContainer]}
+          onPress={selectLocation && selectLocation}>
           <Location
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}
           />
-          <Text style={styles.title}>{'Home'}</Text>
+          <Text style={styles.title}>
+            {title ? title : Strings.locationUnavaible}
+          </Text>
           <DownArrow
             width={EStyleSheet.value('10rem')}
             height={EStyleSheet.value('10rem')}
           />
-        </View>
+        </TouchableOpacity>
       )}
       <View style={styles.headerRightContainer}>
         {headerRight ? headerRight : <CartCounter />}
