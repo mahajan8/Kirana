@@ -19,7 +19,7 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import CustomMarker from '../../../assets/images/address_map_marker.svg';
 import Location from '../../../assets/images/green_location.svg';
 import {connect} from 'react-redux';
-import {addUpdateAddress} from '../Api';
+import {addUpdateAddress} from '../../home/Api';
 import Loader from '../../commons/components/Loader';
 import {isAnyFieldEmpty} from '../../../utils/utility/Validations';
 

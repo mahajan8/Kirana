@@ -30,6 +30,15 @@ const actions = (index) => {
     case 1:
       Actions.addresses();
       break;
+    case 2:
+      Actions.referFriends();
+      break;
+    case 3:
+      Actions.accountSettings();
+      break;
+    case 4:
+      Actions.support();
+      break;
     case 6:
       logout();
       break;

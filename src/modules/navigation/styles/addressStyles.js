@@ -68,4 +68,45 @@ export const styles = EStyleSheet.create({
   list: {
     paddingBottom: '20vrem',
   },
+  modalContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    paddingHorizontal: '20rem',
+  },
+  innerContainer: {
+    backgroundColor: Colors.white,
+    borderRadius: '15rem',
+    paddingVertical: '20vrem',
+    paddingHorizontal: '30vrem',
+  },
+  deleteTitle: {
+    fontSize: '14rem',
+    fontWeight: '900',
+    color: Colors.darkGreen,
+    marginBottom: '10vrem',
+  },
+  deleteDesc: {
+    fontSize: '12rem',
+    fontWeight: '100',
+    lineHeight: '20rem',
+    letterSpacing: '0.2rem',
+    color: Colors.subTitleText,
+    marginBottom: '20vrem',
+  },
+  modalButton: {
+    borderRadius: '6rem',
+    width: '122rem',
+    height: '36vrem',
+  },
+  modalButtonLabel: {
+    fontSize: '10rem',
+  },
+  modalButtonsContainer: {
+    justifyContent: 'space-between',
+  },
 });
