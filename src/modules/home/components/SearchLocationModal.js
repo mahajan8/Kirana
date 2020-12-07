@@ -7,7 +7,7 @@ import Loader from '../../commons/components/Loader';
 import Search from '../../onboarding/components/Search';
 
 const SearchLocationModal = (props) => {
-  let {visible, setVisible} = props;
+  let {visible, setVisible, setShortAddress} = props;
 
   return (
     <Modal
@@ -18,7 +18,15 @@ const SearchLocationModal = (props) => {
       animationType="slide">
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          <Search modal onSelect={() => setVisible(false)} />
+          <Search
+            modal
+            onSelect={(location) => {
+              if (location !== null) {
+                setShortAddress(location.short_address);
+              }
+              setVisible(false);
+            }}
+          />
         </View>
       </View>
     </Modal>

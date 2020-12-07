@@ -7,10 +7,4 @@ export const styles = EStyleSheet.create({
     marginBottom: 0,
     paddingBottom: '5rem',
   },
-  seperator: {
-    backgroundColor: '#f7f7f7',
-    width: '100%',
-    height: '6vrem',
-    marginTop: '20vrem',
-  },
 });

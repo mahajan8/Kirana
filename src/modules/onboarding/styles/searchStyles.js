@@ -132,4 +132,10 @@ export const styles = EStyleSheet.create({
   addressContainer: {
     marginBottom: '24rem',
   },
+  seperator: {
+    backgroundColor: '#f7f7f7',
+    width: '100%',
+    height: '6vrem',
+    marginTop: '20vrem',
+  },
 });

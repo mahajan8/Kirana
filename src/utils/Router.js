@@ -8,8 +8,8 @@ import VerifyOtp from '../modules/authentication/components/VerifyOtp';
 import Onboarding from '../modules/onboarding/components/Onboarding';
 import Referal from '../modules/onboarding/components/Referal';
 import SearchLocation from '../modules/onboarding/components/SearchLocation';
-import AddAddress from '../modules/home/components/AddAddress';
-import Addresses from '../modules/home/components/Addresses';
+import AddAddress from '../modules/navigation/components/AddAddress';
+import Addresses from '../modules/navigation/components/Addresses';
 import Home from '../modules/home/components/Home';
 import DrawerComponent from '../modules/home/components/DrawerComponent';
 import StoreProducts from '../modules/store/components/StoreProducts';
@@ -18,6 +18,11 @@ import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
 import SearchProducts from '../modules/home/components/SearchProducts';
 import SearchProductResults from '../modules/home/components/SearchProductResults';
+import ReferFriends from '../modules/navigation/components/ReferFriends';
+import Invites from '../modules/navigation/components/Invites';
+import CustomerSupport from '../modules/navigation/components/CustomerSupport';
+import AccountSettings from '../modules/navigation/components/AccountSettings';
+import AccountSetup from '../modules/navigation/components/AccountSetup';
 
 const AppRouter = () => {
   return (
@@ -39,10 +44,16 @@ const AppRouter = () => {
         <Scene key="productDetails" component={ProductDetails} />
         <Scene key="searchProducts" component={SearchProducts} />
         <Scene key="searchProductResults" component={SearchProductResults} />
+        <Scene key="referFriends" component={ReferFriends} />
+        <Scene key="invites" component={Invites} />
+        <Scene key="support" component={CustomerSupport} />
+        <Scene key="accountSettings" component={AccountSettings} />
+        <Scene key="accountSetup" component={AccountSetup} />
         <Scene
           key="drawer"
           drawer={true}
           drawerPosition="left"
+          swipeEnabled={true}
           contentComponent={DrawerComponent}
           drawerWidth={'80%'}>
           <Scene key="home" component={Home} hideNavBar />

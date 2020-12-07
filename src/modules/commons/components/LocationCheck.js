@@ -39,7 +39,7 @@ const LocationCheck = (props) => {
     }
   };
 
-  if (visible) {
+  if (!visible) {
     return (
       <View style={styles.container}>
         <View style={styles.innerContainer}>
@@ -57,12 +57,12 @@ const LocationCheck = (props) => {
               Style={styles.buttonStyle}
               labelStyle={styles.buttonLabel}
               onPress={() => setVisible(false)}
+              bordered
             />
             <Button
               label={Strings.turnOn}
               Style={styles.buttonStyle}
               labelStyle={styles.buttonLabel}
-              bordered
               onPress={getPermission}
             />
           </View>
@@ -96,7 +96,6 @@ const styles = EStyleSheet.create({
     fontSize: '14rem',
     fontWeight: '900',
     color: Colors.darkGreen,
-    marginBottom: '10vrem',
     marginLeft: '10rem',
   },
   subText: {
@@ -116,6 +115,7 @@ const styles = EStyleSheet.create({
   buttonStyle: {
     width: '122rem',
     height: '36vrem',
+    borderRadius: '6rem',
   },
   buttonLabel: {
     fontSize: '10rem',
@@ -124,6 +124,7 @@ const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: '10vrem',
   },
 });
 

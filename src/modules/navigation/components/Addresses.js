@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Modal} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -12,13 +12,16 @@ import {connect} from 'react-redux';
 import PlusIcon from '../../../assets/images/green_plus.svg';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
 import {commonStyles} from '../../commons/styles/commonStyles';
-import {getAddresses, deleteAddress} from '../Api';
+import {getAddresses, deleteAddress} from '../../home/Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import Loader from '../../commons/components/Loader';
 
 const Addresses = (props) => {
   let {addresses} = props.homeReducer;
+
+  const [deleteVisible, setDeleteVisible] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
     props.getAddresses();
@@ -47,15 +50,64 @@ const Addresses = (props) => {
             labelStyle={styles.buttonLabel}
             bordered
             onPress={() => {
-              let pars = {
-                address_id: id,
-              };
-
-              props.deleteAddress(pars);
+              setDeleteId(id);
+              //   props.deleteAddress(pars);
+              setDeleteVisible(true);
             }}
           />
         </View>
       </View>
+    );
+  };
+
+  const deleteModal = () => {
+    let type =
+      deleteId !== null &&
+      addresses[addresses.findIndex((obj) => obj.id === deleteId)].type;
+
+    return (
+      <Modal
+        visible={deleteVisible}
+        onRequestClose={() => setDeleteVisible(false)}
+        transparent={true}
+        animated
+        animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.deleteTitle}>{Strings.deleteAddress}</Text>
+            <Text style={styles.deleteDesc}>
+              {Strings.confirmDeleteAddress}{' '}
+              {type && getKeyByValue(addressTypes, type).toLowerCase()}{' '}
+              {Strings.confirmDeleteAddress2}
+            </Text>
+            <View
+              style={[styles.buttonsContainer, styles.modalButtonsContainer]}>
+              <Button
+                label={Strings.cancel}
+                Style={styles.modalButton}
+                labelStyle={styles.modalButtonLabel}
+                bordered
+                onPress={() => setDeleteVisible(false)}
+              />
+
+              <Button
+                label={Strings.yesDelete}
+                Style={styles.modalButton}
+                labelStyle={styles.modalButtonLabel}
+                onPress={() => {
+                  let pars = {
+                    address_id: deleteId,
+                  };
+
+                  props.deleteAddress(pars);
+                  setDeleteVisible(false);
+                  setDeleteId(null);
+                }}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
     );
   };
 
@@ -65,7 +117,7 @@ const Addresses = (props) => {
         title={Strings.addresses}
         type={1}
         headerRight={
-          addresses && (
+          addresses.length ? (
             <Button
               label={Strings.addAddress}
               Style={styles.addButton}
@@ -79,7 +131,7 @@ const Addresses = (props) => {
               }
               onPress={Actions.searchLocation}
             />
-          )
+          ) : null
         }
       />
       <View style={styles.container}>
@@ -105,6 +157,7 @@ const Addresses = (props) => {
         />
       </View>
       <Loader show={props.loading} />
+      {deleteModal()}
     </SafeArea>
   );
 };
