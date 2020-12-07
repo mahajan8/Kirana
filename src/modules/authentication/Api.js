@@ -3,6 +3,7 @@ import instance from '../../utils/AxiosInstance';
 import {Urls} from '../../utils/utility/Urls';
 import {setAuthToken} from '../../utils/utility/LocalStore';
 import {setLoading, setToken} from './AuthActions';
+import { getUserDetails } from '../home/Api';
 
 export const sendOtp = (pars) => {
   return (dispatch) => {
@@ -51,7 +52,7 @@ export const verifyOtp = (pars) => {
           let token = res.data.data.api_token;
           dispatch(setToken(token));
           setAuthToken(token);
-          Actions.reset('drawer');
+          dispatch(getUserDetails());
         } else {
           alert(res.data.message);
         }

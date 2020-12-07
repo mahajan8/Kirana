@@ -1,10 +1,21 @@
 import {SET_LOCATION} from '../onboarding/ActionTypes';
-import {SET_ADDRESS, SET_SELECTED_ADDRESS} from './ActionTypes';
+import {
+  SET_ADDRESS,
+  SET_SELECTED_ADDRESS,
+  SET_CART_QUANTITY,
+  SET_USER_DETAILS,
+  APPEND_STORES,
+  CLEAR_STORES,
+} from './ActionTypes';
 
 const INITIAL_STATE = {
   location: null,
   addresses: [],
   selectedAddress: null,
+  userDetails: null,
+  cartQuantity: null,
+  stores: [],
+  storeCount: null,
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +34,28 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedAddress: action.addressIndex,
+      };
+    case SET_CART_QUANTITY:
+      return {
+        ...state,
+        cartQuantity: action.quantity,
+      };
+    case SET_USER_DETAILS:
+      return {
+        ...state,
+        userDetails: action.userDetail,
+      };
+    case APPEND_STORES:
+      return {
+        ...state,
+        stores: [...state.stores, ...action.stores],
+        storeCount: action.storeCount,
+      };
+    case CLEAR_STORES:
+      return {
+        ...state,
+        stores: [],
+        storeCount: null,
       };
     default:
       return state;

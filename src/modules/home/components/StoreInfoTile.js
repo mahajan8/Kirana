@@ -6,7 +6,6 @@ import {Colors} from '../../../utils/values/Colors';
 
 const StoreInfoTile = (props) => {
   let {name, location, rating, distance} = props.store;
-
   let {onPress} = props;
 
   return (
@@ -17,7 +16,7 @@ const StoreInfoTile = (props) => {
       <Image style={styles.storeImage} source={{uri: getMediaUrl(null)}} />
       <View>
         <Text style={styles.storeName}>{name}</Text>
-        <Text style={styles.storeLocation}>{location}</Text>
+        <Text style={styles.storeLocation}>{location.short_address}</Text>
         <View style={styles.rowContainer}>
           {/* TODO: Replace with Star Icon */}
           <Text style={styles.star}>*</Text>

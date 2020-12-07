@@ -81,7 +81,7 @@ export const getMediaUrl = (path) => {
   if (path) {
     url = AppConfig[environment].storageBaseUrl.concat(path);
   } else {
-    url = 'https://img.icons8.com/officel/2x/user.png';
+    url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn-SJgS0wvz4a8Y2QXVrZ5iDwFpTbK9ilTqg&usqp=CAU';
   }
   return url;
 };

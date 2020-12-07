@@ -2,101 +2,43 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
-import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
 import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/homeStyles';
-import Input from '../../commons/components/Input';
 import Search from '../../../assets/images/search.svg';
 import StoreInfoTile from './StoreInfoTile';
 import HomeLocationCheck from './HomeLocationCheck';
 import SearchLocationModal from './SearchLocationModal';
-import {getAddresses} from '../Api';
+import {getStores} from '../Api';
 import {connect} from 'react-redux';
-import {getKeyByValue} from '../../../utils/utility/Utils';
-import {addressTypes} from '../../../utils/values/Values';
-
-let stores = [
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-];
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
-  const [locationTitle, setLocationTitle] = useState('');
-
-  let {addresses, selectedAddress} = props.homeReducer;
+  const [location, setLocation] = useState(null);
+  const {addresses, selectedAddress, stores, storeCount} = props.homeReducer;
 
   useEffect(() => {
-    if (!addresses.length) {
-      props.getAddresses();
+    if (location) {
+      loadStores(0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
-  let title =
-    selectedAddress !== null
-      ? getKeyByValue(addressTypes, addresses[selectedAddress].type)
-      : locationTitle
-      ? locationTitle
-      : '';
-
+  const loadStores = (start) => {
+    const data = {
+      start,
+      limit: 10,
+      latitude: location.lat,
+      longitude: location.lng,
+    };
+    props.getStores(data);
+  };
   return (
     <SafeArea>
-      <CartHeader title={title} selectLocation={() => setSearchVisible(true)} />
+      <CartHeader
+        location={location}
+        selectLocation={() => setSearchVisible(true)}
+      />
       <FlatList
         data={stores}
         renderItem={({item}) => <StoreInfoTile store={item} />}
@@ -120,12 +62,13 @@ const Home = (props) => {
       />
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
-        setShortAddress={(shortAddress) => setLocationTitle(shortAddress)}
+        setLocation={setLocation}
+        selectedLocation={location}
       />
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}
-        setShortAddress={(shortAddress) => setLocationTitle(shortAddress)}
+        setLocation={setLocation}
       />
     </SafeArea>
   );
@@ -135,7 +78,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getAddresses,
+  getStores,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

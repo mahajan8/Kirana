@@ -7,7 +7,7 @@ import Loader from '../../commons/components/Loader';
 import Search from '../../onboarding/components/Search';
 
 const SearchLocationModal = (props) => {
-  let {visible, setVisible, setShortAddress} = props;
+  let {visible, setVisible, setLocation} = props;
 
   return (
     <Modal
@@ -22,7 +22,7 @@ const SearchLocationModal = (props) => {
             modal
             onSelect={(location) => {
               if (location !== null) {
-                setShortAddress(location.short_address);
+                setLocation(location);
               }
               setVisible(false);
             }}

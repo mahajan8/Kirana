@@ -22,7 +22,7 @@ import {setLoading} from '../../authentication/AuthActions';
 const HomeLocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
 
-  let {setShortAddress, locationTitle} = props;
+  let {setLocation, selectedLocation} = props;
 
   useEffect(() => {
     checkPermission();
@@ -35,7 +35,7 @@ const HomeLocationCheck = (props) => {
       if (!res) {
         setVisible(true);
       } else {
-        if (!locationTitle) {
+        if (!selectedLocation) {
           getLocation();
         }
       }
@@ -63,15 +63,16 @@ const HomeLocationCheck = (props) => {
     props.setLoading(true);
     Geolocation.getCurrentPosition(
       (info) => {
+        const {latitude, longitude} = info.coords;
         let pars = {
-          lat: info.coords.latitude,
-          lng: info.coords.longitude,
+          lat: latitude,
+          lng: longitude,
         };
         getAddressFromLocation(
           pars,
           (location) => {
             props.setLoading(false);
-            setShortAddress(location.short_address);
+            setLocation(location);
           },
           () => props.setLoading(false),
         );

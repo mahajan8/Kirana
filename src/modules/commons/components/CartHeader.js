@@ -28,7 +28,7 @@ const CartHeader = (props) => {
     onSearchChange,
     titleComp,
     inputRef,
-    title,
+    location,
     selectLocation,
   } = props;
 
@@ -86,7 +86,7 @@ const CartHeader = (props) => {
             height={EStyleSheet.value('12rem')}
           />
           <Text style={styles.title}>
-            {title ? title : Strings.locationUnavaible}
+            {location ? location.short_address : Strings.locationUnavaible}
           </Text>
           <DownArrow
             width={EStyleSheet.value('10rem')}

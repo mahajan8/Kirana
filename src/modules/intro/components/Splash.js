@@ -9,6 +9,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 // import {getStoreInfo} from '../../onboarding/Api';
 import {getAuthToken} from '../../../utils/utility/LocalStore';
+import {getUserDetails} from '../../home/Api';
 
 const Splash = (props) => {
   useEffect(() => {
@@ -17,7 +18,7 @@ const Splash = (props) => {
       const token = await getAuthToken();
 
       if (token) {
-        Actions.reset('drawer');
+        props.getUserDetails();
       } else {
         Actions.reset('introduction');
       }
@@ -37,6 +38,8 @@ const Splash = (props) => {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getUserDetails,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Splash);
