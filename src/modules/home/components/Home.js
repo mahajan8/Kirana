@@ -17,7 +17,7 @@ const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [location, setLocation] = useState(null);
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const {addresses, selectedAddress, stores, storeCount} = props.homeReducer;
+  const {stores, storeCount} = props.homeReducer;
 
   useEffect(() => {
     if (location) {
@@ -25,6 +25,23 @@ const Home = (props) => {
     }
   }, [location]);
 
+  const searchProductHeader = () => {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.searchContainer}
+          onPress={() => Actions.searchProducts()}>
+          <Search
+            width={EStyleSheet.value('14rem')}
+            height={EStyleSheet.value('14rem')}
+          />
+          <Text style={styles.textInput}>{Strings.searchProduct}</Text>
+        </TouchableOpacity>
+        <Text style={styles.nearbyText}>{Strings.nearbyStores}</Text>
+      </View>
+    );
+  };
   const loadStores = (start) => {
     const data = {
       start,
@@ -52,21 +69,7 @@ const Home = (props) => {
             setEndReachCallable(true);
           }
         }}
-        ListHeaderComponent={
-          <View style={styles.container}>
-            <TouchableOpacity
-              activeOpacity={0.5}
-              style={styles.searchContainer}
-              onPress={() => Actions.searchProducts()}>
-              <Search
-                width={EStyleSheet.value('14rem')}
-                height={EStyleSheet.value('14rem')}
-              />
-              <Text style={styles.textInput}>{Strings.searchProduct}</Text>
-            </TouchableOpacity>
-            <Text style={styles.nearbyText}>{Strings.nearbyStores}</Text>
-          </View>
-        }
+        ListHeaderComponent={searchProductHeader}
         contentContainerStyle={styles.list}
       />
       <HomeLocationCheck

@@ -21,9 +21,7 @@ const SearchLocationModal = (props) => {
           <Search
             modal
             onSelect={(location) => {
-              if (location !== null) {
-                setLocation(location);
-              }
+              setLocation(location);
               setVisible(false);
             }}
           />

@@ -98,6 +98,7 @@ export const getUserDetails = () => {
         const response = res.data.data;
         const {address_list, cart_item_quantity, user_details} = response;
         dispatch(setAddress(address_list));
+        console.log(JSON.stringify(address_list))
         dispatch(setCartQuantity(cart_item_quantity));
         dispatch(setUserDetails(user_details));
         Actions.reset('drawer');
@@ -115,7 +116,6 @@ export const getStores = (pars) => {
       if (success) {
         const response = res.data.data;
         const {store_list, store_count} = response;
-        console.log({store_list});
         if (pars.start === 0) {
           dispatch(clearStores());
         }

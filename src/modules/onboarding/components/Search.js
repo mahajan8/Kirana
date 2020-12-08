@@ -147,8 +147,7 @@ const Search = (props) => {
           key={`address${index}`}
           style={[styles.itemRow, styles.addressContainer]}
           onPress={() => {
-            props.setSelectedAddress(index);
-            onSelect(null);
+            onSelect(item.location);
           }}>
           <View style={styles.addressImageContainer}>
             <AddressIcon
