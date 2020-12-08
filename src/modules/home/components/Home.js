@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [location, setLocation] = useState(null);
+  const [endReachCallable, setEndReachCallable] = useState(true);
   const {addresses, selectedAddress, stores, storeCount} = props.homeReducer;
 
   useEffect(() => {
@@ -43,6 +44,14 @@ const Home = (props) => {
         data={stores}
         renderItem={({item}) => <StoreInfoTile store={item} />}
         keyExtractor={(item, index) => `store${index}`}
+        onMomentumScrollBegin={() => setEndReachCallable(false)}
+        onEndReachedThreshold={0.1}
+        onEndReached={() => {
+          if (!endReachCallable && stores.length < storeCount) {
+            loadStores(stores.length);
+            setEndReachCallable(true);
+          }
+        }}
         ListHeaderComponent={
           <View style={styles.container}>
             <TouchableOpacity

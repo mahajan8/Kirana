@@ -3,7 +3,7 @@ import instance from '../../utils/AxiosInstance';
 import {Urls} from '../../utils/utility/Urls';
 import {setAuthToken} from '../../utils/utility/LocalStore';
 import {setLoading, setToken} from './AuthActions';
-import { getUserDetails } from '../home/Api';
+import {getUserDetails} from '../home/Api';
 
 export const sendOtp = (pars) => {
   return (dispatch) => {

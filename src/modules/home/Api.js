@@ -114,12 +114,12 @@ export const getStores = (pars) => {
       const success = !res.data.error;
       if (success) {
         const response = res.data.data;
-        const {store_list} = response;
+        const {store_list, store_count} = response;
         console.log({store_list});
         if (pars.start === 0) {
           dispatch(clearStores());
         }
-        dispatch(appendStores(store_list));
+        dispatch(appendStores(store_list, store_count));
       } else {
         alert(res.data.message);
       }
