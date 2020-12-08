@@ -36,7 +36,7 @@ const ProductsBySubCategory = (props) => {
         headerRight={
           <View style={styles.rowContainer}>
             <Search
-              style={styles.searchButton}
+              style={styles.headerIcon}
               width={EStyleSheet.value('16rem')}
               height={EStyleSheet.value('16rem')}
             />

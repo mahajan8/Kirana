@@ -61,6 +61,7 @@ export const Strings = {
   addToCart: 'Add to Cart',
   filter: 'Filter',
   clearAll: 'Clear All',
+  apply: 'Apply',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
