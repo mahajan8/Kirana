@@ -59,7 +59,9 @@ const Home = (props) => {
       />
       <FlatList
         data={stores}
-        renderItem={({item}) => <StoreInfoTile store={item} />}
+        renderItem={({item}) => (
+          <StoreInfoTile store={item} onPress={() => Actions.store()} />
+        )}
         keyExtractor={(item, index) => `store${index}`}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}

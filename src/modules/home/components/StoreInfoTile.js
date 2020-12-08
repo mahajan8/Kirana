@@ -11,8 +11,8 @@ const StoreInfoTile = (props) => {
   return (
     <TouchableOpacity
       style={[styles.rowContainer, styles.container]}
-      activeOpacity={1}
-      onPress={onPress && onPress}>
+      onPress={onPress && onPress}
+      activeOpacity={1}>
       <Image style={styles.storeImage} source={{uri: getMediaUrl(null)}} />
       <View>
         <Text style={styles.storeName}>{name}</Text>

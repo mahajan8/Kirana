@@ -23,6 +23,8 @@ import Invites from '../modules/navigation/components/Invites';
 import CustomerSupport from '../modules/navigation/components/CustomerSupport';
 import AccountSettings from '../modules/navigation/components/AccountSettings';
 import AccountSetup from '../modules/navigation/components/AccountSetup';
+import Store from '../modules/store/components/Store';
+import Filters from '../modules/store/components/Filters';
 
 const AppRouter = () => {
   return (
@@ -49,6 +51,8 @@ const AppRouter = () => {
         <Scene key="support" component={CustomerSupport} />
         <Scene key="accountSettings" component={AccountSettings} />
         <Scene key="accountSetup" component={AccountSetup} />
+        <Scene key="store" component={Store} />
+        <Scene key="filters" component={Filters} />
         <Scene
           key="drawer"
           drawer={true}

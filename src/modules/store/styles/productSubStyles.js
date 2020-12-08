@@ -6,8 +6,8 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  searchButton: {
-    marginRight: '16rem',
+  headerIcon: {
+    marginRight: '18rem',
   },
   bubblesContainer: {
     paddingVertical: '10vrem',

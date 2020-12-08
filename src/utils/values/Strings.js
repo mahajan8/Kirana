@@ -64,6 +64,9 @@ export const Strings = {
   saveAndProceed: 'Save and Proceed',
   cancel: 'Cancel',
   getOtp: 'Get OTP',
+  filter: 'Filter',
+  clearAll: 'Clear All',
+  apply: 'Apply',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -101,8 +104,10 @@ export const Strings = {
   privacyPolicy: 'Privacy Policy',
   logout: 'Logout',
 
+  shop: 'Shop',
+  explore: 'Explore',
   orders: 'Orders',
-  inventory: 'Inventory',
+
   referal: 'Referral Code',
 
   continuePhoneNumber: 'Continue with Phone Number',
@@ -170,4 +175,7 @@ export const Strings = {
   enterNewNumber: 'Please enter your new mobile number',
   changeNumber: 'Change Mobile Number',
   verifyNumber: 'Verify your phone number',
+  groceryCategories: 'Grocery Categories',
+  paid: 'Paid',
+  trackOrder: 'Track Order',
 };
