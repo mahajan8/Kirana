@@ -59,6 +59,8 @@ export const Strings = {
   more: 'more',
   plusAdd: '+ Add',
   addToCart: 'Add to Cart',
+  filter: 'Filter',
+  clearAll: 'Clear All',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -96,8 +98,10 @@ export const Strings = {
   privacyPolicy: 'Privacy Policy',
   logout: 'Logout',
 
+  shop: 'Shop',
+  explore: 'Explore',
   orders: 'Orders',
-  inventory: 'Inventory',
+
   referal: 'Referral Code',
 
   continuePhoneNumber: 'Continue with Phone Number',
@@ -129,4 +133,7 @@ export const Strings = {
   nearbyStores: 'Nearby Stores',
   completeAccSetup: 'Complete account setup',
   allItems: 'All Items',
+  groceryCategories: 'Grocery Categories',
+  paid: 'Paid',
+  trackOrder: 'Track Order',
 };

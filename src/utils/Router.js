@@ -16,12 +16,14 @@ import StoreProducts from '../modules/store/components/StoreProducts';
 import ProductsBySubCategory from '../modules/store/components/ProductsBySubCategory';
 import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
+import Store from '../modules/store/components/Store';
+import Filters from '../modules/store/components/Filters';
 
 const AppRouter = () => {
   return (
     <Router backAndroidHandler={() => {}}>
       <Stack key="root" hideNavBar>
-        {/* <Scene key="splash" component={Splash} />
+        <Scene key="splash" component={Splash} />
         <Scene key="introduction" component={Introduction} />
         <Scene key="selectLanguage" component={SelectLanguage} />
         <Scene key="login" component={Login} />
@@ -30,11 +32,13 @@ const AppRouter = () => {
         <Scene key="referal" component={Referal} />
         <Scene key="searchLocation" component={SearchLocation} />
         <Scene key="addAddress" component={AddAddress} />
-        <Scene key="addresses" component={Addresses} /> */}
+        <Scene key="addresses" component={Addresses} />
         <Scene key="storeProducts" component={StoreProducts} />
         <Scene key="productsBySubCategory" component={ProductsBySubCategory} />
         <Scene key="productsList" component={ProductsList} />
         <Scene key="productDetails" component={ProductDetails} />
+        <Scene key="store" component={Store} />
+        <Scene key="filters" component={Filters} />
         <Scene
           key="drawer"
           drawer={true}

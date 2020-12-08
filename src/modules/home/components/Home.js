@@ -74,7 +74,9 @@ const Home = () => {
       <DrawerHeader />
       <FlatList
         data={stores}
-        renderItem={({item}) => <StoreInfoTile store={item} />}
+        renderItem={({item}) => (
+          <StoreInfoTile store={item} onPress={() => Actions.store()} />
+        )}
         keyExtractor={(item, index) => `store${index}`}
         ListHeaderComponent={
           <View style={styles.container}>
