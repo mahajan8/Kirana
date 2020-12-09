@@ -116,6 +116,7 @@ export const getStores = (pars) => {
       if (success) {
         const response = res.data.data;
         const {store_list, store_count} = response;
+        console.log(JSON.stringify(store_list));
         if (pars.start === 0) {
           dispatch(clearStores());
         }

@@ -28,7 +28,6 @@ const renderBubbles = (label) => (
 
 const ProductsBySubCategory = (props) => {
   let {categoryName} = props;
-
   return (
     <SafeArea>
       <Header
