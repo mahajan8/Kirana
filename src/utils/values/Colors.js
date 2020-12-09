@@ -12,4 +12,5 @@ export const Colors = {
   darkGreen: '#0e492f',
   white: '#FFF',
   lightStatusBar: '#fafafa',
+  placeHolder: '#c3c3c3',
 };

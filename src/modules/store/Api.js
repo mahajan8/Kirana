@@ -1,24 +1,21 @@
-import {Actions} from 'react-native-router-flux';
-import instance from '../../utils/AxiosInstance';
+/* eslint-disable no-alert */
 import {Urls} from '../../utils/utility/Urls';
-import {setAuthToken} from '../../utils/utility/LocalStore';
-import {setLoading, setToken} from './AuthActions';
-import {getUserDetails} from '../home/Api';
 import {getFormBody} from '../../utils/utility/Utils';
+import {setLoading} from '../authentication/AuthActions';
+import instance from '../../utils/AxiosInstance';
+import {Actions} from 'react-native-router-flux';
 
-export const sendOtp = (pars) => {
+export const getStoreDetails = (pars, callback) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
     instance
-      .post(Urls.sendOtp, formBody)
+      .post(Urls.getStoreDetails, formBody)
       .then((res) => {
         dispatch(setLoading(false));
-
         const success = !res.data.error;
         if (success) {
-          if (Actions.currentScene != 'otp') Actions.otp({number: pars.mobile});
-          // alert(res.data.data.otp);
+          callback(res.data.data);
         } else {
           alert(res.data.message);
         }
@@ -30,22 +27,17 @@ export const sendOtp = (pars) => {
   };
 };
 
-export const verifyOtp = (pars) => {
+export const getProductsByCategory = (pars, callback) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
     instance
-      .post(Urls.verifyOtp, formBody)
+      .post(Urls.getProductsByCategory, formBody)
       .then((res) => {
         dispatch(setLoading(false));
-
         const success = !res.data.error;
         if (success) {
-          // Actions.otp({number: pars.mobile})
-          let token = res.data.data.api_token;
-          dispatch(setToken(token));
-          setAuthToken(token);
-          dispatch(getUserDetails());
+          callback(res.data.data);
         } else {
           alert(res.data.message);
         }

@@ -10,7 +10,7 @@ import {styles} from '../styles/searchProductsStyles';
 import Input from '../../commons/components/Input';
 import Search from '../../../assets/images/search.svg';
 import StoreInfoTile from './StoreInfoTile';
-import NoAddressImage from '../../../assets/images/empty_address.svg';
+import NoResults from '../../../assets/images/search_not_found.svg';
 
 let stores = [
   {
@@ -130,7 +130,7 @@ const SearchProducts = () => {
         ListEmptyComponent={
           <View style={styles.emptyListContainer}>
             {/* TODO: Change Image  */}
-            <NoAddressImage
+            <NoResults
               width={EStyleSheet.value('270rem')}
               height={EStyleSheet.value('123rem')}
             />

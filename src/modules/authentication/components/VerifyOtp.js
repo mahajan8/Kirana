@@ -1,5 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -37,6 +43,7 @@ const VerifyOtp = (props) => {
     };
 
     props.sendOtp(pars);
+    otp.current.clear();
     setSeconds(30);
   };
 
@@ -49,29 +56,40 @@ const VerifyOtp = (props) => {
 
   return (
     <SafeArea statusBarColor={Colors.lightGreen}>
-      <View style={{flex: 1}}>
-        <Header
-          title={Strings.verifyOtp}
-          subTitle={Strings.otpSent + props.number}
-        />
-
-        <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
-
-        <Text style={styles.resendText}>
-          {seconds ? Strings.resendWait : Strings.preResend}
-          <Text style={styles.coloredText} onPress={() => !seconds && resend()}>
-            {seconds ? '00:' + seconds : Strings.resend}
-          </Text>
-        </Text>
-
-        <View style={commonStyles.buttonBottomContainer}>
-          <Button
-            label={Strings.verify}
-            onPress={() => verify()}
-            disabled={disabled}
+      <KeyboardAvoidingView
+        style={commonStyles.scrollContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        enabled
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 20}>
+        <ScrollView
+          contentContainerStyle={commonStyles.scrollContainer}
+          bounces={false}
+          keyboardShouldPersistTaps="handled">
+          <Header
+            title={Strings.verifyOtp}
+            subTitle={Strings.otpSent + props.number}
           />
-        </View>
-      </View>
+
+          <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
+
+          <Text style={styles.resendText}>
+            {seconds ? Strings.resendWait : Strings.preResend}
+            <Text
+              style={styles.coloredText}
+              onPress={() => !seconds && resend()}>
+              {seconds ? '00:' + seconds : Strings.resend}
+            </Text>
+          </Text>
+
+          <View style={commonStyles.buttonBottomContainer}>
+            <Button
+              label={Strings.verify}
+              onPress={() => verify()}
+              disabled={disabled}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <Loader show={props.loading} />
     </SafeArea>
   );

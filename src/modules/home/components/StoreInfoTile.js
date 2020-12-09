@@ -3,10 +3,14 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
+import Star from '../../../assets/images/green_rating_star.svg';
+import StoreClosed from '../../../assets/images/store_closed.svg';
+import StoreShop from '../../../assets/images/store_shop_icon.svg';
+import {Strings} from '../../../utils/values/Strings';
 
 const StoreInfoTile = (props) => {
   let {name, location, rating, distance} = props.store;
-  let {onPress} = props;
+  let {onPress, closed} = props;
 
   return (
     <TouchableOpacity
@@ -18,11 +22,45 @@ const StoreInfoTile = (props) => {
         <Text style={styles.storeName}>{name}</Text>
         <Text style={styles.storeLocation}>{location.short_address}</Text>
         <View style={styles.rowContainer}>
-          {/* TODO: Replace with Star Icon */}
-          <Text style={styles.star}>*</Text>
-          <Text style={styles.details}>{rating}</Text>
-          <View style={styles.seperator} />
+          {!closed && (
+            <View style={styles.rowContainer}>
+              <Star
+                style={styles.star}
+                width={EStyleSheet.value('10rem')}
+                height={EStyleSheet.value('10rem')}
+              />
+              <Text style={styles.details}>{rating}</Text>
+              <View style={styles.seperator} />
+            </View>
+          )}
           <Text style={styles.details}>{distance} km</Text>
+          {closed && (
+            <View style={styles.rowContainer}>
+              <View style={[styles.storeClosedContainer, styles.rowContainer]}>
+                <StoreClosed
+                  width={EStyleSheet.value('8rem')}
+                  height={EStyleSheet.value('8rem')}
+                />
+                <Text style={styles.storeClosedText}>
+                  {Strings.storeClosed}
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.storeClosedContainer,
+                  styles.storeShopContainer,
+                  styles.rowContainer,
+                ]}>
+                <StoreShop
+                  width={EStyleSheet.value('8rem')}
+                  height={EStyleSheet.value('8rem')}
+                />
+                <Text style={[styles.storeClosedText, styles.storeShopText]}>
+                  {Strings.orderNowGetAt}
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
       </View>
     </TouchableOpacity>
@@ -62,7 +100,6 @@ const styles = EStyleSheet.create({
     color: Colors.darkGray,
   },
   star: {
-    color: Colors.themeGreen,
     marginRight: '3rem',
   },
   seperator: {
@@ -70,6 +107,24 @@ const styles = EStyleSheet.create({
     backgroundColor: '#e0e0e0',
     marginHorizontal: '7rem',
     height: '12vrem',
+  },
+  storeClosedContainer: {
+    backgroundColor: '#f8d7da',
+    borderRadius: '3rem',
+    padding: '5rem',
+    marginLeft: '6rem',
+  },
+  storeClosedText: {
+    color: '#731c23',
+    fontSize: '8rem',
+    fontWeight: '500',
+    marginLeft: '4rem',
+  },
+  storeShopContainer: {
+    backgroundColor: '#dcebfe',
+  },
+  storeShopText: {
+    color: '#014085',
   },
 });
 

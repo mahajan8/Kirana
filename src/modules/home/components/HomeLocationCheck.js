@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
-import LocationIcon from '../../../assets/images/location.svg';
+import LocationIcon from '../../../assets/images/green_location.svg';
 import CurrentLocation from '../../../assets/images/home_location_current.svg';
 import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {Fonts} from '../../../utils/values/Fonts';
 import {connect} from 'react-redux';
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
 
@@ -94,7 +94,6 @@ const HomeLocationCheck = (props) => {
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           <View style={styles.locationIconContainer}>
-            {/* TODO: Change to Green Icon */}
             <LocationIcon
               width={EStyleSheet.value('15rem')}
               height={EStyleSheet.value('20rem')}

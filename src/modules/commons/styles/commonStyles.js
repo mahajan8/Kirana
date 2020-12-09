@@ -22,4 +22,7 @@ export const commonStyles = EStyleSheet.create({
     right: '5rem',
     left: '5rem',
   },
+  scrollContainer: {
+    flexGrow: 1,
+  },
 });

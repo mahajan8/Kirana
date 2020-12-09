@@ -7,6 +7,8 @@ export const Urls = {
   deleteAddress: '/organisation/user/delete-user-address',
   getUserDetails: '/organisation/user/get-user-details',
   getStores: '/offering/store/get-stores-by-location',
+  getStoreDetails: '/offering/store/get-store-details-and-products',
+  getProductsByCategory: '/offering/store/get-store-products-by-category-id',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

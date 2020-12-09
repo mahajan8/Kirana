@@ -14,7 +14,7 @@ const List = (props) => {
 
   useEffect(() => {
     if (!vertical) {
-      setHorizontalList(list.length > 5 ? list.slice(5) : list);
+      setHorizontalList(list.length > 5 ? list.slice(0, 5) : list);
     }
   }, []);
 
@@ -30,8 +30,13 @@ const List = (props) => {
       </View>
     );
 
-  const renderProduct = (item) => (
-    <ProductBox key={`product${item}`} vertical={vertical} onPress={onPress} />
+  const renderProduct = (item, index) => (
+    <ProductBox
+      key={`product${item + index}`}
+      vertical={vertical}
+      onPress={onPress}
+      item={item}
+    />
   );
 
   return (
@@ -39,7 +44,7 @@ const List = (props) => {
       {vertical ? (
         <FlatList
           data={list}
-          renderItem={({item}) => renderProduct(item)}
+          renderItem={({item, index}) => renderProduct(item, index)}
           keyExtractor={(item, index) => `product${index}`}
           numColumns={2}
           contentContainerStyle={[
@@ -52,7 +57,7 @@ const List = (props) => {
         <View style={[styles.listContainer, !noShadow && commonStyles.shadow]}>
           {renderHeader()}
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {horizontalList.map((item) => renderProduct(item))}
+            {horizontalList.map((item, index) => renderProduct(item, index))}
           </ScrollView>
         </View>
       )}

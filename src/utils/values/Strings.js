@@ -178,4 +178,6 @@ export const Strings = {
   groceryCategories: 'Grocery Categories',
   paid: 'Paid',
   trackOrder: 'Track Order',
+  storeClosed: 'Store Closed',
+  orderNowGetAt: 'Order Now, Get it at 11 am!',
 };

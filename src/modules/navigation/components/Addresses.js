@@ -12,13 +12,13 @@ import {connect} from 'react-redux';
 import PlusIcon from '../../../assets/images/green_plus.svg';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
 import {commonStyles} from '../../commons/styles/commonStyles';
-import {getAddresses, deleteAddress} from '../../home/Api';
+import {getAddresses, deleteAddress} from '../Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import Loader from '../../commons/components/Loader';
 
 const Addresses = (props) => {
-  let {addresses} = props.homeReducer;
+  let {addresses} = props.navigationReducer;
 
   const [deleteVisible, setDeleteVisible] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -164,7 +164,7 @@ const Addresses = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  homeReducer: state.homeReducer,
+  navigationReducer: state.navigationReducer,
 });
 
 const mapDispatchToProps = {

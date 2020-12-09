@@ -29,7 +29,7 @@ const Store = (props) => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <StoreProducts />;
+        return <StoreProducts storeId={props.storeId} />;
       case 'second':
         return <Explore />;
       case 'third':

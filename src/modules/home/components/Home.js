@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -60,7 +61,10 @@ const Home = (props) => {
       <FlatList
         data={stores}
         renderItem={({item}) => (
-          <StoreInfoTile store={item} onPress={() => Actions.store()} />
+          <StoreInfoTile
+            store={item}
+            onPress={() => Actions.store({storeId: item.id})}
+          />
         )}
         keyExtractor={(item, index) => `store${index}`}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
@@ -74,11 +78,11 @@ const Home = (props) => {
         ListHeaderComponent={searchProductHeader}
         contentContainerStyle={styles.list}
       />
-      <HomeLocationCheck
+      {/* <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
         setLocation={setLocation}
         selectedLocation={location}
-      />
+      /> */}
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}

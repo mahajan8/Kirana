@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productSubStyles';
@@ -8,7 +9,10 @@ import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
-import List from './List';
+import List from './StoreProductsListing';
+import ListPlaceHolder from './ListPlaceHolder';
+import {getProductsByCategory} from '../Api';
+import {connect} from 'react-redux';
 
 let products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let subCategories = ['Fresh Vegetables', 'Fresh Fruits', 'Exotic Fruits'];
@@ -28,6 +32,21 @@ const renderBubbles = (label) => (
 
 const ProductsBySubCategory = (props) => {
   let {categoryName} = props;
+
+  const [storeProducts, setStoreProducts] = useState(null);
+
+  useEffect(() => {
+    let pars = {
+      store_id: props.storeId,
+      category_id: props.categoryId,
+    };
+
+    props.getProductsByCategory(pars, (data) => {
+      console.log(data);
+      setStoreProducts(data.store_products);
+    });
+  }, []);
+
   return (
     <SafeArea>
       <Header
@@ -44,37 +63,55 @@ const ProductsBySubCategory = (props) => {
         }
         type={1}
       />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={[styles.rowContainer, styles.bubblesContainer]}>
-          {subCategories.map((item, index) => renderBubbles(item))}
-        </View>
+      {storeProducts ? (
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <View style={[styles.rowContainer, styles.bubblesContainer]}>
+            {storeProducts.map((item, index) => renderBubbles(item.name))}
+          </View>
 
-        {subCategories.map((item, index) => (
-          <List
-            label={item}
+          {storeProducts.map((item, index) => (
+            <List
+              label={item.name}
+              list={item.products}
+              key={`subCategoryProduct${index}`}
+              onMorePress={() =>
+                Actions.productsList({
+                  subCategoryName: item.name,
+                })
+              }
+            />
+          ))}
+
+          {/* <List
+            label={Strings.allItems}
             list={products}
-            key={`subCategoryProduct${index}`}
+            vertical
             onMorePress={() =>
               Actions.productsList({
-                subCategoryName: item,
+                subCategoryName: Strings.allItems,
               })
             }
-          />
-        ))}
-
-        <List
-          label={Strings.allItems}
-          list={products}
-          vertical
-          onMorePress={() =>
-            Actions.productsList({
-              subCategoryName: Strings.allItems,
-            })
-          }
-        />
-      </ScrollView>
+          /> */}
+        </ScrollView>
+      ) : (
+        <View>
+          <ListPlaceHolder count={4} />
+          <ListPlaceHolder count={4} vertical />
+        </View>
+      )}
     </SafeArea>
   );
 };
 
-export default ProductsBySubCategory;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+});
+
+const mapDispatchToProps = {
+  getProductsByCategory,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductsBySubCategory);

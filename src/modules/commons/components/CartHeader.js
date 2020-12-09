@@ -5,6 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
 import Back from '../../../assets/images/back-arrow.svg';
+import Menu from '../../../assets/images/menu_icon.svg';
 import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../styles/commonStyles';
@@ -53,11 +54,19 @@ const CartHeader = (props) => {
           }
         }}
         hitSlop={commonStyles.hitSlop}>
-        <Back
-          style={styles.leftButton}
-          width={EStyleSheet.value('18rem')}
-          height={EStyleSheet.value('14rem')}
-        />
+        {Actions.currentScene === '_home' ? (
+          <Menu
+            style={styles.leftButton}
+            width={EStyleSheet.value('18rem')}
+            height={EStyleSheet.value('14rem')}
+          />
+        ) : (
+          <Back
+            style={styles.leftButton}
+            width={EStyleSheet.value('18rem')}
+            height={EStyleSheet.value('14rem')}
+          />
+        )}
       </TouchableOpacity>
 
       {titleComp ? (

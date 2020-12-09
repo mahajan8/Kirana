@@ -51,6 +51,12 @@ export default class Otp extends Component {
     }
   }
 
+  clear() {
+    this.setState({
+      otp: ['', '', '', ''],
+    });
+  }
+
   render() {
     const {focus, error} = this.state;
 

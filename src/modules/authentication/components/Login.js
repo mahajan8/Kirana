@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -27,42 +33,51 @@ const Login = (props) => {
 
   return (
     <SafeArea statusBarColor={Colors.lightGreen}>
-      <View style={{flex: 1}}>
-        <Header title={Strings.loginTitle} subTitle={Strings.loginSubTitle} />
+      <KeyboardAvoidingView
+        style={commonStyles.scrollContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        enabled
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 50 : 20}>
+        <ScrollView
+          contentContainerStyle={commonStyles.scrollContainer}
+          bounces={false}
+          keyboardShouldPersistTaps="handled">
+          <Header title={Strings.loginTitle} subTitle={Strings.loginSubTitle} />
 
-        <Input
-          label={Strings.mobileNumber}
-          value={number}
-          onChange={(number) => setNumber(number)}
-          type={'phone'}
-          errorMessage={Strings.invalidNumber}
-          error={number && !valid(number, Validation.mobile)}
-          containerStyle={{marginTop: 0}}
-        />
-
-        <View style={commonStyles.buttonBottomContainer}>
-          <Button
-            label={Strings.continue}
-            onPress={() => login()}
-            disabled={!valid(number, Validation.mobile)}
+          <Input
+            label={Strings.mobileNumber}
+            value={number}
+            onChange={(number) => setNumber(number)}
+            type={'phone'}
+            errorMessage={Strings.invalidNumber}
+            error={number && !valid(number, Validation.mobile)}
+            containerStyle={{marginTop: 0}}
           />
 
-          <Text style={styles.termsText}>
-            {Strings.accepting}
-            <Text
-              style={styles.coloredText}
-              onPress={() => console.log('terms')}>
-              {Strings.terms}
+          <View style={commonStyles.buttonBottomContainer}>
+            <Button
+              label={Strings.continue}
+              onPress={() => login()}
+              disabled={!valid(number, Validation.mobile)}
+            />
+
+            <Text style={styles.termsText}>
+              {Strings.accepting}
+              <Text
+                style={styles.coloredText}
+                onPress={() => console.log('terms')}>
+                {Strings.terms}
+              </Text>
+              {Strings.and}
+              <Text
+                style={styles.coloredText}
+                onPress={() => console.log('privacy')}>
+                {Strings.privacy}
+              </Text>
             </Text>
-            {Strings.and}
-            <Text
-              style={styles.coloredText}
-              onPress={() => console.log('privacy')}>
-              {Strings.privacy}
-            </Text>
-          </Text>
-        </View>
-      </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <Loader show={props.loading} />
     </SafeArea>
   );

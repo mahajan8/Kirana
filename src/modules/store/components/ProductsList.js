@@ -9,7 +9,7 @@ import Filter from '../../../assets/images/filter.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
-import List from './List';
+import List from './StoreProductsListing';
 
 let products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

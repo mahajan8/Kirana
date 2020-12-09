@@ -14,6 +14,7 @@ import Privacy from '../../../assets/images/privacy.svg';
 import FreeDelivery from '../../../assets/images/get_free_delivery.svg';
 import RightArrow from '../../../assets/images/right_arrow.svg';
 import {logout} from '../../../utils/utility/Utils';
+import SafeArea from '../../commons/components/SafeArea';
 
 let options = [
   {icon: MyOrders, label: Strings.myOrders},
@@ -62,7 +63,7 @@ const renderOptions = (Icon, label, index) => {
 
 const DrawerComponent = () => {
   return (
-    <View>
+    <SafeArea statusBarColor={Colors.themeGreen}>
       <View style={styles.greenContainer}>
         <Text style={styles.number}>+91 9830098300</Text>
         <Text style={styles.completeSetup}>{Strings.completeAccSetup}</Text>
@@ -92,7 +93,7 @@ const DrawerComponent = () => {
         </View>
       ))}
       {/* </View> */}
-    </View>
+    </SafeArea>
   );
 };
 

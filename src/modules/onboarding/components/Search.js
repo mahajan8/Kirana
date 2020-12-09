@@ -8,6 +8,7 @@ import {
   ScrollView,
   Platform,
   LogBox,
+  PermissionsAndroid,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
@@ -22,7 +23,7 @@ import {Colors} from '../../../utils/values/Colors';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
 import {getKeyByValue} from '../../../utils/utility/Utils';
@@ -93,6 +94,27 @@ const Search = (props) => {
         </View>
       </View>
     );
+  };
+
+  const getPremission = async () => {
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization('whenInUse')
+        .then((permission) => {
+          if (permission === 'granted') {
+            getLocation();
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        getLocation();
+      } else {
+        console.log('Location permission denied');
+      }
+    }
   };
 
   const getLocation = () => {
@@ -185,7 +207,7 @@ const Search = (props) => {
             styles.currentLocationContainer,
             modal && styles.currentLocationModal,
           ]}
-          onPress={getLocation}>
+          onPress={getPremission}>
           <CurrentLocation style={styles.locationIcon} />
           {modal ? (
             <Text style={styles.useCurrentText}>
