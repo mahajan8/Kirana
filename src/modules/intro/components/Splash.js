@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/introStyle';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -28,9 +28,10 @@ const Splash = (props) => {
   return (
     <SafeArea statusBarColor={Colors.themeGreen}>
       <View style={styles.container}>
-        <Text style={{color: '#FFF', fontSize: EStyleSheet.value(20)}}>
-          Kirana Kart
-        </Text>
+        <Image
+          source={require('../../../assets/images/logo.png')}
+          style={styles.splashLogo}
+        />
       </View>
     </SafeArea>
   );

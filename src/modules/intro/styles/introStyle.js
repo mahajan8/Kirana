@@ -60,4 +60,8 @@ export const styles = EStyleSheet.create({
   greenText: {
     color: Colors.themeGreen,
   },
+  splashLogo: {
+    width: '210rem',
+    height: '40vrem',
+  },
 });

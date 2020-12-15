@@ -85,7 +85,7 @@ export default class Otp extends Component {
               placeholder="0"
               placeholderTextColor={Colors.grayText}
               underlineColorAndroid="transparent"
-              caretHidden={true}
+              selectionColor={Colors.themeGreen}
               ref={(ref) => (this['otp' + index] = ref)}
               onFocus={() => {
                 this.setState({focus: index});
