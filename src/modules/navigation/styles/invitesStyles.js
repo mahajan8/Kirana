@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {Fonts} from '../../../utils/values/Fonts';
 const {Colors} = require('../../../utils/values/Colors');
 
 export const styles = EStyleSheet.create({
@@ -16,7 +17,7 @@ export const styles = EStyleSheet.create({
   },
   rewarded: {
     color: Colors.darkGreen,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     fontSize: '12rem',
   },
   inviteRow: {
@@ -26,11 +27,11 @@ export const styles = EStyleSheet.create({
   },
   number: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   rewardDate: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '10rem',
     color: Colors.darkGray,
     marginLeft: '4rem',
@@ -50,12 +51,12 @@ export const styles = EStyleSheet.create({
   },
   nextFree: {
     fontSize: '13rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: '#466eb6',
     letterSpacing: '-0.05rem',
     width: '140rem',
   },
   freeDeliveryCount: {
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
   },
 });

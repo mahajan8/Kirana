@@ -13,6 +13,7 @@ import HomeLocationCheck from './HomeLocationCheck';
 import SearchLocationModal from './SearchLocationModal';
 import {getStores} from '../Api';
 import {connect} from 'react-redux';
+import {Colors} from '../../../utils/values/Colors';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -52,11 +53,13 @@ const Home = (props) => {
     };
     props.getStores(data);
   };
+
   return (
     <SafeArea>
       <CartHeader
         location={location}
         selectLocation={() => setSearchVisible(true)}
+        drawer
       />
       <FlatList
         data={stores}

@@ -7,6 +7,7 @@ import Camera from '../../../assets/images/camera.svg';
 import Cross from '../../../assets/images/cross.svg';
 import ImagePicker from 'react-native-image-picker';
 import {commonStyles} from '../styles/commonStyles';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const ImagePick = (props) => {
   const {visible, setVisible, onSelectImage} = props;
@@ -111,7 +112,7 @@ const styles = EStyleSheet.create({
     color: Colors.darkGreen,
     lineHeight: '24rem',
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   optionsView: {
     flexDirection: 'row',
@@ -122,7 +123,7 @@ const styles = EStyleSheet.create({
     color: Colors.darkGray,
     fontSize: '12rem',
     marginLeft: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
 });
 

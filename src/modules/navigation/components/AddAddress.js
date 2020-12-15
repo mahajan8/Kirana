@@ -22,6 +22,13 @@ import {connect} from 'react-redux';
 import {addUpdateAddress} from '../Api';
 import Loader from '../../commons/components/Loader';
 import {isAnyFieldEmpty} from '../../../utils/utility/Validations';
+import {addressTypes} from '../../../utils/values/Values';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
+import {commonStyles} from '../../commons/styles/commonStyles';
+import BottomButton from '../../commons/components/BottomButton';
+
+const typesList = Object.values(addressTypes);
 
 const AddAddress = (props) => {
   const [houseNumber, setHouseNumber] = useState('');
@@ -76,131 +83,98 @@ const AddAddress = (props) => {
 
   return (
     <SafeArea>
-      <KeyboardAvoidingView
-        style={{flexGrow: 1}}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        enabled
-        keyboardVerticalOffset={20}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContainer}
-          bounces={false}
-          keyboardShouldPersistTaps="handled">
-          <Header title={Strings.addresses} type={1} />
-          <View style={styles.mapView}>
-            <MapView
-              provider={PROVIDER_GOOGLE}
-              style={styles.map}
-              region={{
-                latitude: lat,
-                longitude: lng,
-                latitudeDelta: 0.03,
-                longitudeDelta: 0.03,
-              }}
-              // onRegionChange={(region) => setRegion(region)}
-              scrollEnabled={false}>
-              <Marker coordinate={{latitude: lat, longitude: lng}}>
-                <CustomMarker
-                  style={styles.marker}
-                  width={EStyleSheet.value('42rem')}
-                  height={EStyleSheet.value('42rem')}
-                />
-              </Marker>
-            </MapView>
-          </View>
-          <View style={styles.locationContainer}>
+      <Header title={Strings.addresses} type={1} />
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps={'handled'}
+        style={commonStyles.scrollContainer}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.mapView}>
+          <MapView
+            provider={PROVIDER_GOOGLE}
+            style={styles.map}
+            region={{
+              latitude: lat,
+              longitude: lng,
+              latitudeDelta: 0.03,
+              longitudeDelta: 0.03,
+            }}
+            // onRegionChange={(region) => setRegion(region)}
+            scrollEnabled={false}>
+            <Marker coordinate={{latitude: lat, longitude: lng}}>
+              <CustomMarker
+                style={styles.marker}
+                width={EStyleSheet.value('42rem')}
+                height={EStyleSheet.value('42rem')}
+              />
+            </Marker>
+          </MapView>
+        </View>
+        <View style={styles.locationContainer}>
+          <View style={styles.rowContainer}>
             <View style={styles.rowContainer}>
-              <View style={styles.rowContainer}>
-                <Location
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('14rem')}
-                />
-                <Text style={styles.locationTitle} numberOfLines={1}>
-                  {formatted_address}
-                </Text>
-              </View>
-              <Button
-                label={Strings.change}
-                Style={styles.changeButton}
-                labelStyle={styles.changeButtonLabel}
-                onPress={() => {
-                  if (id) {
-                    Actions.searchLocation({saveLocation: setLocation});
-                  } else {
-                    Actions.pop();
-                  }
-                }}
+              <Location
+                width={EStyleSheet.value('12rem')}
+                height={EStyleSheet.value('14rem')}
               />
+              <Text style={styles.locationTitle} numberOfLines={1}>
+                {formatted_address}
+              </Text>
             </View>
-            <Text style={styles.locationSub}>{formatted_address}</Text>
+            <Button
+              label={Strings.change}
+              Style={styles.changeButton}
+              labelStyle={styles.changeButtonLabel}
+              onPress={() => {
+                if (id) {
+                  Actions.addressSearch({saveLocation: setLocation});
+                } else {
+                  Actions.pop();
+                }
+              }}
+            />
           </View>
+          <Text style={styles.locationSub}>{formatted_address}</Text>
+        </View>
 
-          <Input
-            value={houseNumber}
-            onChange={setHouseNumber}
-            label={Strings.addressLine}
-          />
+        <Input
+          value={houseNumber}
+          onChange={setHouseNumber}
+          label={Strings.addressLine}
+        />
 
-          <Input
-            value={landmark}
-            onChange={setLandMark}
-            label={Strings.landmark}
-          />
-          <View style={styles.saveAddressContainer}>
-            <Text style={styles.saveAddressText}>{Strings.saveAddressAs}</Text>
-            <View style={styles.buttonsContainer}>
+        <Input
+          value={landmark}
+          onChange={setLandMark}
+          label={Strings.landmark}
+        />
+        <View style={styles.saveAddressContainer}>
+          <Text style={styles.saveAddressText}>{Strings.saveAddressAs}</Text>
+          <View style={styles.buttonsContainer}>
+            {typesList.map((type) => (
               <Button
-                label={Strings.home}
+                key={`addressTypeButton${type}`}
+                label={getKeyByValue(addressTypes, type)}
                 bordered
                 Style={[
                   styles.buttonStyle,
-                  addressType === 10 && styles.selectedButton,
+                  addressType === type && styles.selectedButton,
                 ]}
                 labelStyle={[
                   styles.buttonLabel,
-                  addressType !== 10 && styles.unSelectedLabel,
+                  addressType !== type && styles.unSelectedLabel,
                 ]}
-                onPress={() => setAddressType(10)}
-                disabled={getDisabled(10)}
+                onPress={() => setAddressType(type)}
+                disabled={getDisabled(type)}
               />
-
-              <Button
-                label={Strings.work}
-                bordered
-                Style={[
-                  styles.buttonStyle,
-                  addressType === 20 && styles.selectedButton,
-                ]}
-                labelStyle={[
-                  styles.buttonLabel,
-                  addressType !== 20 && styles.unSelectedLabel,
-                ]}
-                onPress={() => setAddressType(20)}
-                disabled={getDisabled(20)}
-              />
-
-              <Button
-                label={Strings.other}
-                bordered
-                Style={[
-                  styles.buttonStyle,
-                  addressType === 30 && styles.selectedButton,
-                ]}
-                labelStyle={[
-                  styles.buttonLabel,
-                  addressType !== 30 && styles.unSelectedLabel,
-                ]}
-                onPress={() => setAddressType(30)}
-                disabled={getDisabled(30)}
-              />
-            </View>
+            ))}
           </View>
-          <Button
-            label={Strings.saveAndProceed}
-            onPress={() => submitAddress()}
-            disabled={isAnyFieldEmpty([houseNumber, landmark]) || !addressType}
-          />
-        </ScrollView>
-      </KeyboardAvoidingView>
+        </View>
+      </KeyboardAwareScrollView>
+      <BottomButton
+        buttonLabel={Strings.saveAndProceed}
+        onPress={() => submitAddress()}
+        disabled={isAnyFieldEmpty([houseNumber, landmark]) || !addressType}
+      />
       <Loader show={props.loading} />
     </SafeArea>
   );

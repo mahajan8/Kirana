@@ -7,7 +7,7 @@ import Login from '../modules/authentication/components/Login';
 import VerifyOtp from '../modules/authentication/components/VerifyOtp';
 import Onboarding from '../modules/onboarding/components/Onboarding';
 import Referal from '../modules/onboarding/components/Referal';
-import SearchLocation from '../modules/onboarding/components/SearchLocation';
+import AddressSearch from '../modules/onboarding/components/AddressSearch';
 import AddAddress from '../modules/navigation/components/AddAddress';
 import Addresses from '../modules/navigation/components/Addresses';
 import Home from '../modules/home/components/Home';
@@ -37,7 +37,7 @@ const AppRouter = () => {
         <Scene key="otp" component={VerifyOtp} />
         <Scene key="onboarding" component={Onboarding} />
         <Scene key="referal" component={Referal} />
-        <Scene key="searchLocation" component={SearchLocation} />
+        <Scene key="addressSearch" component={AddressSearch} />
         <Scene key="addAddress" component={AddAddress} />
         <Scene key="addresses" component={Addresses} />
         <Scene key="storeProducts" component={StoreProducts} />

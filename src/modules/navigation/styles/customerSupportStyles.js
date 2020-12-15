@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   rowContainer: {
@@ -16,7 +17,7 @@ export const styles = EStyleSheet.create({
   },
   helpText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.darkGreen,
   },
   helpOptionContainer: {
@@ -32,12 +33,12 @@ export const styles = EStyleSheet.create({
   },
   helpOptionTitle: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   helpOptionSub: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.lightGray,
   },
   helpOptionTextContainer: {

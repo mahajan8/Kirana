@@ -8,6 +8,7 @@ import Back from '../../../assets/images/back-arrow.svg';
 import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../styles/commonStyles';
+import {Fonts} from '../../../utils/values/Fonts';
 
 // type =0 --> Auth Header with title and subtitle
 // type =1 --> Row Header with title and back arrow
@@ -28,9 +29,9 @@ const Header = (props) => {
   return (
     <View
       style={[
+        !noShadow && styles.headerShadow,
         styles.container,
         type != 0 && styles.container2,
-        !noShadow && commonStyles.shadow,
         containerStyle && containerStyle,
       ]}>
       <View style={styles.rowContainer}>
@@ -85,14 +86,14 @@ const styles = EStyleSheet.create({
   title: {
     color: Colors.titleText,
     fontSize: '18rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginTop: '12vrem',
   },
   subTitle: {
     color: Colors.subTitleText,
     fontSize: '12rem',
     letterSpacing: '0.2rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -102,7 +103,7 @@ const styles = EStyleSheet.create({
   type1Title: {
     color: Colors.titleText,
     fontSize: '16rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginLeft: '16rem',
   },
   headerRightContainer: {
@@ -110,6 +111,12 @@ const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  headerShadow: {
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
   },
 });
 

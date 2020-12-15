@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   productImage: {
@@ -16,18 +17,18 @@ export const styles = EStyleSheet.create({
   },
   price: {
     fontSize: '16rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
   },
   name: {
     fontSize: '14rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     letterSpacing: '-0.22rem',
     color: Colors.titleText,
   },
   weight: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: '#666666',
   },
   buttonStyle: {
@@ -58,12 +59,12 @@ export const styles = EStyleSheet.create({
   },
   counterText: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
   countText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: '#333333',
     letterSpacing: '-0.2rem',
   },

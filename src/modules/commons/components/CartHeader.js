@@ -9,8 +9,8 @@ import Menu from '../../../assets/images/menu_icon.svg';
 import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../styles/commonStyles';
-import Location from '../../../assets/images/location.svg';
-import DownArrow from '../../../assets/images/down_arrow.svg';
+import Location from '../../../assets/images/green_location.svg';
+import DownArrow from '../../../assets/images/header_down_arrow.svg';
 import CartCounter from './CartCounter';
 import {Fonts} from '../../../utils/values/Fonts';
 
@@ -31,13 +31,14 @@ const CartHeader = (props) => {
     inputRef,
     location,
     selectLocation,
+    drawer,
   } = props;
 
   return (
     <View
       style={[
         styles.container,
-        !noShadow && commonStyles.shadow,
+        !noShadow && styles.headerShadow,
         containerStyle && containerStyle,
         styles.rowContainer,
       ]}>
@@ -54,7 +55,7 @@ const CartHeader = (props) => {
           }
         }}
         hitSlop={commonStyles.hitSlop}>
-        {Actions.currentScene === '_home' ? (
+        {drawer ? (
           <Menu
             style={styles.leftButton}
             width={EStyleSheet.value('18rem')}
@@ -97,10 +98,7 @@ const CartHeader = (props) => {
           <Text style={styles.title}>
             {location ? location.short_address : Strings.locationUnavaible}
           </Text>
-          <DownArrow
-            width={EStyleSheet.value('10rem')}
-            height={EStyleSheet.value('10rem')}
-          />
+          <DownArrow />
         </TouchableOpacity>
       )}
       <View style={styles.headerRightContainer}>
@@ -123,7 +121,7 @@ const styles = EStyleSheet.create({
     color: Colors.subTitleText,
     fontSize: '12rem',
     letterSpacing: '0.2rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -133,9 +131,9 @@ const styles = EStyleSheet.create({
   title: {
     color: Colors.titleText,
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginLeft: '6rem',
-    marginRight: '14rem',
+    marginRight: '10rem',
   },
   headerRightContainer: {
     flex: 1,
@@ -169,6 +167,12 @@ const styles = EStyleSheet.create({
   },
   leftButton: {
     marginRight: '16rem',
+  },
+  headerShadow: {
+    shadowOffset: {width: 0, height: 5},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
   },
 });
 

@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {Fonts} from '../../../utils/values/Fonts';
 const {Colors} = require('../../../utils/values/Colors');
 
 export const styles = EStyleSheet.create({
@@ -14,7 +15,7 @@ export const styles = EStyleSheet.create({
   },
   referHeadline: {
     color: Colors.titleText,
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     fontSize: '16rem',
     textAlign: 'center',
     width: '285rem',
@@ -22,7 +23,7 @@ export const styles = EStyleSheet.create({
   },
   referSub: {
     color: Colors.darkGray,
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '12rem',
     lineHeight: '18rem',
     letterSpacing: '0.2rem',
@@ -52,7 +53,7 @@ export const styles = EStyleSheet.create({
     fontSize: '15rem',
     letterSpacing: '-0.12rem',
     color: Colors.themeGreen,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   backButton: {
     position: 'absolute',

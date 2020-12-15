@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, Keyboard} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const Button = (props) => {
   const {Style, label, onPress, disabled, labelStyle, bordered, Icon} = props;
@@ -52,8 +53,7 @@ const styles = EStyleSheet.create({
   },
   label: {
     fontSize: '14rem',
-    fontWeight: '500',
-    fontFamily: 'Poppins-Medium',
+    fontFamily: Fonts.medium,
   },
   disabledButton: {
     backgroundColor: Colors.seperatorColor,

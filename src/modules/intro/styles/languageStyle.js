@@ -24,7 +24,6 @@ export const styles = EStyleSheet.create({
   languageText: {
     fontSize: '14rem',
     color: Colors.subTitleText,
-    fontWeight: '500',
     fontFamily: Fonts.medium,
   },
   languageDesc: {

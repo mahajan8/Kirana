@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   scrollContainer: {
@@ -18,7 +19,7 @@ export const styles = EStyleSheet.create({
     color: Colors.lightGray,
   },
   saveAddressContainer: {
-    marginLeft: '30rem',
+    marginLeft: '20rem',
     marginTop: '24vrem',
   },
   buttonsContainer: {
@@ -49,14 +50,14 @@ export const styles = EStyleSheet.create({
   },
   locationTitle: {
     fontSize: '16rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
     width: '200rem',
     marginLeft: '6rem',
   },
   locationSub: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.titleText,
     width: '250rem',
   },

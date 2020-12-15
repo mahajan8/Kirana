@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
@@ -22,7 +23,7 @@ export const styles = EStyleSheet.create({
   introTitle: {
     color: '#333333',
     fontSize: '16rem',
-    fontWeight: 'bold',
+    fontFamily: Fonts.semiBold,
     marginBottom: '10vrem',
     textAlign: 'center',
   },
@@ -33,7 +34,7 @@ export const styles = EStyleSheet.create({
     lineHeight: '18rem',
     maxWidth: '290rem',
     textAlign: 'center',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
   activeDotStyle: {
     width: '6rem',
@@ -55,7 +56,7 @@ export const styles = EStyleSheet.create({
     color: '#424242',
     alignSelf: 'center',
     marginTop: '20vrem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   greenText: {
     color: Colors.themeGreen,

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 /**
  * Function that calculates rotation of the semicircle for firstProgressLayer
@@ -213,7 +214,7 @@ CircularProgress.defaultProps = {
   percentTextStyle: {
     fontSize: 14,
     color: 'black',
-    fontWeight: 'bold',
+    fontFamily: Fonts.semiBold,
   },
   clockwise: true,
   bgColor: 'white',

@@ -11,7 +11,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import LocationIcon from '../../../assets/images/green_location.svg';
 import CurrentLocation from '../../../assets/images/home_location_current.svg';
-import Search from '../../../assets/images/search.svg';
+import Search from '../../../assets/images/search_black.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {Fonts} from '../../../utils/values/Fonts';
 import {connect} from 'react-redux';
@@ -122,10 +122,7 @@ const HomeLocationCheck = (props) => {
               setVisible(false);
               props.onSearchPress();
             }}>
-            <Search
-              width={EStyleSheet.value('12rem')}
-              height={EStyleSheet.value('12rem')}
-            />
+            <Search />
             <Text style={[styles.buttonsText, styles.searchText]}>
               {Strings.searchManually}
             </Text>
@@ -155,13 +152,13 @@ const styles = EStyleSheet.create({
   },
   title: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.darkGreen,
     marginBottom: '10vrem',
   },
   subText: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.subTitleText,
     lineHeight: '20rem',
     letterSpacing: '0.2rem',
@@ -192,7 +189,7 @@ const styles = EStyleSheet.create({
   },
   buttonsText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '0.2rem',
     marginLeft: '6rem',

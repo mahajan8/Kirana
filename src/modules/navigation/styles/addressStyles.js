@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   addButton: {
@@ -17,16 +18,18 @@ export const styles = EStyleSheet.create({
     marginTop: '16vrem',
     backgroundColor: Colors.white,
     borderRadius: '6rem',
+    shadowOffset: {width: 0, height: 0},
+    elevation: 3,
   },
   addressType: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
   },
   locationText: {
     fontSize: '12rem',
     color: Colors.darkGray,
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     marginTop: '4vrem',
     marginBottom: '12vrem',
   },
@@ -37,7 +40,7 @@ export const styles = EStyleSheet.create({
   buttonStyle: {
     width: null,
     paddingHorizontal: '16rem',
-    paddingVertical: '7vrem',
+    height: '30vrem',
     marginRight: '6rem',
     borderRadius: '5rem',
   },
@@ -46,7 +49,7 @@ export const styles = EStyleSheet.create({
     marginBottom: '40vrem',
     color: Colors.titleText,
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     lineHeight: '21rem',
     letterSpacing: '0.18rem',
     width: '203rem',
@@ -62,7 +65,6 @@ export const styles = EStyleSheet.create({
     height: '40vrem',
   },
   container: {
-    backgroundColor: '#fafafa',
     flex: 1,
   },
   list: {
@@ -86,13 +88,13 @@ export const styles = EStyleSheet.create({
   },
   deleteTitle: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.darkGreen,
     marginBottom: '10vrem',
   },
   deleteDesc: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     lineHeight: '20rem',
     letterSpacing: '0.2rem',
     color: Colors.subTitleText,

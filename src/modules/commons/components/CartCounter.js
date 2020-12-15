@@ -5,6 +5,7 @@ import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import Cart from '../../../assets/images/cart.svg';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const CartCounter = () => {
   return (
@@ -29,7 +30,7 @@ const styles = EStyleSheet.create({
   },
   count: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.white,
     marginLeft: '5rem',
   },

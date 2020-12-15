@@ -161,7 +161,7 @@ const styles = EStyleSheet.create({
   title: {
     fontSize: '16rem',
     lineHeight: '24rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.darkGreen,
   },
   listStyle: {

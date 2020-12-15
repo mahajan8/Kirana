@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   sectionHeaderContainer: {
@@ -10,7 +11,7 @@ export const styles = EStyleSheet.create({
   },
   sectionName: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   orderContainer: {
@@ -25,7 +26,7 @@ export const styles = EStyleSheet.create({
   },
   detailText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   icons: {
@@ -33,11 +34,11 @@ export const styles = EStyleSheet.create({
   },
   name: {
     fontSize: '11rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   locationText: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '9rem',
     color: Colors.lightGray,
     width: '118rem',
@@ -66,7 +67,7 @@ export const styles = EStyleSheet.create({
   },
   greenText: {
     color: Colors.themeGreen,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   itemSeperator: {
     height: '7vrem',

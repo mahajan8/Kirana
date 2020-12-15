@@ -25,7 +25,7 @@ export const styles = EStyleSheet.create({
   },
   nearbyText: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     marginBottom: '12vrem',
   },

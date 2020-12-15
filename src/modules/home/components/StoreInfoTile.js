@@ -7,6 +7,7 @@ import Star from '../../../assets/images/green_rating_star.svg';
 import StoreClosed from '../../../assets/images/store_closed.svg';
 import StoreShop from '../../../assets/images/store_shop_icon.svg';
 import {Strings} from '../../../utils/values/Strings';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const StoreInfoTile = (props) => {
   let {name, location, rating, distance} = props.store;
@@ -83,19 +84,20 @@ const styles = EStyleSheet.create({
   },
   storeName: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
   },
   storeLocation: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     letterSpacing: '-0.2rem',
     color: Colors.lightGray,
+    marginBottom: '2vrem',
   },
   details: {
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     letterSpacing: '-0.17rem',
     color: Colors.darkGray,
   },
@@ -117,7 +119,7 @@ const styles = EStyleSheet.create({
   storeClosedText: {
     color: '#731c23',
     fontSize: '8rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginLeft: '4rem',
   },
   storeShopContainer: {

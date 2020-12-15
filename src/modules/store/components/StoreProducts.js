@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
@@ -20,6 +21,9 @@ import List from './StoreProductsListing';
 import {connect} from 'react-redux';
 import {getStoreDetails} from '../Api';
 import ListPlaceHolder from './ListPlaceHolder';
+import CartCounter from '../../commons/components/CartCounter';
+
+let backgroundImage = require('../../../assets/images/store_background.png');
 
 const StoreProducts = (props) => {
   const [storeDetails, setStoreDetails] = useState(null);
@@ -44,25 +48,40 @@ const StoreProducts = (props) => {
       : null;
 
     return (
-      <SafeArea>
+      <SafeArea statusBarHidden={Platform.OS === 'android' && true}>
         <ScrollView>
           <ImageBackground
-            source={require('../../../assets/images/dummy.png')}
+            source={backgroundImage}
             style={styles.imageBackground}
-            blurRadius={2}>
+            blurRadius={1}>
+            <View style={styles.darkBg} />
             <View style={styles.storeInfoContainer}>
-              <TouchableOpacity style={styles.backArrow} onPress={Actions.pop}>
-                <BackArrow
-                  width={EStyleSheet.value('16rem')}
-                  height={EStyleSheet.value('16rem')}
-                />
-              </TouchableOpacity>
-              <Text
-                style={styles.storeName}
-                onPress={() => console.log(storeDetails)}>
-                {name ? name : ''}
-              </Text>
-              <Text style={styles.storeLocation}>{location.short_address}</Text>
+              <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
+                <TouchableOpacity
+                  style={styles.backArrow}
+                  onPress={Actions.pop}>
+                  <BackArrow
+                    width={EStyleSheet.value('16rem')}
+                    height={EStyleSheet.value('16rem')}
+                  />
+                </TouchableOpacity>
+
+                <View>
+                  <Text
+                    style={styles.storeName}
+                    onPress={() => console.log(storeDetails)}>
+                    {name ? name : ''}
+                  </Text>
+                  <Text style={styles.storeLocation}>
+                    {location.short_address}
+                  </Text>
+                </View>
+
+                <View style={styles.cartContianer}>
+                  <CartCounter />
+                </View>
+              </View>
+
               <Image
                 source={{
                   uri: getMediaUrl(
@@ -71,6 +90,7 @@ const StoreProducts = (props) => {
                 }}
                 style={styles.image}
               />
+
               <View style={[styles.rowContainer, styles.searchView]}>
                 <Search
                   width={EStyleSheet.value('15rem')}

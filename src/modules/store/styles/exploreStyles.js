@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   searchContainer: {
@@ -11,7 +12,7 @@ export const styles = EStyleSheet.create({
   },
   searchProduct: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.grayText,
     flex: 1,
     marginLeft: '12rem',
@@ -22,7 +23,7 @@ export const styles = EStyleSheet.create({
   },
   heading: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
     margin: '16rem',
@@ -42,7 +43,7 @@ export const styles = EStyleSheet.create({
   },
   categoryName: {
     fontSize: '15rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     letterSpacing: '-0.13rem',
     color: Colors.titleText,
     margin: '16rem',

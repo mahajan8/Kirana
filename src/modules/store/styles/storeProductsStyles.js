@@ -1,10 +1,17 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   imageBackground: {
     height: '230vrem',
     width: '100%',
+  },
+  darkBg: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    position: 'absolute',
   },
   rowContainer: {
     flexDirection: 'row',
@@ -16,18 +23,24 @@ export const styles = EStyleSheet.create({
     paddingTop: '33vrem',
     paddingBottom: '12vrem',
   },
+  storeDetailsContainer: {
+    justifyContent: 'center',
+    width: '100%',
+  },
   storeLocation: {
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.lightStatusBar,
     letterSpacing: '-0.16rem',
     marginBottom: '10vrem',
+    textAlign: 'center',
   },
   storeName: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.lightStatusBar,
     letterSpacing: '-0.22rem',
+    textAlign: 'center',
   },
   image: {
     height: '70rem',
@@ -45,15 +58,14 @@ export const styles = EStyleSheet.create({
     width: '100%',
   },
   searchText: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '14rem',
     color: '#979797',
     marginLeft: '13rem',
   },
   backArrow: {
     position: 'absolute',
-    left: '20rem',
-    top: '45vrem',
+    left: 0,
   },
   storeNamePlaceHolder: {
     height: '20vrem',
@@ -73,5 +85,9 @@ export const styles = EStyleSheet.create({
     borderRadius: '35rem',
     backgroundColor: Colors.lightGray,
     marginBottom: '20vrem',
+  },
+  cartContianer: {
+    position: 'absolute',
+    right: 0,
   },
 });

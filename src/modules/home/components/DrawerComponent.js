@@ -15,6 +15,7 @@ import FreeDelivery from '../../../assets/images/get_free_delivery.svg';
 import RightArrow from '../../../assets/images/right_arrow.svg';
 import {logout} from '../../../utils/utility/Utils';
 import SafeArea from '../../commons/components/SafeArea';
+import {Fonts} from '../../../utils/values/Fonts';
 
 let options = [
   {icon: MyOrders, label: Strings.myOrders},
@@ -40,6 +41,9 @@ const actions = (index) => {
     case 4:
       Actions.support();
       break;
+    case 5:
+      console.log(Actions.state);
+      break;
     case 6:
       logout();
       break;
@@ -63,7 +67,7 @@ const renderOptions = (Icon, label, index) => {
 
 const DrawerComponent = () => {
   return (
-    <SafeArea statusBarColor={Colors.themeGreen}>
+    <SafeArea statusBarColor={Colors.white}>
       <View style={styles.greenContainer}>
         <Text style={styles.number}>+91 9830098300</Text>
         <Text style={styles.completeSetup}>{Strings.completeAccSetup}</Text>
@@ -109,13 +113,13 @@ const styles = EStyleSheet.create({
   },
   number: {
     fontSize: '16rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.white,
     lineHeight: '22rem',
   },
   completeSetup: {
     fontSize: '9rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.white,
     textDecorationLine: 'underline',
   },
@@ -131,7 +135,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   optionLabel: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '12rem',
     color: '#424242',
     lineHeight: '18rem',
@@ -153,12 +157,12 @@ const styles = EStyleSheet.create({
     marginLeft: '16rem',
   },
   freeDelivery: {
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     fontSize: '10rem',
     color: Colors.darkGreen,
   },
   freeDeliverySub: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '8rem',
     color: '#424242',
     letterSpacing: '0.13rem',

@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   rowContainer: {
@@ -16,13 +17,13 @@ export const styles = EStyleSheet.create({
   headlineTitle: {
     color: '#252525',
     fontSize: '12rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     lineHeight: '17rem',
   },
   headlineSub: {
     color: '#424242',
     fontSize: '9rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     lineHeight: '13.5rem',
   },
   greenTick: {

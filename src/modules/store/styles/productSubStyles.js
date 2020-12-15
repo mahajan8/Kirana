@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   rowContainer: {
@@ -30,7 +31,7 @@ export const styles = EStyleSheet.create({
   },
   bubbleLabel: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
     letterSpacing: '-0.18rem',
   },

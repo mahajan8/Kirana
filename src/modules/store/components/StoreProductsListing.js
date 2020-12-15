@@ -7,6 +7,7 @@ import {Strings} from '../../../utils/values/Strings';
 import ProductBox from './ProductBox';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const List = (props) => {
   let {vertical, list, label, onMorePress, noShadow, noHeader, onPress} = props;
@@ -73,13 +74,13 @@ const styles = EStyleSheet.create({
     paddingRight: '16rem',
   },
   listLabel: {
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     fontSize: '12rem',
     color: Colors.titleText,
     letterSpacing: '-0.17rem',
   },
   viewMore: {
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     fontSize: '11rem',
     color: Colors.themeGreen,
   },

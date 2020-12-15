@@ -172,7 +172,7 @@ const Styles = EStyleSheet.create({
     color: '#ea4e3c',
     letterSpacing: '0.22rem',
     marginTop: '8vrem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
 });
 

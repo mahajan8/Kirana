@@ -11,7 +11,36 @@ import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import List from './StoreProductsListing';
 
-let products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let products = [
+  {
+    product_name: 'Name',
+    product_packaging: 2,
+    product_quantity: 50,
+    store_price: 100,
+    product_images: [],
+  },
+  {
+    product_name: 'Name',
+    product_packaging: 2,
+    product_quantity: 50,
+    store_price: 100,
+    product_images: [],
+  },
+  {
+    product_name: 'Name',
+    product_packaging: 2,
+    product_quantity: 50,
+    store_price: 100,
+    product_images: [],
+  },
+  {
+    product_name: 'Name',
+    product_packaging: 2,
+    product_quantity: 50,
+    store_price: 100,
+    product_images: [],
+  },
+];
 
 const renderHeader = (label, list) => (
   <View style={styles.listHeader}>

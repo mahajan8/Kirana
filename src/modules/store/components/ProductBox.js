@@ -9,6 +9,7 @@ import {unitsList} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
 import MinusButton from '../../../assets/images/minus_button.svg';
 import PlusButton from '../../../assets/images/plus_button.svg';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const ProductBox = (props) => {
   const [count, setCount] = useState(0);
@@ -70,7 +71,7 @@ const ProductBox = (props) => {
           <Button
             label={Strings.plusAdd}
             Style={[styles.buttonStyle, vertical && styles.verticalButton]}
-            labelStyle={styles.labelStyle}
+            labelStyle={styles.addLabel}
             onPress={() => setCount(count + 1)}
           />
         )}
@@ -82,7 +83,7 @@ const ProductBox = (props) => {
 const styles = EStyleSheet.create({
   productImage: {
     height: '100rem',
-    width: '100rem',
+    width: '110rem',
     alignSelf: 'center',
   },
   container: {
@@ -96,18 +97,20 @@ const styles = EStyleSheet.create({
   },
   price: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     marginTop: '8vrem',
+    marginBottom: '2rem',
   },
   name: {
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.titleText,
+    marginBottom: '2rem',
   },
   weight: {
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: '#787787',
   },
   buttonStyle: {
@@ -117,7 +120,7 @@ const styles = EStyleSheet.create({
   },
   buttonLabel: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     letterSpacing: '0.1rem',
   },
   counterContainer: {
@@ -136,7 +139,7 @@ const styles = EStyleSheet.create({
   },
   countText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: '#333333',
     letterSpacing: '-0.2rem',
   },
@@ -146,6 +149,11 @@ const styles = EStyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
+  },
+  addLabel: {
+    fontSize: '12rem',
+    fontFamily: Fonts.regular,
+    letterSpacing: '-0.1rem',
   },
 });
 

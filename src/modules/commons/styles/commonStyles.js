@@ -5,8 +5,8 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const commonStyles = EStyleSheet.create({
   shadow: {
     elevation: 5,
-    shadowOffset: {width: 0, height: 5},
-    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.2,
     shadowRadius: 5,
   },
   buttonBottomContainer: {
@@ -24,5 +24,12 @@ export const commonStyles = EStyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
+  },
+  bottomButtonContainer: {
+    width: '100%',
+    paddingTop: '10rem',
+    bottom: 0,
+    backgroundColor: Colors.white,
+    paddingBottom: '20rem',
   },
 });

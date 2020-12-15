@@ -5,6 +5,7 @@ import {Colors} from '../../../utils/values/Colors';
 import LocationIcon from '../../../assets/images/green_location_current.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from './Button';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const LocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
@@ -94,13 +95,13 @@ const styles = EStyleSheet.create({
   },
   title: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.darkGreen,
     marginLeft: '10rem',
   },
   subText: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.subTitleText,
     lineHeight: '20rem',
     letterSpacing: '0.2rem',

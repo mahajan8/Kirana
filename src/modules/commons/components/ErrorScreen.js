@@ -6,6 +6,7 @@ import SafeArea from './SafeArea';
 import ErrorImage from '../../../assets/images/error_image.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from './Button';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const ErrorScreen = (props) => {
   return (
@@ -30,14 +31,14 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   noInternetTitle: {
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     fontSize: '14rem',
     letterSpacing: '0.18rem',
     marginTop: '40vrem',
   },
   noInternetSub: {
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.darkGray,
     fontSize: '12rem',
     letterSpacing: '0.2rem',

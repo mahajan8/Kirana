@@ -31,7 +31,7 @@ const Addresses = (props) => {
     let {type, block_address, location, landmark, id} = item;
 
     return (
-      <View style={[styles.addressBox, commonStyles.shadow]}>
+      <View style={[commonStyles.shadow, styles.addressBox]}>
         <Text style={styles.addressType}>
           {getKeyByValue(addressTypes, type)}
         </Text>
@@ -129,7 +129,7 @@ const Addresses = (props) => {
                   height={EStyleSheet.value('12rem')}
                 />
               }
-              onPress={Actions.searchLocation}
+              onPress={Actions.addressSearch}
             />
           ) : null
         }
@@ -148,7 +148,7 @@ const Addresses = (props) => {
               <Button
                 label={Strings.addAddress}
                 Style={styles.noAddressButton}
-                onPress={Actions.searchLocation}
+                onPress={Actions.addressSearch}
               />
             </View>
           }

@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 import {Strings} from '../../../utils/values/Strings';
 
 const SearchItemTile = (props) => {
@@ -70,14 +71,14 @@ const styles = EStyleSheet.create({
   },
   productName: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
     lineHeight: '18rem',
     width: '160rem',
   },
   productWeight: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.subTitleText,
     letterSpacing: '-0.2rem',
   },
@@ -87,7 +88,7 @@ const styles = EStyleSheet.create({
   },
   price: {
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     color: '#333333',
     marginBottom: '10vrem',
   },
@@ -102,12 +103,12 @@ const styles = EStyleSheet.create({
   },
   quantityButtonIcons: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
   quantityText: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
     marginHorizontal: '10rem',
   },

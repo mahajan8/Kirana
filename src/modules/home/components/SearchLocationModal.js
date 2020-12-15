@@ -4,7 +4,7 @@ import {View, Modal} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import Loader from '../../commons/components/Loader';
-import Search from '../../onboarding/components/Search';
+import Search from '../../onboarding/components/SearchLocation';
 
 const SearchLocationModal = (props) => {
   let {visible, setVisible, setLocation} = props;

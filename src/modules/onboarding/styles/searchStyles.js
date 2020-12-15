@@ -18,12 +18,12 @@ export const styles = EStyleSheet.create({
   currentLocation: {
     color: Colors.themeGreen,
     fontSize: '14rem',
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
   },
   subText: {
     color: Colors.themeGreen,
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
   searchContainer: {
     backgroundColor: '#FFF',
@@ -64,24 +64,24 @@ export const styles = EStyleSheet.create({
   locationMain: {
     color: Colors.titleText,
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
   locationSecondary: {
     color: Colors.darkGray,
     fontSize: '10rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
   },
   title: {
     color: Colors.titleText,
     fontSize: '16rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginLeft: '20rem',
     marginTop: '16vrem',
     marginBottom: '10vrem',
   },
   useCurrentText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '0.2rem',
     marginLeft: '-6rem',
@@ -94,7 +94,7 @@ export const styles = EStyleSheet.create({
   },
   savedAddresses: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.subTitleText,
     lineHeight: '18rem',
     marginBottom: '16vrem',
@@ -118,12 +118,12 @@ export const styles = EStyleSheet.create({
   },
   addressName: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: '#333333',
   },
   addressLocation: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.darkGray,
     lineHeight: '20rem',
     letterSpacing: '0.2rem',

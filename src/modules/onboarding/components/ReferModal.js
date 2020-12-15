@@ -8,6 +8,7 @@ import Share from '../../../assets/images/share.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
+import {Fonts} from '../../../utils/values/Fonts';
 
 const ReferModal = (props) => {
   let {visible, setVisible} = props;
@@ -98,14 +99,14 @@ const styles = EStyleSheet.create({
   },
   referHeadline: {
     color: Colors.titleText,
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
     fontSize: '16rem',
     textAlign: 'center',
     width: '196rem',
   },
   referSub: {
     color: Colors.darkGray,
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     fontSize: '12rem',
     lineHeight: '18rem',
     letterSpacing: '0.2rem',
@@ -133,7 +134,7 @@ const styles = EStyleSheet.create({
     fontSize: '13rem',
     lineHeight: '18rem',
     color: Colors.themeGreen,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     marginBottom: '25vrem',
   },
 });

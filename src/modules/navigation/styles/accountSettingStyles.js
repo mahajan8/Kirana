@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   rowContainer: {
@@ -16,7 +17,7 @@ export const styles = EStyleSheet.create({
   },
   headlineText: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.darkGreen,
   },
   changeButton: {
@@ -44,14 +45,14 @@ export const styles = EStyleSheet.create({
   },
   numberLabel: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     lineHeight: '16rem',
     letterSpacing: '0.09rem',
     color: Colors.themeGreen,
   },
   number: {
     fontSize: '14rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   currentNumberRow: {
@@ -64,19 +65,19 @@ export const styles = EStyleSheet.create({
   },
   currentNumberLabel: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.darkGray,
     lineHeight: '20rem',
   },
   currentNumber: {
     fontSize: '17rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
     lineHeight: '20rem',
   },
   heading: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: '#424242',
     lineHeight: '20rem',
     marginBottom: '20vrem',
@@ -93,6 +94,6 @@ export const styles = EStyleSheet.create({
   },
   coloredText: {
     color: Colors.themeGreen,
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
   },
 });

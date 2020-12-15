@@ -9,7 +9,7 @@ export const styles = EStyleSheet.create({
   },
   searchResultsHeading: {
     fontSize: '12rem',
-    fontWeight: '500',
+    fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '-0.19rem',
     marginBottom: '20vrem',
@@ -25,7 +25,7 @@ export const styles = EStyleSheet.create({
   },
   noSearchResults: {
     fontSize: '12rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     lineHeight: '20rem',
     letterSpacing: '0.2rem',
     color: Colors.subTitleText,
@@ -36,11 +36,11 @@ export const styles = EStyleSheet.create({
   storeName: {
     fontSize: '14rem',
     color: Colors.titleText,
-    fontWeight: '900',
+    fontFamily: Fonts.semiBold,
   },
   storeLocation: {
     fontSize: '11rem',
-    fontWeight: '100',
+    fontFamily: Fonts.regular,
     color: Colors.lightGray,
     lineHeight: '12rem',
   },
