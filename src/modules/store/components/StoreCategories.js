@@ -7,6 +7,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  FlatList,
   Platform,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
@@ -25,7 +26,7 @@ import CartCounter from '../../commons/components/CartCounter';
 
 let backgroundImage = require('../../../assets/images/store_background.png');
 
-const StoreProducts = (props) => {
+const StoreCategories = (props) => {
   const [storeDetails, setStoreDetails] = useState(null);
   const [storeProducts, setStoreProducts] = useState(null);
 
@@ -34,9 +35,9 @@ const StoreProducts = (props) => {
       store_id: props.storeId,
     };
     props.getStoreDetails(pars, (data) => {
-      console.log(data);
       setStoreProducts(data.store_products);
       setStoreDetails(data.store_details);
+      console.log({pars, data: data.store_products});
     });
   }, []);
 
@@ -48,7 +49,7 @@ const StoreProducts = (props) => {
       : null;
 
     return (
-      <SafeArea statusBarHidden={Platform.OS === 'android' && true}>
+      <SafeArea>
         <ScrollView>
           <ImageBackground
             source={backgroundImage}
@@ -100,21 +101,23 @@ const StoreProducts = (props) => {
               </View>
             </View>
           </ImageBackground>
-
-          {storeProducts.map((item, index) => (
-            <List
-              label={item.name}
-              list={item.products}
-              key={`categoryProduct${index}`}
-              onMorePress={() =>
-                Actions.productsBySubCategory({
-                  categoryName: item.name,
-                  categoryId: item.id,
-                  storeId: props.storeId,
-                })
-              }
-            />
-          ))}
+          <FlatList
+            data={storeProducts}
+            renderItem={({item}) => (
+              <List
+                label={item.name}
+                list={item.products}
+                onMorePress={() =>
+                  Actions.productsBySubCategory({
+                    categoryName: item.name,
+                    categoryId: item.id,
+                    storeId: props.storeId,
+                  })
+                }
+              />
+            )}
+            keyExtractor={(item, index) => `store${index}`}
+          />
         </ScrollView>
       </SafeArea>
     );
@@ -161,4 +164,4 @@ const mapDispatchToProps = {
   getStoreDetails,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StoreProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreCategories);

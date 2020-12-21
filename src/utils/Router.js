@@ -12,7 +12,6 @@ import AddAddress from '../modules/navigation/components/AddAddress';
 import Addresses from '../modules/navigation/components/Addresses';
 import Home from '../modules/home/components/Home';
 import DrawerComponent from '../modules/home/components/DrawerComponent';
-import StoreProducts from '../modules/store/components/StoreProducts';
 import ProductsBySubCategory from '../modules/store/components/ProductsBySubCategory';
 import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
@@ -25,6 +24,7 @@ import AccountSettings from '../modules/navigation/components/AccountSettings';
 import AccountSetup from '../modules/navigation/components/AccountSetup';
 import Store from '../modules/store/components/Store';
 import Filters from '../modules/store/components/Filters';
+import StoreCategories from '../modules/store/components/StoreCategories';
 
 const AppRouter = () => {
   return (
@@ -40,7 +40,7 @@ const AppRouter = () => {
         <Scene key="addressSearch" component={AddressSearch} />
         <Scene key="addAddress" component={AddAddress} />
         <Scene key="addresses" component={Addresses} />
-        <Scene key="storeProducts" component={StoreProducts} />
+        <Scene key="storeCategories" component={StoreCategories} />
         <Scene key="productsBySubCategory" component={ProductsBySubCategory} />
         <Scene key="productsList" component={ProductsList} />
         <Scene key="productDetails" component={ProductDetails} />

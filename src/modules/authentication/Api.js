@@ -18,7 +18,7 @@ export const sendOtp = (pars) => {
         const success = !res.data.error;
         if (success) {
           if (Actions.currentScene != 'otp') Actions.otp({number: pars.mobile});
-          // alert(res.data.data.otp);
+          alert(res.data.data.otp);
         } else {
           alert(res.data.message);
         }

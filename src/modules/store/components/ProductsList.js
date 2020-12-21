@@ -54,7 +54,6 @@ const renderHeader = (label, list) => (
 
 const ProductsList = (props) => {
   let {subCategoryName} = props;
-
   return (
     <SafeArea>
       <Header

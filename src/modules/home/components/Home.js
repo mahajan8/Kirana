@@ -81,11 +81,11 @@ const Home = (props) => {
         ListHeaderComponent={searchProductHeader}
         contentContainerStyle={styles.list}
       />
-      {/* <HomeLocationCheck
+      <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
         setLocation={setLocation}
         selectedLocation={location}
-      /> */}
+      />
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}
