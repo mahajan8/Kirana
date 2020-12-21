@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
-import LocationIcon from '../../../assets/images/green_location.svg';
+import LocationIcon from '../../../assets/images/home_location_icon.svg';
 import CurrentLocation from '../../../assets/images/home_location_current.svg';
 import Search from '../../../assets/images/search_black.svg';
 import {Strings} from '../../../utils/values/Strings';
@@ -93,12 +93,7 @@ const HomeLocationCheck = (props) => {
       animationType="slide">
       <View style={styles.container}>
         <View style={styles.innerContainer}>
-          <View style={styles.locationIconContainer}>
-            <LocationIcon
-              width={EStyleSheet.value('15rem')}
-              height={EStyleSheet.value('20rem')}
-            />
-          </View>
+          <LocationIcon style={styles.locaitonIcon} />
 
           <Text style={styles.title}>{Strings.locationOff}</Text>
 
@@ -173,13 +168,7 @@ const styles = EStyleSheet.create({
     width: '100%',
     justifyContent: 'center',
   },
-  locationIconContainer: {
-    width: '42rem',
-    height: '42rem',
-    borderRadius: '21rem',
-    backgroundColor: 'rgba(67,176,42, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
+  locaitonIcon: {
     marginBottom: '23vrem',
   },
   seperator: {

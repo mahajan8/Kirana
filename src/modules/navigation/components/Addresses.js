@@ -77,7 +77,7 @@ const Addresses = (props) => {
             <Text style={styles.deleteTitle}>{Strings.deleteAddress}</Text>
             <Text style={styles.deleteDesc}>
               {Strings.confirmDeleteAddress}{' '}
-              {type && getKeyByValue(addressTypes, type).toLowerCase()}{' '}
+              {type && getKeyByValue(addressTypes, type)}{' '}
               {Strings.confirmDeleteAddress2}
             </Text>
             <View
