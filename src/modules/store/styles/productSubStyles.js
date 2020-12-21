@@ -28,6 +28,7 @@ export const styles = EStyleSheet.create({
     backgroundColor: '#ecf6ff',
     borderRadius: '16rem',
     marginBottom: '10vrem',
+    marginTop: '10rem',
   },
   bubbleLabel: {
     fontSize: '12rem',

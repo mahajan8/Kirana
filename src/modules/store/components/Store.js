@@ -7,13 +7,13 @@ import {commonStyles} from '../../commons/styles/commonStyles';
 import {TabView} from 'react-native-tab-view';
 import {styles} from '../styles/storeStyles';
 import {connect} from 'react-redux';
-import StoreProducts from './StoreProducts';
 import ShopInactive from '../../../assets/images/shop_inactive.svg';
 import OrdersInactive from '../../../assets/images/orders_inactive.svg';
 import ExploreActive from '../../../assets/images/explore_active.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Explore from './Explore';
 import StoreOrders from './StoreOrders';
+import StoreCategories from './StoreCategories';
 
 // TODO: Add Icons for Tabs
 let routes = [
@@ -29,7 +29,7 @@ const Store = (props) => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <StoreProducts storeId={props.storeId} />;
+        return <StoreCategories storeId={props.storeId} />;
       case 'second':
         return <Explore />;
       case 'third':
