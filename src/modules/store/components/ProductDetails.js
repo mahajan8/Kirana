@@ -2,25 +2,45 @@ import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productDetailStyles';
-import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import Button from '../../commons/components/Button';
+import {unitsList} from '../../../utils/values/Values';
 
 const ProductDetails = (props) => {
-  let {subCategoryName} = props;
+  let {subCategoryName, item} = props;
+  let {
+    product_name,
+    product_packaging,
+    product_quantity,
+    store_price,
+    product_images,
+  } = item;
+
   const [count, setCount] = useState(0);
 
   return (
     <SafeArea>
       <Header title={subCategoryName} headerRight={<CartCounter />} type={1} />
       <View style={styles.container}>
-        <Image source={{uri: getMediaUrl(null)}} style={styles.productImage} />
-        <Text style={styles.price}>{Strings.currency} 450</Text>
-        <Text style={styles.name}>Australian Cherries</Text>
-        <Text style={styles.weight}>1 kg</Text>
+        <Image
+          source={{
+            uri: getMediaUrl(
+              product_images.length ? product_images[0].path : null,
+            ),
+          }}
+          style={styles.productImage}
+        />
+        <Text style={styles.price}>
+          {Strings.currency} {store_price}
+        </Text>
+        <Text style={styles.name}>{product_name}</Text>
+        <Text style={styles.weight}>
+          {product_quantity} {getKeyByValue(unitsList, product_packaging)}
+        </Text>
       </View>
       <View
         style={[

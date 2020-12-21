@@ -10,14 +10,17 @@ import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import List from './StoreProductsListing';
 import ListPlaceHolder from './ListPlaceHolder';
-import {getProductsByCategory} from '../Api';
+import {getProductsByCategory, getStoreProducts} from '../Api';
 import {connect} from 'react-redux';
 import ProductBox from './ProductBox';
 
 const ProductsBySubCategory = (props) => {
   let {categoryName} = props;
 
-  const [storeProducts, setStoreProducts] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [productCount, setProductCount] = useState(null);
+  const [endReachCallable, setEndReachCallable] = useState(true);
 
   useEffect(() => {
     let pars = {
@@ -25,12 +28,35 @@ const ProductsBySubCategory = (props) => {
       category_id: props.categoryId,
     };
     props.getProductsByCategory(pars, (data) => {
-      setStoreProducts(data.store_products);
+      setSubcategories(data.store_products);
+      getProducts();
     });
   }, []);
-
+  const getProducts = () => {
+    let pars = {
+      start: products.length,
+      limit: 10,
+      sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
+      conditions: [
+        {
+          key: 'SEARCH_BY_STORE_ID',
+          value: props.storeId,
+          context: null,
+        },
+        {
+          key: 'SEARCH_BY_CATEGORY_IN',
+          value: [props.categoryId],
+          context: null,
+        },
+      ],
+    };
+    props.getStoreProducts(pars, (data) => {
+      setProducts([...products, ...data.results]);
+      setProductCount(data.total_count);
+    });
+  };
   const getSubCategoryList = () => {
-    return storeProducts.map((item) => {
+    return subcategories.map((item) => {
       return {name: item.name};
     });
   };
@@ -52,7 +78,8 @@ const ProductsBySubCategory = (props) => {
       />
 
       <FlatList
-        data={[]}
+        data={products}
+        numColumns={2}
         renderItem={({item, index}) => (
           <ProductBox
             key={`product${index}`}
@@ -61,18 +88,18 @@ const ProductsBySubCategory = (props) => {
             item={item}
           />
         )}
-        keyExtractor={(item, index) => `store${index}`}
-        // onMomentumScrollBegin={() => setEndReachCallable(false)}
-        // onEndReachedThreshold={0.1}
-        // onEndReached={() => {
-        //   if (!endReachCallable && stores.length < storeCount) {
-        //     loadStores(stores.length);
-        //     setEndReachCallable(true);
-        //   }
-        // }}
+        keyExtractor={(item, index) => `products${index}`}
+        onMomentumScrollBegin={() => setEndReachCallable(false)}
+        onEndReachedThreshold={0.1}
+        onEndReached={() => {
+          if (!endReachCallable && products.length < productCount) {
+            getProducts();
+            setEndReachCallable(true);
+          }
+        }}
         ListHeaderComponent={() => (
           <FlatList
-            data={storeProducts}
+            data={subcategories}
             renderItem={({item, index}) => (
               <List
                 label={item.name}
@@ -85,7 +112,7 @@ const ProductsBySubCategory = (props) => {
                 }
               />
             )}
-            keyExtractor={(item, index) => `store${index}`}
+            keyExtractor={(item, index) => `subCategoryProducts${index}`}
             ListHeaderComponent={() => (
               <FlatList
                 data={getSubCategoryList()}
@@ -103,7 +130,7 @@ const ProductsBySubCategory = (props) => {
                   </TouchableOpacity>
                 )}
                 contentContainerStyle={{marginHorizontal: 10}}
-                keyExtractor={(item, index) => `stores${index}`}
+                keyExtractor={(item, index) => `bubbles${index}`}
               />
             )}
           />
@@ -141,6 +168,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getProductsByCategory,
+  getStoreProducts,
 };
 
 export default connect(

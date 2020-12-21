@@ -28,7 +28,11 @@ const ProductBox = (props) => {
     <TouchableOpacity
       activeOpacity={1}
       style={[styles.container, vertical && styles.verticalContainer]}
-      onPress={onPress && onPress}>
+      onPress={() => {
+        if (onPress) {
+          onPress(item);
+        }
+      }}>
       <Image
         source={{
           uri: getMediaUrl(
