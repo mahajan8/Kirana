@@ -101,7 +101,11 @@ const ProductsList = (props) => {
               setEndReachCallable(true);
             }
           }}
-          ListFooterComponent={<Loader show={props.loading} />}
+          ListFooterComponent={
+            <View style={styles.listLoaderContainer}>
+              <Loader show={storeProducts.length && props.loading} />
+            </View>
+          }
         />
       </View>
     </SafeArea>

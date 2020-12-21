@@ -44,7 +44,7 @@ const ProductBox = (props) => {
       <Text style={styles.price}>
         {Strings.currency} {store_price}
       </Text>
-      <Text style={styles.name} numberOfLines={2}>
+      <Text style={styles.name} numberOfLines={1}>
         {product_name}
       </Text>
       <Text style={styles.weight}>
