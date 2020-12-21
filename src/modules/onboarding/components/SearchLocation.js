@@ -131,7 +131,7 @@ const Search = (props) => {
             props.setLoading(false);
             if (modal) {
               onSelect(location);
-              props.setSelectedAddress(null);
+              // props.setSelectedAddress(null);
             }
             saveLocation(location);
             // props.setLocation(location);
@@ -149,7 +149,7 @@ const Search = (props) => {
   const saveLocation = (location) => {
     if (modal) {
       onSelect(location);
-      props.setSelectedAddress(null);
+      // props.setSelectedAddress(null);
     }
     if (props.setLocation) {
       props.setLocation(location);
@@ -235,7 +235,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   setLoading,
-  setSelectedAddress,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
