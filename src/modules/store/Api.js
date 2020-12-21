@@ -48,3 +48,25 @@ export const getProductsByCategory = (pars, callback) => {
       });
   };
 };
+
+export const getStoreProducts = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance
+      .post(Urls.getStoreProducts, formBody)
+      .then((res) => {
+        dispatch(setLoading(false));
+        const success = !res.data.error;
+        if (success) {
+          callback(res.data.data);
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(setLoading(false));
+      });
+  };
+};

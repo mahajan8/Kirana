@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productSubStyles';
@@ -10,6 +11,8 @@ import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import List from './StoreProductsListing';
+import {connect} from 'react-redux';
+import {getStoreProducts} from '../Api';
 
 let products = [
   {
@@ -55,6 +58,33 @@ const renderHeader = (label, list) => (
 const ProductsList = (props) => {
   let {subCategoryName} = props;
 
+  const [storeProducts, setStoreProducts] = useState(null);
+
+  useEffect(() => {
+    let pars = {
+      start: 0,
+      limit: 10,
+      sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
+      conditions: [
+        {
+          key: 'SEARCH_BY_STORE_ID',
+          value: '5fdaf974b6a38a8eafa410b0',
+          context: null,
+        },
+        {
+          key: 'SEARCH_BY_SUB_CATEGORY_IN',
+          value: ['5fca768aa941d902e71e310c'],
+          context: null,
+        },
+      ],
+    };
+
+    props.getStoreProducts(pars, (data) => {
+      console.log(data);
+      setStoreProducts(data.results);
+    });
+  }, []);
+
   return (
     <SafeArea>
       <Header
@@ -83,18 +113,26 @@ const ProductsList = (props) => {
         <List
           noShadow
           noHeader
-          list={products}
+          list={storeProducts}
           onMorePress={() =>
             Actions.productsList({
               subCategoryName,
             })
           }
           vertical
-          onPress={() => Actions.productDetails({subCategoryName})}
+          onPress={(item) => Actions.productDetails({subCategoryName, item})}
         />
       </View>
     </SafeArea>
   );
 };
 
-export default ProductsList;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+});
+
+const mapDispatchToProps = {
+  getStoreProducts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
