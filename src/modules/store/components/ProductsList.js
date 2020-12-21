@@ -1,68 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, FlatList} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productSubStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import Search from '../../../assets/images/search.svg';
 import Filter from '../../../assets/images/filter.svg';
-import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
-import List from './StoreProductsListing';
 import {connect} from 'react-redux';
 import {getStoreProducts} from '../Api';
-
-let products = [
-  {
-    product_name: 'Name',
-    product_packaging: 2,
-    product_quantity: 50,
-    store_price: 100,
-    product_images: [],
-  },
-  {
-    product_name: 'Name',
-    product_packaging: 2,
-    product_quantity: 50,
-    store_price: 100,
-    product_images: [],
-  },
-  {
-    product_name: 'Name',
-    product_packaging: 2,
-    product_quantity: 50,
-    store_price: 100,
-    product_images: [],
-  },
-  {
-    product_name: 'Name',
-    product_packaging: 2,
-    product_quantity: 50,
-    store_price: 100,
-    product_images: [],
-  },
-];
-
-const renderHeader = (label, list) => (
-  <View style={styles.listHeader}>
-    <Text style={styles.listLabel}>{label}</Text>
-    <Text style={styles.viewMore}>
-      {Strings.view} {list && (list.length > 5 ? list.length - 5 + ' ' : null)}
-      {Strings.more}
-    </Text>
-  </View>
-);
+import ProductBox from './ProductBox';
+import ListPlaceHolder from './ListPlaceHolder';
+import Loader from '../../commons/components/Loader';
 
 const ProductsList = (props) => {
   let {subCategoryName} = props;
 
-  const [storeProducts, setStoreProducts] = useState(null);
+  const [storeProducts, setStoreProducts] = useState([]);
+  const [endReachCallable, setEndReachCallable] = useState(true);
+  const [totalProducts, setTotalProducts] = useState(0);
 
   useEffect(() => {
+    getProducts(0);
+  }, []);
+
+  const getProducts = (start) => {
     let pars = {
-      start: 0,
+      start,
       limit: 10,
       sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
       conditions: [
@@ -81,9 +47,12 @@ const ProductsList = (props) => {
 
     props.getStoreProducts(pars, (data) => {
       console.log(data);
-      setStoreProducts(data.results);
+      setStoreProducts(
+        start === 0 ? data.results : [...storeProducts, ...data.results],
+      );
+      setTotalProducts(data.total_count);
     });
-  }, []);
+  };
 
   return (
     <SafeArea>
@@ -110,17 +79,29 @@ const ProductsList = (props) => {
       />
 
       <View style={{flex: 1}}>
-        <List
-          noShadow
-          noHeader
-          list={storeProducts}
-          onMorePress={() =>
-            Actions.productsList({
-              subCategoryName,
-            })
-          }
-          vertical
-          onPress={(item) => Actions.productDetails({subCategoryName, item})}
+        <FlatList
+          data={storeProducts}
+          renderItem={({item, index}) => (
+            <ProductBox
+              key={`product${item + index}`}
+              vertical
+              onPress={() => Actions.productDetails({subCategoryName, item})}
+              item={item}
+            />
+          )}
+          keyExtractor={(item, index) => `product${index}`}
+          numColumns={2}
+          contentContainerStyle={[styles.listContainer]}
+          ListEmptyComponent={<ListPlaceHolder count={4} vertical />}
+          onMomentumScrollBegin={() => setEndReachCallable(false)}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            if (!endReachCallable && storeProducts.length < totalProducts) {
+              getProducts(storeProducts.length);
+              setEndReachCallable(true);
+            }
+          }}
+          ListFooterComponent={<Loader show={props.loading} />}
         />
       </View>
     </SafeArea>

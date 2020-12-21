@@ -10,13 +10,11 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 
 const List = (props) => {
-  let {vertical, list, label, onMorePress, noShadow, noHeader, onPress} = props;
+  let {list, label, onMorePress, noShadow, noHeader, onPress} = props;
   const [horizontalList, setHorizontalList] = useState([]);
 
   useEffect(() => {
-    if (!vertical) {
-      setHorizontalList(list.length > 5 ? list.slice(0, 5) : list);
-    }
+    setHorizontalList(list.length > 5 ? list.slice(0, 5) : list);
   }, []);
 
   const renderHeader = () =>
@@ -32,36 +30,17 @@ const List = (props) => {
     );
 
   const renderProduct = (item, index) => (
-    <ProductBox
-      key={`product${item + index}`}
-      vertical={vertical}
-      onPress={onPress}
-      item={item}
-    />
+    <ProductBox key={`product${item + index}`} onPress={onPress} item={item} />
   );
 
   return (
     <View>
-      {vertical ? (
-        <FlatList
-          data={list}
-          renderItem={({item, index}) => renderProduct(item, index)}
-          keyExtractor={(item, index) => `product${index}`}
-          numColumns={2}
-          contentContainerStyle={[
-            styles.listContainer,
-            !noShadow && commonStyles.shadow,
-          ]}
-          ListHeaderComponent={renderHeader()}
-        />
-      ) : (
-        <View style={[styles.listContainer, !noShadow && commonStyles.shadow]}>
-          {renderHeader()}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {horizontalList.map((item, index) => renderProduct(item, index))}
-          </ScrollView>
-        </View>
-      )}
+      <View style={[styles.listContainer, !noShadow && commonStyles.shadow]}>
+        {renderHeader()}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {horizontalList.map((item, index) => renderProduct(item, index))}
+        </ScrollView>
+      </View>
     </View>
   );
 };

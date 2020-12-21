@@ -35,4 +35,10 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     letterSpacing: '-0.18rem',
   },
+  listContainer: {
+    backgroundColor: Colors.white,
+    paddingVertical: '15vrem',
+    paddingLeft: '16rem',
+    marginBottom: '8vrem',
+  },
 });

@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import {ActivityIndicator, View} from 'react-native';
 import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {Colors} from '../../../utils/values/Colors';
 
 const Loader = (props) => {
   const {show} = props;
   if (show) {
     return (
       <View style={[styles.loading]}>
-        <ActivityIndicator size="large" color="gray" />
+        <ActivityIndicator size="large" color={Colors.themeGreen} />
       </View>
     );
   } else {
