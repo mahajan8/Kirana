@@ -70,3 +70,18 @@ export const getStoreProducts = (pars, callback) => {
       });
   };
 };
+
+export const getStoreCategories = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.getStoreCategories, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        callback(res.data.data);
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};

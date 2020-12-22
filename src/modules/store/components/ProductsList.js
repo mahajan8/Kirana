@@ -21,6 +21,7 @@ const ProductsList = (props) => {
   const [storeProducts, setStoreProducts] = useState([]);
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [filters, setFilters] = useState(0);
 
   useEffect(() => {
     getProducts(0);
@@ -51,6 +52,7 @@ const ProductsList = (props) => {
         start === 0 ? data.results : [...storeProducts, ...data.results],
       );
       setTotalProducts(data.total_count);
+      setFilters(data.filters);
     });
   };
 
@@ -65,7 +67,12 @@ const ProductsList = (props) => {
               width={EStyleSheet.value('16rem')}
               height={EStyleSheet.value('16rem')}
             />
-            <TouchableOpacity onPress={Actions.filters}>
+            <TouchableOpacity
+              onPress={() => {
+                Actions.filters({
+                  filters: filters,
+                });
+              }}>
               <Filter
                 style={styles.headerIcon}
                 width={EStyleSheet.value('14rem')}
@@ -103,7 +110,7 @@ const ProductsList = (props) => {
           }}
           ListFooterComponent={
             <View style={styles.listLoaderContainer}>
-              <Loader show={storeProducts.length && props.loading} />
+              <Loader show={storeProducts.length ? props.loading : false} />
             </View>
           }
         />

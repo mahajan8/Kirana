@@ -59,6 +59,7 @@ instance.interceptors.response.use(
     // } else {
     //   dispatch(disableLoading(false));
     // }
+    dispatch(setLoading(false));
     return response;
   },
   function (error) {
@@ -82,6 +83,7 @@ instance.interceptors.response.use(
     // } else {
     //   dispatch(apiError(true));
     // }
+    dispatch(setLoading(false));
   },
 );
 
