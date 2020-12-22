@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
@@ -23,7 +23,6 @@ const ProductBox = (props) => {
     store_price,
     product_images,
   } = item;
-
   return (
     <TouchableOpacity
       activeOpacity={1}
@@ -160,5 +159,9 @@ const styles = EStyleSheet.create({
     letterSpacing: '-0.1rem',
   },
 });
+function arePropsEqual(prevProps, nextProps) {
+  return prevProps.item.id === nextProps.item.id;
+}
 
+// export default memo(ProductBox, arePropsEqual);
 export default ProductBox;

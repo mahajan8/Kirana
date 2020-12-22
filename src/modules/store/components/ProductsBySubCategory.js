@@ -21,16 +21,15 @@ const ProductsBySubCategory = (props) => {
   const [products, setProducts] = useState([]);
   const [productCount, setProductCount] = useState(null);
   const [endReachCallable, setEndReachCallable] = useState(true);
-
   useEffect(() => {
-    let pars = {
+    let params = {
       store_id: props.storeId,
       category_id: props.categoryId,
     };
-    props.getProductsByCategory(pars, (data) => {
-      setSubcategories(data.store_products);
-      getProducts();
+    props.getProductsByCategory(params, (data2) => {
+      setSubcategories(data2.store_products);
     });
+    getProducts();
   }, []);
   const getProducts = () => {
     let pars = {
@@ -76,17 +75,11 @@ const ProductsBySubCategory = (props) => {
         }
         type={1}
       />
-
       <FlatList
         data={products}
         numColumns={2}
         renderItem={({item, index}) => (
-          <ProductBox
-            key={`product${index}`}
-            vertical
-            // onPress={}
-            item={item}
-          />
+          <ProductBox key={`product${index}`} vertical item={item} />
         )}
         keyExtractor={(item, index) => `products${index}`}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
@@ -103,6 +96,7 @@ const ProductsBySubCategory = (props) => {
             renderItem={({item, index}) => (
               <List
                 label={item.name}
+                id={item.id}
                 list={item.products}
                 key={`subCategoryProduct${index}`}
                 onMorePress={() =>

@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
-import {View, Text, ScrollView, FlatList, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState, memo} from 'react';
+import {View, Text, ScrollView} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
 import ProductBox from './ProductBox';
 import {commonStyles} from '../../commons/styles/commonStyles';
@@ -10,13 +9,12 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 
 const List = (props) => {
-  let {list, label, onMorePress, noShadow, noHeader, onPress} = props;
+  let {list, label, onMorePress, noShadow, noHeader, onPress, id} = props;
   const [horizontalList, setHorizontalList] = useState([]);
 
   useEffect(() => {
     setHorizontalList(list.length > 5 ? list.slice(0, 5) : list);
   }, []);
-
   const renderHeader = () =>
     !noHeader && (
       <View style={styles.listHeader}>
@@ -70,5 +68,7 @@ const styles = EStyleSheet.create({
     marginBottom: '8vrem',
   },
 });
-
-export default List;
+function arePropsEqual(prevProps, nextProps) {
+  return prevProps.id === nextProps.id;
+}
+export default memo(List, arePropsEqual);

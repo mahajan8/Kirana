@@ -3,7 +3,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const getAuthToken = async () => {
   try {
     const value = await AsyncStorage.getItem('token');
-    console.log('Token', value);
     if (value !== null) {
       return value;
     }
