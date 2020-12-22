@@ -70,20 +70,20 @@ export const styles = EStyleSheet.create({
   storeNamePlaceHolder: {
     height: '20vrem',
     width: '150rem',
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Colors.placeHolder,
     marginBottom: '5vrem',
   },
   storeLocationPlaceHolder: {
     height: '15vrem',
     width: '120rem',
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Colors.placeHolder,
     marginBottom: '10vrem',
   },
   profilePicPlaceHolder: {
     height: '70rem',
     width: '70rem',
     borderRadius: '35rem',
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Colors.placeHolder,
     marginBottom: '20vrem',
   },
   cartContianer: {
