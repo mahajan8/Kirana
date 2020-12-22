@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {Actions} from 'react-native-router-flux';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {Strings} from '../../../utils/values/Strings';
@@ -24,6 +23,14 @@ const ProductBox = (props) => {
     product_images,
     product_brand,
   } = item;
+
+  const getProductQuantity = (quantity, packaging) => {
+    if ((packaging === 2 || packaging === 4) && quantity >= 1000) {
+      packaging -= 1;
+      quantity = quantity / 1000;
+    }
+    return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
+  };
 
   return (
     <TouchableOpacity
@@ -63,11 +70,12 @@ const ProductBox = (props) => {
               />
             </TouchableOpacity>
             <Text style={styles.countText}>
-              {product_brand
+              {!product_brand
                 ? count
-                : count * product_quantity +
-                  ' ' +
-                  getKeyByValue(unitsShortName, product_packaging)}
+                : getProductQuantity(
+                    count * product_quantity,
+                    product_packaging,
+                  )}
             </Text>
             <TouchableOpacity
               style={styles.counter}

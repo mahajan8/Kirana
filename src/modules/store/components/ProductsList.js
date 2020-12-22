@@ -7,6 +7,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import Search from '../../../assets/images/search.svg';
 import Filter from '../../../assets/images/filter.svg';
+import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import {connect} from 'react-redux';
@@ -79,6 +80,9 @@ const ProductsList = (props) => {
     });
   };
 
+  let FilterIcon =
+    filters.brands.length || filters.price_sort ? ActiveFilter : Filter;
+
   return (
     <SafeArea>
       <Header
@@ -97,7 +101,7 @@ const ProductsList = (props) => {
                   filters: filters,
                 });
               }}>
-              <Filter
+              <FilterIcon
                 style={styles.headerIcon}
                 width={EStyleSheet.value('14rem')}
                 height={EStyleSheet.value('14rem')}
