@@ -6,6 +6,7 @@ import {
   PermissionsAndroid,
   Modal,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
@@ -18,6 +19,13 @@ import {connect} from 'react-redux';
 import Geolocation from 'react-native-geolocation-service';
 import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
+import {
+  check,
+  PERMISSIONS,
+  RESULTS,
+  request,
+  openSettings,
+} from 'react-native-permissions';
 
 const HomeLocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
@@ -29,30 +37,54 @@ const HomeLocationCheck = (props) => {
   }, []);
 
   const checkPermission = () => {
-    PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    ).then((res) => {
-      if (!res) {
-        setVisible(true);
-      } else {
-        if (!selectedLocation) {
-          getLocation();
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then((res) => {
+        if (!res) {
+          setVisible(true);
+        } else {
+          if (!selectedLocation) {
+            getLocation();
+          }
         }
-      }
-    });
+      });
+    } else {
+      check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
+        let granted = result === RESULTS.GRANTED ? true : false;
+        if (!granted) {
+          setVisible(true);
+        } else {
+          if (!selectedLocation) {
+            getLocation();
+          }
+        }
+      });
+    }
   };
 
   const getPermission = async () => {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Granted');
-        setVisible(false);
-        getLocation();
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Granted');
+          setVisible(false);
+          getLocation();
+        } else {
+          console.log('Denied');
+        }
       } else {
-        console.log('Denied');
+        request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
+          if (result === RESULTS.GRANTED) {
+            setVisible(false);
+            getLocation();
+          } else {
+            openSettings().catch(() => console.warn('cannot open settings'));
+          }
+        });
       }
     } catch (err) {
       console.warn(err);

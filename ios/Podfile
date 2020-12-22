@@ -11,6 +11,11 @@ target 'customerapp' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
+  
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  
+  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
+  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
 
   target 'customerappTests' do
     inherit! :complete
