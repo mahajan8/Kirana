@@ -56,6 +56,7 @@ const styles = EStyleSheet.create({
     paddingVertical: '15vrem',
     paddingLeft: '16rem',
     marginBottom: '8vrem',
+    alignSelf: 'center',
   },
   productContainer: {
     backgroundColor: Colors.white,
@@ -68,23 +69,23 @@ const styles = EStyleSheet.create({
   },
   productImage: {
     height: '100rem',
-    width: '100rem',
+    width: '100%',
     backgroundColor: Colors.placeHolder,
   },
   productPrice: {
-    width: '50rem',
+    width: '80rem',
     height: '15vrem',
     backgroundColor: Colors.placeHolder,
     marginTop: '8vrem',
   },
   productName: {
-    width: '100rem',
+    width: '100%',
     backgroundColor: Colors.placeHolder,
     marginVertical: '5rem',
     height: '12vrem',
   },
   productWeight: {
-    width: '30rem',
+    width: '50rem',
     backgroundColor: Colors.placeHolder,
     marginBottom: '30vrem',
     height: '12vrem',

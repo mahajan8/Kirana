@@ -22,6 +22,7 @@ const ProductBox = (props) => {
     product_quantity,
     store_price,
     product_images,
+    product_brand,
   } = item;
   return (
     <TouchableOpacity
@@ -61,8 +62,11 @@ const ProductBox = (props) => {
               />
             </TouchableOpacity>
             <Text style={styles.countText}>
-              {count * product_quantity}{' '}
-              {getKeyByValue(unitsShortName, product_packaging)}
+              {product_brand
+                ? count
+                : count * product_quantity +
+                  ' ' +
+                  getKeyByValue(unitsShortName, product_packaging)}
             </Text>
             <TouchableOpacity
               style={styles.counter}

@@ -9,6 +9,7 @@ export const styles = EStyleSheet.create({
     alignSelf: 'center',
     marginTop: '40vrem',
     marginBottom: '30rem',
+    resizeMode: 'contain',
   },
   container: {
     width: '100%',

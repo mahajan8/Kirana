@@ -56,6 +56,7 @@ const ProductsList = (props) => {
         ...pars.conditions,
         {key: 'SEARCH_BY_BRAND_IN', value: brands, context: null},
       ];
+      pars.filter = true;
     }
 
     if (price_sort !== null) {
@@ -67,6 +68,7 @@ const ProductsList = (props) => {
           context: null,
         },
       ];
+      pars.filter = true;
     }
     props.getStoreProducts(pars, (data) => {
       console.log(data);

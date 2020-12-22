@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
-import { Fonts } from '../../../utils/values/Fonts';
+import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   clearAllButton: {
@@ -35,7 +35,7 @@ export const styles = EStyleSheet.create({
     marginBottom: '26vrem',
   },
   listContainer: {
-    paddingTop: '24vrem',
+    paddingVertical: '24vrem',
     paddingHorizontal: '20rem',
   },
   optionContainer: {

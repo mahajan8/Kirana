@@ -142,20 +142,26 @@ const Filters = (props) => {
       />
       <View style={styles.container}>
         <View style={styles.filterContainer}>
-          {filtersList.map((item, index) => (
-            <TouchableOpacity
-              key={`filter${index}`}
-              onPress={() => setFilterIndex(index)}
-              style={styles.filterNameContainer}>
-              <Text
-                style={[
-                  styles.filterName,
-                  filterIndex === index && styles.selectedFilterName,
-                ]}>
-                {item.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
+          {filtersList.map((item, index) => {
+            if (index === 1 && filterCategories.length < 2) {
+              return null;
+            } else {
+              return (
+                <TouchableOpacity
+                  key={`filter${index}`}
+                  onPress={() => setFilterIndex(index)}
+                  style={styles.filterNameContainer}>
+                  <Text
+                    style={[
+                      styles.filterName,
+                      filterIndex === index && styles.selectedFilterName,
+                    ]}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }
+          })}
         </View>
         <View style={{flex: 1}}>
           <FlatList
