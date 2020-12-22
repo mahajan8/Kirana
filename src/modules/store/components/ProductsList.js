@@ -15,23 +15,26 @@ import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
 
+let defaultFilters = {brands: [], categories: [], price_sort: null};
+
 const ProductsList = (props) => {
   let {subCategoryName} = props;
 
   const [storeProducts, setStoreProducts] = useState([]);
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [filters, setFilters] = useState(0);
+  const [filters, setFilters] = useState(defaultFilters);
 
   useEffect(() => {
+    setStoreProducts([]);
     getProducts(0);
-  }, []);
+  }, [filters]);
 
   const getProducts = (start) => {
     let pars = {
       start,
       limit: 10,
-      sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
+      sorts: [],
       conditions: [
         {
           key: 'SEARCH_BY_STORE_ID',
@@ -46,13 +49,31 @@ const ProductsList = (props) => {
       ],
     };
 
+    let {brands, price_sort} = filters;
+
+    if (brands.length) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_BRAND_IN', value: brands, context: null},
+      ];
+    }
+
+    if (price_sort !== null) {
+      pars.sorts = [
+        ...pars.sorts,
+        {
+          key: 'SORT_BY_PRICE',
+          value: price_sort === 0 ? true : false,
+          context: null,
+        },
+      ];
+    }
     props.getStoreProducts(pars, (data) => {
       console.log(data);
       setStoreProducts(
         start === 0 ? data.results : [...storeProducts, ...data.results],
       );
       setTotalProducts(data.total_count);
-      setFilters(data.filters);
     });
   };
 
@@ -70,6 +91,7 @@ const ProductsList = (props) => {
             <TouchableOpacity
               onPress={() => {
                 Actions.filters({
+                  saveFilters: setFilters,
                   filters: filters,
                 });
               }}>

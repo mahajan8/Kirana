@@ -4,6 +4,7 @@ import {getFormBody} from '../../utils/utility/Utils';
 import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {Actions} from 'react-native-router-flux';
+import {setFilters} from './StoreActions';
 
 export const getStoreDetails = (pars, callback) => {
   return (dispatch) => {
@@ -53,21 +54,15 @@ export const getStoreProducts = (pars, callback) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
-    instance
-      .post(Urls.getStoreProducts, formBody)
-      .then((res) => {
-        dispatch(setLoading(false));
-        const success = !res.data.error;
-        if (success) {
-          callback(res.data.data);
-        } else {
-          alert(res.data.message);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(setLoading(false));
-      });
+    instance.post(Urls.getStoreProducts, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        dispatch(setFilters(res.data.data.filters));
+        callback(res.data.data);
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
 };
 
