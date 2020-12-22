@@ -52,12 +52,17 @@ export const getProductsByCategory = (pars, callback) => {
 
 export const getStoreProducts = (pars, callback) => {
   return (dispatch) => {
+    let filter = pars.filter;
+    delete pars.filter;
+
     var formBody = getFormBody(pars);
 
     instance.post(Urls.getStoreProducts, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        dispatch(setFilters(res.data.data.filters));
+        if (!filter) {
+          dispatch(setFilters(res.data.data.filters));
+        }
         callback(res.data.data);
       } else {
         alert(res.data.message);
