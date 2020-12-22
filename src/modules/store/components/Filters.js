@@ -12,54 +12,46 @@ import RadioSelected from '../../../assets/images/filter_radio_selected.svg';
 import RadioUnselected from '../../../assets/images/filter_radio_unselected.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {commonStyles} from '../../commons/styles/commonStyles';
+import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 
-// let filtersList = [
-//   {
-//     name: 'Category',
-//     key: 'categories',
-//     type: 0,
-//   },
-//   {
-//     name: 'Brand',
-//     key: 'brand',
-//     type: 0,
-//   },
-//   {
-//     name: 'Sort',
-//     options: ['Price: Lowest First', 'Price: Highest First'],
-//     type: 1,
-//   },
-// ];
+let filtersList = [
+  {name: 'Brands', type: 0},
+  {name: 'Category', type: 0},
+  {name: 'Sort', type: 1},
+];
+
+let sortOptions = ['Price: Lowest First', 'Price: Highest First'];
 
 const Filters = (props) => {
   const [filterIndex, setFilterIndex] = useState(0);
-  const [filtersList, setFiltersList] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState(
-    filtersList.map(() => []),
-  );
-  let {filters} = props;
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedSort, setSelectedSort] = useState(null);
+
+  let {filterBrands, filterCategories} = props.storeReducer;
 
   useEffect(() => {
-    setFiltersList([
-      {name: 'Brands', options: filters.brand, type: 0},
-      {name: 'Category', options: filters.categories, type: 0},
-      {
-        name: 'Sort',
-        options: ['Price: Lowest First', 'Price: Highest First'],
-        type: 1,
-      },
-    ]);
+    let {brands, categories, price_sort} = props.filters;
+    let selected_brands = brands.map((item) => {
+      let i = filterBrands.findIndex((obj) => obj === item);
+      return i;
+    });
+    let selected_categories = categories.map((item) => {
+      let i = filterCategories.findIndex((obj) => obj.id === item);
+      return i;
+    });
+    setSelectedBrands([...selected_brands]);
+    setSelectedCategories([...selected_categories]);
+    setSelectedSort(price_sort);
   }, []);
 
   const getChecked = (index) => {
     if (filterIndex === 2) {
-      return selectedFilters[filterIndex].includes(index) ? (
-        <RadioSelected />
-      ) : (
-        <RadioUnselected />
-      );
+      return selectedSort === index ? <RadioSelected /> : <RadioUnselected />;
     } else {
-      return selectedFilters[filterIndex].includes(index) ? (
+      let selected = filterIndex === 0 ? selectedBrands : selectedCategories;
+      return selected.includes(index) ? (
         <Checked
           width={EStyleSheet.value('16rem')}
           height={EStyleSheet.value('16rem')}
@@ -73,6 +65,62 @@ const Filters = (props) => {
     }
   };
 
+  const toggleSelectFilter = (index) => {
+    let arr = [];
+
+    switch (filterIndex) {
+      case 0:
+        arr = selectedBrands;
+        break;
+      case 1:
+        arr = selectedCategories;
+        break;
+      case 2:
+        arr = selectedSort;
+        break;
+    }
+
+    if (filterIndex !== 2) {
+      if (arr.includes(index)) {
+        let selectedIndex = arr.findIndex((i) => i === index);
+        arr.splice(selectedIndex, 1);
+      } else {
+        arr.push(index);
+      }
+    } else {
+      arr = index;
+    }
+
+    switch (filterIndex) {
+      case 0:
+        setSelectedBrands([...arr]);
+        break;
+      case 1:
+        setSelectedCategories([...arr]);
+        break;
+      case 2:
+        setSelectedSort(arr);
+        break;
+    }
+  };
+
+  const applyFilters = () => {
+    // {"key":"SEARCH_BY_BRAND","value":"Tata","context":null}
+    let brands = selectedBrands.map((item) => filterBrands[item]);
+    let categories = selectedCategories.map(
+      (item) => filterCategories[item].id,
+    );
+    let priceSort = selectedSort;
+
+    let filters = {
+      brands: brands,
+      categories: categories,
+      price_sort: priceSort,
+    };
+    Actions.pop();
+    props.saveFilters(filters);
+  };
+
   return (
     <SafeArea>
       <Header
@@ -84,6 +132,11 @@ const Filters = (props) => {
             Style={styles.clearAllButton}
             labelStyle={styles.clearAllLabel}
             bordered
+            onPress={() => {
+              setSelectedBrands([]);
+              setSelectedCategories([]);
+              setSelectedSort(null);
+            }}
           />
         }
       />
@@ -106,33 +159,20 @@ const Filters = (props) => {
         </View>
         <View style={{flex: 1}}>
           <FlatList
-            data={filtersList.length ? filtersList[filterIndex].options : []}
+            data={
+              filterIndex === 0
+                ? filterBrands
+                : filterIndex === 1
+                ? filterCategories
+                : sortOptions
+            }
             renderItem={({item, index}) => (
               <TouchableOpacity
                 style={styles.optionContainer}
-                onPress={() => {
-                  if (filterIndex !== 2) {
-                    setSelectedFilters((obj) => {
-                      let arr = obj[filterIndex];
-                      if (arr.includes(index)) {
-                        let selectedIndex = arr.findIndex((i) => i === index);
-                        arr.splice(selectedIndex, 1);
-                      } else {
-                        arr.push(index);
-                      }
-                      obj[filterIndex] = arr;
-                      return obj;
-                    });
-                  } else {
-                    setSelectedFilters((obj) => {
-                      obj[filterIndex] = [index];
-                      return obj;
-                    });
-                  }
-                }}>
-                {/* {getChecked(index)} */}
+                onPress={() => toggleSelectFilter(index)}>
+                {getChecked(index)}
                 <Text style={styles.optionsText}>
-                  {index === 1 ? item.name : item}
+                  {filterIndex === 1 ? item.name : item}
                 </Text>
               </TouchableOpacity>
             )}
@@ -143,10 +183,16 @@ const Filters = (props) => {
         </View>
       </View>
       <View style={[styles.buttonContainer, commonStyles.shadow]}>
-        <Button label={Strings.apply} />
+        <Button label={Strings.apply} onPress={applyFilters} />
       </View>
     </SafeArea>
   );
 };
 
-export default Filters;
+const mapStateToProps = (state) => ({
+  storeReducer: state.storeReducer,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);
