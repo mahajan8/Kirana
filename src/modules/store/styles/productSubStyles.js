@@ -42,4 +42,7 @@ export const styles = EStyleSheet.create({
     paddingLeft: '16rem',
     marginBottom: '8vrem',
   },
+  listLoaderContainer: {
+    marginTop: '20vrem',
+  },
 });

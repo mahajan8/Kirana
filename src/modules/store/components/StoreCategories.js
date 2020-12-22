@@ -27,7 +27,7 @@ import CartCounter from '../../commons/components/CartCounter';
 let backgroundImage = require('../../../assets/images/store_background.png');
 
 const StoreCategories = (props) => {
-  const [storeDetails, setStoreDetails] = useState(null);
+  const [storeDetails, setStoreDetails] = useState({});
   const [storeProducts, setStoreProducts] = useState(null);
 
   useEffect(() => {
@@ -41,119 +41,98 @@ const StoreCategories = (props) => {
     });
   }, []);
 
-  if (storeDetails) {
-    let {owner_data, location, name} = storeDetails;
+  let {owner_data, location, name} = storeDetails;
 
-    let profilePhoto = owner_data.profile_photo
-      ? owner_data.profile_photo
-      : null;
+  let isLoaded = storeDetails.name ? true : false;
 
-    return (
-      <SafeArea>
-        <ScrollView>
-          <ImageBackground
-            source={backgroundImage}
-            style={styles.imageBackground}
-            blurRadius={1}>
-            <View style={styles.darkBg} />
-            <View style={styles.storeInfoContainer}>
-              <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-                <TouchableOpacity
-                  style={styles.backArrow}
-                  onPress={Actions.pop}>
-                  <BackArrow
-                    width={EStyleSheet.value('16rem')}
-                    height={EStyleSheet.value('16rem')}
-                  />
-                </TouchableOpacity>
+  let profilePhoto = isLoaded
+    ? owner_data.profile_photo
+      ? owner_data.profile_photo.path
+      : null
+    : null;
 
-                <View>
-                  <Text
-                    style={styles.storeName}
-                    onPress={() => console.log(storeDetails)}>
-                    {name ? name : ''}
-                  </Text>
-                  <Text style={styles.storeLocation}>
-                    {location.short_address}
-                  </Text>
-                </View>
+  return (
+    <SafeArea>
+      <ScrollView>
+        <ImageBackground
+          source={backgroundImage}
+          style={styles.imageBackground}
+          blurRadius={1}>
+          <View style={styles.darkBg} />
+          <View style={styles.storeInfoContainer}>
+            <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
+              <TouchableOpacity style={styles.backArrow} onPress={Actions.pop}>
+                <BackArrow
+                  width={EStyleSheet.value('16rem')}
+                  height={EStyleSheet.value('16rem')}
+                />
+              </TouchableOpacity>
 
-                <View style={styles.cartContianer}>
-                  <CartCounter />
-                </View>
+              <View>
+                <Text
+                  style={
+                    isLoaded ? styles.storeName : styles.storeNamePlaceHolder
+                  }
+                  onPress={() => console.log(storeDetails)}>
+                  {name ? name : ''}
+                </Text>
+                <Text
+                  style={
+                    isLoaded
+                      ? styles.storeLocation
+                      : styles.storeLocationPlaceHolder
+                  }>
+                  {isLoaded ? location.short_address : null}
+                </Text>
               </View>
 
-              <Image
-                source={{
-                  uri: getMediaUrl(
-                    profilePhoto ? profilePhoto.path : profilePhoto,
-                  ),
-                }}
-                style={styles.image}
-              />
-
-              <View style={[styles.rowContainer, styles.searchView]}>
-                <Search
-                  width={EStyleSheet.value('15rem')}
-                  height={EStyleSheet.value('15rem')}
-                />
-                <Text style={styles.searchText}>{Strings.searchProduct}</Text>
+              <View style={styles.cartContianer}>
+                <CartCounter />
               </View>
             </View>
-          </ImageBackground>
-          <FlatList
-            data={storeProducts}
-            renderItem={({item}) => (
-              <List
-                label={item.name}
-                list={item.products}
-                onMorePress={() =>
-                  Actions.productsBySubCategory({
-                    categoryName: item.name,
-                    categoryId: item.id,
-                    storeId: props.storeId,
-                  })
-                }
-              />
-            )}
-            keyExtractor={(item, index) => `store${index}`}
-          />
-        </ScrollView>
-      </SafeArea>
-    );
-  } else {
-    return (
-      <SafeArea>
-        <ScrollView>
-          <ImageBackground
-            source={require('../../../assets/images/dummy.png')}
-            style={styles.imageBackground}
-            blurRadius={2}>
-            <View style={styles.storeInfoContainer}>
-              <BackArrow
-                style={styles.backArrow}
-                width={EStyleSheet.value('16rem')}
-                height={EStyleSheet.value('16rem')}
-              />
-              <View style={styles.storeNamePlaceHolder} />
-              <View style={styles.storeLocationPlaceHolder} />
-              <View style={styles.profilePicPlaceHolder} />
-              <View style={[styles.rowContainer, styles.searchView]}>
-                <Search
-                  width={EStyleSheet.value('15rem')}
-                  height={EStyleSheet.value('15rem')}
-                />
-                <Text style={styles.searchText}>{Strings.searchProduct}</Text>
-              </View>
-            </View>
-          </ImageBackground>
 
-          <ListPlaceHolder count={4} />
-          <ListPlaceHolder count={4} vertical />
-        </ScrollView>
-      </SafeArea>
-    );
-  }
+            <Image
+              source={{
+                uri: getMediaUrl(profilePhoto),
+              }}
+              style={isLoaded ? styles.image : styles.profilePicPlaceHolder}
+            />
+
+            <View style={[styles.rowContainer, styles.searchView]}>
+              <Search
+                width={EStyleSheet.value('15rem')}
+                height={EStyleSheet.value('15rem')}
+              />
+              <Text style={styles.searchText}>{Strings.searchProduct}</Text>
+            </View>
+          </View>
+        </ImageBackground>
+        <FlatList
+          data={storeProducts}
+          renderItem={({item}) => (
+            <List
+              label={item.name}
+              list={item.products}
+              onMorePress={() =>
+                Actions.productsBySubCategory({
+                  categoryName: item.name,
+                  categoryId: item.id,
+                  storeId: props.storeId,
+                })
+              }
+            />
+          )}
+          keyExtractor={(item, index) => `store${index}`}
+          ListEmptyComponent={
+            <View>
+              <ListPlaceHolder count={4} />
+              <ListPlaceHolder count={4} />
+            </View>
+          }
+        />
+      </ScrollView>
+    </SafeArea>
+  );
 };
 
 const mapStateToProps = (state) => ({

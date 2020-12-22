@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
@@ -8,27 +9,27 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import CartCounter from '../../commons/components/CartCounter';
 import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getStoreCategories} from '../Api';
+import {connect} from 'react-redux';
 
-let categories = [
-  'Staples',
-  'Beverages',
-  'Breakfast & Dairy',
-  'Fruits & Vegetables',
-  'Staples',
-  'Beverages',
-  'Breakfast & Dairy',
-  'Fruits & Vegetables',
-  'Staples',
-  'Beverages',
-  'Breakfast & Dairy',
-  'Fruits & Vegetables',
-];
+const Explore = (props) => {
+  useEffect(() => {
+    props.getStoreCategories({}, (data) => {
+      setCategories(data.category_list);
+    });
+  }, []);
 
-const Explore = () => {
+  const [categories, setCategories] = useState([]);
+
   const renderCategory = (item) => (
     <View style={styles.categoryContainer}>
-      <Image style={styles.categoryImage} source={{uri: getMediaUrl(null)}} />
-      <Text style={styles.categoryName}>{item}</Text>
+      <Image
+        style={styles.categoryImage}
+        source={{
+          uri: getMediaUrl(item.attachment ? item.attachment.path : null),
+        }}
+      />
+      <Text style={styles.categoryName}>{item.name}</Text>
     </View>
   );
 
@@ -56,4 +57,12 @@ const Explore = () => {
   );
 };
 
-export default Explore;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+});
+
+const mapDispatchToProps = {
+  getStoreCategories,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Explore);

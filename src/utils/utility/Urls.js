@@ -10,6 +10,8 @@ export const Urls = {
   getStoreDetails: '/offering/store/get-store-details-and-products',
   getProductsByCategory: '/offering/store/get-store-products-by-category-id',
   getStoreProducts: '/offering/store/search-store-products',
+  getStoreCategories:
+    '/offering/category/get-all-categories-and-sub-categories',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

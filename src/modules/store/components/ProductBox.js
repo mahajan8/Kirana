@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {Strings} from '../../../utils/values/Strings';
-import {unitsList} from '../../../utils/values/Values';
+import {unitsList, unitsShortName} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
 import MinusButton from '../../../assets/images/minus_button.svg';
 import PlusButton from '../../../assets/images/plus_button.svg';
@@ -43,7 +43,7 @@ const ProductBox = (props) => {
       <Text style={styles.price}>
         {Strings.currency} {store_price}
       </Text>
-      <Text style={styles.name} numberOfLines={2}>
+      <Text style={styles.name} numberOfLines={1}>
         {product_name}
       </Text>
       <Text style={styles.weight}>
@@ -60,7 +60,10 @@ const ProductBox = (props) => {
                 height={EStyleSheet.value('25rem')}
               />
             </TouchableOpacity>
-            <Text style={styles.countText}>{count} kg</Text>
+            <Text style={styles.countText}>
+              {count * product_quantity}{' '}
+              {getKeyByValue(unitsShortName, product_packaging)}
+            </Text>
             <TouchableOpacity
               style={styles.counter}
               onPress={() => setCount(count + 1)}>
