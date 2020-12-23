@@ -122,7 +122,7 @@ const SearchStoreProducts = (props) => {
               key={`${item}`}
               onPress={() => {
                 setSearchInput(item);
-                search(0);
+                search(0, item);
               }}>
               <Text style={styles.commonSearchItem}>{item}</Text>
             </Pressable>
