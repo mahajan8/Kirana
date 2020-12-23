@@ -60,7 +60,11 @@ const ProductBox = (props) => {
       </Text>
       <View style={styles.bottomContainer}>
         {count ? (
-          <View style={styles.counterContainer}>
+          <View
+            style={[
+              styles.counterContainer,
+              vertical && styles.verticalButton,
+            ]}>
             <TouchableOpacity
               style={styles.counter}
               onPress={() => setCount(count > 0 ? count - 1 : count)}>

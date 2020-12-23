@@ -20,7 +20,7 @@ export const styles = EStyleSheet.create({
   storeInfoContainer: {
     alignItems: 'center',
     paddingHorizontal: '16rem',
-    paddingTop: '33vrem',
+    paddingTop: '10vrem',
     paddingBottom: '12vrem',
   },
   storeDetailsContainer: {

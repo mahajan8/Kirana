@@ -7,6 +7,7 @@ import ProductBox from './ProductBox';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
+import Button from '../../commons/components/Button';
 
 const List = (props) => {
   let {list, label, onMorePress, noShadow, noHeader, onPress, id} = props;
@@ -37,6 +38,15 @@ const List = (props) => {
         {renderHeader()}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {horizontalList.map((item, index) => renderProduct(item, index))}
+          <View style={styles.productContainer}>
+            <Button
+              Style={styles.viewAllButton}
+              labelStyle={styles.viewAllLabel}
+              label={Strings.viewAll}
+              bordered
+              onPress={onMorePress && onMorePress}
+            />
+          </View>
         </ScrollView>
       </View>
     </View>
@@ -66,6 +76,25 @@ const styles = EStyleSheet.create({
     paddingVertical: '15vrem',
     paddingLeft: '16rem',
     marginBottom: '8vrem',
+  },
+  productContainer: {
+    marginTop: '12vrem',
+    marginRight: '30rem',
+    width: '110rem',
+    height: '220vrem',
+    backgroundColor: Colors.lightStatusBar,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewAllButton: {
+    width: '79rem',
+    height: '31vrem',
+    borderRadius: '2rem',
+    borderColor: Colors.themeGreen,
+    backgroundColor: 'transparent',
+  },
+  viewAllLabel: {
+    fontSize: '11rem',
   },
 });
 function arePropsEqual(prevProps, nextProps) {

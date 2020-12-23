@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, FlatList, Image} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
@@ -14,12 +14,8 @@ import {connect} from 'react-redux';
 
 const Explore = (props) => {
   useEffect(() => {
-    props.getStoreCategories({}, (data) => {
-      setCategories(data.category_list);
-    });
+    props.getStoreCategories();
   }, []);
-
-  const [categories, setCategories] = useState([]);
 
   const renderCategory = (item) => (
     <View style={styles.categoryContainer}>
@@ -46,7 +42,7 @@ const Explore = (props) => {
       <View style={styles.container}>
         <Text style={styles.heading}>{Strings.groceryCategories}</Text>
         <FlatList
-          data={categories}
+          data={props.storeCategories}
           keyExtractor={(item, index) => `categories${index}`}
           renderItem={({item}) => renderCategory(item)}
           numColumns={2}
@@ -59,6 +55,7 @@ const Explore = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  storeCategories: state.storeReducer.storeCategories,
 });
 
 const mapDispatchToProps = {

@@ -15,20 +15,23 @@ import {getStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
+import {setProducts} from '../StoreActions';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const ProductsList = (props) => {
   let {subCategoryName, subCategoryId} = props;
-
-  const [storeProducts, setStoreProducts] = useState([]);
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [totalProducts, setTotalProducts] = useState(0);
   const [filters, setFilters] = useState(defaultFilters);
 
+  const {products} = props.storeReducer;
+
   useEffect(() => {
-    setStoreProducts([]);
+    props.setProducts([]);
     getProducts(0);
+
+    return () => props.setProducts([]);
   }, [filters]);
 
   const getProducts = (start) => {
@@ -72,8 +75,8 @@ const ProductsList = (props) => {
       pars.filter = true;
     }
     props.getStoreProducts(pars, (data) => {
-      setStoreProducts(
-        start === 0 ? data.results : [...storeProducts, ...data.results],
+      props.setProducts(
+        start === 0 ? data.results : [...products, ...data.results],
       );
       setTotalProducts(data.total_count);
     });
@@ -100,11 +103,7 @@ const ProductsList = (props) => {
                   filters: filters,
                 });
               }}>
-              <FilterIcon
-                style={styles.headerIcon}
-                width={EStyleSheet.value('14rem')}
-                height={EStyleSheet.value('14rem')}
-              />
+              <FilterIcon style={styles.headerIcon} />
             </TouchableOpacity>
             <CartCounter />
           </View>
@@ -114,7 +113,7 @@ const ProductsList = (props) => {
 
       <View style={{flex: 1}}>
         <FlatList
-          data={storeProducts}
+          data={products}
           renderItem={({item, index}) => (
             <ProductBox
               key={`product${item + index}`}
@@ -130,14 +129,14 @@ const ProductsList = (props) => {
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
           onEndReached={() => {
-            if (!endReachCallable && storeProducts.length < totalProducts) {
-              getProducts(storeProducts.length);
+            if (!endReachCallable && products.length < totalProducts) {
+              getProducts(products.length);
               setEndReachCallable(true);
             }
           }}
           ListFooterComponent={
             <View style={styles.listLoaderContainer}>
-              <Loader show={storeProducts.length ? props.loading : false} />
+              <Loader show={products.length ? props.loading : false} />
             </View>
           }
         />
@@ -148,10 +147,12 @@ const ProductsList = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  storeReducer: state.storeReducer,
 });
 
 const mapDispatchToProps = {
   getStoreProducts,
+  setProducts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

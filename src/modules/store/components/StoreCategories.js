@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,6 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Platform,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
@@ -23,23 +22,24 @@ import {connect} from 'react-redux';
 import {getStoreDetails} from '../Api';
 import ListPlaceHolder from './ListPlaceHolder';
 import CartCounter from '../../commons/components/CartCounter';
+import {setCategoryProducts, setStoreDetails} from '../StoreActions';
 
 let backgroundImage = require('../../../assets/images/store_background.png');
 
 const StoreCategories = (props) => {
-  const [storeDetails, setStoreDetails] = useState({});
-  const [storeProducts, setStoreProducts] = useState(null);
-
   useEffect(() => {
     let pars = {
       store_id: props.storeId,
     };
-    props.getStoreDetails(pars, (data) => {
-      setStoreProducts(data.store_products);
-      setStoreDetails(data.store_details);
-      console.log({pars, data: data.store_products});
-    });
+    props.getStoreDetails(pars);
+
+    return () => {
+      props.setStoreDetails({});
+      props.setCategoryProducts([]);
+    };
   }, []);
+
+  let {storeDetails, categoryProducts} = props.storeReducer;
 
   let {owner_data, location, name} = storeDetails;
 
@@ -107,7 +107,7 @@ const StoreCategories = (props) => {
           </View>
         </ImageBackground>
         <FlatList
-          data={storeProducts}
+          data={categoryProducts}
           renderItem={({item}) => (
             <List
               label={item.name}
@@ -136,10 +136,13 @@ const StoreCategories = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  storeReducer: state.storeReducer,
 });
 
 const mapDispatchToProps = {
   getStoreDetails,
+  setCategoryProducts,
+  setStoreDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoreCategories);

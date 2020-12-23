@@ -1,9 +1,20 @@
-import {SET_FILTERS, SET_SUBCATEGORY_PRODUCTS} from './ActionTypes';
+import {
+  SET_CATEGORIES,
+  SET_CATEGORY_PRODUCTS,
+  SET_FILTERS,
+  SET_PRODUCTS,
+  SET_STORE_DETAILS,
+  SET_SUBCATEGORY_PRODUCTS,
+} from './ActionTypes';
 
 const INITIAL_STATE = {
   filterBrands: [],
   filterCategories: [],
   subcategoryProducts: [],
+  storeDetails: {},
+  categoryProducts: [],
+  products: [],
+  storeCategories: [],
 };
 
 const StoreReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +30,26 @@ const StoreReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         subcategoryProducts: action.data,
+      };
+    case SET_CATEGORY_PRODUCTS:
+      return {
+        ...state,
+        categoryProducts: action.data,
+      };
+    case SET_STORE_DETAILS:
+      return {
+        ...state,
+        storeDetails: action.data,
+      };
+    case SET_PRODUCTS:
+      return {
+        ...state,
+        products: action.data,
+      };
+    case SET_CATEGORIES:
+      return {
+        ...state,
+        storeCategories: action.data,
       };
     default:
       return state;

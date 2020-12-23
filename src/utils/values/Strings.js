@@ -180,4 +180,5 @@ export const Strings = {
   trackOrder: 'Track Order',
   storeClosed: 'Store Closed',
   orderNowGetAt: 'Order Now, Get it at 11 am!',
+  viewAll: 'View All',
 };
