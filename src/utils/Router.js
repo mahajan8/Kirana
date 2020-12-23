@@ -12,10 +12,10 @@ import AddAddress from '../modules/navigation/components/AddAddress';
 import Addresses from '../modules/navigation/components/Addresses';
 import Home from '../modules/home/components/Home';
 import DrawerComponent from '../modules/home/components/DrawerComponent';
-import ProductsBySubCategory from '../modules/store/components/ProductsBySubCategory';
+import StoreSubCategories from '../modules/store/components/StoreSubCategories';
 import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
-import SearchProducts from '../modules/home/components/SearchProducts';
+import SearchStoreProducts from '../modules/home/components/SearchStoreProducts';
 import SearchProductResults from '../modules/home/components/SearchProductResults';
 import ReferFriends from '../modules/navigation/components/ReferFriends';
 import Invites from '../modules/navigation/components/Invites';
@@ -41,10 +41,10 @@ const AppRouter = () => {
         <Scene key="addAddress" component={AddAddress} />
         <Scene key="addresses" component={Addresses} />
         <Scene key="storeCategories" component={StoreCategories} />
-        <Scene key="productsBySubCategory" component={ProductsBySubCategory} />
+        <Scene key="storeSubCategories" component={StoreSubCategories} />
         <Scene key="productsList" component={ProductsList} />
         <Scene key="productDetails" component={ProductDetails} />
-        <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="searchStoreProducts" component={SearchStoreProducts} />
         <Scene key="searchProductResults" component={SearchProductResults} />
         <Scene key="referFriends" component={ReferFriends} />
         <Scene key="invites" component={Invites} />

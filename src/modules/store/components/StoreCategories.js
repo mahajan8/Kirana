@@ -8,7 +8,6 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Platform,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
@@ -113,7 +112,7 @@ const StoreCategories = (props) => {
               label={item.name}
               list={item.products}
               onMorePress={() =>
-                Actions.productsBySubCategory({
+                Actions.storeSubCategories({
                   categoryName: item.name,
                   categoryId: item.id,
                   storeId: props.storeId,

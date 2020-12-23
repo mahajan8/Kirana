@@ -69,7 +69,7 @@ let stores = [
   },
 ];
 
-const SearchProducts = () => {
+const SearchStoreProducts = () => {
   const [searchInput, setSearchInput] = useState('');
 
   let input = useRef(null);
@@ -145,4 +145,4 @@ const SearchProducts = () => {
   );
 };
 
-export default SearchProducts;
+export default SearchStoreProducts;

@@ -11,7 +11,7 @@ import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import {connect} from 'react-redux';
-import {getStoreProducts} from '../Api';
+import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
@@ -71,7 +71,7 @@ const ProductsList = (props) => {
       ];
       pars.filter = true;
     }
-    props.getStoreProducts(pars, (data) => {
+    props.searchStoreProducts(pars, (data) => {
       setStoreProducts(
         start === 0 ? data.results : [...storeProducts, ...data.results],
       );
@@ -151,7 +151,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getStoreProducts,
+  searchStoreProducts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

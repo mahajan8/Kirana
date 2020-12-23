@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productSubStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -9,12 +9,12 @@ import Search from '../../../assets/images/search.svg';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import List from './StoreProductsListing';
-import {getProductsByCategory, getStoreProducts} from '../Api';
+import {getProductsByCategory, searchStoreProducts} from '../Api';
 import {connect} from 'react-redux';
 import {setSubcategoryProducts} from '../StoreActions';
 import ListPlaceHolder from './ListPlaceHolder';
 
-const ProductsBySubCategory = (props) => {
+const StoreSubCategories = (props) => {
   let {categoryName} = props;
   let {subcategoryProducts} = props.storeState;
   useEffect(() => {
@@ -105,11 +105,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getProductsByCategory,
-  getStoreProducts,
+  searchStoreProducts,
   setSubcategoryProducts,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ProductsBySubCategory);
+)(StoreSubCategories);
