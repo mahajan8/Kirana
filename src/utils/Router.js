@@ -25,6 +25,7 @@ import AccountSetup from '../modules/navigation/components/AccountSetup';
 import Store from '../modules/store/components/Store';
 import Filters from '../modules/store/components/Filters';
 import StoreCategories from '../modules/store/components/StoreCategories';
+import SearchProducts from '../modules/store/components/SearchProducts';
 
 const AppRouter = () => {
   return (
@@ -53,6 +54,7 @@ const AppRouter = () => {
         <Scene key="accountSetup" component={AccountSetup} />
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
+        <Scene key="searchProducts" component={SearchProducts} />
         <Scene
           key="drawer"
           drawer={true}
