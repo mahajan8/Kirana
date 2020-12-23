@@ -28,12 +28,12 @@ const ProductsList = (props) => {
 
   useEffect(() => {
     props.clearProducts();
-    getProducts(0);
+    getProducts();
 
     return () => props.clearProducts();
   }, [filters]);
 
-  const getProducts = (start) => {
+  const getProducts = (start = 0) => {
     let pars = {
       start,
       limit: 10,

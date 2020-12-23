@@ -1,26 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useRef, useEffect, useState} from 'react';
 import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, TouchableOpacity} from 'react-native';
 import ProductBox from './ProductBox';
 import {Actions} from 'react-native-router-flux';
 import Loader from '../../commons/components/Loader';
 import {styles} from '../styles/productSubStyles';
 import {clearProducts} from '../StoreActions';
+import ActiveFilter from '../../../assets/images/active-filter.svg';
+import Filter from '../../../assets/images/filter.svg';
+
+let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const SearchProducts = (props) => {
   let input = useRef(null);
   let debounceTimer = useRef(null);
   const [searchInput, setSearchInput] = useState('');
   const [endReachCallable, setEndReachCallable] = useState(true);
+  const [filters, setFilters] = useState(defaultFilters);
+
   const {storeDetails, products, totalProductCount} = props.storeReducer;
 
   useEffect(() => {
-    props.clearProducts();
-    input.current.focus();
-  }, []);
+    if (searchInput) {
+      searchProducts(searchInput);
+    } else {
+      input.current.focus();
+      props.clearProducts();
+    }
+    return () => props.clearProducts();
+  }, [filters]);
 
   let searchProducts = (query, start = 0) => {
     let pars = {
@@ -43,6 +55,38 @@ const SearchProducts = (props) => {
     if (start === 0) {
       props.clearProducts();
     }
+
+    let {brands, categories, price_sort} = filters;
+
+    if (brands.length) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_BRAND_IN', value: brands, context: null},
+      ];
+      pars.filter = true;
+    }
+    if (categories.length) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_CATEGORY_IN', value: categories, context: null},
+      ];
+      if (!pars.filter) {
+        pars.filter = true;
+      }
+    }
+    if (price_sort !== null) {
+      pars.sorts = [
+        ...pars.sorts,
+        {
+          key: 'SORT_BY_PRICE',
+          value: price_sort === 0 ? true : false,
+          context: null,
+        },
+      ];
+      if (!pars.filter) {
+        pars.filter = true;
+      }
+    }
     props.searchStoreProducts(pars);
   };
 
@@ -52,12 +96,18 @@ const SearchProducts = (props) => {
       if (query) {
         searchProducts(query);
       } else {
+        setFilters(defaultFilters);
         props.clearProducts();
       }
     }, 500);
     setSearchInput(query);
   };
-
+  let FilterIcon =
+    filters.brands.length ||
+    filters.price_sort !== null ||
+    filters.categories.length
+      ? ActiveFilter
+      : Filter;
   return (
     <SafeArea>
       <CartHeader
@@ -65,6 +115,18 @@ const SearchProducts = (props) => {
         onSearchChange={onChangeSearchText}
         searchValue={searchInput}
         inputRef={input}
+        onCrossPress={() => setSearchInput('')}
+        headerRight={
+          <TouchableOpacity
+            onPress={() => {
+              Actions.filters({
+                saveFilters: setFilters,
+                filters: filters,
+              });
+            }}>
+            <FilterIcon style={{marginRight: 18}} />
+          </TouchableOpacity>
+        }
       />
       <FlatList
         data={products}

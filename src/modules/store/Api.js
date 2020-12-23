@@ -69,7 +69,6 @@ export const searchStoreProducts = (pars) => {
         // if (pars.start === 0) {
         //   dispatch(clearProducts());
         // }
-        console.log(res.data.data)
         let {total_count, results} = res.data.data;
         dispatch(addProducts(results, total_count));
       } else {

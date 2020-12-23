@@ -7,28 +7,32 @@ import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/searchProductsStyles';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
-import {getMediaUrl} from '../../../utils/utility/Utils';
 import SearchItemTile from './SearchItemTile';
 import {clearProducts} from '../../store/StoreActions';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../../store/Api';
 import Loader from '../../commons/components/Loader';
 import StoreProductPlaceholder from './StoreProductPlaceholder';
+import {Actions} from 'react-native-router-flux';
+import ActiveFilter from '../../../assets/images/active-filter.svg';
+import Filter from '../../../assets/images/filter.svg';
+
+let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const SearchProductResults = (props) => {
   let {searchedText, store} = props;
   const [endReachCallable, setEndReachCallable] = useState(true);
+  const [filters, setFilters] = useState(defaultFilters);
 
   const {products, totalProductCount} = props.storeReducer;
 
   useEffect(() => {
     props.clearProducts();
-    getProducts(0);
-
+    getProducts();
     return () => props.clearProducts();
-  }, []);
+  }, [filters]);
 
-  const getProducts = (start) => {
+  const getProducts = (start = 0) => {
     let pars = {
       start,
       limit: 10,
@@ -42,10 +46,45 @@ const SearchProductResults = (props) => {
         {key: 'SEARCH_BY_TEXT', value: searchedText, context: null},
       ],
     };
+    let {brands, categories, price_sort} = filters;
 
+    if (brands.length) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_BRAND_IN', value: brands, context: null},
+      ];
+      pars.filter = true;
+    }
+    if (categories.length) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_CATEGORY_IN', value: categories, context: null},
+      ];
+      if (!pars.filter) {
+        pars.filter = true;
+      }
+    }
+    if (price_sort !== null) {
+      pars.sorts = [
+        ...pars.sorts,
+        {
+          key: 'SORT_BY_PRICE',
+          value: price_sort === 0 ? true : false,
+          context: null,
+        },
+      ];
+      if (!pars.filter) {
+        pars.filter = true;
+      }
+    }
     props.searchStoreProducts(pars);
   };
-
+  let FilterIcon =
+    filters.brands.length ||
+    filters.price_sort !== null ||
+    filters.categories.length
+      ? ActiveFilter
+      : Filter;
   return (
     <SafeArea>
       <CartHeader
@@ -56,6 +95,17 @@ const SearchProductResults = (props) => {
               {store.location.short_address}
             </Text>
           </View>
+        }
+        headerRight={
+          <TouchableOpacity
+            onPress={() => {
+              Actions.filters({
+                saveFilters: setFilters,
+                filters: filters,
+              });
+            }}>
+            <FilterIcon style={{marginRight: 18}} />
+          </TouchableOpacity>
         }
         containerStyle={styles.headerContainer}
       />
