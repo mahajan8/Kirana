@@ -6,6 +6,8 @@ import {
   SET_FILTERS,
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
+  ADD_SEARCHED_PRODUCTS,
+  CLEAR_SEARCHED_PRODUCTS,
 } from './ActionTypes';
 
 export const setFilters = (filters) => ({
