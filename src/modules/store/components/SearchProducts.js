@@ -1,7 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
-import {debounce} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
 import {FlatList, View} from 'react-native';
@@ -41,7 +40,9 @@ const SearchProducts = (props) => {
         },
       ],
     };
-    props.clearProducts();
+    if (start === 0) {
+      props.clearProducts();
+    }
     props.searchStoreProducts(pars);
   };
 
