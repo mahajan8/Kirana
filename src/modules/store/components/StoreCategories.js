@@ -15,7 +15,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import Search from '../../../assets/images/search.svg';
-import BackArrow from '../../../assets/images/back-arrow.svg';
+import BackArrow from '../../../assets/images/white_back.svg';
+import LocationIcon from '../../../assets/images/white_location.svg';
 import {Strings} from '../../../utils/values/Strings';
 import List from './StoreProductsListing';
 import {connect} from 'react-redux';
@@ -62,17 +63,13 @@ const StoreCategories = (props) => {
           <View style={styles.storeInfoContainer}>
             <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
               <TouchableOpacity style={styles.backArrow} onPress={Actions.pop}>
-                <BackArrow
-                  width={EStyleSheet.value('16rem')}
-                  height={EStyleSheet.value('16rem')}
-                />
+                <BackArrow />
               </TouchableOpacity>
               <View>
                 <Text
                   style={
                     isLoaded ? styles.storeName : styles.storeNamePlaceHolder
-                  }
-                  onPress={() => console.log(storeDetails)}>
+                  }>
                   {name ? name : ''}
                 </Text>
                 <Text
@@ -81,7 +78,7 @@ const StoreCategories = (props) => {
                       ? styles.storeLocation
                       : styles.storeLocationPlaceHolder
                   }>
-                  {isLoaded ? location.short_address : null}
+                  <LocationIcon /> {isLoaded ? location.short_address : null}
                 </Text>
               </View>
 
@@ -113,7 +110,7 @@ const StoreCategories = (props) => {
               label={item.name}
               list={item.products}
               onMorePress={() =>
-                Actions.productsBySubCategory({
+                Actions.storeSubCategories({
                   categoryName: item.name,
                   categoryId: item.id,
                   storeId: props.storeId,

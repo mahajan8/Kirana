@@ -33,7 +33,7 @@ const Home = (props) => {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.searchContainer}
-          onPress={() => Actions.searchProducts()}>
+          onPress={() => Actions.searchStoreProducts()}>
           <Search
             width={EStyleSheet.value('14rem')}
             height={EStyleSheet.value('14rem')}

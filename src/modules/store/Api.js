@@ -52,14 +52,14 @@ export const getProductsByCategory = (pars) => {
   };
 };
 
-export const getStoreProducts = (pars, callback) => {
+export const searchStoreProducts = (pars, callback) => {
   return (dispatch) => {
     let filter = pars.filter;
     delete pars.filter;
 
     var formBody = getFormBody(pars);
 
-    instance.post(Urls.getStoreProducts, formBody).then((res) => {
+    instance.post(Urls.searchStoreProducts, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
         if (!filter) {

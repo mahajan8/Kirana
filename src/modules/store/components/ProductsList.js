@@ -11,7 +11,7 @@ import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Header from '../../commons/components/Header';
 import CartCounter from '../../commons/components/CartCounter';
 import {connect} from 'react-redux';
-import {getStoreProducts} from '../Api';
+import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
@@ -74,7 +74,7 @@ const ProductsList = (props) => {
       ];
       pars.filter = true;
     }
-    props.getStoreProducts(pars, (data) => {
+    props.searchStoreProducts(pars, (data) => {
       props.setProducts(
         start === 0 ? data.results : [...products, ...data.results],
       );
@@ -83,7 +83,9 @@ const ProductsList = (props) => {
   };
 
   let FilterIcon =
-    filters.brands.length || filters.price_sort ? ActiveFilter : Filter;
+    filters.brands.length || filters.price_sort !== null
+      ? ActiveFilter
+      : Filter;
 
   return (
     <SafeArea>
@@ -151,7 +153,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getStoreProducts,
+  searchStoreProducts,
   setProducts,
 };
 
