@@ -262,12 +262,13 @@ export const logout = () => {
   Actions.reset('introduction');
 };
 
-export const debounce = (func, delay) => {
-  let debounceTimer;
-  return function () {
+export const debounce = (fn, delay) => {
+  let timer = null;
+  return function (...args) {
     const context = this;
-    const args = arguments;
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
   };
 };

@@ -13,15 +13,15 @@ import {clearProducts} from '../StoreActions';
 
 const SearchProducts = (props) => {
   let input = useRef(null);
+  let debounceTimer = useRef(null);
   const [searchInput, setSearchInput] = useState('');
   const [endReachCallable, setEndReachCallable] = useState(true);
   const {storeDetails, products, totalProductCount} = props.storeReducer;
-  let debounceTimer = useRef(null);
 
   useEffect(() => {
+    props.clearProducts();
     input.current.focus();
-    // props.clearProducts();
-  });
+  }, []);
 
   let searchProducts = (query, start = 0) => {
     let pars = {
@@ -45,15 +45,15 @@ const SearchProducts = (props) => {
     props.searchStoreProducts(pars);
   };
 
-  const test = debounce(() => console.log(searchInput), 3000);
-
   const onChangeSearchText = (query) => {
-    // debounceTimer.current = null;
-    // clearTimeout(debounceTimer.current);
-    // debounceTimer.current = setTimeout(() => {
-    //   searchProducts(query);
-    // }, 500);
-    test();
+    clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      if (query) {
+        searchProducts(query);
+      } else {
+        props.clearProducts();
+      }
+    }, 500);
     setSearchInput(query);
   };
 
