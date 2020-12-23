@@ -4,16 +4,16 @@ import {getFormBody} from '../../utils/utility/Utils';
 import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {
+  addProducts,
   clearProducts,
   setCategories,
   setCategoryProducts,
   setFilters,
-  setProducts,
   setStoreDetails,
   setSubcategoryProducts,
 } from './StoreActions';
 
-export const getStoreDetails = (pars, callback) => {
+export const getStoreDetails = (pars) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
@@ -53,7 +53,7 @@ export const getProductsByCategory = (pars) => {
   };
 };
 
-export const searchStoreProducts = (pars, callback) => {
+export const searchStoreProducts = (pars) => {
   return (dispatch) => {
     let filter = pars.filter;
     delete pars.filter;
@@ -66,12 +66,12 @@ export const searchStoreProducts = (pars, callback) => {
         if (!filter) {
           dispatch(setFilters(res.data.data.filters));
         }
-        if (pars.start === 0) {
-          dispatch(clearProducts());
-        }
+        // if (pars.start === 0) {
+        //   dispatch(clearProducts());
+        // }
+        console.log(res.data.data)
         let {total_count, results} = res.data.data;
-        dispatch(setProducts(results, total_count));
-        callback(res.data.data);
+        dispatch(addProducts(results, total_count));
       } else {
         alert(res.data.message);
       }
@@ -79,7 +79,7 @@ export const searchStoreProducts = (pars, callback) => {
   };
 };
 
-export const getStoreCategories = (pars, callback) => {
+export const getStoreCategories = (pars) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 

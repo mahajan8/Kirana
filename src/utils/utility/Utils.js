@@ -81,7 +81,8 @@ export const getMediaUrl = (path) => {
   if (path) {
     url = AppConfig[environment].storageBaseUrl.concat(path);
   } else {
-    url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn-SJgS0wvz4a8Y2QXVrZ5iDwFpTbK9ilTqg&usqp=CAU';
+    url =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn-SJgS0wvz4a8Y2QXVrZ5iDwFpTbK9ilTqg&usqp=CAU';
   }
   return url;
 };
@@ -259,4 +260,15 @@ export const logout = () => {
   dispatch(logoutUser());
   removeAuthToken();
   Actions.reset('introduction');
+};
+
+export const debounce = (fn, delay) => {
+  let timer = null;
+  return function (...args) {
+    const context = this;
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  };
 };

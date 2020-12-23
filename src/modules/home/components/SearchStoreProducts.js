@@ -1,148 +1,148 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, TextInput, FlatList} from 'react-native';
+import {View, Text, TextInput, FlatList, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
-import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
 import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/searchProductsStyles';
-import Input from '../../commons/components/Input';
-import Search from '../../../assets/images/search.svg';
 import StoreInfoTile from './StoreInfoTile';
 import NoResults from '../../../assets/images/search_not_found.svg';
+import {debounce} from '../../../utils/utility/Utils';
+import {searchProductInStores} from '../Api';
+import {connect} from 'react-redux';
+import {clearSearchedStores} from '../HomeActions';
 
-let stores = [
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen 1',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s 2',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen 3',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen6',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-  {
-    name: 'The Baker’s Dozen',
-    location: 'Pratiksha Nagar',
-    rating: '4.1',
-    distance: '1',
-  },
-];
+let commonSearches = ['Milk', 'Onion', 'Apple', 'Potato', 'Chocolate'];
 
-const SearchStoreProducts = () => {
+const SearchStoreProducts = (props) => {
   const [searchInput, setSearchInput] = useState('');
-
+  const [endReachCallable, setEndReachCallable] = useState(true);
+  const {location, searchedStores, searchedStoresCount} = props.homeReducer;
   let input = useRef(null);
 
   useEffect(() => {
     input.current.focus();
-  });
 
-  const getSearchedList = () => {
-    if (searchInput) {
-      if (searchInput.toLowerCase() === 'milk') {
-        return stores.slice(0, 2);
-      } else {
-        return [];
-      }
-    } else {
-      return stores;
+    return () => props.clearSearchedStores();
+  }, []);
+
+  const search = (start, query) => {
+    let pars = {
+      start,
+      limit: 10,
+      query: query ? query : searchInput,
+      longitude: location.lng,
+      latitude: location.lat,
+    };
+
+    if (start === 0) {
+      props.clearSearchedStores();
     }
+    props.searchProductInStores(pars);
   };
-
+  // let searchProducts = debounce(test, 1000);
   return (
     <SafeArea>
       <CartHeader
         search
-        onSearchChange={setSearchInput}
+        onSearchChange={(text) => {
+          setSearchInput(text);
+          // searchProducts(text);
+          if (text.length > 2) {
+            search(0, text);
+          }
+        }}
         searchValue={searchInput}
         inputRef={input}
       />
-      <FlatList
-        data={getSearchedList()}
-        renderItem={({item}) => (
-          <StoreInfoTile
-            store={item}
-            onPress={() => {
-              if (searchInput) {
-                Actions.searchProductResults({
-                  searchedText: searchInput,
-                  storeName: item.name,
-                  storeLocation: item.location,
-                });
-              } else {
-                console.log('andias');
-              }
-            }}
-          />
-        )}
-        keyExtractor={(item, index) => `store${index}`}
-        ListHeaderComponent={
-          getSearchedList().length && (
-            <View style={styles.container}>
-              <Text style={styles.searchResultsHeading}>
-                {Strings.found} {getSearchedList().length}{' '}
-                {Strings.storesMatching} {searchInput}
+      {searchInput.length > 2 ? (
+        <FlatList
+          data={searchedStores}
+          renderItem={({item}) => (
+            <StoreInfoTile
+              store={item}
+              onPress={() => {
+                if (searchInput) {
+                  Actions.searchProductResults({
+                    searchedText: searchInput,
+                    store: item,
+                  });
+                } else {
+                  console.log('andias');
+                }
+              }}
+            />
+          )}
+          keyExtractor={(item, index) => `store${index}`}
+          ListHeaderComponent={
+            searchedStores.length && (
+              <View style={styles.container}>
+                <Text style={styles.searchResultsHeading}>
+                  {Strings.found} {searchedStores.length}{' '}
+                  {Strings.storesMatching} {searchInput}
+                </Text>
+              </View>
+            )
+          }
+          ListEmptyComponent={
+            <View style={styles.emptyListContainer}>
+              {/* TODO: Change Image  */}
+              <NoResults
+                width={EStyleSheet.value('270rem')}
+                height={EStyleSheet.value('123rem')}
+              />
+              <Text style={styles.noSearchResults}>
+                {Strings.noSearchResults}
               </Text>
             </View>
-          )
-        }
-        ListEmptyComponent={
-          <View style={styles.emptyListContainer}>
-            {/* TODO: Change Image  */}
-            <NoResults
-              width={EStyleSheet.value('270rem')}
-              height={EStyleSheet.value('123rem')}
-            />
-            <Text style={styles.noSearchResults}>
-              {Strings.noSearchResults}
-            </Text>
-          </View>
-        }
-        contentContainerStyle={styles.list}
-      />
+          }
+          contentContainerStyle={styles.list}
+          onMomentumScrollBegin={() => setEndReachCallable(false)}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            if (
+              !endReachCallable &&
+              searchedStores.length < searchedStoresCount
+            ) {
+              search(searchedStores.length);
+              setEndReachCallable(true);
+            }
+          }}
+        />
+      ) : (
+        <View style={styles.commonSearchesContainer}>
+          <Text
+            style={[styles.searchResultsHeading, styles.commonSearchHeading]}>
+            {Strings.commonSearches}
+          </Text>
+          {commonSearches.map((item) => (
+            <Pressable
+              key={`${item}`}
+              onPress={() => {
+                setSearchInput(item);
+                search(0);
+              }}>
+              <Text style={styles.commonSearchItem}>{item}</Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
     </SafeArea>
   );
 };
 
-export default SearchStoreProducts;
+const mapStateToProps = (state) => ({
+  homeReducer: state.homeReducer,
+});
+
+const mapDispatchToProps = {
+  searchProductInStores,
+  clearSearchedStores,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SearchStoreProducts);

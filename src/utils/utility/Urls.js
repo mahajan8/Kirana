@@ -12,6 +12,7 @@ export const Urls = {
   searchStoreProducts: '/offering/store/search-store-products',
   getStoreCategories:
     '/offering/category/get-all-categories-and-sub-categories',
+  searchProductInStores: '/offering/product/search-product-and-get-stores',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

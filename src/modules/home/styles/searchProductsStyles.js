@@ -47,4 +47,21 @@ export const styles = EStyleSheet.create({
   headerContainer: {
     paddingVertical: '8vrem',
   },
+  commonSearchesContainer: {
+    paddingHorizontal: '20rem',
+    paddingTop: '16vrem',
+  },
+  commonSearchItem: {
+    fontSize: '14rem',
+    fontFamily: Fonts.medium,
+    letterSpacing: '0.28rem',
+    color: Colors.titleText,
+    marginBottom: '16vrem',
+  },
+  commonSearchHeading: {
+    marginBottom: '14vrem',
+  },
+  listLoaderContainer: {
+    marginTop: '20vrem',
+  },
 });

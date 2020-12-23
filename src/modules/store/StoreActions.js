@@ -28,7 +28,7 @@ export const setStoreDetails = (data) => ({
   data,
 });
 
-export const setProducts = (data, count) => ({
+export const addProducts = (data, count) => ({
   type: ADD_PRODUCTS,
   data,
   count,
