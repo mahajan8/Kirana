@@ -1,8 +1,9 @@
 import {
+  ADD_PRODUCTS,
+  CLEAR_PRODUCTS,
   SET_CATEGORIES,
   SET_CATEGORY_PRODUCTS,
   SET_FILTERS,
-  SET_PRODUCTS,
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
 } from './ActionTypes';
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
   categoryProducts: [],
   products: [],
   storeCategories: [],
+  totalProductCount: 0,
 };
 
 const StoreReducer = (state = INITIAL_STATE, action) => {
@@ -41,10 +43,16 @@ const StoreReducer = (state = INITIAL_STATE, action) => {
         ...state,
         storeDetails: action.data,
       };
-    case SET_PRODUCTS:
+    case ADD_PRODUCTS:
       return {
         ...state,
-        products: action.data,
+        products: [...state.products, ...action.data],
+        totalProductCount: action.count,
+      };
+    case CLEAR_PRODUCTS:
+      return {
+        ...state,
+        products: [],
       };
     case SET_CATEGORIES:
       return {

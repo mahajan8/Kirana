@@ -14,7 +14,9 @@ const List = (props) => {
   const [horizontalList, setHorizontalList] = useState([]);
 
   useEffect(() => {
-    setHorizontalList(list.length > 5 ? list.slice(0, 5) : list);
+    setHorizontalList(
+      list.length > 5 ? [...list.slice(0, 5), {viewAll: true}] : list,
+    );
   }, []);
   const renderHeader = () =>
     !noHeader && (
@@ -22,7 +24,7 @@ const List = (props) => {
         <Text style={styles.listLabel}>{label}</Text>
         <Text style={styles.viewMore} onPress={onMorePress && onMorePress}>
           {Strings.view}{' '}
-          {list && (list.length > 5 ? list.length - 5 + ' ' : null)}
+          {/* {list && (list.length > 5 ? list.length - 5 + ' ' : null)} */}
           {Strings.more}
         </Text>
       </View>
@@ -37,16 +39,23 @@ const List = (props) => {
       <View style={[styles.listContainer, !noShadow && commonStyles.shadow]}>
         {renderHeader()}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {horizontalList.map((item, index) => renderProduct(item, index))}
-          <View style={styles.productContainer}>
-            <Button
-              Style={styles.viewAllButton}
-              labelStyle={styles.viewAllLabel}
-              label={Strings.viewAll}
-              bordered
-              onPress={onMorePress && onMorePress}
-            />
-          </View>
+          {horizontalList.map((item, index) => {
+            if (item.viewAll) {
+              return (
+                <View style={styles.productContainer} key={`viewAll`}>
+                  <Button
+                    Style={styles.viewAllButton}
+                    labelStyle={styles.viewAllLabel}
+                    label={Strings.viewAll}
+                    bordered
+                    onPress={onMorePress && onMorePress}
+                  />
+                </View>
+              );
+            } else {
+              return renderProduct(item, index);
+            }
+          })}
         </ScrollView>
       </View>
     </View>

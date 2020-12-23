@@ -15,23 +15,22 @@ import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
-import {setProducts} from '../StoreActions';
+import {clearProducts} from '../StoreActions';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const ProductsList = (props) => {
   let {subCategoryName, subCategoryId} = props;
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const [totalProducts, setTotalProducts] = useState(0);
   const [filters, setFilters] = useState(defaultFilters);
 
-  const {products} = props.storeReducer;
+  const {products, totalProductCount, storeDetails} = props.storeReducer;
 
   useEffect(() => {
-    props.setProducts([]);
+    props.clearProducts();
     getProducts(0);
 
-    return () => props.setProducts([]);
+    return () => props.clearProducts();
   }, [filters]);
 
   const getProducts = (start) => {
@@ -42,7 +41,7 @@ const ProductsList = (props) => {
       conditions: [
         {
           key: 'SEARCH_BY_STORE_ID',
-          value: '5fdaf974b6a38a8eafa410b0',
+          value: storeDetails.id,
           context: null,
         },
         {
@@ -74,12 +73,7 @@ const ProductsList = (props) => {
       ];
       pars.filter = true;
     }
-    props.searchStoreProducts(pars, (data) => {
-      props.setProducts(
-        start === 0 ? data.results : [...products, ...data.results],
-      );
-      setTotalProducts(data.total_count);
-    });
+    props.searchStoreProducts(pars);
   };
 
   let FilterIcon =
@@ -131,7 +125,7 @@ const ProductsList = (props) => {
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
           onEndReached={() => {
-            if (!endReachCallable && products.length < totalProducts) {
+            if (!endReachCallable && products.length < totalProductCount) {
               getProducts(products.length);
               setEndReachCallable(true);
             }
@@ -154,7 +148,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   searchStoreProducts,
-  setProducts,
+  clearProducts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
