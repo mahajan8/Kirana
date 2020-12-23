@@ -62,6 +62,6 @@ export const styles = EStyleSheet.create({
     marginBottom: '14vrem',
   },
   listLoaderContainer: {
-    marginTop: '20vrem',
+    marginBottom: '20vrem',
   },
 });

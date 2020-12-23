@@ -56,6 +56,7 @@ const SearchStoreProducts = (props) => {
         }}
         searchValue={searchInput}
         inputRef={input}
+        onCrossPress={() => setSearchInput('')}
       />
       {searchInput.length > 2 ? (
         <FlatList
@@ -64,14 +65,10 @@ const SearchStoreProducts = (props) => {
             <StoreInfoTile
               store={item}
               onPress={() => {
-                if (searchInput) {
-                  Actions.searchProductResults({
-                    searchedText: searchInput,
-                    store: item,
-                  });
-                } else {
-                  console.log('andias');
-                }
+                Actions.storeProductsResults({
+                  searchedText: searchInput,
+                  store: item,
+                });
               }}
             />
           )}

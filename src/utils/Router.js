@@ -16,7 +16,7 @@ import StoreSubCategories from '../modules/store/components/StoreSubCategories';
 import ProductsList from '../modules/store/components/ProductsList';
 import ProductDetails from '../modules/store/components/ProductDetails';
 import SearchStoreProducts from '../modules/home/components/SearchStoreProducts';
-import SearchProductResults from '../modules/home/components/SearchProductResults';
+import StoreProductsResults from '../modules/home/components/StoreProductsResults';
 import ReferFriends from '../modules/navigation/components/ReferFriends';
 import Invites from '../modules/navigation/components/Invites';
 import CustomerSupport from '../modules/navigation/components/CustomerSupport';
@@ -46,7 +46,7 @@ const AppRouter = () => {
         <Scene key="productsList" component={ProductsList} />
         <Scene key="productDetails" component={ProductDetails} />
         <Scene key="searchStoreProducts" component={SearchStoreProducts} />
-        <Scene key="searchProductResults" component={SearchProductResults} />
+        <Scene key="storeProductsResults" component={StoreProductsResults} />
         <Scene key="referFriends" component={ReferFriends} />
         <Scene key="invites" component={Invites} />
         <Scene key="support" component={CustomerSupport} />

@@ -1,6 +1,13 @@
 /* eslint-disable eqeqeq */
 import React from 'react';
-import {View, Text, TouchableOpacity, TextInput, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+  Pressable,
+} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
@@ -11,6 +18,7 @@ import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../styles/commonStyles';
 import Location from '../../../assets/images/green_location.svg';
 import DownArrow from '../../../assets/images/header_down_arrow.svg';
+import Cross from '../../../assets/images/gray_cross.svg';
 import CartCounter from './CartCounter';
 import {Fonts} from '../../../utils/values/Fonts';
 
@@ -32,6 +40,7 @@ const CartHeader = (props) => {
     location,
     selectLocation,
     drawer,
+    onCrossPress,
   } = props;
 
   return (
@@ -85,6 +94,9 @@ const CartHeader = (props) => {
             onChangeText={onSearchChange}
             ref={inputRef}
           />
+          <Pressable onPress={onCrossPress && onCrossPress}>
+            <Cross />
+          </Pressable>
         </View>
       ) : (
         <TouchableOpacity
@@ -148,7 +160,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
-    paddingLeft: '16rem',
+    paddingHorizontal: '16rem',
     borderRadius: '8rem',
     height: '40vrem',
     width: '230rem',

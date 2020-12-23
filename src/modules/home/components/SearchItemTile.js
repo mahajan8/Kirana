@@ -5,7 +5,7 @@ import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 import {Strings} from '../../../utils/values/Strings';
-import {unitsList} from '../../../utils/values/Values';
+import {unitsShortName} from '../../../utils/values/Values';
 
 const SearchItemTile = (props) => {
   let {
@@ -32,10 +32,10 @@ const SearchItemTile = (props) => {
         />
       </View>
 
-      <View>
+      <View style={styles.productDetialsContainer}>
         <Text style={styles.productName}>{product_name}</Text>
         <Text style={styles.productWeight}>
-          {product_quantity} {getKeyByValue(unitsList, product_packaging)}
+          {product_quantity} {getKeyByValue(unitsShortName, product_packaging)}
         </Text>
       </View>
 
@@ -71,7 +71,7 @@ const SearchItemTile = (props) => {
 const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   productImageContainer: {
     height: '65rem',
@@ -92,6 +92,7 @@ const styles = EStyleSheet.create({
     color: Colors.titleText,
     lineHeight: '18rem',
     width: '160rem',
+    marginBottom: '3rem',
   },
   productWeight: {
     fontSize: '12rem',
@@ -102,6 +103,7 @@ const styles = EStyleSheet.create({
   rightContainer: {
     flex: 1,
     alignItems: 'flex-end',
+    paddingTop: '3rem',
   },
   price: {
     fontSize: '14rem',
@@ -131,6 +133,9 @@ const styles = EStyleSheet.create({
   },
   itemContainer: {
     marginBottom: '24vrem',
+  },
+  productDetialsContainer: {
+    paddingTop: '3rem',
   },
 });
 

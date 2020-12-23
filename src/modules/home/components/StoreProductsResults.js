@@ -13,24 +13,7 @@ import {clearProducts} from '../../store/StoreActions';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../../store/Api';
 import Loader from '../../commons/components/Loader';
-
-let items = [
-  {
-    name: 'Nandini Good Life Cow Milk (pouch)',
-    weight: '1 L',
-    price: 110,
-  },
-  {
-    name: 'Mother Dairy Cow Milk    ',
-    weight: '1 L',
-    price: 110,
-  },
-  {
-    name: 'Amul Gold Milk (Tetra Pak)',
-    weight: '1 L',
-    price: 110,
-  },
-];
+import StoreProductPlaceholder from './StoreProductPlaceholder';
 
 const SearchProductResults = (props) => {
   let {searchedText, store} = props;
@@ -91,16 +74,20 @@ const SearchProductResults = (props) => {
           </View>
         }
         ListEmptyComponent={
-          <View style={styles.emptyListContainer}>
-            {/* TODO: Change Image  */}
-            <NoAddressImage
-              width={EStyleSheet.value('270rem')}
-              height={EStyleSheet.value('123rem')}
-            />
-            <Text style={styles.noSearchResults}>
-              {Strings.noSearchResults}
-            </Text>
-          </View>
+          props.loading ? (
+            <StoreProductPlaceholder count={4} />
+          ) : (
+            <View style={styles.emptyListContainer}>
+              {/* TODO: Change Image  */}
+              <NoAddressImage
+                width={EStyleSheet.value('270rem')}
+                height={EStyleSheet.value('123rem')}
+              />
+              <Text style={styles.noSearchResults}>
+                {Strings.noSearchResults}
+              </Text>
+            </View>
+          )
         }
         contentContainerStyle={styles.list}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
