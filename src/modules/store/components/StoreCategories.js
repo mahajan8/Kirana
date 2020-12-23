@@ -67,7 +67,6 @@ const StoreCategories = (props) => {
                   height={EStyleSheet.value('16rem')}
                 />
               </TouchableOpacity>
-
               <View>
                 <Text
                   style={

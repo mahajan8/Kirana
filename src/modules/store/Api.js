@@ -4,7 +4,7 @@ import {getFormBody} from '../../utils/utility/Utils';
 import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {Actions} from 'react-native-router-flux';
-import {setFilters} from './StoreActions';
+import {setFilters, setSubcategoryProducts} from './StoreActions';
 
 export const getStoreDetails = (pars, callback) => {
   return (dispatch) => {
@@ -28,7 +28,7 @@ export const getStoreDetails = (pars, callback) => {
   };
 };
 
-export const getProductsByCategory = (pars, callback) => {
+export const getProductsByCategory = (pars) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
@@ -38,7 +38,8 @@ export const getProductsByCategory = (pars, callback) => {
         dispatch(setLoading(false));
         const success = !res.data.error;
         if (success) {
-          callback(res.data.data);
+          const {store_products} = res.data.data;
+          dispatch(setSubcategoryProducts(store_products));
         } else {
           alert(res.data.message);
         }

@@ -19,7 +19,7 @@ import Loader from '../../commons/components/Loader';
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const ProductsList = (props) => {
-  let {subCategoryName} = props;
+  let {subCategoryName, subCategoryId} = props;
 
   const [storeProducts, setStoreProducts] = useState([]);
   const [endReachCallable, setEndReachCallable] = useState(true);
@@ -44,7 +44,7 @@ const ProductsList = (props) => {
         },
         {
           key: 'SEARCH_BY_SUB_CATEGORY_IN',
-          value: ['5fca768aa941d902e71e310c'],
+          value: [subCategoryId],
           context: null,
         },
       ],
@@ -72,7 +72,6 @@ const ProductsList = (props) => {
       pars.filter = true;
     }
     props.getStoreProducts(pars, (data) => {
-      console.log(data);
       setStoreProducts(
         start === 0 ? data.results : [...storeProducts, ...data.results],
       );
