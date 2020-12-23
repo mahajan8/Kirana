@@ -43,17 +43,18 @@ const SearchStoreProducts = (props) => {
     }
     props.searchProductInStores(pars);
   };
-  // let searchProducts = debounce(test, 1000);
 
   const onChangeSearchText = (query) => {
-    clearTimeout(debounceTimer.current);
-    debounceTimer.current = setTimeout(() => {
-      if (query) {
-        search(0, query);
-      } else {
-        props.clearSearchedStores();
-      }
-    }, 500);
+    if (query.length > 2) {
+      clearTimeout(debounceTimer.current);
+      debounceTimer.current = setTimeout(() => {
+        if (query) {
+          search(0, query);
+        } else {
+          props.clearSearchedStores();
+        }
+      }, 500);
+    }
     setSearchInput(query);
   };
 
