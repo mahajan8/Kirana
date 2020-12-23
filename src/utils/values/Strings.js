@@ -181,4 +181,5 @@ export const Strings = {
   storeClosed: 'Store Closed',
   orderNowGetAt: 'Order Now, Get it at 11 am!',
   viewAll: 'View All',
+  commonSearches: 'Common Searches',
 };

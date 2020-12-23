@@ -1,30 +1,47 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 import {Strings} from '../../../utils/values/Strings';
+import {unitsList} from '../../../utils/values/Values';
 
 const SearchItemTile = (props) => {
-  let {name, price, weight} = props.item;
+  let {
+    product_name,
+    product_packaging,
+    product_quantity,
+    store_price,
+    product_images,
+    product_brand,
+  } = props.item;
 
   const [quantity, setQuantity] = useState(0);
 
   return (
     <View style={[styles.rowContainer, styles.itemContainer]}>
       <View style={styles.productImageContainer}>
-        <Image style={styles.productImage} source={{uri: getMediaUrl(null)}} />
+        <Image
+          style={styles.productImage}
+          source={{
+            uri: getMediaUrl(
+              product_images.length ? product_images[0].path : null,
+            ),
+          }}
+        />
       </View>
 
       <View>
-        <Text style={styles.productName}>{name}</Text>
-        <Text style={styles.productWeight}>{weight}</Text>
+        <Text style={styles.productName}>{product_name}</Text>
+        <Text style={styles.productWeight}>
+          {product_quantity} {getKeyByValue(unitsList, product_packaging)}
+        </Text>
       </View>
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {price}
+          {Strings.currency} {store_price}
         </Text>
 
         <View style={styles.rowContainer}>

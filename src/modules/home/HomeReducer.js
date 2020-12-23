@@ -6,6 +6,8 @@ import {
   SET_USER_DETAILS,
   APPEND_STORES,
   CLEAR_STORES,
+  APPEND_SEARCHED_STORES,
+  CLEAR_SEARCHED_STORES,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -16,6 +18,8 @@ const INITIAL_STATE = {
   cartQuantity: null,
   stores: [],
   storeCount: null,
+  searchedStores: [],
+  searchedStoresCount: null,
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -56,6 +60,18 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
         ...state,
         stores: [],
         storeCount: null,
+      };
+    case APPEND_SEARCHED_STORES:
+      return {
+        ...state,
+        searchedStores: [...state.searchedStores, ...action.stores],
+        searchedStoresCount: action.storeCount,
+      };
+    case CLEAR_SEARCHED_STORES:
+      return {
+        ...state,
+        searchedStores: [],
+        searchedStoresCount: null,
       };
     default:
       return state;

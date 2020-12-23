@@ -7,6 +7,8 @@ import {
   setUserDetails,
   appendStores,
   clearStores,
+  appendSearchedStores,
+  clearSearchedStores,
 } from './HomeActions';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
@@ -41,6 +43,23 @@ export const getStores = (pars) => {
           dispatch(clearStores());
         }
         dispatch(appendStores(store_list, store_count));
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const searchProductInStores = (pars) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.searchProductInStores, formBody).then((res) => {
+      const success = !res.data.error;
+      console.log(res.data.data);
+      if (success) {
+        const {store_list, store_count} = res.data.data;
+        dispatch(appendSearchedStores(store_list, store_count));
       } else {
         alert(res.data.message);
       }

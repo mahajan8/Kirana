@@ -3,6 +3,8 @@ import {
   SET_USER_DETAILS,
   APPEND_STORES,
   CLEAR_STORES,
+  APPEND_SEARCHED_STORES,
+  CLEAR_SEARCHED_STORES,
 } from './ActionTypes';
 
 export const setCartQuantity = (quantity) => ({
@@ -23,4 +25,14 @@ export const appendStores = (stores, storeCount) => ({
 
 export const clearStores = () => ({
   type: CLEAR_STORES,
+});
+
+export const appendSearchedStores = (stores, storeCount) => ({
+  type: APPEND_SEARCHED_STORES,
+  stores,
+  storeCount,
+});
+
+export const clearSearchedStores = () => ({
+  type: CLEAR_SEARCHED_STORES,
 });

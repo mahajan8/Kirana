@@ -14,12 +14,13 @@ import SearchLocationModal from './SearchLocationModal';
 import {getStores} from '../Api';
 import {connect} from 'react-redux';
 import {Colors} from '../../../utils/values/Colors';
+import {setLocation} from '../../onboarding/OnboardingActions';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
-  const [location, setLocation] = useState(null);
+  // const [location, setLocation] = useState(null);
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const {stores, storeCount} = props.homeReducer;
+  const {stores, storeCount, location} = props.homeReducer;
 
   useEffect(() => {
     if (location) {
@@ -83,13 +84,13 @@ const Home = (props) => {
       />
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
-        setLocation={setLocation}
+        setLocation={props.setLocation}
         selectedLocation={location}
       />
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}
-        setLocation={setLocation}
+        setLocation={props.setLocation}
       />
     </SafeArea>
   );
@@ -100,6 +101,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getStores,
+  setLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

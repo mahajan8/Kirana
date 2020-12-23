@@ -74,7 +74,7 @@ const ProductBox = (props) => {
               />
             </TouchableOpacity>
             <Text style={styles.countText}>
-              {!product_brand
+              {product_brand
                 ? count
                 : getProductQuantity(
                     count * product_quantity,
