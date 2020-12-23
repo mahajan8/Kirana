@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Pressable,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
@@ -94,13 +95,15 @@ const StoreCategories = (props) => {
               style={isLoaded ? styles.image : styles.profilePicPlaceHolder}
             />
 
-            <View style={[styles.rowContainer, styles.searchView]}>
+            <Pressable
+              style={[styles.rowContainer, styles.searchView]}
+              onPress={Actions.searchProducts}>
               <Search
                 width={EStyleSheet.value('15rem')}
                 height={EStyleSheet.value('15rem')}
               />
               <Text style={styles.searchText}>{Strings.searchProduct}</Text>
-            </View>
+            </Pressable>
           </View>
         </ImageBackground>
         <FlatList
