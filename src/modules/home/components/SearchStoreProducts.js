@@ -2,13 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, TextInput, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
-import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
 import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/searchProductsStyles';
-import Input from '../../commons/components/Input';
-import Search from '../../../assets/images/search.svg';
 import StoreInfoTile from './StoreInfoTile';
 import NoResults from '../../../assets/images/search_not_found.svg';
 
