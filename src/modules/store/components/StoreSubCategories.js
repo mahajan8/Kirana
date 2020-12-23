@@ -16,10 +16,10 @@ import ListPlaceHolder from './ListPlaceHolder';
 
 const StoreSubCategories = (props) => {
   let {categoryName} = props;
-  let {subcategoryProducts} = props.storeState;
+  let {subcategoryProducts, storeDetails} = props.storeState;
   useEffect(() => {
     let params = {
-      store_id: props.storeId,
+      store_id: storeDetails.id,
       category_id: props.categoryId,
     };
     props.setSubcategoryProducts([]);

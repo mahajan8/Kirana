@@ -3,11 +3,12 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
-import {Actions} from 'react-native-router-flux';
 import {
+  clearProducts,
   setCategories,
   setCategoryProducts,
   setFilters,
+  setProducts,
   setStoreDetails,
   setSubcategoryProducts,
 } from './StoreActions';
@@ -65,6 +66,11 @@ export const searchStoreProducts = (pars, callback) => {
         if (!filter) {
           dispatch(setFilters(res.data.data.filters));
         }
+        if (pars.start === 0) {
+          dispatch(clearProducts());
+        }
+        let {total_count, results} = res.data.data;
+        dispatch(setProducts(results, total_count));
         callback(res.data.data);
       } else {
         alert(res.data.message);

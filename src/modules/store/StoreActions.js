@@ -1,8 +1,9 @@
 import {
+  ADD_PRODUCTS,
+  CLEAR_PRODUCTS,
   SET_CATEGORIES,
   SET_CATEGORY_PRODUCTS,
   SET_FILTERS,
-  SET_PRODUCTS,
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
 } from './ActionTypes';
@@ -27,9 +28,14 @@ export const setStoreDetails = (data) => ({
   data,
 });
 
-export const setProducts = (data) => ({
-  type: SET_PRODUCTS,
+export const setProducts = (data, count) => ({
+  type: ADD_PRODUCTS,
   data,
+  count,
+});
+
+export const clearProducts = () => ({
+  type: CLEAR_PRODUCTS,
 });
 
 export const setCategories = (data) => ({

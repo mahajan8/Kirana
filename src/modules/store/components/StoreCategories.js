@@ -113,7 +113,6 @@ const StoreCategories = (props) => {
                 Actions.storeSubCategories({
                   categoryName: item.name,
                   categoryId: item.id,
-                  storeId: props.storeId,
                 })
               }
             />
