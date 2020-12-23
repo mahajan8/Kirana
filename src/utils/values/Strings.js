@@ -182,4 +182,5 @@ export const Strings = {
   orderNowGetAt: 'Order Now, Get it at 11 am!',
   viewAll: 'View All',
   commonSearches: 'Common Searches',
+  viewStore: 'View Entire Store',
 };

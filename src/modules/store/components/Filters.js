@@ -24,14 +24,23 @@ let filtersList = [
 let sortOptions = ['Price: Lowest First', 'Price: Highest First'];
 
 const Filters = (props) => {
-  const [filterIndex, setFilterIndex] = useState(0);
+  let {filterBrands, filterCategories} = props.storeReducer;
+
+  const [filterIndex, setFilterIndex] = useState(
+    filterBrands.length < 2 ? (filterCategories.length < 2 ? 2 : 1) : 0,
+  );
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSort, setSelectedSort] = useState(null);
 
-  let {filterBrands, filterCategories} = props.storeReducer;
-
   useEffect(() => {
+    if (filterBrands.length < 2) {
+      if (filterCategories.length < 2) {
+        setFilterIndex(2);
+      } else {
+        setFilterIndex(1);
+      }
+    }
     let {brands, categories, price_sort} = props.filters;
     let selected_brands = brands.map((item) => {
       let i = filterBrands.findIndex((obj) => obj === item);
@@ -143,7 +152,10 @@ const Filters = (props) => {
       <View style={styles.container}>
         <View style={styles.filterContainer}>
           {filtersList.map((item, index) => {
-            if (index === 1 && filterCategories.length < 2) {
+            if (
+              (index === 0 && filterBrands.length < 2) ||
+              (index === 1 && filterCategories.length < 2)
+            ) {
               return null;
             } else {
               return (

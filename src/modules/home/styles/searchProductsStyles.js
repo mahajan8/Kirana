@@ -64,4 +64,12 @@ export const styles = EStyleSheet.create({
   listLoaderContainer: {
     marginBottom: '20vrem',
   },
+  buttonContainer: {
+    paddingVertical: '8vrem',
+    backgroundColor: Colors.white,
+    shadowOffset: {width: 0, height: -3},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 5,
+  },
 });

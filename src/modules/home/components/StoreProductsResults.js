@@ -16,6 +16,7 @@ import StoreProductPlaceholder from './StoreProductPlaceholder';
 import {Actions} from 'react-native-router-flux';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Filter from '../../../assets/images/filter.svg';
+import Button from '../../commons/components/Button';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -116,12 +117,14 @@ const SearchProductResults = (props) => {
         )}
         keyExtractor={(item, index) => `store${index}`}
         ListHeaderComponent={
-          <View style={styles.container}>
-            <Text style={styles.searchResultsHeading}>
-              {Strings.found} {products.length} {Strings.itemsMatching}{' '}
-              {searchedText}
-            </Text>
-          </View>
+          totalProductCount && (
+            <View style={styles.container}>
+              <Text style={styles.searchResultsHeading}>
+                {Strings.found} {totalProductCount} {Strings.itemsMatching}{' '}
+                {searchedText}
+              </Text>
+            </View>
+          )
         }
         ListEmptyComponent={
           props.loading ? (
@@ -154,6 +157,12 @@ const SearchProductResults = (props) => {
           </View>
         }
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          label={Strings.viewStore}
+          onPress={() => Actions.store({storeId: store.id})}
+        />
+      </View>
     </SafeArea>
   );
 };

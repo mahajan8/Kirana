@@ -83,11 +83,11 @@ const SearchStoreProducts = (props) => {
           )}
           keyExtractor={(item, index) => `store${index}`}
           ListHeaderComponent={
-            searchedStores.length && (
+            searchedStoresCount && (
               <View style={styles.container}>
                 <Text style={styles.searchResultsHeading}>
-                  {Strings.found} {searchedStores.length}{' '}
-                  {Strings.storesMatching} {searchInput}
+                  {Strings.found} {searchedStoresCount} {Strings.storesMatching}{' '}
+                  {searchInput}
                 </Text>
               </View>
             )

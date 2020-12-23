@@ -80,7 +80,7 @@ const CartHeader = (props) => {
       </TouchableOpacity>
 
       {titleComp ? (
-        titleComp
+        <View style={styles.titleContainer}>{titleComp}</View>
       ) : search ? (
         <View style={styles.searchContainer}>
           <Search
@@ -114,7 +114,8 @@ const CartHeader = (props) => {
         </TouchableOpacity>
       )}
       <View style={styles.headerRightContainer}>
-        {headerRight ? headerRight : <CartCounter />}
+        {headerRight && headerRight}
+        <CartCounter />
       </View>
     </View>
   );
@@ -148,13 +149,14 @@ const styles = EStyleSheet.create({
     marginRight: '10rem',
   },
   headerRightContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
+    // flex: 1,
+    // justifyContent: 'flex-end',
     flexDirection: 'row',
     alignItems: 'center',
   },
   locationContainer: {
     marginLeft: '4rem',
+    flex: 1,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -163,7 +165,8 @@ const styles = EStyleSheet.create({
     paddingHorizontal: '16rem',
     borderRadius: '8rem',
     height: '40vrem',
-    width: '230rem',
+    flex: 1,
+    marginRight: '10rem',
   },
   textInput: {
     fontSize: '12rem',
@@ -185,6 +188,9 @@ const styles = EStyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,
+  },
+  titleContainer: {
+    flex: 1,
   },
 });
 
