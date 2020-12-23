@@ -21,6 +21,7 @@ const SearchStoreProducts = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
   const {location, searchedStores, searchedStoresCount} = props.homeReducer;
   let input = useRef(null);
+  let debounceTimer = useRef(null);
 
   useEffect(() => {
     input.current.focus();
@@ -43,17 +44,24 @@ const SearchStoreProducts = (props) => {
     props.searchProductInStores(pars);
   };
   // let searchProducts = debounce(test, 1000);
+
+  const onChangeSearchText = (query) => {
+    clearTimeout(debounceTimer.current);
+    debounceTimer.current = setTimeout(() => {
+      if (query) {
+        search(0, query);
+      } else {
+        props.clearSearchedStores();
+      }
+    }, 500);
+    setSearchInput(query);
+  };
+
   return (
     <SafeArea>
       <CartHeader
         search
-        onSearchChange={(text) => {
-          setSearchInput(text);
-          // searchProducts(text);
-          if (text.length > 2) {
-            search(0, text);
-          }
-        }}
+        onSearchChange={onChangeSearchText}
         searchValue={searchInput}
         inputRef={input}
         onCrossPress={() => setSearchInput('')}
