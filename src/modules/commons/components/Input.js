@@ -32,7 +32,7 @@ const Input = (props) => {
   useEffect(() => {
     Animated.timing(anim, {
       toValue: focused ? 1 : 0,
-      duration: 300,
+      duration: 50,
       useNativeDriver: false,
     }).start();
   }, [focused]);

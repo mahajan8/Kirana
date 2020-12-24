@@ -15,7 +15,6 @@ import {styles} from '../styles/otpStyles';
 import {connect} from 'react-redux';
 import Otp from '../../commons/components/Otp';
 import {verifyOtp, sendOtp} from '../Api';
-import {Actions} from 'react-native-router-flux';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import Loader from '../../commons/components/Loader';
 import {Colors} from '../../../utils/values/Colors';
@@ -74,7 +73,11 @@ const VerifyOtp = (props) => {
             noShadow
           />
 
-          <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
+          <Otp
+            ref={otp}
+            isComplete={(complete) => setDisabled(!complete)}
+            verify={verify}
+          />
 
           {error && (
             <View style={styles.rowContainer}>

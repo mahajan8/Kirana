@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View, TextInput, Platform} from 'react-native';
+import {View, TextInput, Platform, Keyboard} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
+import RNOtpVerify from 'react-native-otp-verify';
 
 export default class Otp extends Component {
   constructor(props) {
@@ -13,6 +14,12 @@ export default class Otp extends Component {
       error: false,
       focus: undefined,
     };
+  }
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      this.getHash();
+      this.startListeningForOtp();
+    }
   }
 
   isComplete() {
@@ -35,6 +42,37 @@ export default class Otp extends Component {
     return otpString;
   }
 
+  otpHandler = (message) => {
+    const otpCode = /(\d{4})/g.exec(message)[1];
+    if (otpCode) {
+      let {otp} = this.state;
+      otp[0] = otpCode.charAt(0);
+      otp[1] = otpCode.charAt(1);
+      otp[2] = otpCode.charAt(2);
+      otp[3] = otpCode.charAt(3);
+      this.setState(
+        {
+          otp,
+        },
+        () => {
+          this.props.isComplete(true);
+          this.props.verify();
+        },
+      );
+    }
+  };
+
+  getHash = () => RNOtpVerify.getHash().then(console.log).catch(console.log);
+
+  startListeningForOtp = () =>
+    RNOtpVerify.getOtp()
+      .then((p) => RNOtpVerify.addListener(this.otpHandler))
+      .catch((p) => console.log(p));
+
+  componentWillUnmount() {
+    Keyboard.dismiss();
+    RNOtpVerify.removeListener();
+  }
   submitOTP() {
     if (this.isComplete()) {
       let otp = this.getOtp(this.state.otp);
@@ -83,6 +121,7 @@ export default class Otp extends Component {
               keyboardType="number-pad"
               value={item}
               placeholder="0"
+              multiline={Platform.OS === 'android'}
               placeholderTextColor={Colors.grayText}
               underlineColorAndroid="transparent"
               selectionColor={Colors.themeGreen}

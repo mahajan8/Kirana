@@ -149,7 +149,7 @@ export const Strings = {
   storesMatching: 'stores matching',
   itemsMatching: 'items matching',
   noSearchResults: 'Sorry! We can’t find any product matching your search.',
-  locationUnavaible: 'Location Unavaible',
+  locationUnavaible: 'Location Unavailable',
   deleteAddress: 'Delete Address',
   confirmDeleteAddress: 'Are you sure you want to the address',
   confirmDeleteAddress2: 'from your address list?',
