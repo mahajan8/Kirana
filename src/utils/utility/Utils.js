@@ -87,53 +87,8 @@ export const getMediaUrl = (path) => {
   return url;
 };
 
-export const getTopReactions = (reactions_count) => {
-  let reactions = {...reactions_count};
-  let sortable = [];
-
-  delete reactions.created_on;
-  delete reactions.total_count;
-  delete reactions.top_reactions;
-
-  for (let key in reactions) {
-    if (reactions.hasOwnProperty(key)) {
-      if (reactions[key] > 0) {
-        sortable.push([key, reactions[key]]);
-      }
-    }
-  }
-  sortable.sort(function (a, b) {
-    return a[1] - b[1];
-  });
-
-  let sortArray = Object.values(sortable);
-  reactions = [];
-  for (let i = sortArray.length; i > 0; i--) {
-    reactions.push(sortArray[i - 1][0]);
-  }
-  //console.log('getTopReactions', reactions);
-  return reactions.slice(0, 3);
-};
-
 export const isEmptyObj = (obj) => {
   return Object.keys(obj).length === 0;
-};
-
-export const getPollResults = (options, poll_results) => {
-  let total_vote = poll_results.total_vote;
-  let poll_result = deepClone(poll_results);
-  let results = [];
-  delete poll_result.total_vote;
-  delete poll_result.created_on;
-  delete poll_result.results;
-  for (let item of options) {
-    results.push(
-      poll_result[item]
-        ? `${Number(((100 * poll_result[item]) / total_vote).toFixed(0))}%`
-        : '0%',
-    );
-  }
-  return results;
 };
 
 export const getAttachmentPublicUrlPath = (module, sub_module, attachment) => {
@@ -260,15 +215,4 @@ export const logout = () => {
   dispatch(logoutUser());
   removeAuthToken();
   Actions.reset('introduction');
-};
-
-export const debounce = (fn, delay) => {
-  let timer = null;
-  return function (...args) {
-    const context = this;
-    timer && clearTimeout(timer);
-    timer = setTimeout(() => {
-      fn.apply(context, args);
-    }, delay);
-  };
 };

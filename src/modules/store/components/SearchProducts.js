@@ -91,15 +91,17 @@ const SearchProducts = (props) => {
   };
 
   const onChangeSearchText = (query) => {
-    clearTimeout(debounceTimer.current);
-    debounceTimer.current = setTimeout(() => {
-      if (query) {
-        searchProducts(query);
-      } else {
-        setFilters(defaultFilters);
-        props.clearProducts();
-      }
-    }, 500);
+    if (query.length > 2) {
+      clearTimeout(debounceTimer.current);
+      debounceTimer.current = setTimeout(() => {
+        if (query) {
+          searchProducts(query);
+        } else {
+          setFilters(defaultFilters);
+          props.clearProducts();
+        }
+      }, 500);
+    }
     setSearchInput(query);
   };
   let FilterIcon =
