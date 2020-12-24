@@ -109,4 +109,13 @@ export const styles = EStyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
   },
+  seperator: {
+    height: '8vrem',
+    backgroundColor: '#f7f7f7',
+  },
+  horizontalListContainer: {
+    borderBottomWidth: '1rem',
+    borderColor: Colors.listBorderGray,
+    paddingHorizontal: '10rem',
+  },
 });

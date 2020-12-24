@@ -20,12 +20,14 @@ export const styles = EStyleSheet.create({
     fontSize: '16rem',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
+    marginBottom: '3rem',
   },
   name: {
     fontSize: '14rem',
     fontFamily: Fonts.regular,
     letterSpacing: '-0.22rem',
     color: Colors.titleText,
+    marginBottom: '2rem',
   },
   weight: {
     fontSize: '12rem',
@@ -74,5 +76,9 @@ export const styles = EStyleSheet.create({
     paddingVertical: '8vrem',
     flex: 0,
     marginHorizontal: 0,
+    shadowOffset: {width: 0, height: -3},
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 5,
   },
 });

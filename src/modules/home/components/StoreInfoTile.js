@@ -10,7 +10,7 @@ import {Strings} from '../../../utils/values/Strings';
 import {Fonts} from '../../../utils/values/Fonts';
 
 const StoreInfoTile = (props) => {
-  let {name, location, rating, distance} = props.store;
+  let {name, location, rating, distance_in_kms} = props.store;
   let {onPress, closed} = props;
 
   return (
@@ -34,7 +34,7 @@ const StoreInfoTile = (props) => {
               <View style={styles.seperator} />
             </View>
           )}
-          <Text style={styles.details}>{distance} km</Text>
+          <Text style={styles.details}>{distance_in_kms} km</Text>
           {closed && (
             <View style={styles.rowContainer}>
               <View style={[styles.storeClosedContainer, styles.rowContainer]}>

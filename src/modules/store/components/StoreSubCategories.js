@@ -74,26 +74,29 @@ const StoreSubCategories = (props) => {
         )}
         keyExtractor={(item, index) => `subCategoryProducts${index}`}
         ListHeaderComponent={() => (
-          <FlatList
-            data={getSubCategoryList()}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            renderItem={({item, index}) => (
-              <Pressable
-                style={styles.bubble}
-                key={`bubble${item.name}`}
-                onPress={() =>
-                  Actions.productsList({
-                    subCategoryName: item.name,
-                    subCategoryId: item.id,
-                  })
-                }>
-                <Text style={styles.bubbleLabel}>{item.name}</Text>
-              </Pressable>
-            )}
-            contentContainerStyle={{marginHorizontal: 10}}
-            keyExtractor={(item, index) => `bubbles${index}`}
-          />
+          <View>
+            <FlatList
+              data={getSubCategoryList()}
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              renderItem={({item, index}) => (
+                <Pressable
+                  style={styles.bubble}
+                  key={`bubble${item.name}`}
+                  onPress={() =>
+                    Actions.productsList({
+                      subCategoryName: item.name,
+                      subCategoryId: item.id,
+                    })
+                  }>
+                  <Text style={styles.bubbleLabel}>{item.name}</Text>
+                </Pressable>
+              )}
+              contentContainerStyle={styles.horizontalListContainer}
+              keyExtractor={(item, index) => `bubbles${index}`}
+            />
+            <View style={styles.seperator} />
+          </View>
         )}
       />
     </SafeArea>

@@ -29,7 +29,7 @@ const StoreCategories = (props) => {
     <SafeArea>
       <FlatList
         data={categoryProducts}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <List
             label={item.name}
             list={item.products}
@@ -39,6 +39,7 @@ const StoreCategories = (props) => {
                 categoryId: item.id,
               })
             }
+            hideBorderTop={index === 0 ? true : false}
           />
         )}
         keyExtractor={(item, index) => `store${index}`}

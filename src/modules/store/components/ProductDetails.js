@@ -44,9 +44,9 @@ const ProductDetails = (props) => {
       </View>
       <View
         style={[
+          commonStyles.shadow,
           styles.counterContainer,
           styles.buttonsContainer,
-          commonStyles.shadow,
         ]}>
         <View style={styles.counterContainer}>
           <Pressable
@@ -54,7 +54,7 @@ const ProductDetails = (props) => {
             onPress={() => setCount(count > 0 ? count - 1 : count)}>
             <Text style={styles.counterText}>-</Text>
           </Pressable>
-          <Text style={styles.countText}>{count} kg</Text>
+          <Text style={styles.countText}>{count}</Text>
           <Pressable style={styles.counter} onPress={() => setCount(count + 1)}>
             <Text style={styles.counterText}>+</Text>
           </Pressable>

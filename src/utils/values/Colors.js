@@ -13,4 +13,5 @@ export const Colors = {
   white: '#FFF',
   lightStatusBar: '#fafafa',
   placeHolder: '#ececec',
+  listBorderGray: '#e3e3e3',
 };

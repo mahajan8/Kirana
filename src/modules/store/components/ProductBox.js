@@ -110,10 +110,10 @@ const styles = EStyleSheet.create({
     alignSelf: 'center',
   },
   container: {
-    marginTop: '12vrem',
+    marginTop: '15vrem',
     marginRight: '30rem',
     width: '110rem',
-    height: '220vrem',
+    height: '200vrem',
   },
   verticalContainer: {
     width: '150rem',
@@ -167,7 +167,7 @@ const styles = EStyleSheet.create({
     letterSpacing: '-0.2rem',
   },
   verticalButton: {
-    marginBottom: '15rem',
+    // marginBottom: '15rem',
   },
   bottomContainer: {
     flex: 1,

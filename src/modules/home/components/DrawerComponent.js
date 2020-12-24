@@ -12,6 +12,7 @@ import Support from '../../../assets/images/support.svg';
 import Terms from '../../../assets/images/terms.svg';
 import Privacy from '../../../assets/images/privacy.svg';
 import FreeDelivery from '../../../assets/images/get_free_delivery.svg';
+import Logout from '../../../assets/images/logout.svg';
 import RightArrow from '../../../assets/images/right_arrow.svg';
 import {logout} from '../../../utils/utility/Utils';
 import SafeArea from '../../commons/components/SafeArea';
@@ -25,6 +26,7 @@ let options = [
   {icon: Support, label: Strings.support},
   {icon: Terms, label: Strings.termsConditions},
   {icon: Privacy, label: Strings.privacyPolicy},
+  {icon: Logout, label: Strings.logout},
 ];
 
 const actions = (index) => {
@@ -44,7 +46,7 @@ const actions = (index) => {
     case 5:
       console.log(Actions.state);
       break;
-    case 6:
+    case 7:
       logout();
       break;
     default:
@@ -55,11 +57,7 @@ const actions = (index) => {
 const renderOptions = (Icon, label, index) => {
   return (
     <Pressable style={styles.optionsRow} onPress={() => actions(index)}>
-      <Icon
-        style={{marginRight: EStyleSheet.value('20rem')}}
-        width={EStyleSheet.value('24rem')}
-        height={EStyleSheet.value('24rem')}
-      />
+      <Icon style={{marginRight: EStyleSheet.value('20rem')}} />
       <Text style={styles.optionLabel}>{label}</Text>
     </Pressable>
   );
@@ -92,7 +90,9 @@ const DrawerComponent = () => {
       </View>
       {options.map((item, index) => (
         <View key={`$option${item.label}`}>
-          {(index === 3 || index === 5) && <View style={styles.seperator} />}
+          {(index === 3 || index === 5 || index === 7) && (
+            <View style={styles.seperator} />
+          )}
           {renderOptions(item.icon, item.label, index)}
         </View>
       ))}

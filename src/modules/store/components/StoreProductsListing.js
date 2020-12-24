@@ -4,13 +4,12 @@ import {View, Text, ScrollView} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import ProductBox from './ProductBox';
-import {commonStyles} from '../../commons/styles/commonStyles';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 import Button from '../../commons/components/Button';
 
 const List = (props) => {
-  let {list, label, onMorePress, noShadow, noHeader, onPress, id} = props;
+  let {list, label, onMorePress, noHeader, onPress, hideBorderTop} = props;
   const [horizontalList, setHorizontalList] = useState([]);
 
   useEffect(() => {
@@ -36,7 +35,8 @@ const List = (props) => {
 
   return (
     <View>
-      <View style={[styles.listContainer, !noShadow && commonStyles.shadow]}>
+      <View
+        style={[styles.listContainer, hideBorderTop && {borderTopWidth: 0}]}>
         {renderHeader()}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {horizontalList.map((item, index) => {
@@ -58,6 +58,7 @@ const List = (props) => {
           })}
         </ScrollView>
       </View>
+      <View style={styles.seperator} />
     </View>
   );
 };
@@ -84,7 +85,9 @@ const styles = EStyleSheet.create({
     backgroundColor: Colors.white,
     paddingVertical: '15vrem',
     paddingLeft: '16rem',
-    marginBottom: '8vrem',
+    borderBottomWidth: '1rem',
+    borderColor: Colors.listBorderGray,
+    borderTopWidth: '1rem',
   },
   productContainer: {
     marginTop: '12vrem',
@@ -104,6 +107,10 @@ const styles = EStyleSheet.create({
   },
   viewAllLabel: {
     fontSize: '11rem',
+  },
+  seperator: {
+    height: '8vrem',
+    backgroundColor: '#f7f7f7',
   },
 });
 function arePropsEqual(prevProps, nextProps) {
