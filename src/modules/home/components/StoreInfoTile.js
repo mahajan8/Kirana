@@ -8,10 +8,18 @@ import StoreClosed from '../../../assets/images/store_closed.svg';
 import StoreShop from '../../../assets/images/store_shop_icon.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {Fonts} from '../../../utils/values/Fonts';
+import moment from 'moment';
 
 const StoreInfoTile = (props) => {
-  let {name, location, rating, distance} = props.store;
-  let {onPress, closed} = props;
+  let {
+    name,
+    location,
+    rating,
+    distance_in_kms,
+    online,
+    open_time,
+  } = props.store;
+  let {onPress} = props;
 
   return (
     <Pressable
@@ -23,7 +31,7 @@ const StoreInfoTile = (props) => {
         <Text style={styles.storeName}>{name}</Text>
         <Text style={styles.storeLocation}>{location.short_address}</Text>
         <View style={styles.rowContainer}>
-          {!closed && (
+          {online && (
             <View style={styles.rowContainer}>
               <Star
                 style={styles.star}
@@ -34,8 +42,8 @@ const StoreInfoTile = (props) => {
               <View style={styles.seperator} />
             </View>
           )}
-          <Text style={styles.details}>{distance} km</Text>
-          {closed && (
+          <Text style={styles.details}>{distance_in_kms} km</Text>
+          {!online && (
             <View style={styles.rowContainer}>
               <View style={[styles.storeClosedContainer, styles.rowContainer]}>
                 <StoreClosed
@@ -57,7 +65,9 @@ const StoreInfoTile = (props) => {
                   height={EStyleSheet.value('8rem')}
                 />
                 <Text style={[styles.storeClosedText, styles.storeShopText]}>
-                  {Strings.orderNowGetAt}
+                  {Strings.orderNowGetAt +
+                    moment(open_time, 'hh:mm').format('hh:mm A') +
+                    '!'}
                 </Text>
               </View>
             </View>

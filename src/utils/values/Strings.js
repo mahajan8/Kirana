@@ -179,7 +179,7 @@ export const Strings = {
   paid: 'Paid',
   trackOrder: 'Track Order',
   storeClosed: 'Store Closed',
-  orderNowGetAt: 'Order Now, Get it at 11 am!',
+  orderNowGetAt: 'Order Now, Get it at ',
   viewAll: 'View All',
   commonSearches: 'Common Searches',
   viewStore: 'View Entire Store',
