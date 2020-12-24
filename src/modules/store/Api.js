@@ -5,13 +5,14 @@ import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {
   addProducts,
-  clearProducts,
   setCategories,
   setCategoryProducts,
   setFilters,
   setStoreDetails,
   setSubcategoryProducts,
 } from './StoreActions';
+import {Actions} from 'react-native-router-flux';
+import {appendStoreProducts} from '../home/HomeActions';
 
 export const getStoreDetails = (pars) => {
   return (dispatch) => {
@@ -70,7 +71,11 @@ export const searchStoreProducts = (pars) => {
         //   dispatch(clearProducts());
         // }
         let {total_count, results} = res.data.data;
-        dispatch(addProducts(results, total_count));
+        if (Actions.currentScene === 'storeProductsResults') {
+          dispatch(appendStoreProducts(results, total_count));
+        } else {
+          dispatch(addProducts(results, total_count));
+        }
       } else {
         alert(res.data.message);
       }

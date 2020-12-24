@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, Pressable, FlatList} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import Header from '../../commons/components/Header';
@@ -159,7 +159,7 @@ const Filters = (props) => {
               return null;
             } else {
               return (
-                <TouchableOpacity
+                <Pressable
                   key={`filter${index}`}
                   onPress={() => setFilterIndex(index)}
                   style={styles.filterNameContainer}>
@@ -170,7 +170,7 @@ const Filters = (props) => {
                     ]}>
                     {item.name}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               );
             }
           })}
@@ -185,14 +185,14 @@ const Filters = (props) => {
                 : sortOptions
             }
             renderItem={({item, index}) => (
-              <TouchableOpacity
+              <Pressable
                 style={styles.optionContainer}
                 onPress={() => toggleSelectFilter(index)}>
                 {getChecked(index)}
                 <Text style={styles.optionsText}>
                   {filterIndex === 1 ? item.name : item}
                 </Text>
-              </TouchableOpacity>
+              </Pressable>
             )}
             keyExtractor={(item, index) => `option${index}`}
             contentContainerStyle={styles.listContainer}

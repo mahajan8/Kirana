@@ -5,7 +5,7 @@ import {
   View,
   PermissionsAndroid,
   Modal,
-  TouchableOpacity,
+  Pressable,
   Platform,
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -133,17 +133,17 @@ const HomeLocationCheck = (props) => {
 
           <View style={styles.seperator} />
 
-          <TouchableOpacity style={styles.rowContainer} onPress={getPermission}>
+          <Pressable style={styles.rowContainer} onPress={getPermission}>
             <CurrentLocation
               width={EStyleSheet.value('12rem')}
               height={EStyleSheet.value('12rem')}
             />
             <Text style={styles.buttonsText}>{Strings.turnOnLocation}</Text>
-          </TouchableOpacity>
+          </Pressable>
 
           <View style={styles.seperator} />
 
-          <TouchableOpacity
+          <Pressable
             style={styles.rowContainer}
             onPress={() => {
               setVisible(false);
@@ -153,7 +153,7 @@ const HomeLocationCheck = (props) => {
             <Text style={[styles.buttonsText, styles.searchText]}>
               {Strings.searchManually}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </Modal>

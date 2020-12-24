@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
@@ -35,7 +35,7 @@ const Header = (props) => {
         containerStyle && containerStyle,
       ]}>
       <View style={styles.rowContainer}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
             if (onBack) {
               onBack();
@@ -48,7 +48,7 @@ const Header = (props) => {
             width={EStyleSheet.value('18rem')}
             height={EStyleSheet.value('14rem')}
           />
-        </TouchableOpacity>
+        </Pressable>
 
         {type == 1 && <Text style={styles.type1Title}>{title}</Text>}
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, Pressable, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import {Actions} from 'react-native-router-flux';
@@ -13,8 +13,10 @@ import HomeLocationCheck from './HomeLocationCheck';
 import SearchLocationModal from './SearchLocationModal';
 import {getStores} from '../Api';
 import {connect} from 'react-redux';
-import {Colors} from '../../../utils/values/Colors';
 import {setLocation} from '../../onboarding/OnboardingActions';
+import NoStores from '../../../assets/images/stores_empty_image.svg';
+import Button from '../../commons/components/Button';
+import StorePlaceholder from './StorePlaceHolder';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -31,7 +33,7 @@ const Home = (props) => {
   const searchProductHeader = () => {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <Pressable
           activeOpacity={0.5}
           style={styles.searchContainer}
           onPress={() => Actions.searchStoreProducts()}>
@@ -40,7 +42,7 @@ const Home = (props) => {
             height={EStyleSheet.value('14rem')}
           />
           <Text style={styles.textInput}>{Strings.searchProduct}</Text>
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.nearbyText}>{Strings.nearbyStores}</Text>
       </View>
     );
@@ -79,8 +81,24 @@ const Home = (props) => {
             setEndReachCallable(true);
           }
         }}
-        ListHeaderComponent={searchProductHeader}
+        ListHeaderComponent={stores.length && searchProductHeader}
         contentContainerStyle={styles.list}
+        ListEmptyComponent={
+          props.loading ? (
+            <StorePlaceholder count={2} />
+          ) : (
+            <View style={styles.listEmptyContainer}>
+              <NoStores />
+              <Text style={styles.listEmptyHeadline}>
+                {Strings.homeStoresEmpty}
+              </Text>
+              <Button
+                label={Strings.changeLocation}
+                Style={styles.listEmptyButton}
+              />
+            </View>
+          )
+        }
       />
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
@@ -96,6 +114,7 @@ const Home = (props) => {
   );
 };
 const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
   homeReducer: state.homeReducer,
 });
 

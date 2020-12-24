@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Modal, TouchableOpacity} from 'react-native';
+import {Text, View, Modal, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Strings} from '../../../utils/values/Strings';
@@ -44,25 +44,25 @@ const ImagePick = (props) => {
       transparent={true}
       animated
       animationType="slide">
-      <TouchableOpacity
+      <Pressable
         activeOpacity={1}
         style={styles.container}
         onPress={() => setVisible(false)}>
-        <TouchableOpacity activeOpacity={1} style={styles.innerContainer}>
+        <Pressable activeOpacity={1} style={styles.innerContainer}>
           <View style={styles.titleView}>
             <Text style={styles.titleText}>{Strings.selectFrom} </Text>
 
-            <TouchableOpacity
+            <Pressable
               onPress={() => setVisible(false)}
               hitSlop={commonStyles.hitSlop}>
               <Cross
                 width={EStyleSheet.value('14rem')}
                 height={EStyleSheet.value('14vrem')}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.optionsView}
             onPress={() => openImagePicker(0)}>
             <Camera
@@ -70,9 +70,9 @@ const ImagePick = (props) => {
               height={EStyleSheet.value('13vrem')}
             />
             <Text style={styles.optionsText}>{Strings.camera}</Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.optionsView}
             onPress={() => openImagePicker(1)}>
             <Camera
@@ -80,9 +80,9 @@ const ImagePick = (props) => {
               height={EStyleSheet.value('13vrem')}
             />
             <Text style={styles.optionsText}>{Strings.gallery}</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </TouchableOpacity>
+          </Pressable>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
@@ -32,7 +32,7 @@ const Language = () => {
         <View>
           <Header title={Strings.chooseLanguage} />
 
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.buttonContainer,
               selected == 0 && styles.selectedButton,
@@ -48,9 +48,9 @@ const Language = () => {
             </Text>
 
             {isSelected(0)}
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.buttonContainer,
               selected == 1 && styles.selectedButton,
@@ -65,7 +65,7 @@ const Language = () => {
             </Text>
 
             {isSelected(1)}
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <Button

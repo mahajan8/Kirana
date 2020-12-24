@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, FlatList} from 'react-native';
+import {View, Pressable, FlatList} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productSubStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -92,7 +92,7 @@ const ProductsList = (props) => {
               width={EStyleSheet.value('16rem')}
               height={EStyleSheet.value('16rem')}
             />
-            <TouchableOpacity
+            <Pressable
               onPress={() => {
                 Actions.filters({
                   saveFilters: setFilters,
@@ -100,7 +100,7 @@ const ProductsList = (props) => {
                 });
               }}>
               <FilterIcon style={styles.headerIcon} />
-            </TouchableOpacity>
+            </Pressable>
             <CartCounter />
           </View>
         }

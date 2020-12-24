@@ -1,13 +1,6 @@
 /* eslint-disable eqeqeq */
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  Platform,
-  Pressable,
-} from 'react-native';
+import {View, Text, Pressable, TextInput, Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
@@ -51,7 +44,7 @@ const CartHeader = (props) => {
         containerStyle && containerStyle,
         styles.rowContainer,
       ]}>
-      <TouchableOpacity
+      <Pressable
         onPress={() => {
           if (onBack) {
             onBack();
@@ -77,7 +70,7 @@ const CartHeader = (props) => {
             height={EStyleSheet.value('14rem')}
           />
         )}
-      </TouchableOpacity>
+      </Pressable>
 
       {titleComp ? (
         <View style={styles.titleContainer}>{titleComp}</View>
@@ -99,7 +92,7 @@ const CartHeader = (props) => {
           </Pressable>
         </View>
       ) : (
-        <TouchableOpacity
+        <Pressable
           activeOpacity={1}
           style={[styles.locationContainer, styles.rowContainer]}
           onPress={selectLocation && selectLocation}>
@@ -111,7 +104,7 @@ const CartHeader = (props) => {
             {location ? location.short_address : Strings.locationUnavaible}
           </Text>
           <DownArrow />
-        </TouchableOpacity>
+        </Pressable>
       )}
       <View style={styles.headerRightContainer}>
         {headerRight && headerRight}

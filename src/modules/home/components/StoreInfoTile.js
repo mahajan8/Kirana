@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
@@ -14,7 +14,7 @@ const StoreInfoTile = (props) => {
   let {onPress, closed} = props;
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={[styles.rowContainer, styles.container]}
       onPress={onPress && onPress}
       activeOpacity={1}>
@@ -64,7 +64,7 @@ const StoreInfoTile = (props) => {
           )}
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -183,4 +183,6 @@ export const Strings = {
   viewAll: 'View All',
   commonSearches: 'Common Searches',
   viewStore: 'View Entire Store',
+  homeStoresEmpty: 'Sorry! We can’t find any stores in your location',
+  changeLocation: 'Change Location',
 };

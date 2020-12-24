@@ -4,7 +4,7 @@ import {View, Text, ScrollView, FlatList, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 
-const StoreProductPlaceholder = (props) => {
+const StorePlaceholder = (props) => {
   let {count} = props;
 
   const [list, setList] = useState([]);
@@ -19,17 +19,12 @@ const StoreProductPlaceholder = (props) => {
     <View
       style={[styles.rowContainer, styles.itemContainer]}
       key={`storeProductItemPlaceholder${index}`}>
-      <View style={styles.productImageContainer} />
+      <View style={styles.storeImageContainer} />
 
       <View style={styles.productDetialsContainer}>
-        <View style={styles.productName} />
-        <View style={styles.productWeight} />
-      </View>
-
-      <View style={styles.rightContainer}>
-        <View style={styles.price} />
-
-        <View style={styles.buttonsContainer} />
+        <View style={styles.storeName} />
+        <View style={styles.storeLocation} />
+        <View style={styles.storeDetails} />
       </View>
     </View>
   );
@@ -50,42 +45,29 @@ const styles = EStyleSheet.create({
     // alignItems: 'center',
     marginBottom: '24vrem',
   },
-  productImageContainer: {
+  storeImageContainer: {
     height: '65rem',
     width: '65rem',
     backgroundColor: Colors.placeHolder,
     marginRight: '12rem',
   },
-  productName: {
+  storeName: {
     backgroundColor: Colors.placeHolder,
     width: '120rem',
     marginBottom: '3rem',
     height: '15vrem',
   },
-  productWeight: {
-    width: '30rem',
+  storeLocation: {
+    width: '70rem',
     backgroundColor: Colors.placeHolder,
     height: '15vrem',
+    marginBottom: '3rem',
   },
-  rightContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-    paddingTop: '3rem',
-  },
-  price: {
+  storeDetails: {
     width: '50rem',
     backgroundColor: Colors.placeHolder,
     height: '15vrem',
-    marginBottom: '10vrem',
-  },
-  productDetialsContainer: {
-    paddingTop: '3rem',
-  },
-  buttonsContainer: {
-    width: '70rem',
-    backgroundColor: Colors.placeHolder,
-    height: '20vrem',
   },
 });
 
-export default StoreProductPlaceholder;
+export default StorePlaceholder;

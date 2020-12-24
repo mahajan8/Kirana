@@ -47,9 +47,9 @@ const Input = (props) => {
   });
 
   // const eye =
-  // <TouchableOpacity style={{width:'10%', alignItems:'center', justifyContent:'center', alignSelf:'center' }} onPress={()=>setSecure(!secure)} >
+  // <Pressable style={{width:'10%', alignItems:'center', justifyContent:'center', alignSelf:'center' }} onPress={()=>setSecure(!secure)} >
   //     <Image source={secure?Images.hide:Images.view} style={{width:dp(20), height:dp(20), resizeMode:'contain'}} />
-  // </TouchableOpacity>
+  // </Pressable>
 
   const {
     label,

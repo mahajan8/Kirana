@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
@@ -19,12 +19,12 @@ const ReferFriends = () => {
           width={EStyleSheet.value('286rem')}
           height={EStyleSheet.value('176rem')}
         />
-        <TouchableOpacity style={styles.backButton} onPress={Actions.pop}>
+        <Pressable style={styles.backButton} onPress={Actions.pop}>
           <Back
             width={EStyleSheet.value('16rem')}
             height={EStyleSheet.value('14rem')}
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <View style={styles.container}>
         <Text style={styles.referHeadline}>{Strings.referScreenHeadline}</Text>

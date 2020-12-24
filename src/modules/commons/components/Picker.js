@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, Modal, TouchableOpacity, FlatList} from 'react-native';
+import {Text, View, Modal, Pressable, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import Cross from '../../../assets/images/cross.svg';
@@ -24,7 +24,7 @@ const Picker = (props) => {
   let selected = value >= 0;
 
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={disabled}
       activeOpacity={1}
       style={[
@@ -47,26 +47,26 @@ const Picker = (props) => {
         transparent={true}
         animated
         animationType="slide">
-        <TouchableOpacity
+        <Pressable
           activeOpacity={1}
           style={styles.modalContainer}
           onPress={() => setVisible(false)}>
-          <TouchableOpacity activeOpacity={1} style={styles.innerContainer}>
+          <Pressable activeOpacity={1} style={styles.innerContainer}>
             <View style={styles.titleView}>
               <Text>{label}</Text>
 
-              <TouchableOpacity onPress={() => setVisible(false)}>
+              <Pressable onPress={() => setVisible(false)}>
                 <Cross
                   width={EStyleSheet.value('14rem')}
                   height={EStyleSheet.value('14vrem')}
                 />
-              </TouchableOpacity>
+              </Pressable>
             </View>
 
             <FlatList
               data={list}
               renderItem={({item, index}) => (
-                <TouchableOpacity
+                <Pressable
                   style={styles.itemBox}
                   onPress={() => {
                     setValue(index);
@@ -85,16 +85,16 @@ const Picker = (props) => {
                       height={EStyleSheet.value('12rem')}
                     />
                   )}
-                </TouchableOpacity>
+                </Pressable>
               )}
               keyExtractor={(item, index) => `PickerItem${index}`}
               contentContainerStyle={styles.listStyle}
               ListHeaderComponent={header}
             />
-          </TouchableOpacity>
-        </TouchableOpacity>
+          </Pressable>
+        </Pressable>
       </Modal>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
+import {View, Text, Pressable, FlatList, Image} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import SafeArea from '../../commons/components/SafeArea';
@@ -8,7 +8,6 @@ import CartHeader from '../../commons/components/CartHeader';
 import {styles} from '../styles/searchProductsStyles';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
 import SearchItemTile from './SearchItemTile';
-import {clearProducts} from '../../store/StoreActions';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../../store/Api';
 import Loader from '../../commons/components/Loader';
@@ -17,6 +16,7 @@ import {Actions} from 'react-native-router-flux';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Filter from '../../../assets/images/filter.svg';
 import Button from '../../commons/components/Button';
+import {clearStoreProducts} from '../HomeActions';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -25,12 +25,12 @@ const SearchProductResults = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [filters, setFilters] = useState(defaultFilters);
 
-  const {products, totalProductCount} = props.storeReducer;
+  const {storeProducts, storeProductsCount} = props.homeReducer;
 
   useEffect(() => {
-    props.clearProducts();
+    props.clearStoreProducts();
     getProducts();
-    return () => props.clearProducts();
+    return () => props.clearStoreProducts();
   }, [filters]);
 
   const getProducts = (start = 0) => {
@@ -98,7 +98,7 @@ const SearchProductResults = (props) => {
           </View>
         }
         headerRight={
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               Actions.filters({
                 saveFilters: setFilters,
@@ -106,21 +106,22 @@ const SearchProductResults = (props) => {
               });
             }}>
             <FilterIcon style={{marginRight: 18}} />
-          </TouchableOpacity>
+          </Pressable>
         }
         containerStyle={styles.headerContainer}
       />
       <FlatList
-        data={products}
+        data={storeProducts}
         renderItem={({item, index}) => (
           <SearchItemTile item={item} index={index} />
         )}
         keyExtractor={(item, index) => `store${index}`}
         ListHeaderComponent={
-          totalProductCount && (
-            <View style={styles.container}>
+          storeProductsCount &&
+          !props.loading && (
+            <View>
               <Text style={styles.searchResultsHeading}>
-                {Strings.found} {totalProductCount} {Strings.itemsMatching}{' '}
+                {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
                 {searchedText}
               </Text>
             </View>
@@ -146,14 +147,14 @@ const SearchProductResults = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
-          if (!endReachCallable && products.length < totalProductCount) {
-            getProducts(products.length);
+          if (!endReachCallable && storeProducts.length < storeProductsCount) {
+            getProducts(storeProducts.length);
             setEndReachCallable(true);
           }
         }}
         ListFooterComponent={
           <View style={styles.listLoaderContainer}>
-            <Loader show={products.length ? props.loading : false} />
+            <Loader show={storeProducts.length ? props.loading : false} />
           </View>
         }
       />
@@ -169,12 +170,12 @@ const SearchProductResults = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  storeReducer: state.storeReducer,
+  homeReducer: state.homeReducer,
 });
 
 const mapDispatchToProps = {
   searchStoreProducts,
-  clearProducts,
+  clearStoreProducts,
 };
 
 export default connect(

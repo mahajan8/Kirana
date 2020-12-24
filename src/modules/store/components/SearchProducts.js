@@ -4,7 +4,7 @@ import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
-import {FlatList, View, TouchableOpacity} from 'react-native';
+import {FlatList, View, Pressable} from 'react-native';
 import ProductBox from './ProductBox';
 import {Actions} from 'react-native-router-flux';
 import Loader from '../../commons/components/Loader';
@@ -117,7 +117,7 @@ const SearchProducts = (props) => {
         inputRef={input}
         onCrossPress={() => setSearchInput('')}
         headerRight={
-          <TouchableOpacity
+          <Pressable
             onPress={() => {
               Actions.filters({
                 saveFilters: setFilters,
@@ -125,7 +125,7 @@ const SearchProducts = (props) => {
               });
             }}>
             <FilterIcon style={{marginRight: 18}} />
-          </TouchableOpacity>
+          </Pressable>
         }
       />
       <FlatList

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
@@ -45,23 +45,23 @@ const SearchItemTile = (props) => {
         </Text>
 
         <View style={styles.rowContainer}>
-          <TouchableOpacity
+          <Pressable
             style={styles.quantityButton}
             onPress={() => {
               setQuantity(quantity > 0 ? quantity - 1 : quantity);
             }}>
             <Text style={styles.quantityButtonIcons}>-</Text>
-          </TouchableOpacity>
+          </Pressable>
 
           <Text style={styles.quantityText}>{quantity}</Text>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.quantityButton}
             onPress={() => {
               setQuantity(quantity + 1);
             }}>
             <Text style={styles.quantityButtonIcons}>+</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>

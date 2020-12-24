@@ -4,9 +4,6 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
-  container: {
-    paddingTop: '16vrem',
-  },
   searchResultsHeading: {
     fontSize: '12rem',
     fontFamily: Fonts.medium,
@@ -17,6 +14,7 @@ export const styles = EStyleSheet.create({
   list: {
     paddingHorizontal: '16rem',
     flexGrow: 1,
+    paddingTop: '16vrem',
   },
   emptyListContainer: {
     flex: 1,

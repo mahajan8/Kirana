@@ -8,6 +8,8 @@ import {
   CLEAR_STORES,
   APPEND_SEARCHED_STORES,
   CLEAR_SEARCHED_STORES,
+  CLEAR_STORE_PRODUCTS,
+  APPEND_STORE_PRODUCTS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -20,6 +22,8 @@ const INITIAL_STATE = {
   storeCount: null,
   searchedStores: [],
   searchedStoresCount: null,
+  storeProducts: [],
+  storeProductCount: null,
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -72,6 +76,18 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
         ...state,
         searchedStores: [],
         searchedStoresCount: null,
+      };
+    case APPEND_STORE_PRODUCTS:
+      return {
+        ...state,
+        storeProducts: [...state.storeProducts, ...action.storeProducts],
+        storeProductsCount: action.storeProductsCount,
+      };
+    case CLEAR_STORE_PRODUCTS:
+      return {
+        ...state,
+        storeProducts: [],
+        storeProductsCount: null,
       };
     default:
       return state;

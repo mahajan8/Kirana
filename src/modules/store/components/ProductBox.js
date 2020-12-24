@@ -1,5 +1,5 @@
 import React, {useState, memo} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
@@ -33,7 +33,7 @@ const ProductBox = (props) => {
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       activeOpacity={1}
       style={[styles.container, vertical && styles.verticalContainer]}
       onPress={() => {
@@ -65,14 +65,14 @@ const ProductBox = (props) => {
               styles.counterContainer,
               vertical && styles.verticalButton,
             ]}>
-            <TouchableOpacity
+            <Pressable
               style={styles.counter}
               onPress={() => setCount(count > 0 ? count - 1 : count)}>
               <MinusButton
                 width={EStyleSheet.value('25rem')}
                 height={EStyleSheet.value('25rem')}
               />
-            </TouchableOpacity>
+            </Pressable>
             <Text style={styles.countText}>
               {product_brand
                 ? count
@@ -81,14 +81,14 @@ const ProductBox = (props) => {
                     product_packaging,
                   )}
             </Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.counter}
               onPress={() => setCount(count + 1)}>
               <PlusButton
                 width={EStyleSheet.value('25rem')}
                 height={EStyleSheet.value('25rem')}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
         ) : (
           <Button
@@ -99,7 +99,7 @@ const ProductBox = (props) => {
           />
         )}
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, Platform} from 'react-native';
+import {Text, Pressable, Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -20,7 +20,7 @@ const TimePick = (props) => {
   };
 
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => setShow(true)}
       activeOpacity={1}
       style={[Styles.container, selected && {borderColor: Colors.themeGreen}]}>
@@ -43,7 +43,7 @@ const TimePick = (props) => {
           minimumDate={min}
         />
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

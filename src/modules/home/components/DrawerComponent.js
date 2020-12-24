@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import {Colors} from '../../../utils/values/Colors';
@@ -54,14 +54,14 @@ const actions = (index) => {
 
 const renderOptions = (Icon, label, index) => {
   return (
-    <TouchableOpacity style={styles.optionsRow} onPress={() => actions(index)}>
+    <Pressable style={styles.optionsRow} onPress={() => actions(index)}>
       <Icon
         style={{marginRight: EStyleSheet.value('20rem')}}
         width={EStyleSheet.value('24rem')}
         height={EStyleSheet.value('24rem')}
       />
       <Text style={styles.optionLabel}>{label}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

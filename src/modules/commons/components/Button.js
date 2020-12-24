@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, Keyboard} from 'react-native';
+import {Text, Pressable, Keyboard} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
@@ -8,7 +8,7 @@ const Button = (props) => {
   const {Style, label, onPress, disabled, labelStyle, bordered, Icon} = props;
 
   return (
-    <TouchableOpacity
+    <Pressable
       style={[
         styles.button,
         bordered && styles.bordered,
@@ -36,7 +36,7 @@ const Button = (props) => {
         ]}>
         {label}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

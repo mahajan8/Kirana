@@ -6,9 +6,8 @@ import {
   ScrollView,
   ImageBackground,
   Image,
-  TouchableOpacity,
-  FlatList,
   Pressable,
+  FlatList,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
@@ -49,9 +48,9 @@ const StoreHeader = (props) => {
       <View style={styles.darkBg} />
       <View style={styles.storeInfoContainer}>
         <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-          <TouchableOpacity style={styles.backArrow} onPress={Actions.pop}>
+          <Pressable style={styles.backArrow} onPress={Actions.pop}>
             <BackArrow />
-          </TouchableOpacity>
+          </Pressable>
           <View>
             <Text
               style={isLoaded ? styles.storeName : styles.storeNamePlaceHolder}>
@@ -63,7 +62,8 @@ const StoreHeader = (props) => {
                   ? styles.storeLocation
                   : styles.storeLocationPlaceHolder
               }>
-              <LocationIcon /> {isLoaded ? location.short_address : null}
+              {isLoaded && <LocationIcon />}{' '}
+              {isLoaded ? location.short_address : null}
             </Text>
           </View>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Modal, TouchableOpacity} from 'react-native';
+import {View, Text, Modal, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import ReferImage from '../../../assets/images/refer_image.svg';
@@ -20,11 +20,11 @@ const ReferModal = (props) => {
       transparent={true}
       animated
       animationType="slide">
-      <TouchableOpacity
+      <Pressable
         activeOpacity={1}
         style={styles.modalContainer}
         onPress={() => setVisible(false)}>
-        <TouchableOpacity activeOpacity={1} style={styles.innerContainer}>
+        <Pressable activeOpacity={1} style={styles.innerContainer}>
           <View style={styles.imageContainer}>
             <ReferImage
               width={EStyleSheet.value('248rem')}
@@ -68,8 +68,8 @@ const ReferModal = (props) => {
               {Strings.gotReferal}
             </Text>
           </View>
-        </TouchableOpacity>
-      </TouchableOpacity>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 };

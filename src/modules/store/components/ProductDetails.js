@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productDetailStyles';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
@@ -49,17 +49,15 @@ const ProductDetails = (props) => {
           commonStyles.shadow,
         ]}>
         <View style={styles.counterContainer}>
-          <TouchableOpacity
+          <Pressable
             style={styles.counter}
             onPress={() => setCount(count > 0 ? count - 1 : count)}>
             <Text style={styles.counterText}>-</Text>
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.countText}>{count} kg</Text>
-          <TouchableOpacity
-            style={styles.counter}
-            onPress={() => setCount(count + 1)}>
+          <Pressable style={styles.counter} onPress={() => setCount(count + 1)}>
             <Text style={styles.counterText}>+</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <Button

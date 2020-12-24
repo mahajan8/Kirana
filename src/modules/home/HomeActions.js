@@ -5,6 +5,8 @@ import {
   CLEAR_STORES,
   APPEND_SEARCHED_STORES,
   CLEAR_SEARCHED_STORES,
+  CLEAR_STORE_PRODUCTS,
+  APPEND_STORE_PRODUCTS,
 } from './ActionTypes';
 
 export const setCartQuantity = (quantity) => ({
@@ -35,4 +37,14 @@ export const appendSearchedStores = (stores, storeCount) => ({
 
 export const clearSearchedStores = () => ({
   type: CLEAR_SEARCHED_STORES,
+});
+
+export const appendStoreProducts = (storeProducts, storeProductsCount) => ({
+  type: APPEND_STORE_PRODUCTS,
+  storeProducts,
+  storeProductsCount,
+});
+
+export const clearStoreProducts = () => ({
+  type: CLEAR_STORE_PRODUCTS,
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Linking} from 'react-native';
+import {View, Text, Pressable, Linking} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import {Colors} from '../../../utils/values/Colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -53,7 +53,7 @@ const CustomerSupport = (props) => {
 
     return (
       <View key={`helpOption${index}`}>
-        <TouchableOpacity
+        <Pressable
           style={[styles.rowContainer, styles.helpOptionContainer]}
           onPress={() => helpAction(index)}>
           <View style={[styles.imageContainer, {backgroundColor: iconBg}]}>
@@ -71,7 +71,7 @@ const CustomerSupport = (props) => {
             width={EStyleSheet.value('10rem')}
             height={EStyleSheet.value('10rem')}
           />
-        </TouchableOpacity>
+        </Pressable>
         {index < options.length - 1 && <View style={styles.seperator} />}
       </View>
     );

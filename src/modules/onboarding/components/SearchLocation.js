@@ -3,7 +3,7 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
+  Pressable,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
@@ -165,7 +165,7 @@ const Search = (props) => {
     <View style={styles.savedAddressContainer}>
       <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
       {props.addresses.map((item, index) => (
-        <TouchableOpacity
+        <Pressable
           key={`address${index}`}
           style={[styles.itemRow, styles.addressContainer]}
           onPress={() => {
@@ -185,7 +185,7 @@ const Search = (props) => {
               {item.location.formatted_address}
             </Text>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       ))}
     </View>
   );
@@ -202,7 +202,7 @@ const Search = (props) => {
         keyboardShouldPersistTaps="handled">
         <Text style={styles.title}>{Strings.searchDeliveryLocation}</Text>
         {renderSearchInput()}
-        <TouchableOpacity
+        <Pressable
           style={[
             styles.currentLocationContainer,
             modal && styles.currentLocationModal,
@@ -221,7 +221,7 @@ const Search = (props) => {
               <Text style={styles.subText}>{Strings.usingGPS}</Text>
             </View>
           )}
-        </TouchableOpacity>
+        </Pressable>
         <View style={modal ? styles.modalSeperator : styles.seperator} />
         {props.addresses.length && modal ? getSavedAddresses() : null}
       </ScrollView>
