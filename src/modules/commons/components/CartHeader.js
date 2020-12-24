@@ -39,8 +39,8 @@ const CartHeader = (props) => {
   return (
     <View
       style={[
-        styles.container,
         !noShadow && styles.headerShadow,
+        styles.container,
         containerStyle && containerStyle,
         styles.rowContainer,
       ]}>
