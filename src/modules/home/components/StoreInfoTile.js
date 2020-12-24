@@ -71,6 +71,7 @@ const StoreInfoTile = (props) => {
 const styles = EStyleSheet.create({
   container: {
     marginBottom: '20vrem',
+    alignItems: 'flex-start',
   },
   rowContainer: {
     flexDirection: 'row',
@@ -87,13 +88,14 @@ const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
+    marginTop: '7rem',
   },
   storeLocation: {
     fontSize: '12rem',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.2rem',
     color: Colors.lightGray,
-    marginBottom: '2vrem',
+    marginBottom: '4vrem',
   },
   details: {
     fontSize: '10rem',

@@ -20,6 +20,8 @@ export const styles = EStyleSheet.create({
     borderRadius: '6rem',
     shadowOffset: {width: 0, height: 0},
     elevation: 3,
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
   },
   addressType: {
     fontSize: '14rem',
@@ -58,7 +60,7 @@ export const styles = EStyleSheet.create({
   noAddressContainer: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: '127vrem',
+    justifyContent: 'center',
   },
   noAddressButton: {
     width: '204rem',
@@ -69,6 +71,7 @@ export const styles = EStyleSheet.create({
   },
   list: {
     paddingBottom: '20vrem',
+    flex: 1,
   },
   modalContainer: {
     position: 'absolute',

@@ -11,7 +11,6 @@ import {styles} from '../styles/addressStyles';
 import {connect} from 'react-redux';
 import PlusIcon from '../../../assets/images/green_plus.svg';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
-import {commonStyles} from '../../commons/styles/commonStyles';
 import {getAddresses, deleteAddress} from '../Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
@@ -31,7 +30,7 @@ const Addresses = (props) => {
     let {type, block_address, location, landmark, id} = item;
 
     return (
-      <View style={[commonStyles.shadow, styles.addressBox]}>
+      <View style={styles.addressBox}>
         <Text style={styles.addressType}>
           {getKeyByValue(addressTypes, type)}
         </Text>

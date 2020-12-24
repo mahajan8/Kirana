@@ -9,6 +9,7 @@ import {
   Platform,
   LogBox,
   PermissionsAndroid,
+  ImageBackground,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
@@ -16,7 +17,7 @@ import {connect} from 'react-redux';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {styles} from '../styles/searchStyles';
 import SearchIcon from '../../../assets/images/search.svg';
-import Location from '../../../assets/images/location.svg';
+import Location from '../../../assets/images/autocomplete_location.svg';
 import AddressIcon from '../../../assets/images/address_icon.svg';
 import CurrentLocation from '../../../assets/images/current_location.svg';
 import {Colors} from '../../../utils/values/Colors';
@@ -164,29 +165,37 @@ const Search = (props) => {
   const getSavedAddresses = () => (
     <View style={styles.savedAddressContainer}>
       <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
-      {props.addresses.map((item, index) => (
-        <Pressable
-          key={`address${index}`}
-          style={[styles.itemRow, styles.addressContainer]}
-          onPress={() => {
-            onSelect(item.location);
-          }}>
-          <View style={styles.addressImageContainer}>
-            <AddressIcon
-              width={EStyleSheet.value('21rem')}
-              height={EStyleSheet.value('24rem')}
-            />
-          </View>
-          <View>
-            <Text style={styles.addressName}>
-              {getKeyByValue(addressTypes, item.type)}
-            </Text>
-            <Text style={styles.addressLocation}>
-              {item.location.formatted_address}
-            </Text>
-          </View>
-        </Pressable>
-      ))}
+      {props.addresses.map((item, index) => {
+        let {type, block_address, location, landmark, id} = item;
+
+        if (type !== 30) {
+          return (
+            <Pressable
+              key={`address${index}`}
+              style={[styles.itemRow, styles.addressContainer]}
+              onPress={() => {
+                onSelect(location);
+              }}>
+              <ImageBackground
+                style={styles.addressImageContainer}
+                source={require('../../../assets/images/address_background.jpg')}>
+                <AddressIcon
+                  width={EStyleSheet.value('21rem')}
+                  height={EStyleSheet.value('24rem')}
+                />
+              </ImageBackground>
+              <View>
+                <Text style={styles.addressName}>
+                  {getKeyByValue(addressTypes, type)}
+                </Text>
+                <Text style={styles.addressLocation}>
+                  {block_address} {landmark}
+                </Text>
+              </View>
+            </Pressable>
+          );
+        }
+      })}
     </View>
   );
 
