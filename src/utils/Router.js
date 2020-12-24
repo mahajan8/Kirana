@@ -1,5 +1,5 @@
 import React from 'react';
-import {Scene, Router, Stack, Drawer} from 'react-native-router-flux';
+import {Scene, Router, Stack} from 'react-native-router-flux';
 import Splash from '../modules/intro/components/Splash';
 import Introduction from '../modules/intro/components/Introduction';
 import SelectLanguage from '../modules/intro/components/SelectLanguage';
@@ -61,7 +61,7 @@ const AppRouter = () => {
           drawerPosition="left"
           swipeEnabled={true}
           contentComponent={DrawerComponent}
-          drawerWidth={'80%'}>
+          drawerWidth={330}>
           <Scene key="home" component={Home} hideNavBar />
         </Scene>
       </Stack>
