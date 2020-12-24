@@ -186,4 +186,5 @@ export const Strings = {
   homeStoresEmpty: 'Sorry! We can’t find any stores in your location',
   changeLocation: 'Change Location',
   storeSearchEmpty: "Sorry! We can't find any stores matching ",
+  noProductFound: 'Sorry! We can’t find any product matching your search.',
 };
