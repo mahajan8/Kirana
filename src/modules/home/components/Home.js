@@ -97,6 +97,7 @@ const Home = (props) => {
               <Button
                 label={Strings.changeLocation}
                 Style={styles.listEmptyButton}
+                onPress={() => setSearchVisible(true)}
               />
             </View>
           )
