@@ -35,7 +35,9 @@ const Addresses = (props) => {
         <Text style={styles.addressType}>
           {getKeyByValue(addressTypes, type)}
         </Text>
-        <Text style={styles.locationText}>{location.formatted_address}</Text>
+        <Text style={styles.locationText}>
+          {block_address} {landmark}
+        </Text>
         <View style={styles.buttonsContainer}>
           <Button
             label={Strings.edit}
@@ -71,7 +73,7 @@ const Addresses = (props) => {
         onRequestClose={() => setDeleteVisible(false)}
         transparent={true}
         animated
-        animationType="slide">
+        animationType="none">
         <View style={styles.modalContainer}>
           <View style={styles.innerContainer}>
             <Text style={styles.deleteTitle}>{Strings.deleteAddress}</Text>

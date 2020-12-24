@@ -99,6 +99,7 @@ const AddAddress = (props) => {
               longitudeDelta: 0.03,
             }}
             // onRegionChange={(region) => setRegion(region)}
+            zoomEnabled={false}
             scrollEnabled={false}>
             <Marker coordinate={{latitude: lat, longitude: lng}}>
               <CustomMarker

@@ -28,7 +28,7 @@ export const styles = EStyleSheet.create({
     letterSpacing: '0.2rem',
     color: Colors.subTitleText,
     marginTop: '20vrem',
-    width: '266rem',
+    width: '200rem',
     textAlign: 'center',
   },
   storeName: {

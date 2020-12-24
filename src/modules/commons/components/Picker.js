@@ -46,7 +46,7 @@ const Picker = (props) => {
         onRequestClose={() => setVisible(false)}
         transparent={true}
         animated
-        animationType="slide">
+        animationType="none">
         <Pressable
           activeOpacity={1}
           style={styles.modalContainer}

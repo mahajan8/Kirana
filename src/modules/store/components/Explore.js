@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
-import {View, Text, FlatList, Image} from 'react-native';
+import {View, Text, FlatList, Image, Pressable} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {styles} from '../styles/exploreStyles';
@@ -11,6 +11,7 @@ import CartCounter from '../../commons/components/CartCounter';
 import {getMediaUrl} from '../../../utils/utility/Utils';
 import {getStoreCategories} from '../Api';
 import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 
 const Explore = (props) => {
   useEffect(() => {
@@ -18,7 +19,14 @@ const Explore = (props) => {
   }, []);
 
   const renderCategory = (item) => (
-    <View style={styles.categoryContainer}>
+    <Pressable
+      style={styles.categoryContainer}
+      onPress={() =>
+        Actions.storeSubCategories({
+          categoryName: item.name,
+          categoryId: item.id,
+        })
+      }>
       <Image
         style={styles.categoryImage}
         source={{
@@ -26,7 +34,7 @@ const Explore = (props) => {
         }}
       />
       <Text style={styles.categoryName}>{item.name}</Text>
-    </View>
+    </Pressable>
   );
 
   return (

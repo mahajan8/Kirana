@@ -46,10 +46,11 @@ const styles = EStyleSheet.create({
     marginBottom: '24vrem',
   },
   storeImageContainer: {
-    height: '65rem',
-    width: '65rem',
+    width: '70rem',
+    height: '70rem',
+    borderRadius: '8rem',
+    marginRight: '16rem',
     backgroundColor: Colors.placeHolder,
-    marginRight: '12rem',
   },
   storeName: {
     backgroundColor: Colors.placeHolder,
