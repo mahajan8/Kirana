@@ -230,7 +230,7 @@ const Search = (props) => {
 };
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  addresses: state.homeReducer.addresses,
+  addresses: state.navigationReducer.addresses,
 });
 
 const mapDispatchToProps = {

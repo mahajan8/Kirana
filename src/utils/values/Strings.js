@@ -185,4 +185,5 @@ export const Strings = {
   viewStore: 'View Entire Store',
   homeStoresEmpty: 'Sorry! We can’t find any stores in your location',
   changeLocation: 'Change Location',
+  storeSearchEmpty: "Sorry! We can't find any stores matching ",
 };

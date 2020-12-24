@@ -87,9 +87,11 @@ const CartHeader = (props) => {
             onChangeText={onSearchChange}
             ref={inputRef}
           />
-          <Pressable onPress={onCrossPress && onCrossPress}>
-            <Cross />
-          </Pressable>
+          {searchValue ? (
+            <Pressable onPress={onCrossPress && onCrossPress}>
+              <Cross />
+            </Pressable>
+          ) : null}
         </View>
       ) : (
         <Pressable

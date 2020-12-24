@@ -15,7 +15,7 @@ const SearchLocationModal = (props) => {
       //   onRequestClose={() => console.log('back')}
       transparent={true}
       animated
-      animationType="slide">
+      animationType="none">
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           <Search

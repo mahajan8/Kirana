@@ -122,7 +122,7 @@ const HomeLocationCheck = (props) => {
       //   onRequestClose={() => console.log('back')}
       transparent={true}
       animated
-      animationType="slide">
+      animationType="none">
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           <LocationIcon style={styles.locaitonIcon} />

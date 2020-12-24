@@ -100,7 +100,7 @@ const SearchStoreProducts = (props) => {
                 height={EStyleSheet.value('123rem')}
               />
               <Text style={styles.noSearchResults}>
-                {Strings.noSearchResults}
+                {Strings.storeSearchEmpty + searchInput}
               </Text>
             </View>
           }
