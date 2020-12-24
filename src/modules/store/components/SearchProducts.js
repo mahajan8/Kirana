@@ -4,7 +4,7 @@ import SafeArea from '../../commons/components/SafeArea';
 import CartHeader from '../../commons/components/CartHeader';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
-import {FlatList, View, Pressable} from 'react-native';
+import {FlatList, View, Pressable, Text} from 'react-native';
 import ProductBox from './ProductBox';
 import {Actions} from 'react-native-router-flux';
 import Loader from '../../commons/components/Loader';
@@ -12,8 +12,12 @@ import {styles} from '../styles/productSubStyles';
 import {clearProducts} from '../StoreActions';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Filter from '../../../assets/images/filter.svg';
+import {Strings} from '../../../utils/values/Strings';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import NoResults from '../../../assets/images/search_not_found.svg';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
+let commonSearches = ['Drink', 'Onion', 'Apple', 'Potato', 'Chocolate'];
 
 const SearchProducts = (props) => {
   let input = useRef(null);
@@ -110,6 +114,23 @@ const SearchProducts = (props) => {
     filters.categories.length
       ? ActiveFilter
       : Filter;
+
+  const getEmptyState = () => {
+    if (!props.loading) {
+      return (
+        <View style={styles.emptyListContainer}>
+          {/* TODO: Change Image  */}
+          <NoResults
+            width={EStyleSheet.value('270rem')}
+            height={EStyleSheet.value('123rem')}
+          />
+          <Text style={styles.noSearchResults}>{Strings.noProductFound}</Text>
+        </View>
+      );
+    } else {
+      return null;
+    }
+  };
   return (
     <SafeArea>
       <CartHeader
@@ -130,33 +151,55 @@ const SearchProducts = (props) => {
           </Pressable>
         }
       />
-      <FlatList
-        data={products}
-        renderItem={({item, index}) => (
-          <ProductBox
-            key={`product${item + index}`}
-            vertical
-            onPress={() => Actions.productDetails({subCategoryName: '', item})}
-            item={item}
-          />
-        )}
-        keyExtractor={(item, index) => `product${index}`}
-        numColumns={2}
-        contentContainerStyle={[styles.listContainer]}
-        onMomentumScrollBegin={() => setEndReachCallable(false)}
-        onEndReachedThreshold={0.1}
-        onEndReached={() => {
-          if (!endReachCallable && products.length < totalProductCount) {
-            searchProducts(searchInput, products.length);
-            setEndReachCallable(true);
+      {searchInput.length > 2 ? (
+        <FlatList
+          data={products}
+          renderItem={({item, index}) => (
+            <ProductBox
+              key={`product${item + index}`}
+              vertical
+              onPress={() =>
+                Actions.productDetails({subCategoryName: '', item})
+              }
+              item={item}
+            />
+          )}
+          keyExtractor={(item, index) => `product${index}`}
+          numColumns={2}
+          contentContainerStyle={[styles.listContainer]}
+          onMomentumScrollBegin={() => setEndReachCallable(false)}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            if (!endReachCallable && products.length < totalProductCount) {
+              searchProducts(searchInput, products.length);
+              setEndReachCallable(true);
+            }
+          }}
+          ListEmptyComponent={getEmptyState()}
+          ListFooterComponent={
+            <View style={styles.listLoaderContainer}>
+              <Loader show={products.length ? props.loading : false} />
+            </View>
           }
-        }}
-        ListFooterComponent={
-          <View style={styles.listLoaderContainer}>
-            <Loader show={products.length ? props.loading : false} />
-          </View>
-        }
-      />
+        />
+      ) : (
+        <View style={styles.commonSearchesContainer}>
+          <Text
+            style={[styles.searchResultsHeading, styles.commonSearchHeading]}>
+            {Strings.commonSearches}
+          </Text>
+          {commonSearches.map((item) => (
+            <Pressable
+              key={`${item}`}
+              onPress={() => {
+                setSearchInput(item);
+                searchProducts(item);
+              }}>
+              <Text style={styles.commonSearchItem}>{item}</Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
     </SafeArea>
   );
 };

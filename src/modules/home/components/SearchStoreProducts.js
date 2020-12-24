@@ -56,7 +56,24 @@ const SearchStoreProducts = (props) => {
     }
     setSearchInput(query);
   };
-
+  const getEmptyState = () => {
+    if (!props.loading) {
+      return (
+        <View style={styles.emptyListContainer}>
+          {/* TODO: Change Image  */}
+          <NoResults
+            width={EStyleSheet.value('270rem')}
+            height={EStyleSheet.value('123rem')}
+          />
+          <Text style={styles.noSearchResults}>
+            {Strings.storeSearchEmpty + searchInput}
+          </Text>
+        </View>
+      );
+    } else {
+      return null;
+    }
+  };
   return (
     <SafeArea>
       <CartHeader
@@ -91,18 +108,7 @@ const SearchStoreProducts = (props) => {
               </View>
             )
           }
-          ListEmptyComponent={
-            <View style={styles.emptyListContainer}>
-              {/* TODO: Change Image  */}
-              <NoResults
-                width={EStyleSheet.value('270rem')}
-                height={EStyleSheet.value('123rem')}
-              />
-              <Text style={styles.noSearchResults}>
-                {Strings.storeSearchEmpty + searchInput}
-              </Text>
-            </View>
-          }
+          ListEmptyComponent={getEmptyState()}
           contentContainerStyle={styles.list}
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
@@ -140,6 +146,7 @@ const SearchStoreProducts = (props) => {
 
 const mapStateToProps = (state) => ({
   homeReducer: state.homeReducer,
+  loading: state.authReducer.loading,
 });
 
 const mapDispatchToProps = {
