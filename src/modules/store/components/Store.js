@@ -31,7 +31,7 @@ const Store = (props) => {
       case 'first':
         return <StoreCategories storeId={props.storeId} />;
       case 'second':
-        return <Explore />;
+        return <Explore storeId={props.storeId} />;
       case 'third':
         return <StoreOrders />;
     }
@@ -70,21 +70,19 @@ const Store = (props) => {
   };
   return (
     <SafeArea>
-      <View style={{flex: 1}}>
-        <TabView
-          navigationState={{
-            ...{routes},
-            ...{index: tabIndex},
-          }}
-          swipeEnabled={true}
-          renderTabBar={renderTabBar}
-          tabBarPosition={'bottom'}
-          renderScene={renderScene}
-          onIndexChange={(index) => onChangeTab(index)}
-          initialLayout={initialLayout}
-          lazy
-        />
-      </View>
+      <TabView
+        navigationState={{
+          ...{routes},
+          ...{index: tabIndex},
+        }}
+        swipeEnabled={false}
+        renderTabBar={renderTabBar}
+        tabBarPosition={'bottom'}
+        renderScene={renderScene}
+        onIndexChange={(index) => onChangeTab(index)}
+        initialLayout={initialLayout}
+        lazy
+      />
     </SafeArea>
   );
 };
