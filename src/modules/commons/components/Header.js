@@ -24,6 +24,7 @@ const Header = (props) => {
     containerStyle,
     onBack,
     headerRight,
+    noBorder,
   } = props;
 
   return (
@@ -33,6 +34,7 @@ const Header = (props) => {
         styles.container,
         type != 0 && styles.container2,
         containerStyle && containerStyle,
+        type === 0 && !noBorder && styles.bottomBorder,
       ]}>
       <View style={styles.rowContainer}>
         <Pressable
@@ -117,6 +119,10 @@ const styles = EStyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,
+  },
+  bottomBorder: {
+    borderBottomWidth: '1rem',
+    borderBottomColor: Colors.seperatorColor,
   },
 });
 

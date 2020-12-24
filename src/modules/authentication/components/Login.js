@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  Pressable,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
@@ -21,14 +22,21 @@ import {Colors} from '../../../utils/values/Colors';
 
 const Login = (props) => {
   const [number, setNumber] = useState('');
+  const [error, setError] = useState(false);
 
   const login = () => {
-    let pars = {
-      mobile: number,
-      country_code: '+91',
-    };
-
-    props.sendOtp(pars);
+    if (!valid(number, Validation.mobile)) {
+      setError(true);
+    } else {
+      if (error) {
+        setError(false);
+      }
+      let pars = {
+        mobile: number,
+        country_code: '+91',
+      };
+      props.sendOtp(pars);
+    }
   };
 
   return (
@@ -42,39 +50,50 @@ const Login = (props) => {
           contentContainerStyle={commonStyles.scrollContainer}
           bounces={false}
           keyboardShouldPersistTaps="handled">
-          <Header title={Strings.loginTitle} subTitle={Strings.loginSubTitle} />
-
-          <Input
-            label={Strings.mobileNumber}
-            value={number}
-            onChange={(number) => setNumber(number)}
-            type={'phone'}
-            errorMessage={Strings.invalidNumber}
-            error={number && !valid(number, Validation.mobile)}
-            containerStyle={{marginTop: 0}}
+          <Header
+            title={Strings.loginTitle}
+            subTitle={Strings.loginSubTitle}
+            noShadow
           />
 
-          <View style={commonStyles.buttonBottomContainer}>
+          <View style={styles.codeContainer}>
+            <View style={styles.codeSubContainer}>
+              {/*<Text style={styles.codeLabel}>Code</Text>*/}
+              <Text style={styles.codeValue}>+91</Text>
+            </View>
+            <Input
+              label={Strings.mobileNumber}
+              value={number}
+              onChange={(number) => setNumber(number)}
+              type={'phone'}
+              errorMessage={Strings.invalidNumber}
+              error={error}
+              containerStyle={{marginTop: 0}}
+              max={10}
+            />
+          </View>
+
+          <View
+            style={{...commonStyles.buttonBottomContainer, paddingBottom: 0}}>
             <Button
               label={Strings.continue}
               onPress={() => login()}
-              disabled={!valid(number, Validation.mobile)}
+              disabled={!number}
             />
-
-            <Text style={styles.termsText}>
-              {Strings.accepting}
-              <Text
-                style={styles.coloredText}
-                onPress={() => console.log('terms')}>
-                {Strings.terms}
-              </Text>
-              {Strings.and}
-              <Text
-                style={styles.coloredText}
-                onPress={() => console.log('privacy')}>
-                {Strings.privacy}
-              </Text>
-            </Text>
+            <View style={styles.bottomTextContainer}>
+              <Text style={styles.termsText}>{Strings.accepting}</Text>
+              <Pressable>
+                <Text style={[styles.termsText, styles.coloredText]}>
+                  {Strings.terms}
+                </Text>
+              </Pressable>
+              <Text style={styles.termsText}>{Strings.and}</Text>
+              <Pressable>
+                <Text style={[styles.termsText, styles.coloredText]}>
+                  {Strings.privacy}
+                </Text>
+              </Pressable>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

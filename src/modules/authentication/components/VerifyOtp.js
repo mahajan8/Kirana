@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  Pressable,
 } from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
@@ -18,12 +19,14 @@ import {Actions} from 'react-native-router-flux';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import Loader from '../../commons/components/Loader';
 import {Colors} from '../../../utils/values/Colors';
+import ErrorIcon from '../../../assets/images/error_icon.svg';
 
 const VerifyOtp = (props) => {
   const otp = useRef(null);
 
   const [disabled, setDisabled] = useState(true);
   const [seconds, setSeconds] = useState(30);
+  const [error, setError] = useState(false);
 
   const verify = () => {
     if (otp.current.submitOTP()) {
@@ -32,7 +35,7 @@ const VerifyOtp = (props) => {
         otp_code: otp.current.submitOTP(),
         user_type: 30,
       };
-      props.verifyOtp(pars);
+      props.verifyOtp(pars, () => setError(true));
     }
   };
 
@@ -68,23 +71,36 @@ const VerifyOtp = (props) => {
           <Header
             title={Strings.verifyOtp}
             subTitle={Strings.otpSent + props.number}
+            noShadow
           />
 
           <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
 
-          <Text style={styles.resendText}>
-            {seconds ? Strings.resendWait : Strings.preResend}
-            <Text
-              style={styles.coloredText}
-              onPress={() => !seconds && resend()}>
-              {seconds ? '00:' + seconds : Strings.resend}
-            </Text>
-          </Text>
+          {error && (
+            <View style={styles.rowContainer}>
+              <ErrorIcon />
+              <Text style={styles.errorMessage}>{Strings.otpError}</Text>
+            </View>
+          )}
+          <View style={commonStyles.bottomTextContainer}>
+            {seconds ? (
+              <Text style={styles.resendText}>
+                {seconds ? Strings.resendWait : ''}
+                <Text style={styles.coloredText}>{'00:' + seconds}</Text>
+              </Text>
+            ) : (
+              <Pressable onPress={resend}>
+                <Text style={[styles.resendText, styles.coloredText]}>
+                  {Strings.resend}
+                </Text>
+              </Pressable>
+            )}
+          </View>
 
           <View style={commonStyles.buttonBottomContainer}>
             <Button
               label={Strings.verify}
-              onPress={() => verify()}
+              onPress={verify}
               disabled={disabled}
             />
           </View>

@@ -187,4 +187,5 @@ export const Strings = {
   changeLocation: 'Change Location',
   storeSearchEmpty: "Sorry! We can't find any stores matching ",
   noProductFound: 'Sorry! We can’t find any product matching your search.',
+  otpError: 'Please enter a valid 4 digit OTP',
 };

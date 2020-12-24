@@ -24,28 +24,6 @@ export default class App extends Component {
       Text.defaultProps = {};
     }
     Text.defaultProps.allowFontScaling = false;
-    LogBox.ignoreAllLogs(true);
-
-    let oldRender = Text.render;
-    Text.render = function (...args) {
-      let origin = oldRender.call(this, ...args);
-      let style = origin.props.style;
-
-      return React.cloneElement(origin, {
-        style: [
-          {
-            fontFamily: style
-              ? style.fontWeight > 600 || style.fontWeight === 'bold'
-                ? Fonts.semiBold
-                : style.fontWeight > 400
-                ? Fonts.medium
-                : Fonts.regular
-              : Fonts.medium,
-          },
-          origin.props.style,
-        ],
-      });
-    };
   }
   render() {
     return (

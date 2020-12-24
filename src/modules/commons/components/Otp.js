@@ -153,8 +153,8 @@ const Styles = EStyleSheet.create({
     color: Colors.titleText,
     fontFamily: Fonts.medium,
     ...(Platform.OS == 'android' && {
-      paddingBottom: '11rem',
-      paddingTop: '16rem',
+      paddingBottom: 0,
+      paddingTop: 0,
     }),
   },
   otpView: {

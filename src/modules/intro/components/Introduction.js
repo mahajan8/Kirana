@@ -48,7 +48,7 @@ const Onboarding = () => {
         </View>
 
         <Text style={styles.introTitle}>{item.title}</Text>
-        <Text style={[styles.introSubText]}>{item.subText}</Text>
+        <Text style={styles.introSubText}>{item.subText}</Text>
       </View>
     );
   };

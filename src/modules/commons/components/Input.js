@@ -5,6 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 // import Images from '../util/images'
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
+import ErrorIcon from '../../../assets/images/error_icon.svg';
 const dp = (size) => EStyleSheet.value(size + 'rem');
 
 const Input = (props) => {
@@ -124,7 +125,10 @@ const Input = (props) => {
         </Animated.Text>
       </View>
       {error && errorMessage ? (
-        <Text style={Styles.errorMessage}>{errorMessage}</Text>
+        <View style={Styles.rowContainer}>
+          <ErrorIcon />
+          <Text style={Styles.errorMessage}>{errorMessage}</Text>
+        </View>
       ) : null}
     </View>
   );
@@ -171,8 +175,13 @@ const Styles = EStyleSheet.create({
     fontSize: '11rem',
     color: '#ea4e3c',
     letterSpacing: '0.22rem',
-    marginTop: '8vrem',
     fontFamily: Fonts.regular,
+    marginLeft: '7rem',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '8vrem',
   },
 });
 

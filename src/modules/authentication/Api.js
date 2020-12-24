@@ -30,7 +30,7 @@ export const sendOtp = (pars) => {
   };
 };
 
-export const verifyOtp = (pars) => {
+export const verifyOtp = (pars, error) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
@@ -47,7 +47,9 @@ export const verifyOtp = (pars) => {
           setAuthToken(token);
           dispatch(getUserDetails());
         } else {
-          alert(res.data.message);
+          if (error) {
+            error();
+          }
         }
       })
       .catch((error) => {

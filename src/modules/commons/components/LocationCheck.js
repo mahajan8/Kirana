@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, PermissionsAndroid} from 'react-native';
+import {Text, View, PermissionsAndroid, Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import LocationIcon from '../../../assets/images/green_location_current.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from './Button';
 import {Fonts} from '../../../utils/values/Fonts';
+import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const LocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
@@ -15,32 +16,42 @@ const LocationCheck = (props) => {
   }, []);
 
   const checkPermission = () => {
-    PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-    ).then((res) => {
-      if (!res) {
-        setVisible(true);
-      }
-    });
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.check(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then((res) => {
+        if (!res) {
+          setVisible(true);
+        }
+      });
+    } else {
+      check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
+        let granted = result === RESULTS.GRANTED ? true : false;
+        if (!granted) {
+          setVisible(true);
+        }
+      });
+    }
   };
 
   const getPermission = async () => {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Granted');
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
         setVisible(false);
       } else {
-        console.log('Denied');
+        request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
+          setVisible(false);
+        });
       }
     } catch (err) {
       console.warn(err);
     }
   };
 
-  if (!visible) {
+  if (visible) {
     return (
       <View style={styles.container}>
         <View style={styles.innerContainer}>

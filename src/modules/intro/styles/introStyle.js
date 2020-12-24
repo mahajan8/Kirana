@@ -24,7 +24,7 @@ export const styles = EStyleSheet.create({
     color: '#333333',
     fontSize: '16rem',
     fontFamily: Fonts.semiBold,
-    marginBottom: '10vrem',
+    marginBottom: '14vrem',
     textAlign: 'center',
   },
   introSubText: {
@@ -60,6 +60,7 @@ export const styles = EStyleSheet.create({
   },
   greenText: {
     color: Colors.themeGreen,
+    fontFamily: Fonts.medium,
   },
   splashLogo: {
     width: '210rem',
