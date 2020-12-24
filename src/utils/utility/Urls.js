@@ -1,4 +1,8 @@
 export const Urls = {
+  kiranaKartWebUrl: 'https://www.kiranakart.app',
+  privacyUrl: 'https://www.kiranakart.app/Privacy_Policy-KiranaKart.docx',
+  termsUrl: 'https://www.kiranakart.app/KiranaKart%20T_and_C.docx',
+
   sendOtp: '/organisation/user/send-sms-otp',
   verifyOtp: '/organisation/user/verify-otp',
   upload: '/common/attachment/upload',
