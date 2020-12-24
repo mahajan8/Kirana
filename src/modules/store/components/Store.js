@@ -7,19 +7,37 @@ import {commonStyles} from '../../commons/styles/commonStyles';
 import {TabView} from 'react-native-tab-view';
 import {styles} from '../styles/storeStyles';
 import {connect} from 'react-redux';
+import ShopActive from '../../../assets/images/shop_active.svg';
 import ShopInactive from '../../../assets/images/shop_inactive.svg';
+import OrdersActive from '../../../assets/images/orders_active.svg';
 import OrdersInactive from '../../../assets/images/orders_inactive.svg';
 import ExploreActive from '../../../assets/images/explore_active.svg';
+import ExploreInactive from '../../../assets/images/explore_inactive.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Explore from './Explore';
 import StoreOrders from './StoreOrders';
 import StoreCategories from './StoreCategories';
 
-// TODO: Add Icons for Tabs
+// TODO: Add Icons for Explore
 let routes = [
-  {key: 'first', title: Strings.shop, Icon: ShopInactive},
-  {key: 'second', title: Strings.explore, Icon: ExploreActive},
-  {key: 'third', title: Strings.orders, Icon: OrdersInactive},
+  {
+    key: 'first',
+    title: Strings.shop,
+    ActiveIcon: ShopActive,
+    InactiveIcon: ShopInactive,
+  },
+  {
+    key: 'second',
+    title: Strings.explore,
+    ActiveIcon: ExploreActive,
+    InactiveIcon: ExploreInactive,
+  },
+  {
+    key: 'third',
+    title: Strings.orders,
+    ActiveIcon: OrdersActive,
+    InactiveIcon: OrdersInactive,
+  },
 ];
 let initialLayout = {height: 0, width: Dimensions.get('window').width};
 
@@ -41,21 +59,15 @@ const Store = (props) => {
     return (
       <View style={[commonStyles.shadow, styles.tabRow]}>
         {routes.map((item, index) => {
-          let {title, Icon} = item;
+          let {title, ActiveIcon, InactiveIcon} = item;
+          let selected = tabIndex === index ? true : false;
           return (
             <Pressable
               key={index.toString()}
               onPress={() => onChangeTab(index)}
               style={styles.tabItemContainer}>
-              <Icon
-                width={EStyleSheet.value('16rem')}
-                height={EStyleSheet.value('16rem')}
-              />
-              <Text
-                style={[
-                  styles.label,
-                  tabIndex === index && styles.selectedLabel,
-                ]}>
+              {selected ? <ActiveIcon /> : <InactiveIcon />}
+              <Text style={[styles.label, selected && styles.selectedLabel]}>
                 {title}
               </Text>
             </Pressable>
