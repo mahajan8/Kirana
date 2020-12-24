@@ -15,7 +15,10 @@ import {Actions} from 'react-native-router-flux';
 
 const Explore = (props) => {
   useEffect(() => {
-    props.getStoreCategories();
+    const pars = {
+      store_id: props.storeId,
+    };
+    props.getStoreCategories(pars);
   }, []);
 
   const renderCategory = (item) => (
@@ -39,14 +42,16 @@ const Explore = (props) => {
 
   return (
     <SafeArea>
-      <View style={[styles.searchContainer, commonStyles.shadow]}>
+      <Pressable
+        style={[styles.searchContainer, commonStyles.shadow]}
+        onPress={Actions.searchProducts}>
         <Search
           width={EStyleSheet.value('14rem')}
           height={EStyleSheet.value('14rem')}
         />
         <Text style={styles.searchProduct}>{Strings.searchProduct}...</Text>
         <CartCounter />
-      </View>
+      </Pressable>
       <View style={styles.container}>
         <Text style={styles.heading}>{Strings.groceryCategories}</Text>
         <FlatList

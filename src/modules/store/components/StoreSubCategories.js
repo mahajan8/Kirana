@@ -37,11 +37,13 @@ const StoreSubCategories = (props) => {
         title={categoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            <Search
-              style={styles.headerIcon}
-              width={EStyleSheet.value('16rem')}
-              height={EStyleSheet.value('16rem')}
-            />
+            <Pressable onPress={Actions.searchProducts}>
+              <Search
+                style={styles.headerIcon}
+                width={EStyleSheet.value('16rem')}
+                height={EStyleSheet.value('16rem')}
+              />
+            </Pressable>
             <CartCounter />
           </View>
         }

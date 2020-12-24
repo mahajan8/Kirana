@@ -67,9 +67,6 @@ export const searchStoreProducts = (pars) => {
         if (!filter) {
           dispatch(setFilters(res.data.data.filters));
         }
-        // if (pars.start === 0) {
-        //   dispatch(clearProducts());
-        // }
         let {total_count, results} = res.data.data;
         if (Actions.currentScene === 'storeProductsResults') {
           dispatch(appendStoreProducts(results, total_count));

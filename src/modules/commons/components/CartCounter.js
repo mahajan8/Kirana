@@ -1,21 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
-import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import Cart from '../../../assets/images/cart.svg';
 import {Fonts} from '../../../utils/values/Fonts';
 
 const CartCounter = () => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <Cart
         width={EStyleSheet.value('14rem')}
         height={EStyleSheet.value('14rem')}
       />
       <Text style={styles.count}>0</Text>
-    </View>
+    </Pressable>
   );
 };
 

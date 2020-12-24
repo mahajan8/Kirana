@@ -87,11 +87,13 @@ const ProductsList = (props) => {
         title={subCategoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            <Search
-              style={styles.headerIcon}
-              width={EStyleSheet.value('16rem')}
-              height={EStyleSheet.value('16rem')}
-            />
+            {/*<Pressable onPress={Actions.searchProducts}>
+              <Search
+                style={styles.headerIcon}
+                width={EStyleSheet.value('16rem')}
+                height={EStyleSheet.value('16rem')}
+              />
+        </Pressable>*/}
             <Pressable
               onPress={() => {
                 Actions.filters({

@@ -86,7 +86,7 @@ const Home = (props) => {
         ListEmptyComponent={
           props.loading ? (
             <View style={styles.container}>
-              <StorePlaceholder count={2} />
+              <StorePlaceholder count={6} />
             </View>
           ) : (
             <View style={styles.listEmptyContainer}>
