@@ -56,7 +56,7 @@ export const styles = EStyleSheet.create({
   },
   itemRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   locationDetails: {
     marginLeft: '9rem',
@@ -65,6 +65,7 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     fontSize: '12rem',
     fontFamily: Fonts.medium,
+    marginBottom: '4vrem',
   },
   locationSecondary: {
     color: Colors.darkGray,
@@ -120,6 +121,7 @@ export const styles = EStyleSheet.create({
     fontSize: '14rem',
     fontFamily: Fonts.medium,
     color: '#333333',
+    marginTop: '4rem',
   },
   addressLocation: {
     fontSize: '12rem',
@@ -128,6 +130,7 @@ export const styles = EStyleSheet.create({
     lineHeight: '20rem',
     letterSpacing: '0.2rem',
     width: '220rem',
+    marginTop: '2rem',
   },
   addressContainer: {
     marginBottom: '24rem',
