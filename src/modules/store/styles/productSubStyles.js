@@ -41,7 +41,7 @@ export const styles = EStyleSheet.create({
     paddingVertical: '15vrem',
     paddingLeft: '16rem',
     marginBottom: '8vrem',
-    flex: 1,
+    flexGrow: 1,
   },
   listLoaderContainer: {
     marginTop: '20vrem',

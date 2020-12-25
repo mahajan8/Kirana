@@ -109,36 +109,34 @@ const ProductsList = (props) => {
         type={1}
       />
 
-      <View style={{flex: 1}}>
-        <FlatList
-          data={products}
-          renderItem={({item, index}) => (
-            <ProductBox
-              key={`product${item + index}`}
-              vertical
-              onPress={() => Actions.productDetails({subCategoryName, item})}
-              item={item}
-            />
-          )}
-          keyExtractor={(item, index) => `product${index}`}
-          numColumns={2}
-          contentContainerStyle={[styles.listContainer]}
-          ListEmptyComponent={<ListPlaceHolder count={4} vertical />}
-          onMomentumScrollBegin={() => setEndReachCallable(false)}
-          onEndReachedThreshold={0.1}
-          onEndReached={() => {
-            if (!endReachCallable && products.length < totalProductCount) {
-              getProducts(products.length);
-              setEndReachCallable(true);
-            }
-          }}
-          ListFooterComponent={
-            <View style={styles.listLoaderContainer}>
-              <Loader show={products.length ? props.loading : false} />
-            </View>
+      <FlatList
+        data={products}
+        renderItem={({item, index}) => (
+          <ProductBox
+            key={`product${item + index}`}
+            vertical
+            onPress={() => Actions.productDetails({subCategoryName, item})}
+            item={item}
+          />
+        )}
+        keyExtractor={(item, index) => `product${index}`}
+        numColumns={2}
+        contentContainerStyle={styles.listContainer}
+        ListEmptyComponent={<ListPlaceHolder count={4} vertical />}
+        onMomentumScrollBegin={() => setEndReachCallable(false)}
+        onEndReachedThreshold={0.1}
+        onEndReached={() => {
+          if (!endReachCallable && products.length < totalProductCount) {
+            getProducts(products.length);
+            setEndReachCallable(true);
           }
-        />
-      </View>
+        }}
+        ListFooterComponent={
+          <View style={styles.listLoaderContainer}>
+            <Loader show={products.length ? props.loading : false} />
+          </View>
+        }
+      />
     </SafeArea>
   );
 };
