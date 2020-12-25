@@ -26,12 +26,13 @@ import Store from '../modules/store/components/Store';
 import Filters from '../modules/store/components/Filters';
 import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
+import OrderDetails from '../modules/orders/components/OrderDetails';
 
 const AppRouter = () => {
   return (
     <Router backAndroidHandler={() => {}}>
       <Stack key="root" hideNavBar>
-        <Scene key="splash" component={Splash} />
+        {/* <Scene key="splash" component={Splash} />
         <Scene key="introduction" component={Introduction} />
         <Scene key="selectLanguage" component={SelectLanguage} />
         <Scene key="login" component={Login} />
@@ -54,7 +55,8 @@ const AppRouter = () => {
         <Scene key="accountSetup" component={AccountSetup} />
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
-        <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="searchProducts" component={SearchProducts} /> */}
+        <Scene key="orderDetails" component={OrderDetails} />
         <Scene
           key="drawer"
           drawer={true}

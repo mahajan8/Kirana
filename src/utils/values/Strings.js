@@ -110,6 +110,13 @@ export const Strings = {
 
   referal: 'Referral Code',
 
+  new: 'New',
+  onRoute: 'On Route',
+  completed: 'Completed',
+  rejected: 'Rejected',
+  cancelled: 'Cancelled',
+  refundInProgress: 'Refund in progress',
+
   continuePhoneNumber: 'Continue with Phone Number',
   drawerFreeDeliverySub:
     'Refer friends and get free deliveries. It’s a Win-Win!',
@@ -188,4 +195,24 @@ export const Strings = {
   storeSearchEmpty: "Sorry! We can't find any stores matching ",
   noProductFound: 'Sorry! We can’t find any product matching your search.',
   otpError: 'Please enter a valid 4 digit OTP',
+  orderId: 'Order Id',
+  needHelp: 'Need Help?',
+  orderInfoItemsRefund:
+    "Certain items in your order were removed or replaced, so we're sending you an instant refund of 200 rupees!",
+  yourItems: 'Your Items',
+  paymentDetails: 'Payment Details',
+  subTotal: 'Sub Total',
+  deliveryCharge: 'Delivery charge',
+  refundAmount: 'Refund Amount',
+  grandTotal: 'Grand Total',
+  instructions: 'Instructions',
+  reorderItems: 'Reorder All Items',
+  orderRejectedRefundInfo:
+    'Your order was rejected by the store. The refunded amount will be credited in your account within 2 days.',
+  orderCancelRefundInfo:
+    'You have cancelled the order. Refund amount will be credited in your account in 2 days',
+  cancelOrder: 'Cancel Order',
+  cancelOrderConfirm:
+    'Are you sure you want to cancel the order from The Bakers Dozen?',
+  yesCancel: 'Yes, Cancel',
 };
