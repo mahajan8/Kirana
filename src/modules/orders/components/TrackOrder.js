@@ -7,6 +7,7 @@ import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/trackOrderStyles';
 import TrackOrderInfo from './TrackOrderInfo';
+import TrackMarker from '../../../assets/images/track_marker.svg';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -45,10 +46,12 @@ const TrackOrder = () => {
           }}
           // onRegionChange={(region) => setRegion(region)}
         >
-          <Marker
-            coordinate={{latitude: 30.677655, longitude: 76.745384}}></Marker>
-          <Marker
-            coordinate={{latitude: 30.72961, longitude: 76.702469}}></Marker>
+          <Marker coordinate={{latitude: 30.677655, longitude: 76.745384}}>
+            <TrackMarker />
+          </Marker>
+          <Marker coordinate={{latitude: 30.72961, longitude: 76.702469}}>
+            <TrackMarker />
+          </Marker>
         </MapView>
       </View>
       <TrackOrderInfo trackStatus={trackStatus} />
