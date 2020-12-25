@@ -43,10 +43,16 @@ let orderStatusList = [
     borderColor: '#cfc7f4',
     labelColor: '#5445bd',
   },
+  {
+    label: Strings.refundComplete,
+    backgroundColor: '#e4deff',
+    borderColor: '#cfc7f4',
+    labelColor: '#5445bd',
+  },
 ];
 
 const OrderHeader = (props) => {
-  let {status, infoLabel} = props;
+  let {status, infoLabel, refund, refundComplete} = props;
 
   const getOrderStatusBubble = (index = 0) => {
     let orderStatus = orderStatusList[index];
@@ -77,7 +83,8 @@ const OrderHeader = (props) => {
             </Pressable>
             <Text style={styles.orderId}>{Strings.orderId} - OVXK089119</Text>
             <Text style={styles.orderTime}>12 Sep 2020, 7:00 pm</Text>
-            {(status === 3 || status === 4) && getOrderStatusBubble(5)}
+            {(refund || refundComplete) &&
+              getOrderStatusBubble(refundComplete ? 6 : 5)}
           </View>
 
           <View style={styles.rightContainer}>

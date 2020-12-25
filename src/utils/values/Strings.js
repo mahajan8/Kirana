@@ -116,6 +116,7 @@ export const Strings = {
   rejected: 'Rejected',
   cancelled: 'Cancelled',
   refundInProgress: 'Refund in progress',
+  refundComplete: 'Refund Complete',
 
   continuePhoneNumber: 'Continue with Phone Number',
   drawerFreeDeliverySub:
@@ -216,4 +217,15 @@ export const Strings = {
     'Are you sure you want to cancel the order from The Bakers Dozen?',
   yesCancel: 'Yes, Cancel',
   tryOtherStores: 'Try Alternative Stores',
+  orderDetails: 'Order Details',
+  orderAccepted: 'Order Accepted',
+  orderPlaced: 'Order Placed',
+  partnedOnWay: 'Delivery partner is on the way to store',
+  orderPicked: 'Order picked up from the store',
+  orderDelivered: 'Order Delivered',
+  orderRejected: 'Order Rejected',
+  orderAcceptedSub: 'Looking for a delivery partner now',
+  onTheWaySub:
+    'Your order shall be picked up once the partner reached the outlet',
+  orderPickedSub: 'On the way to delivery location',
 };

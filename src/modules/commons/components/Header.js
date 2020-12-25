@@ -25,6 +25,7 @@ const Header = (props) => {
     onBack,
     headerRight,
     noBorder,
+    titleComp,
   } = props;
 
   return (
@@ -52,7 +53,12 @@ const Header = (props) => {
           />
         </Pressable>
 
-        {type == 1 && <Text style={styles.type1Title}>{title}</Text>}
+        {type == 1 &&
+          (titleComp ? (
+            titleComp
+          ) : (
+            <Text style={styles.type1Title}>{title}</Text>
+          ))}
 
         {headerRight && (
           <View style={styles.headerRightContainer}>{headerRight}</View>

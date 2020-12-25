@@ -27,6 +27,7 @@ import Filters from '../modules/store/components/Filters';
 import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
 import OrderDetails from '../modules/orders/components/OrderDetails';
+import TrackOrder from '../modules/orders/components/TrackOrder';
 
 const AppRouter = () => {
   return (
@@ -56,7 +57,8 @@ const AppRouter = () => {
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
         <Scene key="searchProducts" component={SearchProducts} /> */}
-        <Scene key="orderDetails" component={OrderDetails} />
+        {/* <Scene key="orderDetails" component={OrderDetails} /> */}
+        <Scene key="trackOrder" component={TrackOrder} />
         <Scene
           key="drawer"
           drawer={true}

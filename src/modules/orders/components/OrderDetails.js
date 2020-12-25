@@ -86,7 +86,11 @@ const OrderDetails = () => {
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
         ListHeaderComponent={
           <View style={styles.listHeader}>
-            <OrderHeader status={orderStatus} />
+            <OrderHeader
+              status={orderStatus}
+              refund={orderStatus === 3 || orderStatus === 4}
+              //   refundComplete
+            />
             {renderHeader(Strings.yourItems)}
           </View>
         }
