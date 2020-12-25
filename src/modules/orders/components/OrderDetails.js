@@ -131,7 +131,13 @@ const OrderDetails = () => {
           </View>
         ) : (
           <Button
-            label={Strings.reorderItems}
+            label={
+              orderStatus === 1
+                ? Strings.trackOrder
+                : orderStatus === 2
+                ? Strings.reorderItems
+                : Strings.tryOtherStores
+            }
             labelStyle={styles.buttonLabel}
           />
         )}

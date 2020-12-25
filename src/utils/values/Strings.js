@@ -215,4 +215,5 @@ export const Strings = {
   cancelOrderConfirm:
     'Are you sure you want to cancel the order from The Bakers Dozen?',
   yesCancel: 'Yes, Cancel',
+  tryOtherStores: 'Try Alternative Stores',
 };
