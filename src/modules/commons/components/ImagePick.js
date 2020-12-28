@@ -8,6 +8,7 @@ import Cross from '../../../assets/images/cross.svg';
 import ImagePicker from 'react-native-image-picker';
 import {commonStyles} from '../styles/commonStyles';
 import {Fonts} from '../../../utils/values/Fonts';
+import ModalContainer from './ModalContainer';
 
 const ImagePick = (props) => {
   const {visible, setVisible, onSelectImage} = props;
@@ -38,59 +39,50 @@ const ImagePick = (props) => {
   };
 
   return (
-    <Modal
+    <ModalContainer
       visible={visible}
-      onRequestClose={() => setVisible(false)}
-      transparent={true}
-      animated
-      animationType="none">
-      <Pressable
-        activeOpacity={1}
-        style={styles.container}
-        onPress={() => setVisible(false)}>
-        <Pressable activeOpacity={1} style={styles.innerContainer}>
-          <View style={styles.titleView}>
-            <Text style={styles.titleText}>{Strings.selectFrom} </Text>
-
-            <Pressable
-              onPress={() => setVisible(false)}
-              hitSlop={commonStyles.hitSlop}>
-              <Cross
-                width={EStyleSheet.value('14rem')}
-                height={EStyleSheet.value('14vrem')}
-              />
-            </Pressable>
-          </View>
+      setVisible={setVisible}
+      containerStyle={styles.container}>
+      <Pressable activeOpacity={1} style={styles.innerContainer}>
+        <View style={styles.titleView}>
+          <Text style={styles.titleText}>{Strings.selectFrom} </Text>
 
           <Pressable
-            style={styles.optionsView}
-            onPress={() => openImagePicker(0)}>
-            <Camera
-              width={EStyleSheet.value('17rem')}
-              height={EStyleSheet.value('13vrem')}
+            onPress={() => setVisible(false)}
+            hitSlop={commonStyles.hitSlop}>
+            <Cross
+              width={EStyleSheet.value('14rem')}
+              height={EStyleSheet.value('14vrem')}
             />
-            <Text style={styles.optionsText}>{Strings.camera}</Text>
           </Pressable>
+        </View>
 
-          <Pressable
-            style={styles.optionsView}
-            onPress={() => openImagePicker(1)}>
-            <Camera
-              width={EStyleSheet.value('17rem')}
-              height={EStyleSheet.value('13vrem')}
-            />
-            <Text style={styles.optionsText}>{Strings.gallery}</Text>
-          </Pressable>
+        <Pressable
+          style={styles.optionsView}
+          onPress={() => openImagePicker(0)}>
+          <Camera
+            width={EStyleSheet.value('17rem')}
+            height={EStyleSheet.value('13vrem')}
+          />
+          <Text style={styles.optionsText}>{Strings.camera}</Text>
+        </Pressable>
+
+        <Pressable
+          style={styles.optionsView}
+          onPress={() => openImagePicker(1)}>
+          <Camera
+            width={EStyleSheet.value('17rem')}
+            height={EStyleSheet.value('13vrem')}
+          />
+          <Text style={styles.optionsText}>{Strings.gallery}</Text>
         </Pressable>
       </Pressable>
-    </Modal>
+    </ModalContainer>
   );
 };
 
 const styles = EStyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
     paddingBottom: '22vrem',
     justifyContent: 'flex-end',
   },

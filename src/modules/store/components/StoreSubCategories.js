@@ -6,13 +6,12 @@ import {styles} from '../styles/productSubStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import Search from '../../../assets/images/search.svg';
-import Header from '../../commons/components/Header';
-import CartCounter from '../../commons/components/CartCounter';
 import List from './StoreProductsListing';
 import {getProductsByCategory, searchStoreProducts} from '../Api';
 import {connect} from 'react-redux';
 import {setSubcategoryProducts} from '../StoreActions';
 import ListPlaceHolder from './ListPlaceHolder';
+import CartHeader from '../../commons/components/CartHeader';
 
 const StoreSubCategories = (props) => {
   let {categoryName} = props;
@@ -33,7 +32,7 @@ const StoreSubCategories = (props) => {
   };
   return (
     <SafeArea>
-      <Header
+      <CartHeader
         title={categoryName}
         headerRight={
           <View style={styles.rowContainer}>
@@ -44,10 +43,8 @@ const StoreSubCategories = (props) => {
                 height={EStyleSheet.value('16rem')}
               />
             </Pressable>
-            <CartCounter />
           </View>
         }
-        type={1}
       />
       <FlatList
         data={subcategoryProducts}

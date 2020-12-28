@@ -14,4 +14,5 @@ export const Colors = {
   lightStatusBar: '#fafafa',
   placeHolder: '#ececec',
   listBorderGray: '#e3e3e3',
+  black2: '#333333',
 };

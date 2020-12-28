@@ -8,14 +8,13 @@ import {Actions} from 'react-native-router-flux';
 import Search from '../../../assets/images/search.svg';
 import Filter from '../../../assets/images/filter.svg';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
-import Header from '../../commons/components/Header';
-import CartCounter from '../../commons/components/CartCounter';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
 import {clearProducts} from '../StoreActions';
+import CartHeader from '../../commons/components/CartHeader';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -83,17 +82,17 @@ const ProductsList = (props) => {
 
   return (
     <SafeArea>
-      <Header
+      <CartHeader
         title={subCategoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            {/*<Pressable onPress={Actions.searchProducts}>
+            <Pressable onPress={Actions.searchProducts}>
               <Search
                 style={styles.headerIcon}
                 width={EStyleSheet.value('16rem')}
                 height={EStyleSheet.value('16rem')}
               />
-        </Pressable>*/}
+            </Pressable>
             <Pressable
               onPress={() => {
                 Actions.filters({
@@ -103,10 +102,8 @@ const ProductsList = (props) => {
               }}>
               <FilterIcon style={styles.headerIcon} />
             </Pressable>
-            <CartCounter />
           </View>
         }
-        type={1}
       />
 
       <FlatList

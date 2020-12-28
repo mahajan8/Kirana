@@ -5,6 +5,7 @@ import {setLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from './NavigationActions';
+import {setLocation} from '../onboarding/OnboardingActions';
 
 export const addUpdateAddress = (pars, callback) => {
   return (dispatch) => {
@@ -19,11 +20,18 @@ export const addUpdateAddress = (pars, callback) => {
 
         if (success) {
           dispatch(getAddresses());
-          let index = Actions.state.routes.findIndex(
+          let addresses = Actions.state.routes.some(
             (obj) => obj.routeName === 'addresses',
           );
-          if (index >= 0) {
+          let cart = Actions.state.routes.some(
+            (obj) => obj.routeName === 'cart',
+          );
+          if (addresses) {
             Actions.popTo('addresses');
+          } else if (cart) {
+            let {id, type, location} = res.data.data.user_address;
+            dispatch(setLocation({...location, id, type}));
+            Actions.popTo('cart');
           } else {
             Actions.drawer();
           }
@@ -46,7 +54,6 @@ export const getAddresses = () => {
         dispatch(setLoading(false));
 
         const success = !res.data.error;
-        console.log(res.data);
 
         if (success) {
           dispatch(setAddress(res.data.data));

@@ -58,8 +58,9 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     // alignItems: 'center',
   },
-  locationDetails: {
-    marginLeft: '9rem',
+  rowIcon: {
+    marginRight: '9rem',
+    marginTop: '2rem',
   },
   locationMain: {
     color: Colors.titleText,

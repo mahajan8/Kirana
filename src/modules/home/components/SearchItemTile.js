@@ -20,7 +20,7 @@ const SearchItemTile = (props) => {
   const [quantity, setQuantity] = useState(0);
 
   return (
-    <View style={[styles.rowContainer, styles.itemContainer]}>
+    <View style={[styles.rowContainer]}>
       <View style={styles.productImageContainer}>
         <Image
           style={styles.productImage}
@@ -130,9 +130,6 @@ const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.titleText,
     marginHorizontal: '10rem',
-  },
-  itemContainer: {
-    marginBottom: '24vrem',
   },
   productDetialsContainer: {
     paddingTop: '3rem',

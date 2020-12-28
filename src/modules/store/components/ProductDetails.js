@@ -5,10 +5,9 @@ import {styles} from '../styles/productDetailStyles';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../../commons/styles/commonStyles';
-import Header from '../../commons/components/Header';
-import CartCounter from '../../commons/components/CartCounter';
 import Button from '../../commons/components/Button';
 import {unitsList} from '../../../utils/values/Values';
+import CartHeader from '../../commons/components/CartHeader';
 
 const ProductDetails = (props) => {
   let {subCategoryName, item} = props;
@@ -24,7 +23,7 @@ const ProductDetails = (props) => {
 
   return (
     <SafeArea>
-      <Header title={subCategoryName} headerRight={<CartCounter />} type={1} />
+      <CartHeader title={subCategoryName} />
       <View style={styles.container}>
         <Image
           source={{

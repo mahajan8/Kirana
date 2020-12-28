@@ -35,7 +35,7 @@ const CartHeader = (props) => {
     location,
     selectLocation,
     drawer,
-    onCrossPress,
+    title,
   } = props;
 
   return (
@@ -74,7 +74,9 @@ const CartHeader = (props) => {
         )}
       </Pressable>
 
-      {titleComp ? (
+      {title ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : titleComp ? (
         <View style={styles.titleContainer}>{titleComp}</View>
       ) : search ? (
         <View style={styles.searchContainer}>
@@ -90,7 +92,7 @@ const CartHeader = (props) => {
             ref={inputRef}
           />
           {searchValue ? (
-            <Pressable onPress={onCrossPress && onCrossPress}>
+            <Pressable onPress={() => onSearchChange('')}>
               <Cross />
             </Pressable>
           ) : null}
@@ -104,7 +106,7 @@ const CartHeader = (props) => {
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}
           />
-          <Text style={styles.title}>
+          <Text style={styles.locationTitle}>
             {location
               ? location.type
                 ? getKeyByValue(addressTypes, location.type)
@@ -142,7 +144,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     // marginBottom: '12vrem',
   },
-  title: {
+  locationTitle: {
     color: Colors.titleText,
     fontSize: '14rem',
     fontFamily: Fonts.medium,
@@ -191,6 +193,13 @@ const styles = EStyleSheet.create({
     elevation: 5,
   },
   titleContainer: {
+    flex: 1,
+  },
+  title: {
+    color: Colors.titleText,
+    fontSize: '16rem',
+    fontFamily: Fonts.medium,
+    marginLeft: '4rem',
     flex: 1,
   },
 });

@@ -12,7 +12,6 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 // type =0 --> Auth Header with title and subtitle
 // type =1 --> Row Header with title and back arrow
-// type =2 --> Type 1 header with Create Product and search button
 
 const Header = (props) => {
   const {
