@@ -199,4 +199,7 @@ export const Strings = {
   grandTotal: 'Grand Total',
   addAddressToProceed: 'Add an address to proceed',
   pleaseAddAddress: 'Please add your delivery address.',
+  selectDeliveryAddress: 'Select delivery address',
+  addNewAddress: '+ Add new address',
+  deliverTo: 'Deliver to:',
 };

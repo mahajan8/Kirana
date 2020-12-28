@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
@@ -7,6 +7,8 @@ import SearchItemTile from '../../home/components/SearchItemTile';
 import {styles} from '../styles/cartStyles';
 import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartSelectedAddress from './CartSelectedAddress';
+import {connect} from 'react-redux';
+import AddressListModal from './AddressListModal';
 
 let cartItems = [
   {
@@ -46,7 +48,9 @@ let cartItems = [
   },
 ];
 
-const Cart = () => {
+const Cart = (props) => {
+  const [addressModal, setAddressModal] = useState(false);
+
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
@@ -136,9 +140,21 @@ const Cart = () => {
         }
       />
 
-      <CartSelectedAddress />
+      <CartSelectedAddress
+        addAddress={() => {
+          setAddressModal(true);
+        }}
+      />
+      <AddressListModal visible={addressModal} setVisible={setAddressModal} />
     </SafeArea>
   );
 };
 
-export default Cart;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+  homeReducer: state.homeReducer,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -12,7 +12,7 @@ import Search from './SearchLocation';
 const SearchLocation = (props) => {
   return (
     <SafeArea>
-      <Header noShadow containerStyle={styles.headerContainer} />
+      <Header noShadow containerStyle={styles.headerContainer} noBorder />
       <Search setLocation={props.saveLocation ? props.saveLocation : false} />
       <Loader show={props.loading} />
     </SafeArea>

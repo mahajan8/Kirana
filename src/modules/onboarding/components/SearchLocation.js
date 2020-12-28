@@ -84,7 +84,7 @@ const Search = (props) => {
   const renderRow = (data) => {
     return (
       <View style={styles.itemRow}>
-        <Location />
+        <Location style={styles.rowIcon} />
         <View style={styles.locationDetails}>
           <Text style={styles.locationMain}>
             {data.structured_formatting.main_text}

@@ -40,4 +40,13 @@ export const styles = EStyleSheet.create({
   addButtonLabel: {
     fontSize: '10rem',
   },
+  addressType: {
+    fontFamily: Fonts.semiBold,
+    textTransform: 'uppercase',
+  },
+  change: {
+    fontSize: '12rem',
+    fontFamily: Fonts.medium,
+    color: Colors.themeGreen,
+  },
 });
