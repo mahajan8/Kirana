@@ -102,7 +102,7 @@ const CartHeader = (props) => {
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}
           />
-          <Text style={styles.title}>
+          <Text style={styles.locationTitle}>
             {location
               ? location.type
                 ? getKeyByValue(addressTypes, location.type)
