@@ -5,10 +5,11 @@ import {Colors} from '../../../utils/values/Colors';
 import {connect} from 'react-redux';
 import Cart from '../../../assets/images/cart.svg';
 import {Fonts} from '../../../utils/values/Fonts';
+import {Actions} from 'react-native-router-flux';
 
 const CartCounter = () => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={Actions.cart}>
       <Cart
         width={EStyleSheet.value('14rem')}
         height={EStyleSheet.value('14rem')}

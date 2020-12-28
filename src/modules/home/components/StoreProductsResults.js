@@ -157,6 +157,7 @@ const SearchProductResults = (props) => {
             <Loader show={storeProducts.length ? props.loading : false} />
           </View>
         }
+        ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       />
       <View style={styles.buttonContainer}>
         <Button

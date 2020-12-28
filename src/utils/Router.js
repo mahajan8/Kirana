@@ -26,6 +26,7 @@ import Store from '../modules/store/components/Store';
 import Filters from '../modules/store/components/Filters';
 import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
+import Cart from '../modules/cart/components/Cart';
 
 const AppRouter = () => {
   return (
@@ -55,6 +56,7 @@ const AppRouter = () => {
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
         <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="cart" component={Cart} />
         <Scene
           key="drawer"
           drawer={true}

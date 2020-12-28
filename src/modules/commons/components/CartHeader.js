@@ -15,10 +15,6 @@ import Cross from '../../../assets/images/gray_cross.svg';
 import CartCounter from './CartCounter';
 import {Fonts} from '../../../utils/values/Fonts';
 
-// type =0 --> Auth Header with title and subtitle
-// type =1 --> Row Header with title and back arrow
-// type =2 --> Type 1 header with Create Product and search button
-
 const CartHeader = (props) => {
   const {
     search,
@@ -33,7 +29,7 @@ const CartHeader = (props) => {
     location,
     selectLocation,
     drawer,
-    onCrossPress,
+    title,
   } = props;
 
   return (
@@ -72,7 +68,9 @@ const CartHeader = (props) => {
         )}
       </Pressable>
 
-      {titleComp ? (
+      {title ? (
+        <Text style={styles.title}>{title}</Text>
+      ) : titleComp ? (
         <View style={styles.titleContainer}>{titleComp}</View>
       ) : search ? (
         <View style={styles.searchContainer}>
@@ -88,7 +86,7 @@ const CartHeader = (props) => {
             ref={inputRef}
           />
           {searchValue ? (
-            <Pressable onPress={onCrossPress && onCrossPress}>
+            <Pressable onPress={() => onSearchChange('')}>
               <Cross />
             </Pressable>
           ) : null}
@@ -102,7 +100,7 @@ const CartHeader = (props) => {
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}
           />
-          <Text style={styles.title}>
+          <Text style={styles.locationTitle}>
             {location ? location.short_address : Strings.locationUnavaible}
           </Text>
           <DownArrow />
@@ -136,7 +134,7 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     // marginBottom: '12vrem',
   },
-  title: {
+  locationTitle: {
     color: Colors.titleText,
     fontSize: '14rem',
     fontFamily: Fonts.medium,
@@ -185,6 +183,13 @@ const styles = EStyleSheet.create({
     elevation: 5,
   },
   titleContainer: {
+    flex: 1,
+  },
+  title: {
+    color: Colors.titleText,
+    fontSize: '16rem',
+    fontFamily: Fonts.medium,
+    marginLeft: '4rem',
     flex: 1,
   },
 });

@@ -60,7 +60,7 @@ export const styles = EStyleSheet.create({
     marginBottom: '14vrem',
   },
   listLoaderContainer: {
-    marginBottom: '20vrem',
+    marginVertical: '20vrem',
   },
   buttonContainer: {
     paddingVertical: '8vrem',
@@ -69,5 +69,8 @@ export const styles = EStyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,
+  },
+  itemSeperator: {
+    height: '24vrem',
   },
 });
