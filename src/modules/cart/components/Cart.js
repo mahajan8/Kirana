@@ -24,6 +24,7 @@ const Cart = (props) => {
     delivery_fee,
     product_list,
     store,
+    is_overweight,
   } = cart;
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const Cart = (props) => {
         data={product_list ? Object.values(product_list) : []}
         renderItem={({item, index}) => (
           <View style={styles.itemContainer}>
-            <SearchItemTile item={item.product} />
+            <SearchItemTile item={item} />
           </View>
         )}
         keyExtractor={(item, index) => `cartItem${index}`}
@@ -56,9 +57,19 @@ const Cart = (props) => {
         ItemSeparatorComponent={() => <View style={styles.listItemSeperator} />}
         ListHeaderComponent={
           <View>
+            {is_overweight && (
+              <View
+                style={[styles.overWeightContainer, styles.detailsContainer]}>
+                <Text style={[styles.detailsText, styles.overWeightText]}>
+                  {Strings.overWeightCartText}
+                </Text>
+              </View>
+            )}
             <View style={styles.container}>
               <View style={[styles.rowContainer, styles.storeNameContainer]}>
-                <Text style={styles.grayHeading}>{store.store_name}</Text>
+                <Text style={styles.grayHeading}>
+                  {store ? store.store_name : null}
+                </Text>
                 <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
               </View>
             </View>

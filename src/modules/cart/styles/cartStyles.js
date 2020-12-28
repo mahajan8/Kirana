@@ -99,4 +99,10 @@ export const styles = EStyleSheet.create({
   priceContainer: {
     justifyContent: 'space-between',
   },
+  overWeightContainer: {
+    backgroundColor: '#f8d7da',
+  },
+  overWeightText: {
+    color: '#731c23',
+  },
 });

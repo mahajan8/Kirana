@@ -203,4 +203,5 @@ export const Strings = {
   addNewAddress: '+ Add new address',
   deliverTo: 'Deliver to:',
   plusAddMore: '+ Add more',
+  overWeightCartText: 'Max. weight limit is 10 kg. Reduce items to proceed.',
 };
