@@ -51,48 +51,46 @@ const TrackOrderInfo = (props) => {
     return (
       <View style={styles.expandedContainer}>
         {trackingArray.map((item, index) => {
-          if (index > 4) {
-            return null;
-          } else {
-            let current = trackStatus === index ? true : false;
-            return (
-              <View style={[styles.expandedStatusContainer]}>
-                <View style={styles.trackingCircleContainer}>
-                  {current ? (
-                    <View style={styles.outerCircle}>
-                      <View style={styles.innerCircle} />
-                      <View style={styles.transparentCurrentCircle} />
-                    </View>
-                  ) : index < trackStatus ? (
-                    <GreenCheck
-                      width={EStyleSheet.value('14rem')}
-                      height={EStyleSheet.value('14rem')}
-                    />
-                  ) : (
-                    <View style={styles.upcomingStatusCircle} />
-                  )}
-                  {index !== trackingArray.length - 1 && (
-                    <View style={current ? styles.dottedLine : styles.line} />
-                  )}
-                </View>
-                <View>
-                  <Text
-                    style={
-                      current
-                        ? styles.expandedCurrentStatus
-                        : styles.expandedStatus
-                    }>
-                    {trackingList[index].title}
-                  </Text>
-                  {current && (
-                    <Text style={styles.expandedCurrentSub}>
-                      {trackingList[index].subTitle}
-                    </Text>
-                  )}
-                </View>
+          let current = trackStatus === index ? true : false;
+          return (
+            <View
+              style={[styles.expandedStatusContainer]}
+              key={`OrderTrackStatus${index}`}>
+              <View style={styles.trackingCircleContainer}>
+                {current ? (
+                  <View style={styles.outerCircle}>
+                    <View style={styles.innerCircle} />
+                    <View style={styles.transparentCurrentCircle} />
+                  </View>
+                ) : index < trackStatus ? (
+                  <GreenCheck
+                    width={EStyleSheet.value('14rem')}
+                    height={EStyleSheet.value('14rem')}
+                  />
+                ) : (
+                  <View style={styles.upcomingStatusCircle} />
+                )}
+                {index !== trackingArray.length - 1 && (
+                  <View style={current ? styles.dottedLine : styles.line} />
+                )}
               </View>
-            );
-          }
+              <View>
+                <Text
+                  style={
+                    current
+                      ? styles.expandedCurrentStatus
+                      : styles.expandedStatus
+                  }>
+                  {trackingList[index].title}
+                </Text>
+                {current && (
+                  <Text style={styles.expandedCurrentSub}>
+                    {trackingList[index].subTitle}
+                  </Text>
+                )}
+              </View>
+            </View>
+          );
         })}
         <Pressable
           style={styles.expandedArrowIcon}
