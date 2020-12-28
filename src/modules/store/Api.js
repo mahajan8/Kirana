@@ -12,7 +12,8 @@ import {
   setSubcategoryProducts,
 } from './StoreActions';
 import {Actions} from 'react-native-router-flux';
-import {appendStoreProducts, setCartDetails} from '../home/HomeActions';
+import {appendStoreProducts} from '../home/HomeActions';
+import {setCartDetails} from '../cart/CartActions';
 
 export const getStoreDetails = (pars) => {
   return (dispatch) => {

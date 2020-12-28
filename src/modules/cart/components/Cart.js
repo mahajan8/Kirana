@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
@@ -9,67 +10,57 @@ import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
-
-let cartItems = [
-  {
-    product_name: 'Fortune Sunlite Refined Sunflower Oil (Pouch)',
-    product_packaging: 2,
-    product_quantity: 1,
-    store_price: 23,
-    product_images: [],
-  },
-  {
-    product_name: 'Fortune Sunlite (Pouch)',
-    product_packaging: 3,
-    product_quantity: 1,
-    store_price: 23,
-    product_images: [],
-  },
-  {
-    product_name: 'Fortune Sunlite Refined Sunflower Oil (Pouch)',
-    product_packaging: 2,
-    product_quantity: 1,
-    store_price: 23,
-    product_images: [],
-  },
-  {
-    product_name: 'Fortune Sunlite (Pouch)',
-    product_packaging: 3,
-    product_quantity: 1,
-    store_price: 23,
-    product_images: [],
-  },
-  {
-    product_name: 'Fortune Sunlite Refined Sunflower Oil (Pouch)',
-    product_packaging: 2,
-    product_quantity: 1,
-    store_price: 23,
-    product_images: [],
-  },
-];
+import {getCart} from '../Api';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
+  const [location, setLocation] = useState(props.location);
+
+  let {cart} = props.cartReducer;
+
+  let {
+    total_cost_price,
+    third_party_delivery_fee,
+    delivery_fee,
+    product_list,
+    store,
+  } = cart;
+
+  useEffect(() => {
+    if (location) {
+      getCartItems();
+    }
+  }, [location]);
+
+  const getCartItems = () => {
+    let pars = {
+      longitude: location.lng,
+      latitude: location.lat,
+    };
+    props.getCart(pars);
+  };
 
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
 
       <FlatList
-        data={cartItems}
+        data={product_list ? Object.values(product_list) : []}
         renderItem={({item, index}) => (
           <View style={styles.itemContainer}>
-            <SearchItemTile item={item} />
+            <SearchItemTile item={item.product} />
           </View>
         )}
         keyExtractor={(item, index) => `cartItem${index}`}
         contentContainerStyle={styles.list}
         ItemSeparatorComponent={() => <View style={styles.listItemSeperator} />}
         ListHeaderComponent={
-          <View style={styles.container}>
-            <View style={[styles.rowContainer, styles.storeNameContainer]}>
-              <Text style={styles.grayHeading}>The Baker’s Dozen</Text>
-              <Text style={styles.addMore}>+ Add more</Text>
+          <View>
+            <View style={styles.container}>
+              <View style={[styles.rowContainer, styles.storeNameContainer]}>
+                <Text style={styles.grayHeading}>{store.store_name}</Text>
+                <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
+              </View>
             </View>
           </View>
         }
@@ -98,8 +89,8 @@ const Cart = (props) => {
               <Text style={styles.grayHeading}>{Strings.paymentDetails}</Text>
               <View style={[styles.borderedContainer, styles.detailsContainer]}>
                 <Text style={styles.detailsText}>
-                  {Strings.youSaved} {Strings.currency} {30}{' '}
-                  {Strings.onThisBill}
+                  {Strings.youSaved} {Strings.currency}{' '}
+                  {third_party_delivery_fee - delivery_fee} {Strings.onThisBill}
                 </Text>
               </View>
 
@@ -107,7 +98,7 @@ const Cart = (props) => {
               <View style={[styles.rowContainer, styles.priceContainer]}>
                 <Text style={styles.priceLabel}>{Strings.subTotal}</Text>
                 <Text style={styles.amount}>
-                  {Strings.currency} {32}
+                  {Strings.currency} {total_cost_price}
                 </Text>
               </View>
 
@@ -118,10 +109,10 @@ const Cart = (props) => {
                 <Text style={styles.priceLabel}>{Strings.deliveryCharge}</Text>
                 <View style={styles.rowContainer}>
                   <Text style={[styles.amount, styles.slicedAmount]}>
-                    {Strings.currency} {40}
+                    {Strings.currency} {third_party_delivery_fee}
                   </Text>
                   <Text style={styles.amount}>
-                    {Strings.currency} {1}
+                    {Strings.currency} {delivery_fee}
                   </Text>
                 </View>
               </View>
@@ -132,7 +123,7 @@ const Cart = (props) => {
               <View style={[styles.rowContainer, styles.priceContainer]}>
                 <Text style={styles.grandTotalLabel}>{Strings.grandTotal}</Text>
                 <Text style={styles.grandTotalAmount}>
-                  {Strings.currency} {33}
+                  {Strings.currency} {total_cost_price + delivery_fee}
                 </Text>
               </View>
             </View>
@@ -144,17 +135,26 @@ const Cart = (props) => {
         addAddress={() => {
           setAddressModal(true);
         }}
+        location={location}
       />
-      <AddressListModal visible={addressModal} setVisible={setAddressModal} />
+      <AddressListModal
+        visible={addressModal}
+        setVisible={setAddressModal}
+        setLocation={setLocation}
+        location={location}
+      />
     </SafeArea>
   );
 };
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  homeReducer: state.homeReducer,
+  location: state.homeReducer.location,
+  cartReducer: state.cartReducer,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getCart,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

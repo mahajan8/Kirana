@@ -17,7 +17,7 @@ const CartSelectedAddress = (props) => {
       <AddressDownArrow />
 
       <View style={styles.addAddressContainer}>
-        {location.id ? (
+        {location.id && address ? (
           <View>
             <Text style={styles.addAddressHeading}>
               {Strings.deliverTo}{' '}
@@ -56,7 +56,6 @@ const CartSelectedAddress = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  location: state.homeReducer.location,
   addresses: state.navigationReducer.addresses,
 });
 

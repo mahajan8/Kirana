@@ -7,13 +7,7 @@ import {
   CLEAR_STORE_PRODUCTS,
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
-  SET_CART_DETAILS,
 } from './ActionTypes';
-
-export const setCartDetails = (data) => ({
-  type: SET_CART_DETAILS,
-  data,
-});
 
 export const setUserDetails = (userDetail) => ({
   type: SET_USER_DETAILS,

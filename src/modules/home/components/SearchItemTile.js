@@ -15,9 +15,11 @@ const SearchItemTile = (props) => {
     store_price,
     product_images,
     product_brand,
+    item_quantity,
+    total_price,
   } = props.item;
 
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(item_quantity ? item_quantity : 0);
 
   return (
     <View style={[styles.rowContainer]}>
@@ -41,7 +43,7 @@ const SearchItemTile = (props) => {
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {store_price}
+          {Strings.currency} {quantity * store_price}
         </Text>
 
         <View style={styles.rowContainer}>

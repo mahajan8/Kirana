@@ -10,7 +10,6 @@ import {
   CLEAR_STORE_PRODUCTS,
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
-  SET_CART_DETAILS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -18,7 +17,6 @@ const INITIAL_STATE = {
   addresses: [],
   selectedAddress: null,
   userDetails: null,
-  cart: null,
   stores: [],
   storeCount: null,
   searchedStores: [],
@@ -44,11 +42,6 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedAddress: action.addressIndex,
-      };
-    case SET_CART_DETAILS:
-      return {
-        ...state,
-        cart: action.data,
       };
     case SET_USER_DETAILS:
       return {

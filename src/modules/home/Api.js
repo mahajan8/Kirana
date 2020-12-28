@@ -3,7 +3,6 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {
-  setCartDetails,
   setUserDetails,
   appendStores,
   clearStores,
@@ -11,6 +10,7 @@ import {
 } from './HomeActions';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
+import {setCartDetails} from '../cart/CartActions';
 
 export const getUserDetails = () => {
   return (dispatch) => {

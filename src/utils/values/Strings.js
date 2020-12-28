@@ -202,4 +202,5 @@ export const Strings = {
   selectDeliveryAddress: 'Select delivery address',
   addNewAddress: '+ Add new address',
   deliverTo: 'Deliver to:',
+  plusAddMore: '+ Add more',
 };

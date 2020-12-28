@@ -1,0 +1,3 @@
+const SET_CART_DETAILS = 'SET_CART_DETAILS';
+
+export {SET_CART_DETAILS};

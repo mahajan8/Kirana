@@ -12,7 +12,6 @@ import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import {Actions} from 'react-native-router-flux';
-import {setLocation} from '../../onboarding/OnboardingActions';
 
 const AddressListModal = (props) => {
   let {visible, setVisible, location, addresses} = props;
@@ -51,7 +50,9 @@ const AddressListModal = (props) => {
       <Pressable style={styles.innerContainer}>
         <View style={styles.headingContainer}>
           <Text style={styles.heading}>{Strings.selectDeliveryAddress}</Text>
-          <Cross />
+          <Pressable onPress={() => setVisible(false)}>
+            <Cross />
+          </Pressable>
         </View>
 
         <FlatList
@@ -133,12 +134,9 @@ const styles = EStyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  location: state.homeReducer.location,
   addresses: state.navigationReducer.addresses,
 });
 
-const mapDispatchToProps = {
-  setLocation,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressListModal);

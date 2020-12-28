@@ -38,7 +38,7 @@ const styles = EStyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  cart: state.homeReducer.cart,
+  cart: state.cartReducer.cart,
 });
 
 const mapDispatchToProps = {};

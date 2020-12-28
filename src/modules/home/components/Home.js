@@ -27,7 +27,7 @@ const Home = (props) => {
     if (location) {
       loadStores(0);
     }
-  }, []);
+  }, [location]);
 
   const searchProductHeader = () => {
     return (
@@ -46,12 +46,12 @@ const Home = (props) => {
       </View>
     );
   };
-  const loadStores = (start, loc = location) => {
+  const loadStores = (start) => {
     const data = {
       start,
       limit: 10,
-      latitude: loc.lat,
-      longitude: loc.lng,
+      latitude: location.lat,
+      longitude: location.lng,
     };
     props.getStores(data);
   };
@@ -110,10 +110,7 @@ const Home = (props) => {
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}
-        setLocation={(data) => {
-          props.setLocation(data);
-          loadStores(0, data);
-        }}
+        setLocation={props.setLocation}
       />
     </SafeArea>
   );
