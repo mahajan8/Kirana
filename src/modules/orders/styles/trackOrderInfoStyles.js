@@ -16,7 +16,7 @@ export const styles = EStyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
     shadowOffset: {width: 0, height: -3},
-    elevation: 3,
+    elevation: 5,
     shadowRadius: 2,
     shadowOpacity: 0.1,
   },
@@ -77,6 +77,7 @@ export const styles = EStyleSheet.create({
   },
   trackingCircleContainer: {
     alignItems: 'center',
+    width: '16rem',
   },
   outerCircle: {
     backgroundColor: Colors.themeGreen,
@@ -99,7 +100,7 @@ export const styles = EStyleSheet.create({
   },
   dottedLine: {
     flex: 1,
-    borderWidth: 1.3,
+    borderWidth: 0.7,
     borderStyle: 'dashed',
     borderRadius: 1,
     borderColor: Colors.borderGray,
@@ -107,5 +108,54 @@ export const styles = EStyleSheet.create({
   arrowIcon: {
     position: 'absolute',
     right: '12rem',
+  },
+  expandedContainer: {
+    paddingLeft: '17rem',
+    paddingVertical: '16vrem',
+    backgroundColor: Colors.white,
+    paddingRight: '16rem',
+  },
+  expandedStatus: {
+    fontSize: '12rem',
+    fontFamily: Fonts.regular,
+    color: Colors.lightGray,
+    lineHeight: '16rem',
+    marginLeft: '17rem',
+  },
+  expandedCurrentStatus: {
+    fontFamily: Fonts.medium,
+    color: Colors.titleText,
+    fontSize: '14rem',
+    marginLeft: '17rem',
+  },
+  expandedCurrentSub: {
+    fontSize: '10rem',
+    fontFamily: Fonts.regular,
+    color: Colors.darkGray,
+    marginTop: '2vrem',
+    marginLeft: '17rem',
+    marginBottom: '16vrem',
+  },
+  expandedStatusContainer: {
+    flexDirection: 'row',
+  },
+  upcomingStatusCircle: {
+    height: '14rem',
+    width: '14rem',
+    borderRadius: '12rem',
+    borderWidth: '1.5rem',
+    borderColor: Colors.borderGray,
+  },
+  transparentCurrentCircle: {
+    height: '24rem',
+    width: '24rem',
+    borderRadius: '12rem',
+    backgroundColor: 'rgba(67,176,42,0.2)',
+    position: 'absolute',
+  },
+  expandedArrowIcon: {
+    position: 'absolute',
+    right: '16rem',
+    top: '16rem',
   },
 });

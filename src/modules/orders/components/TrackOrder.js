@@ -17,7 +17,7 @@ import TrackMarker from '../../../assets/images/track_marker.svg';
 // 3 - Delivered
 // 5 - Rejected
 
-let trackStatus = 1;
+let trackStatus = 2;
 
 const TrackOrder = () => {
   let map = useRef(null);
