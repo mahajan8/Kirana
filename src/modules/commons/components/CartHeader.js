@@ -14,6 +14,8 @@ import DownArrow from '../../../assets/images/header_down_arrow.svg';
 import Cross from '../../../assets/images/gray_cross.svg';
 import CartCounter from './CartCounter';
 import {Fonts} from '../../../utils/values/Fonts';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 const CartHeader = (props) => {
   const {
@@ -100,8 +102,12 @@ const CartHeader = (props) => {
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}
           />
-          <Text style={styles.locationTitle}>
-            {location ? location.short_address : Strings.locationUnavaible}
+          <Text style={styles.title}>
+            {location
+              ? location.type
+                ? getKeyByValue(addressTypes, location.type)
+                : location.short_address
+              : Strings.locationUnavaible}
           </Text>
           <DownArrow />
         </Pressable>

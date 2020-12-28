@@ -20,10 +20,8 @@ import StorePlaceholder from './StorePlaceHolder';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
-  // const [location, setLocation] = useState(null);
   const [endReachCallable, setEndReachCallable] = useState(true);
   const {stores, storeCount, location} = props.homeReducer;
-  console.log(JSON.stringify(stores));
   useEffect(() => {
     if (location) {
       loadStores(0);

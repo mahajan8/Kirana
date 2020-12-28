@@ -167,14 +167,13 @@ const Search = (props) => {
       <Text style={styles.savedAddresses}>{Strings.savedAddresses}</Text>
       {props.addresses.map((item, index) => {
         let {type, block_address, location, landmark, id} = item;
-
         if (type !== 30) {
           return (
             <Pressable
               key={`address${index}`}
               style={[styles.itemRow, styles.addressContainer]}
               onPress={() => {
-                onSelect(location);
+                onSelect({...location, id, type});
               }}>
               <ImageBackground
                 style={styles.addressImageContainer}
