@@ -15,7 +15,6 @@ import {getCart} from '../Api';
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [location, setLocation] = useState(props.location);
-
   let {cart} = props.cartReducer;
 
   let {
@@ -44,7 +43,6 @@ const Cart = (props) => {
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
-
       <FlatList
         data={product_list ? Object.values(product_list) : []}
         renderItem={({item, index}) => (

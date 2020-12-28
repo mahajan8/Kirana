@@ -1,4 +1,4 @@
-import {SET_CART_DETAILS, SET_CART_PRODUCTS} from './ActionTypes';
+import {SET_CART_DETAILS} from './ActionTypes';
 
 const INITIAL_STATE = {
   cart: null,

@@ -18,9 +18,9 @@ export const getUserDetails = () => {
       const success = !res.data.error;
       if (success) {
         const response = res.data.data;
-        const {address_list, cart, user_details} = response;
+        const {address_list, cart_data, user_details} = response;
         dispatch(setAddress(address_list));
-        dispatch(setCartDetails({item_quantity_count: 0}));
+        dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
         Actions.reset('drawer');
       } else {

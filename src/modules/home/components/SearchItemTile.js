@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
@@ -6,6 +6,8 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
+import {connect} from 'react-redux';
+import {updateProductQuantity} from '../../store/Api';
 
 const SearchItemTile = (props) => {
   let {
@@ -17,9 +19,33 @@ const SearchItemTile = (props) => {
     product_brand,
     item_quantity,
     total_price,
+    product_id,
   } = props.item;
 
-  const [quantity, setQuantity] = useState(item_quantity ? item_quantity : 0);
+  const [quantity, setQuantity] = useState(0);
+  const {selectedStoreId} = props.homeState;
+  const {product_list, store_id} = props.cartState.cart;
+
+  useEffect(() => {
+    if (product_list[product_id] && store_id === selectedStoreId) {
+      setQuantity(product_list[product_id]['item_quantity']);
+    }
+  }, []);
+
+  const updateQuantity = (increment = true) => {
+    const pars = {
+      product_id,
+      quantity: increment ? 1 : -1,
+      store_id: selectedStoreId,
+    };
+    props.updateProductQuantity(pars, () => {
+      if (increment) {
+        setQuantity(quantity + 1);
+      } else {
+        setQuantity(quantity - 1);
+      }
+    });
+  };
 
   return (
     <View style={[styles.rowContainer]}>
@@ -43,25 +69,19 @@ const SearchItemTile = (props) => {
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {quantity * store_price}
+          {Strings.currency} {store_price}
         </Text>
 
         <View style={styles.rowContainer}>
           <Pressable
             style={styles.quantityButton}
-            onPress={() => {
-              setQuantity(quantity > 0 ? quantity - 1 : quantity);
-            }}>
+            onPress={() => (quantity !== 0 ? updateQuantity(false) : null)}>
             <Text style={styles.quantityButtonIcons}>-</Text>
           </Pressable>
 
           <Text style={styles.quantityText}>{quantity}</Text>
 
-          <Pressable
-            style={styles.quantityButton}
-            onPress={() => {
-              setQuantity(quantity + 1);
-            }}>
+          <Pressable style={styles.quantityButton} onPress={updateQuantity}>
             <Text style={styles.quantityButtonIcons}>+</Text>
           </Pressable>
         </View>
@@ -137,5 +157,22 @@ const styles = EStyleSheet.create({
     paddingTop: '3rem',
   },
 });
+function arePropsEqual(prevProps, nextProps) {
+  return prevProps.item.product_id === nextProps.item.product_id;
+}
 
-export default SearchItemTile;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+  storeReducer: state.storeReducer,
+  homeState: state.homeReducer,
+  cartState: state.cartReducer,
+});
+
+const mapDispatchToProps = {
+  updateProductQuantity,
+};
+// export default ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(memo(SearchItemTile, arePropsEqual));

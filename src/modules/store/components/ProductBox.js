@@ -1,4 +1,4 @@
-import React, {useState, memo} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
@@ -26,7 +26,13 @@ const ProductBox = (props) => {
     product_id,
   } = item;
   const {selectedStoreId} = props.homeState;
+  const {product_list, store_id} = props.cartState.cart;
 
+  useEffect(() => {
+    if (product_list[product_id] && selectedStoreId === store_id) {
+      setCount(product_list[product_id]['item_quantity']);
+    }
+  }, []);
   const getProductQuantity = (quantity, packaging) => {
     if ((packaging === 2 || packaging === 4) && quantity >= 1000) {
       packaging -= 1;
@@ -194,17 +200,21 @@ const styles = EStyleSheet.create({
   },
 });
 function arePropsEqual(prevProps, nextProps) {
-  return prevProps.item.id === nextProps.item.id;
+  return prevProps.item.product_id === nextProps.item.product_id;
 }
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   storeReducer: state.storeReducer,
   homeState: state.homeReducer,
+  cartState: state.cartReducer,
 });
 
 const mapDispatchToProps = {
   updateProductQuantity,
 };
-// export default memo(ProductBox, arePropsEqual);
-export default connect(mapStateToProps, mapDispatchToProps)(ProductBox);
+// export default ;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(memo(ProductBox, arePropsEqual));
