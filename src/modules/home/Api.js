@@ -3,7 +3,7 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {
-  setCartQuantity,
+  setCartDetails,
   setUserDetails,
   appendStores,
   clearStores,
@@ -18,9 +18,9 @@ export const getUserDetails = () => {
       const success = !res.data.error;
       if (success) {
         const response = res.data.data;
-        const {address_list, cart_item_quantity, user_details} = response;
+        const {address_list, cart, user_details} = response;
         dispatch(setAddress(address_list));
-        dispatch(setCartQuantity(cart_item_quantity));
+        dispatch(setCartDetails({item_quantity_count: 0}));
         dispatch(setUserDetails(user_details));
         Actions.reset('drawer');
       } else {

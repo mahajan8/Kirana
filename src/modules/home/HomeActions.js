@@ -1,5 +1,4 @@
 import {
-  SET_CART_QUANTITY,
   SET_USER_DETAILS,
   APPEND_STORES,
   CLEAR_STORES,
@@ -7,11 +6,13 @@ import {
   CLEAR_SEARCHED_STORES,
   CLEAR_STORE_PRODUCTS,
   APPEND_STORE_PRODUCTS,
+  SELECT_STORE,
+  SET_CART_DETAILS,
 } from './ActionTypes';
 
-export const setCartQuantity = (quantity) => ({
-  type: SET_CART_QUANTITY,
-  quantity,
+export const setCartDetails = (data) => ({
+  type: SET_CART_DETAILS,
+  data,
 });
 
 export const setUserDetails = (userDetail) => ({
@@ -47,4 +48,9 @@ export const appendStoreProducts = (storeProducts, storeProductsCount) => ({
 
 export const clearStoreProducts = () => ({
   type: CLEAR_STORE_PRODUCTS,
+});
+
+export const selectStore = (storeId) => ({
+  type: SELECT_STORE,
+  storeId,
 });

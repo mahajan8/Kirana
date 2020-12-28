@@ -6,14 +6,15 @@ import {connect} from 'react-redux';
 import Cart from '../../../assets/images/cart.svg';
 import {Fonts} from '../../../utils/values/Fonts';
 
-const CartCounter = () => {
+const CartCounter = (props) => {
+  const {item_quantity_count} = props.cart;
   return (
     <Pressable style={styles.container}>
       <Cart
         width={EStyleSheet.value('14rem')}
         height={EStyleSheet.value('14rem')}
       />
-      <Text style={styles.count}>0</Text>
+      <Text style={styles.count}>{item_quantity_count}</Text>
     </Pressable>
   );
 };
@@ -35,7 +36,9 @@ const styles = EStyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  cart: state.homeReducer.cart,
+});
 
 const mapDispatchToProps = {};
 

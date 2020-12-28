@@ -12,7 +12,7 @@ import {
   setSubcategoryProducts,
 } from './StoreActions';
 import {Actions} from 'react-native-router-flux';
-import {appendStoreProducts} from '../home/HomeActions';
+import {appendStoreProducts, setCartDetails} from '../home/HomeActions';
 
 export const getStoreDetails = (pars) => {
   return (dispatch) => {
@@ -88,6 +88,23 @@ export const getStoreCategories = (pars) => {
       const success = !res.data.error;
       if (success) {
         dispatch(setCategories(res.data.data.category_list));
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const updateProductQuantity = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.addUpdateItemToCart, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        const {cart} = res.data.data;
+        dispatch(setCartDetails(cart));
+        callback();
       } else {
         alert(res.data.message);
       }

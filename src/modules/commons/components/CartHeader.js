@@ -14,8 +14,8 @@ import DownArrow from '../../../assets/images/header_down_arrow.svg';
 import Cross from '../../../assets/images/gray_cross.svg';
 import CartCounter from './CartCounter';
 import {Fonts} from '../../../utils/values/Fonts';
-import { getKeyByValue } from '../../../utils/utility/Utils';
-import { addressTypes } from '../../../utils/values/Values';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 // type =0 --> Auth Header with title and subtitle
 // type =1 --> Row Header with title and back arrow

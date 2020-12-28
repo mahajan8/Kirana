@@ -9,12 +9,13 @@ import Button from '../../commons/components/Button';
 import MinusButton from '../../../assets/images/minus_button.svg';
 import PlusButton from '../../../assets/images/plus_button.svg';
 import {Fonts} from '../../../utils/values/Fonts';
+import {connect} from 'react-redux';
+import {updateProductQuantity} from '../Api';
 
 const ProductBox = (props) => {
   const [count, setCount] = useState(0);
 
   let {vertical, onPress, item} = props;
-
   let {
     product_name,
     product_packaging,
@@ -22,7 +23,9 @@ const ProductBox = (props) => {
     store_price,
     product_images,
     product_brand,
+    product_id,
   } = item;
+  const {selectedStoreId} = props.homeState;
 
   const getProductQuantity = (quantity, packaging) => {
     if ((packaging === 2 || packaging === 4) && quantity >= 1000) {
@@ -31,7 +34,20 @@ const ProductBox = (props) => {
     }
     return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
   };
-
+  const updateQuantity = (increment = true) => {
+    const pars = {
+      product_id,
+      quantity: increment ? 1 : -1,
+      store_id: selectedStoreId,
+    };
+    props.updateProductQuantity(pars, () => {
+      if (increment) {
+        setCount(count + 1);
+      } else {
+        setCount(count - 1);
+      }
+    });
+  };
   return (
     <Pressable
       activeOpacity={1}
@@ -67,7 +83,7 @@ const ProductBox = (props) => {
             ]}>
             <Pressable
               style={styles.counter}
-              onPress={() => setCount(count > 0 ? count - 1 : count)}>
+              onPress={() => updateQuantity(false)}>
               <MinusButton
                 width={EStyleSheet.value('25rem')}
                 height={EStyleSheet.value('25rem')}
@@ -81,9 +97,7 @@ const ProductBox = (props) => {
                     product_packaging,
                   )}
             </Text>
-            <Pressable
-              style={styles.counter}
-              onPress={() => setCount(count + 1)}>
+            <Pressable style={styles.counter} onPress={updateQuantity}>
               <PlusButton
                 width={EStyleSheet.value('25rem')}
                 height={EStyleSheet.value('25rem')}
@@ -95,7 +109,7 @@ const ProductBox = (props) => {
             label={Strings.plusAdd}
             Style={[styles.buttonStyle, vertical && styles.verticalButton]}
             labelStyle={styles.addLabel}
-            onPress={() => setCount(count + 1)}
+            onPress={updateQuantity}
           />
         )}
       </View>
@@ -183,5 +197,14 @@ function arePropsEqual(prevProps, nextProps) {
   return prevProps.item.id === nextProps.item.id;
 }
 
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+  storeReducer: state.storeReducer,
+  homeState: state.homeReducer,
+});
+
+const mapDispatchToProps = {
+  updateProductQuantity,
+};
 // export default memo(ProductBox, arePropsEqual);
-export default ProductBox;
+export default connect(mapStateToProps, mapDispatchToProps)(ProductBox);

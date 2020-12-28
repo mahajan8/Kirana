@@ -13,7 +13,6 @@ import OrdersActive from '../../../assets/images/orders_active.svg';
 import OrdersInactive from '../../../assets/images/orders_inactive.svg';
 import ExploreActive from '../../../assets/images/explore_active.svg';
 import ExploreInactive from '../../../assets/images/explore_inactive.svg';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import Explore from './Explore';
 import StoreOrders from './StoreOrders';
 import StoreCategories from './StoreCategories';
@@ -43,13 +42,13 @@ let initialLayout = {height: 0, width: Dimensions.get('window').width};
 
 const Store = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
-
+  const {selectedStoreId} = props.homeState;
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <StoreCategories storeId={props.storeId} />;
+        return <StoreCategories storeId={selectedStoreId} />;
       case 'second':
-        return <Explore storeId={props.storeId} />;
+        return <Explore storeId={selectedStoreId} />;
       case 'third':
         return <StoreOrders />;
     }
@@ -99,7 +98,9 @@ const Store = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  homeState: state.homeReducer,
+});
 
 const mapDispatchToProps = {};
 

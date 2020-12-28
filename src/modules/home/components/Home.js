@@ -17,6 +17,7 @@ import {setLocation} from '../../onboarding/OnboardingActions';
 import NoStores from '../../../assets/images/stores_empty_image.svg';
 import Button from '../../commons/components/Button';
 import StorePlaceholder from './StorePlaceHolder';
+import {selectStore} from '../HomeActions';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -34,7 +35,7 @@ const Home = (props) => {
         <Pressable
           activeOpacity={0.5}
           style={styles.searchContainer}
-          onPress={() => Actions.searchStoreProducts()}>
+          onPress={Actions.searchStoreProducts}>
           <Search
             width={EStyleSheet.value('14rem')}
             height={EStyleSheet.value('14rem')}
@@ -54,7 +55,10 @@ const Home = (props) => {
     };
     props.getStores(data);
   };
-
+  const onStoreClick = (storeId) => {
+    props.selectStore(storeId);
+    Actions.store({storeId});
+  };
   return (
     <SafeArea>
       <CartHeader
@@ -65,10 +69,7 @@ const Home = (props) => {
       <FlatList
         data={stores}
         renderItem={({item}) => (
-          <StoreInfoTile
-            store={item}
-            onPress={() => Actions.store({storeId: item.id})}
-          />
+          <StoreInfoTile store={item} onPress={() => onStoreClick(item.id)} />
         )}
         keyExtractor={(item, index) => `store${index}`}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
@@ -122,6 +123,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getStores,
   setLocation,
+  selectStore,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
