@@ -7,6 +7,7 @@ import {Actions} from 'react-native-router-flux';
 import {setAddress} from './NavigationActions';
 import {setLocation} from '../onboarding/OnboardingActions';
 import {getUserDetails} from '../home/Api';
+import {appendUserDetails} from '../home/HomeActions';
 
 export const addUpdateAddress = (pars, callback) => {
   return (dispatch) => {
@@ -114,7 +115,30 @@ export const verifyOtpChangeNumber = (pars, error) => {
     instance.post(Urls.verifyOtpChangeNumber, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        dispatch(getUserDetails());
+        let details = {
+          mobile: pars.new_mobile,
+        };
+        dispatch(appendUserDetails(details));
+        Actions.reset('drawer');
+      } else {
+        error();
+      }
+    });
+  };
+};
+
+export const updateUserDetails = (pars, error) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.updateUserDetails, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        let details = {
+          first_name: pars.name,
+        };
+        dispatch(appendUserDetails(details));
+        Actions.reset('drawer');
       } else {
         error();
       }

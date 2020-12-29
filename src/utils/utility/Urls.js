@@ -21,6 +21,9 @@ export const Urls = {
   sendOtpToChangeNumber: '/organisation/user/send-otp-to-change-number',
   verifyOtpChangeNumber: '/organisation/user/verify-otp-change-number',
   createOrder: 'commerce/order/create-order',
+  updateUserDetails: '/organisation/user/update-user-details',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };
+
+// Postman Collection : https://www.getpostman.com/collections/ded852ca8b6569f7f386

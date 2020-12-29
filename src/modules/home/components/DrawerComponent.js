@@ -17,6 +17,7 @@ import RightArrow from '../../../assets/images/right_arrow.svg';
 import {logout} from '../../../utils/utility/Utils';
 import SafeArea from '../../commons/components/SafeArea';
 import {Fonts} from '../../../utils/values/Fonts';
+import {connect} from 'react-redux';
 
 let options = [
   {icon: MyOrders, label: Strings.myOrders},
@@ -63,12 +64,16 @@ const renderOptions = (Icon, label, index) => {
   );
 };
 
-const DrawerComponent = () => {
+const DrawerComponent = (props) => {
+  let {userDetails} = props;
+
   return (
     <SafeArea statusBarColor={Colors.white}>
       <View style={styles.greenContainer}>
-        <Text style={styles.number}>+91 9830098300</Text>
-        <Text style={styles.completeSetup}>{Strings.completeAccSetup}</Text>
+        <Text style={styles.number}>{userDetails.mobile}</Text>
+        <Pressable onPress={Actions.accountSetup}>
+          <Text style={styles.completeSetup}>{Strings.completeAccSetup}</Text>
+        </Pressable>
       </View>
       <View style={styles.banner}>
         <FreeDelivery
@@ -174,4 +179,10 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default DrawerComponent;
+const mapStateToProps = (state) => ({
+  userDetails: state.homeReducer.userDetails,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerComponent);

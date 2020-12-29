@@ -10,6 +10,7 @@ import {
   CLEAR_STORE_PRODUCTS,
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
+  APPEND_USER_DETAILS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -89,6 +90,12 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedStoreId: action.storeId,
       };
+    case APPEND_USER_DETAILS: {
+      return {
+        ...state,
+        userDetails: {...state.userDetails, ...action.userDetails},
+      };
+    }
     default:
       return state;
   }

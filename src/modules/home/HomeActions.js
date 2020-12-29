@@ -7,6 +7,7 @@ import {
   CLEAR_STORE_PRODUCTS,
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
+  APPEND_USER_DETAILS,
 } from './ActionTypes';
 
 export const setUserDetails = (userDetail) => ({
@@ -47,4 +48,9 @@ export const clearStoreProducts = () => ({
 export const selectStore = (storeId) => ({
   type: SELECT_STORE,
   storeId,
+});
+
+export const appendUserDetails = (userDetails) => ({
+  type: APPEND_USER_DETAILS,
+  userDetails,
 });
