@@ -22,7 +22,7 @@ const AddressListModal = (props) => {
       <Pressable
         style={styles.addressContainer}
         onPress={() => {
-          props.setLocation({location: {...item.location}, id, type});
+          props.setLocation({...item.location, id, type});
           setVisible(false);
         }}>
         {location.id === id ? (
