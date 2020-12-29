@@ -208,4 +208,5 @@ export const Strings = {
   cartNotDeliverable: 'Delivery address not servicable, please add new address',
   cartEmptyTitle: 'All your grocery needs are a click away',
   cartEmptySubTitle: 'Your cart is empty. Add items from nearby stores. ',
+  addProducts: 'Add products',
 };

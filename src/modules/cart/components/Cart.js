@@ -6,18 +6,17 @@ import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';
 import SearchItemTile from '../../home/components/SearchItemTile';
 import {styles} from '../styles/cartStyles';
-import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartEmptyImage from '../../../assets/images/empty_address.svg';
 import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
 import {getCart} from '../Api';
-import Loader from '../../commons/components/Loader';
 import {selectStore} from '../../home/HomeActions';
-import CartPaymentDetails from './CartPaymentDetails';
 import CartListHeader from './CartListHeader';
 import CartListFooter from './CartListFooter';
 import CartShimmer from './CartShimmer';
+import Button from '../../commons/components/Button';
+import {Actions} from 'react-native-router-flux';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
@@ -28,7 +27,6 @@ const Cart = (props) => {
 
   let {
     total_cost_price,
-    third_party_delivery_fee,
     delivery_fee,
     product_list,
     store,
@@ -95,6 +93,11 @@ const Cart = (props) => {
                 <Text style={styles.cartEmptySubTitle}>
                   {Strings.cartEmptySubTitle}
                 </Text>
+                <Button
+                  Style={styles.emptyButton}
+                  label={Strings.addProducts}
+                  onPress={() => Actions.popTo('_home')}
+                />
               </View>
             }
           />

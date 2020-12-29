@@ -24,6 +24,7 @@ export const AppConfig = {
     // mediaBaseUrl: 'https://d3unaxpny5psa2.cloudfront.net/',
     storageBaseUrl: 'https://kiranakart-dev.s3.ap-south-1.amazonaws.com/',
     googlePlacesKey: 'AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc',
+    razorpayKey: 'rzp_test_whorR3ZOEdCg5w',
     // //mediaUrl: 'https://d2xqut4m1etz6f.cloudfront.net/',
     // //cloudFrontUrl: 'https://d2xqut4m1etz6f.cloudfront.net/',
     // senderId: '826426830572',
