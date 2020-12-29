@@ -28,7 +28,6 @@ const Cart = (props) => {
     store_id,
   } = cart;
   useEffect(() => {
-    props.selectStore(store_id);
     if (location) {
       getCartItems();
     }
