@@ -137,4 +137,8 @@ export const styles = EStyleSheet.create({
   list: {
     flexGrow: 1,
   },
+  emptyButton: {
+    position: 'absolute',
+    bottom: '20vrem',
+  },
 });
