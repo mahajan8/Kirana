@@ -101,14 +101,16 @@ const Cart = (props) => {
             }
           />
 
-          <CartSelectedAddress
-            addAddress={() => {
-              setAddressModal(true);
-            }}
-            location={location}
-            deliverable={is_deliverable}
-            totalAmount={total_cost_price + delivery_fee}
-          />
+          {list.length ? (
+            <CartSelectedAddress
+              addAddress={() => {
+                setAddressModal(true);
+              }}
+              location={location}
+              deliverable={is_deliverable}
+              totalAmount={total_cost_price + delivery_fee}
+            />
+          ) : null}
         </View>
       )}
       <AddressListModal

@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
@@ -37,6 +38,10 @@ export const styles = EStyleSheet.create({
     // color: Colors.lightGray,
     marginLeft: '10rem',
     flex: 1,
+    ...(Platform.OS === 'android' && {
+      paddingVertical: 0,
+      paddingHorizontal: 0,
+    }),
   },
   detailsContainer: {
     paddingHorizontal: '16rem',
