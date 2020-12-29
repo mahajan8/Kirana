@@ -11,6 +11,7 @@ import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
 import {getCart} from '../Api';
+import {selectStore} from '../../home/HomeActions';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
@@ -24,9 +25,10 @@ const Cart = (props) => {
     product_list,
     store,
     is_overweight,
+    store_id,
   } = cart;
-
   useEffect(() => {
+    props.selectStore(store_id);
     if (location) {
       getCartItems();
     }
@@ -164,6 +166,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getCart,
+  selectStore,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

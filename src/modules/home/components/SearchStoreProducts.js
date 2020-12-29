@@ -11,7 +11,7 @@ import StoreInfoTile from './StoreInfoTile';
 import NoResults from '../../../assets/images/search_not_found.svg';
 import {searchProductInStores} from '../Api';
 import {connect} from 'react-redux';
-import {clearSearchedStores} from '../HomeActions';
+import {clearSearchedStores, selectStore} from '../HomeActions';
 
 let commonSearches = ['Milk', 'Onion', 'Apple', 'Potato', 'Chocolate'];
 
@@ -74,6 +74,13 @@ const SearchStoreProducts = (props) => {
       return null;
     }
   };
+  const onStoreClick = (store) => {
+    props.selectStore(store.id);
+    Actions.storeProductsResults({
+      searchedText: searchInput,
+      store: store,
+    });
+  };
   return (
     <SafeArea>
       <CartHeader
@@ -87,15 +94,7 @@ const SearchStoreProducts = (props) => {
         <FlatList
           data={searchedStores}
           renderItem={({item}) => (
-            <StoreInfoTile
-              store={item}
-              onPress={() => {
-                Actions.storeProductsResults({
-                  searchedText: searchInput,
-                  store: item,
-                });
-              }}
-            />
+            <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
           )}
           keyExtractor={(item, index) => `store${index}`}
           ListHeaderComponent={
@@ -152,6 +151,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   searchProductInStores,
   clearSearchedStores,
+  selectStore,
 };
 
 export default connect(
