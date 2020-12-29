@@ -82,6 +82,7 @@ export const Strings = {
   work: 'Work',
   other: 'Other',
   addAddress: 'Add Address',
+  pay: 'Pay',
 
   accepting: 'By continuing, I accept ',
   terms: 'terms of service',

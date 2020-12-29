@@ -45,7 +45,7 @@ const CartPaymentDetails = (props) => {
       <View style={[styles.rowContainer, styles.priceContainer]}>
         <Text style={styles.grandTotalLabel}>{Strings.grandTotal}</Text>
         <Text style={styles.grandTotalAmount}>
-          {Strings.currency} {total + deliveryFee}
+          {Strings.currency} {total}
         </Text>
       </View>
     </View>
