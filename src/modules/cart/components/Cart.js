@@ -15,10 +15,15 @@ import {getCart} from '../Api';
 import Loader from '../../commons/components/Loader';
 import {selectStore} from '../../home/HomeActions';
 import CartPaymentDetails from './CartPaymentDetails';
+import CartListHeader from './CartListHeader';
+import CartListFooter from './CartListFooter';
+import CartShimmer from './CartShimmer';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [location, setLocation] = useState(props.location);
+  const [instructions, setInstructions] = useState('');
+
   let {cart} = props.cartReducer;
 
   let {
@@ -43,12 +48,14 @@ const Cart = (props) => {
     };
     props.getCart(pars);
   };
+
   let list = Object.values(product_list);
+
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
       {props.loading ? (
-        <Loader show={true} />
+        <CartShimmer />
       ) : (
         <View style={{flex: 1}}>
           <FlatList
@@ -65,58 +72,18 @@ const Cart = (props) => {
             )}
             ListHeaderComponent={
               list.length && (
-                <View>
-                  {is_overweight && (
-                    <View
-                      style={[
-                        styles.overWeightContainer,
-                        styles.detailsContainer,
-                      ]}>
-                      <Text style={[styles.detailsText, styles.overWeightText]}>
-                        {Strings.overWeightCartText}
-                      </Text>
-                    </View>
-                  )}
-                  <View style={styles.container}>
-                    <View
-                      style={[styles.rowContainer, styles.storeNameContainer]}>
-                      <Text style={styles.grayHeading}>
-                        {store ? store.store_name : null}
-                      </Text>
-                      <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
-                    </View>
-                  </View>
-                </View>
+                <CartListHeader
+                  overWeight={is_overweight}
+                  storeName={store ? store.store_name : null}
+                />
               )
             }
             ListFooterComponent={
               list.length && (
-                <View style={styles.footerContainer}>
-                  <View style={styles.seperator} />
-
-                  <View style={[styles.rowContainer, styles.container]}>
-                    <InstructionsIcon />
-                    <Text style={styles.instructionsPlaceholder}>
-                      {Strings.cartInstructionsPlaceholder}
-                    </Text>
-                  </View>
-
-                  <View style={styles.seperator} />
-
-                  <View style={styles.detailsContainer}>
-                    <Text style={styles.detailsText}>
-                      {Strings.estimatedDeliveryTime} {'40 minutes'}
-                    </Text>
-                  </View>
-
-                  <View style={styles.seperator} />
-
-                  <CartPaymentDetails
-                    deliveryFee={delivery_fee}
-                    slicedAmount={third_party_delivery_fee}
-                    total={total_cost_price + delivery_fee}
-                  />
-                </View>
+                <CartListFooter
+                  instructions={instructions}
+                  setInstructions={setInstructions}
+                />
               )
             }
             ListEmptyComponent={

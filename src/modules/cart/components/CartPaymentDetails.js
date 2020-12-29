@@ -1,18 +1,21 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {connect} from 'react-redux';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/cartStyles';
 
 const CartPaymentDetails = (props) => {
-  const {deliveryFee, slicedAmount, total} = props;
+  let {total_cost_price, third_party_delivery_fee, delivery_fee} = props.cart;
+
+  let total = total_cost_price + delivery_fee;
 
   return (
     <View style={styles.container}>
       <Text style={styles.grayHeading}>{Strings.paymentDetails}</Text>
       <View style={[styles.borderedContainer, styles.detailsContainer]}>
         <Text style={styles.detailsText}>
-          {Strings.youSaved} {Strings.currency} {slicedAmount - deliveryFee}{' '}
-          {Strings.onThisBill}
+          {Strings.youSaved} {Strings.currency}{' '}
+          {third_party_delivery_fee - delivery_fee} {Strings.onThisBill}
         </Text>
       </View>
 
@@ -20,7 +23,7 @@ const CartPaymentDetails = (props) => {
       <View style={[styles.rowContainer, styles.priceContainer]}>
         <Text style={styles.priceLabel}>{Strings.subTotal}</Text>
         <Text style={styles.amount}>
-          {Strings.currency} {total}
+          {Strings.currency} {total_cost_price}
         </Text>
       </View>
 
@@ -31,10 +34,10 @@ const CartPaymentDetails = (props) => {
         <Text style={styles.priceLabel}>{Strings.deliveryCharge}</Text>
         <View style={styles.rowContainer}>
           <Text style={[styles.amount, styles.slicedAmount]}>
-            {Strings.currency} {slicedAmount}
+            {Strings.currency} {third_party_delivery_fee}
           </Text>
           <Text style={styles.amount}>
-            {Strings.currency} {deliveryFee}
+            {Strings.currency} {delivery_fee}
           </Text>
         </View>
       </View>
@@ -52,4 +55,10 @@ const CartPaymentDetails = (props) => {
   );
 };
 
-export default CartPaymentDetails;
+const mapStateToProps = (state) => ({
+  cart: state.cartReducer.cart,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartPaymentDetails);

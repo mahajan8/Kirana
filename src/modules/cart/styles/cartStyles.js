@@ -31,11 +31,12 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
-  instructionsPlaceholder: {
+  instructionsInput: {
     fontSize: '12rem',
     fontFamily: Fonts.regular,
-    color: Colors.lightGray,
+    // color: Colors.lightGray,
     marginLeft: '10rem',
+    flex: 1,
   },
   detailsContainer: {
     paddingHorizontal: '16rem',
@@ -62,6 +63,7 @@ export const styles = EStyleSheet.create({
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
     marginBottom: '14vrem',
+    borderRadius: 0.1,
   },
   priceLabel: {
     fontSize: '10rem',
