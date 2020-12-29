@@ -105,4 +105,29 @@ export const styles = EStyleSheet.create({
   overWeightText: {
     color: '#731c23',
   },
+  listEmptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cartEmptyTitle: {
+    marginTop: '30vrem',
+    fontSize: '14rem',
+    fontFamily: Fonts.semiBold,
+    letterSpacing: '0.18rem',
+    color: Colors.titleText,
+  },
+  cartEmptySubTitle: {
+    fontSize: '12rem',
+    fontFamily: Fonts.regular,
+    letterSpacing: '0.2rem',
+    color: Colors.darkGray,
+    lineHeight: '18rem',
+    width: '260rem',
+    textAlign: 'center',
+    marginTop: '7vrem',
+  },
+  list: {
+    flexGrow: 1,
+  },
 });
