@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
 import {valid, Validation} from '../../../utils/utility/Validations';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -9,13 +10,20 @@ import Input from '../../commons/components/Input';
 import Otp from '../../commons/components/Otp';
 import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
+import {sendOtpToChangeNumber, verifyOtpChangeNumber} from '../Api';
 import {styles} from '../styles/accountSettingStyles';
+import Loader from '../../commons/components/Loader';
+import ErrorIcon from '../../../assets/images/error_icon.svg';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
+import BottomButton from '../../commons/components/BottomButton';
 
 const AccountSettings = (props) => {
-  let {viewType} = props;
+  let {viewType, userDetails} = props;
   const [number, setNumber] = useState('');
   const [seconds, setSeconds] = useState(30);
   const [disabled, setDisabled] = useState(true);
+  const [error, setError] = useState(false);
+
   const otp = useRef(null);
 
   useEffect(() => {
@@ -31,16 +39,26 @@ const AccountSettings = (props) => {
     <View>
       <Text style={styles.heading}>{Strings.enterNewNumber}</Text>
       <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
-
-      <Text style={styles.resendText}>
-        {seconds ? Strings.resendWait : Strings.preResend}
-        <Text
-          style={styles.coloredText}
-          // onPress={() => !seconds && resend()}
-        >
-          {seconds ? '00:' + seconds : Strings.resend}
-        </Text>
-      </Text>
+      {error && (
+        <View style={styles.rowContainer}>
+          <ErrorIcon />
+          <Text style={styles.errorMessage}>{Strings.otpError}</Text>
+        </View>
+      )}
+      <View style={commonStyles.bottomTextContainer}>
+        {seconds ? (
+          <Text style={styles.resendText}>
+            {seconds ? Strings.resendWait : ''}
+            <Text style={styles.coloredText}>{'00:' + seconds}</Text>
+          </Text>
+        ) : (
+          <Pressable onPress={() => onSubmit(true)}>
+            <Text style={[styles.resendText, styles.coloredText]}>
+              {Strings.resend}
+            </Text>
+          </Pressable>
+        )}
+      </View>
     </View>
   );
 
@@ -54,7 +72,8 @@ const AccountSettings = (props) => {
         containerStyle={styles.input}
         type={'number'}
         errorMessage={Strings.invalidNumber}
-        error={number && !valid(number, Validation.mobile)}
+        error={error}
+        max={10}
       />
     </View>
   );
@@ -63,7 +82,7 @@ const AccountSettings = (props) => {
     <View style={[styles.rowContainer, styles.numberContainer]}>
       <View>
         <Text style={styles.numberLabel}>{Strings.mobileNumber}</Text>
-        <Text style={styles.number}>{'9830098300'}</Text>
+        <Text style={styles.number}>{userDetails.mobile}</Text>
       </View>
       <Button
         Style={styles.changeButton}
@@ -88,7 +107,7 @@ const AccountSettings = (props) => {
   const getDisabled = () => {
     switch (viewType) {
       case 1:
-        return !valid(number, Validation.mobile);
+        return !number;
       case 2:
         return disabled;
       default:
@@ -96,11 +115,36 @@ const AccountSettings = (props) => {
     }
   };
 
-  const onSubmit = () => {
-    if (viewType === 1) {
-      Actions.accountSettings({viewType: 2, number: number});
+  const onSubmit = (resend = false) => {
+    if (viewType === 1 || resend) {
+      if (!valid(number, Validation.mobile) && !resend) {
+        setError(true);
+      } else {
+        if (error) {
+          setError(false);
+        }
+        let pars = {
+          new_mobile: resend ? props.number : number,
+          country_code: '+91',
+        };
+        props.sendOtpToChangeNumber(pars, () => {
+          if (!resend) {
+            Actions.accountSettings({viewType: 2, number: number});
+          }
+        });
+        if (resend) {
+          otp.current.clear();
+          setSeconds(30);
+        }
+      }
     } else {
-      alert(otp.current.submitOTP());
+      if (otp.current.submitOTP()) {
+        let pars = {
+          new_mobile: props.number,
+          otp_code: otp.current.submitOTP(),
+        };
+        props.verifyOtpChangeNumber(pars, () => setError(true));
+      }
     }
   };
 
@@ -110,31 +154,45 @@ const AccountSettings = (props) => {
         title={viewType ? Strings.changeNumber : Strings.accountSetting}
         type={1}
       />
-      <View style={styles.container}>
-        {viewType && (
-          <View>
-            <View style={[styles.rowContainer, styles.currentNumberRow]}>
-              <Text style={styles.currentNumberLabel}>
-                {Strings.currentNumber}
-              </Text>
-              <Text style={styles.currentNumber}>{'9830098300'}</Text>
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps={'handled'}
+        style={commonStyles.scrollContainer}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          {viewType && (
+            <View>
+              <View style={[styles.rowContainer, styles.currentNumberRow]}>
+                <Text style={styles.currentNumberLabel}>
+                  {Strings.currentNumber}
+                </Text>
+                <Text style={styles.currentNumber}>{userDetails.mobile}</Text>
+              </View>
+              <View style={styles.seperator} />
             </View>
-            <View style={styles.seperator} />
-          </View>
-        )}
-        {renderByType()}
-      </View>
-      {viewType && (
-        <View style={commonStyles.buttonBottomContainer}>
-          <Button
-            label={viewType === 1 ? Strings.getOtp : Strings.verify}
-            disabled={getDisabled()}
-            onPress={onSubmit}
-          />
+          )}
+          {renderByType()}
         </View>
+      </KeyboardAwareScrollView>
+      {viewType && (
+        <BottomButton
+          label={viewType === 1 ? Strings.getOtp : Strings.verify}
+          disabled={getDisabled()}
+          onPress={onSubmit}
+        />
       )}
+      <Loader show={props.loading} />
     </SafeArea>
   );
 };
 
-export default AccountSettings;
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+  userDetails: state.homeReducer.userDetails,
+});
+
+const mapDispatchToProps = {
+  sendOtpToChangeNumber,
+  verifyOtpChangeNumber,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountSettings);

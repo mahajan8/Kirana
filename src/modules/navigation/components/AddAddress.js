@@ -172,7 +172,7 @@ const AddAddress = (props) => {
         </View>
       </KeyboardAwareScrollView>
       <BottomButton
-        buttonLabel={Strings.saveAndProceed}
+        label={Strings.saveAndProceed}
         onPress={() => submitAddress()}
         disabled={isAnyFieldEmpty([houseNumber, landmark]) || !addressType}
       />

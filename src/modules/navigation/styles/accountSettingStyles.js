@@ -96,4 +96,11 @@ export const styles = EStyleSheet.create({
     color: Colors.themeGreen,
     fontFamily: Fonts.medium,
   },
+  errorMessage: {
+    fontSize: '11rem',
+    color: '#ea4e3c',
+    letterSpacing: '0.22rem',
+    fontFamily: Fonts.regular,
+    marginLeft: '7rem',
+  },
 });

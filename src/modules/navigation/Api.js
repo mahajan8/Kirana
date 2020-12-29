@@ -6,6 +6,7 @@ import instance from '../../utils/AxiosInstance';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from './NavigationActions';
 import {setLocation} from '../onboarding/OnboardingActions';
+import {getUserDetails} from '../home/Api';
 
 export const addUpdateAddress = (pars, callback) => {
   return (dispatch) => {
@@ -88,5 +89,35 @@ export const deleteAddress = (pars) => {
         console.log(error);
         dispatch(setLoading(false));
       });
+  };
+};
+
+export const sendOtpToChangeNumber = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.sendOtpToChangeNumber, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        callback();
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const verifyOtpChangeNumber = (pars, error) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.verifyOtpChangeNumber, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        dispatch(getUserDetails());
+      } else {
+        error();
+      }
+    });
   };
 };

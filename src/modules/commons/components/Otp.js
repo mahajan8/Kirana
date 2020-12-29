@@ -70,8 +70,10 @@ export default class Otp extends Component {
       .catch((p) => console.log(p));
 
   componentWillUnmount() {
-    Keyboard.dismiss();
-    RNOtpVerify.removeListener();
+    if (Platform.OS === 'android') {
+      Keyboard.dismiss();
+      RNOtpVerify.removeListener();
+    }
   }
   submitOTP() {
     if (this.isComplete()) {
