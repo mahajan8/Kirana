@@ -49,4 +49,12 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
+  notDeliverable: {
+    color: '#e96c76',
+    width: '160rem',
+  },
+  notDeliverableContainer: {
+    alignItems: 'center',
+    paddingVertical: '12vrem',
+  },
 });

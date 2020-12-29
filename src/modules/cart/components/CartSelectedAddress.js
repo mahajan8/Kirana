@@ -7,26 +7,40 @@ import Button from '../../commons/components/Button';
 import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
+import ErrorIcon from '../../../assets/images/error_icon.svg';
 
 const CartSelectedAddress = (props) => {
-  const {location, addresses} = props;
+  const {location, addresses, deliverable} = props;
 
   let address = addresses.find((obj) => obj.id === location.id);
   return (
-    <View style={[styles.container, styles.rowContainer]}>
-      <AddressDownArrow />
+    <View
+      style={[
+        styles.container,
+        styles.rowContainer,
+        !deliverable && styles.notDeliverableContainer,
+      ]}>
+      {deliverable ? <AddressDownArrow /> : <ErrorIcon />}
 
       <View style={styles.addAddressContainer}>
         {location.id && address ? (
           <View>
-            <Text style={styles.addAddressHeading}>
-              {Strings.deliverTo}{' '}
-              <Text style={styles.addressType}>
-                {getKeyByValue(addressTypes, location.type)}
+            {deliverable && (
+              <Text style={styles.addAddressHeading}>
+                {Strings.deliverTo}{' '}
+                <Text style={styles.addressType}>
+                  {getKeyByValue(addressTypes, location.type)}
+                </Text>
               </Text>
-            </Text>
-            <Text style={styles.addAddressSub}>
-              {address.block_address} {address.landmark}
+            )}
+            <Text
+              style={[
+                styles.addAddressSub,
+                !deliverable && styles.notDeliverable,
+              ]}>
+              {deliverable
+                ? address.block_address + ' ' + address.landmark
+                : Strings.cartNotDeliverable}
             </Text>
           </View>
         ) : (
@@ -39,7 +53,7 @@ const CartSelectedAddress = (props) => {
         )}
       </View>
 
-      {location.id ? (
+      {location.id && deliverable ? (
         <Pressable onPress={props.addAddress}>
           <Text style={styles.change}>{Strings.change}</Text>
         </Pressable>
