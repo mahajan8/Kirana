@@ -20,6 +20,7 @@ export const Urls = {
   getCart: '/commerce/cart/get-cart',
   sendOtpToChangeNumber: '/organisation/user/send-otp-to-change-number',
   verifyOtpChangeNumber: '/organisation/user/verify-otp-change-number',
+  createOrder: 'commerce/order/create-order',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

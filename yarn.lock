@@ -6427,6 +6427,11 @@
   "resolved" "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-3.0.0.tgz"
   "version" "3.0.0"
 
+"react-native-razorpay@^2.2.2":
+  "integrity" "sha512-k0ldxnrI141WZlOilQw3TK+RZUcVXITm12533WzuDW2hg+OMrS/BK4J+U4F2lhhHQ5Mm2/78Y8C5iDGi1rwX7w=="
+  "resolved" "https://registry.npmjs.org/react-native-razorpay/-/react-native-razorpay-2.2.2.tgz"
+  "version" "2.2.2"
+
 "react-native-reanimated@^1.13.0":
   "integrity" "sha512-O+WhgxSjOIzcVdAAvx+h2DY331Ek1knKlaq+jsNLpC1fhRy9XTdOObovgob/aF2ve9uJfPEawCx8381g/tUJZQ=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-1.13.2.tgz"

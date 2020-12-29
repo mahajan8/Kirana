@@ -32,6 +32,7 @@ const ProductBox = (props) => {
     if (product_list[product_id] && selectedStoreId === store_id) {
       setCount(product_list[product_id]['item_quantity']);
     }
+    console.log('called')
   }, []);
   const getProductQuantity = (quantity, packaging) => {
     if ((packaging === 2 || packaging === 4) && quantity >= 1000) {

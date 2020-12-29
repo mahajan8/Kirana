@@ -17,9 +17,6 @@ const SearchItemTile = (props) => {
     product_quantity,
     store_price,
     product_images,
-    product_brand,
-    item_quantity,
-    total_price,
     product_id,
   } = props.item;
 
@@ -42,8 +39,10 @@ const SearchItemTile = (props) => {
     props.updateProductQuantity(pars, () => {
       if (increment) {
         setQuantity(quantity + 1);
-      } else {
+      } else if (quantity > 1) {
         setQuantity(quantity - 1);
+      } else {
+        // do nothing
       }
     });
   };
