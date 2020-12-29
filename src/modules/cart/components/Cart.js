@@ -7,10 +7,12 @@ import SafeArea from '../../commons/components/SafeArea';
 import SearchItemTile from '../../home/components/SearchItemTile';
 import {styles} from '../styles/cartStyles';
 import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
+import CartEmptyImage from '../../../assets/images/empty_address.svg';
 import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
 import {getCart} from '../Api';
+import Loader from '../../commons/components/Loader';
 import {selectStore} from '../../home/HomeActions';
 import CartPaymentDetails from './CartPaymentDetails';
 
@@ -26,6 +28,7 @@ const Cart = (props) => {
     product_list,
     store,
     is_overweight,
+    is_deliverable,
     store_id,
   } = cart;
   useEffect(() => {
@@ -42,12 +45,12 @@ const Cart = (props) => {
     };
     props.getCart(pars);
   };
-
+  let list = Object.values(product_list);
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
       <FlatList
-        data={product_list ? Object.values(product_list) : []}
+        data={product_list ? list : []}
         renderItem={({item, index}) => (
           <View style={styles.itemContainer}>
             <SearchItemTile item={item} />
@@ -57,51 +60,64 @@ const Cart = (props) => {
         contentContainerStyle={styles.list}
         ItemSeparatorComponent={() => <View style={styles.listItemSeperator} />}
         ListHeaderComponent={
-          <View>
-            {is_overweight && (
-              <View
-                style={[styles.overWeightContainer, styles.detailsContainer]}>
-                <Text style={[styles.detailsText, styles.overWeightText]}>
-                  {Strings.overWeightCartText}
-                </Text>
-              </View>
-            )}
-            <View style={styles.container}>
-              <View style={[styles.rowContainer, styles.storeNameContainer]}>
-                <Text style={styles.grayHeading}>
-                  {store ? store.store_name : null}
-                </Text>
-                <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
+          list.length && (
+            <View>
+              {is_overweight && (
+                <View
+                  style={[styles.overWeightContainer, styles.detailsContainer]}>
+                  <Text style={[styles.detailsText, styles.overWeightText]}>
+                    {Strings.overWeightCartText}
+                  </Text>
+                </View>
+              )}
+              <View style={styles.container}>
+                <View style={[styles.rowContainer, styles.storeNameContainer]}>
+                  <Text style={styles.grayHeading}>
+                    {store ? store.store_name : null}
+                  </Text>
+                  <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
+                </View>
               </View>
             </View>
-          </View>
+          )
         }
         ListFooterComponent={
-          <View style={styles.footerContainer}>
-            <View style={styles.seperator} />
+          list.length && (
+            <View style={styles.footerContainer}>
+              <View style={styles.seperator} />
 
-            <View style={[styles.rowContainer, styles.container]}>
-              <InstructionsIcon />
-              <Text style={styles.instructionsPlaceholder}>
-                {Strings.cartInstructionsPlaceholder}
-              </Text>
+              <View style={[styles.rowContainer, styles.container]}>
+                <InstructionsIcon />
+                <Text style={styles.instructionsPlaceholder}>
+                  {Strings.cartInstructionsPlaceholder}
+                </Text>
+              </View>
+
+              <View style={styles.seperator} />
+
+              <View style={styles.detailsContainer}>
+                <Text style={styles.detailsText}>
+                  {Strings.estimatedDeliveryTime} {'40 minutes'}
+                </Text>
+              </View>
+
+              <View style={styles.seperator} />
+
+              <CartPaymentDetails
+                deliveryFee={delivery_fee}
+                slicedAmount={third_party_delivery_fee}
+                total={total_cost_price}
+              />
             </View>
-
-            <View style={styles.seperator} />
-
-            <View style={styles.detailsContainer}>
-              <Text style={styles.detailsText}>
-                {Strings.estimatedDeliveryTime} {'40 minutes'}
-              </Text>
-            </View>
-
-            <View style={styles.seperator} />
-
-            <CartPaymentDetails
-              deliveryFee={delivery_fee}
-              slicedAmount={third_party_delivery_fee}
-              total={total_cost_price}
-            />
+          )
+        }
+        ListEmptyComponent={
+          <View style={styles.listEmptyContainer}>
+            <CartEmptyImage />
+            <Text style={styles.cartEmptyTitle}>{Strings.cartEmptyTitle}</Text>
+            <Text style={styles.cartEmptySubTitle}>
+              {Strings.cartEmptySubTitle}
+            </Text>
           </View>
         }
       />
@@ -111,6 +127,7 @@ const Cart = (props) => {
           setAddressModal(true);
         }}
         location={location}
+        deliverable={is_deliverable}
       />
       <AddressListModal
         visible={addressModal}
@@ -118,6 +135,8 @@ const Cart = (props) => {
         setLocation={setLocation}
         location={location}
       />
+
+      <Loader show={props.loading} />
     </SafeArea>
   );
 };
