@@ -13,12 +13,13 @@ import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
 import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
 const CartSelectedAddress = (props) => {
   const {location, addresses, deliverable, totalAmount = 0} = props;
 
   let address = addresses.find((obj) => obj.id === location.id);
+  const {first_name, mobile} = props.userDetails;
   const placeOrder = () => {
     const pars = {
       address_id: location.id,
@@ -26,17 +27,16 @@ const CartSelectedAddress = (props) => {
     };
     props.createOrder(pars, (orderId) => {
       let options = {
-        description: 'Credits towards consultation',
+        description: '',
         image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
         currency: 'INR',
         key: AppConfig[environment].razorpayKey,
         amount: String(totalAmount),
-        name: 'Acme Corp',
+        name: first_name || '',
         order_id: orderId,
         prefill: {
-          email: 'gaurav.kumar@example.com',
-          contact: '9191919191',
-          name: 'Gaurav Kumar',
+          contact: mobile,
+          name: first_name || '',
         },
         theme: {color: Colors.themeGreen},
       };
@@ -124,6 +124,7 @@ const CartSelectedAddress = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
+  userDetails: state.homeReducer.userDetails,
 });
 
 const mapDispatchToProps = {
