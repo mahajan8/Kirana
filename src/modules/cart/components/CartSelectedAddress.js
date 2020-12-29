@@ -21,7 +21,7 @@ const CartSelectedAddress = (props) => {
           styles.rowContainer,
           !deliverable && styles.notDeliverableContainer,
         ]}>
-        {deliverable ? <AddressDownArrow /> : <ErrorIcon />}
+        {!location.id || deliverable ? <AddressDownArrow /> : <ErrorIcon />}
 
         <View style={styles.addAddressContainer}>
           {location.id && address ? (
