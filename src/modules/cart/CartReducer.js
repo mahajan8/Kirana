@@ -9,7 +9,7 @@ const CartReducer = (state = INITIAL_STATE, action) => {
     case SET_CART_DETAILS:
       return {
         ...state,
-        cart: action.data,
+        cart: {...state.cart, ...action.data},
       };
     default:
       return state;

@@ -10,60 +10,72 @@ import {getKeyByValue} from '../../../utils/utility/Utils';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 
 const CartSelectedAddress = (props) => {
-  const {location, addresses, deliverable} = props;
+  const {location, addresses, deliverable, totalAmount = 0} = props;
 
   let address = addresses.find((obj) => obj.id === location.id);
   return (
-    <View
-      style={[
-        styles.container,
-        styles.rowContainer,
-        !deliverable && styles.notDeliverableContainer,
-      ]}>
-      {deliverable ? <AddressDownArrow /> : <ErrorIcon />}
+    <View>
+      <View
+        style={[
+          styles.container,
+          styles.rowContainer,
+          !deliverable && styles.notDeliverableContainer,
+        ]}>
+        {deliverable ? <AddressDownArrow /> : <ErrorIcon />}
 
-      <View style={styles.addAddressContainer}>
-        {location.id && address ? (
-          <View>
-            {deliverable && (
-              <Text style={styles.addAddressHeading}>
-                {Strings.deliverTo}{' '}
-                <Text style={styles.addressType}>
-                  {getKeyByValue(addressTypes, location.type)}
+        <View style={styles.addAddressContainer}>
+          {location.id && address ? (
+            <View>
+              {deliverable && (
+                <Text style={styles.addAddressHeading}>
+                  {Strings.deliverTo}{' '}
+                  <Text style={styles.addressType}>
+                    {getKeyByValue(addressTypes, location.type)}
+                  </Text>
                 </Text>
+              )}
+              <Text
+                style={[
+                  styles.addAddressSub,
+                  !deliverable && styles.notDeliverable,
+                ]}>
+                {deliverable
+                  ? address.block_address + ' ' + address.landmark
+                  : Strings.cartNotDeliverable}
               </Text>
-            )}
-            <Text
-              style={[
-                styles.addAddressSub,
-                !deliverable && styles.notDeliverable,
-              ]}>
-              {deliverable
-                ? address.block_address + ' ' + address.landmark
-                : Strings.cartNotDeliverable}
-            </Text>
-          </View>
+            </View>
+          ) : (
+            <View>
+              <Text style={styles.addAddressHeading}>
+                {Strings.addAddressToProceed}
+              </Text>
+              <Text style={styles.addAddressSub}>
+                {Strings.pleaseAddAddress}
+              </Text>
+            </View>
+          )}
+        </View>
+
+        {location.id && deliverable ? (
+          <Pressable onPress={props.addAddress}>
+            <Text style={styles.change}>{Strings.change}</Text>
+          </Pressable>
         ) : (
-          <View>
-            <Text style={styles.addAddressHeading}>
-              {Strings.addAddressToProceed}
-            </Text>
-            <Text style={styles.addAddressSub}>{Strings.pleaseAddAddress}</Text>
-          </View>
+          <Button
+            label={Strings.add}
+            Style={styles.addButton}
+            labelStyle={styles.addButtonLabel}
+            onPress={props.addAddress}
+          />
         )}
       </View>
-
-      {location.id && deliverable ? (
-        <Pressable onPress={props.addAddress}>
-          <Text style={styles.change}>{Strings.change}</Text>
-        </Pressable>
-      ) : (
-        <Button
-          label={Strings.add}
-          Style={styles.addButton}
-          labelStyle={styles.addButtonLabel}
-          onPress={props.addAddress}
-        />
+      {location.id && deliverable && (
+        <View style={styles.paymentButtonContainer}>
+          <Button
+            Style={styles.payButton}
+            label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
+          />
+        </View>
       )}
     </View>
   );

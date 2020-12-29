@@ -57,4 +57,17 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
     paddingVertical: '12vrem',
   },
+  paymentButtonContainer: {
+    paddingVertical: '10vrem',
+    paddingHorizontal: '16rem',
+    shadowOffset: {width: 0, height: -1},
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 7,
+    backgroundColor: Colors.white,
+  },
+  payButton: {
+    width: '100%',
+    height: '44vrem',
+  },
 });
