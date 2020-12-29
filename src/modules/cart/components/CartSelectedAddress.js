@@ -8,11 +8,19 @@ import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
+import {createOrder} from '../Api';
 
 const CartSelectedAddress = (props) => {
   const {location, addresses, deliverable, totalAmount = 0} = props;
 
   let address = addresses.find((obj) => obj.id === location.id);
+  const placeOrder = () => {
+    const pars = {
+      address_id: location.id,
+      payment_mode: 10,
+    };
+    props.createOrder(pars);
+  };
   return (
     <View>
       <View
@@ -74,6 +82,7 @@ const CartSelectedAddress = (props) => {
           <Button
             Style={styles.payButton}
             label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
+            onPress={placeOrder}
           />
         </View>
       )}
@@ -85,7 +94,9 @@ const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  createOrder,
+};
 
 export default connect(
   mapStateToProps,

@@ -33,3 +33,16 @@ export const getCart = (pars) => {
     });
   };
 };
+
+export const createOrder = (pars) => {
+  return (dispatch) => {
+    instance.post(Urls.createOrder, getFormBody(pars)).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        console.log(JSON.stringify(res.data.data));
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};

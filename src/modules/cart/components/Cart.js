@@ -29,7 +29,6 @@ const Cart = (props) => {
     store,
     is_overweight,
     is_deliverable,
-    store_id,
   } = cart;
   useEffect(() => {
     if (location) {
