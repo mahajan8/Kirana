@@ -21,10 +21,13 @@ const SearchItemTile = (props) => {
     product_images,
     product_id,
     total_price,
+    product_brand,
   } = props.item;
 
   const [quantity, setQuantity] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
+  const [unbrandedTotal, setUnbrandedTotal] = useState(0);
+  const [unbrandedQuantity, setUnbrandedQuantity] = useState(0);
   const {selectedStore} = props.homeState;
   const {product_list, store_id, store} = props.cartState.cart;
   const {cart} = props;
@@ -32,6 +35,10 @@ const SearchItemTile = (props) => {
   useEffect(() => {
     if (product_list[product_id] && store.id === selectedStore.id) {
       setQuantity(product_list[product_id]['item_quantity']);
+      if (!product_brand) {
+        setUnbrandedQuantity(product_list[product_id].product_quantity_str);
+        setUnbrandedTotal(product_list[product_id].total_price);
+      }
     }
   }, []);
 
@@ -45,7 +52,7 @@ const SearchItemTile = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
-      props.updateProductQuantity(pars, () => {
+      props.updateProductQuantity(pars, (data) => {
         if (increment) {
           setQuantity(quantity + 1);
         } else {
@@ -53,6 +60,17 @@ const SearchItemTile = (props) => {
             // donothing as states sets after unmounting.
           } else {
             setQuantity(quantity - 1);
+          }
+        }
+        if (!product_brand) {
+          if (quantity === 1 && !increment) {
+            if (!cart) {
+              setUnbrandedQuantity(0);
+              setUnbrandedTotal(store_price);
+            }
+          } else {
+            setUnbrandedQuantity(data[product_id].product_quantity_str);
+            setUnbrandedTotal(data[product_id].total_price);
           }
         }
       });
@@ -81,7 +99,12 @@ const SearchItemTile = (props) => {
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {cart ? total_price : store_price}
+          {Strings.currency}{' '}
+          {quantity
+            ? product_brand
+              ? store_price * quantity
+              : unbrandedTotal
+            : store_price}
         </Text>
 
         <View style={styles.rowContainer}>
@@ -91,7 +114,9 @@ const SearchItemTile = (props) => {
             <Text style={styles.quantityButtonIcons}>-</Text>
           </Pressable>
 
-          <Text style={styles.quantityText}>{quantity}</Text>
+          <Text style={styles.quantityText}>
+            {product_brand ? quantity : unbrandedQuantity}
+          </Text>
 
           <Pressable style={styles.quantityButton} onPress={updateQuantity}>
             <Text style={styles.quantityButtonIcons}>+</Text>

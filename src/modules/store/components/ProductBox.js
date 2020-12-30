@@ -17,6 +17,8 @@ import AlertModal from '../../commons/components/AlertModal';
 const ProductBox = (props) => {
   const [count, setCount] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
+  const [unbrandedTotal, setUnbrandedTotal] = useState(0);
+  const [unbrandedQuantity, setUnbrandedQuantity] = useState(0);
 
   let {vertical, onPress, item} = props;
   let {
@@ -34,6 +36,9 @@ const ProductBox = (props) => {
   useEffect(() => {
     if (product_list[product_id] && selectedStore.id === store.id) {
       setCount(product_list[product_id]['item_quantity']);
+      if (!product_brand) {
+        setUnbrandedQuantity(product_list[product_id].product_quantity_str);
+      }
     }
   }, []);
   const getProductQuantity = (quantity, packaging) => {
@@ -53,11 +58,21 @@ const ProductBox = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
-      props.updateProductQuantity(pars, () => {
+      props.updateProductQuantity(pars, (data) => {
+        console.log(data);
         if (increment) {
           setCount(count + 1);
         } else {
           setCount(count - 1);
+        }
+        if (!product_brand) {
+          if (count === 1 && !increment) {
+            setUnbrandedQuantity(0);
+            setUnbrandedTotal(store_price);
+          } else {
+            setUnbrandedQuantity(data[product_id].product_quantity_str);
+            setUnbrandedTotal(data[product_id].total_price);
+          }
         }
       });
     }
@@ -80,7 +95,12 @@ const ProductBox = (props) => {
         style={styles.productImage}
       />
       <Text style={styles.price}>
-        {Strings.currency} {store_price}
+        {Strings.currency}{' '}
+        {count
+          ? product_brand
+            ? store_price * count
+            : unbrandedTotal
+          : store_price}
       </Text>
       <Text style={styles.name} numberOfLines={1}>
         {product_name}
@@ -104,12 +124,7 @@ const ProductBox = (props) => {
               />
             </Pressable>
             <Text style={styles.countText}>
-              {product_brand
-                ? count
-                : getProductQuantity(
-                    count * product_quantity,
-                    product_packaging,
-                  )}
+              {product_brand ? count : unbrandedQuantity}
             </Text>
             <Pressable style={styles.counter} onPress={updateQuantity}>
               <PlusButton
