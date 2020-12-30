@@ -68,10 +68,12 @@ export const styles = EStyleSheet.create({
   },
   container: {
     flex: 1,
+    flexGrow: 1,
   },
   list: {
     paddingBottom: '20vrem',
-    flex: 1,
+    // flex: 1,
+    flexGrow: 1,
   },
   modalContainer: {
     position: 'absolute',

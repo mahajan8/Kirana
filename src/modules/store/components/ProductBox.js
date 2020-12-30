@@ -134,7 +134,7 @@ const ProductBox = (props) => {
         heading={Strings.replaceHeading}
         desc={
           Strings.replaceDesc1 +
-          store.name +
+          (store && store.name) +
           Strings.replaceDesc2 +
           selectedStore.name
         }

@@ -60,7 +60,7 @@ const Cart = (props) => {
             data={product_list ? list : []}
             renderItem={({item, index}) => (
               <View style={styles.itemContainer}>
-                <SearchItemTile item={item} />
+                <SearchItemTile item={item} cart />
               </View>
             )}
             keyExtractor={(item, index) => `cartItem${index}`}

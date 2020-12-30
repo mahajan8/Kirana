@@ -20,12 +20,14 @@ const SearchItemTile = (props) => {
     store_price,
     product_images,
     product_id,
+    total_price,
   } = props.item;
 
   const [quantity, setQuantity] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
   const {selectedStore} = props.homeState;
   const {product_list, store_id, store} = props.cartState.cart;
+  const {cart} = props;
 
   useEffect(() => {
     if (product_list[product_id] && store.id === selectedStore.id) {
@@ -79,7 +81,7 @@ const SearchItemTile = (props) => {
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {store_price}
+          {Strings.currency} {cart ? total_price : store_price}
         </Text>
 
         <View style={styles.rowContainer}>
@@ -100,7 +102,12 @@ const SearchItemTile = (props) => {
         visible={replaceAlert}
         setVisible={setReplaceAlert}
         heading={Strings.replaceHeading}
-        desc={Strings.replaceDesc}
+        desc={
+          Strings.replaceDesc1 +
+          store.name +
+          Strings.replaceDesc2 +
+          selectedStore.name
+        }
         label1={Strings.no}
         label2={Strings.yesDiscard}
         invert
