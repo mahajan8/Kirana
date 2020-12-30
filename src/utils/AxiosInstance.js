@@ -63,7 +63,7 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    // console.log('SERVER', error);
+    console.log('SERVER', error);
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(false));
     // } else {

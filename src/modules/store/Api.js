@@ -105,7 +105,6 @@ export const updateProductQuantity = (pars, callback) => {
       if (success) {
         const {cart} = res.data.data;
         dispatch(setCartDetails(cart));
-        callback(cart.product_list);
       } else {
         alert(res.data.message);
       }

@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
-import {unitsList, unitsShortName} from '../../../utils/values/Values';
+import {unitsList} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
 import MinusButton from '../../../assets/images/minus_button.svg';
 import PlusButton from '../../../assets/images/plus_button.svg';
@@ -14,10 +14,7 @@ import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
 
 const ProductBox = (props) => {
-  const [count, setCount] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
-  const [unbrandedTotal, setUnbrandedTotal] = useState(0);
-  const [unbrandedQuantity, setUnbrandedQuantity] = useState(0);
 
   let {vertical, onPress, item} = props;
   let {
@@ -30,23 +27,8 @@ const ProductBox = (props) => {
     product_id,
   } = item;
   const {selectedStore} = props.homeState;
-  const {product_list, store_id, store} = props.cartState.cart;
-
-  useEffect(() => {
-    if (product_list[product_id] && selectedStore.id === store.id) {
-      setCount(product_list[product_id]['item_quantity']);
-      if (!product_brand) {
-        setUnbrandedQuantity(product_list[product_id].product_quantity_str);
-      }
-    }
-  }, []);
-  const getProductQuantity = (quantity, packaging) => {
-    if ((packaging === 2 || packaging === 4) && quantity >= 1000) {
-      packaging -= 1;
-      quantity = quantity / 1000;
-    }
-    return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
-  };
+  const {product_list, store} = props.cartState.cart;
+  const cartProductObj = product_list[product_id];
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
       setReplaceAlert(true);
@@ -57,23 +39,7 @@ const ProductBox = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
-      props.updateProductQuantity(pars, (data) => {
-        console.log(data);
-        if (increment) {
-          setCount(count + 1);
-        } else {
-          setCount(count - 1);
-        }
-        if (!product_brand) {
-          if (count === 1 && !increment) {
-            setUnbrandedQuantity(0);
-            setUnbrandedTotal(store_price);
-          } else {
-            setUnbrandedQuantity(data[product_id].product_quantity_str);
-            setUnbrandedTotal(data[product_id].total_price);
-          }
-        }
-      });
+      props.updateProductQuantity(pars);
     }
   };
   return (
@@ -95,11 +61,7 @@ const ProductBox = (props) => {
       />
       <Text style={styles.price}>
         {Strings.currency}{' '}
-        {count
-          ? product_brand
-            ? store_price * count
-            : unbrandedTotal
-          : store_price}
+        {cartProductObj ? cartProductObj.total_price : store_price}
       </Text>
       <Text style={styles.name} numberOfLines={1}>
         {product_name}
@@ -108,7 +70,7 @@ const ProductBox = (props) => {
         {product_quantity} {getKeyByValue(unitsList, product_packaging)}
       </Text>
       <View style={styles.bottomContainer}>
-        {count ? (
+        {cartProductObj ? (
           <View
             style={[
               styles.counterContainer,
@@ -123,8 +85,11 @@ const ProductBox = (props) => {
               />
             </Pressable>
             <Text style={styles.countText}>
-              {product_brand ? count : unbrandedQuantity}
+              {product_brand
+                ? cartProductObj.item_quantity
+                : cartProductObj.product_quantity_str}
             </Text>
+
             <Pressable style={styles.counter} onPress={updateQuantity}>
               <PlusButton
                 width={EStyleSheet.value('25rem')}
@@ -163,7 +128,25 @@ const ProductBox = (props) => {
 };
 
 function arePropsEqual(prevProps, nextProps) {
-  return prevProps.item.product_id === nextProps.item.product_id;
+  const {product_id: prevProductId} = prevProps.item;
+  const {product_id: nextProductId} = nextProps.item;
+  const {store: prevStoreObj} = prevProps.cartState.cart;
+  const {store: nextStoreObj} = nextProps.cartState.cart;
+  const {product_id: productId} = prevProps.item;
+  const {product_list: prevProductList} = prevProps.cartState.cart;
+  const {product_list: nextProductList} = nextProps.cartState.cart;
+  return (
+    prevProductId === nextProductId &&
+    nextStoreObj &&
+    prevStoreObj &&
+    prevStoreObj.id === nextStoreObj.id &&
+    prevProductList[productId] &&
+    nextProductList[productId] &&
+    prevProductList[productId].item_quantity ===
+      nextProductList[productId].item_quantity &&
+    prevProductList[productId].product_quantity_str ===
+      nextProductList[productId].product_quantity_str
+  );
 }
 
 const mapStateToProps = (state) => ({
