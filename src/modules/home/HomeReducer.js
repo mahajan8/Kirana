@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   searchedStoresCount: null,
   storeProducts: [],
   storeProductCount: null,
-  selectedStoreId: null,
+  selectedStore: null,
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -88,7 +88,7 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
     case SELECT_STORE:
       return {
         ...state,
-        selectedStoreId: action.storeId,
+        selectedStore: action.store,
       };
     case APPEND_USER_DETAILS: {
       return {

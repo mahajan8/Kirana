@@ -217,4 +217,7 @@ export const Strings = {
   paymentSuccess: 'Payment Success',
   paymentSuccessSub:
     'Your order has been placed successfully and is being processed',
+  paymentFailed: 'Payment Failed',
+  paymentFailedSub:
+    'Looks like something went wrong while processing your request.',
 };

@@ -10,6 +10,7 @@ import {unitsShortName} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../../store/Api';
 import {Actions} from 'react-native-router-flux';
+import AlertModal from '../../commons/components/AlertModal';
 
 const SearchItemTile = (props) => {
   let {
@@ -22,32 +23,38 @@ const SearchItemTile = (props) => {
   } = props.item;
 
   const [quantity, setQuantity] = useState(0);
-  const {selectedStoreId} = props.homeState;
+  const [replaceAlert, setReplaceAlert] = useState(false);
+  const {selectedStore} = props.homeState;
   const {product_list, store_id} = props.cartState.cart;
 
   useEffect(() => {
-    if (product_list[product_id] && store_id === selectedStoreId) {
+    if (product_list[product_id] && store_id === selectedStore.id) {
       setQuantity(product_list[product_id]['item_quantity']);
     }
   }, []);
 
   const updateQuantity = (increment = true) => {
-    const pars = {
-      product_id,
-      quantity: increment ? 1 : -1,
-      store_id: selectedStoreId,
-    };
-    props.updateProductQuantity(pars, () => {
-      if (increment) {
-        setQuantity(quantity + 1);
-      } else {
-        if (Actions.currentScene === 'cart' && quantity === 1) {
-          // donothing as states sets after unmounting.
+    if (store_id && selectedStore.id !== store_id && !replaceAlert) {
+      setReplaceAlert(true);
+    } else {
+      setReplaceAlert(false);
+      const pars = {
+        product_id,
+        quantity: increment ? 1 : -1,
+        store_id: selectedStore.id,
+      };
+      props.updateProductQuantity(pars, () => {
+        if (increment) {
+          setQuantity(quantity + 1);
         } else {
-          setQuantity(quantity - 1);
+          if (Actions.currentScene === 'cart' && quantity === 1) {
+            // donothing as states sets after unmounting.
+          } else {
+            setQuantity(quantity - 1);
+          }
         }
-      }
-    });
+      });
+    }
   };
 
   return (
@@ -89,6 +96,17 @@ const SearchItemTile = (props) => {
           </Pressable>
         </View>
       </View>
+      <AlertModal
+        visible={replaceAlert}
+        setVisible={setReplaceAlert}
+        heading={Strings.replaceHeading}
+        desc={Strings.replaceDesc}
+        label1={Strings.no}
+        label2={Strings.yesDiscard}
+        invert
+        button1Press={() => setReplaceAlert(false)}
+        button2Press={updateQuantity}
+      />
     </View>
   );
 };

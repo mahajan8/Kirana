@@ -13,7 +13,7 @@ import StoreHeader from './StoreHeader';
 const StoreCategories = (props) => {
   useEffect(() => {
     let pars = {
-      store_id: props.storeId,
+      store_id: selectedStore.id,
     };
     props.getStoreDetails(pars);
 
@@ -24,6 +24,7 @@ const StoreCategories = (props) => {
   }, []);
 
   let {categoryProducts} = props.storeReducer;
+  let {selectedStore} = props.homeReducer;
 
   return (
     <SafeArea>
@@ -58,6 +59,7 @@ const StoreCategories = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   storeReducer: state.storeReducer,
+  homeReducer: state.homeReducer,
 });
 
 const mapDispatchToProps = {

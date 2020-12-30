@@ -21,12 +21,11 @@ import {clearStoreProducts} from '../HomeActions';
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const SearchProductResults = (props) => {
-  let {searchedText, store} = props;
+  let {searchedText} = props;
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [filters, setFilters] = useState(defaultFilters);
 
-  const {storeProducts, storeProductsCount} = props.homeReducer;
-
+  const {storeProducts, storeProductsCount, selectedStore} = props.homeReducer;
   useEffect(() => {
     props.clearStoreProducts();
     getProducts();
@@ -41,7 +40,7 @@ const SearchProductResults = (props) => {
       conditions: [
         {
           key: 'SEARCH_BY_STORE_ID',
-          value: store.id,
+          value: selectedStore.id,
           context: null,
         },
         {key: 'SEARCH_BY_TEXT', value: searchedText, context: null},
@@ -91,9 +90,9 @@ const SearchProductResults = (props) => {
       <CartHeader
         titleComp={
           <View>
-            <Text style={styles.storeName}>{store.name}</Text>
+            <Text style={styles.storeName}>{selectedStore.name}</Text>
             <Text style={styles.storeLocation}>
-              {store.location.short_address}
+              {selectedStore.location.short_address}
             </Text>
           </View>
         }
@@ -160,10 +159,7 @@ const SearchProductResults = (props) => {
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       />
       <View style={styles.buttonContainer}>
-        <Button
-          label={Strings.viewStore}
-          onPress={() => Actions.store({storeId: store.id})}
-        />
+        <Button label={Strings.viewStore} onPress={() => Actions.store()} />
       </View>
     </SafeArea>
   );

@@ -16,10 +16,12 @@ import {Actions} from 'react-native-router-flux';
 const Explore = (props) => {
   useEffect(() => {
     const pars = {
-      store_id: props.storeId,
+      store_id: selectedStore.id,
     };
     props.getStoreCategories(pars);
   }, []);
+
+  let {selectedStore} = props.homeReducer;
 
   const renderCategory = (item) => (
     <Pressable
@@ -69,6 +71,7 @@ const Explore = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   storeCategories: state.storeReducer.storeCategories,
+  homeReducer: state.homeReducer,
 });
 
 const mapDispatchToProps = {

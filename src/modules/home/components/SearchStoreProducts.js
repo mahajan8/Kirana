@@ -75,10 +75,9 @@ const SearchStoreProducts = (props) => {
     }
   };
   const onStoreClick = (store) => {
-    props.selectStore(store.id);
+    props.selectStore(store);
     Actions.storeProductsResults({
       searchedText: searchInput,
-      store: store,
     });
   };
   return (

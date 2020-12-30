@@ -5,12 +5,18 @@ import {styles} from '../styles/paymentStatusStyles';
 import PaymentSuccess from '../../../assets/images/stores_empty_image.svg';
 import {Strings} from '../../../utils/values/Strings';
 
-const PaymentStatus = () => {
+const PaymentStatus = (props) => {
+  let {success} = props;
   return (
     <SafeArea>
       <View style={styles.container}>
         <PaymentSuccess />
-        <Text>{Strings.paymentSuccess}</Text>
+        <Text style={styles.title}>
+          {success ? Strings.paymentSuccess : Strings.paymentFailed}
+        </Text>
+        <Text style={styles.subTitle}>
+          {success ? Strings.paymentSuccessSub : Strings.paymentFailedSub}
+        </Text>
       </View>
     </SafeArea>
   );

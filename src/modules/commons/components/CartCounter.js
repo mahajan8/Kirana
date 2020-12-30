@@ -9,9 +9,9 @@ import {Actions} from 'react-native-router-flux';
 import {selectStore} from '../../home/HomeActions';
 
 const CartCounter = (props) => {
-  const {item_quantity_count, store_id} = props.cart;
+  const {item_quantity_count, store} = props.cart;
   const onCartClicked = () => {
-    props.selectStore(store_id);
+    props.selectStore(store);
     Actions.cart();
   };
   return (

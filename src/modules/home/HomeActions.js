@@ -45,9 +45,9 @@ export const clearStoreProducts = () => ({
   type: CLEAR_STORE_PRODUCTS,
 });
 
-export const selectStore = (storeId) => ({
+export const selectStore = (store) => ({
   type: SELECT_STORE,
-  storeId,
+  store,
 });
 
 export const appendUserDetails = (userDetails) => ({

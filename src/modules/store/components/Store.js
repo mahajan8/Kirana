@@ -42,13 +42,12 @@ let initialLayout = {height: 0, width: Dimensions.get('window').width};
 
 const Store = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
-  const {selectedStoreId} = props.homeState;
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <StoreCategories storeId={selectedStoreId} />;
+        return <StoreCategories />;
       case 'second':
-        return <Explore storeId={selectedStoreId} />;
+        return <Explore />;
       case 'third':
         return <StoreOrders />;
     }

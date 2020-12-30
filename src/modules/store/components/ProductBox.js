@@ -12,12 +12,11 @@ import PlusButton from '../../../assets/images/plus_button.svg';
 import {Fonts} from '../../../utils/values/Fonts';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../Api';
-import ReplaceModal from '../../commons/components/ReplaceModal';
+import AlertModal from '../../commons/components/AlertModal';
 
 const ProductBox = (props) => {
   const [count, setCount] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
-  const [updateIncrement, setUpdateIncrement] = useState(false);
 
   let {vertical, onPress, item} = props;
   let {
@@ -29,11 +28,11 @@ const ProductBox = (props) => {
     product_brand,
     product_id,
   } = item;
-  const {selectedStoreId} = props.homeState;
+  const {selectedStore} = props.homeState;
   const {product_list, store_id} = props.cartState.cart;
 
   useEffect(() => {
-    if (product_list[product_id] && selectedStoreId === store_id) {
+    if (product_list[product_id] && selectedStore.id === store_id) {
       setCount(product_list[product_id]['item_quantity']);
     }
   }, []);
@@ -45,15 +44,16 @@ const ProductBox = (props) => {
     return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
   };
   const updateQuantity = (increment = true) => {
-    if (store_id && selectedStoreId !== store_id && !replaceAlert) {
+    console.log(store_id);
+    console.log(selectedStore.id);
+    if (store_id && selectedStore.id !== store_id && !replaceAlert) {
       setReplaceAlert(true);
-      setUpdateIncrement(increment);
     } else {
       setReplaceAlert(false);
       const pars = {
         product_id,
         quantity: increment ? 1 : -1,
-        store_id: selectedStoreId,
+        store_id: selectedStore.id,
       };
       props.updateProductQuantity(pars, () => {
         if (increment) {
@@ -129,10 +129,17 @@ const ProductBox = (props) => {
           />
         )}
       </View>
-      <ReplaceModal
+
+      <AlertModal
         visible={replaceAlert}
         setVisible={setReplaceAlert}
-        onReplace={() => updateQuantity(updateIncrement)}
+        heading={Strings.replaceHeading}
+        desc={Strings.replaceDesc}
+        label1={Strings.no}
+        label2={Strings.yesDiscard}
+        invert
+        button1Press={() => setReplaceAlert(false)}
+        button2Press={updateQuantity}
       />
     </Pressable>
   );
@@ -228,7 +235,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   updateProductQuantity,
 };
-// export default ;
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,

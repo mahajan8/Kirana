@@ -56,9 +56,9 @@ const Home = (props) => {
     };
     props.getStores(data);
   };
-  const onStoreClick = (storeId) => {
-    props.selectStore(storeId);
-    Actions.store({storeId});
+  const onStoreClick = (store) => {
+    props.selectStore(store);
+    Actions.store();
   };
   return (
     <SafeArea>
@@ -70,7 +70,7 @@ const Home = (props) => {
       <FlatList
         data={stores}
         renderItem={({item}) => (
-          <StoreInfoTile store={item} onPress={() => onStoreClick(item.id)} />
+          <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
         )}
         keyExtractor={(item, index) => `store${index}`}
         onMomentumScrollBegin={() => setEndReachCallable(false)}

@@ -72,7 +72,7 @@ const Cart = (props) => {
               list.length && (
                 <CartListHeader
                   overWeight={is_overweight}
-                  storeName={store ? store.store_name : null}
+                  storeName={store ? store.name : null}
                 />
               )
             }
