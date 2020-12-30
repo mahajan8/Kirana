@@ -48,7 +48,7 @@ const Cart = (props) => {
   };
 
   let list = Object.values(product_list);
-
+console.log(cart)
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />

@@ -9,7 +9,6 @@ import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../../store/Api';
-import {Actions} from 'react-native-router-flux';
 import AlertModal from '../../commons/components/AlertModal';
 
 const SearchItemTile = (props) => {
@@ -20,20 +19,13 @@ const SearchItemTile = (props) => {
     store_price,
     product_images,
     product_id,
-    total_price,
+    product_brand,
   } = props.item;
 
-  const [quantity, setQuantity] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
-  const {cart} = props;
-
-  useEffect(() => {
-    if (product_list[product_id] && store.id === selectedStore.id) {
-      setQuantity(product_list[product_id]['item_quantity']);
-    }
-  }, []);
+  const cartProductObj = product_list[product_id];
 
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
@@ -45,17 +37,7 @@ const SearchItemTile = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
-      props.updateProductQuantity(pars, () => {
-        if (increment) {
-          // setQuantity(quantity + 1);
-        } else {
-          if (Actions.currentScene === 'cart' && quantity === 1) {
-            // donothing as states sets after unmounting.
-          } else {
-            // setQuantity(quantity - 1);
-          }
-        }
-      });
+      props.updateProductQuantity(pars);
     }
   };
 
@@ -81,18 +63,22 @@ const SearchItemTile = (props) => {
 
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
-          {Strings.currency} {cart ? total_price : store_price}
+          {Strings.currency}{' '}
+          {cartProductObj ? cartProductObj.total_price : store_price}
         </Text>
 
         <View style={styles.rowContainer}>
           <Pressable
             style={styles.quantityButton}
-            onPress={() => (quantity !== 0 ? updateQuantity(false) : null)}>
+            onPress={() => updateQuantity(false)}>
             <Text style={styles.quantityButtonIcons}>-</Text>
           </Pressable>
-
           <Text style={styles.quantityText}>
-            {product_list[product_id].item_quantity}
+            {cartProductObj
+              ? product_brand
+                ? cartProductObj.item_quantity
+                : cartProductObj.product_quantity_str
+              : 0}
           </Text>
 
           <Pressable style={styles.quantityButton} onPress={updateQuantity}>
@@ -106,7 +92,7 @@ const SearchItemTile = (props) => {
         heading={Strings.replaceHeading}
         desc={
           Strings.replaceDesc1 +
-          store.name +
+          store?.name +
           Strings.replaceDesc2 +
           selectedStore.name
         }
@@ -203,7 +189,9 @@ function arePropsEqual(prevProps, nextProps) {
     prevProductList[productId] &&
     nextProductList[productId] &&
     prevProductList[productId].item_quantity ===
-      nextProductList[productId].item_quantity
+      nextProductList[productId].item_quantity &&
+    prevProductList[productId].product_quantity_str ===
+      nextProductList[productId].product_quantity_str
   );
 }
 

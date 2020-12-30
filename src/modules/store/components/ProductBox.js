@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect, memo} from 'react';
+import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {Strings} from '../../../utils/values/Strings';
-import {unitsList, unitsShortName} from '../../../utils/values/Values';
+import {unitsList} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
 import MinusButton from '../../../assets/images/minus_button.svg';
 import PlusButton from '../../../assets/images/plus_button.svg';
@@ -15,7 +15,6 @@ import {updateProductQuantity} from '../Api';
 import AlertModal from '../../commons/components/AlertModal';
 
 const ProductBox = (props) => {
-  const [count, setCount] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
 
   let {vertical, onPress, item} = props;
@@ -30,18 +29,7 @@ const ProductBox = (props) => {
   } = item;
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
-  useEffect(() => {
-    if (product_list[product_id] && selectedStore.id === store.id) {
-      setCount(product_list[product_id]['item_quantity']);
-    }
-  }, []);
-  const getProductQuantity = (quantity, packaging) => {
-    if ((packaging === 2 || packaging === 4) && quantity >= 1000) {
-      packaging -= 1;
-      quantity = quantity / 1000;
-    }
-    return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
-  };
+  const cartProductObj = product_list[product_id];
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
       setReplaceAlert(true);
@@ -52,13 +40,7 @@ const ProductBox = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
-      props.updateProductQuantity(pars, () => {
-        if (increment) {
-          setCount(count + 1);
-        } else {
-          setCount(count - 1);
-        }
-      });
+      props.updateProductQuantity(pars);
     }
   };
   return (
@@ -79,7 +61,8 @@ const ProductBox = (props) => {
         style={styles.productImage}
       />
       <Text style={styles.price}>
-        {Strings.currency} {store_price}
+        {Strings.currency}{' '}
+        {cartProductObj ? cartProductObj.total_price : store_price}
       </Text>
       <Text style={styles.name} numberOfLines={1}>
         {product_name}
@@ -88,7 +71,7 @@ const ProductBox = (props) => {
         {product_quantity} {getKeyByValue(unitsList, product_packaging)}
       </Text>
       <View style={styles.bottomContainer}>
-        {count ? (
+        {cartProductObj ? (
           <View
             style={[
               styles.counterContainer,
@@ -104,12 +87,10 @@ const ProductBox = (props) => {
             </Pressable>
             <Text style={styles.countText}>
               {product_brand
-                ? product_list[product_id].item_quantity
-                : getProductQuantity(
-                    count * product_quantity,
-                    product_packaging,
-                  )}
+                ? cartProductObj.item_quantity
+                : cartProductObj.product_quantity_str}
             </Text>
+
             <Pressable style={styles.counter} onPress={updateQuantity}>
               <PlusButton
                 width={EStyleSheet.value('25rem')}
@@ -239,7 +220,9 @@ function arePropsEqual(prevProps, nextProps) {
     prevProductList[productId] &&
     nextProductList[productId] &&
     prevProductList[productId].item_quantity ===
-      nextProductList[productId].item_quantity
+      nextProductList[productId].item_quantity &&
+    prevProductList[productId].product_quantity_str ===
+      nextProductList[productId].product_quantity_str
   );
 }
 
