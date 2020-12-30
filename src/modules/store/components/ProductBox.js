@@ -29,8 +29,7 @@ const ProductBox = (props) => {
     product_id,
   } = item;
   const {selectedStore} = props.homeState;
-  const {product_list, store_id, store} = props.cartState.cart;
-
+  const {product_list, store} = props.cartState.cart;
   useEffect(() => {
     if (product_list[product_id] && selectedStore.id === store.id) {
       setCount(product_list[product_id]['item_quantity']);
@@ -105,7 +104,7 @@ const ProductBox = (props) => {
             </Pressable>
             <Text style={styles.countText}>
               {product_brand
-                ? count
+                ? product_list[product_id].item_quantity
                 : getProductQuantity(
                     count * product_quantity,
                     product_packaging,
@@ -225,7 +224,23 @@ const styles = EStyleSheet.create({
   },
 });
 function arePropsEqual(prevProps, nextProps) {
-  return prevProps.item.product_id === nextProps.item.product_id;
+  const {product_id: prevProductId} = prevProps.item;
+  const {product_id: nextProductId} = nextProps.item;
+  const {store: prevStoreObj} = prevProps.cartState.cart;
+  const {store: nextStoreObj} = nextProps.cartState.cart;
+  const {product_id: productId} = prevProps.item;
+  const {product_list: prevProductList} = prevProps.cartState.cart;
+  const {product_list: nextProductList} = nextProps.cartState.cart;
+  return (
+    prevProductId === nextProductId &&
+    nextStoreObj &&
+    prevStoreObj &&
+    prevStoreObj.id === nextStoreObj.id &&
+    prevProductList[productId] &&
+    nextProductList[productId] &&
+    prevProductList[productId].item_quantity ===
+      nextProductList[productId].item_quantity
+  );
 }
 
 const mapStateToProps = (state) => ({

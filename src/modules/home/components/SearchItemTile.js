@@ -26,7 +26,7 @@ const SearchItemTile = (props) => {
   const [quantity, setQuantity] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
   const {selectedStore} = props.homeState;
-  const {product_list, store_id, store} = props.cartState.cart;
+  const {product_list, store} = props.cartState.cart;
   const {cart} = props;
 
   useEffect(() => {
@@ -47,12 +47,12 @@ const SearchItemTile = (props) => {
       };
       props.updateProductQuantity(pars, () => {
         if (increment) {
-          setQuantity(quantity + 1);
+          // setQuantity(quantity + 1);
         } else {
           if (Actions.currentScene === 'cart' && quantity === 1) {
             // donothing as states sets after unmounting.
           } else {
-            setQuantity(quantity - 1);
+            // setQuantity(quantity - 1);
           }
         }
       });
@@ -91,7 +91,9 @@ const SearchItemTile = (props) => {
             <Text style={styles.quantityButtonIcons}>-</Text>
           </Pressable>
 
-          <Text style={styles.quantityText}>{quantity}</Text>
+          <Text style={styles.quantityText}>
+            {product_list[product_id].item_quantity}
+          </Text>
 
           <Pressable style={styles.quantityButton} onPress={updateQuantity}>
             <Text style={styles.quantityButtonIcons}>+</Text>
@@ -186,7 +188,23 @@ const styles = EStyleSheet.create({
   },
 });
 function arePropsEqual(prevProps, nextProps) {
-  return prevProps.item.product_id === nextProps.item.product_id;
+  const {product_id: prevProductId} = prevProps.item;
+  const {product_id: nextProductId} = nextProps.item;
+  const {store: prevStoreObj} = prevProps.cartState.cart;
+  const {store: nextStoreObj} = nextProps.cartState.cart;
+  const {product_id: productId} = prevProps.item;
+  const {product_list: prevProductList} = prevProps.cartState.cart;
+  const {product_list: nextProductList} = nextProps.cartState.cart;
+  return (
+    prevProductId === nextProductId &&
+    nextStoreObj &&
+    prevStoreObj &&
+    prevStoreObj.id === nextStoreObj.id &&
+    prevProductList[productId] &&
+    nextProductList[productId] &&
+    prevProductList[productId].item_quantity ===
+      nextProductList[productId].item_quantity
+  );
 }
 
 const mapStateToProps = (state) => ({
