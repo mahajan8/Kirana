@@ -29,10 +29,10 @@ const ProductBox = (props) => {
     product_id,
   } = item;
   const {selectedStore} = props.homeState;
-  const {product_list, store_id} = props.cartState.cart;
+  const {product_list, store_id, store} = props.cartState.cart;
 
   useEffect(() => {
-    if (product_list[product_id] && selectedStore.id === store_id) {
+    if (product_list[product_id] && selectedStore.id === store.id) {
       setCount(product_list[product_id]['item_quantity']);
     }
   }, []);
@@ -44,9 +44,7 @@ const ProductBox = (props) => {
     return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
   };
   const updateQuantity = (increment = true) => {
-    console.log(store_id);
-    console.log(selectedStore.id);
-    if (store_id && selectedStore.id !== store_id && !replaceAlert) {
+    if (store && selectedStore.id !== store.id && !replaceAlert) {
       setReplaceAlert(true);
     } else {
       setReplaceAlert(false);
@@ -134,7 +132,12 @@ const ProductBox = (props) => {
         visible={replaceAlert}
         setVisible={setReplaceAlert}
         heading={Strings.replaceHeading}
-        desc={Strings.replaceDesc}
+        desc={
+          Strings.replaceDesc1 +
+          store.name +
+          Strings.replaceDesc2 +
+          selectedStore.name
+        }
         label1={Strings.no}
         label2={Strings.yesDiscard}
         invert

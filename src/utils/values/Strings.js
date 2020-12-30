@@ -211,8 +211,8 @@ export const Strings = {
   cartEmptySubTitle: 'Your cart is empty. Add items from nearby stores. ',
   addProducts: 'Add products',
   replaceHeading: 'Replace cart item?',
-  replaceDesc:
-    'Your cart contains items from The Bakers Dozen. Do you want to discard the selection and add items from Maya General Store?',
+  replaceDesc1: 'Your cart contains items from ',
+  replaceDesc2: '. Do you want to discard the selection and add items from ',
   yesDiscard: 'Yes, Discard',
   paymentSuccess: 'Payment Success',
   paymentSuccessSub:

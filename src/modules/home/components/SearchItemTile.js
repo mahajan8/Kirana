@@ -25,16 +25,16 @@ const SearchItemTile = (props) => {
   const [quantity, setQuantity] = useState(0);
   const [replaceAlert, setReplaceAlert] = useState(false);
   const {selectedStore} = props.homeState;
-  const {product_list, store_id} = props.cartState.cart;
+  const {product_list, store_id, store} = props.cartState.cart;
 
   useEffect(() => {
-    if (product_list[product_id] && store_id === selectedStore.id) {
+    if (product_list[product_id] && store.id === selectedStore.id) {
       setQuantity(product_list[product_id]['item_quantity']);
     }
   }, []);
 
   const updateQuantity = (increment = true) => {
-    if (store_id && selectedStore.id !== store_id && !replaceAlert) {
+    if (store && selectedStore.id !== store.id && !replaceAlert) {
       setReplaceAlert(true);
     } else {
       setReplaceAlert(false);
