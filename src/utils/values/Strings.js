@@ -216,8 +216,10 @@ export const Strings = {
   yesDiscard: 'Yes, Discard',
   paymentSuccess: 'Payment Success',
   paymentSuccessSub:
-    'Your order has been placed successfully and is being processed',
+    'Your order has been placed successfully and is being processed.',
   paymentFailed: 'Payment Failed',
   paymentFailedSub:
     'Looks like something went wrong while processing your request.',
+  gotIt: 'Got it!',
+  tryAgain: 'Try again',
 };

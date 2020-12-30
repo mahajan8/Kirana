@@ -15,8 +15,8 @@ import {selectStore} from '../../home/HomeActions';
 import CartListHeader from './CartListHeader';
 import CartListFooter from './CartListFooter';
 import CartShimmer from './CartShimmer';
-import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
+import BottomButton from '../../commons/components/BottomButton';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
@@ -48,7 +48,7 @@ const Cart = (props) => {
   };
 
   let list = Object.values(product_list);
-console.log(cart)
+
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
@@ -85,15 +85,17 @@ console.log(cart)
               )
             }
             ListEmptyComponent={
-              <View style={styles.listEmptyContainer}>
-                <CartEmptyImage />
-                <Text style={styles.cartEmptyTitle}>
-                  {Strings.cartEmptyTitle}
-                </Text>
-                <Text style={styles.cartEmptySubTitle}>
-                  {Strings.cartEmptySubTitle}
-                </Text>
-                <Button
+              <View style={{flex: 1}}>
+                <View style={styles.listEmptyContainer}>
+                  <CartEmptyImage />
+                  <Text style={styles.cartEmptyTitle}>
+                    {Strings.cartEmptyTitle}
+                  </Text>
+                  <Text style={styles.cartEmptySubTitle}>
+                    {Strings.cartEmptySubTitle}
+                  </Text>
+                </View>
+                <BottomButton
                   Style={styles.emptyButton}
                   label={Strings.addProducts}
                   onPress={() => Actions.popTo('_home')}

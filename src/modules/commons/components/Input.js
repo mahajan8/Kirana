@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {Text, View, TextInput, Animated, Platform} from 'react-native';
+import {Text, View, TextInput, Animated} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 // import Images from '../util/images'
 import {Colors} from '../../../utils/values/Colors';
-import {Fonts} from '../../../utils/values/Fonts';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
+import {styles} from '../styles/inputStyles';
 const dp = (size) => EStyleSheet.value(size + 'rem');
 
 const Input = (props) => {
@@ -68,10 +68,10 @@ const Input = (props) => {
   } = props;
 
   return (
-    <View style={[Styles.container, containerStyle && containerStyle]}>
+    <View style={[styles.container, containerStyle && containerStyle]}>
       <View
         style={[
-          Styles.borderedContainer,
+          styles.borderedContainer,
           {
             borderColor:
               focused || value ? Colors.themeGreen : Colors.borderGray,
@@ -90,7 +90,7 @@ const Input = (props) => {
             onChangeText={(text) => {
               onChange(text);
             }}
-            style={[Styles.textInput, comp && {flex: 1}]}
+            style={[styles.textInput, comp && {flex: 1}]}
             ref={ref}
             onFocus={() => {
               setFocus(true);
@@ -115,74 +115,23 @@ const Input = (props) => {
 
         <Animated.Text
           style={[
-            Styles.label,
+            styles.label,
             focused || value
               ? {color: Colors.themeGreen, lineHeight: dp(16)}
               : {color: Colors.grayText},
-            !value ? {top: move, fontSize: size} : Styles.focusedLabel,
+            !value ? {top: move, fontSize: size} : styles.focusedLabel,
           ]}>
           {label}
         </Animated.Text>
       </View>
       {error && errorMessage ? (
-        <View style={Styles.rowContainer}>
+        <View style={styles.rowContainer}>
           <ErrorIcon />
-          <Text style={Styles.errorMessage}>{errorMessage}</Text>
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
         </View>
       ) : null}
     </View>
   );
 };
-
-const Styles = EStyleSheet.create({
-  container: {
-    alignSelf: 'center',
-    width: '90%',
-    marginTop: '35rem',
-  },
-  textInput: {
-    fontSize: '15rem',
-    fontFamily: Fonts.medium,
-    color: Colors.titleText,
-    marginVertical: '15rem',
-    marginHorizontal: '16rem',
-    lineHeight: '20rem',
-    ...(Platform.OS == 'android' && {
-      paddingVertical: 0,
-      paddingHorizontal: 0,
-    }),
-  },
-  borderedContainer: {
-    borderWidth: '1.2rem',
-    borderRadius: '5rem',
-  },
-  label: {
-    position: 'absolute',
-    marginTop: '15rem',
-    marginLeft: '14rem',
-    zIndex: -5,
-    backgroundColor: '#FFF',
-    paddingHorizontal: '2rem',
-    fontFamily: Fonts.regular,
-    lineHeight: '20rem',
-    color: Colors.grayText,
-  },
-  focusedLabel: {
-    top: '-25rem',
-    fontSize: '13rem',
-  },
-  errorMessage: {
-    fontSize: '11rem',
-    color: '#ea4e3c',
-    letterSpacing: '0.22rem',
-    fontFamily: Fonts.regular,
-    marginLeft: '7rem',
-  },
-  rowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: '8vrem',
-  },
-});
 
 export default Input;

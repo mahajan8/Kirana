@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {View, TextInput, Platform, Keyboard} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
-import {Fonts} from '../../../utils/values/Fonts';
 import RNOtpVerify from 'react-native-otp-verify';
+import {styles} from '../styles/otpStyles';
 
 export default class Otp extends Component {
   constructor(props) {
@@ -101,14 +100,14 @@ export default class Otp extends Component {
     const {focus, error} = this.state;
 
     return (
-      <View style={Styles.otpView}>
+      <View style={styles.otpView}>
         {this.state.otp.map((item, index) => {
           let otp = this.state.otp;
           return (
             <TextInput
               key={`otp${index}`}
               style={[
-                Styles.otpField,
+                styles.otpField,
                 // eslint-disable-next-line react-native/no-inline-styles
                 {
                   borderColor:
@@ -179,44 +178,3 @@ export default class Otp extends Component {
     );
   }
 }
-
-const Styles = EStyleSheet.create({
-  otpField: {
-    height: '56rem',
-    width: '68rem',
-    backgroundColor: '#FFF',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: '18rem',
-    borderWidth: 1,
-    borderColor: Colors.borderGray,
-    borderRadius: '10rem',
-    color: Colors.titleText,
-    fontFamily: Fonts.medium,
-    ...(Platform.OS == 'android' && {
-      paddingBottom: 0,
-      paddingTop: 0,
-    }),
-  },
-  otpView: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: '10rem',
-  },
-  submit: {
-    borderTopWidth: 1,
-    width: '100%',
-    paddingVertical: '10rem',
-    alignItems: 'center',
-    marginTop: '30rem',
-    borderColor: '#D8D8D8',
-  },
-  heading: {
-    marginTop: '20rem',
-    fontSize: '14rem',
-    width: '80%',
-    textAlign: 'center',
-  },
-});

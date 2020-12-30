@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, FlatList, Pressable} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import {Colors} from '../../../utils/values/Colors';
+import {styles} from '../styles/storePlaceHolderStyles';
 
 const StorePlaceholder = (props) => {
   let {count} = props;
@@ -38,37 +37,5 @@ const StorePlaceholder = (props) => {
     />
   );
 };
-
-const styles = EStyleSheet.create({
-  rowContainer: {
-    flexDirection: 'row',
-    // alignItems: 'center',
-    marginBottom: '24vrem',
-  },
-  storeImageContainer: {
-    width: '70rem',
-    height: '70rem',
-    borderRadius: '8rem',
-    marginRight: '16rem',
-    backgroundColor: Colors.placeHolder,
-  },
-  storeName: {
-    backgroundColor: Colors.placeHolder,
-    width: '120rem',
-    marginBottom: '3rem',
-    height: '15vrem',
-  },
-  storeLocation: {
-    width: '70rem',
-    backgroundColor: Colors.placeHolder,
-    height: '15vrem',
-    marginBottom: '3rem',
-  },
-  storeDetails: {
-    width: '50rem',
-    backgroundColor: Colors.placeHolder,
-    height: '15vrem',
-  },
-});
 
 export default StorePlaceholder;

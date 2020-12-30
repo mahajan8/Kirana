@@ -21,37 +21,38 @@ const CartSelectedAddress = (props) => {
   let address = addresses.find((obj) => obj.id === location.id);
   const {first_name, mobile} = props.userDetails;
   const placeOrder = () => {
-    const pars = {
-      address_id: location.id,
-      payment_mode: 10,
-    };
-    props.createOrder(pars, (orderId) => {
-      let options = {
-        description: '',
-        image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
-        currency: 'INR',
-        key: AppConfig[environment].razorpayKey,
-        amount: String(totalAmount),
-        name: first_name || '',
-        order_id: orderId,
-        prefill: {
-          contact: mobile,
-          name: first_name || '',
-        },
-        theme: {color: Colors.themeGreen},
-      };
-      RazorpayCheckout.open(options)
-        .then((data) => {
-          // handle success
-          Actions.popTo('_home');
-          alert(`Success: ${data.razorpay_payment_id}`);
-        })
-        .catch((error) => {
-          // handle failure
-          Actions.popTo('_home');
-          alert(`Error: ${error.code} | ${error.description}`);
-        });
-    });
+    // const pars = {
+    //   address_id: location.id,
+    //   payment_mode: 10,
+    // };
+    // props.createOrder(pars, (orderId) => {
+    //   let options = {
+    //     description: '',
+    //     image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
+    //     currency: 'INR',
+    //     key: AppConfig[environment].razorpayKey,
+    //     amount: String(totalAmount),
+    //     name: first_name || '',
+    //     order_id: orderId,
+    //     prefill: {
+    //       contact: mobile,
+    //       name: first_name || '',
+    //     },
+    //     theme: {color: Colors.themeGreen},
+    //   };
+    //   RazorpayCheckout.open(options)
+    //     .then((data) => {
+    //       // handle success
+    //       Actions.popTo('_home');
+    //       alert(`Success: ${data.razorpay_payment_id}`);
+    //     })
+    //     .catch((error) => {
+    //       // handle failure
+    //       Actions.popTo('_home');
+    //       alert(`Error: ${error.code} | ${error.description}`);
+    //     });
+    // });
+    Actions.paymentStatus({success: false});
   };
   return (
     <View>
