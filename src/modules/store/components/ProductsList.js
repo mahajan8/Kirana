@@ -109,12 +109,7 @@ const ProductsList = (props) => {
       <FlatList
         data={products}
         renderItem={({item, index}) => (
-          <ProductBox
-            key={`product${item + index}`}
-            vertical
-            onPress={() => Actions.productDetails({subCategoryName, item})}
-            item={item}
-          />
+          <ProductBox key={`product${item + index}`} vertical item={item} />
         )}
         keyExtractor={(item, index) => `product${index}`}
         numColumns={2}

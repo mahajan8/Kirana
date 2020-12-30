@@ -12,11 +12,12 @@ import {connect} from 'react-redux';
 import {updateProductQuantity} from '../Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
+import { Actions } from 'react-native-router-flux';
 
 const ProductBox = (props) => {
   const [replaceAlert, setReplaceAlert] = useState(false);
 
-  let {vertical, onPress, item} = props;
+  let {vertical, item} = props;
   let {
     product_name,
     product_packaging,
@@ -46,11 +47,7 @@ const ProductBox = (props) => {
     <Pressable
       activeOpacity={1}
       style={[styles.container, vertical && styles.verticalContainer]}
-      onPress={() => {
-        if (onPress) {
-          onPress(item);
-        }
-      }}>
+      onPress={() => Actions.productDetails({item})}>
       <Image
         source={{
           uri: getMediaUrl(
