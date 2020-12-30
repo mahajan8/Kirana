@@ -9,6 +9,7 @@ import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../../store/Api';
+import {Actions} from 'react-native-router-flux';
 
 const SearchItemTile = (props) => {
   let {
@@ -39,10 +40,12 @@ const SearchItemTile = (props) => {
     props.updateProductQuantity(pars, () => {
       if (increment) {
         setQuantity(quantity + 1);
-      } else if (quantity > 1) {
-        setQuantity(quantity - 1);
       } else {
-        // do nothing
+        if (Actions.currentScene === 'cart' && quantity === 1) {
+          // donothing as states sets after unmounting.
+        } else {
+          setQuantity(quantity - 1);
+        }
       }
     });
   };
