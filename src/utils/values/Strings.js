@@ -210,4 +210,11 @@ export const Strings = {
   cartEmptyTitle: 'All your grocery needs are a click away',
   cartEmptySubTitle: 'Your cart is empty. Add items from nearby stores. ',
   addProducts: 'Add products',
+  replaceHeading: 'Replace cart item?',
+  replaceDesc:
+    'Your cart contains items from The Bakers Dozen. Do you want to discard the selection and add items from Maya General Store?',
+  yesDiscard: 'Yes, Discard',
+  paymentSuccess: 'Payment Success',
+  paymentSuccessSub:
+    'Your order has been placed successfully and is being processed',
 };

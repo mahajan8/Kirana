@@ -23,7 +23,7 @@ const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [endReachCallable, setEndReachCallable] = useState(true);
   const {stores, storeCount, location} = props.homeReducer;
-  console.log(props.homeReducer.userDetails);
+
   useEffect(() => {
     if (location) {
       loadStores(0);

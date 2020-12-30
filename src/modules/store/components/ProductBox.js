@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, memo} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -11,9 +12,12 @@ import PlusButton from '../../../assets/images/plus_button.svg';
 import {Fonts} from '../../../utils/values/Fonts';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../Api';
+import ReplaceModal from '../../commons/components/ReplaceModal';
 
 const ProductBox = (props) => {
   const [count, setCount] = useState(0);
+  const [replaceAlert, setReplaceAlert] = useState(false);
+  const [updateIncrement, setUpdateIncrement] = useState(false);
 
   let {vertical, onPress, item} = props;
   let {
@@ -41,18 +45,24 @@ const ProductBox = (props) => {
     return quantity + ' ' + getKeyByValue(unitsShortName, packaging);
   };
   const updateQuantity = (increment = true) => {
-    const pars = {
-      product_id,
-      quantity: increment ? 1 : -1,
-      store_id: selectedStoreId,
-    };
-    props.updateProductQuantity(pars, () => {
-      if (increment) {
-        setCount(count + 1);
-      } else {
-        setCount(count - 1);
-      }
-    });
+    if (store_id && selectedStoreId !== store_id && !replaceAlert) {
+      setReplaceAlert(true);
+      setUpdateIncrement(increment);
+    } else {
+      setReplaceAlert(false);
+      const pars = {
+        product_id,
+        quantity: increment ? 1 : -1,
+        store_id: selectedStoreId,
+      };
+      props.updateProductQuantity(pars, () => {
+        if (increment) {
+          setCount(count + 1);
+        } else {
+          setCount(count - 1);
+        }
+      });
+    }
   };
   return (
     <Pressable
@@ -119,6 +129,11 @@ const ProductBox = (props) => {
           />
         )}
       </View>
+      <ReplaceModal
+        visible={replaceAlert}
+        setVisible={setReplaceAlert}
+        onReplace={() => updateQuantity(updateIncrement)}
+      />
     </Pressable>
   );
 };
