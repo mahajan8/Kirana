@@ -38,7 +38,11 @@ const AccountSettings = (props) => {
   const verifyOtp = () => (
     <View>
       <Text style={styles.heading}>{Strings.enterNewNumber}</Text>
-      <Otp ref={otp} isComplete={(complete) => setDisabled(!complete)} />
+      <Otp
+        ref={otp}
+        isComplete={(complete) => setDisabled(!complete)}
+        verify={onSubmit}
+      />
       {error && (
         <View style={styles.rowContainer}>
           <ErrorIcon />
@@ -126,6 +130,7 @@ const AccountSettings = (props) => {
         let pars = {
           new_mobile: resend ? props.number : number,
           country_code: '+91',
+          user_type: 30,
         };
         props.sendOtpToChangeNumber(pars, () => {
           if (!resend) {
