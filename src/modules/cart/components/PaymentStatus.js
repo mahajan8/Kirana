@@ -6,9 +6,17 @@ import PaymentSuccess from '../../../assets/images/payment_success.svg';
 import PaymentFailed from '../../../assets/images/payment_failed.svg';
 import {Strings} from '../../../utils/values/Strings';
 import BottomButton from '../../commons/components/BottomButton';
+import {Actions} from 'react-native-router-flux';
 
 const PaymentStatus = (props) => {
   let {success} = props;
+  const handleOnPress = () => {
+    if (success) {
+      Actions.popTo('_home');
+    } else {
+      Actions.pop();
+    }
+  };
   return (
     <SafeArea>
       <View style={styles.container}>
@@ -20,7 +28,10 @@ const PaymentStatus = (props) => {
           {success ? Strings.paymentSuccessSub : Strings.paymentFailedSub}
         </Text>
       </View>
-      <BottomButton label={success ? Strings.gotIt : Strings.tryAgain} />
+      <BottomButton
+        label={success ? Strings.gotIt : Strings.tryAgain}
+        onPress={handleOnPress}
+      />
     </SafeArea>
   );
 };

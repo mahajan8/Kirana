@@ -70,4 +70,7 @@ export const styles = EStyleSheet.create({
     width: '100%',
     height: '44vrem',
   },
+  loader: {
+    height: '50rem',
+  },
 });

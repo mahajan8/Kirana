@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Pressable, ActivityIndicator} from 'react-native';
 import {styles} from '../styles/cartSelectedAddressStyles';
 import AddressDownArrow from '../../../assets/images/cart_address_down_arrow.svg';
 import {Strings} from '../../../utils/values/Strings';
@@ -17,7 +17,7 @@ import {Actions} from 'react-native-router-flux';
 
 const CartSelectedAddress = (props) => {
   const {location, addresses, deliverable, totalAmount = 0} = props;
-
+  const [loading, setLoading] = useState(false);
   let address = addresses.find((obj) => obj.id === location.id);
   const {first_name, mobile} = props.userDetails;
   const confirmOrder = () => {
@@ -25,8 +25,9 @@ const CartSelectedAddress = (props) => {
       address_id: location.id,
       payment_mode: 10,
     };
-    console.log(pars);
+    setLoading(true);
     props.createOrder(pars, (orderId) => {
+      setLoading(false);
       let options = {
         description: '',
         image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
@@ -113,11 +114,19 @@ const CartSelectedAddress = (props) => {
       </View>
       {location.id && deliverable && (
         <View style={styles.paymentButtonContainer}>
-          <Button
-            Style={styles.payButton}
-            label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
-            onPress={confirmOrder}
-          />
+          {loading ? (
+            <ActivityIndicator
+              color={Colors.themeGreen}
+              size={'large'}
+              style={styles.loader}
+            />
+          ) : (
+            <Button
+              Style={styles.payButton}
+              label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
+              onPress={confirmOrder}
+            />
+          )}
         </View>
       )}
     </View>

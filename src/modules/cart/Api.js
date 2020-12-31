@@ -3,6 +3,7 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import {setCartDetails} from './CartActions';
 import {Actions} from 'react-native-router-flux';
+import { setDisableLoading } from '../authentication/AuthActions';
 
 export const getCart = (pars) => {
   return (dispatch) => {
@@ -20,6 +21,7 @@ export const getCart = (pars) => {
 
 export const createOrder = (pars, callback) => {
   return (dispatch) => {
+    dispatch(setDisableLoading(true));
     instance.post(Urls.createOrder, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
       if (success) {

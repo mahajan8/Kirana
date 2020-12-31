@@ -36,6 +36,7 @@ const Login = (props) => {
       let pars = {
         mobile: number,
         country_code: '+91',
+        user_type: 30,
       };
       props.sendOtp(pars);
     }

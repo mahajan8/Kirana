@@ -10,6 +10,7 @@ export default class Otp extends Component {
 
     this.state = {
       otp: ['', '', '', ''],
+      placeHolder: ['0', '0', '0', '0'],
       error: false,
       focus: undefined,
     };
@@ -97,7 +98,7 @@ export default class Otp extends Component {
   }
 
   render() {
-    const {focus, error} = this.state;
+    const {focus, error, placeHolder} = this.state;
 
     return (
       <View style={styles.otpView}>
@@ -121,34 +122,39 @@ export default class Otp extends Component {
               maxLength={1}
               keyboardType="number-pad"
               value={item}
-              placeholder="0"
+              placeholder={placeHolder[index]}
               multiline={Platform.OS === 'android'}
               placeholderTextColor={Colors.grayText}
               underlineColorAndroid="transparent"
               selectionColor={Colors.themeGreen}
               ref={(ref) => (this['otp' + index] = ref)}
               onFocus={() => {
-                this.setState({focus: index});
-                if (otp[index] == '') {
-                  for (var i = 0; i < index; i++) {
-                    if (otp[i] == '') {
-                      this['otp' + i].focus();
-                      break;
-                    }
-                  }
-                } else {
-                  for (var i = otp.length - 1; i > index; i--) {
-                    if (otp[i] != '') {
-                      if (i == otp.length - 1) {
-                        this['otp' + i].focus();
-                      } else {
-                        this['otp' + (i + 1)].focus();
-                      }
-                      break;
-                    }
-                  }
-                }
+                let placeHolderArr = ['0', '0', '0', '0'];
+                placeHolderArr[index] = '';
+                this.setState({placeHolder: placeHolderArr});
               }}
+              // onFocus={() => {
+              //   this.setState({focus: index});
+              //   if (otp[index] == '') {
+              //     for (var i = 0; i < index; i++) {
+              //       if (otp[i] == '') {
+              //         this['otp' + i].focus();
+              //         break;
+              //       }
+              //     }
+              //   } else {
+              //     for (var i = otp.length - 1; i > index; i--) {
+              //       if (otp[i] != '') {
+              //         if (i == otp.length - 1) {
+              //           this['otp' + i].focus();
+              //         } else {
+              //           this['otp' + (i + 1)].focus();
+              //         }
+              //         break;
+              //       }
+              //     }
+              //   }
+              // }}
               onChangeText={(value) => {
                 otp[index] = value;
                 if (index < this.state.otp.length - 1 && value != '') {
