@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
-import {setLoading} from '../authentication/AuthActions';
+import {setLoading, setDisableLoading} from '../authentication/AuthActions';
 import instance from '../../utils/AxiosInstance';
 import {
   addProducts,
@@ -10,6 +10,7 @@ import {
   setFilters,
   setStoreDetails,
   setSubcategoryProducts,
+  setLoadingProduct,
 } from './StoreActions';
 import {Actions} from 'react-native-router-flux';
 import {appendStoreProducts} from '../home/HomeActions';
@@ -98,10 +99,13 @@ export const getStoreCategories = (pars) => {
 
 export const updateProductQuantity = (pars, callback) => {
   return (dispatch) => {
+    dispatch(setDisableLoading(true));
+    dispatch(setLoadingProduct(pars.product_id));
     var formBody = getFormBody(pars);
 
     instance.post(Urls.addUpdateItemToCart, formBody).then((res) => {
       const success = !res.data.error;
+      dispatch(setLoadingProduct(null));
       if (success) {
         const {cart} = res.data.data;
         dispatch(setCartDetails(cart));

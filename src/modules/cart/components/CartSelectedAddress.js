@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
-import {createOrder} from '../Api';
+import {createOrder, placeOrder} from '../Api';
 import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
 import {AppConfig} from '../../../config/AppConfig';
@@ -20,39 +20,40 @@ const CartSelectedAddress = (props) => {
 
   let address = addresses.find((obj) => obj.id === location.id);
   const {first_name, mobile} = props.userDetails;
-  const placeOrder = () => {
-    // const pars = {
-    //   address_id: location.id,
-    //   payment_mode: 10,
-    // };
-    // props.createOrder(pars, (orderId) => {
-    //   let options = {
-    //     description: '',
-    //     image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
-    //     currency: 'INR',
-    //     key: AppConfig[environment].razorpayKey,
-    //     amount: String(totalAmount),
-    //     name: first_name || '',
-    //     order_id: orderId,
-    //     prefill: {
-    //       contact: mobile,
-    //       name: first_name || '',
-    //     },
-    //     theme: {color: Colors.themeGreen},
-    //   };
-    //   RazorpayCheckout.open(options)
-    //     .then((data) => {
-    //       // handle success
-    //       Actions.popTo('_home');
-    //       alert(`Success: ${data.razorpay_payment_id}`);
-    //     })
-    //     .catch((error) => {
-    //       // handle failure
-    //       Actions.popTo('_home');
-    //       alert(`Error: ${error.code} | ${error.description}`);
-    //     });
-    // });
-    Actions.paymentStatus({success: false});
+  const confirmOrder = () => {
+    const pars = {
+      address_id: location.id,
+      payment_mode: 10,
+    };
+    console.log(pars);
+    props.createOrder(pars, (orderId) => {
+      let options = {
+        description: '',
+        image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
+        currency: 'INR',
+        key: AppConfig[environment].razorpayKey,
+        amount: String(totalAmount),
+        name: first_name || '',
+        order_id: orderId,
+        prefill: {
+          contact: mobile,
+          name: first_name || '',
+        },
+        theme: {color: Colors.themeGreen},
+      };
+      RazorpayCheckout.open(options)
+        .then((razorpayData) => {
+          const data = {
+            payment_reference_id: orderId,
+            property: razorpayData,
+          };
+          console.log(JSON.stringify(data));
+          props.placeOrder(data);
+        })
+        .catch((error) => {
+          Actions.paymentStatus({success: false});
+        });
+    });
   };
   return (
     <View>
@@ -115,7 +116,7 @@ const CartSelectedAddress = (props) => {
           <Button
             Style={styles.payButton}
             label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
-            onPress={placeOrder}
+            onPress={confirmOrder}
           />
         </View>
       )}
@@ -130,6 +131,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   createOrder,
+  placeOrder,
 };
 
 export default connect(

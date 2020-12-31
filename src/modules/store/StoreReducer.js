@@ -6,6 +6,7 @@ import {
   SET_FILTERS,
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
+  SET_LOADING_PRODUCT,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -17,6 +18,7 @@ const INITIAL_STATE = {
   products: [],
   storeCategories: [],
   totalProductCount: 0,
+  loadingProductId: null,
 };
 
 const StoreReducer = (state = INITIAL_STATE, action) => {
@@ -58,6 +60,11 @@ const StoreReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         storeCategories: action.data,
+      };
+    case SET_LOADING_PRODUCT:
+      return {
+        ...state,
+        loadingProductId: action.productId,
       };
     default:
       return state;

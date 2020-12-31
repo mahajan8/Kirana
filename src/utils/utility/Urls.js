@@ -22,6 +22,7 @@ export const Urls = {
   verifyOtpChangeNumber: '/organisation/user/verify-otp-change-number',
   createOrder: 'commerce/order/create-order',
   updateUserDetails: '/organisation/user/update-user-details',
+  placeOrder: 'commerce/order/place-order',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

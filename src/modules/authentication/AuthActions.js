@@ -1,4 +1,9 @@
-import {SET_LOADING, SET_TOKEN, LOGOUT_USER} from './ActionTypes';
+import {
+  SET_LOADING,
+  SET_TOKEN,
+  LOGOUT_USER,
+  SET_DISABLE_LOADING,
+} from './ActionTypes';
 
 export const setLoading = (loading) => ({
   type: SET_LOADING,
@@ -12,4 +17,9 @@ export const setToken = (token) => ({
 
 export const logoutUser = () => ({
   type: LOGOUT_USER,
+});
+
+export const setDisableLoading = (disabled) => ({
+  type: SET_DISABLE_LOADING,
+  disabled,
 });

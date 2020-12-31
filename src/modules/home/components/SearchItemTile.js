@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect, memo} from 'react';
-import {View, Text, Image, Pressable} from 'react-native';
+import React, {useState, memo} from 'react';
+import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {updateProductQuantity} from '../../store/Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/searchItemTileStyles';
+import {Colors} from '../../../utils/values/Colors';
 
 const SearchItemTile = (props) => {
   let {
@@ -24,6 +25,7 @@ const SearchItemTile = (props) => {
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
   const cartProductObj = product_list[product_id];
+  const {loadingProductId} = props.storeState;
 
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
@@ -65,24 +67,28 @@ const SearchItemTile = (props) => {
           {cartProductObj ? cartProductObj.total_price : store_price}
         </Text>
 
-        <View style={styles.rowContainer}>
-          <Pressable
-            style={styles.quantityButton}
-            onPress={() => updateQuantity(false)}>
-            <Text style={styles.quantityButtonIcons}>-</Text>
-          </Pressable>
-          <Text style={styles.quantityText}>
-            {cartProductObj
-              ? product_brand
-                ? cartProductObj.item_quantity
-                : cartProductObj.product_quantity_str
-              : 0}
-          </Text>
+        {loadingProductId !== product_id ? (
+          <View style={styles.rowContainer}>
+            <Pressable
+              style={styles.quantityButton}
+              onPress={() => updateQuantity(false)}>
+              <Text style={styles.quantityButtonIcons}>-</Text>
+            </Pressable>
+            <Text style={styles.quantityText}>
+              {cartProductObj
+                ? product_brand
+                  ? cartProductObj.item_quantity
+                  : cartProductObj.product_quantity_str
+                : 0}
+            </Text>
 
-          <Pressable style={styles.quantityButton} onPress={updateQuantity}>
-            <Text style={styles.quantityButtonIcons}>+</Text>
-          </Pressable>
-        </View>
+            <Pressable style={styles.quantityButton} onPress={updateQuantity}>
+              <Text style={styles.quantityButtonIcons}>+</Text>
+            </Pressable>
+          </View>
+        ) : (
+          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
+        )}
       </View>
       <AlertModal
         visible={replaceAlert}
@@ -109,26 +115,27 @@ function arePropsEqual(prevProps, nextProps) {
   const {product_id: nextProductId} = nextProps.item;
   const {store: prevStoreObj} = prevProps.cartState.cart;
   const {store: nextStoreObj} = nextProps.cartState.cart;
-  const {product_id: productId} = prevProps.item;
   const {product_list: prevProductList} = prevProps.cartState.cart;
   const {product_list: nextProductList} = nextProps.cartState.cart;
+  const {loadingProductId} = nextProps.storeState;
   return (
     prevProductId === nextProductId &&
     nextStoreObj &&
     prevStoreObj &&
     prevStoreObj.id === nextStoreObj.id &&
-    prevProductList[productId] &&
-    nextProductList[productId] &&
-    prevProductList[productId].item_quantity ===
-      nextProductList[productId].item_quantity &&
-    prevProductList[productId].product_quantity_str ===
-      nextProductList[productId].product_quantity_str
+    prevProductList[prevProductId] &&
+    nextProductList[prevProductId] &&
+    prevProductList[prevProductId].item_quantity ===
+      nextProductList[prevProductId].item_quantity &&
+    prevProductList[prevProductId].product_quantity_str ===
+      nextProductList[prevProductId].product_quantity_str &&
+    loadingProductId !== prevProductId
   );
 }
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  storeReducer: state.storeReducer,
+  storeState: state.storeReducer,
   homeState: state.homeReducer,
   cartState: state.cartReducer,
 });

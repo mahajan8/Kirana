@@ -10,7 +10,10 @@ import {AppConfig} from '../config/AppConfig';
 import {environment} from '../config/EnvConfig';
 import {getAuthToken} from './utility/LocalStore';
 import store from './Store';
-import {setLoading} from '../modules/authentication/AuthActions';
+import {
+  setLoading,
+  setDisableLoading,
+} from '../modules/authentication/AuthActions';
 // import {toggleCommentLoading} from '../modules/home/Actions';
 
 const instance = axios.create({
@@ -18,18 +21,20 @@ const instance = axios.create({
   timeout: 30000,
   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 });
-
 instance.interceptors.request.use(
   async (config) => {
+    let {disableLoading, authToken} = store.getState().authReducer;
+
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(true));
     // }
     // console.log(config)
-
-    dispatch(setLoading(true));
-    const token = store.getState().authReducer.authToken;
-    if (token) {
-      config.headers.Authorization = token;
+    console.log(store.getState().authReducer);
+    if (!disableLoading) {
+      dispatch(setLoading(true));
+    }
+    if (authToken) {
+      config.headers.Authorization = authToken;
     } else {
       config.headers.Authorization = await getAuthToken();
     }
@@ -37,7 +42,13 @@ instance.interceptors.request.use(
   },
   (error) => {
     console.log(error);
-    dispatch(setLoading(false));
+    let {disableLoading} = store.getState().authReducer;
+
+    if (disableLoading) {
+      dispatch(setDisableLoading(false));
+    } else {
+      dispatch(setLoading(false));
+    }
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(false));
     // } else {
@@ -54,16 +65,24 @@ const NETWORK_ERROR = 'Network Error';
 const {dispatch} = store;
 instance.interceptors.response.use(
   (response) => {
+    let {disableLoading} = store.getState().authReducer;
+
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(false));
     // } else {
     //   dispatch(disableLoading(false));
     // }
-    dispatch(setLoading(false));
+    if (disableLoading) {
+      dispatch(setDisableLoading(false));
+    } else {
+      dispatch(setLoading(false));
+    }
     return response;
   },
   function (error) {
     console.log('SERVER', error);
+    let {disableLoading} = store.getState().authReducer;
+
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(false));
     // } else {
@@ -83,7 +102,11 @@ instance.interceptors.response.use(
     // } else {
     //   dispatch(apiError(true));
     // }
-    dispatch(setLoading(false));
+    if (disableLoading) {
+      dispatch(setDisableLoading(false));
+    } else {
+      dispatch(setLoading(false));
+    }
   },
 );
 

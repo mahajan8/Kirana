@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productDetailStyles';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
@@ -13,6 +13,7 @@ import Plus from '../../../assets/images/product_detail_plus.svg';
 import {updateProductQuantity} from '../Api';
 import {connect} from 'react-redux';
 import AlertModal from '../../commons/components/AlertModal';
+import {Colors} from '../../../utils/values/Colors';
 
 const ProductDetails = (props) => {
   let {
@@ -29,6 +30,7 @@ const ProductDetails = (props) => {
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
   const cartProductObj = product_list[product_id];
+  const {loadingProductId} = props.storeState;
 
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
@@ -71,31 +73,35 @@ const ProductDetails = (props) => {
           styles.counterContainer,
           styles.buttonsContainer,
         ]}>
-        {cartProductObj ? (
-          <View style={styles.counterContainer}>
-            <Pressable
-              style={styles.counter}
-              onPress={() => updateQuantity(false)}>
-              <Minus />
-            </Pressable>
+        {loadingProductId !== product_id ? (
+          cartProductObj ? (
+            <View style={styles.counterContainer}>
+              <Pressable
+                style={styles.counter}
+                onPress={() => updateQuantity(false)}>
+                <Minus />
+              </Pressable>
 
-            <Text style={styles.countText}>
-              {product_brand
-                ? cartProductObj.item_quantity
-                : cartProductObj.product_quantity_str}
-            </Text>
+              <Text style={styles.countText}>
+                {product_brand
+                  ? cartProductObj.item_quantity
+                  : cartProductObj.product_quantity_str}
+              </Text>
 
-            <Pressable style={styles.counter} onPress={updateQuantity}>
-              <Plus />
-            </Pressable>
-          </View>
+              <Pressable style={styles.counter} onPress={updateQuantity}>
+                <Plus />
+              </Pressable>
+            </View>
+          ) : (
+            <Button
+              label={Strings.addToCart}
+              Style={styles.buttonStyle}
+              labelStyle={styles.labelStyle}
+              onPress={updateQuantity}
+            />
+          )
         ) : (
-          <Button
-            label={Strings.addToCart}
-            Style={styles.buttonStyle}
-            labelStyle={styles.labelStyle}
-            onPress={updateQuantity}
-          />
+          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </View>
       <AlertModal
@@ -120,7 +126,7 @@ const ProductDetails = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  storeReducer: state.storeReducer,
+  storeState: state.storeReducer,
   homeState: state.homeReducer,
   cartState: state.cartReducer,
 });

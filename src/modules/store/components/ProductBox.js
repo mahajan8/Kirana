@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, memo} from 'react';
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
@@ -12,7 +12,8 @@ import {connect} from 'react-redux';
 import {updateProductQuantity} from '../Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
+import { Colors } from '../../../utils/values/Colors';
 
 const ProductBox = (props) => {
   const [replaceAlert, setReplaceAlert] = useState(false);
@@ -30,6 +31,8 @@ const ProductBox = (props) => {
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
   const cartProductObj = product_list[product_id];
+  const {loadingProductId} = props.storeState;
+
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
       setReplaceAlert(true);
@@ -67,40 +70,44 @@ const ProductBox = (props) => {
         {product_quantity} {getKeyByValue(unitsList, product_packaging)}
       </Text>
       <View style={styles.bottomContainer}>
-        {cartProductObj ? (
-          <View
-            style={[
-              styles.counterContainer,
-              vertical && styles.verticalButton,
-            ]}>
-            <Pressable
-              style={styles.counter}
-              onPress={() => updateQuantity(false)}>
-              <MinusButton
-                width={EStyleSheet.value('25rem')}
-                height={EStyleSheet.value('25rem')}
-              />
-            </Pressable>
-            <Text style={styles.countText}>
-              {product_brand
-                ? cartProductObj.item_quantity
-                : cartProductObj.product_quantity_str}
-            </Text>
+        {loadingProductId !== product_id ? (
+          cartProductObj ? (
+            <View
+              style={[
+                styles.counterContainer,
+                vertical && styles.verticalButton,
+              ]}>
+              <Pressable
+                style={styles.counter}
+                onPress={() => updateQuantity(false)}>
+                <MinusButton
+                  width={EStyleSheet.value('25rem')}
+                  height={EStyleSheet.value('25rem')}
+                />
+              </Pressable>
+              <Text style={styles.countText}>
+                {product_brand
+                  ? cartProductObj.item_quantity
+                  : cartProductObj.product_quantity_str}
+              </Text>
 
-            <Pressable style={styles.counter} onPress={updateQuantity}>
-              <PlusButton
-                width={EStyleSheet.value('25rem')}
-                height={EStyleSheet.value('25rem')}
-              />
-            </Pressable>
-          </View>
+              <Pressable style={styles.counter} onPress={updateQuantity}>
+                <PlusButton
+                  width={EStyleSheet.value('25rem')}
+                  height={EStyleSheet.value('25rem')}
+                />
+              </Pressable>
+            </View>
+          ) : (
+            <Button
+              label={Strings.plusAdd}
+              Style={[styles.buttonStyle, vertical && styles.verticalButton]}
+              labelStyle={styles.addLabel}
+              onPress={updateQuantity}
+            />
+          )
         ) : (
-          <Button
-            label={Strings.plusAdd}
-            Style={[styles.buttonStyle, vertical && styles.verticalButton]}
-            labelStyle={styles.addLabel}
-            onPress={updateQuantity}
-          />
+          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </View>
 
@@ -132,6 +139,7 @@ function arePropsEqual(prevProps, nextProps) {
   const {product_id: productId} = prevProps.item;
   const {product_list: prevProductList} = prevProps.cartState.cart;
   const {product_list: nextProductList} = nextProps.cartState.cart;
+  const {loadingProductId} = nextProps.storeState;
   return (
     prevProductId === nextProductId &&
     nextStoreObj &&
@@ -142,13 +150,14 @@ function arePropsEqual(prevProps, nextProps) {
     prevProductList[productId].item_quantity ===
       nextProductList[productId].item_quantity &&
     prevProductList[productId].product_quantity_str ===
-      nextProductList[productId].product_quantity_str
+      nextProductList[productId].product_quantity_str &&
+    loadingProductId !== prevProductId
   );
 }
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  storeReducer: state.storeReducer,
+  storeState: state.storeReducer,
   homeState: state.homeReducer,
   cartState: state.cartReducer,
 });

@@ -68,4 +68,8 @@ export const styles = EStyleSheet.create({
   productDetialsContainer: {
     paddingTop: '3rem',
   },
+  loader: {
+    alignSelf: 'flex-end',
+    marginEnd: '30rem',
+  },
 });

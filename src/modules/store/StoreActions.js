@@ -6,8 +6,7 @@ import {
   SET_FILTERS,
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
-  ADD_SEARCHED_PRODUCTS,
-  CLEAR_SEARCHED_PRODUCTS,
+  SET_LOADING_PRODUCT,
 } from './ActionTypes';
 
 export const setFilters = (filters) => ({
@@ -43,4 +42,9 @@ export const clearProducts = () => ({
 export const setCategories = (data) => ({
   type: SET_CATEGORIES,
   data,
+});
+
+export const setLoadingProduct = (productId) => ({
+  type: SET_LOADING_PRODUCT,
+  productId,
 });

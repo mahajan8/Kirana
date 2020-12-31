@@ -77,4 +77,5 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.regular,
     letterSpacing: '-0.1rem',
   },
+  loader: {alignSelf: 'center'},
 });

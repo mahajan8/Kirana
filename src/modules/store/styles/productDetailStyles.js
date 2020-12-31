@@ -75,4 +75,9 @@ export const styles = EStyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
+  loader: {
+    alignSelf: 'center',
+    width: '160rem',
+    height: '36rem',
+  },
 });

@@ -1,8 +1,9 @@
-import {SET_LOADING, SET_TOKEN} from './ActionTypes';
+import {SET_LOADING, SET_TOKEN, SET_DISABLE_LOADING} from './ActionTypes';
 
 const INITIAL_STATE = {
   loading: false,
   authToken: '',
+  disableLoading: false,
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,15 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         authToken: action.token,
+      };
+    case SET_DISABLE_LOADING:
+      console.log(action.disabled, '1', {
+        ...state,
+        disableLoading: action.disabled,
+      });
+      return {
+        ...state,
+        disableLoading: action.disabled,
       };
     default:
       return state;
