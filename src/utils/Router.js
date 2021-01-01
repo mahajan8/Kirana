@@ -28,6 +28,8 @@ import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
 import Cart from '../modules/cart/components/Cart';
 import PaymentStatus from '../modules/cart/components/PaymentStatus';
+import OrderDetails from '../modules/orders/components/OrderDetails';
+import TrackOrder from '../modules/orders/components/TrackOrder';
 
 const AppRouter = () => {
   return (
@@ -59,6 +61,9 @@ const AppRouter = () => {
         <Scene key="searchProducts" component={SearchProducts} />
         <Scene key="cart" component={Cart} />
         <Scene key="paymentStatus" component={PaymentStatus} />
+        <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="orderDetails" component={OrderDetails} />
+        <Scene key="trackOrder" component={TrackOrder} />
         <Scene
           key="drawer"
           drawer={true}

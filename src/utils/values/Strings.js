@@ -112,6 +112,14 @@ export const Strings = {
 
   referal: 'Referral Code',
 
+  new: 'New',
+  onRoute: 'On Route',
+  completed: 'Completed',
+  rejected: 'Rejected',
+  cancelled: 'Cancelled',
+  refundInProgress: 'Refund in progress',
+  refundComplete: 'Refund Complete',
+
   continuePhoneNumber: 'Continue with Phone Number',
   drawerFreeDeliverySub:
     'Refer friends and get free deliveries. It’s a Win-Win!',
@@ -222,4 +230,32 @@ export const Strings = {
     'Looks like something went wrong while processing your request.',
   gotIt: 'Got it!',
   tryAgain: 'Try again',
+  orderId: 'Order Id',
+  needHelp: 'Need Help?',
+  orderInfoItemsRefund:
+    "Certain items in your order were removed or replaced, so we're sending you an instant refund of 200 rupees!",
+  yourItems: 'Your Items',
+  refundAmount: 'Refund Amount',
+  instructions: 'Instructions',
+  reorderItems: 'Reorder All Items',
+  orderRejectedRefundInfo:
+    'Your order was rejected by the store. The refunded amount will be credited in your account within 2 days.',
+  orderCancelRefundInfo:
+    'You have cancelled the order. Refund amount will be credited in your account in 2 days',
+  cancelOrder: 'Cancel Order',
+  cancelOrderConfirm:
+    'Are you sure you want to cancel the order from The Bakers Dozen?',
+  yesCancel: 'Yes, Cancel',
+  tryOtherStores: 'Try Alternative Stores',
+  orderDetails: 'Order Details',
+  orderAccepted: 'Order Accepted',
+  orderPlaced: 'Order Placed',
+  partnedOnWay: 'Delivery partner is on the way to store',
+  orderPicked: 'Order picked up from the store',
+  orderDelivered: 'Order Delivered',
+  orderRejected: 'Order Rejected',
+  orderAcceptedSub: 'Looking for a delivery partner now',
+  onTheWaySub:
+    'Your order shall be picked up once the partner reached the outlet',
+  orderPickedSub: 'On the way to delivery location',
 };
