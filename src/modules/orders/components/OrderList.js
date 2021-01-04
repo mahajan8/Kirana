@@ -17,10 +17,14 @@ const OrderList = (props) => {
   const {pastOrders, activeOrders, totalCount} = props.orderReducer;
 
   useEffect(() => {
+    getOrderList();
+  }, []);
+
+  const getOrderList = () => {
     props.clearOrders();
     getActiveOrders();
     getPastOrders();
-  }, []);
+  };
 
   const getActiveOrders = () => {
     let {ORDER_PLACED, ORDER_ACCEPTED, ORDER_DISPATCHED} = orderStatus;
@@ -106,7 +110,9 @@ const OrderList = (props) => {
       ListHeaderComponent={() => (
         <FlatList
           data={activeOrders}
-          renderItem={({item}) => <OrderListItem item={item} />}
+          renderItem={({item}) => (
+            <OrderListItem item={item} refresh={getOrderList} />
+          )}
           keyExtractor={(item, index) => `activeOrders${index}`}
           ListFooterComponent={
             pastOrders.length && (

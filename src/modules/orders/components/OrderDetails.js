@@ -10,8 +10,9 @@ import Button from '../../commons/components/Button';
 import AlertModal from '../../commons/components/AlertModal';
 import {orderStatus} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
-import {getOrderDetails} from '../Api';
+import {cancelOrder, getOrderDetails} from '../Api';
 import {setOrderDetails} from '../OrderActions';
+import {Actions} from 'react-native-router-flux';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -57,8 +58,17 @@ const OrderDetails = (props) => {
     </View>
   );
 
-  const cancelOrder = () => {
+  const cancel = () => {
     setShowCancelModal(false);
+
+    let pars = {
+      order_id: props.orderId,
+    };
+
+    props.cancelOrder(pars, () => {
+      props.refresh();
+      Actions.pop();
+    });
   };
 
   return (
@@ -145,7 +155,7 @@ const OrderDetails = (props) => {
         label1={Strings.no}
         label2={Strings.yesCancel}
         button1Press={() => setShowCancelModal(false)}
-        button2Press={cancelOrder}
+        button2Press={cancel}
       />
     </SafeArea>
   );
@@ -159,6 +169,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getOrderDetails,
   setOrderDetails,
+  cancelOrder,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);

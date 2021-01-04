@@ -39,3 +39,18 @@ export const getOrderDetails = (pars) => {
     });
   };
 };
+
+export const cancelOrder = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.cancelOrder, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        callback();
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
