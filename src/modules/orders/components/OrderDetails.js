@@ -48,11 +48,18 @@ let orderItems = [
   },
 ];
 
-let deliveryCharge = 20;
-let refundAmount = -50;
-
-const OrderDetails = () => {
+const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
+
+  let {
+    instructions,
+    final_amount,
+    created_on,
+    status,
+    delivery_fee,
+    charged_amount,
+    product_list,
+  } = props.order ? props.order : {};
 
   const renderHeader = (label) => (
     <View style={styles.headerContainer}>
@@ -70,25 +77,17 @@ const OrderDetails = () => {
     </View>
   );
 
-  const getTotal = () => {
-    let total = 0;
-    orderItems.forEach((obj) => (total += obj.count * obj.price));
-
-    return total;
-  };
-
   return (
     <SafeArea>
       <FlatList
-        data={orderItems}
+        data={product_list ? product_list : []}
         keyExtractor={(item, index) => `OrderItem${index}`}
         renderItem={({item}) => <OrderItem item={item} />}
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
         ListHeaderComponent={
           <View style={styles.listHeader}>
             <OrderHeader
-              status={orderStatus}
-              refund={orderStatus === 3 || orderStatus === 4}
+              item={props.order}
               //   refundComplete
             />
             {renderHeader(Strings.yourItems)}
@@ -96,22 +95,25 @@ const OrderDetails = () => {
         }
         ListFooterComponent={
           <View style={styles.listFooter}>
-            <View style={styles.instructionsContainer}>
-              <Text style={styles.instructionsLabel}>
-                {Strings.instructions}
-              </Text>
-              <Text style={styles.instructionsText}>Give me extra bags</Text>
-            </View>
+            {instructions && (
+              <View style={styles.instructionsContainer}>
+                <Text style={styles.instructionsLabel}>
+                  {Strings.instructions}
+                </Text>
+                <Text style={styles.instructionsText}>{instructions}</Text>
+              </View>
+            )}
+
             {renderHeader(Strings.paymentDetails)}
+
             <View style={styles.priceInfoContainer}>
-              {renderPrice(Strings.subTotal, getTotal())}
-              {renderPrice(Strings.deliveryCharge, deliveryCharge)}
-              {renderPrice(Strings.refundAmount, refundAmount)}
+              {renderPrice(Strings.subTotal, charged_amount)}
+              {renderPrice(Strings.deliveryCharge, delivery_fee)}
+              {renderPrice(Strings.refundAmount, -50)}
               <View style={styles.priceRowContainer}>
                 <Text style={styles.grandTotal}>{Strings.grandTotal}</Text>
                 <Text style={styles.grandTotalAmount}>
-                  {Strings.currency}{' '}
-                  {getTotal() + deliveryCharge + refundAmount}
+                  {Strings.currency} {final_amount}
                 </Text>
               </View>
             </View>

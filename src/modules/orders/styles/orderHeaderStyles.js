@@ -22,6 +22,7 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     fontFamily: Fonts.medium,
     marginTop: '8vrem',
+    width: '240rem',
   },
   orderTime: {
     fontSize: '10rem',

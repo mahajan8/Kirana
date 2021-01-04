@@ -258,4 +258,6 @@ export const Strings = {
   onTheWaySub:
     'Your order shall be picked up once the partner reached the outlet',
   orderPickedSub: 'On the way to delivery location',
+  activeOrders: 'Active Orders',
+  pastOrders: 'Past Orders',
 };

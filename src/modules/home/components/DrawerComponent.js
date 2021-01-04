@@ -32,6 +32,9 @@ let options = [
 
 const actions = (index) => {
   switch (index) {
+    case 0:
+      Actions.myOrders();
+      break;
     case 1:
       Actions.addresses();
       break;

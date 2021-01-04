@@ -4,36 +4,31 @@ import Clock from '../../../assets/images/clock.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
+import FromIcon from '../../../assets/images/order_location_from.svg';
+import ToIcon from '../../../assets/images/order_location_to.svg';
 
-const OrderAddressTile = () => {
+const OrderAddressTile = (props) => {
+  let {storeLocation, deliveryLocation, storeName, deliverAddress} = props;
   return (
     <View style={styles.rowContainer}>
       {/* Restaurant Details  */}
       <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-        <Clock
-          style={styles.icons}
-          width={EStyleSheet.value('14rem')}
-          height={EStyleSheet.value('14rem')}
-        />
+        <FromIcon style={styles.icons} />
         <View>
-          <Text style={styles.name}>{'The Baker’s Dozen'}</Text>
+          <Text style={styles.name}>{storeName}</Text>
           <Text style={styles.locationText} numberOfLines={1}>
-            {'Pratikshat Junior College Pratikshat Junior College'}
+            {storeLocation}
           </Text>
         </View>
       </View>
       <View style={styles.dottedLine} />
       {/* User Address to Deliver Details  */}
       <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-        <Clock
-          style={styles.icons}
-          width={EStyleSheet.value('14rem')}
-          height={EStyleSheet.value('14rem')}
-        />
+        <ToIcon style={styles.icons} />
         <View>
           <Text style={styles.name}>{'The Baker’s Dozen'}</Text>
           <Text style={styles.locationText} numberOfLines={1}>
-            {'Pratikshat Junior College Pratikshat Junior College'}
+            {deliveryLocation}
           </Text>
         </View>
       </View>

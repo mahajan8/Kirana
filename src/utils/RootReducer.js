@@ -4,6 +4,7 @@ import homeReducer from '../modules/home/HomeReducer';
 import navigationReducer from '../modules/navigation/NavigationReducer';
 import storeReducer from '../modules/store/StoreReducer';
 import cartReducer from '../modules/cart/CartReducer';
+import orderReducer from '../modules/orders/OrderReducer';
 
 const AppReducers = combineReducers({
   authReducer,
@@ -11,6 +12,7 @@ const AppReducers = combineReducers({
   navigationReducer,
   storeReducer,
   cartReducer,
+  orderReducer,
 });
 
 const rootReducer = (state, action) => {

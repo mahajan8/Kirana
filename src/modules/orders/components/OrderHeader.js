@@ -5,72 +5,75 @@ import Back from '../../../assets/images/back-arrow.svg';
 import InfoIcon from '../../../assets/images/red_info.svg';
 import {Strings} from '../../../utils/values/Strings';
 import OrderAddressTile from './OrderAddressTile';
+import {orderStatus, orderStatusLabels} from '../../../utils/values/Values';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import moment from 'moment';
 
 let orderStatusList = [
   {
-    label: Strings.new,
+    orderStatus: orderStatus.ORDER_PLACED,
     backgroundColor: '#cde4ff',
-    borderColor: '#79a8db',
+    borderColor: '#b9daff',
     labelColor: '#014085',
   },
   {
-    label: Strings.onRoute,
+    orderStatus: orderStatus.ORDER_ACCEPTED,
     backgroundColor: '#fff3cd',
-    borderColor: '#e1b741',
+    borderColor: '#feebae',
     labelColor: '#856305',
   },
   {
-    label: Strings.completed,
+    orderStatus: orderStatus.ORDER_DISPATCHED,
+    backgroundColor: '#d1ecf1',
+    borderColor: '#b5e4eb',
+    labelColor: '#0b5460',
+  },
+  {
+    orderStatus: orderStatus.ORDER_DELIVERED,
     backgroundColor: '#d5edda',
-    borderColor: '#5dc675',
+    borderColor: '#c2e6cb',
     labelColor: '#155824',
   },
   {
-    label: Strings.cancelled,
+    orderStatus: orderStatus.ORDER_REJECTED,
     backgroundColor: '#f8d7da',
     borderColor: '#da9fa4',
     labelColor: '#731c23',
-  },
-  {
-    label: Strings.rejected,
-    backgroundColor: '#f8d7da',
-    borderColor: '#da9fa4',
-    labelColor: '#731c23',
-  },
-  {
-    label: Strings.refundInProgress,
-    backgroundColor: '#e4deff',
-    borderColor: '#cfc7f4',
-    labelColor: '#5445bd',
-  },
-  {
-    label: Strings.refundComplete,
-    backgroundColor: '#e4deff',
-    borderColor: '#cfc7f4',
-    labelColor: '#5445bd',
   },
 ];
 
 const OrderHeader = (props) => {
-  let {status, infoLabel, refund, refundComplete} = props;
+  let {
+    status,
+    infoLabel,
+    refund,
+    refundComplete,
+    id,
+    created_on,
+    store_location,
+    store_name,
+    delivery_address_location,
+  } = props.item;
 
   const getOrderStatusBubble = (index = 0) => {
-    let orderStatus = orderStatusList[index];
-    let containerStyle = {
-      backgroundColor: orderStatus.backgroundColor,
-      borderColor: orderStatus.borderColor,
-    };
-    let labelStyle = {
-      color: orderStatus.labelColor,
-    };
+    let order = orderStatusList.find((obj) => obj.orderStatus === status);
+    if (order) {
+      let containerStyle = {
+        backgroundColor: order.backgroundColor,
+        borderColor: order.borderColor,
+      };
+      let labelStyle = {
+        color: order.labelColor,
+      };
 
-    return (
-      <View style={[styles.orderStatusContainer, containerStyle]}>
-        <Text style={[styles.statusLabel, labelStyle]}>
-          {orderStatus.label}
-        </Text>
-      </View>
-    );
+      return (
+        <View style={[styles.orderStatusContainer, containerStyle]}>
+          <Text style={[styles.statusLabel, labelStyle]}>
+            {getKeyByValue(orderStatusLabels, order.orderStatus)}
+          </Text>
+        </View>
+      );
+    }
   };
 
   return (
@@ -81,8 +84,12 @@ const OrderHeader = (props) => {
             <Pressable>
               <Back />
             </Pressable>
-            <Text style={styles.orderId}>{Strings.orderId} - OVXK089119</Text>
-            <Text style={styles.orderTime}>12 Sep 2020, 7:00 pm</Text>
+            <Text style={styles.orderId} numberOfLines={1}>
+              {Strings.orderId} - {id}
+            </Text>
+            <Text style={styles.orderTime}>
+              {moment(created_on).format('lll')}
+            </Text>
             {(refund || refundComplete) &&
               getOrderStatusBubble(refundComplete ? 6 : 5)}
           </View>
@@ -112,7 +119,11 @@ const OrderHeader = (props) => {
         )}
 
         <View style={styles.addressContainer}>
-          <OrderAddressTile />
+          <OrderAddressTile
+            storeName={store_name}
+            storeLocation={store_location.formatted_address}
+            deliveryLocation={delivery_address_location.formatted_address}
+          />
         </View>
       </View>
     </View>

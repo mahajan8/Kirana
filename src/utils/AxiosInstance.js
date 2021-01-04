@@ -29,7 +29,7 @@ instance.interceptors.request.use(
     //   dispatch(loading(true));
     // }
     // console.log(config)
-    console.log(store.getState().authReducer);
+    // console.log(store.getState().authReducer);
     if (!disableLoading) {
       dispatch(setLoading(true));
     }

@@ -19,3 +19,31 @@ export const addressTypes = {
   Work: 20,
   Other: 30,
 };
+
+export const orderStatus = {
+  ORDER_INITIATED: 10,
+  ORDER_NOT_PLACED: 15,
+  ORDER_PLACED: 20,
+  ORDER_UPDATED: 30,
+  ORDER_REJECTED: 40,
+  ORDER_CANCELLED: 50,
+  ORDER_ACCEPTED: 60,
+  ORDER_PARTIALLY_ACCEPTED: 70,
+  ORDER_DISPATCHED: 80,
+  ORDER_OUT_FOR_DELIVERY: 90,
+  ORDER_DELIVERED: 100,
+};
+
+export const orderStatusLabels = {
+  ORDER_INITIATED: 10,
+  ORDER_NOT_PLACED: 15,
+  New: 20,
+  ORDER_UPDATED: 30,
+  Rejected: 40,
+  ORDER_CANCELLED: 50,
+  Preparing: 60,
+  ORDER_PARTIALLY_ACCEPTED: 70,
+  Dispatched: 80,
+  ORDER_OUT_FOR_DELIVERY: 90,
+  Completed: 100,
+};
