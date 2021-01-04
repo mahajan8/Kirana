@@ -23,6 +23,7 @@ export const Urls = {
   createOrder: 'commerce/order/create-order',
   updateUserDetails: '/organisation/user/update-user-details',
   placeOrder: 'commerce/order/place-order',
+  getOrders: 'commerce/order/get-consumer-order-history',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };
