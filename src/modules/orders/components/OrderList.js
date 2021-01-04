@@ -156,6 +156,7 @@ const OrderList = (props) => {
                 </View>
               )
             }
+            ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
           />
         )
       }

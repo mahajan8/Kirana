@@ -6,9 +6,11 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 import FromIcon from '../../../assets/images/order_location_from.svg';
 import ToIcon from '../../../assets/images/order_location_to.svg';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 const OrderAddressTile = (props) => {
-  let {storeLocation, deliveryLocation, storeName, deliverAddress} = props;
+  let {storeLocation, deliveryLocation, storeName, addressType} = props;
   return (
     <View style={styles.rowContainer}>
       {/* Restaurant Details  */}
@@ -26,7 +28,11 @@ const OrderAddressTile = (props) => {
       <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
         <ToIcon style={styles.icons} />
         <View>
-          <Text style={styles.name}>{'The Baker’s Dozen'}</Text>
+          <Text style={styles.name}>
+            {addressType
+              ? getKeyByValue(addressTypes, addressType)
+              : 'The Baker’s Dozen'}
+          </Text>
           <Text style={styles.locationText} numberOfLines={1}>
             {deliveryLocation}
           </Text>
