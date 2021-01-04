@@ -243,8 +243,7 @@ export const Strings = {
   orderCancelRefundInfo:
     'You have cancelled the order. Refund amount will be credited in your account in 2 days',
   cancelOrder: 'Cancel Order',
-  cancelOrderConfirm:
-    'Are you sure you want to cancel the order from The Bakers Dozen?',
+  cancelOrderConfirm: 'Are you sure you want to cancel the order from ',
   yesCancel: 'Yes, Cancel',
   tryOtherStores: 'Try Alternative Stores',
   orderDetails: 'Order Details',

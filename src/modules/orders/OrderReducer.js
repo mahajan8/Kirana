@@ -1,9 +1,15 @@
-import {CLEAR_ORDERS, SET_ACTIVE_ORDERS, SET_PAST_ORDERS} from './ActionTypes';
+import {
+  CLEAR_ORDERS,
+  SET_ACTIVE_ORDERS,
+  SET_ORDER_DETAILS,
+  SET_PAST_ORDERS,
+} from './ActionTypes';
 
 const INITIAL_STATE = {
   pastOrders: [],
   activeOrders: [],
   totalCount: null,
+  orderDetails: null,
 };
 
 const OrderReducer = (state = INITIAL_STATE, action) => {
@@ -29,6 +35,11 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
         totalCount: null,
       };
     }
+    case SET_ORDER_DETAILS:
+      return {
+        ...state,
+        orderDetails: action.data,
+      };
     default:
       return state;
   }

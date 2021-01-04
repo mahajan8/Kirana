@@ -1,4 +1,9 @@
-import {CLEAR_ORDERS, SET_ACTIVE_ORDERS, SET_PAST_ORDERS} from './ActionTypes';
+import {
+  CLEAR_ORDERS,
+  SET_ACTIVE_ORDERS,
+  SET_ORDER_DETAILS,
+  SET_PAST_ORDERS,
+} from './ActionTypes';
 
 export const setPastOrders = (orders, total) => ({
   type: SET_PAST_ORDERS,
@@ -13,4 +18,9 @@ export const setActiveOrders = (orders) => ({
 
 export const clearOrders = () => ({
   type: CLEAR_ORDERS,
+});
+
+export const setOrderDetails = (data) => ({
+  type: SET_ORDER_DETAILS,
+  data,
 });

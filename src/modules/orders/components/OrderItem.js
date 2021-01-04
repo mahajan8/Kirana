@@ -6,22 +6,32 @@ import {unitsShortName} from '../../../utils/values/Values';
 import {styles} from '../styles/orderItemStyles';
 
 const OrderItem = (props) => {
-  const {name, count, price, quantity, packaging} = props.item;
+  let {
+    product_name,
+    product_packaging,
+    final_amount,
+    product_quantity,
+    item_quantity,
+    product_images,
+  } = props.item;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.itemCount}>{count} x</Text>
-      <Image source={{uri: getMediaUrl(null)}} style={styles.itemImage} />
+      <Text style={styles.itemCount}>{item_quantity} x</Text>
+      <Image
+        source={{uri: getMediaUrl(product_images[0].path)}}
+        style={styles.itemImage}
+      />
       <View>
         <Text style={styles.itemName} numberOfLines={2}>
-          {name}
+          {product_name}
         </Text>
         <Text style={styles.itemWeight}>
-          {quantity} {getKeyByValue(unitsShortName, packaging)}
+          {product_quantity} {getKeyByValue(unitsShortName, product_packaging)}
         </Text>
       </View>
       <Text style={styles.itemPrice}>
-        {Strings.currency} {count * price}
+        {Strings.currency} {final_amount}
       </Text>
     </View>
   );

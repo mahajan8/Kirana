@@ -2,7 +2,7 @@
 import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
-import {setActiveOrders, setPastOrders} from './OrderActions';
+import {setActiveOrders, setOrderDetails, setPastOrders} from './OrderActions';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -18,6 +18,21 @@ export const getOrders = (pars, callback) => {
         } else {
           dispatch(setPastOrders(results, total_count));
         }
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const getOrderDetails = (pars) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.getOrderDetails, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        dispatch(setOrderDetails(res.data.data));
       } else {
         alert(res.data.message);
       }

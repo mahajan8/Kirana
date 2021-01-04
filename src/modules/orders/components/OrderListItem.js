@@ -24,9 +24,7 @@ const OrderListItem = (props) => {
   return (
     <Pressable
       style={styles.orderContainer}
-      onPress={() =>
-        Actions.orderDetails({order: props.item, orderId: props.item.id})
-      }>
+      onPress={() => Actions.orderDetails({orderId: props.item.id})}>
       {/* First row with clock and Date of Order  */}
       <View style={[styles.rowContainer, styles.dateContainer]}>
         {/* TODO: Change to green clock  */}

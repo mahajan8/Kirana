@@ -24,6 +24,7 @@ export const Urls = {
   updateUserDetails: '/organisation/user/update-user-details',
   placeOrder: 'commerce/order/place-order',
   getOrders: 'commerce/order/get-consumer-order-history',
+  getOrderDetails: '/commerce/order/get-order-details',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };
