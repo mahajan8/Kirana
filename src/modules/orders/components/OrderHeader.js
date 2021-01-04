@@ -8,6 +8,7 @@ import OrderAddressTile from './OrderAddressTile';
 import {orderStatus, orderStatusLabels} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import moment from 'moment';
+import {Actions} from 'react-native-router-flux';
 
 let orderStatusList = [
   {
@@ -36,6 +37,12 @@ let orderStatusList = [
   },
   {
     orderStatus: orderStatus.ORDER_REJECTED,
+    backgroundColor: '#f8d7da',
+    borderColor: '#da9fa4',
+    labelColor: '#731c23',
+  },
+  {
+    orderStatus: orderStatus.ORDER_CANCELLED,
     backgroundColor: '#f8d7da',
     borderColor: '#da9fa4',
     labelColor: '#731c23',
@@ -81,7 +88,7 @@ const OrderHeader = (props) => {
       <View style={styles.container}>
         <View style={styles.orderInfoRow}>
           <View style={styles.orderDetails}>
-            <Pressable>
+            <Pressable onPress={Actions.pop}>
               <Back />
             </Pressable>
             <Text style={styles.orderId} numberOfLines={1}>

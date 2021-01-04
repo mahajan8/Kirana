@@ -3,7 +3,7 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import {setCartDetails} from './CartActions';
 import {Actions} from 'react-native-router-flux';
-import { setDisableLoading } from '../authentication/AuthActions';
+import {setDisableLoading} from '../authentication/AuthActions';
 
 export const getCart = (pars) => {
   return (dispatch) => {
@@ -38,7 +38,7 @@ export const placeOrder = (pars) => {
   return (dispatch) => {
     instance.post(Urls.placeOrder, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
-      console.log(JSON.stringify(res.data.data));
+      // console.log(JSON.stringify(res.data.data));
       if (success) {
         const {cart} = res.data.data;
         dispatch(setCartDetails(cart));

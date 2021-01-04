@@ -10,6 +10,7 @@ import Loader from '../../commons/components/Loader';
 import OrderListItem from './OrderListItem';
 import {orderStatus} from '../../../utils/values/Values';
 import {clearOrders} from '../OrderActions';
+import OrderListShimmer from './OrderListShimmer';
 
 const OrderList = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
@@ -27,7 +28,14 @@ const OrderList = (props) => {
   };
 
   const getActiveOrders = () => {
-    let {ORDER_PLACED, ORDER_ACCEPTED, ORDER_DISPATCHED} = orderStatus;
+    let {
+      ORDER_PLACED,
+      ORDER_ACCEPTED,
+      ORDER_DISPATCHED,
+      ORDER_UPDATED,
+      ORDER_PARTIALLY_ACCEPTED,
+      ORDER_OUT_FOR_DELIVERY,
+    } = orderStatus;
 
     let data = {
       start: -1,
@@ -40,7 +48,14 @@ const OrderList = (props) => {
         },
         {
           key: 'SEARCH_BY_STATUS_IN',
-          value: [ORDER_PLACED, ORDER_ACCEPTED, ORDER_DISPATCHED],
+          value: [
+            ORDER_PLACED,
+            ORDER_ACCEPTED,
+            ORDER_DISPATCHED,
+            ORDER_UPDATED,
+            ORDER_PARTIALLY_ACCEPTED,
+            ORDER_OUT_FOR_DELIVERY,
+          ],
           context: null,
         },
       ],
@@ -62,6 +77,13 @@ const OrderList = (props) => {
   };
 
   const getPastOrders = (start = 0) => {
+    let {
+      ORDER_DELIVERED,
+      ORDER_CANCELLED,
+      ORDER_REJECTED,
+      ORDER_NOT_PLACED,
+    } = orderStatus;
+
     let data = {
       start,
       limit: 10,
@@ -73,7 +95,12 @@ const OrderList = (props) => {
         },
         {
           key: 'SEARCH_BY_STATUS_IN',
-          value: [orderStatus.ORDER_DELIVERED],
+          value: [
+            ORDER_DELIVERED,
+            ORDER_CANCELLED,
+            ORDER_REJECTED,
+            ORDER_NOT_PLACED,
+          ],
           context: null,
         },
       ],
@@ -107,29 +134,31 @@ const OrderList = (props) => {
           setEndReachCallable(true);
         }
       }}
-      ListHeaderComponent={() => (
-        <FlatList
-          data={activeOrders}
-          renderItem={({item}) => (
-            <OrderListItem item={item} refresh={getOrderList} />
-          )}
-          keyExtractor={(item, index) => `activeOrders${index}`}
-          ListFooterComponent={
-            pastOrders.length && (
-              <View style={styles.sectionHeaderContainer}>
-                <Text style={styles.sectionName}>{Strings.pastOrders}</Text>
-              </View>
-            )
-          }
-          ListHeaderComponent={
-            activeOrders.length && (
-              <View style={styles.sectionHeaderContainer}>
-                <Text style={styles.sectionName}>{Strings.activeOrders}</Text>
-              </View>
-            )
-          }
-        />
-      )}
+      ListHeaderComponent={
+        pastOrders.length && (
+          <FlatList
+            data={activeOrders}
+            renderItem={({item}) => (
+              <OrderListItem item={item} refresh={getOrderList} />
+            )}
+            keyExtractor={(item, index) => `activeOrders${index}`}
+            ListFooterComponent={
+              pastOrders.length && (
+                <View style={styles.sectionHeaderContainer}>
+                  <Text style={styles.sectionName}>{Strings.pastOrders}</Text>
+                </View>
+              )
+            }
+            ListHeaderComponent={
+              activeOrders.length && (
+                <View style={styles.sectionHeaderContainer}>
+                  <Text style={styles.sectionName}>{Strings.activeOrders}</Text>
+                </View>
+              )
+            }
+          />
+        )
+      }
       ListFooterComponent={() => {
         if (props.loading && pastOrders.length) {
           return (
@@ -142,6 +171,8 @@ const OrderList = (props) => {
         }
       }}
       contentContainerStyle={styles.list}
+      ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
+      ListEmptyComponent={<OrderListShimmer count={4} />}
     />
   );
 };

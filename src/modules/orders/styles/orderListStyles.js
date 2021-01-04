@@ -20,4 +20,8 @@ export const styles = EStyleSheet.create({
   list: {
     flexGrow: 1,
   },
+  itemSeperator: {
+    height: '7vrem',
+    backgroundColor: Colors.seperatorColor,
+  },
 });

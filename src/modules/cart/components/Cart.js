@@ -17,11 +17,17 @@ import CartListFooter from './CartListFooter';
 import CartShimmer from './CartShimmer';
 import {Actions} from 'react-native-router-flux';
 import BottomButton from '../../commons/components/BottomButton';
+import {AppConfig} from '../../../config/AppConfig';
+import {environment} from '../../../config/EnvConfig';
+import RazorpayCheckout from 'react-native-razorpay';
+import {Colors} from '../../../utils/values/Colors';
+import {createOrder, placeOrder} from '../Api';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [location, setLocation] = useState(props.location);
   const [instructions, setInstructions] = useState('');
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   let {cart} = props.cartReducer;
 
@@ -45,6 +51,46 @@ const Cart = (props) => {
       latitude: location.lat,
     };
     props.getCart(pars);
+  };
+  const {first_name, mobile} = props.userDetails;
+
+  const confirmOrder = () => {
+    const pars = {
+      address_id: location.id,
+      payment_mode: 10,
+    };
+    setPaymentLoading(true);
+    props.createOrder(pars, (orderId) => {
+      setPaymentLoading(false);
+      let options = {
+        description: '',
+        image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
+        currency: 'INR',
+        key: AppConfig[environment].razorpayKey,
+        amount: String(total_cost_price + delivery_fee),
+        name: first_name || '',
+        order_id: orderId,
+        instructions: instructions,
+        prefill: {
+          contact: mobile,
+          name: first_name || '',
+        },
+        theme: {color: Colors.themeGreen},
+      };
+
+      RazorpayCheckout.open(options)
+        .then((razorpayData) => {
+          const data = {
+            payment_reference_id: orderId,
+            property: razorpayData,
+          };
+          console.log(JSON.stringify(data));
+          props.placeOrder(data);
+        })
+        .catch((error) => {
+          Actions.paymentStatus({success: false});
+        });
+    });
   };
 
   let list = Object.values(product_list);
@@ -112,6 +158,8 @@ const Cart = (props) => {
               location={location}
               deliverable={is_deliverable}
               totalAmount={total_cost_price + delivery_fee}
+              loading={paymentLoading}
+              confirmOrder={confirmOrder}
             />
           ) : null}
         </View>
@@ -132,11 +180,14 @@ const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   location: state.homeReducer.location,
   cartReducer: state.cartReducer,
+  userDetails: state.homeReducer.userDetails,
 });
 
 const mapDispatchToProps = {
   getCart,
   selectStore,
+  createOrder,
+  placeOrder,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

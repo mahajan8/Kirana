@@ -60,7 +60,12 @@ const actions = (index) => {
 
 const renderOptions = (Icon, label, index) => {
   return (
-    <Pressable style={styles.optionsRow} onPress={() => actions(index)}>
+    <Pressable
+      style={styles.optionsRow}
+      onPress={() => {
+        Actions.drawerClose();
+        actions(index);
+      }}>
       <Icon style={{marginRight: EStyleSheet.value('20rem')}} />
       <Text style={styles.optionLabel}>{label}</Text>
     </Pressable>

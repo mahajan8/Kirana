@@ -25,23 +25,18 @@ export const styles = EStyleSheet.create({
     marginBottom: '16vrem',
   },
   detailText: {
-    fontSize: '12rem',
-    fontFamily: Fonts.medium,
-    color: Colors.titleText,
+    height: '17rem',
+    width: '120rem',
+    backgroundColor: Colors.placeHolder,
   },
   icons: {
     marginRight: '10rem',
   },
-  name: {
-    fontSize: '11rem',
-    fontFamily: Fonts.medium,
-    color: Colors.titleText,
-  },
   locationText: {
-    fontFamily: Fonts.regular,
-    fontSize: '9rem',
-    color: Colors.lightGray,
+    backgroundColor: Colors.placeHolder,
     width: '118rem',
+    height: '12rem',
+    marginTop: '2rem',
   },
   storeDetailsContainer: {
     flex: 1,
@@ -79,5 +74,17 @@ export const styles = EStyleSheet.create({
   },
   listLoaderContainer: {
     marginTop: '20vrem',
+  },
+  addressName: {
+    backgroundColor: Colors.placeHolder,
+    width: '100rem',
+    height: '16rem',
+  },
+  checkIcon: {
+    width: '16rem',
+    height: '16rem',
+    borderRadius: '8rem',
+    marginRight: '8rem',
+    backgroundColor: Colors.placeHolder,
   },
 });

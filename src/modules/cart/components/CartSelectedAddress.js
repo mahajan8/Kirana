@@ -8,54 +8,19 @@ import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
-import {createOrder, placeOrder} from '../Api';
-import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
-import {AppConfig} from '../../../config/AppConfig';
-import {environment} from '../../../config/EnvConfig';
-import {Actions} from 'react-native-router-flux';
 
 const CartSelectedAddress = (props) => {
-  const {location, addresses, deliverable, totalAmount = 0} = props;
-  const [loading, setLoading] = useState(false);
+  const {
+    location,
+    addresses,
+    deliverable,
+    totalAmount = 0,
+    confirmOrder,
+    loading,
+  } = props;
   let address = addresses.find((obj) => obj.id === location.id);
-  const {first_name, mobile} = props.userDetails;
-  const confirmOrder = () => {
-    const pars = {
-      address_id: location.id,
-      payment_mode: 10,
-    };
-    setLoading(true);
-    props.createOrder(pars, (orderId) => {
-      setLoading(false);
-      let options = {
-        description: '',
-        image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
-        currency: 'INR',
-        key: AppConfig[environment].razorpayKey,
-        amount: String(totalAmount),
-        name: first_name || '',
-        order_id: orderId,
-        prefill: {
-          contact: mobile,
-          name: first_name || '',
-        },
-        theme: {color: Colors.themeGreen},
-      };
-      RazorpayCheckout.open(options)
-        .then((razorpayData) => {
-          const data = {
-            payment_reference_id: orderId,
-            property: razorpayData,
-          };
-          console.log(JSON.stringify(data));
-          props.placeOrder(data);
-        })
-        .catch((error) => {
-          Actions.paymentStatus({success: false});
-        });
-    });
-  };
+
   return (
     <View>
       <View
@@ -135,13 +100,9 @@ const CartSelectedAddress = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
-  userDetails: state.homeReducer.userDetails,
 });
 
-const mapDispatchToProps = {
-  createOrder,
-  placeOrder,
-};
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,

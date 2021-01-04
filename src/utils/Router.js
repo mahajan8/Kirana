@@ -31,6 +31,7 @@ import PaymentStatus from '../modules/cart/components/PaymentStatus';
 import OrderDetails from '../modules/orders/components/OrderDetails';
 import TrackOrder from '../modules/orders/components/TrackOrder';
 import MyOrders from '../modules/navigation/components/MyOrders';
+import OrderCancelled from '../modules/orders/components/OrderCancelled';
 
 const AppRouter = () => {
   return (
@@ -66,6 +67,7 @@ const AppRouter = () => {
         <Scene key="orderDetails" component={OrderDetails} />
         <Scene key="trackOrder" component={TrackOrder} />
         <Scene key="myOrders" component={MyOrders} />
+        <Scene key="orderCancelled" component={OrderCancelled} />
         <Scene
           key="drawer"
           drawer={true}

@@ -259,4 +259,7 @@ export const Strings = {
   orderPickedSub: 'On the way to delivery location',
   activeOrders: 'Active Orders',
   pastOrders: 'Past Orders',
+  orderCancelHeading: 'Your order has been cancelled',
+  orderCancelDesc:
+    'Your items can be fulfilled from other stores in your region.',
 };

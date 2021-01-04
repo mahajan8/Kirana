@@ -92,4 +92,11 @@ export const styles = EStyleSheet.create({
   rowButton: {
     width: '150rem',
   },
+  loaderContainer: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

@@ -13,6 +13,8 @@ import {connect} from 'react-redux';
 import {cancelOrder, getOrderDetails} from '../Api';
 import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
+import OrderDetailShimmer from './OrderDetailShimmer';
+import Loader from '../../commons/components/Loader';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -67,7 +69,7 @@ const OrderDetails = (props) => {
 
     props.cancelOrder(pars, () => {
       props.refresh();
-      Actions.pop();
+      Actions.replace('orderCancelled');
     });
   };
 
@@ -117,36 +119,39 @@ const OrderDetails = (props) => {
             </View>
           )
         }
+        ListEmptyComponent={<OrderDetailShimmer />}
       />
-      <View style={styles.buttonContainer}>
-        {status === orderStatus.ORDER_PLACED ? (
-          <View style={styles.buttonsRowContainer}>
+      {orderDetails && (
+        <View style={styles.buttonContainer}>
+          {status === orderStatus.ORDER_PLACED ? (
+            <View style={styles.buttonsRowContainer}>
+              <Button
+                label={Strings.cancelOrder}
+                Style={styles.rowButton}
+                labelStyle={styles.buttonLabel}
+                bordered
+                onPress={() => setShowCancelModal(true)}
+              />
+              <Button
+                label={Strings.trackOrder}
+                Style={styles.rowButton}
+                labelStyle={styles.buttonLabel}
+              />
+            </View>
+          ) : (
             <Button
-              label={Strings.cancelOrder}
-              Style={styles.rowButton}
-              labelStyle={styles.buttonLabel}
-              bordered
-              onPress={() => setShowCancelModal(true)}
-            />
-            <Button
-              label={Strings.trackOrder}
-              Style={styles.rowButton}
+              label={
+                status === orderStatus.ORDER_DISPATCHED
+                  ? Strings.trackOrder
+                  : status === orderStatus.ORDER_DELIVERED
+                  ? Strings.reorderItems
+                  : Strings.tryOtherStores
+              }
               labelStyle={styles.buttonLabel}
             />
-          </View>
-        ) : (
-          <Button
-            label={
-              status === orderStatus.ORDER_DISPATCHED
-                ? Strings.trackOrder
-                : status === orderStatus.ORDER_DELIVERED
-                ? Strings.reorderItems
-                : Strings.tryOtherStores
-            }
-            labelStyle={styles.buttonLabel}
-          />
-        )}
-      </View>
+          )}
+        </View>
+      )}
       <AlertModal
         visible={showCancelModal}
         setVisible={setShowCancelModal}
@@ -157,6 +162,11 @@ const OrderDetails = (props) => {
         button1Press={() => setShowCancelModal(false)}
         button2Press={cancel}
       />
+      {orderDetails && props.loading && (
+        <View style={styles.loaderContainer}>
+          <Loader show={true} />
+        </View>
+      )}
     </SafeArea>
   );
 };
