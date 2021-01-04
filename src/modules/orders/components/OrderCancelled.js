@@ -19,7 +19,10 @@ const OrderCancelled = () => {
         <Text style={styles.heading}>{Strings.orderCancelHeading}</Text>
         <Text style={styles.desc}>{Strings.orderCancelDesc}</Text>
       </View>
-      <Button label={Strings.tryOtherStores} onPress={() => Actions.home()} />
+      <Button
+        label={Strings.tryOtherStores}
+        onPress={() => Actions.popTo('_home')}
+      />
     </SafeArea>
   );
 };

@@ -73,6 +73,29 @@ const OrderDetails = (props) => {
     });
   };
 
+  const getButtonLabel = () => {
+    let {
+      ORDER_ACCEPTED,
+      ORDER_DISPATCHED,
+      ORDER_OUT_FOR_DELIVERY,
+      ORDER_CANCELLED,
+      ORDER_REJECTED,
+      ORDER_DELIVERED,
+    } = orderStatus;
+
+    switch (status) {
+      case ORDER_ACCEPTED:
+      case ORDER_DISPATCHED:
+      case ORDER_OUT_FOR_DELIVERY:
+        return Strings.trackOrder;
+      case ORDER_CANCELLED:
+      case ORDER_REJECTED:
+        return Strings.tryOtherStores;
+      case ORDER_DELIVERED:
+        return Strings.reorderItems;
+    }
+  };
+
   return (
     <SafeArea>
       <FlatList
@@ -94,14 +117,14 @@ const OrderDetails = (props) => {
         ListFooterComponent={
           orderDetails && (
             <View style={styles.listFooter}>
-              {instructions && (
+              {instructions ? (
                 <View style={styles.instructionsContainer}>
                   <Text style={styles.instructionsLabel}>
                     {Strings.instructions}
                   </Text>
                   <Text style={styles.instructionsText}>{instructions}</Text>
                 </View>
-              )}
+              ) : null}
 
               {renderHeader(Strings.paymentDetails)}
 
@@ -139,16 +162,7 @@ const OrderDetails = (props) => {
               />
             </View>
           ) : (
-            <Button
-              label={
-                status === orderStatus.ORDER_DISPATCHED
-                  ? Strings.trackOrder
-                  : status === orderStatus.ORDER_DELIVERED
-                  ? Strings.reorderItems
-                  : Strings.tryOtherStores
-              }
-              labelStyle={styles.buttonLabel}
-            />
+            <Button label={getButtonLabel()} labelStyle={styles.buttonLabel} />
           )}
         </View>
       )}

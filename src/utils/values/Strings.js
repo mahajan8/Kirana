@@ -262,4 +262,7 @@ export const Strings = {
   orderCancelHeading: 'Your order has been cancelled',
   orderCancelDesc:
     'Your items can be fulfilled from other stores in your region.',
+  myOrdersEmpty: 'Your order list is empty.',
+  myOrdersEmptySub: 'Explore nearby stores to start shopping',
+  exploreStores: 'Explore Stores',
 };

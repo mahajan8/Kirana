@@ -19,7 +19,7 @@ const OrderListItem = (props) => {
     created_on,
     store_location,
     delivery_address_location,
-    address_type,
+    delivery_address_type,
   } = props.item;
 
   return (
@@ -41,7 +41,7 @@ const OrderListItem = (props) => {
         storeName={store_name}
         storeLocation={store_location.formatted_address}
         deliveryLocation={delivery_address_location.formatted_address}
-        addressType={address_type ? address_type : null}
+        addressType={delivery_address_type}
       />
 
       <View style={styles.seperator} />

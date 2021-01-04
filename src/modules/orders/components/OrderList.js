@@ -11,6 +11,9 @@ import OrderListItem from './OrderListItem';
 import {orderStatus} from '../../../utils/values/Values';
 import {clearOrders} from '../OrderActions';
 import OrderListShimmer from './OrderListShimmer';
+import CartEmpty from '../../../assets/images/empty_cart.svg';
+import {Actions} from 'react-native-router-flux';
+import Button from '../../commons/components/Button';
 
 const OrderList = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
@@ -173,7 +176,34 @@ const OrderList = (props) => {
       }}
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
-      ListEmptyComponent={<OrderListShimmer count={4} />}
+      ListEmptyComponent={() => {
+        if (props.loading && !activeOrders.length) {
+          return <OrderListShimmer count={4} />;
+        } else {
+          let myOrders = Actions.currentScene === 'myOrders' ? true : false;
+          return (
+            <View style={styles.emptyListContainer}>
+              <View style={styles.emptyListInnerContainer}>
+                <CartEmpty />
+                <Text style={styles.heading}>
+                  {myOrders ? Strings.myOrdersEmpty : Strings.cartEmptyTitle}
+                </Text>
+                <Text style={styles.desc}>
+                  {myOrders
+                    ? Strings.myOrdersEmptySub
+                    : Strings.cartEmptySubTitle}
+                </Text>
+              </View>
+              {myOrders ? (
+                <Button
+                  label={Strings.exploreStores}
+                  onPress={() => Actions.popTo('_home')}
+                />
+              ) : null}
+            </View>
+          );
+        }
+      }}
     />
   );
 };

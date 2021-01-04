@@ -29,9 +29,7 @@ const OrderAddressTile = (props) => {
         <ToIcon style={styles.icons} />
         <View>
           <Text style={styles.name}>
-            {addressType
-              ? getKeyByValue(addressTypes, addressType)
-              : 'The Baker’s Dozen'}
+            {addressType ? getKeyByValue(addressTypes, addressType) : 'Other'}
           </Text>
           <Text style={styles.locationText} numberOfLines={1}>
             {deliveryLocation}

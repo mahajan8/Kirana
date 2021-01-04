@@ -24,4 +24,29 @@ export const styles = EStyleSheet.create({
     height: '7vrem',
     backgroundColor: Colors.seperatorColor,
   },
+  emptyListContainer: {
+    flex: 1,
+  },
+  emptyListInnerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: '14rem',
+    fontFamily: Fonts.semiBold,
+    color: Colors.titleText,
+    letterSpacing: '0.18rem',
+    marginTop: '30vrem',
+  },
+  desc: {
+    fontSize: '12rem',
+    fontFamily: Fonts.regular,
+    color: Colors.darkGray,
+    letterSpacing: '0.2rem',
+    lineHeight: '18rem',
+    width: '260rem',
+    textAlign: 'center',
+    marginTop: '7vrem',
+  },
 });
