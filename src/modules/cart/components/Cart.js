@@ -58,6 +58,7 @@ const Cart = (props) => {
     const pars = {
       address_id: location.id,
       payment_mode: 10,
+      instructions: instructions,
     };
     setPaymentLoading(true);
     props.createOrder(pars, (orderId) => {
@@ -70,7 +71,6 @@ const Cart = (props) => {
         amount: String(total_cost_price + delivery_fee),
         name: first_name || '',
         order_id: orderId,
-        instructions: instructions,
         prefill: {
           contact: mobile,
           name: first_name || '',
