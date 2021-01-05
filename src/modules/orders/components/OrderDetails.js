@@ -96,6 +96,32 @@ const OrderDetails = (props) => {
     }
   };
 
+  const onButtonPress = () => {
+    let {
+      ORDER_ACCEPTED,
+      ORDER_DISPATCHED,
+      ORDER_OUT_FOR_DELIVERY,
+      ORDER_CANCELLED,
+      ORDER_REJECTED,
+      ORDER_DELIVERED,
+    } = orderStatus;
+
+    switch (status) {
+      case ORDER_ACCEPTED:
+      case ORDER_DISPATCHED:
+      case ORDER_OUT_FOR_DELIVERY:
+        console.log('track');
+        break;
+      case ORDER_CANCELLED:
+      case ORDER_REJECTED:
+        Actions.alternativeStores({orderId: props.orderId});
+        break;
+      case ORDER_DELIVERED:
+        console.log('Re order');
+        break;
+    }
+  };
+
   return (
     <SafeArea>
       <FlatList
@@ -162,7 +188,11 @@ const OrderDetails = (props) => {
               />
             </View>
           ) : (
-            <Button label={getButtonLabel()} labelStyle={styles.buttonLabel} />
+            <Button
+              label={getButtonLabel()}
+              labelStyle={styles.buttonLabel}
+              onPress={onButtonPress}
+            />
           )}
         </View>
       )}

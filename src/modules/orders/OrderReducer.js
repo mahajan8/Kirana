@@ -1,6 +1,8 @@
 import {
+  CLEAR_ALTERNATIVE_STORES,
   CLEAR_ORDERS,
   SET_ACTIVE_ORDERS,
+  SET_ALTERNATIVE_STORES,
   SET_ORDER_DETAILS,
   SET_PAST_ORDERS,
 } from './ActionTypes';
@@ -10,6 +12,8 @@ const INITIAL_STATE = {
   activeOrders: [],
   totalCount: null,
   orderDetails: null,
+  alternativeStores: [],
+  alternativeStoresCount: null,
 };
 
 const OrderReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +44,20 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
         ...state,
         orderDetails: action.data,
       };
+    case SET_ALTERNATIVE_STORES: {
+      return {
+        ...state,
+        alternativeStores: [...state.alternativeStores, ...action.stores],
+        alternativeStoresCount: action.count,
+      };
+    }
+    case CLEAR_ALTERNATIVE_STORES: {
+      return {
+        ...state,
+        alternativeStores: [],
+        alternativeStoresCount: null,
+      };
+    }
     default:
       return state;
   }

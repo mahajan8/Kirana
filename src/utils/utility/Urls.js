@@ -26,6 +26,7 @@ export const Urls = {
   getOrders: 'commerce/order/get-consumer-order-history',
   getOrderDetails: '/commerce/order/get-order-details',
   cancelOrder: '/commerce/order/cancel-order',
+  getStoresByOrderId: '/offering/store/get-stores-by-order-id',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

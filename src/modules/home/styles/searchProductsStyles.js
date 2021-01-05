@@ -10,6 +10,7 @@ export const styles = EStyleSheet.create({
     color: Colors.themeGreen,
     letterSpacing: '-0.19rem',
     marginBottom: '20vrem',
+    lineHeight: '18rem',
   },
   list: {
     paddingHorizontal: '16rem',

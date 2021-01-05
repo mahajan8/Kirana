@@ -1,6 +1,8 @@
 import {
+  CLEAR_ALTERNATIVE_STORES,
   CLEAR_ORDERS,
   SET_ACTIVE_ORDERS,
+  SET_ALTERNATIVE_STORES,
   SET_ORDER_DETAILS,
   SET_PAST_ORDERS,
 } from './ActionTypes';
@@ -23,4 +25,14 @@ export const clearOrders = () => ({
 export const setOrderDetails = (data) => ({
   type: SET_ORDER_DETAILS,
   data,
+});
+
+export const setAlternativeStores = (stores, count) => ({
+  type: SET_ALTERNATIVE_STORES,
+  stores,
+  count,
+});
+
+export const clearAlternativeStores = () => ({
+  type: CLEAR_ALTERNATIVE_STORES,
 });

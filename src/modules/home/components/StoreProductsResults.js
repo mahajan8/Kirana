@@ -21,7 +21,7 @@ import {clearStoreProducts} from '../HomeActions';
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const SearchProductResults = (props) => {
-  let {searchedText} = props;
+  let {searchedText, productsList} = props;
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -43,9 +43,21 @@ const SearchProductResults = (props) => {
           value: selectedStore.id,
           context: null,
         },
-        {key: 'SEARCH_BY_TEXT', value: searchedText, context: null},
       ],
     };
+
+    if (productsList) {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_PRODUCT_ID_IN', value: productsList},
+      ];
+    } else {
+      pars.conditions = [
+        ...pars.conditions,
+        {key: 'SEARCH_BY_TEXT', value: searchedText, context: null},
+      ];
+    }
+
     let {brands, categories, price_sort} = filters;
 
     if (brands.length) {
@@ -79,12 +91,14 @@ const SearchProductResults = (props) => {
     }
     props.searchStoreProducts(pars);
   };
+
   let FilterIcon =
     filters.brands.length ||
     filters.price_sort !== null ||
     filters.categories.length
       ? ActiveFilter
       : Filter;
+
   return (
     <SafeArea>
       <CartHeader
@@ -119,10 +133,16 @@ const SearchProductResults = (props) => {
           storeProductsCount &&
           !props.loading && (
             <View>
-              <Text style={styles.searchResultsHeading}>
-                {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
-                {searchedText}
-              </Text>
+              {productsList ? (
+                <Text style={styles.searchResultsHeading}>
+                  {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
+                </Text>
+              ) : (
+                <Text style={styles.searchResultsHeading}>
+                  {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
+                  {searchedText}
+                </Text>
+              )}
             </View>
           )
         }
