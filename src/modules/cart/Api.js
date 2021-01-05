@@ -38,7 +38,6 @@ export const placeOrder = (pars) => {
   return (dispatch) => {
     instance.post(Urls.placeOrder, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
-      // console.log(JSON.stringify(res.data.data));
       if (success) {
         const {cart} = res.data.data;
         dispatch(setCartDetails(cart));

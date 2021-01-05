@@ -18,12 +18,6 @@ export const getOrders = (pars, callback) => {
       const success = !res.data.error;
       if (success) {
         const {total_count, results} = res.data.data;
-        console.log(res.data.data);
-        // if (pars.start === -1) {
-        //   dispatch(setActiveOrders(results));
-        // } else {
-        //   dispatch(setPastOrders(results, total_count));
-        // }
         callback(results, total_count);
       } else {
         alert(res.data.message);

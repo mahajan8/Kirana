@@ -38,7 +38,6 @@ export const getFormBody = (data) => {
     }
   }
   formBody = formBody.join('&');
-  //console.log('FormBody', formBody);
   return formBody;
 };
 

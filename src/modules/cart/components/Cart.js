@@ -84,7 +84,6 @@ const Cart = (props) => {
             payment_reference_id: orderId,
             property: razorpayData,
           };
-          console.log(JSON.stringify(data));
           props.placeOrder(data);
         })
         .catch((error) => {
