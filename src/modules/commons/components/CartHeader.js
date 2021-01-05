@@ -96,7 +96,7 @@ const CartHeader = (props) => {
             </Pressable>
           ) : null}
         </View>
-      ) : (
+      ) : location ? (
         <Pressable
           activeOpacity={1}
           style={[styles.locationContainer, styles.rowContainer]}
@@ -114,6 +114,8 @@ const CartHeader = (props) => {
           </Text>
           <DownArrow />
         </Pressable>
+      ) : (
+        <View style={styles.titleContainer} />
       )}
       <View style={styles.headerRightContainer}>
         {headerRight && headerRight}

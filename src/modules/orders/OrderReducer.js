@@ -2,9 +2,11 @@ import {
   CLEAR_ALTERNATIVE_STORES,
   CLEAR_ORDERS,
   SET_ACTIVE_ORDERS,
+  SET_ALTERNATE_DETAILS,
   SET_ALTERNATIVE_STORES,
   SET_ORDER_DETAILS,
   SET_PAST_ORDERS,
+  SET_SELECTED_ORDER_ID,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -14,6 +16,9 @@ const INITIAL_STATE = {
   orderDetails: null,
   alternativeStores: [],
   alternativeStoresCount: null,
+  productIds: [],
+  orderDeliveryLocation: null,
+  selectedOrderId: null,
 };
 
 const OrderReducer = (state = INITIAL_STATE, action) => {
@@ -56,6 +61,21 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
         ...state,
         alternativeStores: [],
         alternativeStoresCount: null,
+        productIds: [],
+        orderDeliveryLocation: null,
+      };
+    }
+    case SET_ALTERNATE_DETAILS: {
+      return {
+        ...state,
+        productIds: action.products,
+        orderDeliveryLocation: action.location,
+      };
+    }
+    case SET_SELECTED_ORDER_ID: {
+      return {
+        ...state,
+        selectedOrderId: action.orderId,
       };
     }
     default:

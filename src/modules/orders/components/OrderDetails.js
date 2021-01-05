@@ -18,7 +18,7 @@ import Loader from '../../commons/components/Loader';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
-  const {orderDetails} = props;
+  const {orderDetails, selectedOrderId} = props.orderReducer;
 
   let {
     instructions,
@@ -29,6 +29,7 @@ const OrderDetails = (props) => {
     charged_amount,
     product_list,
     store_name,
+    refund_amount,
   } = orderDetails ? orderDetails : {};
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const OrderDetails = (props) => {
 
   const fetchDetails = () => {
     let pars = {
-      order_id: props.orderId,
+      order_id: selectedOrderId,
     };
 
     props.getOrderDetails(pars);
@@ -64,7 +65,7 @@ const OrderDetails = (props) => {
     setShowCancelModal(false);
 
     let pars = {
-      order_id: props.orderId,
+      order_id: selectedOrderId,
     };
 
     props.cancelOrder(pars, () => {
@@ -114,7 +115,7 @@ const OrderDetails = (props) => {
         break;
       case ORDER_CANCELLED:
       case ORDER_REJECTED:
-        Actions.alternativeStores({orderId: props.orderId});
+        Actions.alternativeStores();
         break;
       case ORDER_DELIVERED:
         console.log('Re order');
@@ -157,7 +158,9 @@ const OrderDetails = (props) => {
               <View style={styles.priceInfoContainer}>
                 {renderPrice(Strings.subTotal, charged_amount)}
                 {renderPrice(Strings.deliveryCharge, delivery_fee)}
-                {renderPrice(Strings.refundAmount, -50)}
+                {refund_amount
+                  ? renderPrice(Strings.refundAmount, refund_amount)
+                  : null}
                 <View style={styles.priceRowContainer}>
                   <Text style={styles.grandTotal}>{Strings.grandTotal}</Text>
                   <Text style={styles.grandTotalAmount}>
@@ -217,7 +220,7 @@ const OrderDetails = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  orderDetails: state.orderReducer.orderDetails,
+  orderReducer: state.orderReducer,
 });
 
 const mapDispatchToProps = {

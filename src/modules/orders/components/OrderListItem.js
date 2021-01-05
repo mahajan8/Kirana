@@ -1,16 +1,15 @@
 import React from 'react';
 import {View, Text, Pressable} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import Clock from '../../../assets/images/green_clock.svg';
 import GreenCheck from '../../../assets/images/green_circle_tick.svg';
-import FromIcon from '../../../assets/images/order_location_from.svg';
-import ToIcon from '../../../assets/images/order_location_to.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {styles} from '../styles/orderListItemStyles';
 import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
 import OrderAddressTile from './OrderAddressTile';
+import {setSelectedOrderId} from '../OrderActions';
+import {connect} from 'react-redux';
 
 const OrderListItem = (props) => {
   let {
@@ -25,9 +24,10 @@ const OrderListItem = (props) => {
   return (
     <Pressable
       style={styles.orderContainer}
-      onPress={() =>
-        Actions.orderDetails({orderId: props.item.id, refresh: props.refresh})
-      }>
+      onPress={() => {
+        Actions.orderDetails({refresh: props.refresh});
+        props.setSelectedOrderId(props.item.id);
+      }}>
       {/* First row with clock and Date of Order  */}
       <View style={[styles.rowContainer, styles.dateContainer]}>
         <Clock style={styles.icons} />
@@ -68,4 +68,10 @@ const OrderListItem = (props) => {
   );
 };
 
-export default OrderListItem;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  setSelectedOrderId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListItem);

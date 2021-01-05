@@ -14,7 +14,9 @@ import {updateUserDetails} from '../Api';
 import {connect} from 'react-redux';
 
 const AccountSetup = (props) => {
-  const [fullName, setFullName] = useState('');
+  let {first_name} = props.userDetails;
+
+  const [fullName, setFullName] = useState(first_name ? first_name : '');
 
   const saveDetails = () => {
     let pars = {
@@ -51,7 +53,9 @@ const AccountSetup = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  userDetails: state.homeReducer.userDetails,
+});
 
 const mapDispatchToProps = {
   updateUserDetails,

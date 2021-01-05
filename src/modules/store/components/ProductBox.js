@@ -13,7 +13,7 @@ import {updateProductQuantity} from '../Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
 import {Actions} from 'react-native-router-flux';
-import { Colors } from '../../../utils/values/Colors';
+import {Colors} from '../../../utils/values/Colors';
 
 const ProductBox = (props) => {
   const [replaceAlert, setReplaceAlert] = useState(false);

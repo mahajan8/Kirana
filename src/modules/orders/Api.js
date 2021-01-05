@@ -2,7 +2,13 @@
 import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
-import {setActiveOrders, setAlternativeStores, setOrderDetails, setPastOrders} from './OrderActions';
+import {
+  setActiveOrders,
+  setAlternateDetails,
+  setAlternativeStores,
+  setOrderDetails,
+  setPastOrders,
+} from './OrderActions';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -70,7 +76,7 @@ export const getAlternativeStores = (pars, callback) => {
         } = res.data.data;
 
         dispatch(setAlternativeStores(store_list, store_count));
-        callback(product_list, delivery_location);
+        dispatch(setAlternateDetails(product_list, delivery_location));
       } else {
         alert(res.data.message);
       }

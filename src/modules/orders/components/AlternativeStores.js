@@ -16,16 +16,19 @@ import {getAlternativeStores} from '../Api';
 import {clearAlternativeStores} from '../OrderActions';
 
 const AlternativeStores = (props) => {
-  const {alternativeStores, alternativeStoresCount} = props.orderReducer;
+  const {
+    alternativeStores,
+    alternativeStoresCount,
+    orderDeliveryLocation,
+    selectedOrderId,
+  } = props.orderReducer;
 
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const [deliveryLocation, setDeliveryLocation] = useState(true);
-  const [productsList, setProductsList] = useState([]);
 
   const onStoreClick = (store) => {
     props.selectStore(store);
     Actions.storeProductsResults({
-      productsList: productsList,
+      searchById: true,
     });
   };
 
@@ -39,18 +42,15 @@ const AlternativeStores = (props) => {
     const pars = {
       start,
       limit: 10,
-      order_id: props.orderId,
+      order_id: selectedOrderId,
     };
-    props.getAlternativeStores(pars, (products, location) => {
-      setProductsList(products);
-      setDeliveryLocation(location);
-    });
+    props.getAlternativeStores(pars);
   };
 
   return (
     <SafeArea>
       <CartHeader
-        location={deliveryLocation}
+        location={orderDeliveryLocation}
         selectLocation={() => console.log('location Change')}
       />
       <FlatList

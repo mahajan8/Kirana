@@ -269,4 +269,5 @@ export const Strings = {
     'These are the items available from your previous cart that are available at',
   alternativeStoresHeadline:
     'These are the kirana stores in your area that have the items that you need.',
+  editAccountDetails: 'Edit Account Details',
 };

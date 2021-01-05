@@ -21,7 +21,7 @@ import {clearStoreProducts} from '../HomeActions';
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
 const SearchProductResults = (props) => {
-  let {searchedText, productsList} = props;
+  let {searchedText, productIds, searchById} = props;
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -46,10 +46,10 @@ const SearchProductResults = (props) => {
       ],
     };
 
-    if (productsList) {
+    if (searchById) {
       pars.conditions = [
         ...pars.conditions,
-        {key: 'SEARCH_BY_PRODUCT_ID_IN', value: productsList},
+        {key: 'SEARCH_BY_PRODUCT_ID_IN', value: productIds},
       ];
     } else {
       pars.conditions = [
@@ -133,7 +133,7 @@ const SearchProductResults = (props) => {
           storeProductsCount &&
           !props.loading && (
             <View>
-              {productsList ? (
+              {productIds ? (
                 <Text style={styles.searchResultsHeading}>
                   {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
                 </Text>
@@ -188,6 +188,7 @@ const SearchProductResults = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   homeReducer: state.homeReducer,
+  productIds: state.orderReducer.productIds,
 });
 
 const mapDispatchToProps = {

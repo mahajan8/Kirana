@@ -62,7 +62,7 @@ export const searchStoreProducts = (pars) => {
     delete pars.filter;
 
     var formBody = getFormBody(pars);
-console.log(pars)
+
     instance.post(Urls.searchStoreProducts, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {

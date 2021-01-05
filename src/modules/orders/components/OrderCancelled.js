@@ -8,7 +8,7 @@ import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 
-const OrderCancelled = () => {
+const OrderCancelled = (props) => {
   return (
     <SafeArea>
       <View style={styles.container}>
@@ -21,7 +21,7 @@ const OrderCancelled = () => {
       </View>
       <Button
         label={Strings.tryOtherStores}
-        onPress={() => Actions.popTo('_home')}
+        onPress={() => Actions.alternativeStores()}
       />
     </SafeArea>
   );

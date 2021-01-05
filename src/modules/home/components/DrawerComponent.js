@@ -80,7 +80,11 @@ const DrawerComponent = (props) => {
       <View style={styles.greenContainer}>
         <Text style={styles.number}>{userDetails.mobile}</Text>
         <Pressable onPress={Actions.accountSetup}>
-          <Text style={styles.completeSetup}>{Strings.completeAccSetup}</Text>
+          <Text style={styles.completeSetup}>
+            {userDetails.first_name
+              ? Strings.editAccountDetails
+              : Strings.completeAccSetup}
+          </Text>
         </Pressable>
       </View>
       <View style={styles.banner}>
