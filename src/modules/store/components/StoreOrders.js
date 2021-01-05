@@ -75,7 +75,6 @@ const StoreOrders = (props) => {
         renderScene={renderScene}
         onIndexChange={(index) => setTabIndex(index)}
         initialLayout={initialLayout}
-        lazy
       />
     </SafeArea>
   );

@@ -65,6 +65,7 @@ const Input = (props) => {
     containerStyle,
     error,
     multiline,
+    borderedContainerStyle,
   } = props;
 
   return (

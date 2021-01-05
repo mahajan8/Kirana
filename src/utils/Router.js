@@ -33,6 +33,7 @@ import TrackOrder from '../modules/orders/components/TrackOrder';
 import MyOrders from '../modules/navigation/components/MyOrders';
 import OrderCancelled from '../modules/orders/components/OrderCancelled';
 import AlternativeStores from '../modules/orders/components/AlternativeStores';
+import Rating from '../modules/orders/components/Rating';
 
 const AppRouter = () => {
   return (
@@ -70,6 +71,7 @@ const AppRouter = () => {
         <Scene key="myOrders" component={MyOrders} />
         <Scene key="orderCancelled" component={OrderCancelled} />
         <Scene key="alternativeStores" component={AlternativeStores} />
+        <Scene key="rating" component={Rating} />
         <Scene
           key="drawer"
           drawer={true}

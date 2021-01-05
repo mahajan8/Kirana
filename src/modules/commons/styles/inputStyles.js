@@ -24,6 +24,7 @@ export const styles = EStyleSheet.create({
   borderedContainer: {
     borderWidth: '1.2rem',
     borderRadius: '5rem',
+    flex: 1,
   },
   label: {
     position: 'absolute',

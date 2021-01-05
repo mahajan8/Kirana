@@ -273,4 +273,9 @@ export const Strings = {
   alternativeStoresHeadline:
     'These are the kirana stores in your area that have the items that you need.',
   editAccountDetails: 'Edit Account Details',
+  ratingHeading: 'Thank you for shopping with',
+  rateGrocery: 'Rate your Grocery',
+  rateDelivery: 'Rate your Delivery',
+  reason: 'Reason',
+  submitFeedback: 'Submit your Feedback',
 };
