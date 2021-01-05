@@ -16,10 +16,10 @@ import {getAlternativeStores} from '../Api';
 import {clearAlternativeStores} from '../OrderActions';
 
 const AlternativeStores = (props) => {
-  const {location} = props.homeReducer;
   const {alternativeStores, alternativeStoresCount} = props.orderReducer;
 
   const [endReachCallable, setEndReachCallable] = useState(true);
+  const [deliveryLocation, setDeliveryLocation] = useState(true);
   const [productsList, setProductsList] = useState([]);
 
   const onStoreClick = (store) => {
@@ -41,15 +41,16 @@ const AlternativeStores = (props) => {
       limit: 10,
       order_id: props.orderId,
     };
-    props.getAlternativeStores(pars, (products) => {
+    props.getAlternativeStores(pars, (products, location) => {
       setProductsList(products);
+      setDeliveryLocation(location);
     });
   };
 
   return (
     <SafeArea>
       <CartHeader
-        location={location}
+        location={deliveryLocation}
         selectLocation={() => console.log('location Change')}
       />
       <FlatList

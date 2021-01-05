@@ -62,9 +62,15 @@ export const getAlternativeStores = (pars, callback) => {
     instance.post(Urls.getStoresByOrderId, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        let {store_list, store_count, product_list} = res.data.data;
+        let {
+          store_list,
+          store_count,
+          product_list,
+          delivery_location,
+        } = res.data.data;
+
         dispatch(setAlternativeStores(store_list, store_count));
-        callback(product_list);
+        callback(product_list, delivery_location);
       } else {
         alert(res.data.message);
       }
