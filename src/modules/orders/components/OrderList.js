@@ -33,11 +33,13 @@ const OrderList = (props) => {
 
   useEffect(() => {
     getOrderList();
+    return () => {
+      props.clearOrders();
+      props.clearStoreOrders();
+    };
   }, []);
 
   const getOrderList = () => {
-    props.clearOrders();
-    props.clearStoreOrders();
     getActiveOrders();
     getPastOrders();
   };
