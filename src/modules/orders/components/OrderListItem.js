@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Clock from '../../../assets/images/green_clock.svg';
 import GreenCheck from '../../../assets/images/green_circle_tick.svg';
@@ -68,10 +68,17 @@ const OrderListItem = (props) => {
   );
 };
 
+function arePropsEqual(prevProps, nextProps) {
+  return prevProps.id === nextProps.id;
+}
+
 const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   setSelectedOrderId,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderListItem);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(memo(OrderListItem, arePropsEqual));

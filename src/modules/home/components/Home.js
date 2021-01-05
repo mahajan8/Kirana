@@ -112,6 +112,7 @@ const Home = (props) => {
         visible={searchVisible}
         setVisible={setSearchVisible}
         setLocation={props.setLocation}
+        cancellable={location ? true : false}
       />
     </SafeArea>
   );

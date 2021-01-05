@@ -9,7 +9,12 @@ import {getOrders} from '../Api';
 import Loader from '../../commons/components/Loader';
 import OrderListItem from './OrderListItem';
 import {orderStatus} from '../../../utils/values/Values';
-import {clearOrders} from '../OrderActions';
+import {clearOrders, setActiveOrders, setPastOrders} from '../OrderActions';
+import {
+  setStoreActiveOrders,
+  setStorePastOrders,
+  clearStoreOrders,
+} from '../../store/StoreActions';
 import OrderListShimmer from './OrderListShimmer';
 import CartEmpty from '../../../assets/images/empty_cart.svg';
 import {Actions} from 'react-native-router-flux';
@@ -17,8 +22,14 @@ import Button from '../../commons/components/Button';
 
 const OrderList = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const {userDetails} = props.homeReducer;
+  const {userDetails, selectedStore} = props.homeReducer;
   const {pastOrders, activeOrders, totalCount} = props.orderReducer;
+  const {
+    storePastOrders,
+    storeActiveOrders,
+    storeTotalCount,
+  } = props.storeReducer;
+  const {storeOrders} = props;
 
   useEffect(() => {
     getOrderList();
@@ -26,6 +37,7 @@ const OrderList = (props) => {
 
   const getOrderList = () => {
     props.clearOrders();
+    props.clearStoreOrders();
     getActiveOrders();
     getPastOrders();
   };
@@ -65,18 +77,24 @@ const OrderList = (props) => {
       sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
     };
 
-    if (props.storeId) {
+    if (storeOrders) {
       data.conditions = [
         ...data.conditions,
         {
           key: 'SEARCH_BY_STORE_ID',
-          value: props.storeId,
+          value: selectedStore.id,
           context: null,
         },
       ];
     }
 
-    props.getOrders(data);
+    props.getOrders(data, (results, total) => {
+      if (storeOrders) {
+        props.setStoreActiveOrders(results);
+      } else {
+        props.setActiveOrders(results);
+      }
+    });
   };
 
   const getPastOrders = (start = 0) => {
@@ -110,50 +128,79 @@ const OrderList = (props) => {
       sorts: [{key: 'SORT_BY_ID', value: false, context: null}],
     };
 
-    if (props.storeId) {
+    if (storeOrders) {
       data.conditions = [
         ...data.conditions,
         {
           key: 'SEARCH_BY_STORE_ID',
-          value: props.storeId,
+          value: selectedStore.id,
           context: null,
         },
       ];
     }
 
-    props.getOrders(data);
+    props.getOrders(data, (results, total) => {
+      if (storeOrders) {
+        props.setStorePastOrders(results, total);
+      } else {
+        props.setPastOrders(results, total);
+      }
+    });
   };
+
+  let showActiveHeader = storeOrders
+    ? storeActiveOrders.length
+      ? true
+      : false
+    : activeOrders.length
+    ? true
+    : false;
+
+  let showPastHeader = storeOrders
+    ? storePastOrders.length
+      ? true
+      : false
+    : pastOrders.length
+    ? true
+    : false;
 
   return (
     <FlatList
-      data={pastOrders}
+      data={storeOrders ? storePastOrders : pastOrders}
       renderItem={({item}) => <OrderListItem item={item} />}
       keyExtractor={(item, index) => `pastOrder${index}`}
       onMomentumScrollBegin={() => setEndReachCallable(false)}
       onEndReachedThreshold={0.1}
       onEndReached={() => {
-        if (!endReachCallable && pastOrders.length < totalCount) {
-          getPastOrders(pastOrders.length);
+        if (
+          !endReachCallable &&
+          ((!storeOrders && pastOrders.length < totalCount) ||
+            (storeOrders && storePastOrders.length < storeTotalCount))
+        ) {
           setEndReachCallable(true);
+          getPastOrders(
+            storeOrders ? storePastOrders.length : pastOrders.length,
+          );
         }
       }}
       ListHeaderComponent={
-        pastOrders.length && (
+        showPastHeader && (
+          //   Active Orders List
           <FlatList
-            data={activeOrders}
+            data={storeOrders ? storeActiveOrders : activeOrders}
             renderItem={({item}) => (
               <OrderListItem item={item} refresh={getOrderList} />
             )}
             keyExtractor={(item, index) => `activeOrders${index}`}
             ListFooterComponent={
-              pastOrders.length && (
+              showPastHeader && (
                 <View style={styles.sectionHeaderContainer}>
                   <Text style={styles.sectionName}>{Strings.pastOrders}</Text>
                 </View>
               )
             }
             ListHeaderComponent={
-              activeOrders.length && (
+              showActiveHeader && (
                 <View style={styles.sectionHeaderContainer}>
                   <Text style={styles.sectionName}>{Strings.activeOrders}</Text>
                 </View>
@@ -164,7 +211,15 @@ const OrderList = (props) => {
         )
       }
       ListFooterComponent={() => {
-        if (props.loading && pastOrders.length) {
+        let showLoader = storeOrders
+          ? storePastOrders.length
+            ? true
+            : false
+          : pastOrders.length
+          ? true
+          : false;
+
+        if (props.loading && showLoader) {
           return (
             <View style={styles.listLoaderContainer}>
               <Loader show={true} />
@@ -211,11 +266,17 @@ const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   homeReducer: state.homeReducer,
   orderReducer: state.orderReducer,
+  storeReducer: state.storeReducer,
 });
 
 const mapDispatchToProps = {
   getOrders,
   clearOrders,
+  setActiveOrders,
+  setPastOrders,
+  setStoreActiveOrders,
+  setStorePastOrders,
+  clearStoreOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);

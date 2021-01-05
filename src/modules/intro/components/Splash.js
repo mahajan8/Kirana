@@ -69,6 +69,7 @@ const Splash = (props) => {
       },
       (error) => {
         console.log(error);
+        props.getUserDetails();
       },
     );
   };

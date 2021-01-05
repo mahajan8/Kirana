@@ -7,6 +7,9 @@ import {
   SET_STORE_DETAILS,
   SET_SUBCATEGORY_PRODUCTS,
   SET_LOADING_PRODUCT,
+  SET_STORE_PAST_ORDERS,
+  SET_STORE_ACTIVE_ORDERS,
+  CLEAR_STORE_ORDERS,
 } from './ActionTypes';
 
 export const setFilters = (filters) => ({
@@ -47,4 +50,19 @@ export const setCategories = (data) => ({
 export const setLoadingProduct = (productId) => ({
   type: SET_LOADING_PRODUCT,
   productId,
+});
+
+export const setStorePastOrders = (orders, total) => ({
+  type: SET_STORE_PAST_ORDERS,
+  orders,
+  total,
+});
+
+export const setStoreActiveOrders = (orders) => ({
+  type: SET_STORE_ACTIVE_ORDERS,
+  orders,
+});
+
+export const clearStoreOrders = () => ({
+  type: CLEAR_STORE_ORDERS,
 });

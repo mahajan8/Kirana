@@ -142,7 +142,6 @@ const Cart = (props) => {
                   </Text>
                 </View>
                 <BottomButton
-                  Style={styles.emptyButton}
                   label={Strings.addProducts}
                   onPress={() => Actions.popTo('_home')}
                 />

@@ -1,23 +1,29 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {View, Modal} from 'react-native';
+import {View, Modal, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import Loader from '../../commons/components/Loader';
 import Search from '../../onboarding/components/SearchLocation';
 
 const SearchLocationModal = (props) => {
-  let {visible, setVisible, setLocation} = props;
+  let {visible, setVisible, setLocation, cancellable} = props;
+
+  const onBack = () => {
+    if (cancellable) {
+      setVisible(false);
+    }
+  };
 
   return (
     <Modal
       visible={visible}
-      //   onRequestClose={() => console.log('back')}
+      onRequestClose={onBack}
       transparent={true}
       animated
       animationType="none">
-      <View style={styles.container}>
-        <View style={styles.innerContainer}>
+      <Pressable style={styles.container} onPress={onBack}>
+        <Pressable style={styles.innerContainer}>
           <Search
             modal
             onSelect={(location) => {
@@ -25,8 +31,8 @@ const SearchLocationModal = (props) => {
               setVisible(false);
             }}
           />
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 };

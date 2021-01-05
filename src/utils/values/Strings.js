@@ -110,6 +110,9 @@ export const Strings = {
   explore: 'Explore',
   orders: 'Orders',
 
+  thisStore: 'This Store',
+  allOrders: 'All Orders',
+
   referal: 'Referral Code',
 
   new: 'New',

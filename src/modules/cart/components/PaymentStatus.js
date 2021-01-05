@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {View, Text, BackHandler} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/paymentStatusStyles';
 import PaymentSuccess from '../../../assets/images/payment_success.svg';
@@ -10,6 +10,8 @@ import {Actions} from 'react-native-router-flux';
 
 const PaymentStatus = (props) => {
   let {success} = props;
+  let backHandler = useRef(null);
+
   const handleOnPress = () => {
     if (success) {
       Actions.popTo('_home');
@@ -17,6 +19,20 @@ const PaymentStatus = (props) => {
       Actions.pop();
     }
   };
+
+  useEffect(() => {
+    backHandler.current = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        handleOnPress();
+        return true;
+      },
+    );
+    return () => {
+      backHandler.current.remove();
+    };
+  });
+
   return (
     <SafeArea>
       <View style={styles.container}>
