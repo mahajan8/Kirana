@@ -107,7 +107,6 @@ const Input = (props) => {
             secureTextEntry={pass || props.secure ? secure : false}
             editable={edit}
             multiline={multiline ? true : false}
-            selection={multiline ? {start: 0} : null}
           />
 
           {/* {pass?eye:null} */}

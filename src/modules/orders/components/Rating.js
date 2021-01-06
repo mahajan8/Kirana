@@ -63,6 +63,7 @@ const Rating = () => {
               onChange={setGroceryReason}
               containerStyle={styles.inputContainer}
               label={Strings.reason}
+              multiline
             />
           )}
 
@@ -87,6 +88,7 @@ const Rating = () => {
               onChange={setDeliveryReason}
               containerStyle={styles.inputDelivery}
               label={Strings.reason}
+              multiline
             />
           )}
         </View>

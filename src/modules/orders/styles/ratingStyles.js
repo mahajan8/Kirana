@@ -37,10 +37,10 @@ export const styles = EStyleSheet.create({
     marginRight: '15rem',
   },
   inputContainer: {
-    height: '70rem',
+    height: '80vrem',
   },
   inputDelivery: {
-    height: '70vrem',
+    height: '80vrem',
     marginBottom: '30vrem',
   },
 });
