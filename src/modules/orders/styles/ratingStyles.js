@@ -39,10 +39,6 @@ export const styles = EStyleSheet.create({
   inputContainer: {
     height: '70rem',
   },
-  button: {
-    marginBottom: '20vrem',
-    marginTop: '35rem',
-  },
   inputDelivery: {
     height: '70vrem',
     marginBottom: '30vrem',

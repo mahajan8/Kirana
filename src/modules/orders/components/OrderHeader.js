@@ -9,6 +9,7 @@ import {
   orderStatus,
   orderStatusLabels,
   paymentStatus,
+  paymentStatusLabels,
 } from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import moment from 'moment';
@@ -102,7 +103,10 @@ const OrderHeader = (props) => {
       return (
         <View style={[styles.orderStatusContainer, containerStyle]}>
           <Text style={[styles.statusLabel, labelStyle]}>
-            {getKeyByValue(orderStatusLabels, order.orderStatus)}
+            {getKeyByValue(
+              payStatus ? paymentStatusLabels : orderStatusLabels,
+              payStatus ? payStatus : status,
+            )}
           </Text>
         </View>
       );

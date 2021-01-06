@@ -26,7 +26,6 @@ export const styles = EStyleSheet.create({
     fontSize: '12rem',
     letterSpacing: '0.09rem',
     color: Colors.darkGreen,
-    marginTop: '4vrem',
   },
   selectedLabel: {
     color: Colors.white,
