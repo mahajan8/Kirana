@@ -3,12 +3,12 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {
-  setActiveOrders,
   setAlternateDetails,
   setAlternativeStores,
   setOrderDetails,
-  setPastOrders,
 } from './OrderActions';
+import {setCartDetails} from '../cart/CartActions';
+import {Actions} from 'react-native-router-flux';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -72,6 +72,23 @@ export const getAlternativeStores = (pars, callback) => {
 
         dispatch(setAlternativeStores(store_list, store_count));
         dispatch(setAlternateDetails(product_list, delivery_location));
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const repeatOrder = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.repeatOrderToCart, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        const {cart} = res.data.data;
+        dispatch(setCartDetails(cart));
+        Actions.cart();
       } else {
         alert(res.data.message);
       }

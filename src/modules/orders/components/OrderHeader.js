@@ -5,7 +5,11 @@ import Back from '../../../assets/images/back-arrow.svg';
 import InfoIcon from '../../../assets/images/red_info.svg';
 import {Strings} from '../../../utils/values/Strings';
 import OrderAddressTile from './OrderAddressTile';
-import {orderStatus, orderStatusLabels} from '../../../utils/values/Values';
+import {
+  orderStatus,
+  orderStatusLabels,
+  paymentStatus,
+} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
@@ -49,26 +53,48 @@ let orderStatusList = [
   },
 ];
 
+let paymentStatusList = [
+  {
+    paymentStatus: paymentStatus.REFUND_IN_PROGRESS,
+    backgroundColor: '#e4deff',
+    borderColor: '#cfc7f4',
+    labelColor: '#5445bd',
+  },
+  {
+    paymentStatus: paymentStatus.REFUNDED,
+    backgroundColor: '#e4deff',
+    borderColor: '#cfc7f4',
+    labelColor: '#5445bd',
+  },
+];
+
 const OrderHeader = (props) => {
   let {
     status,
     infoLabel,
-    refund,
-    refundComplete,
     id,
     created_on,
     store_location,
     store_name,
     delivery_address_location,
+    payment,
   } = props.item;
 
-  const getOrderStatusBubble = (index = 0) => {
-    let order = orderStatusList.find((obj) => obj.orderStatus === status);
+  const getOrderStatusBubble = (payStatus) => {
+    let order = {};
+
+    if (payStatus) {
+      order = paymentStatusList.find((obj) => obj.paymentStatus === payStatus);
+    } else {
+      order = orderStatusList.find((obj) => obj.orderStatus === status);
+    }
+
     if (order) {
       let containerStyle = {
         backgroundColor: order.backgroundColor,
         borderColor: order.borderColor,
       };
+
       let labelStyle = {
         color: order.labelColor,
       };
@@ -80,6 +106,39 @@ const OrderHeader = (props) => {
           </Text>
         </View>
       );
+    }
+  };
+
+  const orderStatusInfoLabel = (label) => (
+    <View>
+      <View style={styles.infoContainer}>
+        <InfoIcon />
+        <Text style={styles.infoText}>{label}</Text>
+      </View>
+      <View style={styles.seperator} />
+    </View>
+  );
+
+  const showLabel = () => {
+    let label = null;
+    let {ORDER_REJECTED, ORDER_CANCELLED} = orderStatus;
+
+    switch (status) {
+      case ORDER_REJECTED:
+        label = Strings.orderRejectedRefundInfo;
+        break;
+      case ORDER_CANCELLED:
+        label = Strings.orderCancelRefundInfo;
+        break;
+      default:
+        label = null;
+        break;
+    }
+
+    if (infoLabel) {
+      return orderStatusInfoLabel(infoLabel);
+    } else if (label) {
+      return orderStatusInfoLabel(label);
     }
   };
 
@@ -97,33 +156,20 @@ const OrderHeader = (props) => {
             <Text style={styles.orderTime}>
               {moment(created_on).format('lll')}
             </Text>
-            {(refund || refundComplete) &&
-              getOrderStatusBubble(refundComplete ? 6 : 5)}
+            {(payment.status === paymentStatus.REFUND_IN_PROGRESS ||
+              payment.status === paymentStatus.REFUNDED) &&
+              getOrderStatusBubble(payment.status)}
           </View>
 
           <View style={styles.rightContainer}>
             <Text style={styles.needHelp}>{Strings.needHelp}</Text>
-            {getOrderStatusBubble(status)}
+            {getOrderStatusBubble()}
           </View>
         </View>
       </View>
 
       <View style={styles.bottomContainer}>
-        {(status === 3 || status === 4 || infoLabel) && (
-          <View>
-            <View style={styles.infoContainer}>
-              <InfoIcon />
-              <Text style={styles.infoText}>
-                {status === 3
-                  ? Strings.orderCancelRefundInfo
-                  : status === 4
-                  ? Strings.orderRejectedRefundInfo
-                  : infoLabel}
-              </Text>
-            </View>
-            <View style={styles.seperator} />
-          </View>
-        )}
+        {showLabel(40)}
 
         <View style={styles.addressContainer}>
           <OrderAddressTile

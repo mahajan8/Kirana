@@ -72,9 +72,11 @@ const AlternativeStores = (props) => {
         }}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <Text style={styles.headline}>
-            {Strings.alternativeStoresHeadline}
-          </Text>
+          alternativeStores.length ? (
+            <Text style={styles.headline}>
+              {Strings.alternativeStoresHeadline}
+            </Text>
+          ) : null
         }
         ListEmptyComponent={
           props.loading ? (

@@ -47,3 +47,13 @@ export const orderStatusLabels = {
   ORDER_OUT_FOR_DELIVERY: 90,
   Completed: 100,
 };
+
+export const paymentStatus = {
+  PENDING: 10,
+  SUCCESS: 20,
+  FAILED: 30,
+  PARTIAL_REFUND_IN_PROGRESS: 40,
+  PARTIALLY_REFUNDED: 50,
+  REFUND_IN_PROGRESS: 60,
+  REFUNDED: 70,
+};

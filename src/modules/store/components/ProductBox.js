@@ -119,7 +119,7 @@ const ProductBox = (props) => {
           Strings.replaceDesc1 +
           (store && store.name) +
           Strings.replaceDesc2 +
-          selectedStore.name
+          (selectedStore ? selectedStore.name : null)
         }
         label1={Strings.no}
         label2={Strings.yesDiscard}

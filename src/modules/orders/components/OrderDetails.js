@@ -10,7 +10,7 @@ import Button from '../../commons/components/Button';
 import AlertModal from '../../commons/components/AlertModal';
 import {orderStatus} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
-import {cancelOrder, getOrderDetails} from '../Api';
+import {cancelOrder, getOrderDetails, repeatOrder} from '../Api';
 import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import OrderDetailShimmer from './OrderDetailShimmer';
@@ -74,6 +74,14 @@ const OrderDetails = (props) => {
     });
   };
 
+  const reOrderItems = () => {
+    let pars = {
+      order_id: selectedOrderId,
+    };
+
+    props.repeatOrder(pars);
+  };
+
   const getButtonLabel = () => {
     let {
       ORDER_ACCEPTED,
@@ -118,7 +126,7 @@ const OrderDetails = (props) => {
         Actions.alternativeStores();
         break;
       case ORDER_DELIVERED:
-        console.log('Re order');
+        reOrderItems();
         break;
     }
   };
@@ -227,6 +235,7 @@ const mapDispatchToProps = {
   getOrderDetails,
   setOrderDetails,
   cancelOrder,
+  repeatOrder,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);
