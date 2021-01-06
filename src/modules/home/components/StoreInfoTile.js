@@ -65,7 +65,9 @@ const StoreInfoTile = (props) => {
                 />
                 <Text style={[styles.storeClosedText, styles.storeShopText]}>
                   {Strings.orderNowGetAt +
-                    moment(open_time, 'hh:mm').format('hh:mm A') +
+                    moment(open_time, 'hh:mm')
+                      .add(1, 'hours')
+                      .format('hh:mm A') +
                     '!'}
                 </Text>
               </View>
