@@ -278,4 +278,8 @@ export const Strings = {
   rateDelivery: 'Rate your Delivery',
   reason: 'Reason',
   submitFeedback: 'Submit your Feedback',
+  rejectOrder: 'Reject Order',
+  acceptOrder: 'Accept Order',
+  viewOriginalItem: 'View original item',
+  originalItem: 'Original Item',
 };

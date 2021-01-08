@@ -44,4 +44,13 @@ export const styles = EStyleSheet.create({
     alignSelf: 'center',
     flex: 1,
   },
+  viewOriginal: {
+    fontSize: '8rem',
+    fontFamily: Fonts.regular,
+    lineHeight: '15rem',
+    letterSpacing: '0.08rem',
+    color: '#e96c76',
+    textDecorationLine: 'underline',
+    marginTop: '5rem',
+  },
 });

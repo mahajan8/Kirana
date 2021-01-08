@@ -7,6 +7,7 @@ import {Strings} from '../../../utils/values/Strings';
 import OrderAddressTile from './OrderAddressTile';
 import {
   orderStatus,
+  orderStatusBubbles,
   orderStatusLabels,
   paymentStatus,
   paymentStatusLabels,
@@ -14,45 +15,6 @@ import {
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
-
-let orderStatusList = [
-  {
-    orderStatus: orderStatus.ORDER_PLACED,
-    backgroundColor: '#cde4ff',
-    borderColor: '#b9daff',
-    labelColor: '#014085',
-  },
-  {
-    orderStatus: orderStatus.ORDER_ACCEPTED,
-    backgroundColor: '#fff3cd',
-    borderColor: '#feebae',
-    labelColor: '#856305',
-  },
-  {
-    orderStatus: orderStatus.ORDER_DISPATCHED,
-    backgroundColor: '#d1ecf1',
-    borderColor: '#b5e4eb',
-    labelColor: '#0b5460',
-  },
-  {
-    orderStatus: orderStatus.ORDER_DELIVERED,
-    backgroundColor: '#d5edda',
-    borderColor: '#c2e6cb',
-    labelColor: '#155824',
-  },
-  {
-    orderStatus: orderStatus.ORDER_REJECTED,
-    backgroundColor: '#f8d7da',
-    borderColor: '#da9fa4',
-    labelColor: '#731c23',
-  },
-  {
-    orderStatus: orderStatus.ORDER_CANCELLED,
-    backgroundColor: '#f8d7da',
-    borderColor: '#da9fa4',
-    labelColor: '#731c23',
-  },
-];
 
 let paymentStatusList = [
   {
@@ -79,15 +41,20 @@ const OrderHeader = (props) => {
     store_name,
     delivery_address_location,
     payment,
-  } = props.item;
+    overdue_time_limit,
+  } = props.orderDetails;
 
-  const getOrderStatusBubble = (payStatus) => {
+  const getOrderStatusBubble = (payStatus, custom) => {
     let order = {};
 
     if (payStatus) {
       order = paymentStatusList.find((obj) => obj.paymentStatus === payStatus);
     } else {
-      order = orderStatusList.find((obj) => obj.orderStatus === status);
+      if (custom) {
+        order = orderStatusBubbles.find((obj) => obj.orderStatus === custom);
+      } else {
+        order = orderStatusBubbles.find((obj) => obj.orderStatus === status);
+      }
     }
 
     if (order) {
@@ -146,34 +113,44 @@ const OrderHeader = (props) => {
     }
   };
 
+  let isOverdue =
+    status === orderStatus.ORDER_PLACED
+      ? moment.duration({from: moment(created_on)}).asMinutes() >
+        overdue_time_limit
+        ? true
+        : false
+      : false;
+
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.orderInfoRow}>
-          <View style={styles.orderDetails}>
-            <Pressable onPress={Actions.pop}>
-              <Back />
-            </Pressable>
-            <Text style={styles.orderId} numberOfLines={1}>
-              {Strings.orderId} - {id}
-            </Text>
-            <Text style={styles.orderTime}>
-              {moment(created_on).format('lll')}
-            </Text>
-            {(payment.status === paymentStatus.REFUND_IN_PROGRESS ||
-              payment.status === paymentStatus.REFUNDED) &&
-              getOrderStatusBubble(payment.status)}
-          </View>
+          <Pressable onPress={Actions.pop}>
+            <Back style={styles.backIcon} />
+          </Pressable>
 
-          <View style={styles.rightContainer}>
-            <Text style={styles.needHelp}>{Strings.needHelp}</Text>
-            {getOrderStatusBubble()}
-          </View>
+          <Text style={styles.needHelp}>{Strings.needHelp}</Text>
         </View>
+
+        <View style={[styles.orderInfoRow, styles.orderIdContainer]}>
+          <Text style={styles.orderId} numberOfLines={1}>
+            {Strings.orderId} - {id}
+          </Text>
+          {getOrderStatusBubble(
+            null,
+            isOverdue ? orderStatus.ORDER_OVERDUE : null,
+          )}
+        </View>
+
+        <Text style={styles.orderTime}>{moment(created_on).format('lll')}</Text>
+
+        {(payment.status === paymentStatus.REFUND_IN_PROGRESS ||
+          payment.status === paymentStatus.REFUNDED) &&
+          getOrderStatusBubble(payment.status)}
       </View>
 
       <View style={styles.bottomContainer}>
-        {showLabel(40)}
+        {showLabel()}
 
         <View style={styles.addressContainer}>
           <OrderAddressTile

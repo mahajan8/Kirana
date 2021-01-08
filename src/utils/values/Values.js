@@ -24,6 +24,7 @@ export const orderStatus = {
   ORDER_INITIATED: 10,
   ORDER_NOT_PLACED: 15,
   ORDER_PLACED: 20,
+  ORDER_OVERDUE: 25, //Added custom on front end
   ORDER_UPDATED: 30,
   ORDER_REJECTED: 40,
   ORDER_CANCELLED: 50,
@@ -38,7 +39,8 @@ export const orderStatusLabels = {
   ORDER_INITIATED: 10,
   ORDER_NOT_PLACED: 15,
   New: 20,
-  ORDER_UPDATED: 30,
+  Overdue: 25,
+  'Awaiting Confirmation': 30,
   Rejected: 40,
   Cancelled: 50,
   Preparing: 60,
@@ -67,3 +69,54 @@ export const paymentStatusLabels = {
   'Refund In Progress': 60,
   'Refund Completed': 70,
 };
+
+export const orderStatusBubbles = [
+  {
+    orderStatus: orderStatus.ORDER_PLACED,
+    backgroundColor: '#cde4ff',
+    borderColor: '#b9daff',
+    labelColor: '#014085',
+  },
+  {
+    orderStatus: orderStatus.ORDER_ACCEPTED,
+    backgroundColor: '#fff3cd',
+    borderColor: '#feebae',
+    labelColor: '#856305',
+  },
+  {
+    orderStatus: orderStatus.ORDER_DISPATCHED,
+    backgroundColor: '#d1ecf1',
+    borderColor: '#b5e4eb',
+    labelColor: '#0b5460',
+  },
+  {
+    orderStatus: orderStatus.ORDER_DELIVERED,
+    backgroundColor: '#d5edda',
+    borderColor: '#c2e6cb',
+    labelColor: '#155824',
+  },
+  {
+    orderStatus: orderStatus.ORDER_UPDATED,
+    backgroundColor: '#f8d7da',
+    borderColor: '#da9fa4',
+    labelColor: '#731c23',
+  },
+  {
+    orderStatus: orderStatus.ORDER_REJECTED,
+    backgroundColor: '#f8d7da',
+    borderColor: '#da9fa4',
+    labelColor: '#731c23',
+  },
+  {
+    orderStatus: orderStatus.ORDER_OVERDUE,
+    backgroundColor: '#f8d7da',
+    borderColor: '#da9fa4',
+    labelColor: '#731c23',
+  },
+  {
+    orderStatus: orderStatus.ORDER_CANCELLED,
+    backgroundColor: '#f8d7da',
+    borderColor: '#da9fa4',
+    labelColor: '#731c23',
+  },
+];

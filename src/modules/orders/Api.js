@@ -33,6 +33,7 @@ export const getOrderDetails = (pars) => {
     instance.post(Urls.getOrderDetails, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
+        console.log(res.data.data);
         dispatch(setOrderDetails(res.data.data));
       } else {
         alert(res.data.message);
@@ -89,6 +90,26 @@ export const repeatOrder = (pars, callback) => {
         const {cart} = res.data.data;
         dispatch(setCartDetails(cart));
         Actions.cart();
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};
+
+export const acceptRejectOrder = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.acceptRejectOrder, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        let params = {
+          order_id: pars.order_id,
+        };
+
+        dispatch(getOrderDetails(params));
+        callback();
       } else {
         alert(res.data.message);
       }

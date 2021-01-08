@@ -10,11 +10,17 @@ import Button from '../../commons/components/Button';
 import AlertModal from '../../commons/components/AlertModal';
 import {orderStatus} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
-import {cancelOrder, getOrderDetails, repeatOrder} from '../Api';
+import {
+  cancelOrder,
+  getOrderDetails,
+  repeatOrder,
+  acceptRejectOrder,
+} from '../Api';
 import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import OrderDetailShimmer from './OrderDetailShimmer';
 import Loader from '../../commons/components/Loader';
+import ViewOriginalModal from './ViewOriginalModal';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -82,6 +88,17 @@ const OrderDetails = (props) => {
     props.repeatOrder(pars);
   };
 
+  const acceptReject = (accepted = true) => {
+    let pars = {
+      order_id: selectedOrderId,
+      is_accepted: accepted,
+    };
+
+    props.acceptRejectOrder(pars, () => {
+      props.refresh();
+    });
+  };
+
   const getButtonLabel = () => {
     let {
       ORDER_ACCEPTED,
@@ -131,6 +148,50 @@ const OrderDetails = (props) => {
     }
   };
 
+  const getBottomButton = () => {
+    let {ORDER_PLACED, ORDER_UPDATED} = orderStatus;
+    if (status === ORDER_PLACED || status === ORDER_UPDATED) {
+      let update = status === ORDER_UPDATED ? true : false;
+
+      return (
+        <View style={styles.buttonsRowContainer}>
+          <Button
+            label={update ? Strings.rejectOrder : Strings.cancelOrder}
+            Style={styles.rowButton}
+            labelStyle={styles.buttonLabel}
+            bordered
+            onPress={() => {
+              if (update) {
+                acceptReject(false);
+              } else {
+                setShowCancelModal(true);
+              }
+            }}
+          />
+
+          <Button
+            label={update ? Strings.acceptOrder : Strings.trackOrder}
+            Style={styles.rowButton}
+            labelStyle={styles.buttonLabel}
+            onPress={() => {
+              if (update) {
+                acceptReject();
+              }
+            }}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <Button
+          label={getButtonLabel()}
+          labelStyle={styles.buttonLabel}
+          onPress={onButtonPress}
+        />
+      );
+    }
+  };
+
   return (
     <SafeArea>
       <FlatList
@@ -142,7 +203,7 @@ const OrderDetails = (props) => {
           orderDetails && (
             <View style={styles.listHeader}>
               <OrderHeader
-                item={orderDetails}
+                orderDetails={orderDetails}
                 //   refundComplete
               />
               {renderHeader(Strings.yourItems)}
@@ -167,7 +228,7 @@ const OrderDetails = (props) => {
                 {renderPrice(Strings.subTotal, charged_amount)}
                 {renderPrice(Strings.deliveryCharge, delivery_fee)}
                 {refund_amount
-                  ? renderPrice(Strings.refundAmount, refund_amount)
+                  ? renderPrice(Strings.refundAmount, -refund_amount)
                   : null}
                 <View style={styles.priceRowContainer}>
                   <Text style={styles.grandTotal}>{Strings.grandTotal}</Text>
@@ -181,32 +242,11 @@ const OrderDetails = (props) => {
         }
         ListEmptyComponent={<OrderDetailShimmer />}
       />
+
       {orderDetails && (
-        <View style={styles.buttonContainer}>
-          {status === orderStatus.ORDER_PLACED ? (
-            <View style={styles.buttonsRowContainer}>
-              <Button
-                label={Strings.cancelOrder}
-                Style={styles.rowButton}
-                labelStyle={styles.buttonLabel}
-                bordered
-                onPress={() => setShowCancelModal(true)}
-              />
-              <Button
-                label={Strings.trackOrder}
-                Style={styles.rowButton}
-                labelStyle={styles.buttonLabel}
-              />
-            </View>
-          ) : (
-            <Button
-              label={getButtonLabel()}
-              labelStyle={styles.buttonLabel}
-              onPress={onButtonPress}
-            />
-          )}
-        </View>
+        <View style={styles.buttonContainer}>{getBottomButton()}</View>
       )}
+
       <AlertModal
         visible={showCancelModal}
         setVisible={setShowCancelModal}
@@ -217,6 +257,7 @@ const OrderDetails = (props) => {
         button1Press={() => setShowCancelModal(false)}
         button2Press={cancel}
       />
+
       {orderDetails && props.loading && (
         <View style={styles.loaderContainer}>
           <Loader show={true} />
@@ -236,6 +277,7 @@ const mapDispatchToProps = {
   setOrderDetails,
   cancelOrder,
   repeatOrder,
+  acceptRejectOrder,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);

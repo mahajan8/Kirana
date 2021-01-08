@@ -1,32 +1,47 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {Modal, Pressable} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {styles} from '../styles/modalContainerStyles';
 
 const ModalContainer = (props) => {
-  let {visible, setVisible, containerStyle} = props;
+  const {
+    visible,
+    setVisible,
+    children,
+    containerStyle,
+    cancellable = true,
+  } = props;
 
   return (
     <Modal
       visible={visible}
-      onRequestClose={() => setVisible(false)}
+      onRequestClose={() => {
+        if (cancellable) {
+          setVisible(false);
+        }
+      }}
       transparent={true}
       animated
       animationType="none">
       <Pressable
         activeOpacity={1}
-        style={[styles.container, containerStyle && containerStyle]}
-        onPress={() => setVisible(false)}>
-        {props.children}
+        style={[styles.modalContainer, containerStyle && containerStyle]}
+        onPress={() => {
+          if (cancellable) {
+            setVisible(false);
+          }
+        }}>
+        <Pressable>{children}</Pressable>
       </Pressable>
     </Modal>
   );
 };
 
-const styles = EStyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-  },
-});
+ModalContainer.propTypes = {
+  visible: PropTypes.bool,
+  setVisible: PropTypes.func,
+  containerStyle: PropTypes.object,
+  cancellable: PropTypes.bool,
+};
 
 export default ModalContainer;

@@ -13,16 +13,18 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  orderDetails: {
-    paddingTop: '4vrem',
-    alignItems: 'flex-start',
+  backIcon: {
+    marginTop: '4vrem',
+  },
+  orderIdContainer: {
+    marginTop: '8vrem',
   },
   orderId: {
     fontSize: '14rem',
     color: Colors.titleText,
     fontFamily: Fonts.medium,
-    marginTop: '8vrem',
-    width: '240rem',
+    flex: 1,
+    marginRight: '15rem',
   },
   orderTime: {
     fontSize: '10rem',
@@ -45,7 +47,6 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: '12rem',
     height: '21vrem',
     borderWidth: '0.5rem',
-    marginTop: '11vrem',
     justifyContent: 'center',
   },
   statusLabel: {
