@@ -7,7 +7,7 @@ export const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
   },
   innerContainer: {
-    height: '90%',
+    height: '600vrem',
     backgroundColor: Colors.white,
     borderTopLeftRadius: '15rem',
     borderTopRightRadius: '15rem',
@@ -58,5 +58,6 @@ export const styles = EStyleSheet.create({
   },
   list: {
     // paddingBottom: '20vrem',
+    flexGrow: 1,
   },
 });
