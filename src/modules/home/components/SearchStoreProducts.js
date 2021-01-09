@@ -74,12 +74,23 @@ const SearchStoreProducts = (props) => {
       return null;
     }
   };
+
   const onStoreClick = (store) => {
     props.selectStore(store);
     Actions.storeProductsResults({
       searchedText: searchInput,
     });
   };
+
+  const renderHeader = () => (
+    <View style={styles.container}>
+      <Text style={styles.searchResultsHeading}>
+        {Strings.found} {searchedStoresCount} {Strings.storesMatching}{' '}
+        {searchInput}
+      </Text>
+    </View>
+  );
+
   return (
     <SafeArea>
       <CartHeader
@@ -96,16 +107,7 @@ const SearchStoreProducts = (props) => {
             <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
           )}
           keyExtractor={(item, index) => `store${index}`}
-          ListHeaderComponent={
-            searchedStoresCount && (
-              <View style={styles.container}>
-                <Text style={styles.searchResultsHeading}>
-                  {Strings.found} {searchedStoresCount} {Strings.storesMatching}{' '}
-                  {searchInput}
-                </Text>
-              </View>
-            )
-          }
+          ListHeaderComponent={searchedStoresCount && renderHeader()}
           ListEmptyComponent={getEmptyState()}
           contentContainerStyle={styles.list}
           onMomentumScrollBegin={() => setEndReachCallable(false)}

@@ -216,7 +216,8 @@ export const Strings = {
   addNewAddress: '+ Add new address',
   deliverTo: 'Deliver to:',
   plusAddMore: '+ Add more',
-  overWeightCartText: 'Max. weight limit is 10 kg. Reduce items to proceed.',
+  overWeightCartText: (weight) =>
+    'Max. weight limit is ' + weight + ' kg . Reduce items to proceed.',
   cartNotDeliverable: 'Delivery address not servicable, please add new address',
   cartEmptyTitle: 'All your grocery needs are a click away',
   cartEmptySubTitle: 'Your cart is empty. Add items from nearby stores. ',

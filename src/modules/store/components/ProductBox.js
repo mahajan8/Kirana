@@ -69,7 +69,7 @@ const ProductBox = (props) => {
       <Text style={styles.weight}>
         {product_quantity} {getKeyByValue(unitsList, product_packaging)}
       </Text>
-      <View style={styles.bottomContainer}>
+      <Pressable style={styles.bottomContainer}>
         {loadingProductId !== product_id ? (
           cartProductObj ? (
             <View
@@ -109,7 +109,7 @@ const ProductBox = (props) => {
         ) : (
           <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
-      </View>
+      </Pressable>
 
       <AlertModal
         visible={replaceAlert}

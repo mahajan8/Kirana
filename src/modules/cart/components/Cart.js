@@ -38,6 +38,7 @@ const Cart = (props) => {
     store,
     is_overweight,
     is_deliverable,
+    max_weight_limit_kg,
   } = cart;
   useEffect(() => {
     if (location) {
@@ -116,8 +117,12 @@ const Cart = (props) => {
             ListHeaderComponent={
               list.length && (
                 <CartListHeader
-                  overWeight={is_overweight}
+                  overWeight={is_overweight ? max_weight_limit_kg : false}
                   storeName={store ? store.name : null}
+                  addMore={() => {
+                    props.selectStore(store);
+                    Actions.replace('store');
+                  }}
                 />
               )
             }
@@ -158,6 +163,7 @@ const Cart = (props) => {
               totalAmount={total_cost_price + delivery_fee}
               loading={paymentLoading}
               confirmOrder={confirmOrder}
+              overWeight={is_overweight}
             />
           ) : null}
         </View>

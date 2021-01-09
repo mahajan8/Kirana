@@ -75,6 +75,12 @@ const ProductsList = (props) => {
     props.searchStoreProducts(pars);
   };
 
+  const renderLoader = () => (
+    <View style={styles.listLoaderContainer}>
+      <Loader show={products.length ? props.loading : false} />
+    </View>
+  );
+
   let FilterIcon =
     filters.brands.length || filters.price_sort !== null
       ? ActiveFilter
@@ -123,11 +129,7 @@ const ProductsList = (props) => {
             setEndReachCallable(true);
           }
         }}
-        ListFooterComponent={
-          <View style={styles.listLoaderContainer}>
-            <Loader show={products.length ? props.loading : false} />
-          </View>
-        }
+        ListFooterComponent={renderLoader()}
       />
     </SafeArea>
   );

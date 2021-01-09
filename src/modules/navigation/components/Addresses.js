@@ -112,6 +112,21 @@ const Addresses = (props) => {
     );
   };
 
+  const renderListEmptyComponent = () => (
+    <View style={styles.noAddressContainer}>
+      <NoAddressImage
+        width={EStyleSheet.value('270rem')}
+        height={EStyleSheet.value('123rem')}
+      />
+      <Text style={styles.noAddressText}>{Strings.noSavedAddress}</Text>
+      <Button
+        label={Strings.addAddress}
+        Style={styles.noAddressButton}
+        onPress={Actions.addressSearch}
+      />
+    </View>
+  );
+
   return (
     <SafeArea>
       <Header
@@ -139,20 +154,7 @@ const Addresses = (props) => {
         <FlatList
           data={addresses}
           renderItem={({item, index}) => renderAddress(item)}
-          ListEmptyComponent={
-            <View style={styles.noAddressContainer}>
-              <NoAddressImage
-                width={EStyleSheet.value('270rem')}
-                height={EStyleSheet.value('123rem')}
-              />
-              <Text style={styles.noAddressText}>{Strings.noSavedAddress}</Text>
-              <Button
-                label={Strings.addAddress}
-                Style={styles.noAddressButton}
-                onPress={Actions.addressSearch}
-              />
-            </View>
-          }
+          ListEmptyComponent={renderListEmptyComponent()}
           contentContainerStyle={styles.list}
           keyExtractor={(item, index) => `address${index}`}
         />

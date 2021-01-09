@@ -12,6 +12,7 @@ import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {updateUserDetails} from '../Api';
 import {connect} from 'react-redux';
+import Loader from '../../commons/components/Loader';
 
 const AccountSetup = (props) => {
   let {first_name} = props.userDetails;
@@ -49,11 +50,13 @@ const AccountSetup = (props) => {
         onPress={saveDetails}
         disabled={!fullName}
       />
+      <Loader show={props.loading} />
     </SafeArea>
   );
 };
 
 const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
   userDetails: state.homeReducer.userDetails,
 });
 

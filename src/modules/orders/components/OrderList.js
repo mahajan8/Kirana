@@ -150,6 +150,47 @@ const OrderList = (props) => {
     });
   };
 
+  const renderTitle = (label) => (
+    <View style={styles.sectionHeaderContainer}>
+      <Text style={styles.sectionName}>{label}</Text>
+    </View>
+  );
+
+  const renderActiveList = () => (
+    <FlatList
+      data={storeOrders ? storeActiveOrders : activeOrders}
+      renderItem={({item}) => (
+        <OrderListItem item={item} refresh={getOrderList} />
+      )}
+      keyExtractor={(item, index) => `activeOrders${index}`}
+      ListFooterComponent={showPastHeader && renderTitle(Strings.pastOrders)}
+      ListHeaderComponent={
+        showActiveHeader && renderTitle(Strings.activeOrders)
+      }
+      ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
+    />
+  );
+
+  const renderLoader = () => {
+    let showLoader = storeOrders
+      ? storePastOrders.length
+        ? true
+        : false
+      : pastOrders.length
+      ? true
+      : false;
+
+    if (props.loading && showLoader) {
+      return (
+        <View style={styles.listLoaderContainer}>
+          <Loader show={true} />
+        </View>
+      );
+    } else {
+      return null;
+    }
+  };
+
   let showActiveHeader = storeOrders
     ? storeActiveOrders.length
       ? true
@@ -185,52 +226,8 @@ const OrderList = (props) => {
           );
         }
       }}
-      ListHeaderComponent={
-        showPastHeader && (
-          //   Active Orders List
-          <FlatList
-            data={storeOrders ? storeActiveOrders : activeOrders}
-            renderItem={({item}) => (
-              <OrderListItem item={item} refresh={getOrderList} />
-            )}
-            keyExtractor={(item, index) => `activeOrders${index}`}
-            ListFooterComponent={
-              showPastHeader && (
-                <View style={styles.sectionHeaderContainer}>
-                  <Text style={styles.sectionName}>{Strings.pastOrders}</Text>
-                </View>
-              )
-            }
-            ListHeaderComponent={
-              showActiveHeader && (
-                <View style={styles.sectionHeaderContainer}>
-                  <Text style={styles.sectionName}>{Strings.activeOrders}</Text>
-                </View>
-              )
-            }
-            ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
-          />
-        )
-      }
-      ListFooterComponent={() => {
-        let showLoader = storeOrders
-          ? storePastOrders.length
-            ? true
-            : false
-          : pastOrders.length
-          ? true
-          : false;
-
-        if (props.loading && showLoader) {
-          return (
-            <View style={styles.listLoaderContainer}>
-              <Loader show={true} />
-            </View>
-          );
-        } else {
-          return null;
-        }
-      }}
+      ListHeaderComponent={showPastHeader && renderActiveList()}
+      ListFooterComponent={renderLoader()}
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       ListEmptyComponent={() => {

@@ -131,6 +131,13 @@ const SearchProducts = (props) => {
       return null;
     }
   };
+
+  const renderLoader = () => (
+    <View style={styles.listLoaderContainer}>
+      <Loader show={products.length ? props.loading : false} />
+    </View>
+  );
+
   return (
     <SafeArea>
       <CartHeader
@@ -176,11 +183,7 @@ const SearchProducts = (props) => {
             }
           }}
           ListEmptyComponent={getEmptyState()}
-          ListFooterComponent={
-            <View style={styles.listLoaderContainer}>
-              <Loader show={products.length ? props.loading : false} />
-            </View>
-          }
+          ListFooterComponent={renderLoader()}
         />
       ) : (
         <View style={styles.commonSearchesContainer}>

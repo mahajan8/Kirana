@@ -60,6 +60,24 @@ const Home = (props) => {
     props.selectStore(store);
     Actions.store();
   };
+
+  const renderListEmptyComponent = () =>
+    props.loading ? (
+      <View style={styles.container}>
+        <StorePlaceholder count={6} />
+      </View>
+    ) : (
+      <View style={styles.listEmptyContainer}>
+        <NoStores />
+        <Text style={styles.listEmptyHeadline}>{Strings.homeStoresEmpty}</Text>
+        <Button
+          label={Strings.changeLocation}
+          Style={styles.listEmptyButton}
+          onPress={() => setSearchVisible(true)}
+        />
+      </View>
+    );
+
   return (
     <SafeArea>
       <CartHeader
@@ -83,25 +101,7 @@ const Home = (props) => {
         }}
         ListHeaderComponent={stores.length && searchProductHeader}
         contentContainerStyle={styles.list}
-        ListEmptyComponent={
-          props.loading ? (
-            <View style={styles.container}>
-              <StorePlaceholder count={6} />
-            </View>
-          ) : (
-            <View style={styles.listEmptyContainer}>
-              <NoStores />
-              <Text style={styles.listEmptyHeadline}>
-                {Strings.homeStoresEmpty}
-              </Text>
-              <Button
-                label={Strings.changeLocation}
-                Style={styles.listEmptyButton}
-                onPress={() => setSearchVisible(true)}
-              />
-            </View>
-          )
-        }
+        ListEmptyComponent={renderListEmptyComponent}
       />
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}

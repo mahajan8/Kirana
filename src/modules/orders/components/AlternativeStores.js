@@ -47,6 +47,18 @@ const AlternativeStores = (props) => {
     props.getAlternativeStores(pars);
   };
 
+  const renderListEmptyComponent = () =>
+    props.loading ? (
+      <View style={styles.container}>
+        <StorePlaceholder count={6} />
+      </View>
+    ) : (
+      <View style={styles.listEmptyContainer}>
+        <NoStores />
+        <Text style={styles.listEmptyHeadline}>{Strings.homeStoresEmpty}</Text>
+      </View>
+    );
+
   return (
     <SafeArea>
       <CartHeader
@@ -78,20 +90,7 @@ const AlternativeStores = (props) => {
             </Text>
           ) : null
         }
-        ListEmptyComponent={
-          props.loading ? (
-            <View style={styles.container}>
-              <StorePlaceholder count={6} />
-            </View>
-          ) : (
-            <View style={styles.listEmptyContainer}>
-              <NoStores />
-              <Text style={styles.listEmptyHeadline}>
-                {Strings.homeStoresEmpty}
-              </Text>
-            </View>
-          )
-        }
+        ListEmptyComponent={renderListEmptyComponent()}
       />
     </SafeArea>
   );

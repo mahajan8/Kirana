@@ -18,6 +18,7 @@ const CartSelectedAddress = (props) => {
     totalAmount = 0,
     confirmOrder,
     loading,
+    overWeight,
   } = props;
   let address = addresses.find((obj) => obj.id === location.id);
 
@@ -90,6 +91,7 @@ const CartSelectedAddress = (props) => {
               Style={styles.payButton}
               label={Strings.pay + ' ' + Strings.currency + ' ' + totalAmount}
               onPress={confirmOrder}
+              disabled={overWeight}
             />
           )}
         </View>

@@ -192,6 +192,33 @@ const OrderDetails = (props) => {
     }
   };
 
+  const renderListFooter = () => (
+    <View style={styles.listFooter}>
+      {instructions ? (
+        <View style={styles.instructionsContainer}>
+          <Text style={styles.instructionsLabel}>{Strings.instructions}</Text>
+          <Text style={styles.instructionsText}>{instructions}</Text>
+        </View>
+      ) : null}
+
+      {renderHeader(Strings.paymentDetails)}
+
+      <View style={styles.priceInfoContainer}>
+        {renderPrice(Strings.subTotal, charged_amount)}
+        {renderPrice(Strings.deliveryCharge, delivery_fee)}
+        {refund_amount
+          ? renderPrice(Strings.refundAmount, -refund_amount)
+          : null}
+        <View style={styles.priceRowContainer}>
+          <Text style={styles.grandTotal}>{Strings.grandTotal}</Text>
+          <Text style={styles.grandTotalAmount}>
+            {Strings.currency} {final_amount}
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+
   return (
     <SafeArea>
       <FlatList
@@ -210,36 +237,7 @@ const OrderDetails = (props) => {
             </View>
           )
         }
-        ListFooterComponent={
-          orderDetails && (
-            <View style={styles.listFooter}>
-              {instructions ? (
-                <View style={styles.instructionsContainer}>
-                  <Text style={styles.instructionsLabel}>
-                    {Strings.instructions}
-                  </Text>
-                  <Text style={styles.instructionsText}>{instructions}</Text>
-                </View>
-              ) : null}
-
-              {renderHeader(Strings.paymentDetails)}
-
-              <View style={styles.priceInfoContainer}>
-                {renderPrice(Strings.subTotal, charged_amount)}
-                {renderPrice(Strings.deliveryCharge, delivery_fee)}
-                {refund_amount
-                  ? renderPrice(Strings.refundAmount, -refund_amount)
-                  : null}
-                <View style={styles.priceRowContainer}>
-                  <Text style={styles.grandTotal}>{Strings.grandTotal}</Text>
-                  <Text style={styles.grandTotalAmount}>
-                    {Strings.currency} {final_amount}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          )
-        }
+        ListFooterComponent={orderDetails && renderListFooter()}
         ListEmptyComponent={<OrderDetailShimmer />}
       />
 
