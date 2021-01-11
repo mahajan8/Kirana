@@ -156,16 +156,12 @@ const OrderDetails = (props) => {
       return (
         <View style={styles.buttonsRowContainer}>
           <Button
-            label={update ? Strings.rejectOrder : Strings.cancelOrder}
+            label={Strings.cancelOrder}
             Style={styles.rowButton}
             labelStyle={styles.buttonLabel}
             bordered
             onPress={() => {
-              if (update) {
-                acceptReject(false);
-              } else {
-                setShowCancelModal(true);
-              }
+              setShowCancelModal(true);
             }}
           />
 

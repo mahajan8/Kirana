@@ -72,7 +72,7 @@ const OrderHeader = (props) => {
           <Text style={[styles.statusLabel, labelStyle]}>
             {getKeyByValue(
               payStatus ? paymentStatusLabels : orderStatusLabels,
-              payStatus ? payStatus : status,
+              payStatus ? payStatus : order.orderStatus,
             )}
           </Text>
         </View>
