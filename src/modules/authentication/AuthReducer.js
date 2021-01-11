@@ -19,10 +19,6 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
         authToken: action.token,
       };
     case SET_DISABLE_LOADING:
-      console.log(action.disabled, '1', {
-        ...state,
-        disableLoading: action.disabled,
-      });
       return {
         ...state,
         disableLoading: action.disabled,
