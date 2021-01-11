@@ -121,7 +121,15 @@ const Cart = (props) => {
                   storeName={store ? store.name : null}
                   addMore={() => {
                     props.selectStore(store);
-                    Actions.replace('store');
+                    // Actions.replace('store');
+                    let storeRoute = Actions.state.routes.some(
+                      (obj) => obj.routeName === 'store',
+                    );
+                    if (storeRoute) {
+                      Actions.popTo('store');
+                    } else {
+                      Actions.replace('store');
+                    }
                   }}
                 />
               )
