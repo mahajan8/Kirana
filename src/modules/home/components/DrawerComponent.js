@@ -66,7 +66,7 @@ const renderOptions = (Icon, label, index) => {
         Actions.drawerClose();
         actions(index);
       }}>
-      <Icon style={{marginRight: EStyleSheet.value('20rem')}} />
+      <Icon style={styles.optionIcon} />
       <Text style={styles.optionLabel}>{label}</Text>
     </Pressable>
   );

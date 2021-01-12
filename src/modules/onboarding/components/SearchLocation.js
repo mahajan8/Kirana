@@ -200,7 +200,7 @@ const Search = (props) => {
 
   return (
     <KeyboardAvoidingView
-      style={{flexGrow: 1}}
+      style={styles.keyboardContainer}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled
       keyboardVerticalOffset={20}>

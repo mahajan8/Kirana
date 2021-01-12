@@ -226,16 +226,16 @@ const OrderList = (props) => {
           );
         }
       }}
-      ListHeaderComponent={showPastHeader && renderActiveList()}
+      ListHeaderComponent={renderActiveList()}
       ListFooterComponent={renderLoader()}
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       ListEmptyComponent={() => {
-        if (props.loading && !activeOrders.length) {
-          return <OrderListShimmer count={4} />;
-        } else {
-          let myOrders = Actions.currentScene === 'myOrders' ? true : false;
-          return (
+        let myOrders = Actions.currentScene === 'myOrders' ? true : false;
+        if (!activeOrders) {
+          return props.loading ? (
+            <OrderListShimmer count={4} />
+          ) : (
             <View style={styles.emptyListContainer}>
               <View style={styles.emptyListInnerContainer}>
                 <CartEmpty />
@@ -256,6 +256,8 @@ const OrderList = (props) => {
               ) : null}
             </View>
           );
+        } else {
+          return null;
         }
       }}
     />

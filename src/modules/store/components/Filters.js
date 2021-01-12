@@ -175,7 +175,7 @@ const Filters = (props) => {
             }
           })}
         </View>
-        <View style={{flex: 1}}>
+        <View style={styles.listOuterContainer}>
           <FlatList
             data={
               filterIndex === 0

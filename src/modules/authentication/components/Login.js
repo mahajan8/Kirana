@@ -78,13 +78,13 @@ const Login = (props) => {
               type={'phone'}
               errorMessage={Strings.invalidNumber}
               error={error}
-              containerStyle={{marginTop: 0}}
+              containerStyle={styles.numberInputContainer}
               max={10}
             />
           </View>
 
           <View
-            style={{...commonStyles.buttonBottomContainer, paddingBottom: 0}}>
+            style={[commonStyles.buttonBottomContainer, styles.bottomButton]}>
             <Button
               label={Strings.continue}
               onPress={() => login()}

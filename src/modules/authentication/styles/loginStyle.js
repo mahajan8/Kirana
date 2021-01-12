@@ -42,4 +42,10 @@ export const styles = EStyleSheet.create({
     fontSize: '19rem',
     color: Colors.black,
   },
+  numberInputContainer: {
+    marginTop: 0,
+  },
+  bottomButton: {
+    paddingBottom: 0,
+  },
 });

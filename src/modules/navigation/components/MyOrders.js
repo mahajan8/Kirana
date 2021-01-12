@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';

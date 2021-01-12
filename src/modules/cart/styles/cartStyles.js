@@ -141,4 +141,7 @@ export const styles = EStyleSheet.create({
     position: 'absolute',
     bottom: '20vrem',
   },
+  fullContainer: {
+    flex: 1,
+  },
 });

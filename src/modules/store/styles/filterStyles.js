@@ -63,4 +63,7 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.white,
     paddingVertical: '15vrem',
   },
+  listOuterContainer: {
+    flex: 1,
+  },
 });

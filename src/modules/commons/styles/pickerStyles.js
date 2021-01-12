@@ -84,4 +84,7 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  listHeaderContainer: {
+    height: '24vrem',
+  },
 });

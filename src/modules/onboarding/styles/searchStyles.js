@@ -142,4 +142,7 @@ export const styles = EStyleSheet.create({
     height: '6vrem',
     marginTop: '20vrem',
   },
+  keyboardContainer: {
+    flexGrow: 1,
+  },
 });

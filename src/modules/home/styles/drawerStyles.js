@@ -73,4 +73,7 @@ export const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
   },
+  optionIcon: {
+    marginRight: '20rem',
+  },
 });

@@ -118,4 +118,7 @@ export const styles = EStyleSheet.create({
     borderColor: Colors.listBorderGray,
     paddingHorizontal: '10rem',
   },
+  filterIcon: {
+    marginRight: '18rem',
+  },
 });

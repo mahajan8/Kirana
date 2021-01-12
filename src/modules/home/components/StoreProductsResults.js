@@ -118,7 +118,7 @@ const SearchProductResults = (props) => {
                 filters: filters,
               });
             }}>
-            <FilterIcon style={{marginRight: 18}} />
+            <FilterIcon style={styles.filterIcon} />
           </Pressable>
         }
         containerStyle={styles.headerContainer}

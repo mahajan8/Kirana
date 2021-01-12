@@ -101,7 +101,7 @@ const Cart = (props) => {
       {props.loading ? (
         <CartShimmer />
       ) : (
-        <View style={{flex: 1}}>
+        <View style={styles.fullContainer}>
           <FlatList
             data={product_list ? list : []}
             renderItem={({item, index}) => (
@@ -143,7 +143,7 @@ const Cart = (props) => {
               )
             }
             ListEmptyComponent={
-              <View style={{flex: 1}}>
+              <View style={styles.fullContainer}>
                 <View style={styles.listEmptyContainer}>
                   <CartEmptyImage />
                   <Text style={styles.cartEmptyTitle}>

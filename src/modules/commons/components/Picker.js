@@ -19,7 +19,7 @@ const Picker = (props) => {
 
   const [visible, setVisible] = useState(false);
 
-  const header = () => <View style={{height: EStyleSheet.value('24vrem')}} />;
+  const header = () => <View style={styles.listHeaderContainer} />;
 
   let selected = value >= 0;
 

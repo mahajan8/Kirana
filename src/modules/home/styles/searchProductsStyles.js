@@ -74,4 +74,7 @@ export const styles = EStyleSheet.create({
   itemSeperator: {
     height: '24vrem',
   },
+  filterIcon: {
+    marginRight: '18rem',
+  },
 });
