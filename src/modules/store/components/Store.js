@@ -16,6 +16,7 @@ import ExploreInactive from '../../../assets/images/explore_inactive.svg';
 import Explore from './Explore';
 import StoreOrders from './StoreOrders';
 import StoreCategories from './StoreCategories';
+import {ripple} from '../../../utils/utility/Utils';
 
 // TODO: Add Icons for Explore
 let routes = [
@@ -61,6 +62,7 @@ const Store = (props) => {
           let selected = tabIndex === index ? true : false;
           return (
             <Pressable
+              android_ripple={ripple}
               key={index.toString()}
               onPress={() => onChangeTab(index)}
               style={styles.tabItemContainer}>

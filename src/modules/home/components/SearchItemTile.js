@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
-import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
@@ -9,6 +9,7 @@ import {updateProductQuantity} from '../../store/Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/searchItemTileStyles';
 import {Colors} from '../../../utils/values/Colors';
+import {Actions} from 'react-native-router-flux';
 
 const SearchItemTile = (props) => {
   let {
@@ -43,24 +44,29 @@ const SearchItemTile = (props) => {
 
   return (
     <View style={[styles.rowContainer]}>
-      <View style={styles.productImageContainer}>
-        <Image
-          style={styles.productImage}
-          source={{
-            uri: getMediaUrl(
-              product_images.length ? product_images[0].path : null,
-            ),
-          }}
-        />
-      </View>
+      <Pressable
+        style={[styles.rowContainer]}
+        android_ripple={ripple}
+        onPress={() => Actions.productDetails({item: props.item})}>
+        <View style={styles.productImageContainer}>
+          <Image
+            style={styles.productImage}
+            source={{
+              uri: getMediaUrl(
+                product_images.length ? product_images[0].path : null,
+              ),
+            }}
+          />
+        </View>
 
-      <View style={styles.productDetialsContainer}>
-        <Text style={styles.productName}>{product_name}</Text>
-        <Text style={styles.productWeight}>
-          {product_quantity} {getKeyByValue(unitsShortName, product_packaging)}
-        </Text>
-      </View>
-
+        <View style={styles.productDetialsContainer}>
+          <Text style={styles.productName}>{product_name}</Text>
+          <Text style={styles.productWeight}>
+            {product_quantity}{' '}
+            {getKeyByValue(unitsShortName, product_packaging)}
+          </Text>
+        </View>
+      </Pressable>
       <View style={styles.rightContainer}>
         <Text style={styles.price}>
           {Strings.currency}{' '}
@@ -70,6 +76,7 @@ const SearchItemTile = (props) => {
         {loadingProductId !== product_id ? (
           <View style={styles.rowContainer}>
             <Pressable
+              android_ripple={ripple}
               style={styles.quantityButton}
               onPress={() => updateQuantity(false)}>
               <Text style={styles.quantityButtonIcons}>-</Text>
@@ -82,7 +89,10 @@ const SearchItemTile = (props) => {
                 : 0}
             </Text>
 
-            <Pressable style={styles.quantityButton} onPress={updateQuantity}>
+            <Pressable
+              style={styles.quantityButton}
+              onPress={updateQuantity}
+              android_ripple={ripple}>
               <Text style={styles.quantityButtonIcons}>+</Text>
             </Pressable>
           </View>

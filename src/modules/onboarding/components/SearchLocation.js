@@ -27,7 +27,7 @@ import {environment} from '../../../config/EnvConfig';
 import Geolocation from 'react-native-geolocation-service';
 import {getAddressFromLocation} from '../../commons/Api';
 import {setLoading} from '../../authentication/AuthActions';
-import {getKeyByValue} from '../../../utils/utility/Utils';
+import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import {addressTypes} from '../../../utils/values/Values';
 import {setSelectedAddress} from '../../home/HomeActions';
 
@@ -170,6 +170,7 @@ const Search = (props) => {
         if (type !== 30) {
           return (
             <Pressable
+              android_ripple={ripple}
               key={`address${index}`}
               style={[styles.itemRow, styles.addressContainer]}
               onPress={() => {
@@ -215,6 +216,7 @@ const Search = (props) => {
             styles.currentLocationContainer,
             modal && styles.currentLocationModal,
           ]}
+          android_ripple={ripple}
           onPress={getPremission}>
           <CurrentLocation style={styles.locationIcon} />
           {modal ? (

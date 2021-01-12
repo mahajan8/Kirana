@@ -45,7 +45,7 @@ export const styles = EStyleSheet.create({
   optionsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: '10vrem',
+    paddingVertical: '10vrem',
     paddingHorizontal: '16rem',
   },
   seperator: {

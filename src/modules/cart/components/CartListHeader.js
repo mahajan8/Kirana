@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
+import {ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/cartStyles';
 
@@ -18,9 +19,9 @@ const CartListHeader = (props) => {
       <View style={styles.container}>
         <View style={[styles.rowContainer, styles.storeNameContainer]}>
           <Text style={styles.grayHeading}>{storeName}</Text>
-          <Text onPress={addMore} style={styles.addMore}>
-            {Strings.plusAddMore}
-          </Text>
+          <Pressable onPress={addMore} android_ripple={ripple}>
+            <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
+          </Pressable>
         </View>
       </View>
     </View>

@@ -8,6 +8,7 @@ import ImagePicker from 'react-native-image-picker';
 import {commonStyles} from '../styles/commonStyles';
 import ModalContainer from './ModalContainer';
 import {styles} from '../styles/imagepickStyles';
+import {ripple} from '../../../utils/utility/Utils';
 
 const ImagePick = (props) => {
   const {visible, setVisible, onSelectImage} = props;
@@ -57,6 +58,7 @@ const ImagePick = (props) => {
         </View>
 
         <Pressable
+          android_ripple={ripple}
           style={styles.optionsView}
           onPress={() => openImagePicker(0)}>
           <Camera
@@ -67,6 +69,7 @@ const ImagePick = (props) => {
         </Pressable>
 
         <Pressable
+          android_ripple={ripple}
           style={styles.optionsView}
           onPress={() => openImagePicker(1)}>
           <Camera

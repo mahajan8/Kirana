@@ -18,6 +18,7 @@ import NoStores from '../../../assets/images/stores_empty_image.svg';
 import Button from '../../commons/components/Button';
 import StorePlaceholder from './StorePlaceHolder';
 import {selectStore} from '../HomeActions';
+import {ripple} from '../../../utils/utility/Utils';
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -36,7 +37,8 @@ const Home = (props) => {
         <Pressable
           activeOpacity={0.5}
           style={styles.searchContainer}
-          onPress={Actions.searchStoreProducts}>
+          onPress={Actions.searchStoreProducts}
+          android_ripple={ripple}>
           <Search
             width={EStyleSheet.value('14rem')}
             height={EStyleSheet.value('14rem')}

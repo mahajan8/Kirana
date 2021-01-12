@@ -27,11 +27,12 @@ export const styles = EStyleSheet.create({
     fontSize: '14rem',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
-    marginBottom: '12vrem',
+    marginBottom: '2vrem',
   },
   list: {
     paddingHorizontal: '16rem',
     flexGrow: 1,
+    paddingBottom: '10vrem',
   },
   listEmptyContainer: {
     height: '100%',

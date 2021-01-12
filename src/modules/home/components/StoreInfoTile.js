@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import Star from '../../../assets/images/green_rating_star.svg';
 import StoreClosed from '../../../assets/images/store_closed.svg';
 import StoreShop from '../../../assets/images/store_shop_icon.svg';
@@ -22,6 +22,7 @@ const StoreInfoTile = (props) => {
 
   return (
     <Pressable
+      android_ripple={ripple}
       style={[styles.rowContainer, styles.container]}
       onPress={onPress && onPress}
       activeOpacity={1}>

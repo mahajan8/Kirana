@@ -7,7 +7,7 @@ import RadioSelected from '../../../assets/images/filter_radio_selected.svg';
 import RadioUnSelected from '../../../assets/images/filter_radio_unselected.svg';
 import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
-import {getKeyByValue} from '../../../utils/utility/Utils';
+import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import {Actions} from 'react-native-router-flux';
 import {styles} from '../styles/addressListModalStyles';
 
@@ -22,7 +22,8 @@ const AddressListModal = (props) => {
         onPress={() => {
           props.setLocation({...item.location, id, type});
           setVisible(false);
-        }}>
+        }}
+        android_ripple={ripple}>
         {location.id === id ? (
           <RadioSelected style={styles.radio} />
         ) : (
@@ -64,7 +65,8 @@ const AddressListModal = (props) => {
           onPress={() => {
             setVisible(false);
             Actions.addressSearch();
-          }}>
+          }}
+          android_ripple={ripple}>
           <Text style={styles.addNewAddress}>{Strings.addNewAddress}</Text>
         </Pressable>
       </Pressable>

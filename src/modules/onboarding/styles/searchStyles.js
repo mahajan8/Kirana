@@ -6,11 +6,13 @@ export const styles = EStyleSheet.create({
   currentLocationContainer: {
     paddingHorizontal: '20rem',
     flexDirection: 'row',
-    marginTop: '30vrem',
     alignItems: 'center',
+    paddingVertical: '20vrem',
+    marginTop: '8vrem',
   },
   currentLocationModal: {
-    marginTop: '14vrem',
+    paddingVertical: '14vrem',
+    marginTop: 0,
   },
   locationIcon: {
     marginRight: '12rem',
@@ -92,7 +94,6 @@ export const styles = EStyleSheet.create({
     width: '100%',
     backgroundColor: Colors.seperatorColor,
     height: '1vrem',
-    marginTop: '14vrem',
   },
   savedAddresses: {
     fontSize: '12rem',
@@ -140,7 +141,6 @@ export const styles = EStyleSheet.create({
     backgroundColor: '#f7f7f7',
     width: '100%',
     height: '6vrem',
-    marginTop: '20vrem',
   },
   keyboardContainer: {
     flexGrow: 1,

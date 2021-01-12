@@ -14,7 +14,7 @@ import Privacy from '../../../assets/images/privacy.svg';
 import FreeDelivery from '../../../assets/images/get_free_delivery.svg';
 import Logout from '../../../assets/images/logout.svg';
 import RightArrow from '../../../assets/images/right_arrow.svg';
-import {logout} from '../../../utils/utility/Utils';
+import {logout, ripple} from '../../../utils/utility/Utils';
 import SafeArea from '../../commons/components/SafeArea';
 import {connect} from 'react-redux';
 import {styles} from '../styles/drawerStyles';
@@ -61,6 +61,7 @@ const actions = (index) => {
 const renderOptions = (Icon, label, index) => {
   return (
     <Pressable
+      android_ripple={ripple}
       style={styles.optionsRow}
       onPress={() => {
         Actions.drawerClose();
@@ -79,7 +80,7 @@ const DrawerComponent = (props) => {
     <SafeArea statusBarColor={Colors.white}>
       <View style={styles.greenContainer}>
         <Text style={styles.number}>{userDetails.mobile}</Text>
-        <Pressable onPress={Actions.accountSetup}>
+        <Pressable onPress={Actions.accountSetup} android_ripple={ripple}>
           <Text style={styles.completeSetup}>
             {userDetails.first_name
               ? Strings.editAccountDetails
@@ -87,7 +88,7 @@ const DrawerComponent = (props) => {
           </Text>
         </Pressable>
       </View>
-      <View style={styles.banner}>
+      <Pressable style={styles.banner} android_ripple={ripple}>
         <FreeDelivery
           width={EStyleSheet.value('56rem')}
           height={EStyleSheet.value('37rem')}
@@ -104,7 +105,7 @@ const DrawerComponent = (props) => {
             height={EStyleSheet.value('12rem')}
           />
         </View>
-      </View>
+      </Pressable>
       {options.map((item, index) => (
         <View key={`$option${item.label}`}>
           {(index === 3 || index === 5 || index === 7) && (

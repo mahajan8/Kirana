@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/productDetailStyles';
-import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import Button from '../../commons/components/Button';
@@ -77,6 +77,7 @@ const ProductDetails = (props) => {
           cartProductObj ? (
             <View style={styles.counterContainer}>
               <Pressable
+                android_ripple={ripple}
                 style={styles.counter}
                 onPress={() => updateQuantity(false)}>
                 <Minus />
@@ -88,7 +89,10 @@ const ProductDetails = (props) => {
                   : cartProductObj.product_quantity_str}
               </Text>
 
-              <Pressable style={styles.counter} onPress={updateQuantity}>
+              <Pressable
+                style={styles.counter}
+                onPress={updateQuantity}
+                android_ripple={ripple}>
                 <Plus />
               </Pressable>
             </View>

@@ -14,6 +14,7 @@ import {Colors} from '../../../utils/values/Colors';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import BottomButton from '../../commons/components/BottomButton';
+import {ripple} from '../../../utils/utility/Utils';
 
 const VerifyOtp = (props) => {
   const otp = useRef(null);
@@ -82,7 +83,7 @@ const VerifyOtp = (props) => {
               <Text style={styles.coloredText}>{'00:' + seconds}</Text>
             </Text>
           ) : (
-            <Pressable onPress={resend}>
+            <Pressable onPress={resend} android_ripple={ripple}>
               <Text style={[styles.resendText, styles.coloredText]}>
                 {Strings.resend}
               </Text>

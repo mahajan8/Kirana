@@ -12,6 +12,7 @@ import NoResults from '../../../assets/images/search_not_found.svg';
 import {searchProductInStores} from '../Api';
 import {connect} from 'react-redux';
 import {clearSearchedStores, selectStore} from '../HomeActions';
+import {ripple} from '../../../utils/utility/Utils';
 
 let commonSearches = ['Milk', 'Onion', 'Apple', 'Potato', 'Chocolate'];
 
@@ -130,6 +131,7 @@ const SearchStoreProducts = (props) => {
           </Text>
           {commonSearches.map((item) => (
             <Pressable
+              android_ripple={ripple}
               key={`${item}`}
               onPress={() => {
                 setSearchInput(item);

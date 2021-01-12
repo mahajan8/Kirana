@@ -21,6 +21,7 @@ import {connect} from 'react-redux';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {Colors} from '../../../utils/values/Colors';
 import {Urls} from '../../../utils/utility/Urls';
+import {ripple} from '../../../utils/utility/Utils';
 
 const Login = (props) => {
   const [number, setNumber] = useState('');
@@ -92,13 +93,13 @@ const Login = (props) => {
             />
             <View style={styles.bottomTextContainer}>
               <Text style={styles.termsText}>{Strings.accepting}</Text>
-              <Pressable onPress={tncClick}>
+              <Pressable onPress={tncClick} android_ripple={ripple}>
                 <Text style={[styles.termsText, styles.coloredText]}>
                   {Strings.terms}
                 </Text>
               </Pressable>
               <Text style={styles.termsText}>{Strings.and}</Text>
-              <Pressable onPress={privacyPolicyClick}>
+              <Pressable onPress={privacyPolicyClick} android_ripple={ripple}>
                 <Text style={[styles.termsText, styles.coloredText]}>
                   {Strings.privacy}
                 </Text>

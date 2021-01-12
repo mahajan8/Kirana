@@ -7,6 +7,7 @@ import Urls from './Urls';
 import {removeAuthToken} from './LocalStore';
 import {logoutUser} from '../../modules/authentication/AuthActions';
 import store from '../Store';
+import {Colors} from '../values/Colors';
 const {dispatch} = store;
 
 export const clipText = (text, limit) => {
@@ -214,4 +215,10 @@ export const logout = () => {
   dispatch(logoutUser());
   removeAuthToken();
   Actions.reset('introduction');
+};
+
+export const ripple = {
+  color: Colors.black10,
+  backgroundColor: true,
+  radius: 180,
 };

@@ -8,6 +8,7 @@ import OrderList from '../../orders/components/OrderList';
 import {TabView} from 'react-native-tab-view';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/storeOrdersStyles';
+import {ripple} from '../../../utils/utility/Utils';
 
 let routes = [
   {
@@ -35,6 +36,7 @@ const StoreOrders = (props) => {
             let selected = tabIndex === index ? true : false;
             return (
               <Pressable
+                android_ripple={ripple}
                 key={index.toString()}
                 onPress={() => setTabIndex(index)}
                 style={[

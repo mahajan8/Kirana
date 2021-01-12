@@ -12,7 +12,7 @@ import {
   paymentStatus,
   paymentStatusLabels,
 } from '../../../utils/values/Values';
-import {getKeyByValue} from '../../../utils/utility/Utils';
+import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
 
@@ -125,11 +125,13 @@ const OrderHeader = (props) => {
     <View>
       <View style={styles.container}>
         <View style={styles.orderInfoRow}>
-          <Pressable onPress={Actions.pop}>
+          <Pressable onPress={Actions.pop} android_ripple={ripple}>
             <Back style={styles.backIcon} />
           </Pressable>
 
-          <Text style={styles.needHelp}>{Strings.needHelp}</Text>
+          <Pressable android_ripple={ripple}>
+            <Text style={styles.needHelp}>{Strings.needHelp}</Text>
+          </Pressable>
         </View>
 
         <View style={[styles.orderInfoRow, styles.orderIdContainer]}>

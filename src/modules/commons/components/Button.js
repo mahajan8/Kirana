@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, Pressable, Keyboard} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {ripple} from '../../../utils/utility/Utils';
 import {Colors} from '../../../utils/values/Colors';
 import {styles} from '../styles/buttonStyles';
 
@@ -19,7 +20,8 @@ const Button = (props) => {
       onPress={() => {
         Keyboard.dismiss();
         if (onPress) onPress();
-      }}>
+      }}
+      android_ripple={ripple}>
       {Icon && Icon}
       <Text
         style={[

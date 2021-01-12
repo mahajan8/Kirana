@@ -12,10 +12,12 @@ import {connect} from 'react-redux';
 import {setSubcategoryProducts} from '../StoreActions';
 import ListPlaceHolder from './ListPlaceHolder';
 import CartHeader from '../../commons/components/CartHeader';
+import {ripple} from '../../../utils/utility/Utils';
 
 const StoreSubCategories = (props) => {
   let {categoryName} = props;
   let {subcategoryProducts, storeDetails} = props.storeState;
+
   useEffect(() => {
     let params = {
       store_id: storeDetails.id,
@@ -36,7 +38,7 @@ const StoreSubCategories = (props) => {
         title={categoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            <Pressable onPress={Actions.searchProducts}>
+            <Pressable onPress={Actions.searchProducts} android_ripple={ripple}>
               <Search
                 style={styles.headerIcon}
                 width={EStyleSheet.value('16rem')}
@@ -78,6 +80,7 @@ const StoreSubCategories = (props) => {
               horizontal
               renderItem={({item, index}) => (
                 <Pressable
+                  android_ripple={ripple}
                   style={styles.bubble}
                   key={`bubble${item.name}`}
                   onPress={() =>

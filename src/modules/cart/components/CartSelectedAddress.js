@@ -6,7 +6,7 @@ import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
-import {getKeyByValue} from '../../../utils/utility/Utils';
+import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 import {Colors} from '../../../utils/values/Colors';
 
@@ -66,7 +66,7 @@ const CartSelectedAddress = (props) => {
         </View>
 
         {location.id && deliverable ? (
-          <Pressable onPress={props.addAddress}>
+          <Pressable onPress={props.addAddress} android_ripple={ripple}>
             <Text style={styles.change}>{Strings.change}</Text>
           </Pressable>
         ) : (

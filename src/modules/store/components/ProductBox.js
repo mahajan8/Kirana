@@ -2,7 +2,7 @@
 import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsList} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
@@ -49,26 +49,29 @@ const ProductBox = (props) => {
   return (
     <Pressable
       activeOpacity={1}
-      style={[styles.container, vertical && styles.verticalContainer]}
-      onPress={() => Actions.productDetails({item})}>
-      <Image
-        source={{
-          uri: getMediaUrl(
-            product_images.length ? product_images[0].path : null,
-          ),
-        }}
-        style={styles.productImage}
-      />
-      <Text style={styles.price}>
-        {Strings.currency}{' '}
-        {cartProductObj ? cartProductObj.total_price : store_price}
-      </Text>
-      <Text style={styles.name} numberOfLines={1}>
-        {product_name}
-      </Text>
-      <Text style={styles.weight}>
-        {product_quantity} {getKeyByValue(unitsList, product_packaging)}
-      </Text>
+      style={[styles.container, vertical && styles.verticalContainer]}>
+      <Pressable
+        android_ripple={ripple}
+        onPress={() => Actions.productDetails({item})}>
+        <Image
+          source={{
+            uri: getMediaUrl(
+              product_images.length ? product_images[0].path : null,
+            ),
+          }}
+          style={styles.productImage}
+        />
+        <Text style={styles.price}>
+          {Strings.currency}{' '}
+          {cartProductObj ? cartProductObj.total_price : store_price}
+        </Text>
+        <Text style={styles.name} numberOfLines={1}>
+          {product_name}
+        </Text>
+        <Text style={styles.weight}>
+          {product_quantity} {getKeyByValue(unitsList, product_packaging)}
+        </Text>
+      </Pressable>
       <Pressable style={styles.bottomContainer}>
         {loadingProductId !== product_id ? (
           cartProductObj ? (
@@ -78,6 +81,7 @@ const ProductBox = (props) => {
                 vertical && styles.verticalButton,
               ]}>
               <Pressable
+                android_ripple={ripple}
                 style={styles.counter}
                 onPress={() => updateQuantity(false)}>
                 <MinusButton
@@ -91,7 +95,10 @@ const ProductBox = (props) => {
                   : cartProductObj.product_quantity_str}
               </Text>
 
-              <Pressable style={styles.counter} onPress={updateQuantity}>
+              <Pressable
+                style={styles.counter}
+                onPress={updateQuantity}
+                android_ripple={ripple}>
                 <PlusButton
                   width={EStyleSheet.value('25rem')}
                   height={EStyleSheet.value('25rem')}

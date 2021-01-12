@@ -8,13 +8,14 @@ export const styles = EStyleSheet.create({
   },
   tabRow: {
     flexDirection: 'row',
-    paddingHorizontal: '40rem',
-    paddingVertical: '10vrem',
+    paddingHorizontal: '25rem',
     backgroundColor: Colors.white,
     justifyContent: 'space-between',
   },
   tabItemContainer: {
     alignItems: 'center',
+    paddingVertical: '10vrem',
+    paddingHorizontal: '15rem',
   },
   label: {
     fontFamily: Fonts.medium,

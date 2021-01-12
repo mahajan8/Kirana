@@ -10,6 +10,7 @@ import {Actions} from 'react-native-router-flux';
 import OrderAddressTile from './OrderAddressTile';
 import {setSelectedOrderId} from '../OrderActions';
 import {connect} from 'react-redux';
+import {ripple} from '../../../utils/utility/Utils';
 
 const OrderListItem = (props) => {
   let {
@@ -23,6 +24,7 @@ const OrderListItem = (props) => {
 
   return (
     <Pressable
+      android_ripple={ripple}
       style={styles.orderContainer}
       onPress={() => {
         Actions.orderDetails({refresh: props.refresh});

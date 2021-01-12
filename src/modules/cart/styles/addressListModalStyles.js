@@ -34,6 +34,7 @@ export const styles = EStyleSheet.create({
   },
   radio: {
     marginRight: '10rem',
+    marginTop: '2vrem',
   },
   addressType: {
     fontSize: '14rem',

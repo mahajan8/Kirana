@@ -15,4 +15,5 @@ export const Colors = {
   placeHolder: '#ececec',
   listBorderGray: '#e3e3e3',
   black2: '#333333',
+  black10: '#00000010',
 };

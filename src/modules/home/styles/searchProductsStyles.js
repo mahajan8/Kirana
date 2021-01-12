@@ -55,10 +55,10 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     letterSpacing: '0.28rem',
     color: Colors.titleText,
-    marginBottom: '16vrem',
+    marginVertical: '8vrem',
   },
   commonSearchHeading: {
-    marginBottom: '14vrem',
+    marginBottom: '6vrem',
   },
   listLoaderContainer: {
     marginVertical: '20vrem',

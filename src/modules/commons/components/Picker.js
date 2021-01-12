@@ -6,6 +6,7 @@ import Cross from '../../../assets/images/cross.svg';
 import Check from '../../../assets/images/green_check.svg';
 import {styles} from '../styles/pickerStyles';
 import ModalContainer from './ModalContainer';
+import {ripple} from '../../../utils/utility/Utils';
 
 const Picker = (props) => {
   const {
@@ -50,7 +51,9 @@ const Picker = (props) => {
           <View style={styles.titleView}>
             <Text>{label}</Text>
 
-            <Pressable onPress={() => setVisible(false)}>
+            <Pressable
+              onPress={() => setVisible(false)}
+              android_ripple={ripple}>
               <Cross
                 width={EStyleSheet.value('14rem')}
                 height={EStyleSheet.value('14vrem')}

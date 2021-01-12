@@ -8,7 +8,7 @@ import Search from '../../../assets/images/search.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import CartCounter from '../../commons/components/CartCounter';
-import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {getStoreCategories} from '../Api';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
@@ -25,6 +25,7 @@ const Explore = (props) => {
 
   const renderCategory = (item) => (
     <Pressable
+      android_ripple={ripple}
       style={styles.categoryContainer}
       onPress={() =>
         Actions.storeSubCategories({

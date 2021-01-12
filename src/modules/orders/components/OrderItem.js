@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
-import {getKeyByValue, getMediaUrl} from '../../../utils/utility/Utils';
+import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {styles} from '../styles/orderItemStyles';
@@ -35,7 +35,9 @@ const OrderItem = (props) => {
         </Text>
 
         {old_order_product ? (
-          <Pressable onPress={() => setShowOriginal(true)}>
+          <Pressable
+            onPress={() => setShowOriginal(true)}
+            android_ripple={ripple}>
             <Text style={styles.viewOriginal}>{Strings.viewOriginalItem}</Text>
           </Pressable>
         ) : null}
