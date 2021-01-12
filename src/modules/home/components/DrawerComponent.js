@@ -80,7 +80,7 @@ const DrawerComponent = (props) => {
     <SafeArea statusBarColor={Colors.white}>
       <View style={styles.greenContainer}>
         <Text style={styles.number}>{userDetails.mobile}</Text>
-        <Pressable onPress={Actions.accountSetup} android_ripple={ripple}>
+        <Pressable onPress={Actions.accountSetup}>
           <Text style={styles.completeSetup}>
             {userDetails.first_name
               ? Strings.editAccountDetails

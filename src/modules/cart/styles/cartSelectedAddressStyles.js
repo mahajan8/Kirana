@@ -73,4 +73,8 @@ export const styles = EStyleSheet.create({
   loader: {
     height: '50rem',
   },
+  changeButton: {
+    height: '18vrem',
+    justifyContent: 'center',
+  },
 });

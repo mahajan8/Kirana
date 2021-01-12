@@ -96,10 +96,10 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     letterSpacing: '0.28rem',
     color: Colors.titleText,
-    marginBottom: '16vrem',
+    paddingVertical: '8vrem',
   },
   commonSearchHeading: {
-    marginBottom: '14vrem',
+    marginBottom: '6vrem',
   },
   buttonContainer: {
     paddingVertical: '8vrem',
@@ -119,6 +119,8 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: '10rem',
   },
   filterIcon: {
-    marginRight: '18rem',
+    marginRight: '12rem',
+    paddingHorizontal: '3rem',
+    paddingVertical: '3vrem',
   },
 });

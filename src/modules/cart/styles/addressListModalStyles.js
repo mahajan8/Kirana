@@ -54,11 +54,15 @@ export const styles = EStyleSheet.create({
     fontSize: '14rem',
     fontFamily: Fonts.semiBold,
     color: Colors.themeGreen,
-    marginVertical: '24vrem',
     marginLeft: '20rem',
   },
   list: {
     // paddingBottom: '20vrem',
     flexGrow: 1,
+  },
+  addAddressButton: {
+    marginVertical: '14vrem',
+    paddingVertical: '10vrem',
+    width: '200rem',
   },
 });

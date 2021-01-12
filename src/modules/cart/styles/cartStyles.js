@@ -6,6 +6,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   container: {
     padding: '16vrem',
+    paddingTop: '12vrem',
   },
   seperator: {
     height: '7vrem',
@@ -31,6 +32,7 @@ export const styles = EStyleSheet.create({
     fontSize: '11rem',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
+    paddingVertical: '4vrem',
   },
   instructionsInput: {
     fontSize: '12rem',

@@ -19,7 +19,7 @@ export const styles = EStyleSheet.create({
   filterContainer: {
     width: '100rem',
     backgroundColor: Colors.lightBlue,
-    paddingTop: '22vrem',
+    paddingTop: '9vrem',
     paddingHorizontal: '16rem',
   },
   filterName: {
@@ -32,20 +32,20 @@ export const styles = EStyleSheet.create({
     color: '#1b1f21',
   },
   filterNameContainer: {
-    marginBottom: '26vrem',
+    paddingVertical: '13vrem',
   },
   listContainer: {
-    paddingVertical: '24vrem',
+    paddingVertical: '10vrem',
     paddingHorizontal: '20rem',
   },
   optionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: '15vrem',
   },
   itemSeperator: {
     height: '1vrem',
     backgroundColor: Colors.seperatorColor,
-    marginVertical: '15vrem',
   },
   optionsText: {
     fontSize: '12rem',

@@ -13,7 +13,7 @@ import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/storeProductsStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
-import {getMediaUrl} from '../../../utils/utility/Utils';
+import {getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import Search from '../../../assets/images/search.svg';
 import BackArrow from '../../../assets/images/white_back.svg';
 import LocationIcon from '../../../assets/images/white_location.svg';
@@ -80,6 +80,7 @@ const StoreHeader = (props) => {
         />
 
         <Pressable
+          android_ripple={ripple}
           style={[styles.rowContainer, styles.searchView]}
           onPress={Actions.searchProducts}>
           <Search

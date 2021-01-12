@@ -7,13 +7,17 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingRight: '16rem',
+    paddingRight: '13rem',
   },
   listLabel: {
     fontFamily: Fonts.medium,
     fontSize: '12rem',
     color: Colors.titleText,
     letterSpacing: '-0.17rem',
+  },
+  viewMoreButton: {
+    paddingVertical: '4vrem',
+    paddingHorizontal: '3rem',
   },
   viewMore: {
     fontFamily: Fonts.medium,
@@ -22,7 +26,8 @@ export const styles = EStyleSheet.create({
   },
   listContainer: {
     backgroundColor: Colors.white,
-    paddingVertical: '15vrem',
+    paddingBottom: '15vrem',
+    paddingTop: '11vrem',
     paddingLeft: '16rem',
     borderBottomWidth: '1rem',
     borderColor: Colors.listBorderGray,

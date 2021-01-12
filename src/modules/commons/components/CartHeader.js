@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 import React from 'react';
 import {View, Text, Pressable, TextInput} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -12,7 +11,7 @@ import Location from '../../../assets/images/green_location.svg';
 import DownArrow from '../../../assets/images/header_down_arrow.svg';
 import Cross from '../../../assets/images/gray_cross.svg';
 import CartCounter from './CartCounter';
-import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
+import {getKeyByValue} from '../../../utils/utility/Utils';
 import {addressTypes} from '../../../utils/values/Values';
 import {styles} from '../styles/cartHeaderStyles';
 
@@ -57,8 +56,7 @@ const CartHeader = (props) => {
             }
           }
         }}
-        hitSlop={commonStyles.hitSlop}
-        android_ripple={ripple}>
+        hitSlop={commonStyles.hitSlop}>
         {drawer ? (
           <Menu
             style={styles.leftButton}
@@ -101,8 +99,7 @@ const CartHeader = (props) => {
         <Pressable
           activeOpacity={1}
           style={[styles.locationContainer, styles.rowContainer]}
-          onPress={selectLocation && selectLocation}
-          android_ripple={ripple}>
+          onPress={selectLocation && selectLocation}>
           <Location
             width={EStyleSheet.value('12rem')}
             height={EStyleSheet.value('12rem')}

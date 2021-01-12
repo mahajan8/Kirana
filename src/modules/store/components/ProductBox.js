@@ -51,7 +51,7 @@ const ProductBox = (props) => {
       activeOpacity={1}
       style={[styles.container, vertical && styles.verticalContainer]}>
       <Pressable
-        android_ripple={ripple}
+        // android_ripple={ripple}
         onPress={() => Actions.productDetails({item})}>
         <Image
           source={{

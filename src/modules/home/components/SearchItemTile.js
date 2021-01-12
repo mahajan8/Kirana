@@ -46,7 +46,7 @@ const SearchItemTile = (props) => {
     <View style={[styles.rowContainer]}>
       <Pressable
         style={[styles.rowContainer]}
-        android_ripple={ripple}
+        // android_ripple={ripple}
         onPress={() => Actions.productDetails({item: props.item})}>
         <View style={styles.productImageContainer}>
           <Image

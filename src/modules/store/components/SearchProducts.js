@@ -15,6 +15,7 @@ import Filter from '../../../assets/images/filter.svg';
 import {Strings} from '../../../utils/values/Strings';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import NoResults from '../../../assets/images/search_not_found.svg';
+import {ripple} from '../../../utils/utility/Utils';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 let commonSearches = ['Drink', 'Onion', 'Apple', 'Potato', 'Chocolate'];
@@ -148,13 +149,15 @@ const SearchProducts = (props) => {
         onCrossPress={() => setSearchInput('')}
         headerRight={
           <Pressable
+            style={styles.filterIcon}
+            android_ripple={ripple}
             onPress={() => {
               Actions.filters({
                 saveFilters: setFilters,
                 filters: filters,
               });
             }}>
-            <FilterIcon style={styles.filterIcon} />
+            <FilterIcon />
           </Pressable>
         }
       />
@@ -194,6 +197,7 @@ const SearchProducts = (props) => {
           {commonSearches.map((item) => (
             <Pressable
               key={`${item}`}
+              android_ripple={ripple}
               onPress={() => {
                 setSearchInput(item);
                 searchProducts(item);

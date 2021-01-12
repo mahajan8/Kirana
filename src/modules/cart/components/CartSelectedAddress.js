@@ -66,7 +66,10 @@ const CartSelectedAddress = (props) => {
         </View>
 
         {location.id && deliverable ? (
-          <Pressable onPress={props.addAddress} android_ripple={ripple}>
+          <Pressable
+            onPress={props.addAddress}
+            android_ripple={ripple}
+            style={styles.changeButton}>
             <Text style={styles.change}>{Strings.change}</Text>
           </Pressable>
         ) : (

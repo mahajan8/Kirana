@@ -66,6 +66,7 @@ const AddressListModal = (props) => {
             setVisible(false);
             Actions.addressSearch();
           }}
+          style={styles.addAddressButton}
           android_ripple={ripple}>
           <Text style={styles.addNewAddress}>{Strings.addNewAddress}</Text>
         </Pressable>

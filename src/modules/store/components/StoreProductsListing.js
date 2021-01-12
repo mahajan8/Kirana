@@ -20,7 +20,10 @@ const List = (props) => {
     !noHeader && (
       <View style={styles.listHeader}>
         <Text style={styles.listLabel}>{label}</Text>
-        <Pressable android_ripple={ripple} onPress={onMorePress && onMorePress}>
+        <Pressable
+          android_ripple={ripple}
+          onPress={onMorePress && onMorePress}
+          style={styles.viewMoreButton}>
           <Text style={styles.viewMore}>
             {Strings.view}{' '}
             {/* {list && (list.length > 5 ? list.length - 5 + ' ' : null)} */}

@@ -14,6 +14,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
+import {ripple} from '../../../utils/utility/Utils';
 
 let filtersList = [
   {name: 'Brands', type: 0},
@@ -161,6 +162,7 @@ const Filters = (props) => {
               return (
                 <Pressable
                   key={`filter${index}`}
+                  android_ripple={ripple}
                   onPress={() => setFilterIndex(index)}
                   style={styles.filterNameContainer}>
                   <Text
@@ -186,6 +188,7 @@ const Filters = (props) => {
             }
             renderItem={({item, index}) => (
               <Pressable
+                android_ripple={ripple}
                 style={styles.optionContainer}
                 onPress={() => toggleSelectFilter(index)}>
                 {getChecked(index)}

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, Pressable, FlatList, Image} from 'react-native';
+import {View, Text, Pressable, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import SafeArea from '../../commons/components/SafeArea';
@@ -17,6 +17,7 @@ import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Filter from '../../../assets/images/filter.svg';
 import Button from '../../commons/components/Button';
 import {clearStoreProducts} from '../HomeActions';
+import {ripple} from '../../../utils/utility/Utils';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -112,6 +113,7 @@ const SearchProductResults = (props) => {
         }
         headerRight={
           <Pressable
+            android_ripple={ripple}
             onPress={() => {
               Actions.filters({
                 saveFilters: setFilters,
