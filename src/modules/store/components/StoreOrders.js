@@ -55,7 +55,7 @@ const StoreOrders = (props) => {
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <OrderList storeOrders={true} />;
+        return <OrderList storeOrders={true} resetTab={props.resetTab} />;
       case 'second':
         return <OrderList />;
     }

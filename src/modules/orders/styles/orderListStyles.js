@@ -26,6 +26,7 @@ export const styles = EStyleSheet.create({
   },
   emptyListContainer: {
     flex: 1,
+    paddingBottom: '20vrem',
   },
   emptyListInnerContainer: {
     flex: 1,

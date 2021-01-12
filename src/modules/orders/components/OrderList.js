@@ -231,8 +231,17 @@ const OrderList = (props) => {
       contentContainerStyle={styles.list}
       ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       ListEmptyComponent={() => {
-        let myOrders = Actions.currentScene === 'myOrders' ? true : false;
-        if (!activeOrders) {
+        let myOrders =
+          Actions.currentScene === 'myOrders'
+            ? true
+            : storeOrders
+            ? false
+            : true;
+
+        if (
+          (storeOrders && !storeActiveOrders.length) ||
+          (!storeOrders && !activeOrders.length)
+        ) {
           return props.loading ? (
             <OrderListShimmer count={4} />
           ) : (
@@ -245,15 +254,19 @@ const OrderList = (props) => {
                 <Text style={styles.desc}>
                   {myOrders
                     ? Strings.myOrdersEmptySub
-                    : Strings.cartEmptySubTitle}
+                    : Strings.addFromThisStore}
                 </Text>
               </View>
-              {myOrders ? (
-                <Button
-                  label={Strings.exploreStores}
-                  onPress={() => Actions.popTo('_home')}
-                />
-              ) : null}
+              <Button
+                label={myOrders ? Strings.exploreStores : Strings.addProducts}
+                onPress={() => {
+                  if (myOrders) {
+                    Actions.popTo('_home');
+                  } else {
+                    props.resetTab();
+                  }
+                }}
+              />
             </View>
           );
         } else {

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, Modal} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -15,6 +15,7 @@ import {getAddresses, deleteAddress} from '../Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import Loader from '../../commons/components/Loader';
+import AlertModal from '../../commons/components/AlertModal';
 
 const Addresses = (props) => {
   let {addresses} = props.navigationReducer;
@@ -67,48 +68,31 @@ const Addresses = (props) => {
       addresses[addresses.findIndex((obj) => obj.id === deleteId)].type;
 
     return (
-      <Modal
+      <AlertModal
         visible={deleteVisible}
-        onRequestClose={() => setDeleteVisible(false)}
-        transparent={true}
-        animated
-        animationType="none">
-        <View style={styles.modalContainer}>
-          <View style={styles.innerContainer}>
-            <Text style={styles.deleteTitle}>{Strings.deleteAddress}</Text>
-            <Text style={styles.deleteDesc}>
-              {Strings.confirmDeleteAddress}{' '}
-              {type && getKeyByValue(addressTypes, type)}{' '}
-              {Strings.confirmDeleteAddress2}
-            </Text>
-            <View
-              style={[styles.buttonsContainer, styles.modalButtonsContainer]}>
-              <Button
-                label={Strings.cancel}
-                Style={styles.modalButton}
-                labelStyle={styles.modalButtonLabel}
-                bordered
-                onPress={() => setDeleteVisible(false)}
-              />
+        setVisible={setDeleteVisible}
+        heading={Strings.deleteAddress}
+        desc={
+          Strings.confirmDeleteAddress +
+          ' ' +
+          (type && getKeyByValue(addressTypes, type)) +
+          ' ' +
+          Strings.confirmDeleteAddress2
+        }
+        label1={Strings.cancel}
+        label2={Strings.yesDelete}
+        button1Press={() => setDeleteVisible(false)}
+        button2Press={() => {
+          let pars = {
+            address_id: deleteId,
+          };
 
-              <Button
-                label={Strings.yesDelete}
-                Style={styles.modalButton}
-                labelStyle={styles.modalButtonLabel}
-                onPress={() => {
-                  let pars = {
-                    address_id: deleteId,
-                  };
-
-                  props.deleteAddress(pars);
-                  setDeleteVisible(false);
-                  setDeleteId(null);
-                }}
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
+          props.deleteAddress(pars);
+          setDeleteVisible(false);
+          setDeleteId(null);
+        }}
+        invert
+      />
     );
   };
 

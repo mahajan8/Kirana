@@ -25,6 +25,7 @@ import {
   openSettings,
 } from 'react-native-permissions';
 import {styles} from '../styles/homeLocationCheckStyles';
+import ModalContainer from '../../commons/components/ModalContainer';
 
 const HomeLocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
@@ -116,46 +117,43 @@ const HomeLocationCheck = (props) => {
   };
 
   return (
-    <Modal
+    <ModalContainer
       visible={visible}
-      //   onRequestClose={() => console.log('back')}
-      transparent={true}
-      animated
-      animationType="none">
-      <View style={styles.container}>
-        <View style={styles.innerContainer}>
-          <LocationIcon style={styles.locaitonIcon} />
+      setVisible={setVisible}
+      containerStyle={styles.container}
+      cancellable={false}>
+      <Pressable style={styles.innerContainer}>
+        <LocationIcon style={styles.locaitonIcon} />
 
-          <Text style={styles.title}>{Strings.locationOff}</Text>
+        <Text style={styles.title}>{Strings.locationOff}</Text>
 
-          <Text style={styles.subText}>{Strings.locationOffHome}</Text>
+        <Text style={styles.subText}>{Strings.locationOffHome}</Text>
 
-          <View style={styles.seperator} />
+        <View style={styles.seperator} />
 
-          <Pressable style={styles.rowContainer} onPress={getPermission}>
-            <CurrentLocation
-              width={EStyleSheet.value('12rem')}
-              height={EStyleSheet.value('12rem')}
-            />
-            <Text style={styles.buttonsText}>{Strings.turnOnLocation}</Text>
-          </Pressable>
+        <Pressable style={styles.rowContainer} onPress={getPermission}>
+          <CurrentLocation
+            width={EStyleSheet.value('12rem')}
+            height={EStyleSheet.value('12rem')}
+          />
+          <Text style={styles.buttonsText}>{Strings.turnOnLocation}</Text>
+        </Pressable>
 
-          <View style={styles.seperator} />
+        <View style={styles.seperator} />
 
-          <Pressable
-            style={styles.rowContainer}
-            onPress={() => {
-              setVisible(false);
-              props.onSearchPress();
-            }}>
-            <Search />
-            <Text style={[styles.buttonsText, styles.searchText]}>
-              {Strings.searchManually}
-            </Text>
-          </Pressable>
-        </View>
-      </View>
-    </Modal>
+        <Pressable
+          style={styles.rowContainer}
+          onPress={() => {
+            setVisible(false);
+            props.onSearchPress();
+          }}>
+          <Search />
+          <Text style={[styles.buttonsText, styles.searchText]}>
+            {Strings.searchManually}
+          </Text>
+        </Pressable>
+      </Pressable>
+    </ModalContainer>
   );
 };
 

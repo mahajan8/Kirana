@@ -49,7 +49,7 @@ const Store = (props) => {
       case 'second':
         return <Explore />;
       case 'third':
-        return <StoreOrders />;
+        return <StoreOrders resetTab={() => setTabIndex(0)} />;
     }
   };
 

@@ -4,9 +4,6 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   innerContainer: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal, Pressable} from 'react-native';
+import ModalContainer from '../../commons/components/ModalContainer';
 import Search from '../../onboarding/components/SearchLocation';
 import {styles} from '../styles/searchLocationModalStyles';
 
@@ -13,24 +14,21 @@ const SearchLocationModal = (props) => {
   };
 
   return (
-    <Modal
+    <ModalContainer
       visible={visible}
-      onRequestClose={onBack}
-      transparent={true}
-      animated
-      animationType="none">
-      <Pressable style={styles.container} onPress={onBack}>
-        <Pressable style={styles.innerContainer}>
-          <Search
-            modal
-            onSelect={(location) => {
-              setLocation(location);
-              setVisible(false);
-            }}
-          />
-        </Pressable>
+      setVisible={setVisible}
+      containerStyle={styles.container}
+      cancellable={cancellable}>
+      <Pressable style={styles.innerContainer}>
+        <Search
+          modal
+          onSelect={(location) => {
+            setLocation(location);
+            setVisible(false);
+          }}
+        />
       </Pressable>
-    </Modal>
+    </ModalContainer>
   );
 };
 

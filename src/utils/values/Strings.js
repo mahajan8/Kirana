@@ -283,4 +283,5 @@ export const Strings = {
   acceptOrder: 'Accept Order',
   viewOriginalItem: 'View original item',
   originalItem: 'Original Item',
+  addFromThisStore: 'Add items from this store. ',
 };
