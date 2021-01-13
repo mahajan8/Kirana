@@ -6,11 +6,11 @@ import AppRouter from './src/utils/Router';
 import store from './src/utils/Store';
 import {Fonts} from './src/utils/values/Fonts';
 
-import * as Sentry from '@sentry/react-native';
+// import * as Sentry from '@sentry/react-native';
 
-Sentry.init({ 
-  dsn: 'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167', 
-});
+// Sentry.init({ 
+//   dsn: 'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167', 
+// });
 
 
 // Extended Style Sheet Configuration
