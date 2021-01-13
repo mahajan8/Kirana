@@ -349,8 +349,14 @@ PODS:
     - React-Core
   - RNScreens (2.15.0):
     - React-Core
+  - RNSentry (2.1.0):
+    - React-Core
+    - Sentry (= 6.0.9)
   - RNSVG (12.1.0):
     - React
+  - Sentry (6.0.9):
+    - Sentry/Core (= 6.0.9)
+  - Sentry/Core (6.0.9)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -418,6 +424,7 @@ DEPENDENCIES:
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -437,6 +444,7 @@ SPEC REPOS:
     - GoogleMaps
     - OpenSSL-Universal
     - razorpay-pod
+    - Sentry
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -518,6 +526,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   Yoga:
@@ -543,8 +553,8 @@ SPEC CHECKSUMS:
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
-  Permission-LocationAlways: c083f45f28c4b78ddc6f9668cf1a984d879a80ec
-  Permission-LocationWhenInUse: e2b8c40ce0f3675a521f26787ab47ebb9bace503
+  Permission-LocationAlways: 20c287ae79fbc5659a9cc95b32a725810f5529df
+  Permission-LocationWhenInUse: e09ae67e8db2b1eeefb35f18ca59848d0785de5b
   razorpay-pod: ee8dc073c65baee8df6e8c4275b1c989bab614a2
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -558,9 +568,9 @@ SPEC CHECKSUMS:
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-geolocation-service: f33626f1ae12381ca2ae60f98b2f5edd676bf95a
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: c6d75c4ab2cf46f9289f341242b219cb3c1180d3
+  react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-razorpay: bb19c0aa50ee004ddb4b51615f07f3435aae4901
+  react-native-razorpay: 4e851d32acf8147ae5799321e749b3e2d137e1a3
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
   React-RCTBlob: 0b284339cbe4b15705a05e2313a51c6d8b51fa40
@@ -571,16 +581,18 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RNCAsyncStorage: 05bae7ecfab1cbd5441993f1ca098f7c3b3f8d0e
-  RNDateTimePicker: 120f8d08b19dd50c0308d30a07c1982e4618e9ad
+  RNCAsyncStorage: bc2f81cc1df90c267ce9ed30bb2dbc93b945a8ee
+  RNDateTimePicker: 54bc1830e4e8d99ed00e6b6735b8517e163b2a4a
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
-  RNPermissions: 99dd8d4a30ff13509b949ca63cd1f69edc461775
+  RNPermissions: 350964d19150b183796a88180fb7ec62a1e41422
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
+  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: a4628db73955bdc5eb1d82dd6331132c09c3054e
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.9.3
