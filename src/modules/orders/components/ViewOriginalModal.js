@@ -15,7 +15,7 @@ const ViewOriginalModal = (props) => {
       visible={visible}
       setVisible={setVisible}
       containerStyle={styles.modalContainer}>
-      <View activeOpacity={1} style={styles.innerContainer}>
+      <Pressable activeOpacity={1} style={styles.innerContainer}>
         <View style={styles.titleView}>
           <Text style={styles.titleText}>{Strings.originalItem}</Text>
 
@@ -28,7 +28,7 @@ const ViewOriginalModal = (props) => {
         </View>
 
         <OrderItem item={originalItem} />
-      </View>
+      </Pressable>
     </ModalContainer>
   );
 };

@@ -11,6 +11,6 @@ export const styles = EStyleSheet.create({
     borderTopRightRadius: '15rem',
     paddingTop: '14vrem',
     width: '100%',
-    height: '600vrem',
+    height: '80%',
   },
 });

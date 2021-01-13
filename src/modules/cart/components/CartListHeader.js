@@ -16,9 +16,11 @@ const CartListHeader = (props) => {
           </Text>
         </View>
       )}
+
       <View style={styles.container}>
         <View style={[styles.rowContainer, styles.storeNameContainer]}>
           <Text style={styles.grayHeading}>{storeName}</Text>
+
           <Pressable onPress={addMore} android_ripple={ripple}>
             <Text style={styles.addMore}>{Strings.plusAddMore}</Text>
           </Pressable>

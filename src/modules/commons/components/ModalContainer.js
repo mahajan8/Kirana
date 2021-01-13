@@ -21,7 +21,6 @@ const ModalContainer = (props) => {
         }
       }}
       transparent={true}
-      animated
       animationType="none">
       <Pressable
         activeOpacity={1}
@@ -31,7 +30,7 @@ const ModalContainer = (props) => {
             setVisible(false);
           }
         }}>
-        <Pressable>{children}</Pressable>
+        {children}
       </Pressable>
     </Modal>
   );

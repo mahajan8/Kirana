@@ -100,11 +100,12 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.subTitleText,
     lineHeight: '18rem',
-    marginBottom: '16vrem',
+    marginBottom: '4vrem',
   },
   savedAddressContainer: {
     paddingHorizontal: '20rem',
     marginTop: '20vrem',
+    paddingBottom: '10vrem',
   },
   scrollContainer: {
     paddingBottom: '20vrem',
@@ -135,7 +136,7 @@ export const styles = EStyleSheet.create({
     marginTop: '2rem',
   },
   addressContainer: {
-    marginBottom: '24rem',
+    paddingVertical: '12rem',
   },
   seperator: {
     backgroundColor: '#f7f7f7',

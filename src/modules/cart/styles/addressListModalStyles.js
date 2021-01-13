@@ -7,7 +7,7 @@ export const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
   },
   innerContainer: {
-    height: '600vrem',
+    height: '90%',
     backgroundColor: Colors.white,
     borderTopLeftRadius: '15rem',
     borderTopRightRadius: '15rem',
@@ -29,7 +29,7 @@ export const styles = EStyleSheet.create({
   },
   addressContainer: {
     paddingHorizontal: '20rem',
-    marginTop: '30vrem',
+    paddingVertical: '15vrem',
     flexDirection: 'row',
   },
   radio: {
@@ -58,6 +58,7 @@ export const styles = EStyleSheet.create({
   },
   list: {
     // paddingBottom: '20vrem',
+    paddingVertical: '15vrem',
     flexGrow: 1,
   },
   addAddressButton: {
