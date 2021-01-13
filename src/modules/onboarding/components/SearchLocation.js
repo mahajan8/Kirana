@@ -44,13 +44,28 @@ const Search = (props) => {
       placeholder={Strings.searchLocationPlaceHolder}
       fetchDetails={true}
       onPress={(data, details = null) => {
-        let {lat, lng} = details.geometry.location;
+        let {geometry, address_components, name, formatted_address} = details;
+        let {lat, lng} = geometry.location;
+
+        let city = address_components.find((obj) =>
+          obj.types.includes('locality'),
+        );
+        let state = address_components.find((obj) =>
+          obj.types.includes('administrative_area_level_1'),
+        );
+        let zipCode = address_components.find((obj) =>
+          obj.types.includes('postal_code'),
+        );
+
         let location = {
           lat,
           lng,
-          geometry: details.geometry,
-          short_address: details.name,
-          formatted_address: details.formatted_address,
+          geometry: geometry,
+          short_address: name,
+          formatted_address: formatted_address,
+          city: city ? city.long_name : null,
+          state: state ? state.long_name : null,
+          pincode: zipCode ? zipCode.long_name : null,
         };
         // props.saveDetails(location);
         // Actions.pop();

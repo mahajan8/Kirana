@@ -62,6 +62,15 @@ export const getAddressFromLocation = (pars, callback, err) => {
           nameIndex !== -1
             ? address_components[nameIndex].long_name
             : Strings.unknown;
+        let city = address_components.find((obj) =>
+          obj.types.includes('locality'),
+        );
+        let state = address_components.find((obj) =>
+          obj.types.includes('administrative_area_level_1'),
+        );
+        let zipCode = address_components.find((obj) =>
+          obj.types.includes('postal_code'),
+        );
 
         let location = {
           lat: pars.lat,
@@ -69,6 +78,9 @@ export const getAddressFromLocation = (pars, callback, err) => {
           geometry,
           short_address,
           formatted_address,
+          city: city ? city.long_name : null,
+          state: state ? state.long_name : null,
+          pincode: zipCode ? zipCode.long_name : null,
         };
         callback(location);
       } else {
