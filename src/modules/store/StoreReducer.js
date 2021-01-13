@@ -10,6 +10,8 @@ import {
   SET_STORE_PAST_ORDERS,
   SET_STORE_ACTIVE_ORDERS,
   CLEAR_STORE_ORDERS,
+  SET_STORE_SEARCH_PRODUCTS,
+  CLEAR_STORE_SEARCH_PRODUCTS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -25,6 +27,8 @@ const INITIAL_STATE = {
   storeActiveOrders: [],
   storePastOrders: [],
   storeTotalCount: null,
+  storeSearchProducts: [],
+  storeSeachCount: null,
 };
 
 const StoreReducer = (state = INITIAL_STATE, action) => {
@@ -61,6 +65,7 @@ const StoreReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products: [],
+        totalProductCount: null,
       };
     case SET_CATEGORIES:
       return {
@@ -93,6 +98,18 @@ const StoreReducer = (state = INITIAL_STATE, action) => {
         storeTotalCount: null,
       };
     }
+    case SET_STORE_SEARCH_PRODUCTS:
+      return {
+        ...state,
+        storeSearchProducts: [...state.storeSearchProducts, ...action.data],
+        storeSeachCount: action.count,
+      };
+    case CLEAR_STORE_SEARCH_PRODUCTS:
+      return {
+        ...state,
+        storeSearchProducts: [],
+        storeSeachCount: null,
+      };
     default:
       return state;
   }

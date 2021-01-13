@@ -9,7 +9,7 @@ import ProductBox from './ProductBox';
 import {Actions} from 'react-native-router-flux';
 import Loader from '../../commons/components/Loader';
 import {styles} from '../styles/productSubStyles';
-import {clearProducts} from '../StoreActions';
+import {clearStoreSearchProducts} from '../StoreActions';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
 import Filter from '../../../assets/images/filter.svg';
 import {Strings} from '../../../utils/values/Strings';
@@ -27,16 +27,20 @@ const SearchProducts = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
   const [filters, setFilters] = useState(defaultFilters);
 
-  const {storeDetails, products, totalProductCount} = props.storeReducer;
+  const {
+    storeDetails,
+    storeSearchProducts,
+    storeSeachCount,
+  } = props.storeReducer;
 
   useEffect(() => {
     if (searchInput) {
       searchProducts(searchInput);
     } else {
       input.current.focus();
-      props.clearProducts();
+      props.clearStoreSearchProducts();
     }
-    return () => props.clearProducts();
+    return () => props.clearStoreSearchProducts();
   }, [filters]);
 
   let searchProducts = (query, start = 0) => {
@@ -58,7 +62,7 @@ const SearchProducts = (props) => {
       ],
     };
     if (start === 0) {
-      props.clearProducts();
+      props.clearStoreSearchProducts();
     }
 
     let {brands, categories, price_sort} = filters;
@@ -103,7 +107,7 @@ const SearchProducts = (props) => {
           searchProducts(query);
         } else {
           setFilters(defaultFilters);
-          props.clearProducts();
+          props.clearStoreSearchProducts();
         }
       }, 500);
     }
@@ -135,7 +139,7 @@ const SearchProducts = (props) => {
 
   const renderLoader = () => (
     <View style={styles.listLoaderContainer}>
-      <Loader show={products.length ? props.loading : false} />
+      <Loader show={storeSearchProducts.length ? props.loading : false} />
     </View>
   );
 
@@ -163,7 +167,7 @@ const SearchProducts = (props) => {
       />
       {searchInput.length > 2 ? (
         <FlatList
-          data={products}
+          data={storeSearchProducts}
           renderItem={({item, index}) => (
             <ProductBox
               key={`product${item + index}`}
@@ -180,8 +184,11 @@ const SearchProducts = (props) => {
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
           onEndReached={() => {
-            if (!endReachCallable && products.length < totalProductCount) {
-              searchProducts(searchInput, products.length);
+            if (
+              !endReachCallable &&
+              storeSearchProducts.length < storeSeachCount
+            ) {
+              searchProducts(searchInput, storeSearchProducts.length);
               setEndReachCallable(true);
             }
           }}
@@ -218,7 +225,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   searchStoreProducts,
-  clearProducts,
+  clearStoreSearchProducts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchProducts);

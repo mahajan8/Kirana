@@ -10,6 +10,8 @@ import {
   SET_STORE_PAST_ORDERS,
   SET_STORE_ACTIVE_ORDERS,
   CLEAR_STORE_ORDERS,
+  SET_STORE_SEARCH_PRODUCTS,
+  CLEAR_STORE_SEARCH_PRODUCTS,
 } from './ActionTypes';
 
 export const setFilters = (filters) => ({
@@ -65,4 +67,14 @@ export const setStoreActiveOrders = (orders) => ({
 
 export const clearStoreOrders = () => ({
   type: CLEAR_STORE_ORDERS,
+});
+
+export const appendStoreSearchProducts = (data, count) => ({
+  type: SET_STORE_SEARCH_PRODUCTS,
+  data,
+  count,
+});
+
+export const clearStoreSearchProducts = () => ({
+  type: CLEAR_STORE_SEARCH_PRODUCTS,
 });

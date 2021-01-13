@@ -11,6 +11,7 @@ import {
   setStoreDetails,
   setSubcategoryProducts,
   setLoadingProduct,
+  appendStoreSearchProducts,
 } from './StoreActions';
 import {Actions} from 'react-native-router-flux';
 import {appendStoreProducts} from '../home/HomeActions';
@@ -72,6 +73,8 @@ export const searchStoreProducts = (pars) => {
         let {total_count, results} = res.data.data;
         if (Actions.currentScene === 'storeProductsResults') {
           dispatch(appendStoreProducts(results, total_count));
+        } else if (Actions.currentScene === 'searchProducts') {
+          dispatch(appendStoreSearchProducts(results, total_count));
         } else {
           dispatch(addProducts(results, total_count));
         }

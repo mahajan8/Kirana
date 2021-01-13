@@ -7,8 +7,15 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  headerIcon: {
-    marginRight: '18rem',
+  headerSearchIcon: {
+    paddingHorizontal: '4rem',
+    marginRight: '10rem',
+    paddingVertical: '4vrem',
+  },
+  headerFilterIcon: {
+    paddingHorizontal: '4rem',
+    marginRight: '14rem',
+    paddingVertical: '4vrem',
   },
   bubblesContainer: {
     paddingVertical: '10vrem',

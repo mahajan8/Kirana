@@ -38,9 +38,11 @@ const StoreSubCategories = (props) => {
         title={categoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            <Pressable onPress={Actions.searchProducts} android_ripple={ripple}>
+            <Pressable
+              onPress={Actions.searchProducts}
+              android_ripple={ripple}
+              style={styles.headerSearchIcon}>
               <Search
-                style={styles.headerIcon}
                 width={EStyleSheet.value('16rem')}
                 height={EStyleSheet.value('16rem')}
               />

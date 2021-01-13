@@ -15,6 +15,7 @@ import ListPlaceHolder from './ListPlaceHolder';
 import Loader from '../../commons/components/Loader';
 import {clearProducts} from '../StoreActions';
 import CartHeader from '../../commons/components/CartHeader';
+import {ripple} from '../../../utils/utility/Utils';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -92,14 +93,18 @@ const ProductsList = (props) => {
         title={subCategoryName}
         headerRight={
           <View style={styles.rowContainer}>
-            <Pressable onPress={Actions.searchProducts}>
+            <Pressable
+              onPress={Actions.searchProducts}
+              android_ripple={ripple}
+              style={styles.headerSearchIcon}>
               <Search
-                style={styles.headerIcon}
                 width={EStyleSheet.value('16rem')}
                 height={EStyleSheet.value('16rem')}
               />
             </Pressable>
             <Pressable
+              android_ripple={ripple}
+              style={styles.headerFilterIcon}
               onPress={() => {
                 Actions.filters({
                   saveFilters: setFilters,
