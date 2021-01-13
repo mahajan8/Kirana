@@ -220,5 +220,5 @@ export const logout = () => {
 export const ripple = {
   color: Colors.black10,
   backgroundColor: true,
-  radius: 180,
+  radius: 200,
 };

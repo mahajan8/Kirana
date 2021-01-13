@@ -11,7 +11,9 @@ import {styles} from '../styles/cartCounterStyles';
 const CartCounter = (props) => {
   const {item_quantity_count, store} = props.cart;
   const onCartClicked = () => {
-    props.selectStore(store);
+    if (store) {
+      props.selectStore(store);
+    }
     Actions.cart();
   };
   return (
