@@ -5,6 +5,7 @@ import MapView, {
   Marker,
   AnimatedRegion,
   Polyline,
+  Callout,
 } from 'react-native-maps';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -14,7 +15,6 @@ import {styles} from '../styles/trackOrderStyles';
 import TrackOrderInfo from './TrackOrderInfo';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
-import {poly} from 'react-native/Libraries/Animated/src/Easing';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -82,15 +82,6 @@ const TrackOrder = () => {
     }
   };
 
-  const animateLegs = (legs) => {
-    legs.map((obj) => {
-      obj.steps.forEach(async (step, index) => {
-        let {start_location, end_location} = step;
-        await animate(end_location, 1000);
-      });
-    });
-  };
-
   const getPolyline = () => {
     fetch(url)
       .then((res) => res.json())
@@ -142,32 +133,6 @@ const TrackOrder = () => {
               <TrackMarker />
             </View>
           </Marker.Animated> */}
-          {/* <Marker coordinate={start}>
-            <View style={styles.markerContainer}>
-              <TrackMarker style={styles.marker} />
-            </View>
-            <View style={styles.markerLabelContainer}>
-              <Text style={styles.markerLabel}>The Baker’s Dozen</Text>
-            </View>
-          </Marker>
-
-          <Marker coordinate={end}>
-            <View style={styles.markerContainer}>
-              <TrackMarker style={styles.marker} />
-              <View style={styles.deliveryTimeContainer}>
-                <Text style={styles.deliveryTime}>
-                  {deliveryTime.split(' ')[0]}{' '}
-                  <Text style={styles.minutes}>
-                    {deliveryTime.split(' ')[1]}
-                  </Text>
-                </Text>
-              </View>
-            </View>
-            <View style={styles.markerLabelContainer}>
-              <Text style={styles.markerLabel}>Home</Text>
-            </View>
-          </Marker> */}
-
           <Marker coordinate={end}>
             <View style={styles.markerContainer}>
               <View>
