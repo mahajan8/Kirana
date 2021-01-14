@@ -61,6 +61,7 @@ const TrackOrder = () => {
   }, []);
 
   const animate = (endCoords, duration) => {
+    // markerCoordinate.stopAnimation();
     const newCoordinate = {
       latitude: endCoords.lat,
       longitude: endCoords.lng,
@@ -68,26 +69,38 @@ const TrackOrder = () => {
       longitudeDelta: LONGITUDE_DELTA,
     };
 
-    if (Platform.OS === 'android') {
-      if (marker.current) {
-        marker.current.animateMarkerToCoordinate(newCoordinate, duration);
-      }
-    } else {
-      markerCoordinate
-        .timing({
-          ...newCoordinate,
-          duration: duration,
-          useNativeDriver: false,
-        })
-        .start();
-    }
+    // if (Platform.OS === 'android') {
+    //   if (marker.current) {
+    //     marker.current.animateMarkerToCoordinate(newCoordinate, duration);
+    //   }
+    // } else {
+    //   markerCoordinate
+    //     .timing({
+    //       ...newCoordinate,
+    //       duration: duration,
+    //       useNativeDriver: false,
+    //     })
+    //     .start();
+    // }
+    markerCoordinate
+      .timing({
+        ...newCoordinate,
+        duration: duration,
+        useNativeDriver: false,
+      })
+      .start();
   };
 
   const animateLegs = (legs) => {
     legs.map((obj) => {
-      obj.steps.forEach(async (step, index) => {
-        let {start_location, end_location} = step;
-        await animate(end_location, 1000);
+      let totalDuration = 0;
+      obj.steps.forEach((step, index) => {
+        let {end_location, duration} = step;
+        setTimeout(() => {
+          animate(end_location, duration.value * 50);
+        }, totalDuration);
+
+        totalDuration += duration.value * 50;
       });
     });
   };
@@ -98,7 +111,7 @@ const TrackOrder = () => {
       .then((res) => {
         console.log(res);
         setPolyline(decodePolyline(res.routes[0].overview_polyline.points));
-        // animateLegs(res.routes[0].legs);
+        animateLegs(res.routes[0].legs);
         setDeliveryTime(res.routes[0].legs[0].duration.text);
       });
   };
@@ -159,20 +172,23 @@ const TrackOrder = () => {
             </View>
           </Marker.Animated> */}
 
-          <Marker coordinate={start}>
+          <Marker.Animated
+            coordinate={markerCoordinate}
+            ref={marker}
+            tracksViewChanges={false}>
             <View style={styles.markerContainer}>
               <TrackMarker style={styles.marker} />
             </View>
             <View style={styles.markerLabelContainer}>
               <Text style={styles.markerLabel}>The Baker’s Dozen</Text>
             </View>
-          </Marker>
+          </Marker.Animated>
 
-          <Marker coordinate={end}>{getMarker()}</Marker>
+          {/* <Marker coordinate={end}>{getMarker()}</Marker> */}
         </MapView>
       </View>
-      <TrackOrderInfo trackStatus={trackStatus} />
-      {/* <Button onPress={getPolyline} /> */}
+      {/* <TrackOrderInfo trackStatus={trackStatus} /> */}
+      <Button onPress={getPolyline} />
     </SafeArea>
   );
 };
