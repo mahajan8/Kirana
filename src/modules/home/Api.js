@@ -54,7 +54,6 @@ export const searchProductInStores = (pars) => {
 
     instance.post(Urls.searchProductInStores, formBody).then((res) => {
       const success = !res.data.error;
-      console.log(res.data.data);
       if (success) {
         const {store_list, store_count} = res.data.data;
         dispatch(appendSearchedStores(store_list, store_count));

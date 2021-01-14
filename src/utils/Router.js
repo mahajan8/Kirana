@@ -28,13 +28,12 @@ import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
 import OrderDetails from '../modules/orders/components/OrderDetails';
 import TrackOrder from '../modules/orders/components/TrackOrder';
-import AnimatedMarkers from '../modules/orders/components/AnimatedMarkers';
 
 const AppRouter = () => {
   return (
     <Router backAndroidHandler={() => {}}>
       <Stack key="root" hideNavBar>
-        {/* <Scene key="splash" component={Splash} />
+        <Scene key="splash" component={Splash} />
         <Scene key="introduction" component={Introduction} />
         <Scene key="selectLanguage" component={SelectLanguage} />
         <Scene key="login" component={Login} />
@@ -57,10 +56,9 @@ const AppRouter = () => {
         <Scene key="accountSetup" component={AccountSetup} />
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
-        <Scene key="searchProducts" component={SearchProducts} /> */}
-        {/* <Scene key="orderDetails" component={OrderDetails} /> */}
+        <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="orderDetails" component={OrderDetails} />
         <Scene key="trackOrder" component={TrackOrder} />
-        <Scene key="animatedMarkers" component={AnimatedMarkers} />
         <Scene
           key="drawer"
           drawer={true}

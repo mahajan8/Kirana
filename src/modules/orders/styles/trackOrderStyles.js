@@ -31,56 +31,21 @@ export const styles = EStyleSheet.create({
     letterSpacing: '0.1rem',
     fontFamily: Fonts.medium,
   },
-  deliveryTimeContainer: {
-    width: '30rem',
-    height: '30rem',
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   deliveryTime: {
     fontFamily: Fonts.semiBold,
-    fontSize: '14rem',
+    fontSize: '12rem',
     color: Colors.darkGreen,
     textAlign: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
   },
   minutes: {
     fontFamily: Fonts.medium,
     fontSize: '8rem',
     letterSpacing: '-0.2rem',
   },
-  markerContainer: {
-    ...(Platform.OS === 'android' && {
-      // top: '50rem',
-      justifyContent: 'flex-end',
-    }),
-    display: 'flex',
-    alignItems: 'center',
-    width: '150rem',
-    // backgroundColor: 'red',
-  },
-  marker: {
-    // ...(Platform.OS === 'ios' && {
-    //   position: 'absolute',
-    //   top: '-40rem',
-    // }),
-    // alignSelf: 'center',
-    // alignSelf: 'flex-end',
-  },
   markerLabelContainer: {
     borderRadius: '2rem',
-    ...(Platform.OS === 'android'
-      ? {
-          position: 'absolute',
-          // bottom: '-140rem',
-        }
-      : {
-          marginTop: '5rem',
-        }),
-    width: '150rem',
-    alignSelf: 'center',
-    alignItems: 'center',
-    zIndex: 10,
   },
   markerLabel: {
     fontSize: '12rem',
@@ -89,5 +54,22 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: '12rem',
     paddingVertical: '6vrem',
     backgroundColor: Colors.white,
+  },
+  markerContainer: {
+    height: '100rem',
+    width: '100rem',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  driverMarker: {
+    alignItems: 'center',
+    ...(Platform.OS === 'ios' && {
+      top: '-50%',
+    }),
+  },
+  markerIcon: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '8rem',
   },
 });
