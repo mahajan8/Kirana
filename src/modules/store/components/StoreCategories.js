@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
-import {View, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Pressable, Animated, Text} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Actions} from 'react-native-router-flux';
 import List from './StoreProductsListing';
@@ -9,6 +9,14 @@ import {getStoreDetails} from '../Api';
 import ListPlaceHolder from './ListPlaceHolder';
 import {setCategoryProducts, setStoreDetails} from '../StoreActions';
 import StoreHeader from './StoreHeader';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {styles} from '../styles/storeCategoriesStyles';
+import Search from '../../../assets/images/search.svg';
+import {Strings} from '../../../utils/values/Strings';
+import CartCounter from '../../commons/components/CartCounter';
+import {ripple} from '../../../utils/utility/Utils';
+
+const HEADER_HEIGHT = EStyleSheet.value('230vrem');
 
 const StoreCategories = (props) => {
   useEffect(() => {
@@ -26,9 +34,80 @@ const StoreCategories = (props) => {
   let {categoryProducts} = props.storeReducer;
   let {selectedStore} = props.homeReducer;
 
+  const [anim, setAnim] = useState(new Animated.Value(0));
+  const [scroll, setScroll] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    scroll.addListener(
+      Animated.event([{value: anim}], {useNativeDriver: false}),
+    );
+  }, []);
+
+  const renderSticky = () => {
+    return (
+      <Animated.View
+        style={[
+          styles.stickySearchBar,
+          {
+            transform: [{scaleY: searchScale}],
+            opacity: searchOpacity,
+          },
+        ]}>
+        <Pressable
+          style={styles.searchContainer}
+          android_ripple={ripple}
+          onPress={Actions.searchProducts}>
+          <Search />
+
+          <Text style={styles.searchText}>{Strings.searchProduct}</Text>
+
+          <CartCounter />
+        </Pressable>
+      </Animated.View>
+    );
+  };
+
+  const storeHeader = () => (
+    <Animated.View
+      style={{
+        transform: [
+          {translateY: Animated.multiply(scroll, 0.65)},
+          {scale: headerScale},
+        ],
+        opacity: headerOpacity,
+      }}>
+      <StoreHeader />
+    </Animated.View>
+  );
+
+  const headerOpacity = anim.interpolate({
+    inputRange: [0, HEADER_HEIGHT],
+    outputRange: [1, 0],
+    extrapolate: 'clamp',
+  });
+
+  const headerScale = scroll.interpolate({
+    inputRange: [-25, 0],
+    outputRange: [1.1, 1],
+    extrapolateRight: 'clamp',
+  });
+
+  const searchOpacity = anim.interpolate({
+    inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
+    outputRange: [0, 0, 1],
+    extrapolate: 'clamp',
+  });
+
+  const searchScale = anim.interpolate({
+    inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
+    outputRange: [0, 0, 1],
+    extrapolate: 'clamp',
+  });
+
   return (
     <SafeArea>
-      <FlatList
+      {renderSticky()}
+      <Animated.FlatList
         data={categoryProducts}
         renderItem={({item, index}) => (
           <List
@@ -50,7 +129,11 @@ const StoreCategories = (props) => {
             <ListPlaceHolder count={4} />
           </View>
         }
-        ListHeaderComponent={<StoreHeader />}
+        ListHeaderComponent={storeHeader}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: scroll}}}],
+          {useNativeDriver: true},
+        )}
       />
     </SafeArea>
   );
