@@ -50,11 +50,14 @@ export const styles = EStyleSheet.create({
     letterSpacing: '-0.2rem',
   },
   markerContainer: {
-    flex: 1,
+    ...(Platform.OS === 'android' && {
+      // top: '50rem',
+      justifyContent: 'flex-end',
+    }),
+    display: 'flex',
     alignItems: 'center',
-    width: '32rem',
-    height: '100rem',
-    // position: 'absolute',
+    width: '150rem',
+    // backgroundColor: 'red',
   },
   marker: {
     // ...(Platform.OS === 'ios' && {
@@ -62,14 +65,22 @@ export const styles = EStyleSheet.create({
     //   top: '-40rem',
     // }),
     // alignSelf: 'center',
+    // alignSelf: 'flex-end',
   },
   markerLabelContainer: {
     borderRadius: '2rem',
-    position: 'absolute',
-    top: '35vrem',
+    ...(Platform.OS === 'android'
+      ? {
+          position: 'absolute',
+          // bottom: '-140rem',
+        }
+      : {
+          marginTop: '5rem',
+        }),
     width: '150rem',
     alignSelf: 'center',
     alignItems: 'center',
+    zIndex: 10,
   },
   markerLabel: {
     fontSize: '12rem',

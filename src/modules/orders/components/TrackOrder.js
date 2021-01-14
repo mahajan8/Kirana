@@ -5,6 +5,7 @@ import MapView, {
   Marker,
   AnimatedRegion,
   Polyline,
+  Callout,
 } from 'react-native-maps';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -102,6 +103,21 @@ const TrackOrder = () => {
       });
   };
 
+  const getMarker = () => (
+    <View style={styles.markerContainer}>
+      <TrackMarker style={styles.marker} />
+      <View style={styles.deliveryTimeContainer}>
+        <Text style={styles.deliveryTime}>
+          {deliveryTime.split(' ')[0]}{' '}
+          <Text style={styles.minutes}>{deliveryTime.split(' ')[1]}</Text>
+        </Text>
+      </View>
+      <View style={styles.markerLabelContainer}>
+        <Text style={styles.markerLabel}>Home</Text>
+      </View>
+    </View>
+  );
+
   return (
     <SafeArea>
       <Header
@@ -120,8 +136,8 @@ const TrackOrder = () => {
           style={styles.map}
           ref={map}
           region={{
-            latitude: 30.702598,
-            longitude: 76.7357713,
+            latitude: 30.712063,
+            longitude: 76.745232,
             latitudeDelta: 0.03,
             longitudeDelta: 0.03,
           }}
@@ -142,7 +158,8 @@ const TrackOrder = () => {
               <TrackMarker />
             </View>
           </Marker.Animated> */}
-          {/* <Marker coordinate={start}>
+
+          <Marker coordinate={start}>
             <View style={styles.markerContainer}>
               <TrackMarker style={styles.marker} />
             </View>
@@ -151,37 +168,7 @@ const TrackOrder = () => {
             </View>
           </Marker>
 
-          <Marker coordinate={end}>
-            <View style={styles.markerContainer}>
-              <TrackMarker style={styles.marker} />
-              <View style={styles.deliveryTimeContainer}>
-                <Text style={styles.deliveryTime}>
-                  {deliveryTime.split(' ')[0]}{' '}
-                  <Text style={styles.minutes}>
-                    {deliveryTime.split(' ')[1]}
-                  </Text>
-                </Text>
-              </View>
-            </View>
-            <View style={styles.markerLabelContainer}>
-              <Text style={styles.markerLabel}>Home</Text>
-            </View>
-          </Marker> */}
-
-          <Marker coordinate={end}>
-            <View style={styles.markerContainer}>
-              <TrackMarker style={styles.marker} />
-            </View>
-            <View style={styles.deliveryTimeContainer}>
-              <Text style={styles.deliveryTime}>
-                {deliveryTime.split(' ')[0]}{' '}
-                <Text style={styles.minutes}>{deliveryTime.split(' ')[1]}</Text>
-              </Text>
-            </View>
-            <View style={styles.markerLabelContainer}>
-              <Text style={styles.markerLabel}>Home</Text>
-            </View>
-          </Marker>
+          <Marker coordinate={end}>{getMarker()}</Marker>
         </MapView>
       </View>
       <TrackOrderInfo trackStatus={trackStatus} />
