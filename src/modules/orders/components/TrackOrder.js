@@ -36,8 +36,8 @@ const LONGITUDE = 76.7357713;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-let start = {latitude: 30.678186, longitude: 76.740683};
-let end = {latitude: 30.712063, longitude: 76.745232};
+let start = {latitude: 19.0996905, longitude: 72.9142052};
+let end = {latitude: 19.108459, longitude: 72.924694};
 
 const TrackOrder = () => {
   let map = useRef(null);
@@ -56,7 +56,7 @@ const TrackOrder = () => {
   const [deliveryTime, setDeliveryTime] = useState('');
 
   useEffect(() => {
-    // getPolyline();
+    getPolyline();
   }, []);
 
   const animate = (endCoords, duration) => {
@@ -120,14 +120,14 @@ const TrackOrder = () => {
           style={styles.map}
           ref={map}
           region={{
-            latitude: 30.702598,
-            longitude: 76.7357713,
+            latitude: (start.latitude + end.latitude) / 2,
+            longitude: (start.longitude + end.longitude) / 2,
             latitudeDelta: 0.03,
             longitudeDelta: 0.03,
           }}
           // onRegionChange={(region) => setRegion(region)}
         >
-          {polyline.length ? (
+          {/*polyline.length ? (
             <Polyline
               coordinates={[
                 start, // optional
@@ -136,7 +136,7 @@ const TrackOrder = () => {
               ]}
               strokeWidth={2}
             />
-          ) : null}
+            ) : null*/}
           {/* <Marker.Animated coordinate={markerCoordinate} ref={marker}>
             <View style={styles.markerContainer}>
               <TrackMarker />
@@ -170,16 +170,36 @@ const TrackOrder = () => {
 
           <Marker coordinate={end}>
             <View style={styles.markerContainer}>
-              <TrackMarker style={styles.marker} />
+              <View>
+                <TrackMarker />
+                <Text style={styles.deliveryTime}>
+                  {deliveryTime.split(' ')[0]}
+                  {'\n'}
+                  <Text style={styles.minutes}>
+                    {deliveryTime.split(' ')[1]}
+                  </Text>
+                </Text>
+              </View>
+              <View style={styles.markerLabelContainer}>
+                <Text style={styles.markerLabel}>Home</Text>
+              </View>
             </View>
-            <View style={styles.deliveryTimeContainer}>
-              <Text style={styles.deliveryTime}>
-                {deliveryTime.split(' ')[0]}{' '}
-                <Text style={styles.minutes}>{deliveryTime.split(' ')[1]}</Text>
-              </Text>
-            </View>
-            <View style={styles.markerLabelContainer}>
-              <Text style={styles.markerLabel}>Home</Text>
+          </Marker>
+          <Marker coordinate={start}>
+            <View style={styles.markerContainer}>
+              <View>
+                <TrackMarker />
+                {/*<Text style={styles.deliveryTime}>
+                  {deliveryTime.split(' ')[0]}
+                  {'\n'}
+                  <Text style={styles.minutes}>
+                    {deliveryTime.split(' ')[1]}
+                  </Text>
+                </Text>*/}
+              </View>
+              <View style={styles.markerLabelContainer}>
+                <Text style={styles.markerLabel}>Store</Text>
+              </View>
             </View>
           </Marker>
         </MapView>

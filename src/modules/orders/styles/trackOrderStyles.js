@@ -32,44 +32,24 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
   },
   deliveryTimeContainer: {
-    width: '30rem',
-    height: '30rem',
-    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
   },
   deliveryTime: {
     fontFamily: Fonts.semiBold,
-    fontSize: '14rem',
+    fontSize: '12rem',
     color: Colors.darkGreen,
     textAlign: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
   },
   minutes: {
     fontFamily: Fonts.medium,
     fontSize: '8rem',
     letterSpacing: '-0.2rem',
   },
-  markerContainer: {
-    flex: 1,
-    alignItems: 'center',
-    width: '32rem',
-    height: '100rem',
-    // position: 'absolute',
-  },
-  marker: {
-    // ...(Platform.OS === 'ios' && {
-    //   position: 'absolute',
-    //   top: '-40rem',
-    // }),
-    // alignSelf: 'center',
-  },
   markerLabelContainer: {
     borderRadius: '2rem',
-    position: 'absolute',
-    top: '35vrem',
-    width: '150rem',
-    alignSelf: 'center',
-    alignItems: 'center',
   },
   markerLabel: {
     fontSize: '12rem',
@@ -79,4 +59,10 @@ export const styles = EStyleSheet.create({
     paddingVertical: '6vrem',
     backgroundColor: Colors.white,
   },
+  markerContainer: {
+    height: '100rem',
+    width: '100rem',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  }
 });
