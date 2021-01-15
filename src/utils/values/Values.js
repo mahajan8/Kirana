@@ -44,7 +44,7 @@ export const orderStatusLabels = {
   Rejected: 40,
   Cancelled: 50,
   Preparing: 60,
-  'Partially Accepted': 70,
+  'Preparing (Partial Order)': 70,
   Dispatched: 80,
   ORDER_OUT_FOR_DELIVERY: 90,
   Completed: 100,
@@ -76,6 +76,12 @@ export const orderStatusBubbles = [
     backgroundColor: '#cde4ff',
     borderColor: '#b9daff',
     labelColor: '#014085',
+  },
+  {
+    orderStatus: orderStatus.ORDER_PARTIALLY_ACCEPTED,
+    backgroundColor: '#fff3cd',
+    borderColor: '#feebae',
+    labelColor: '#856305',
   },
   {
     orderStatus: orderStatus.ORDER_ACCEPTED,

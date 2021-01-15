@@ -123,6 +123,7 @@ export const Strings = {
   refundInProgress: 'Refund in progress',
   refundComplete: 'Refund Complete',
   awaitingConfirmation: 'Awaiting Confirmation',
+  partiallyAccepted: 'Partially Accepted',
 
   continuePhoneNumber: 'Continue with Phone Number',
   drawerFreeDeliverySub:

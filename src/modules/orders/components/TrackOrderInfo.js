@@ -54,6 +54,11 @@ let trackingList = [
     title: Strings.awaitingConfirmation,
     subTitle: null,
   },
+  {
+    orderStatus: orderStatus.ORDER_PARTIALLY_ACCEPTED,
+    title: Strings.orderAccepted,
+    subTitle: null,
+  },
 ];
 
 const TrackOrderInfo = (props) => {
@@ -100,7 +105,15 @@ const TrackOrderInfo = (props) => {
   };
 
   const showCollapsedState = () => {
-    let {title, subTitle} = trackingList[trackStatus];
+    let currentObj = {};
+    if (status === orderStatus.ORDER_PARTIALLY_ACCEPTED) {
+      currentObj = trackingList.find(
+        (obj) => obj.orderStatus === orderStatus.ORDER_ACCEPTED,
+      );
+    } else {
+      currentObj = trackingList[trackStatus];
+    }
+    let {title, subTitle} = currentObj;
     let statusHistory = status_history.find((obj) => obj.status === status);
 
     let updatedAt = statusHistory
@@ -128,7 +141,13 @@ const TrackOrderInfo = (props) => {
 
   const showExpandedState = () => {
     let trackingArray = trackingList.slice(0, 5);
-    let {ORDER_UPDATED, ORDER_REJECTED, ORDER_CANCELLED} = orderStatus;
+    let {
+      ORDER_UPDATED,
+      ORDER_REJECTED,
+      ORDER_CANCELLED,
+      ORDER_PARTIALLY_ACCEPTED,
+      ORDER_ACCEPTED,
+    } = orderStatus;
 
     let currentObj = trackingList.find((obj) => obj.orderStatus === status);
 
@@ -138,7 +157,13 @@ const TrackOrderInfo = (props) => {
       trackingArray.splice(1, trackingArray.length, currentObj);
     }
 
-    currentObj = trackingArray.findIndex((obj) => obj.orderStatus === status);
+    if (status === ORDER_PARTIALLY_ACCEPTED) {
+      currentObj = trackingArray.findIndex(
+        (obj) => obj.orderStatus === ORDER_ACCEPTED,
+      );
+    } else {
+      currentObj = trackingArray.findIndex((obj) => obj.orderStatus === status);
+    }
 
     return (
       <View style={styles.expandedContainer}>

@@ -111,10 +111,12 @@ const OrderDetails = (props) => {
       ORDER_CANCELLED,
       ORDER_REJECTED,
       ORDER_DELIVERED,
+      ORDER_PARTIALLY_ACCEPTED,
     } = orderStatus;
 
     switch (status) {
       case ORDER_ACCEPTED:
+      case ORDER_PARTIALLY_ACCEPTED:
       case ORDER_DISPATCHED:
       case ORDER_OUT_FOR_DELIVERY:
         return Strings.trackOrder;
@@ -134,10 +136,12 @@ const OrderDetails = (props) => {
       ORDER_CANCELLED,
       ORDER_REJECTED,
       ORDER_DELIVERED,
+      ORDER_PARTIALLY_ACCEPTED,
     } = orderStatus;
 
     switch (status) {
       case ORDER_ACCEPTED:
+      case ORDER_PARTIALLY_ACCEPTED:
       case ORDER_DISPATCHED:
       case ORDER_OUT_FOR_DELIVERY:
         Actions.trackOrder({order: orderDetails});

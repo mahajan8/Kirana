@@ -168,7 +168,7 @@ const TrackOrder = (props) => {
             <Polyline coordinates={polyline} strokeWidth={2} />
           ) : null}
 
-          {getDriver()}
+          {/* {getDriver()} */}
 
           {getMarker(1)}
 
