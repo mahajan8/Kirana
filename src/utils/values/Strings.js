@@ -122,6 +122,7 @@ export const Strings = {
   cancelled: 'Cancelled',
   refundInProgress: 'Refund in progress',
   refundComplete: 'Refund Complete',
+  awaitingConfirmation: 'Awaiting Confirmation',
 
   continuePhoneNumber: 'Continue with Phone Number',
   drawerFreeDeliverySub:
@@ -190,6 +191,7 @@ export const Strings = {
   verifyNumber: 'Verify your phone number',
   groceryCategories: 'Grocery Categories',
   paid: 'Paid',
+  paidSuccessfully: 'Paid Successfully',
   trackOrder: 'Track Order',
   storeClosed: 'Store Closed',
   orderNowGetAt: 'Order Now, Get it at ',
@@ -257,6 +259,7 @@ export const Strings = {
   orderPicked: 'Order picked up from the store',
   orderDelivered: 'Order Delivered',
   orderRejected: 'Order Rejected',
+  orderCancelled: 'Order Cancelled',
   orderAcceptedSub: 'Looking for a delivery partner now',
   onTheWaySub:
     'Your order shall be picked up once the partner reached the outlet',
@@ -284,4 +287,5 @@ export const Strings = {
   viewOriginalItem: 'View original item',
   originalItem: 'Original Item',
   addFromThisStore: 'Add items from this store. ',
+  repeatOrder: 'Repeat Order',
 };

@@ -75,7 +75,9 @@ const OrderDetails = (props) => {
     };
 
     props.cancelOrder(pars, () => {
-      props.refresh();
+      if (props.refresh) {
+        props.refresh();
+      }
       Actions.replace('orderCancelled');
     });
   };
@@ -95,7 +97,9 @@ const OrderDetails = (props) => {
     };
 
     props.acceptRejectOrder(pars, () => {
-      props.refresh();
+      if (props.refresh) {
+        props.refresh();
+      }
     });
   };
 
@@ -136,7 +140,7 @@ const OrderDetails = (props) => {
       case ORDER_ACCEPTED:
       case ORDER_DISPATCHED:
       case ORDER_OUT_FOR_DELIVERY:
-        console.log('track');
+        Actions.trackOrder({order: orderDetails});
         break;
       case ORDER_CANCELLED:
       case ORDER_REJECTED:

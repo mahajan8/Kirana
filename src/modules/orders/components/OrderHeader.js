@@ -68,13 +68,15 @@ const OrderHeader = (props) => {
       };
 
       return (
-        <View style={[styles.orderStatusContainer, containerStyle]}>
-          <Text style={[styles.statusLabel, labelStyle]}>
-            {getKeyByValue(
-              payStatus ? paymentStatusLabels : orderStatusLabels,
-              payStatus ? payStatus : order.orderStatus,
-            )}
-          </Text>
+        <View style={styles.bubbleContainer}>
+          <View style={[styles.orderStatusContainer, containerStyle]}>
+            <Text style={[styles.statusLabel, labelStyle]}>
+              {getKeyByValue(
+                payStatus ? paymentStatusLabels : orderStatusLabels,
+                payStatus ? payStatus : order.orderStatus,
+              )}
+            </Text>
+          </View>
         </View>
       );
     }

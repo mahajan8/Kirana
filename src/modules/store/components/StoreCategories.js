@@ -16,8 +16,6 @@ import {Strings} from '../../../utils/values/Strings';
 import CartCounter from '../../commons/components/CartCounter';
 import {ripple} from '../../../utils/utility/Utils';
 
-const HEADER_HEIGHT = EStyleSheet.value('230vrem');
-
 const StoreCategories = (props) => {
   useEffect(() => {
     let pars = {
@@ -34,14 +32,8 @@ const StoreCategories = (props) => {
   let {categoryProducts} = props.storeReducer;
   let {selectedStore} = props.homeReducer;
 
-  const [anim, setAnim] = useState(new Animated.Value(0));
   const [scroll, setScroll] = useState(new Animated.Value(0));
-
-  useEffect(() => {
-    scroll.addListener(
-      Animated.event([{value: anim}], {useNativeDriver: false}),
-    );
-  }, []);
+  const HEADER_HEIGHT = EStyleSheet.value('230vrem');
 
   const renderSticky = () => {
     return (
@@ -80,7 +72,7 @@ const StoreCategories = (props) => {
     </Animated.View>
   );
 
-  const headerOpacity = anim.interpolate({
+  const headerOpacity = scroll.interpolate({
     inputRange: [0, HEADER_HEIGHT],
     outputRange: [1, 0],
     extrapolate: 'clamp',
@@ -92,13 +84,13 @@ const StoreCategories = (props) => {
     extrapolateRight: 'clamp',
   });
 
-  const searchOpacity = anim.interpolate({
+  const searchOpacity = scroll.interpolate({
     inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
     outputRange: [0, 0, 1],
     extrapolate: 'clamp',
   });
 
-  const searchScale = anim.interpolate({
+  const searchScale = scroll.interpolate({
     inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
     outputRange: [0, 0, 1],
     extrapolate: 'clamp',

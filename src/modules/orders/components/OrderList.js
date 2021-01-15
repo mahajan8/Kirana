@@ -210,7 +210,7 @@ const OrderList = (props) => {
   return (
     <FlatList
       data={storeOrders ? storePastOrders : pastOrders}
-      renderItem={({item}) => <OrderListItem item={item} />}
+      renderItem={({item}) => <OrderListItem item={item} past />}
       keyExtractor={(item, index) => `pastOrder${index}`}
       onMomentumScrollBegin={() => setEndReachCallable(false)}
       onEndReachedThreshold={0.1}

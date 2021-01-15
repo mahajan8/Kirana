@@ -124,7 +124,6 @@ const SearchProducts = (props) => {
     if (!props.loading) {
       return (
         <View style={styles.emptyListContainer}>
-          {/* TODO: Change Image  */}
           <NoResults
             width={EStyleSheet.value('270rem')}
             height={EStyleSheet.value('123rem')}

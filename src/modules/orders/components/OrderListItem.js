@@ -11,8 +11,11 @@ import OrderAddressTile from './OrderAddressTile';
 import {setSelectedOrderId} from '../OrderActions';
 import {connect} from 'react-redux';
 import {ripple} from '../../../utils/utility/Utils';
+import {paymentStatus} from '../../../utils/values/Values';
 
 const OrderListItem = (props) => {
+  let {item, past} = props;
+
   let {
     store_name,
     final_amount,
@@ -20,7 +23,26 @@ const OrderListItem = (props) => {
     store_location,
     delivery_address_location,
     delivery_address_type,
-  } = props.item;
+    payment,
+  } = item;
+
+  const getPaymentStatus = () => {
+    let {SUCCESS, REFUNDED, REFUND_IN_PROGRESS} = paymentStatus;
+    if (payment) {
+      switch (payment.status) {
+        case SUCCESS:
+          return Strings.paid;
+        case REFUND_IN_PROGRESS:
+          return Strings.refundInProgress;
+        case REFUNDED:
+          return Strings.refundComplete;
+        default:
+          return Strings.paid;
+      }
+    } else {
+      return Strings.paid;
+    }
+  };
 
   return (
     <Pressable
@@ -53,7 +75,7 @@ const OrderListItem = (props) => {
         <View style={styles.rowContainer}>
           <GreenCheck style={styles.icons} />
           <Text style={styles.detailText}>
-            {Strings.paid}
+            {getPaymentStatus()}
             <Text style={styles.greenText}>
               {'  '}
               {Strings.currency} {final_amount}
@@ -61,10 +83,16 @@ const OrderListItem = (props) => {
           </Text>
         </View>
         <Button
-          label={Strings.trackOrder}
+          label={past ? Strings.repeatOrder : Strings.trackOrder}
           Style={styles.trackButton}
           labelStyle={styles.trackLabel}
-          onPress={() => Actions.trackOrder({order: props.item})}
+          onPress={() => {
+            if (past) {
+              console.log('repeat');
+            } else {
+              Actions.trackOrder({order: item});
+            }
+          }}
         />
       </View>
     </Pressable>

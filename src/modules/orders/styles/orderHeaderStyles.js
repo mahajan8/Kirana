@@ -50,6 +50,9 @@ export const styles = EStyleSheet.create({
     borderWidth: '0.5rem',
     justifyContent: 'center',
   },
+  bubbleContainer: {
+    alignItems: 'flex-start',
+  },
   statusLabel: {
     fontFamily: Fonts.regular,
     fontSize: '10rem',
