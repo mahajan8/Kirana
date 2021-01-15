@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Clock from '../../../assets/images/green_clock.svg';
 import GreenCheck from '../../../assets/images/green_circle_tick.svg';
-import PurpleCheck from '../../../assets/images/order_list_purple_check.svg';
+import PurpleCheck from '../../../assets/images/purple_check.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {styles} from '../styles/orderListItemStyles';

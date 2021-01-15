@@ -162,4 +162,7 @@ export const styles = EStyleSheet.create({
   downArrow: {
     transform: [{rotateX: '180deg'}],
   },
+  checkIcon: {
+    marginLeft: '6rem',
+  },
 });

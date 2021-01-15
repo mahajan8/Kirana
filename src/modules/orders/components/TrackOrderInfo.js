@@ -4,6 +4,8 @@ import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/trackOrderInfoStyles';
 import UpArrow from '../../../assets/images/green_up_arrow.svg';
 import GreenCheck from '../../../assets/images/green_circle_tick.svg';
+import GreenPaidCheck from '../../../assets/images/map_paid_successful.svg';
+import PurpleCheck from '../../../assets/images/purple_check.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {orderStatus, paymentStatus} from '../../../utils/values/Values';
 import {useEffect} from 'react/cjs/react.development';
@@ -246,17 +248,37 @@ const TrackOrderInfo = (props) => {
 
   const getPaymentStatus = () => {
     let {SUCCESS, REFUNDED, REFUND_IN_PROGRESS} = paymentStatus;
+    let Icon = GreenPaidCheck;
+    let label = Strings.paidSuccessfully;
 
-    switch (payment.status) {
-      case SUCCESS:
-        return Strings.paidSuccessfully;
-      case REFUND_IN_PROGRESS:
-        return Strings.refundInProgress;
-      case REFUNDED:
-        return Strings.refundComplete;
-      default:
-        return Strings.paidSuccessfully;
+    if (payment) {
+      switch (payment.status) {
+        case SUCCESS:
+          Icon = GreenPaidCheck;
+          label = Strings.paid;
+          break;
+        case REFUND_IN_PROGRESS:
+          Icon = PurpleCheck;
+          label = Strings.refundInProgress;
+          break;
+        case REFUNDED:
+          Icon = PurpleCheck;
+          label = Strings.refundComplete;
+          break;
+      }
     }
+
+    return (
+      <View style={styles.rowContainer}>
+        <Text style={styles.paymentStatus}>{label}</Text>
+
+        <Icon
+          style={styles.checkIcon}
+          width={EStyleSheet.value('26rem')}
+          height={EStyleSheet.value('26rem')}
+        />
+      </View>
+    );
   };
 
   return (
@@ -288,9 +310,7 @@ const TrackOrderInfo = (props) => {
         </View>
 
         <View>
-          {payment ? (
-            <Text style={styles.paymentStatus}>{getPaymentStatus()}</Text>
-          ) : null}
+          {payment ? getPaymentStatus() : null}
           {/* TODO: Add Check Image */}
         </View>
       </View>
