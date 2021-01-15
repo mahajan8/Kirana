@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import Clock from '../../../assets/images/green_clock.svg';
 import GreenCheck from '../../../assets/images/green_circle_tick.svg';
+import PurpleCheck from '../../../assets/images/order_list_purple_check.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {styles} from '../styles/orderListItemStyles';
@@ -12,6 +13,7 @@ import {setSelectedOrderId} from '../OrderActions';
 import {connect} from 'react-redux';
 import {ripple} from '../../../utils/utility/Utils';
 import {paymentStatus} from '../../../utils/values/Values';
+import {repeatOrder} from '../Api';
 
 const OrderListItem = (props) => {
   let {item, past} = props;
@@ -24,24 +26,52 @@ const OrderListItem = (props) => {
     delivery_address_location,
     delivery_address_type,
     payment,
+    id,
   } = item;
+
+  const reOrderItems = () => {
+    let pars = {
+      order_id: id,
+    };
+
+    props.repeatOrder(pars);
+  };
 
   const getPaymentStatus = () => {
     let {SUCCESS, REFUNDED, REFUND_IN_PROGRESS} = paymentStatus;
+    let Icon = GreenCheck;
+    let label = Strings.paid;
+
     if (payment) {
       switch (payment.status) {
         case SUCCESS:
-          return Strings.paid;
+          Icon = GreenCheck;
+          label = Strings.paid;
+          break;
         case REFUND_IN_PROGRESS:
-          return Strings.refundInProgress;
+          Icon = PurpleCheck;
+          label = Strings.refundInProgress;
+          break;
         case REFUNDED:
-          return Strings.refundComplete;
-        default:
-          return Strings.paid;
+          Icon = PurpleCheck;
+          label = Strings.refundComplete;
+          break;
       }
-    } else {
-      return Strings.paid;
     }
+
+    return (
+      <View style={styles.rowContainer}>
+        <Icon style={styles.icons} />
+
+        <Text style={styles.detailText}>
+          {label}
+          <Text style={styles.greenText}>
+            {'  '}
+            {Strings.currency} {final_amount}
+          </Text>
+        </Text>
+      </View>
+    );
   };
 
   return (
@@ -72,23 +102,15 @@ const OrderListItem = (props) => {
 
       {/* Third row with payment status and track button  */}
       <View style={[styles.rowContainer, styles.trackContainer]}>
-        <View style={styles.rowContainer}>
-          <GreenCheck style={styles.icons} />
-          <Text style={styles.detailText}>
-            {getPaymentStatus()}
-            <Text style={styles.greenText}>
-              {'  '}
-              {Strings.currency} {final_amount}
-            </Text>
-          </Text>
-        </View>
+        {getPaymentStatus()}
+
         <Button
           label={past ? Strings.repeatOrder : Strings.trackOrder}
           Style={styles.trackButton}
           labelStyle={styles.trackLabel}
           onPress={() => {
             if (past) {
-              console.log('repeat');
+              reOrderItems();
             } else {
               Actions.trackOrder({order: item});
             }
@@ -107,6 +129,7 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = {
   setSelectedOrderId,
+  repeatOrder,
 };
 
 export default connect(

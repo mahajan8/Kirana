@@ -33,7 +33,6 @@ export const getOrderDetails = (pars) => {
     instance.post(Urls.getOrderDetails, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        console.log(res.data.data);
         dispatch(setOrderDetails(res.data.data));
       } else {
         alert(res.data.message);
