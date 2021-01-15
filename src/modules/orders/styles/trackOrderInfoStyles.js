@@ -57,6 +57,7 @@ export const styles = EStyleSheet.create({
   trackingInfoContainer: {
     paddingLeft: '16rem',
     paddingRight: '12rem',
+    // height: '73rem',
   },
   trackingStatus: {
     paddingVertical: '18vrem',
@@ -157,5 +158,8 @@ export const styles = EStyleSheet.create({
     position: 'absolute',
     right: '16rem',
     top: '16rem',
+  },
+  downArrow: {
+    transform: [{rotateX: '180deg'}],
   },
 });

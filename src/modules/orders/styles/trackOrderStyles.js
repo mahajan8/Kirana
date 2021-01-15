@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
@@ -29,5 +30,46 @@ export const styles = EStyleSheet.create({
     color: Colors.themeGreen,
     letterSpacing: '0.1rem',
     fontFamily: Fonts.medium,
+  },
+  deliveryTime: {
+    fontFamily: Fonts.semiBold,
+    fontSize: '12rem',
+    color: Colors.darkGreen,
+    textAlign: 'center',
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  minutes: {
+    fontFamily: Fonts.medium,
+    fontSize: '8rem',
+    letterSpacing: '-0.2rem',
+  },
+  markerLabelContainer: {
+    borderRadius: '2rem',
+  },
+  markerLabel: {
+    fontSize: '12rem',
+    fontFamily: Fonts.medium,
+    color: Colors.titleText,
+    paddingHorizontal: '12rem',
+    paddingVertical: '6vrem',
+    backgroundColor: Colors.white,
+  },
+  markerContainer: {
+    height: '100rem',
+    width: '100rem',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  driverMarker: {
+    alignItems: 'center',
+    ...(Platform.OS === 'ios' && {
+      top: '-50%',
+    }),
+  },
+  markerIcon: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '8rem',
   },
 });

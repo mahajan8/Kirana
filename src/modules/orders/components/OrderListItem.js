@@ -64,6 +64,7 @@ const OrderListItem = (props) => {
           label={Strings.trackOrder}
           Style={styles.trackButton}
           labelStyle={styles.trackLabel}
+          onPress={() => Actions.trackOrder({order: props.item})}
         />
       </View>
     </Pressable>
