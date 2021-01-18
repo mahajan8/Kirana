@@ -29,6 +29,7 @@ export const Urls = {
   getStoresByOrderId: '/offering/store/get-stores-by-order-id',
   repeatOrderToCart: '/commerce/cart/repeat-order-to-cart',
   acceptRejectOrder: '/commerce/order/accept-reject-consumer-order',
+  submitOrderRating: '/commerce/order/add-order-rating',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
 };

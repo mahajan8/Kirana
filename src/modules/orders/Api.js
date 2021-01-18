@@ -115,3 +115,18 @@ export const acceptRejectOrder = (pars, callback) => {
     });
   };
 };
+
+export const submitOrderRating = (pars, callback) => {
+  return (dispatch) => {
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.submitOrderRating, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        console.log(res.data.data);
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};

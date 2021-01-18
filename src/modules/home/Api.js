@@ -18,11 +18,21 @@ export const getUserDetails = () => {
       const success = !res.data.error;
       if (success) {
         const response = res.data.data;
-        const {address_list, cart_data, user_details} = response;
+        const {
+          address_list,
+          cart_data,
+          user_details,
+          last_order_rating,
+        } = response;
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
-        Actions.reset('drawer');
+        console.log(response);
+        if (!last_order_rating) {
+          Actions.reset('drawer');
+        } else {
+          Actions.reset('rating');
+        }
       } else {
         alert(res.data.message);
       }

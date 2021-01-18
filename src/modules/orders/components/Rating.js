@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
-import Header from '../../commons/components/Header';
+import {View, Text, Pressable} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/ratingStyles';
 import HeaderImage from '../../../assets/images/rating_header_image.svg';
@@ -15,18 +7,31 @@ import Star from '../../../assets/images/star.svg';
 import StarSelected from '../../../assets/images/star_filled.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Input from '../../commons/components/Input';
-import Button from '../../commons/components/Button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
+import {submitOrderRating} from '../Api';
+import {connect} from 'react-redux';
 
 let stars = [1, 2, 3, 4, 5];
 
-const Rating = () => {
+const Rating = (props) => {
   const [groceryStars, setGroceryStars] = useState(0);
   const [deliveryStars, setDeliveryStars] = useState(0);
   const [groceryReason, setGroceryReason] = useState('');
   const [deliveryReason, setDeliveryReason] = useState('');
+
+  const submitRating = () => {
+    let pars = {
+      order_id: '',
+      store_rating: groceryStars,
+      store_feedback: groceryReason,
+      delivery_rating: deliveryStars,
+      delivery_feedback: deliveryReason,
+    };
+
+    props.submitOrderRating(pars);
+  };
 
   return (
     <SafeArea>
@@ -98,4 +103,10 @@ const Rating = () => {
   );
 };
 
-export default Rating;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  submitOrderRating,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Rating);

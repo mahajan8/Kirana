@@ -32,7 +32,7 @@ const StoreCategories = (props) => {
   let {categoryProducts} = props.storeReducer;
   let {selectedStore} = props.homeReducer;
 
-  const [scroll, setScroll] = useState(new Animated.Value(0));
+  const [scroll] = useState(new Animated.Value(0));
   const HEADER_HEIGHT = EStyleSheet.value('230vrem');
 
   const renderSticky = () => {
@@ -41,8 +41,9 @@ const StoreCategories = (props) => {
         style={[
           styles.stickySearchBar,
           {
-            transform: [{translateY: searchTranslate}, {scaleY: searchScale}],
+            transform: [{translateY: searchTranslate}],
             opacity: searchOpacity,
+            zIndex: zIndex,
           },
         ]}>
         <Pressable
@@ -96,9 +97,9 @@ const StoreCategories = (props) => {
     extrapolate: 'clamp',
   });
 
-  const searchScale = scroll.interpolate({
-    inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
-    outputRange: [0, 0, 1],
+  const zIndex = scroll.interpolate({
+    inputRange: [0, HEADER_HEIGHT],
+    outputRange: [0, 2],
     extrapolate: 'clamp',
   });
 

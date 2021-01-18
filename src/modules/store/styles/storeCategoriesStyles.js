@@ -6,7 +6,7 @@ export const styles = EStyleSheet.create({
   stickySearchBar: {
     width: '100%',
     position: 'absolute',
-    top: 0,
+    // top: 0,
     zIndex: 2,
     paddingHorizontal: '16rem',
     backgroundColor: Colors.white,
