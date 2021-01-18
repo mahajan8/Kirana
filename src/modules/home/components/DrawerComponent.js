@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, Linking} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
 import {Colors} from '../../../utils/values/Colors';
@@ -18,6 +18,7 @@ import {logout, ripple} from '../../../utils/utility/Utils';
 import SafeArea from '../../commons/components/SafeArea';
 import {connect} from 'react-redux';
 import {styles} from '../styles/drawerStyles';
+import {Urls} from '../../../utils/utility/Urls';
 
 let options = [
   {icon: MyOrders, label: Strings.myOrders},
@@ -48,7 +49,10 @@ const actions = (index) => {
       Actions.support();
       break;
     case 5:
-      console.log(Actions.state);
+      Linking.openURL(Urls.termsUrl);
+      break;
+    case 6:
+      Linking.openURL(Urls.privacyUrl);
       break;
     case 7:
       logout();
