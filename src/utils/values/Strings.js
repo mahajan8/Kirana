@@ -289,4 +289,7 @@ export const Strings = {
   originalItem: 'Original Item',
   addFromThisStore: 'Add items from this store. ',
   repeatOrder: 'Repeat Order',
+  mapOrderRejectedHeading: 'Sorry! Your order was rejected.',
+  mapOrderRejectedSub:
+    "We're refunding you instantly. We can fulfill your order from another store.",
 };

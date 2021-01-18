@@ -13,6 +13,8 @@ import StoreIcon from '../../../assets/images/map_store.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
+import MapOrderRejectedModal from './MapOrderRejectedModal';
+import {getOrderDetails} from '../Api';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -37,7 +39,7 @@ let end = {latitude: 19.108459, longitude: 72.924694};
 let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${end.latitude},${end.longitude}&key=AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY`;
 
 const TrackOrder = (props) => {
-  let {store_name} = props.order;
+  let {store_name} = props.orderDetails ? props.orderDetails : {};
   let map = useRef(null);
   let marker = useRef(null);
 
@@ -52,9 +54,14 @@ const TrackOrder = (props) => {
 
   const [polyline, setPolyline] = useState([]);
   const [deliveryTime, setDeliveryTime] = useState('');
+  const [showRejectedModal, setShowRejectedModal] = useState(false);
 
   useEffect(() => {
     // getPolyline();
+    let pars = {
+      order_id: props.orderId,
+    };
+    props.getOrderDetails(pars);
   }, []);
 
   const animate = (endCoords, duration) => {
@@ -177,12 +184,20 @@ const TrackOrder = (props) => {
       </View>
       <TrackOrderInfo trackStatus={trackStatus} order={props.order} />
       {/* <Button onPress={getPolyline} /> */}
+      <MapOrderRejectedModal
+        visible={showRejectedModal}
+        setVisible={setShowRejectedModal}
+      />
     </SafeArea>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  orderDetails: state.orderReducer.orderDetails,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getOrderDetails,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackOrder);

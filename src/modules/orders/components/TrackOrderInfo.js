@@ -64,7 +64,7 @@ let trackingList = [
 ];
 
 const TrackOrderInfo = (props) => {
-  let {order} = props;
+  let {orderDetails} = props;
 
   let {
     item_quantity_count,
@@ -73,7 +73,7 @@ const TrackOrderInfo = (props) => {
     status_history,
     payment,
     id,
-  } = order;
+  } = orderDetails ? orderDetails : {};
 
   const [collapsed, setCollapsed] = useState(true);
   const [animCollapsed, setAnimCollapsed] = useState(new Animated.Value(0));
@@ -318,7 +318,9 @@ const TrackOrderInfo = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  orderDetails: state.orderReducer.orderDetails,
+});
 
 const mapDispatchToProps = {
   setSelectedOrderId,

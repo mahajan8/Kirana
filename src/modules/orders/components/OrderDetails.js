@@ -36,6 +36,7 @@ const OrderDetails = (props) => {
     product_list,
     store_name,
     refund_amount,
+    id,
   } = orderDetails ? orderDetails : {};
 
   useEffect(() => {
@@ -144,7 +145,7 @@ const OrderDetails = (props) => {
       case ORDER_PARTIALLY_ACCEPTED:
       case ORDER_DISPATCHED:
       case ORDER_OUT_FOR_DELIVERY:
-        Actions.trackOrder({order: orderDetails});
+        Actions.trackOrder({orderId: id});
         break;
       case ORDER_CANCELLED:
       case ORDER_REJECTED:
