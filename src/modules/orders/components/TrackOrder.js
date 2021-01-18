@@ -17,6 +17,7 @@ import MapOrderRejectedModal from './MapOrderRejectedModal';
 import {getOrderDetails} from '../Api';
 import TrackInfoShimmer from './TrackInfoShimmer';
 import {setOrderDetails} from '../OrderActions';
+import {Actions} from 'react-native-router-flux';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -65,7 +66,14 @@ const TrackOrder = (props) => {
     };
     props.getOrderDetails(pars);
 
-    return () => props.setOrderDetails(null);
+    return () => {
+      let detailsRoute = Actions.state.routes.some(
+        (obj) => obj.routeName === 'orderDetails',
+      );
+      if (!detailsRoute) {
+        props.setOrderDetails(null);
+      }
+    };
   }, []);
 
   const animate = (endCoords, duration) => {

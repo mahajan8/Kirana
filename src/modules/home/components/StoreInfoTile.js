@@ -38,7 +38,7 @@ const StoreInfoTile = (props) => {
                 width={EStyleSheet.value('10rem')}
                 height={EStyleSheet.value('10rem')}
               />
-              <Text style={styles.details}>{rating}</Text>
+              <Text style={styles.details}>{rating.toFixed(2)}</Text>
               <View style={styles.seperator} />
             </View>
           )}

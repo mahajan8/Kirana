@@ -181,6 +181,8 @@ const OrderDetails = (props) => {
             onPress={() => {
               if (update) {
                 acceptReject();
+              } else {
+                Actions.trackOrder({orderId: id});
               }
             }}
           />
