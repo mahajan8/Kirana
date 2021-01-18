@@ -41,7 +41,7 @@ const StoreCategories = (props) => {
         style={[
           styles.stickySearchBar,
           {
-            transform: [{scaleY: searchScale}],
+            transform: [{translateY: searchTranslate}, {scaleY: searchScale}],
             opacity: searchOpacity,
           },
         ]}>
@@ -87,6 +87,12 @@ const StoreCategories = (props) => {
   const searchOpacity = scroll.interpolate({
     inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
     outputRange: [0, 0, 1],
+    extrapolate: 'clamp',
+  });
+
+  const searchTranslate = scroll.interpolate({
+    inputRange: [0, HEADER_HEIGHT / 2, HEADER_HEIGHT],
+    outputRange: [-50, -50, 0],
     extrapolate: 'clamp',
   });
 
