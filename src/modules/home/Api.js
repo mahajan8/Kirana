@@ -23,15 +23,16 @@ export const getUserDetails = () => {
           cart_data,
           user_details,
           last_order_rating,
+          last_order_data,
         } = response;
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
         console.log(response);
-        if (!last_order_rating) {
+        if (last_order_rating) {
           Actions.reset('drawer');
         } else {
-          Actions.reset('rating');
+          Actions.reset('rating', {order: last_order_data});
         }
       } else {
         alert(res.data.message);

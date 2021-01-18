@@ -12,6 +12,7 @@ import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {submitOrderRating} from '../Api';
 import {connect} from 'react-redux';
+import Loader from '../../commons/components/Loader';
 
 let stars = [1, 2, 3, 4, 5];
 
@@ -21,9 +22,11 @@ const Rating = (props) => {
   const [groceryReason, setGroceryReason] = useState('');
   const [deliveryReason, setDeliveryReason] = useState('');
 
+  let {order_id, store_name} = props.order;
+
   const submitRating = () => {
     let pars = {
-      order_id: '',
+      order_id: order_id,
       store_rating: groceryStars,
       store_feedback: groceryReason,
       delivery_rating: deliveryStars,
@@ -31,6 +34,20 @@ const Rating = (props) => {
     };
 
     props.submitOrderRating(pars);
+  };
+
+  const getDisabled = () => {
+    if (groceryStars < 5 || deliveryStars < 5) {
+      if (groceryStars < 5 && !groceryReason) {
+        return true;
+      } else if (deliveryStars < 5 && !deliveryReason) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -41,7 +58,7 @@ const Rating = (props) => {
         showsVerticalScrollIndicator={false}>
         <View style={styles.headingContainer}>
           <Text style={styles.heading}>
-            {Strings.ratingHeading} {"The Baker's Dozen"}
+            {Strings.ratingHeading} {store_name}
           </Text>
           <HeaderImage />
         </View>
@@ -98,12 +115,19 @@ const Rating = (props) => {
           )}
         </View>
       </KeyboardAwareScrollView>
-      <BottomButton label={Strings.submitFeedback} disabled />
+      <BottomButton
+        label={Strings.submitFeedback}
+        disabled={getDisabled()}
+        onPress={submitRating}
+      />
+      <Loader show={props.loading} />
     </SafeArea>
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  loading: state.authReducer.loading,
+});
 
 const mapDispatchToProps = {
   submitOrderRating,

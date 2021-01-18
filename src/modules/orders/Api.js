@@ -9,6 +9,7 @@ import {
 } from './OrderActions';
 import {setCartDetails} from '../cart/CartActions';
 import {Actions} from 'react-native-router-flux';
+import {getUserDetails} from '../home/Api';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -123,7 +124,7 @@ export const submitOrderRating = (pars, callback) => {
     instance.post(Urls.submitOrderRating, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        console.log(res.data.data);
+        dispatch(getUserDetails());
       } else {
         alert(res.data.message);
       }
