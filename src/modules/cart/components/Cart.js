@@ -39,6 +39,7 @@ const Cart = (props) => {
     is_overweight,
     is_deliverable,
     max_weight_limit_kg,
+    estimated_time_in_mins,
   } = cart;
   useEffect(() => {
     if (location) {
@@ -139,6 +140,7 @@ const Cart = (props) => {
                 <CartListFooter
                   instructions={instructions}
                   setInstructions={setInstructions}
+                  estimatedTime={estimated_time_in_mins}
                 />
               )
             }

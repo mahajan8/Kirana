@@ -6,7 +6,7 @@ import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartPaymentDetails from './CartPaymentDetails';
 
 const CartListFooter = (props) => {
-  let {instructions, setInstructions} = props;
+  let {instructions, setInstructions, estimatedTime} = props;
 
   return (
     <View style={styles.footerContainer}>
@@ -26,7 +26,8 @@ const CartListFooter = (props) => {
 
       <View style={styles.detailsContainer}>
         <Text style={styles.detailsText}>
-          {Strings.estimatedDeliveryTime} {'40 minutes'}
+          {Strings.estimatedDeliveryTime} {Math.ceil(estimatedTime)}
+          {' minutes'}
         </Text>
       </View>
 

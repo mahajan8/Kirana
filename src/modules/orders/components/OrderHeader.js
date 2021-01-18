@@ -41,7 +41,7 @@ const OrderHeader = (props) => {
     store_name,
     delivery_address_location,
     payment,
-    overdue_time_limit,
+    // overdue_time_limit,
   } = props.orderDetails;
 
   const getOrderStatusBubble = (payStatus, custom) => {
@@ -115,13 +115,13 @@ const OrderHeader = (props) => {
     }
   };
 
-  let isOverdue =
-    status === orderStatus.ORDER_PLACED
-      ? moment.duration({from: moment(created_on)}).asMinutes() >
-        overdue_time_limit
-        ? true
-        : false
-      : false;
+  // let isOverdue =
+  //   status === orderStatus.ORDER_PLACED
+  //     ? moment.duration({from: moment(created_on)}).asMinutes() >
+  //       overdue_time_limit
+  //       ? true
+  //       : false
+  //     : false;
 
   return (
     <View>
@@ -140,10 +140,7 @@ const OrderHeader = (props) => {
           <Text style={styles.orderId} numberOfLines={1}>
             {Strings.orderId} - {id}
           </Text>
-          {getOrderStatusBubble(
-            null,
-            isOverdue ? orderStatus.ORDER_OVERDUE : null,
-          )}
+          {getOrderStatusBubble()}
         </View>
 
         <Text style={styles.orderTime}>{moment(created_on).format('lll')}</Text>
