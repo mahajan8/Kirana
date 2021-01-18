@@ -15,6 +15,8 @@ import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
 import MapOrderRejectedModal from './MapOrderRejectedModal';
 import {getOrderDetails} from '../Api';
+import TrackInfoShimmer from './TrackInfoShimmer';
+import {setOrderDetails} from '../OrderActions';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -62,6 +64,8 @@ const TrackOrder = (props) => {
       order_id: props.orderId,
     };
     props.getOrderDetails(pars);
+
+    return () => props.setOrderDetails(null);
   }, []);
 
   const animate = (endCoords, duration) => {
@@ -182,7 +186,11 @@ const TrackOrder = (props) => {
           {getMarker(0)}
         </MapView>
       </View>
-      <TrackOrderInfo trackStatus={trackStatus} order={props.order} />
+      {props.orderDetails ? (
+        <TrackOrderInfo trackStatus={trackStatus} order={props.order} />
+      ) : (
+        <TrackInfoShimmer />
+      )}
       {/* <Button onPress={getPolyline} /> */}
       <MapOrderRejectedModal
         visible={showRejectedModal}
@@ -198,6 +206,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getOrderDetails,
+  setOrderDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackOrder);
