@@ -89,10 +89,14 @@ const TrackOrderInfo = (props) => {
   }, [status]);
 
   useEffect(() => {
+    let listener = {message: handleMessage};
     PubNubClient.subscribe({channels});
-    PubNubClient.addListener({message: handleMessage});
+    PubNubClient.addListener(listener);
 
-    return () => PubNubClient.removeListener({message: handleMessage});
+    return () => {
+      PubNubClient.unsubscribeAll();
+      PubNubClient.removeListener(listener);
+    };
   }, [PubNubClient, channels]);
 
   const handleMessage = (event) => {
