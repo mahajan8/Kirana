@@ -145,8 +145,9 @@ const OrderHeader = (props) => {
 
         <Text style={styles.orderTime}>{moment(created_on).format('lll')}</Text>
 
-        {(payment.status === paymentStatus.REFUND_IN_PROGRESS ||
-          payment.status === paymentStatus.REFUNDED) &&
+        {payment &&
+          (payment.status === paymentStatus.REFUND_IN_PROGRESS ||
+            payment.status === paymentStatus.REFUNDED) &&
           getOrderStatusBubble(payment.status)}
       </View>
 
