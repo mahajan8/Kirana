@@ -41,8 +41,20 @@ const OrderDetails = (props) => {
 
   useEffect(() => {
     fetchDetails();
-    return () => props.setOrderDetails(null);
+    return () => {
+      if (!isAfterTracking()) {
+        props.setOrderDetails(null);
+      }
+    };
   }, []);
+
+  const isAfterTracking = () => {
+    let trackingRoute = Actions.state.routes.some(
+      (obj) => obj.routeName === 'trackOrder',
+    );
+
+    return trackingRoute;
+  };
 
   const fetchDetails = () => {
     let pars = {
@@ -145,7 +157,11 @@ const OrderDetails = (props) => {
       case ORDER_PARTIALLY_ACCEPTED:
       case ORDER_DISPATCHED:
       case ORDER_OUT_FOR_DELIVERY:
-        Actions.trackOrder({orderId: id});
+        if (isAfterTracking()) {
+          Actions.popTo('trackOrder', {orderId: id});
+        } else {
+          Actions.trackOrder({orderId: id});
+        }
         break;
       case ORDER_CANCELLED:
       case ORDER_REJECTED:
@@ -182,7 +198,11 @@ const OrderDetails = (props) => {
               if (update) {
                 acceptReject();
               } else {
-                Actions.trackOrder({orderId: id});
+                if (isAfterTracking()) {
+                  Actions.popTo('trackOrder', {orderId: id});
+                } else {
+                  Actions.trackOrder({orderId: id});
+                }
               }
             }}
           />
