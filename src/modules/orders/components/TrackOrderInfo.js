@@ -91,11 +91,13 @@ const TrackOrderInfo = (props) => {
   useEffect(() => {
     PubNubClient.subscribe({channels});
     PubNubClient.addListener({message: handleMessage});
+
+    return () => PubNubClient.removeListener({message: handleMessage});
   }, [PubNubClient, channels]);
 
   const handleMessage = (event) => {
     const {type, payload} = event.message;
-
+console.log('changed')
     if (type === statusUpdate && payload.order.id === id) {
       props.setOrderDetails(payload.order);
     }
