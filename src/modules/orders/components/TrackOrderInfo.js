@@ -97,7 +97,7 @@ const TrackOrderInfo = (props) => {
 
   const handleMessage = (event) => {
     const {type, payload} = event.message;
-console.log('changed')
+
     if (type === statusUpdate && payload.order.id === id) {
       props.setOrderDetails(payload.order);
     }
