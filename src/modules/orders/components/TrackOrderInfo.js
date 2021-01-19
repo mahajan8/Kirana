@@ -1,19 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import {View, Text, Pressable, Animated, Easing} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/trackOrderInfoStyles';
-import UpArrow from '../../../assets/images/green_up_arrow.svg';
-import GreenCheck from '../../../assets/images/green_circle_tick.svg';
 import GreenPaidCheck from '../../../assets/images/map_paid_successful.svg';
 import PurpleCheck from '../../../assets/images/purple_check.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {orderStatus, paymentStatus} from '../../../utils/values/Values';
 import {useEffect} from 'react/cjs/react.development';
-import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import {setSelectedOrderId} from '../OrderActions';
-import {commonStyles} from '../../commons/styles/commonStyles';
+import {setOrderDetails, setSelectedOrderId} from '../OrderActions';
+import {usePubNub} from 'pubnub-react';
+import TrackOrderInfoExpanded from './TrackOrderInfoExpanded';
+import TrackOrderInfoCollapsed from './TrackOrderInfoCollapsed';
 
 let trackingList = [
   {
@@ -63,8 +63,11 @@ let trackingList = [
   },
 ];
 
+const statusUpdate = 'ORDER_STATUS_UPDATE';
+
 const TrackOrderInfo = (props) => {
   let {orderDetails} = props;
+  const PubNubClient = usePubNub();
 
   let {
     item_quantity_count,
@@ -76,155 +79,50 @@ const TrackOrderInfo = (props) => {
   } = orderDetails ? orderDetails : {};
 
   const [collapsed, setCollapsed] = useState(true);
-  const [animCollapsed, setAnimCollapsed] = useState(new Animated.Value(0));
+  const [animCollapsed] = useState(new Animated.Value(0));
   const [trackStatus, setTrackStatus] = useState(-1);
+  const [channels] = useState([props.userDetails.id]);
 
   useEffect(() => {
     let i = trackingList.findIndex((obj) => obj.orderStatus === status);
     setTrackStatus(i);
   }, [status]);
 
-  const renderTrackingCircle = () => (
-    <View style={styles.trackingCircleContainer}>
-      <View style={styles.line} />
-      <View style={styles.outerCircle}>
-        <View style={styles.innerCircle} />
-      </View>
-      <View style={styles.dottedLine} />
-    </View>
-  );
+  useEffect(() => {
+    PubNubClient.subscribe({channels});
+    PubNubClient.addListener({message: handleMessage});
+  }, [PubNubClient, channels]);
+
+  const handleMessage = (event) => {
+    const {type, payload} = event.message;
+
+    if (type === statusUpdate && payload.order.id === id) {
+      props.setOrderDetails(payload.order);
+    }
+  };
 
   const getOrderTrackingStatus = () => {
     return (
       <Animated.View style={{maxHeight: maxHeight}}>
-        {trackStatus >= 0
-          ? collapsed
-            ? showCollapsedState()
-            : showExpandedState()
-          : null}
+        {trackStatus >= 0 ? (
+          collapsed ? (
+            <TrackOrderInfoCollapsed
+              trackingList={trackingList}
+              status={status}
+              status_history={status_history}
+              toggleCollapsed={toggleCollapsedState}
+              trackStatus={trackStatus}
+            />
+          ) : (
+            <TrackOrderInfoExpanded
+              trackingList={trackingList}
+              status={status}
+              status_history={status_history}
+              toggleCollapsed={toggleCollapsedState}
+            />
+          )
+        ) : null}
       </Animated.View>
-    );
-  };
-
-  const showCollapsedState = () => {
-    let currentObj = {};
-    if (status === orderStatus.ORDER_PARTIALLY_ACCEPTED) {
-      currentObj = trackingList.find(
-        (obj) => obj.orderStatus === orderStatus.ORDER_ACCEPTED,
-      );
-    } else {
-      currentObj = trackingList[trackStatus];
-    }
-    let {title, subTitle} = currentObj;
-    let statusHistory = status_history.find((obj) => obj.status === status);
-
-    let updatedAt = statusHistory
-      ? moment(statusHistory.status_changed_on).format('lll')
-      : null;
-
-    return (
-      <View style={[styles.rowContainer, styles.trackingInfoContainer]}>
-        {renderTrackingCircle()}
-        <View style={styles.trackingStatus}>
-          <Text style={styles.trackingStatusLabel}>{title}</Text>
-          <Text style={styles.trackingStatusSub}>
-            {subTitle ? subTitle : updatedAt}
-          </Text>
-        </View>
-        <Pressable
-          style={styles.arrowIcon}
-          onPress={toggleCollapsedState}
-          hitSlop={commonStyles.hitSlop}>
-          <UpArrow />
-        </Pressable>
-      </View>
-    );
-  };
-
-  const showExpandedState = () => {
-    let trackingArray = trackingList.slice(0, 5);
-    let {
-      ORDER_UPDATED,
-      ORDER_REJECTED,
-      ORDER_CANCELLED,
-      ORDER_PARTIALLY_ACCEPTED,
-      ORDER_ACCEPTED,
-    } = orderStatus;
-
-    let currentObj = trackingList.find((obj) => obj.orderStatus === status);
-
-    if (status === ORDER_UPDATED) {
-      trackingArray.splice(1, 0, currentObj);
-    } else if (status === ORDER_REJECTED || status === ORDER_CANCELLED) {
-      trackingArray.splice(1, trackingArray.length, currentObj);
-    }
-
-    if (status === ORDER_PARTIALLY_ACCEPTED) {
-      currentObj = trackingArray.findIndex(
-        (obj) => obj.orderStatus === ORDER_ACCEPTED,
-      );
-    } else {
-      currentObj = trackingArray.findIndex((obj) => obj.orderStatus === status);
-    }
-
-    return (
-      <View style={styles.expandedContainer}>
-        {trackingArray.map((item, index) => {
-          let current = currentObj === index ? true : false;
-          let statusHistory = status_history.find(
-            (obj) => obj.status === status,
-          );
-
-          let updatedAt = statusHistory
-            ? moment(statusHistory.status_changed_on).format('lll')
-            : null;
-          return (
-            <View
-              style={[styles.expandedStatusContainer]}
-              key={`OrderTrackStatus${index}`}>
-              <View style={styles.trackingCircleContainer}>
-                {current ? (
-                  <View style={styles.outerCircle}>
-                    <View style={styles.innerCircle} />
-                    <View style={styles.transparentCurrentCircle} />
-                  </View>
-                ) : index < currentObj ? (
-                  <GreenCheck
-                    width={EStyleSheet.value('14rem')}
-                    height={EStyleSheet.value('14rem')}
-                  />
-                ) : (
-                  <View style={styles.upcomingStatusCircle} />
-                )}
-                {index !== trackingArray.length - 1 && (
-                  <View style={current ? styles.dottedLine : styles.line} />
-                )}
-              </View>
-              <View>
-                <Text
-                  style={
-                    current
-                      ? styles.expandedCurrentStatus
-                      : styles.expandedStatus
-                  }>
-                  {item.title}
-                </Text>
-                {current && (
-                  <Text style={styles.expandedCurrentSub}>
-                    {item.subTitle ? item.subTitle : updatedAt}
-                  </Text>
-                )}
-              </View>
-            </View>
-          );
-        })}
-        <Pressable
-          hitSlop={commonStyles.hitSlop}
-          style={styles.expandedArrowIcon}
-          onPress={toggleCollapsedState}>
-          <UpArrow style={styles.downArrow} />
-        </Pressable>
-      </View>
     );
   };
 
@@ -309,10 +207,7 @@ const TrackOrderInfo = (props) => {
           </Pressable>
         </View>
 
-        <View>
-          {payment ? getPaymentStatus() : null}
-          {/* TODO: Add Check Image */}
-        </View>
+        <View>{payment ? getPaymentStatus() : null}</View>
       </View>
     </View>
   );
@@ -320,10 +215,12 @@ const TrackOrderInfo = (props) => {
 
 const mapStateToProps = (state) => ({
   orderDetails: state.orderReducer.orderDetails,
+  userDetails: state.homeReducer.userDetails,
 });
 
 const mapDispatchToProps = {
   setSelectedOrderId,
+  setOrderDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackOrderInfo);

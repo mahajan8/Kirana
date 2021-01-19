@@ -30,6 +30,8 @@ export const AppConfig = {
     // senderId: '826426830572',
     // otpLength: 6,
     // otpTimer: 40,
+    pubnubPublishKey: 'pub-c-6c6b32d6-708f-4785-8ccb-065b045836d3',
+    pubnutSubscribeKey: 'sub-c-db75dc12-5a14-11eb-95c0-3253a07b53cf',
   },
   production: {
     // baseUrl: 'https://api.girltribe.app/api',
