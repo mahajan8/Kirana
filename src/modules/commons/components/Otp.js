@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {View, TextInput, Platform, Keyboard} from 'react-native';
 import {Colors} from '../../../utils/values/Colors';
-import RNOtpVerify from 'react-native-otp-verify';
 import {styles} from '../styles/otpStyles';
+import OtpAutocomplete from 'react-native-otp-autocomplete';
 
 export default class Otp extends Component {
   constructor(props) {
@@ -62,17 +62,18 @@ export default class Otp extends Component {
     }
   };
 
-  getHash = () => RNOtpVerify.getHash().then(console.log).catch(console.log);
+  getHash = () =>
+    OtpAutocomplete.getHash().then(console.log).catch(console.log);
 
   startListeningForOtp = () =>
-    RNOtpVerify.getOtp()
-      .then((p) => RNOtpVerify.addListener(this.otpHandler))
+    OtpAutocomplete.getOtp()
+      .then((p) => OtpAutocomplete.addListener(this.otpHandler))
       .catch((p) => console.log(p));
 
   componentWillUnmount() {
     if (Platform.OS === 'android') {
       Keyboard.dismiss();
-      RNOtpVerify.removeListener();
+      OtpAutocomplete.removeListener();
     }
   }
   submitOTP() {

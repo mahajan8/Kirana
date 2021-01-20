@@ -7,36 +7,31 @@ import {commonStyles} from '../../commons/styles/commonStyles';
 import {TabView} from 'react-native-tab-view';
 import {styles} from '../styles/storeStyles';
 import {connect} from 'react-redux';
-import ShopActive from '../../../assets/images/shop_active.svg';
 import ShopInactive from '../../../assets/images/shop_inactive.svg';
-import OrdersActive from '../../../assets/images/orders_active.svg';
 import OrdersInactive from '../../../assets/images/orders_inactive.svg';
-import ExploreActive from '../../../assets/images/explore_active.svg';
 import ExploreInactive from '../../../assets/images/explore_inactive.svg';
 import Explore from './Explore';
 import StoreOrders from './StoreOrders';
 import StoreCategories from './StoreCategories';
 import {ripple} from '../../../utils/utility/Utils';
+import { Colors } from '../../../utils/values/Colors';
 
 // TODO: Add Icons for Explore
 let routes = [
   {
     key: 'first',
     title: Strings.shop,
-    ActiveIcon: ShopActive,
-    InactiveIcon: ShopInactive,
+    Icon: ShopInactive,
   },
   {
     key: 'second',
     title: Strings.explore,
-    ActiveIcon: ExploreActive,
-    InactiveIcon: ExploreInactive,
+    Icon: ExploreInactive,
   },
   {
     key: 'third',
     title: Strings.orders,
-    ActiveIcon: OrdersActive,
-    InactiveIcon: OrdersInactive,
+    Icon: OrdersInactive,
   },
 ];
 let initialLayout = {height: 0, width: Dimensions.get('window').width};
@@ -58,7 +53,7 @@ const Store = (props) => {
     return (
       <View style={[commonStyles.shadow, styles.tabRow]}>
         {routes.map((item, index) => {
-          let {title, ActiveIcon, InactiveIcon} = item;
+          let {title, Icon} = item;
           let selected = tabIndex === index ? true : false;
           return (
             <Pressable
@@ -66,7 +61,7 @@ const Store = (props) => {
               key={index.toString()}
               onPress={() => onChangeTab(index)}
               style={styles.tabItemContainer}>
-              {selected ? <ActiveIcon /> : <InactiveIcon />}
+              <Icon fill={selected ? Colors.themeGreen : Colors.lightGray} />
               <Text style={[styles.label, selected && styles.selectedLabel]}>
                 {title}
               </Text>
