@@ -11,8 +11,9 @@ import {
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
 import {setCartDetails} from '../cart/CartActions';
+import CleverTap from 'clevertap-react-native';
 
-export const getUserDetails = () => {
+export const getUserDetails = (newUser = false) => {
   return (dispatch) => {
     instance.get(Urls.getUserDetails).then((res) => {
       const success = !res.data.error;
@@ -28,7 +29,23 @@ export const getUserDetails = () => {
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
-        console.log(response);
+        console.log(user_details);
+        const {email, id, first_name, mobile} = user_details;
+        if (newUser) {
+          CleverTap.onUserLogin({
+            Name: first_name,
+            Identity: id,
+            Email: email,
+            Phone: mobile,
+          });
+        } else {
+          CleverTap.profileSet({
+            Name: first_name,
+            Identity: id,
+            Email: email,
+            Phone: mobile,
+          });
+        }
         if (last_order_rating) {
           Actions.reset('drawer');
         } else {

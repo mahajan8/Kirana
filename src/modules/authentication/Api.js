@@ -30,10 +30,10 @@ export const verifyOtp = (pars, error) => {
       const success = !res.data.error;
       if (success) {
         // Actions.otp({number: pars.mobile})
-        let token = res.data.data.api_token;
-        dispatch(setToken(token));
-        setAuthToken(token);
-        dispatch(getUserDetails());
+        const {is_new_user, api_token} = res.data.data;
+        dispatch(setToken(api_token));
+        setAuthToken(api_token);
+        dispatch(getUserDetails(is_new_user));
       } else {
         if (error) {
           error();
