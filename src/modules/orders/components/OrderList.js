@@ -48,7 +48,7 @@ const OrderList = (props) => {
     let {
       ORDER_PLACED,
       ORDER_ACCEPTED,
-      ORDER_DISPATCHED,
+      ORDER_DELIVERY_ASSIGNED,
       ORDER_UPDATED,
       ORDER_PARTIALLY_ACCEPTED,
       ORDER_OUT_FOR_DELIVERY,
@@ -68,7 +68,7 @@ const OrderList = (props) => {
           value: [
             ORDER_PLACED,
             ORDER_ACCEPTED,
-            ORDER_DISPATCHED,
+            ORDER_DELIVERY_ASSIGNED,
             ORDER_UPDATED,
             ORDER_PARTIALLY_ACCEPTED,
             ORDER_OUT_FOR_DELIVERY,
