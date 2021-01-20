@@ -94,7 +94,7 @@ const TrackOrderInfo = (props) => {
     PubNubClient.addListener(listener);
 
     return () => {
-      PubNubClient.unsubscribeAll();
+      PubNubClient.unsubscribe({channels});
       PubNubClient.removeListener(listener);
     };
   }, [PubNubClient, channels]);

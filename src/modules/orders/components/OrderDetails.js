@@ -119,7 +119,7 @@ const OrderDetails = (props) => {
   const getButtonLabel = () => {
     let {
       ORDER_ACCEPTED,
-      ORDER_DISPATCHED,
+      ORDER_DELIVERY_ASSIGNED,
       ORDER_OUT_FOR_DELIVERY,
       ORDER_CANCELLED,
       ORDER_REJECTED,
@@ -130,7 +130,7 @@ const OrderDetails = (props) => {
     switch (status) {
       case ORDER_ACCEPTED:
       case ORDER_PARTIALLY_ACCEPTED:
-      case ORDER_DISPATCHED:
+      case ORDER_DELIVERY_ASSIGNED:
       case ORDER_OUT_FOR_DELIVERY:
         return Strings.trackOrder;
       case ORDER_CANCELLED:
@@ -144,7 +144,7 @@ const OrderDetails = (props) => {
   const onButtonPress = () => {
     let {
       ORDER_ACCEPTED,
-      ORDER_DISPATCHED,
+      ORDER_DELIVERY_ASSIGNED,
       ORDER_OUT_FOR_DELIVERY,
       ORDER_CANCELLED,
       ORDER_REJECTED,
@@ -155,7 +155,7 @@ const OrderDetails = (props) => {
     switch (status) {
       case ORDER_ACCEPTED:
       case ORDER_PARTIALLY_ACCEPTED:
-      case ORDER_DISPATCHED:
+      case ORDER_DELIVERY_ASSIGNED:
       case ORDER_OUT_FOR_DELIVERY:
         if (isAfterTracking()) {
           Actions.popTo('trackOrder', {orderId: id});

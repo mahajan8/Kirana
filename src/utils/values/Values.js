@@ -30,7 +30,7 @@ export const orderStatus = {
   ORDER_CANCELLED: 50,
   ORDER_ACCEPTED: 60,
   ORDER_PARTIALLY_ACCEPTED: 70,
-  ORDER_DISPATCHED: 80,
+  ORDER_DELIVERY_ASSIGNED: 80,
   ORDER_OUT_FOR_DELIVERY: 90,
   ORDER_DELIVERED: 100,
 };
@@ -90,7 +90,7 @@ export const orderStatusBubbles = [
     labelColor: '#856305',
   },
   {
-    orderStatus: orderStatus.ORDER_DISPATCHED,
+    orderStatus: orderStatus.ORDER_DELIVERY_ASSIGNED,
     backgroundColor: '#d1ecf1',
     borderColor: '#b5e4eb',
     labelColor: '#0b5460',
