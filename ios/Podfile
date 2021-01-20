@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'customerapp' do
+target 'KiranaKart' do
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
   pod 'GoogleMaps'
@@ -17,7 +17,7 @@ target 'customerapp' do
   pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
 
-  target 'customerappTests' do
+  target 'KiranaKartTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -32,10 +32,10 @@ target 'customerapp' do
   end
 end
 
-target 'customerapp-tvOS' do
-  # Pods for customerapp-tvOS
+target 'KiranaKart-tvOS' do
+  # Pods for KiranaKart-tvOS
 
-  target 'customerapp-tvOSTests' do
+  target 'KiranaKart-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

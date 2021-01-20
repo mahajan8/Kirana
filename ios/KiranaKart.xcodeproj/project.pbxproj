@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* customerappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* customerappTests.m */; };
+		00E356F31AD99517003FC87E /* KiranaKartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* KiranaKartTests.m */; };
 		0D0F43B2237747DE9FE9AF92 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B57188CC32E4E13913214B4 /* Roboto-Bold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -16,14 +16,14 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D9906B53812402BBA5270CB /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0CBDF2FB9182485DBE30ED2F /* Poppins-Regular.ttf */; };
-		2DCD954D1E0B4F2C00145EB5 /* customerappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* customerappTests.m */; };
-		489307AD384F12FF1989D518 /* libPods-customerapp-customerappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D37B258E05F9DD8CCADBE123 /* libPods-customerapp-customerappTests.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* KiranaKartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* KiranaKartTests.m */; };
+		489307AD384F12FF1989D518 /* libPods-KiranaKart-KiranaKartTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D37B258E05F9DD8CCADBE123 /* libPods-KiranaKart-KiranaKartTests.a */; };
 		71616333C9B34729A441329B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3471F3AB74D84242B9D1E31A /* Poppins-SemiBold.ttf */; };
 		744FB542211A4D12B4D8485E /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC2C8E3164FC4CA3A9D1B3FC /* Poppins-Medium.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A7405DBD90A19EB6D322E92A /* libPods-customerapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34564E844B148596A39C938A /* libPods-customerapp.a */; };
-		C118375226BA0A691E9A6A8C /* libPods-customerapp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE06DD1A83F62B2A6BDF375 /* libPods-customerapp-tvOSTests.a */; };
-		DD98E7968E7F588B91F43B6C /* libPods-customerapp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7CE8A9864E03596216C609C /* libPods-customerapp-tvOS.a */; };
+		A7405DBD90A19EB6D322E92A /* libPods-KiranaKart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34564E844B148596A39C938A /* libPods-KiranaKart.a */; };
+		C118375226BA0A691E9A6A8C /* libPods-KiranaKart-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE06DD1A83F62B2A6BDF375 /* libPods-KiranaKart-tvOSTests.a */; };
+		DD98E7968E7F588B91F43B6C /* libPods-KiranaKart-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7CE8A9864E03596216C609C /* libPods-KiranaKart-tvOS.a */; };
 		E35C540CB09F4B5D92A5D108 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 949680B432EE4C178EEE9EDF /* Roboto-Medium.ttf */; };
 		F15EDAEA045145BDB12B525F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1926DD3BAF34554909B3948 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -34,50 +34,50 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = customerapp;
+			remoteInfo = KiranaKart;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "customerapp-tvOS";
+			remoteInfo = "KiranaKart-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* customerappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = customerappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* KiranaKartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiranaKartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* customerappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = customerappTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* KiranaKartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiranaKartTests.m; sourceTree = "<group>"; };
 		0B57188CC32E4E13913214B4 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		0CBDF2FB9182485DBE30ED2F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* customerapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = customerapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = customerapp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = customerapp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = customerapp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = customerapp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = customerapp/main.m; sourceTree = "<group>"; };
-		2D02E47B1E0B4A5D006451C7 /* customerapp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "customerapp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* customerapp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "customerapp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F2C45D769B6F5EFE0CF09C9 /* Pods-customerapp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-customerapp-tvOS/Pods-customerapp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		34564E844B148596A39C938A /* libPods-customerapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-customerapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* KiranaKart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiranaKart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = KiranaKart/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = KiranaKart/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KiranaKart/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KiranaKart/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = KiranaKart/main.m; sourceTree = "<group>"; };
+		2D02E47B1E0B4A5D006451C7 /* KiranaKart-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KiranaKart-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* KiranaKart-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KiranaKart-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F2C45D769B6F5EFE0CF09C9 /* Pods-KiranaKart-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-tvOS.release.xcconfig"; path = "Target Support Files/Pods-KiranaKart-tvOS/Pods-KiranaKart-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		34564E844B148596A39C938A /* libPods-KiranaKart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiranaKart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3471F3AB74D84242B9D1E31A /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		50CC0EB9C52C0A4DF92809D7 /* Pods-customerapp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-customerapp-tvOSTests/Pods-customerapp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		50CC0EB9C52C0A4DF92809D7 /* Pods-KiranaKart-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-KiranaKart-tvOSTests/Pods-KiranaKart-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		6880BDCF797644BD94928C78 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
-		7AE06DD1A83F62B2A6BDF375 /* libPods-customerapp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-customerapp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = customerapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		842E85799F6CEB2F63841B00 /* Pods-customerapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp.release.xcconfig"; path = "Target Support Files/Pods-customerapp/Pods-customerapp.release.xcconfig"; sourceTree = "<group>"; };
+		7AE06DD1A83F62B2A6BDF375 /* libPods-KiranaKart-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiranaKart-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = KiranaKart/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		842E85799F6CEB2F63841B00 /* Pods-KiranaKart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart.release.xcconfig"; path = "Target Support Files/Pods-KiranaKart/Pods-KiranaKart.release.xcconfig"; sourceTree = "<group>"; };
 		949680B432EE4C178EEE9EDF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		A290D5CAFF78E178BE14363E /* Pods-customerapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp.debug.xcconfig"; path = "Target Support Files/Pods-customerapp/Pods-customerapp.debug.xcconfig"; sourceTree = "<group>"; };
-		B7CE8A9864E03596216C609C /* libPods-customerapp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-customerapp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A290D5CAFF78E178BE14363E /* Pods-KiranaKart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart.debug.xcconfig"; path = "Target Support Files/Pods-KiranaKart/Pods-KiranaKart.debug.xcconfig"; sourceTree = "<group>"; };
+		B7CE8A9864E03596216C609C /* libPods-KiranaKart-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiranaKart-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2C8E3164FC4CA3A9D1B3FC /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		BD00627DF5C185203639CCF3 /* Pods-customerapp-customerappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-customerappTests.release.xcconfig"; path = "Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests.release.xcconfig"; sourceTree = "<group>"; };
-		BE489DD73E244501008CAF2E /* Pods-customerapp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-customerapp-tvOS/Pods-customerapp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		C80E3A77152968025C280180 /* Pods-customerapp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-customerapp-tvOSTests/Pods-customerapp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BD00627DF5C185203639CCF3 /* Pods-KiranaKart-KiranaKartTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-KiranaKartTests.release.xcconfig"; path = "Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests.release.xcconfig"; sourceTree = "<group>"; };
+		BE489DD73E244501008CAF2E /* Pods-KiranaKart-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-KiranaKart-tvOS/Pods-KiranaKart-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C80E3A77152968025C280180 /* Pods-KiranaKart-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-KiranaKart-tvOSTests/Pods-KiranaKart-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D1926DD3BAF34554909B3948 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		D37B258E05F9DD8CCADBE123 /* libPods-customerapp-customerappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-customerapp-customerappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D41A9500308F257BFF42399A /* Pods-customerapp-customerappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customerapp-customerappTests.debug.xcconfig"; path = "Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D37B258E05F9DD8CCADBE123 /* libPods-KiranaKart-KiranaKartTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiranaKart-KiranaKartTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41A9500308F257BFF42399A /* Pods-KiranaKart-KiranaKartTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiranaKart-KiranaKartTests.debug.xcconfig"; path = "Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489307AD384F12FF1989D518 /* libPods-customerapp-customerappTests.a in Frameworks */,
+				489307AD384F12FF1989D518 /* libPods-KiranaKart-KiranaKartTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7405DBD90A19EB6D322E92A /* libPods-customerapp.a in Frameworks */,
+				A7405DBD90A19EB6D322E92A /* libPods-KiranaKart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD98E7968E7F588B91F43B6C /* libPods-customerapp-tvOS.a in Frameworks */,
+				DD98E7968E7F588B91F43B6C /* libPods-KiranaKart-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,20 +111,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C118375226BA0A691E9A6A8C /* libPods-customerapp-tvOSTests.a in Frameworks */,
+				C118375226BA0A691E9A6A8C /* libPods-KiranaKart-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* customerappTests */ = {
+		00E356EF1AD99517003FC87E /* KiranaKartTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* customerappTests.m */,
+				00E356F21AD99517003FC87E /* KiranaKartTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = customerappTests;
+			path = KiranaKartTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -135,7 +135,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* customerapp */ = {
+		13B07FAE1A68108700A75B9A /* KiranaKart */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -146,7 +146,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = customerapp;
+			name = KiranaKart;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -154,10 +154,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				34564E844B148596A39C938A /* libPods-customerapp.a */,
-				D37B258E05F9DD8CCADBE123 /* libPods-customerapp-customerappTests.a */,
-				B7CE8A9864E03596216C609C /* libPods-customerapp-tvOS.a */,
-				7AE06DD1A83F62B2A6BDF375 /* libPods-customerapp-tvOSTests.a */,
+				34564E844B148596A39C938A /* libPods-KiranaKart.a */,
+				D37B258E05F9DD8CCADBE123 /* libPods-KiranaKart-KiranaKartTests.a */,
+				B7CE8A9864E03596216C609C /* libPods-KiranaKart-tvOS.a */,
+				7AE06DD1A83F62B2A6BDF375 /* libPods-KiranaKart-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,14 +165,14 @@
 		47823C9247DE9980E9DAAE35 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A290D5CAFF78E178BE14363E /* Pods-customerapp.debug.xcconfig */,
-				842E85799F6CEB2F63841B00 /* Pods-customerapp.release.xcconfig */,
-				D41A9500308F257BFF42399A /* Pods-customerapp-customerappTests.debug.xcconfig */,
-				BD00627DF5C185203639CCF3 /* Pods-customerapp-customerappTests.release.xcconfig */,
-				BE489DD73E244501008CAF2E /* Pods-customerapp-tvOS.debug.xcconfig */,
-				2F2C45D769B6F5EFE0CF09C9 /* Pods-customerapp-tvOS.release.xcconfig */,
-				C80E3A77152968025C280180 /* Pods-customerapp-tvOSTests.debug.xcconfig */,
-				50CC0EB9C52C0A4DF92809D7 /* Pods-customerapp-tvOSTests.release.xcconfig */,
+				A290D5CAFF78E178BE14363E /* Pods-KiranaKart.debug.xcconfig */,
+				842E85799F6CEB2F63841B00 /* Pods-KiranaKart.release.xcconfig */,
+				D41A9500308F257BFF42399A /* Pods-KiranaKart-KiranaKartTests.debug.xcconfig */,
+				BD00627DF5C185203639CCF3 /* Pods-KiranaKart-KiranaKartTests.release.xcconfig */,
+				BE489DD73E244501008CAF2E /* Pods-KiranaKart-tvOS.debug.xcconfig */,
+				2F2C45D769B6F5EFE0CF09C9 /* Pods-KiranaKart-tvOS.release.xcconfig */,
+				C80E3A77152968025C280180 /* Pods-KiranaKart-tvOSTests.debug.xcconfig */,
+				50CC0EB9C52C0A4DF92809D7 /* Pods-KiranaKart-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -187,9 +187,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* customerapp */,
+				13B07FAE1A68108700A75B9A /* KiranaKart */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* customerappTests */,
+				00E356EF1AD99517003FC87E /* KiranaKartTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				47823C9247DE9980E9DAAE35 /* Pods */,
@@ -203,10 +203,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* customerapp.app */,
-				00E356EE1AD99517003FC87E /* customerappTests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* customerapp-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* customerapp-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* KiranaKart.app */,
+				00E356EE1AD99517003FC87E /* KiranaKartTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* KiranaKart-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* KiranaKart-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,9 +228,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* customerappTests */ = {
+		00E356ED1AD99517003FC87E /* KiranaKartTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "customerappTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "KiranaKartTests" */;
 			buildPhases = (
 				6F9C1A27AAB38F1FDE2F1FA1 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -244,14 +244,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = customerappTests;
-			productName = customerappTests;
-			productReference = 00E356EE1AD99517003FC87E /* customerappTests.xctest */;
+			name = KiranaKartTests;
+			productName = KiranaKartTests;
+			productReference = 00E356EE1AD99517003FC87E /* KiranaKartTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* customerapp */ = {
+		13B07F861A680F5B00A75B9A /* KiranaKart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "customerapp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KiranaKart" */;
 			buildPhases = (
 				1B2C81BE2D6D4F1006F1571F /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -267,14 +267,14 @@
 			);
 			dependencies = (
 			);
-			name = customerapp;
-			productName = customerapp;
-			productReference = 13B07F961A680F5B00A75B9A /* customerapp.app */;
+			name = KiranaKart;
+			productName = KiranaKart;
+			productReference = 13B07F961A680F5B00A75B9A /* KiranaKart.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* customerapp-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* KiranaKart-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "customerapp-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "KiranaKart-tvOS" */;
 			buildPhases = (
 				D8C2078765F58E64E72F82B7 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -287,14 +287,14 @@
 			);
 			dependencies = (
 			);
-			name = "customerapp-tvOS";
-			productName = "customerapp-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* customerapp-tvOS.app */;
+			name = "KiranaKart-tvOS";
+			productName = "KiranaKart-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* KiranaKart-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* customerapp-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* KiranaKart-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "customerapp-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "KiranaKart-tvOSTests" */;
 			buildPhases = (
 				8C85C4D4187ADB437BB8EEC0 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -306,9 +306,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "customerapp-tvOSTests";
-			productName = "customerapp-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* customerapp-tvOSTests.xctest */;
+			name = "KiranaKart-tvOSTests";
+			productName = "KiranaKart-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* KiranaKart-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -337,7 +337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "customerapp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KiranaKart" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -350,10 +350,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* customerapp */,
-				00E356ED1AD99517003FC87E /* customerappTests */,
-				2D02E47A1E0B4A5D006451C7 /* customerapp-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* customerapp-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* KiranaKart */,
+				00E356ED1AD99517003FC87E /* KiranaKartTests */,
+				2D02E47A1E0B4A5D006451C7 /* KiranaKart-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* KiranaKart-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -419,7 +419,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-customerapp/Pods-customerapp-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KiranaKart/Pods-KiranaKart-resources.sh",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/DigiCertGlobalRootCA.crt",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/DigiCertSHA2SecureServerCA.crt",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/InApps/CTCoverImageViewController~ipad.xib",
@@ -560,7 +560,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-customerapp/Pods-customerapp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiranaKart/Pods-KiranaKart-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B2C81BE2D6D4F1006F1571F /* [CP] Check Pods Manifest.lock */ = {
@@ -578,7 +578,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-customerapp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KiranaKart-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -628,7 +628,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-customerapp-customerappTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KiranaKart-KiranaKartTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -650,7 +650,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-customerapp-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KiranaKart-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -663,7 +663,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests-resources.sh",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/DigiCertGlobalRootCA.crt",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/DigiCertSHA2SecureServerCA.crt",
 				"${PODS_ROOT}/CleverTap-iOS-SDK/CleverTapSDK/InApps/CTCoverImageViewController~ipad.xib",
@@ -804,7 +804,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D8C2078765F58E64E72F82B7 /* [CP] Check Pods Manifest.lock */ = {
@@ -822,7 +822,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-customerapp-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-KiranaKart-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -835,7 +835,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests-frameworks.sh",
 				"${PODS_ROOT}/razorpay-pod/Pod/Razorpay.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -844,7 +844,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-customerapp-customerappTests/Pods-customerapp-customerappTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiranaKart-KiranaKartTests/Pods-KiranaKart-KiranaKartTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE95A76C164B85B65E11A842 /* [CP] Embed Pods Frameworks */ = {
@@ -853,7 +853,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-customerapp/Pods-customerapp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KiranaKart/Pods-KiranaKart-frameworks.sh",
 				"${PODS_ROOT}/razorpay-pod/Pod/Razorpay.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -862,7 +862,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-customerapp/Pods-customerapp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiranaKart/Pods-KiranaKart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -910,7 +910,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* customerappTests.m in Sources */,
+				00E356F31AD99517003FC87E /* KiranaKartTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +936,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* customerappTests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* KiranaKartTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -945,12 +945,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* customerapp */;
+			target = 13B07F861A680F5B00A75B9A /* KiranaKart */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* customerapp-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* KiranaKart-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -958,14 +958,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D41A9500308F257BFF42399A /* Pods-customerapp-customerappTests.debug.xcconfig */;
+			baseConfigurationReference = D41A9500308F257BFF42399A /* Pods-KiranaKart-KiranaKartTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = customerappTests/Info.plist;
+				INFOPLIST_FILE = KiranaKartTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -975,17 +975,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/customerapp.app/customerapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KiranaKart.app/KiranaKart";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD00627DF5C185203639CCF3 /* Pods-customerapp-customerappTests.release.xcconfig */;
+			baseConfigurationReference = BD00627DF5C185203639CCF3 /* Pods-KiranaKart-KiranaKartTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = customerappTests/Info.plist;
+				INFOPLIST_FILE = KiranaKartTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -995,19 +995,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/customerapp.app/customerapp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KiranaKart.app/KiranaKart";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A290D5CAFF78E178BE14363E /* Pods-customerapp.debug.xcconfig */;
+			baseConfigurationReference = A290D5CAFF78E178BE14363E /* Pods-KiranaKart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = customerapp/Info.plist;
+				INFOPLIST_FILE = KiranaKart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1015,7 +1015,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = customerapp;
+				PRODUCT_NAME = KiranaKart;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1024,12 +1024,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 842E85799F6CEB2F63841B00 /* Pods-customerapp.release.xcconfig */;
+			baseConfigurationReference = 842E85799F6CEB2F63841B00 /* Pods-KiranaKart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = customerapp/Info.plist;
+				INFOPLIST_FILE = KiranaKart/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1037,7 +1037,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = customerapp;
+				PRODUCT_NAME = KiranaKart;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1045,7 +1045,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE489DD73E244501008CAF2E /* Pods-customerapp-tvOS.debug.xcconfig */;
+			baseConfigurationReference = BE489DD73E244501008CAF2E /* Pods-KiranaKart-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1056,14 +1056,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "customerapp-tvOS/Info.plist";
+				INFOPLIST_FILE = "KiranaKart-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.customerapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.KiranaKart-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1073,7 +1073,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F2C45D769B6F5EFE0CF09C9 /* Pods-customerapp-tvOS.release.xcconfig */;
+			baseConfigurationReference = 2F2C45D769B6F5EFE0CF09C9 /* Pods-KiranaKart-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1084,14 +1084,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "customerapp-tvOS/Info.plist";
+				INFOPLIST_FILE = "KiranaKart-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.customerapp-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.KiranaKart-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1101,7 +1101,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C80E3A77152968025C280180 /* Pods-customerapp-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = C80E3A77152968025C280180 /* Pods-KiranaKart-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1111,24 +1111,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "customerapp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "KiranaKart-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.customerapp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.KiranaKart-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/customerapp-tvOS.app/customerapp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KiranaKart-tvOS.app/KiranaKart-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50CC0EB9C52C0A4DF92809D7 /* Pods-customerapp-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 50CC0EB9C52C0A4DF92809D7 /* Pods-KiranaKart-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1138,17 +1138,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "customerapp-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "KiranaKart-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.customerapp-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.KiranaKart-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/customerapp-tvOS.app/customerapp-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KiranaKart-tvOS.app/KiranaKart-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -1269,7 +1269,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "customerappTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "KiranaKartTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -1278,7 +1278,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "customerapp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KiranaKart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1287,7 +1287,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "customerapp-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "KiranaKart-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -1296,7 +1296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "customerapp-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "KiranaKart-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -1305,7 +1305,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "customerapp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "KiranaKart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:654937786237:android:c52efab9fcb72cf3f72e14",
+        "android_client_info": {
+          "package_name": "app.kiranakart.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654937786237-l081nfvg66rkl9hdlm2qj42igtgobq3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKPcE18iNGbyvgfcBqZAduHN9XJp0-B5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654937786237-l081nfvg66rkl9hdlm2qj42igtgobq3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:654937786237:android:5889ffe1dd98ed3bf72e14",
         "android_client_info": {
           "package_name": "com.customerapp"

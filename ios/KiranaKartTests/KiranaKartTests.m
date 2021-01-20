@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface customerappTests : XCTestCase
+@interface KiranaKartTests : XCTestCase
 
 @end
 
-@implementation customerappTests
+@implementation KiranaKartTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

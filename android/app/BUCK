@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.customerapp",
+    package = "app.kiranakart.customer",
 )
 
 android_resource(
     name = "res",
-    package = "com.customerapp",
+    package = "app.kiranakart.customer",
     res = "src/main/res",
 )
 

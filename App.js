@@ -41,8 +41,8 @@ export default class App extends Component {
   configureSDK = () => {
     CleverTap.createNotificationChannel(
       'pushChannel',
-      'pushChannel',
-      'pushChannel',
+      'Channel name',
+      'Channel description',
       5,
       true,
     );
