@@ -35,7 +35,10 @@ export default class App extends Component {
     this.configureSDK();
   }
   async componentDidMount() {
-    this.getFcmToken();
+    if (Platform.OS === 'android') {
+      this.getFcmToken();
+    }
+    CleverTap.recordEvent('iOS event');
     // this.initializeListeners();
   }
   configureSDK = () => {
@@ -55,12 +58,10 @@ export default class App extends Component {
     }
     const fcmToken = await messaging().getToken();
     console.log('FCM Token', fcmToken);
-    if (Platform.OS === 'android') {
-      if (fcmToken) {
-        CleverTap.setPushToken('FCM-Token', fcmToken);
-      } else {
-        console.log('FCM Token', 'No Token Received');
-      }
+    if (fcmToken) {
+      CleverTap.setPushToken('FCM-Token', fcmToken);
+    } else {
+      console.log('FCM Token', 'No Token Received');
     }
   };
   initializeListeners = () => {
