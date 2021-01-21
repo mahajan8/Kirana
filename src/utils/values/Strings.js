@@ -299,4 +299,5 @@ export const Strings = {
   viewOrders: 'View Orders',
   multipleStores: 'Multiple stores',
   activeOrdersCount: (count) => 'You have ' + count + ' active orders.',
+  viewDetails: 'View Details',
 };

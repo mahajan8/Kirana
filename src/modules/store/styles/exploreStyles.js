@@ -38,8 +38,8 @@ export const styles = EStyleSheet.create({
   },
   categoryImage: {
     alignSelf: 'flex-end',
-    height: '100rem',
-    width: '100rem',
+    height: '100%',
+    width: '100%',
   },
   categoryName: {
     fontSize: '15rem',
@@ -47,6 +47,8 @@ export const styles = EStyleSheet.create({
     letterSpacing: '-0.13rem',
     color: Colors.titleText,
     margin: '16rem',
+    position: 'absolute',
+    bottom: 0,
   },
   list: {
     marginLeft: '4rem',
