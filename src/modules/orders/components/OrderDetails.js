@@ -20,7 +20,6 @@ import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import OrderDetailShimmer from './OrderDetailShimmer';
 import Loader from '../../commons/components/Loader';
-import ViewOriginalModal from './ViewOriginalModal';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -191,7 +190,7 @@ const OrderDetails = (props) => {
           />
 
           <Button
-            label={update ? Strings.acceptOrder : Strings.trackOrder}
+            label={update ? Strings.acceptChanges : Strings.trackOrder}
             Style={styles.rowButton}
             labelStyle={styles.buttonLabel}
             onPress={() => {

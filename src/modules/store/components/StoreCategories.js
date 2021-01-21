@@ -15,6 +15,7 @@ import Search from '../../../assets/images/search.svg';
 import {Strings} from '../../../utils/values/Strings';
 import CartCounter from '../../commons/components/CartCounter';
 import {ripple} from '../../../utils/utility/Utils';
+import CurrentOrders from '../../home/components/CurrentOrders';
 
 const StoreCategories = (props) => {
   useEffect(() => {
@@ -134,6 +135,7 @@ const StoreCategories = (props) => {
           {useNativeDriver: true},
         )}
       />
+      {/* <CurrentOrders /> */}
     </SafeArea>
   );
 };

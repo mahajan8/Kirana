@@ -27,7 +27,7 @@ let trackingList = [
     subTitle: Strings.orderAcceptedSub,
   },
   {
-    orderStatus: orderStatus.ORDER_DISPATCHED,
+    orderStatus: orderStatus.ORDER_DELIVERY_ASSIGNED,
     title: Strings.partnedOnWay,
     subTitle: Strings.onTheWaySub,
   },

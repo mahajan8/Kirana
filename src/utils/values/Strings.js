@@ -285,6 +285,7 @@ export const Strings = {
   submitFeedback: 'Submit your Feedback',
   rejectOrder: 'Reject Order',
   acceptOrder: 'Accept Order',
+  acceptChanges: 'Accept Changes',
   viewOriginalItem: 'View original item',
   originalItem: 'Original Item',
   addFromThisStore: 'Add items from this store. ',
@@ -292,4 +293,8 @@ export const Strings = {
   mapOrderRejectedHeading: 'Sorry! Your order was rejected.',
   mapOrderRejectedSub:
     "We're refunding you instantly. We can fulfill your order from another store.",
+  orderItemsChanged:
+    'Some items in your order have been changed, kindly review and approve the changes.',
+  yourOrderIs: 'Your order is',
+  viewOrders: 'View Orders',
 };

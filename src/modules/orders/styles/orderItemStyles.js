@@ -45,12 +45,20 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   viewOriginal: {
-    fontSize: '8rem',
-    fontFamily: Fonts.regular,
-    lineHeight: '15rem',
-    letterSpacing: '0.08rem',
-    color: '#e96c76',
-    textDecorationLine: 'underline',
-    marginTop: '5rem',
+    fontSize: '10rem',
+    fontFamily: Fonts.medium,
+    letterSpacing: '0.07rem',
+    color: Colors.themeGreen,
+    marginLeft: '4rem',
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  seperator: {
+    height: '9vrem',
+    width: '1rem',
+    backgroundColor: Colors.lightGray,
+    marginHorizontal: '6rem',
   },
 });

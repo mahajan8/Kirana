@@ -5,6 +5,7 @@ import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {styles} from '../styles/orderItemStyles';
 import ViewOriginalModal from './ViewOriginalModal';
+import Eye from '../../../assets/images/eyeicon.svg';
 
 const OrderItem = (props) => {
   let {
@@ -30,17 +31,30 @@ const OrderItem = (props) => {
         <Text style={styles.itemName} numberOfLines={2}>
           {product_name}
         </Text>
-        <Text style={styles.itemWeight}>
-          {product_quantity} {getKeyByValue(unitsShortName, product_packaging)}
-        </Text>
 
-        {old_order_product ? (
-          <Pressable
-            onPress={() => setShowOriginal(true)}
-            android_ripple={ripple}>
-            <Text style={styles.viewOriginal}>{Strings.viewOriginalItem}</Text>
-          </Pressable>
-        ) : null}
+        <View style={styles.rowContainer}>
+          <Text style={styles.itemWeight}>
+            {product_quantity}{' '}
+            {getKeyByValue(unitsShortName, product_packaging)}
+          </Text>
+
+          {old_order_product ? (
+            <View style={styles.rowContainer}>
+              <View style={styles.seperator} />
+
+              <Pressable
+                onPress={() => setShowOriginal(true)}
+                android_ripple={ripple}
+                style={styles.rowContainer}>
+                <Eye />
+
+                <Text style={styles.viewOriginal}>
+                  {Strings.viewOriginalItem}
+                </Text>
+              </Pressable>
+            </View>
+          ) : null}
+        </View>
       </View>
       <Text style={styles.itemPrice}>
         {Strings.currency} {final_amount}

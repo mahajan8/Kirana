@@ -422,9 +422,9 @@ PODS:
     - Sentry (= 6.0.9)
   - RNSVG (12.1.0):
     - React
-  - SDWebImage (5.10.0):
-    - SDWebImage/Core (= 5.10.0)
-  - SDWebImage/Core (5.10.0)
+  - SDWebImage (5.10.2):
+    - SDWebImage/Core (= 5.10.2)
+  - SDWebImage/Core (5.10.2)
   - Sentry (6.0.9):
     - Sentry/Core (= 6.0.9)
   - Sentry/Core (6.0.9)
@@ -434,7 +434,6 @@ PODS:
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - CleverTap-iOS-SDK
   - clevertap-react-native (from `../node_modules/clevertap-react-native`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -630,7 +629,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CleverTap-iOS-SDK: 37872a91bdac5da30e7d268c7f571ae894be4298
-  clevertap-react-native: 585fc81ae78261f1c8ed5f505e2dfd9010d85309
+  clevertap-react-native: 2ac030374ae68065b4db344f6357a60df702d117
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714
@@ -657,8 +656,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
-  Permission-LocationAlways: 20c287ae79fbc5659a9cc95b32a725810f5529df
-  Permission-LocationWhenInUse: e09ae67e8db2b1eeefb35f18ca59848d0785de5b
+  Permission-LocationAlways: c083f45f28c4b78ddc6f9668cf1a984d879a80ec
+  Permission-LocationWhenInUse: e2b8c40ce0f3675a521f26787ab47ebb9bace503
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   razorpay-pod: ee8dc073c65baee8df6e8c4275b1c989bab614a2
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
@@ -673,9 +672,9 @@ SPEC CHECKSUMS:
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-geolocation-service: f33626f1ae12381ca2ae60f98b2f5edd676bf95a
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
+  react-native-image-picker: c6d75c4ab2cf46f9289f341242b219cb3c1180d3
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-razorpay: 4e851d32acf8147ae5799321e749b3e2d137e1a3
+  react-native-razorpay: bb19c0aa50ee004ddb4b51615f07f3435aae4901
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
   React-RCTBlob: 0b284339cbe4b15705a05e2313a51c6d8b51fa40
@@ -686,21 +685,21 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RNCAsyncStorage: bc2f81cc1df90c267ce9ed30bb2dbc93b945a8ee
-  RNDateTimePicker: 54bc1830e4e8d99ed00e6b6735b8517e163b2a4a
+  RNCAsyncStorage: 05bae7ecfab1cbd5441993f1ca098f7c3b3f8d0e
+  RNDateTimePicker: 120f8d08b19dd50c0308d30a07c1982e4618e9ad
   RNFBApp: 43a062dc6a1a88edd934d2229d1ba64f25381598
   RNFBMessaging: 7ca5248796434376c186b65029b1cec7d3e0990b
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
-  RNPermissions: 350964d19150b183796a88180fb7ec62a1e41422
+  RNPermissions: 99dd8d4a30ff13509b949ca63cd1f69edc461775
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  SDWebImage: 9169792e9eec3e45bba2a0c02f74bf8bd922d1ee
+  SDWebImage: b969dcfc02c40a5da71eac0b03b8f1a0c794a86f
   Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 07bbfc2ada61444c4a0fa0af425259a0f09991ad
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

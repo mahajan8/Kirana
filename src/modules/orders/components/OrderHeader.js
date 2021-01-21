@@ -94,7 +94,7 @@ const OrderHeader = (props) => {
 
   const showLabel = () => {
     let label = null;
-    let {ORDER_REJECTED, ORDER_CANCELLED} = orderStatus;
+    let {ORDER_REJECTED, ORDER_CANCELLED, ORDER_UPDATED} = orderStatus;
 
     switch (status) {
       case ORDER_REJECTED:
@@ -102,6 +102,9 @@ const OrderHeader = (props) => {
         break;
       case ORDER_CANCELLED:
         label = Strings.orderCancelRefundInfo;
+        break;
+      case ORDER_UPDATED:
+        label = Strings.orderItemsChanged;
         break;
       default:
         label = null;
