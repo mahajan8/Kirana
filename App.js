@@ -38,7 +38,7 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       this.getFcmToken();
     }
-    CleverTap.recordEvent('iOS event');
+    // CleverTap.recordEvent('New event for iOS');
     // this.initializeListeners();
   }
   configureSDK = () => {
