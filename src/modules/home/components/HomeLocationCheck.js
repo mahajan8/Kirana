@@ -30,10 +30,12 @@ import ModalContainer from '../../commons/components/ModalContainer';
 const HomeLocationCheck = (props) => {
   const [visible, setVisible] = useState(false);
 
-  let {setLocation, selectedLocation} = props;
+  let {setLocation, selectedLocation, location} = props;
 
   useEffect(() => {
-    checkPermission();
+    if (!location) {
+      checkPermission();
+    }
   }, []);
 
   const checkPermission = () => {
@@ -159,6 +161,7 @@ const HomeLocationCheck = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.homeReducer.addresses,
+  location: state.homeReducer.location,
 });
 
 const mapDispatchToProps = {
