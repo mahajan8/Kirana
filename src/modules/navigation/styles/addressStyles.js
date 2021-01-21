@@ -20,8 +20,8 @@ export const styles = EStyleSheet.create({
     borderRadius: '6rem',
     shadowOffset: {width: 0, height: 0},
     elevation: 3,
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
   addressType: {
     fontSize: '14rem',
@@ -69,6 +69,7 @@ export const styles = EStyleSheet.create({
   container: {
     flex: 1,
     flexGrow: 1,
+    backgroundColor: '#fafafa',
   },
   list: {
     paddingBottom: '20vrem',

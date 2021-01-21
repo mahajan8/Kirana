@@ -121,8 +121,6 @@ export const styles = EStyleSheet.create({
     backgroundColor: '#f7f7f7',
   },
   horizontalListContainer: {
-    borderBottomWidth: '1rem',
-    borderColor: Colors.listBorderGray,
     paddingHorizontal: '10rem',
   },
   filterIcon: {

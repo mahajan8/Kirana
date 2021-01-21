@@ -64,6 +64,7 @@ export const styles = EStyleSheet.create({
     paddingVertical: '14vrem',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingRight: '16rem',
   },
   bottomContainer: {
     paddingHorizontal: '16rem',

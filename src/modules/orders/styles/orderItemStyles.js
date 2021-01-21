@@ -28,9 +28,9 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     width: '170rem',
     paddingTop: '3rem',
+    marginBottom: '3rem',
   },
   itemWeight: {
-    marginTop: '3rem',
     fontSize: '12rem',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.2rem',

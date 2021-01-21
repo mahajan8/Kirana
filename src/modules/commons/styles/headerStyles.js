@@ -9,11 +9,14 @@ export const styles = EStyleSheet.create({
     // borderBottomWidth: 1,
     marginBottom: '35rem',
     backgroundColor: Colors.white,
+    zIndex: 10,
   },
   container2: {
     paddingVertical: '12rem',
     marginBottom: 0,
     paddingHorizontal: '16rem',
+    height: '56rem',
+    justifyContent: 'center',
   },
   title: {
     color: Colors.titleText,
@@ -45,7 +48,7 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   headerShadow: {
-    shadowOffset: {width: 0, height: 5},
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,

@@ -11,6 +11,7 @@ export const styles = EStyleSheet.create({
     paddingRight: '16rem',
     paddingVertical: '15rem',
     backgroundColor: '#FFF',
+    zIndex: 10,
   },
   subTitle: {
     color: Colors.subTitleText,
@@ -55,8 +56,7 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.titleText,
     marginHorizontal: '10rem',
-    lineHeight: '20rem',
-    ...(Platform.OS == 'android' && {
+    ...(Platform.OS === 'android' && {
       paddingVertical: 0,
       paddingHorizontal: 0,
     }),
@@ -66,7 +66,7 @@ export const styles = EStyleSheet.create({
     marginRight: '16rem',
   },
   headerShadow: {
-    shadowOffset: {width: 0, height: 5},
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,

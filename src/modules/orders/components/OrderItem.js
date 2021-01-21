@@ -38,7 +38,7 @@ const OrderItem = (props) => {
             {getKeyByValue(unitsShortName, product_packaging)}
           </Text>
 
-          {old_order_product ? (
+          {!old_order_product ? (
             <View style={styles.rowContainer}>
               <View style={styles.seperator} />
 
@@ -48,9 +48,7 @@ const OrderItem = (props) => {
                 style={styles.rowContainer}>
                 <Eye />
 
-                <Text style={styles.viewOriginal}>
-                  {Strings.viewOriginalItem}
-                </Text>
+                <Text style={styles.viewOriginal}>{Strings.originalItem}</Text>
               </Pressable>
             </View>
           ) : null}

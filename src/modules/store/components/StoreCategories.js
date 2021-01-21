@@ -134,6 +134,7 @@ const StoreCategories = (props) => {
           [{nativeEvent: {contentOffset: {y: scroll}}}],
           {useNativeDriver: true},
         )}
+        bounces={false}
       />
       <CurrentOrders />
     </SafeArea>

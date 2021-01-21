@@ -75,7 +75,7 @@ export const styles = EStyleSheet.create({
   buttonContainer: {
     paddingVertical: '8vrem',
     backgroundColor: Colors.white,
-    shadowOffset: {width: 0, height: -3},
+    shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 5,
