@@ -42,48 +42,48 @@ const Home = (props) => {
     }
   }, [location]);
 
-  // useEffect(() => {
-  //   let listener = {message: handleMessage};
-  //   pubnub.subscribe({channels});
-  //   pubnub.addListener(listener);
+  useEffect(() => {
+    let listener = {message: handleMessage};
+    pubnub.subscribe({channels});
+    pubnub.addListener(listener);
 
-  //   return () => {
-  //     pubnub.unsubscribe({channels});
-  //     pubnub.removeListener(listener);
-  //   };
-  // }, [pubnub, channels]);
+    return () => {
+      pubnub.unsubscribe({channels});
+      pubnub.removeListener(listener);
+    };
+  }, [pubnub, channels]);
 
-  // const handleMessage = async (event) => {
-  //   const {type, payload} = event.message;
+  const handleMessage = async (event) => {
+    const {type, payload} = event.message;
 
-  //   let {id, status, store_name} = payload.order;
+    let {id, status, store_name} = payload.order;
 
-  //   let order = {
-  //     id,
-  //     status,
-  //     store_name,
-  //   };
+    let order = {
+      id,
+      status,
+      store_name,
+    };
 
-  //   let {currentOrders} = store.getState().homeReducer;
+    let {currentOrders} = store.getState().homeReducer;
 
-  //   let i = currentOrders.findIndex((obj) => obj.id === id);
+    let i = currentOrders.findIndex((obj) => obj.id === id);
 
-  //   let newCurrentOrders = [...currentOrders];
+    let newCurrentOrders = [...currentOrders];
 
-  //   if (i >= 0) {
-  //     if (status === orderStatus.ORDER_DELIVERED) {
-  //       newCurrentOrders.splice(i, 1);
-  //     } else if (status !== newCurrentOrders[i].status) {
-  //       newCurrentOrders[i] = order;
-  //     }
-  //   } else {
-  //     if (status !== orderStatus.ORDER_DELIVERED) {
-  //       newCurrentOrders.push(order);
-  //     }
-  //   }
+    if (i >= 0) {
+      if (status === orderStatus.ORDER_DELIVERED) {
+        newCurrentOrders.splice(i, 1);
+      } else if (status !== newCurrentOrders[i].status) {
+        newCurrentOrders[i] = order;
+      }
+    } else {
+      if (status !== orderStatus.ORDER_DELIVERED) {
+        newCurrentOrders.push(order);
+      }
+    }
 
-  //   props.setCurrentOrders(newCurrentOrders);
-  // };
+    props.setCurrentOrders(newCurrentOrders);
+  };
 
   const searchProductHeader = () => {
     return (

@@ -136,7 +136,7 @@ const StoreCategories = (props) => {
         )}
         bounces={false}
       />
-      {/* <CurrentOrders /> */}
+      <CurrentOrders />
     </SafeArea>
   );
 };
