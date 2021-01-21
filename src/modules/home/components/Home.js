@@ -73,6 +73,8 @@ const Home = (props) => {
   //   if (i >= 0) {
   //     if (status === orderStatus.ORDER_DELIVERED) {
   //       newCurrentOrders.splice(i, 1);
+  //     } else if (status !== newCurrentOrders[i].status) {
+  //       newCurrentOrders[i] = order;
   //     }
   //   } else {
   //     if (status !== orderStatus.ORDER_DELIVERED) {
