@@ -11,6 +11,8 @@ import {
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
   APPEND_USER_DETAILS,
+  APPEND_CURRENT_ORDERS,
+  REMOVE_FROM_CURRENT_ORDERS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -25,6 +27,7 @@ const INITIAL_STATE = {
   storeProducts: [],
   storeProductCount: null,
   selectedStore: null,
+  currentOrders: [],
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -94,6 +97,22 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userDetails: {...state.userDetails, ...action.userDetails},
+      };
+    }
+    case APPEND_CURRENT_ORDERS: {
+      return {
+        ...state,
+        currentOrders: [...state.currentOrders, action.data],
+      };
+    }
+    case REMOVE_FROM_CURRENT_ORDERS: {
+      let index = state.currentOrders.findIndex(
+        (obj) => obj.id === action.data,
+      );
+
+      return {
+        ...state,
+        currentOrders: state.currentOrders.splice(index, 1),
       };
     }
     default:

@@ -17,19 +17,69 @@ import {setLocation} from '../../onboarding/OnboardingActions';
 import NoStores from '../../../assets/images/stores_empty_image.svg';
 import Button from '../../commons/components/Button';
 import StorePlaceholder from './StorePlaceHolder';
-import {selectStore} from '../HomeActions';
+import {
+  selectStore,
+  appendCurrentOrders,
+  removeFromCurrentOrders,
+} from '../HomeActions';
 import {ripple} from '../../../utils/utility/Utils';
+import PubNub from 'pubnub';
+import {AppConfig} from '../../../config/AppConfig';
+import {environment} from '../../../config/EnvConfig';
+import store from '../../../utils/Store';
+import {orderStatus} from '../../../utils/values/Values';
+
+const pubnub = new PubNub({
+  publishKey: AppConfig[environment].pubnubPublishKey,
+  subscribeKey: AppConfig[environment].pubnutSubscribeKey,
+});
 
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const {stores, storeCount, location} = props.homeReducer;
+  const {stores, storeCount, location, userDetails} = props.homeReducer;
+  const [channels] = useState([userDetails.id]);
 
   useEffect(() => {
     if (location) {
       loadStores(0);
     }
   }, [location]);
+
+  useEffect(() => {
+    let listener = {message: handleMessage};
+    pubnub.subscribe({channels});
+    pubnub.addListener(listener);
+
+    return () => {
+      pubnub.unsubscribe({channels});
+      pubnub.removeListener(listener);
+    };
+  }, [pubnub, channels]);
+
+  const handleMessage = async (event) => {
+    const {type, payload} = event.message;
+
+    let {id, status, store_name} = payload.order;
+
+    let order = {
+      id,
+      status,
+      store_name,
+    };
+
+    let {currentOrders} = store.getState().homeReducer;
+
+    let exists = currentOrders.some((obj) => obj.id === id);
+
+    if (exists) {
+      // if (status === orderStatus.ORDER_DELIVERED) {
+      //   props.removeFromCurrentOrders(id);
+      // }
+    } else {
+      props.appendCurrentOrders(order);
+    }
+  };
 
   const searchProductHeader = () => {
     return (
@@ -128,6 +178,8 @@ const mapDispatchToProps = {
   getStores,
   setLocation,
   selectStore,
+  appendCurrentOrders,
+  removeFromCurrentOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

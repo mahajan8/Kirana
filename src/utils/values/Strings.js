@@ -297,4 +297,6 @@ export const Strings = {
     'Some items in your order have been changed, kindly review and approve the changes.',
   yourOrderIs: 'Your order is',
   viewOrders: 'View Orders',
+  multipleStores: 'Multiple stores',
+  activeOrdersCount: (count) => 'You have ' + count + ' active orders.',
 };

@@ -8,6 +8,8 @@ import {
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
   APPEND_USER_DETAILS,
+  APPEND_CURRENT_ORDERS,
+  REMOVE_FROM_CURRENT_ORDERS,
 } from './ActionTypes';
 
 export const setUserDetails = (userDetail) => ({
@@ -53,4 +55,14 @@ export const selectStore = (store) => ({
 export const appendUserDetails = (userDetails) => ({
   type: APPEND_USER_DETAILS,
   userDetails,
+});
+
+export const appendCurrentOrders = (data) => ({
+  type: APPEND_CURRENT_ORDERS,
+  data,
+});
+
+export const removeFromCurrentOrders = (data) => ({
+  type: REMOVE_FROM_CURRENT_ORDERS,
+  data,
 });

@@ -135,7 +135,7 @@ const StoreCategories = (props) => {
           {useNativeDriver: true},
         )}
       />
-      {/* <CurrentOrders /> */}
+      <CurrentOrders />
     </SafeArea>
   );
 };
