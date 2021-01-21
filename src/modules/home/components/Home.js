@@ -17,11 +17,7 @@ import {setLocation} from '../../onboarding/OnboardingActions';
 import NoStores from '../../../assets/images/stores_empty_image.svg';
 import Button from '../../commons/components/Button';
 import StorePlaceholder from './StorePlaceHolder';
-import {
-  selectStore,
-  appendCurrentOrders,
-  removeFromCurrentOrders,
-} from '../HomeActions';
+import {selectStore, setCurrentOrders} from '../HomeActions';
 import {ripple} from '../../../utils/utility/Utils';
 import PubNub from 'pubnub';
 import {AppConfig} from '../../../config/AppConfig';
@@ -46,40 +42,46 @@ const Home = (props) => {
     }
   }, [location]);
 
-  useEffect(() => {
-    let listener = {message: handleMessage};
-    pubnub.subscribe({channels});
-    pubnub.addListener(listener);
+  // useEffect(() => {
+  //   let listener = {message: handleMessage};
+  //   pubnub.subscribe({channels});
+  //   pubnub.addListener(listener);
 
-    return () => {
-      pubnub.unsubscribe({channels});
-      pubnub.removeListener(listener);
-    };
-  }, [pubnub, channels]);
+  //   return () => {
+  //     pubnub.unsubscribe({channels});
+  //     pubnub.removeListener(listener);
+  //   };
+  // }, [pubnub, channels]);
 
-  const handleMessage = async (event) => {
-    const {type, payload} = event.message;
+  // const handleMessage = async (event) => {
+  //   const {type, payload} = event.message;
 
-    let {id, status, store_name} = payload.order;
+  //   let {id, status, store_name} = payload.order;
 
-    let order = {
-      id,
-      status,
-      store_name,
-    };
+  //   let order = {
+  //     id,
+  //     status,
+  //     store_name,
+  //   };
 
-    let {currentOrders} = store.getState().homeReducer;
+  //   let {currentOrders} = store.getState().homeReducer;
 
-    let exists = currentOrders.some((obj) => obj.id === id);
+  //   let i = currentOrders.findIndex((obj) => obj.id === id);
 
-    if (exists) {
-      // if (status === orderStatus.ORDER_DELIVERED) {
-      //   props.removeFromCurrentOrders(id);
-      // }
-    } else {
-      props.appendCurrentOrders(order);
-    }
-  };
+  //   let newCurrentOrders = [...currentOrders];
+
+  //   if (i >= 0) {
+  //     if (status === orderStatus.ORDER_DELIVERED) {
+  //       newCurrentOrders.splice(i, 1);
+  //     }
+  //   } else {
+  //     if (status !== orderStatus.ORDER_DELIVERED) {
+  //       newCurrentOrders.push(order);
+  //     }
+  //   }
+
+  //   props.setCurrentOrders(newCurrentOrders);
+  // };
 
   const searchProductHeader = () => {
     return (
@@ -178,8 +180,7 @@ const mapDispatchToProps = {
   getStores,
   setLocation,
   selectStore,
-  appendCurrentOrders,
-  removeFromCurrentOrders,
+  setCurrentOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

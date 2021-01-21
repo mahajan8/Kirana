@@ -13,6 +13,7 @@ import {
   APPEND_USER_DETAILS,
   APPEND_CURRENT_ORDERS,
   REMOVE_FROM_CURRENT_ORDERS,
+  SET_CURRENT_ORDERS,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -99,20 +100,10 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
         userDetails: {...state.userDetails, ...action.userDetails},
       };
     }
-    case APPEND_CURRENT_ORDERS: {
+    case SET_CURRENT_ORDERS: {
       return {
         ...state,
-        currentOrders: [...state.currentOrders, action.data],
-      };
-    }
-    case REMOVE_FROM_CURRENT_ORDERS: {
-      let index = state.currentOrders.findIndex(
-        (obj) => obj.id === action.data,
-      );
-
-      return {
-        ...state,
-        currentOrders: state.currentOrders.splice(index, 1),
+        currentOrders: action.data,
       };
     }
     default:
