@@ -10,6 +10,7 @@ import {
   APPEND_USER_DETAILS,
   APPEND_CURRENT_ORDERS,
   REMOVE_FROM_CURRENT_ORDERS,
+  SET_CURRENT_ORDERS,
 } from './ActionTypes';
 
 export const setUserDetails = (userDetail) => ({
@@ -57,12 +58,7 @@ export const appendUserDetails = (userDetails) => ({
   userDetails,
 });
 
-export const appendCurrentOrders = (data) => ({
-  type: APPEND_CURRENT_ORDERS,
-  data,
-});
-
-export const removeFromCurrentOrders = (data) => ({
-  type: REMOVE_FROM_CURRENT_ORDERS,
+export const setCurrentOrders = (data) => ({
+  type: SET_CURRENT_ORDERS,
   data,
 });
