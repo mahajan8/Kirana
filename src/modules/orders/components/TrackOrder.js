@@ -30,6 +30,8 @@ let trackStatus = 2;
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
   subscribeKey: AppConfig[environment].pubnutSubscribeKey,
+  subscribeRequestTimeout: 60000,
+  presenceTimeout: 122,
 });
 
 const TrackOrder = (props) => {
