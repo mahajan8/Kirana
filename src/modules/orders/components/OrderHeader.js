@@ -42,6 +42,7 @@ const OrderHeader = (props) => {
     delivery_address_location,
     payment,
     // overdue_time_limit,
+    code,
   } = props.orderDetails;
 
   const getOrderStatusBubble = (payStatus, custom) => {
@@ -141,7 +142,7 @@ const OrderHeader = (props) => {
 
         <View style={[styles.orderInfoRow, styles.orderIdContainer]}>
           <Text style={styles.orderId} numberOfLines={1}>
-            {Strings.orderId} - {id}
+            {Strings.orderId} - {code}
           </Text>
           {getOrderStatusBubble()}
         </View>
