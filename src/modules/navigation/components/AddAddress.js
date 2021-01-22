@@ -1,12 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {View, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
@@ -20,13 +14,13 @@ import CustomMarker from '../../../assets/images/address_map_marker.svg';
 import Location from '../../../assets/images/green_location.svg';
 import {connect} from 'react-redux';
 import {addUpdateAddress} from '../Api';
-import Loader from '../../commons/components/Loader';
 import {isAnyFieldEmpty} from '../../../utils/utility/Validations';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import BottomButton from '../../commons/components/BottomButton';
+import LoaderError from '../../commons/components/LoaderError';
 
 const typesList = Object.values(addressTypes);
 
@@ -176,7 +170,7 @@ const AddAddress = (props) => {
         onPress={() => submitAddress()}
         disabled={isAnyFieldEmpty([houseNumber, landmark]) || !addressType}
       />
-      <Loader show={props.loading} />
+      <LoaderError retry={submitAddress} />
     </SafeArea>
   );
 };

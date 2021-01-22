@@ -4,8 +4,11 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    marginTop: '142vrem',
+    justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
+    width: '100%',
+    backgroundColor: Colors.white,
   },
   noInternetTitle: {
     fontFamily: Fonts.semiBold,
@@ -30,5 +33,9 @@ export const styles = EStyleSheet.create({
   buttonLabel: {
     fontSize: '12rem',
     letterSpacing: '0.09rem',
+  },
+  loaderContainer: {
+    position: 'absolute',
+    bottom: '50vrem',
   },
 });

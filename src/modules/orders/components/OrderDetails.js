@@ -19,7 +19,7 @@ import {
 import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import OrderDetailShimmer from './OrderDetailShimmer';
-import Loader from '../../commons/components/Loader';
+import LoaderError from '../../commons/components/LoaderError';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -282,11 +282,7 @@ const OrderDetails = (props) => {
         button2Press={cancel}
       />
 
-      {orderDetails && props.loading && (
-        <View style={styles.loaderContainer}>
-          <Loader show={true} />
-        </View>
-      )}
+      <LoaderError hideLoader={orderDetails ? false : true} />
     </SafeArea>
   );
 };

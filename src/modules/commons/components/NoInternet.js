@@ -1,15 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {Colors} from '../../../utils/values/Colors';
-import SafeArea from './SafeArea';
+import {Text, View, Modal} from 'react-native';
 import NoInternetImage from '../../../assets/images/no_internet.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Button from './Button';
+import store from '../../../utils/Store';
+import {setNoInternet} from '../../authentication/AuthActions';
 import {styles} from '../styles/noInternetStyles';
+import ModalContainer from './ModalContainer';
 
 const NoInternet = (props) => {
   return (
-    <SafeArea statusBarColor={Colors.lightGreen}>
+    <ModalContainer visible={true} cancellable={false}>
       <View style={styles.container}>
         <NoInternetImage />
         <Text style={styles.noInternetTitle}>{Strings.noConnection}</Text>
@@ -18,9 +19,16 @@ const NoInternet = (props) => {
           label={Strings.refresh}
           Style={styles.buttonStyle}
           labelStyle={styles.buttonLabel}
+          onPress={() => {
+            if (props.retry) {
+              props.retry();
+            } else {
+              store.dispatch(setNoInternet(false));
+            }
+          }}
         />
       </View>
-    </SafeArea>
+    </ModalContainer>
   );
 };
 

@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
-import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/orderListStyles';
 import {Strings} from '../../../utils/values/Strings';
 import {connect} from 'react-redux';
 import {getOrders} from '../Api';
-import Loader from '../../commons/components/Loader';
 import OrderListItem from './OrderListItem';
 import {orderStatus} from '../../../utils/values/Values';
 import {clearOrders, setActiveOrders, setPastOrders} from '../OrderActions';
@@ -19,6 +17,7 @@ import OrderListShimmer from './OrderListShimmer';
 import CartEmpty from '../../../assets/images/empty_cart.svg';
 import {Actions} from 'react-native-router-flux';
 import Button from '../../commons/components/Button';
+import LoaderError from '../../commons/components/LoaderError';
 
 const OrderList = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
@@ -180,15 +179,11 @@ const OrderList = (props) => {
       ? true
       : false;
 
-    if (props.loading && showLoader) {
-      return (
-        <View style={styles.listLoaderContainer}>
-          <Loader show={true} />
-        </View>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <View style={styles.listLoaderContainer}>
+        <LoaderError hideLoader={!showLoader} />
+      </View>
+    );
   };
 
   let showActiveHeader = storeOrders

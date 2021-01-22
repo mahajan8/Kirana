@@ -12,7 +12,7 @@ import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {submitOrderRating} from '../Api';
 import {connect} from 'react-redux';
-import Loader from '../../commons/components/Loader';
+import LoaderError from '../../commons/components/LoaderError';
 
 let stars = [1, 2, 3, 4, 5];
 
@@ -120,7 +120,7 @@ const Rating = (props) => {
         disabled={getDisabled()}
         onPress={submitRating}
       />
-      <Loader show={props.loading} />
+      <LoaderError retry={submitRating} />
     </SafeArea>
   );
 };

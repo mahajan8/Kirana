@@ -10,7 +10,6 @@ import NoAddressImage from '../../../assets/images/empty_address.svg';
 import SearchItemTile from './SearchItemTile';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../../store/Api';
-import Loader from '../../commons/components/Loader';
 import StoreProductPlaceholder from './StoreProductPlaceholder';
 import {Actions} from 'react-native-router-flux';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
@@ -18,6 +17,7 @@ import Filter from '../../../assets/images/filter.svg';
 import Button from '../../commons/components/Button';
 import {clearStoreProducts} from '../HomeActions';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -175,7 +175,10 @@ const SearchProductResults = (props) => {
         }}
         ListFooterComponent={
           <View style={styles.listLoaderContainer}>
-            <Loader show={storeProducts.length ? props.loading : false} />
+            <LoaderError
+              hideLoader={!storeProducts.length}
+              retry={() => getProducts(storeProducts.length)}
+            />
           </View>
         }
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}

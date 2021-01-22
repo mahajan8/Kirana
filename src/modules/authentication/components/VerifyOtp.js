@@ -2,19 +2,18 @@ import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
-import Button from '../../commons/components/Button';
 import Header from '../../commons/components/Header';
 import {styles} from '../styles/otpStyles';
 import {connect} from 'react-redux';
 import Otp from '../../commons/components/Otp';
 import {verifyOtp, sendOtp} from '../Api';
 import {commonStyles} from '../../commons/styles/commonStyles';
-import Loader from '../../commons/components/Loader';
 import {Colors} from '../../../utils/values/Colors';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import BottomButton from '../../commons/components/BottomButton';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 const VerifyOtp = (props) => {
   const otp = useRef(null);
@@ -98,7 +97,15 @@ const VerifyOtp = (props) => {
         disabled={disabled}
       />
 
-      <Loader show={props.loading} />
+      <LoaderError
+        retry={() => {
+          if (otp.current.submitOTP()) {
+            verify();
+          } else {
+            resend();
+          }
+        }}
+      />
     </SafeArea>
   );
 };

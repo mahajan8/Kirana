@@ -12,10 +12,10 @@ import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {sendOtpToChangeNumber, verifyOtpChangeNumber} from '../Api';
 import {styles} from '../styles/accountSettingStyles';
-import Loader from '../../commons/components/Loader';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import BottomButton from '../../commons/components/BottomButton';
+import LoaderError from '../../commons/components/LoaderError';
 
 const AccountSettings = (props) => {
   let {viewType, userDetails} = props;
@@ -185,7 +185,7 @@ const AccountSettings = (props) => {
           onPress={onSubmit}
         />
       )}
-      <Loader show={props.loading} />
+      <LoaderError retry={onSubmit} />
     </SafeArea>
   );
 };

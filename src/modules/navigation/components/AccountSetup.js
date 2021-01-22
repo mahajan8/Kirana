@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/accountSetupStyles';
@@ -12,7 +11,7 @@ import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {updateUserDetails} from '../Api';
 import {connect} from 'react-redux';
-import Loader from '../../commons/components/Loader';
+import LoaderError from '../../commons/components/LoaderError';
 
 const AccountSetup = (props) => {
   let {first_name} = props.userDetails;
@@ -50,7 +49,7 @@ const AccountSetup = (props) => {
         onPress={saveDetails}
         disabled={!fullName}
       />
-      <Loader show={props.loading} />
+      <LoaderError retry={saveDetails} />
     </SafeArea>
   );
 };

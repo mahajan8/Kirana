@@ -7,7 +7,6 @@ import {searchStoreProducts} from '../Api';
 import {FlatList, View, Pressable, Text} from 'react-native';
 import ProductBox from './ProductBox';
 import {Actions} from 'react-native-router-flux';
-import Loader from '../../commons/components/Loader';
 import {styles} from '../styles/productSubStyles';
 import {clearStoreSearchProducts} from '../StoreActions';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
@@ -16,6 +15,7 @@ import {Strings} from '../../../utils/values/Strings';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import NoResults from '../../../assets/images/search_not_found.svg';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 let commonSearches = ['Drink', 'Onion', 'Apple', 'Potato', 'Chocolate'];
@@ -138,7 +138,10 @@ const SearchProducts = (props) => {
 
   const renderLoader = () => (
     <View style={styles.listLoaderContainer}>
-      <Loader show={storeSearchProducts.length ? props.loading : false} />
+      <LoaderError
+        hideLoader={!storeSearchProducts.length}
+        retry={() => searchProducts(searchInput, storeSearchProducts.length)}
+      />
     </View>
   );
 

@@ -12,10 +12,10 @@ import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
-import Loader from '../../commons/components/Loader';
 import {clearProducts} from '../StoreActions';
 import CartHeader from '../../commons/components/CartHeader';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -78,7 +78,7 @@ const ProductsList = (props) => {
 
   const renderLoader = () => (
     <View style={styles.listLoaderContainer}>
-      <Loader show={products.length ? props.loading : false} />
+      <LoaderError hideLoader={!products.length} />
     </View>
   );
 

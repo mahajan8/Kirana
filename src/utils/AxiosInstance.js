@@ -13,8 +13,11 @@ import store from './Store';
 import {
   setLoading,
   setDisableLoading,
+  setApiError,
+  setNoInternet,
 } from '../modules/authentication/AuthActions';
 // import {toggleCommentLoading} from '../modules/home/Actions';
+import NetInfo from '@react-native-community/netinfo';
 
 const instance = axios.create({
   baseURL: AppConfig[environment].baseUrl,
@@ -30,6 +33,10 @@ instance.interceptors.request.use(
     // }
     // console.log(config)
     // console.log(store.getState().authReducer);
+    NetInfo.fetch().then((state) => {
+      dispatch(setNoInternet(!state.isConnected));
+    });
+
     if (!disableLoading) {
       dispatch(setLoading(true));
     }
@@ -77,6 +84,7 @@ instance.interceptors.response.use(
     } else {
       dispatch(setLoading(false));
     }
+    dispatch(setApiError(false));
     return response;
   },
   function (error) {
@@ -91,17 +99,17 @@ instance.interceptors.response.use(
     // if (store.getState().homeReducer.commentLoading) {
     //   dispatch(toggleCommentLoading());
     // }
-    // if (error.code === 'ECONNABORTED') {
-    //   dispatch(apiError(true));
-    // } else if (error.message === NETWORK_ERROR) {
-    //   dispatch(noInternet(true));
-    // } else if (error.response.status === API_ERROR) {
-    //   dispatch(apiError(true));
-    // } else if (error.response.status === UNAUTHORIZED) {
-    //   dispatch(apiError(true));
-    // } else {
-    //   dispatch(apiError(true));
-    // }
+    if (error.code === 'ECONNABORTED') {
+      dispatch(setApiError(true));
+    } else if (error.message === NETWORK_ERROR) {
+      dispatch(setNoInternet(true));
+    } else if (error.response.status === API_ERROR) {
+      dispatch(setApiError(true));
+    } else if (error.response.status === UNAUTHORIZED) {
+      dispatch(setApiError(true));
+    } else {
+      dispatch(setApiError(true));
+    }
     if (disableLoading) {
       dispatch(setDisableLoading(false));
     } else {
