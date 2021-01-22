@@ -31,7 +31,11 @@ const CurrentOrders = (props) => {
       singleOrder.status === orderStatus.ORDER_UPDATED ? true : false;
 
     return (
-      <View style={[styles.container]}>
+      <View
+        style={[
+          styles.container,
+          awaitingConfirmation && styles.greenBackground,
+        ]}>
         {renderTrackingCircle()}
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>

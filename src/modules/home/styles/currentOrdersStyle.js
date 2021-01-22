@@ -66,4 +66,7 @@ export const styles = EStyleSheet.create({
   buttonLabel: {
     fontSize: '13rem',
   },
+  greenBackground: {
+    backgroundColor: Colors.lightGreen,
+  },
 });
