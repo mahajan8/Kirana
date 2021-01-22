@@ -4,18 +4,18 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   termsText: {
-    paddingTop: '16vrem',
     fontSize: '10rem',
     lineHeight: '18rem',
     textAlign: 'center',
     fontFamily: Fonts.regular,
     color: Colors.greyBrown,
-    paddingBottom: '30rem',
+    paddingBottom: '20rem',
   },
   coloredText: {
     color: Colors.themeGreen,
   },
   bottomTextContainer: {
+    paddingTop: '16vrem',
     flexDirection: 'row',
     justifyContent: 'center',
   },
