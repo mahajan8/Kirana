@@ -24,6 +24,7 @@ import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
 import store from '../../../utils/Store';
 import {orderStatus} from '../../../utils/values/Values';
+import CurrentOrders from './CurrentOrders';
 
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
@@ -103,6 +104,7 @@ const Home = (props) => {
       </View>
     );
   };
+
   const loadStores = (start) => {
     const data = {
       start,
@@ -112,6 +114,7 @@ const Home = (props) => {
     };
     props.getStores(data);
   };
+
   const onStoreClick = (store) => {
     props.selectStore(store);
     Actions.store();
@@ -159,11 +162,15 @@ const Home = (props) => {
         contentContainerStyle={styles.list}
         ListEmptyComponent={renderListEmptyComponent}
       />
+
+      <CurrentOrders />
+
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
         setLocation={props.setLocation}
         selectedLocation={location}
       />
+
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}

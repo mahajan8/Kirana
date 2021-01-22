@@ -303,7 +303,9 @@ export const Strings = {
   multipleStores: 'Multiple stores',
   activeOrdersCount: (count) => 'You have ' + count + ' active orders.',
   viewDetails: 'View Details',
+  approveOrder: 'Approve Order',
   noConnection: 'Connectivity Error',
   noInternetSub:
     'Slow or no internet connection.\nPlease check your connectivity.',
+  multipleApprovalNeeded: 'One of the order needs approval',
 };

@@ -27,8 +27,9 @@ const CurrentOrders = (props) => {
 
     let singleOrder = currentOrders[0];
 
-    let awaitingConfirmation =
-      singleOrder.status === orderStatus.ORDER_UPDATED ? true : false;
+    let awaitingConfirmation = currentOrders.some(
+      (obj) => obj.status === orderStatus.ORDER_UPDATED,
+    );
 
     return (
       <View
@@ -47,7 +48,11 @@ const CurrentOrders = (props) => {
                 )}`}
           </Text>
           <Text style={styles.subTitle}>
-            {multiple ? Strings.multipleStores : singleOrder.store_name}
+            {multiple
+              ? awaitingConfirmation
+                ? Strings.multipleApprovalNeeded
+                : Strings.multipleStores
+              : singleOrder.store_name}
           </Text>
         </View>
         <Button
@@ -55,7 +60,7 @@ const CurrentOrders = (props) => {
             multiple
               ? Strings.viewOrders
               : awaitingConfirmation
-              ? Strings.viewDetails
+              ? Strings.approveOrder
               : Strings.trackOrder
           }
           Style={styles.buttonStyle}

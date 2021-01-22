@@ -159,7 +159,7 @@ const TrackOrderInfo = (props) => {
       switch (payment.status) {
         case SUCCESS:
           Icon = GreenPaidCheck;
-          label = Strings.paid;
+          label = Strings.paidSuccessfully;
           break;
         case REFUND_IN_PROGRESS:
           Icon = PurpleCheck;

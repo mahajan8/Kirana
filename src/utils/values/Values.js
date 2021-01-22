@@ -38,15 +38,15 @@ export const orderStatus = {
 export const orderStatusLabels = {
   ORDER_INITIATED: 10,
   ORDER_NOT_PLACED: 15,
-  New: 20,
+  Placed: 20,
   Overdue: 25,
-  'Awaiting Confirmation': 30,
+  Modified: 30,
   Rejected: 40,
   Cancelled: 50,
-  Preparing: 60,
-  'Preparing (Partial Order)': 70,
-  Dispatched: 80,
-  ORDER_OUT_FOR_DELIVERY: 90,
+  Accepted: 60,
+  'Accepted (Partial)': 70,
+  'On Route': 80,
+  'On Route ': 90,
   Completed: 100,
 };
 
