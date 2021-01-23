@@ -24,7 +24,6 @@ import LoaderError from '../../commons/components/LoaderError';
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const {orderDetails, selectedOrderId} = props.orderReducer;
-
   let {
     instructions,
     final_amount,
