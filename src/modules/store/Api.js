@@ -24,6 +24,7 @@ export const getStoreDetails = (pars) => {
     instance.post(Urls.getStoreDetails, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
+        // Add Store details and categories in Reducer
         let {store_details, store_products} = res.data.data;
         dispatch(setStoreDetails(store_details));
         dispatch(setCategoryProducts(store_products));
@@ -44,6 +45,7 @@ export const getProductsByCategory = (pars) => {
         dispatch(setLoading(false));
         const success = !res.data.error;
         if (success) {
+          // Set Subcategories in reducer
           const {store_products} = res.data.data;
           dispatch(setSubcategoryProducts(store_products));
         } else {
@@ -70,6 +72,7 @@ export const searchStoreProducts = (pars) => {
         if (!filter) {
           dispatch(setFilters(res.data.data.filters));
         }
+        // Set Products in Reducer w.r.t Screen
         let {total_count, results} = res.data.data;
         if (Actions.currentScene === 'storeProductsResults') {
           dispatch(appendStoreProducts(results, total_count));

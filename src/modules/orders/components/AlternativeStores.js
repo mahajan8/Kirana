@@ -74,6 +74,7 @@ const AlternativeStores = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // Load stores if list end reached and more stores available.
           if (
             !endReachCallable &&
             alternativeStores.length < alternativeStoresCount

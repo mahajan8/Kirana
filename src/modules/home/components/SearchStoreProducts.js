@@ -113,6 +113,7 @@ const SearchStoreProducts = (props) => {
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
           onEndReached={() => {
+            //Load Products if list end reached and more products available
             if (
               !endReachCallable &&
               searchedStores.length < searchedStoresCount

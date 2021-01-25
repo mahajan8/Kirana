@@ -27,6 +27,7 @@ import {environment} from '../../../config/EnvConfig';
 // 5 - Rejected
 let trackStatus = 2;
 
+// Socket Config
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
   subscribeKey: AppConfig[environment].pubnutSubscribeKey,

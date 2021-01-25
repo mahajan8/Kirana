@@ -115,6 +115,7 @@ const OrderDetails = (props) => {
   };
 
   const getButtonLabel = () => {
+    // Button Text according to order Status
     let {
       ORDER_ACCEPTED,
       ORDER_DELIVERY_ASSIGNED,
@@ -140,6 +141,7 @@ const OrderDetails = (props) => {
   };
 
   const onButtonPress = () => {
+    // Button Action according to order Status
     let {
       ORDER_ACCEPTED,
       ORDER_DELIVERY_ASSIGNED,
@@ -172,6 +174,7 @@ const OrderDetails = (props) => {
   };
 
   const getBottomButton = () => {
+    // Bottom Buttons Layout
     let {ORDER_PLACED, ORDER_UPDATED} = orderStatus;
     if (status === ORDER_PLACED || status === ORDER_UPDATED) {
       let update = status === ORDER_UPDATED ? true : false;
@@ -218,6 +221,7 @@ const OrderDetails = (props) => {
   };
 
   const renderListFooter = () => (
+    //List Footer Component
     <View style={styles.listFooter}>
       {instructions ? (
         <View style={styles.instructionsContainer}>
@@ -252,6 +256,7 @@ const OrderDetails = (props) => {
         renderItem={({item}) => <OrderItem item={item} />}
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
         ListHeaderComponent={
+          // List Header Component
           orderDetails && (
             <View style={styles.listHeader}>
               <OrderHeader

@@ -28,6 +28,7 @@ export const getUserDetails = (newUser = false) => {
           last_order_data,
           active_orders,
         } = response;
+        //Set Addresses, Cart List and user details in respective Reducers
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
@@ -42,6 +43,7 @@ export const getUserDetails = (newUser = false) => {
             store_name,
           };
         });
+        //Set Currently Active Orders
         dispatch(setCurrentOrders(activeOrders));
 
         const {email, id, first_name, mobile} = user_details;
@@ -60,6 +62,7 @@ export const getUserDetails = (newUser = false) => {
             Phone: mobile,
           });
         }
+        //If last order rating not completed navigate to rating screen.
         if (last_order_rating) {
           Actions.reset('drawer');
         } else {

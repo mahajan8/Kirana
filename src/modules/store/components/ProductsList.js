@@ -53,7 +53,7 @@ const ProductsList = (props) => {
     };
 
     let {brands, price_sort} = filters;
-
+    // Add filters in params for chosen filters
     if (brands.length) {
       pars.conditions = [
         ...pars.conditions,
@@ -129,6 +129,7 @@ const ProductsList = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // Load products if list end reached and more products available
           if (!endReachCallable && products.length < totalProductCount) {
             getProducts(products.length);
             setEndReachCallable(true);

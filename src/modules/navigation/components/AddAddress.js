@@ -35,6 +35,7 @@ const AddAddress = (props) => {
   let {id, item} = props;
 
   useEffect(() => {
+    // Set Existing details in edit address case
     if (id) {
       setHouseNumber(item.block_address);
       setLandMark(item.landmark);
@@ -83,6 +84,7 @@ const AddAddress = (props) => {
         style={commonStyles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.mapView}>
+          {/* Map to display address location */}
           <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.map}
@@ -104,6 +106,8 @@ const AddAddress = (props) => {
             </Marker>
           </MapView>
         </View>
+
+        {/* Address Details */}
         <View style={styles.locationContainer}>
           <View style={styles.rowContainer}>
             <View style={styles.rowContainer}>

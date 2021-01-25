@@ -100,6 +100,7 @@ const TrackOrderInfo = (props) => {
   }, [PubNubClient, channels]);
 
   const handleMessage = (event) => {
+    // Handler function for Socket Order Changes
     const {type, payload} = event.message;
 
     if (type === statusUpdate && payload.order.id === id) {
@@ -155,6 +156,7 @@ const TrackOrderInfo = (props) => {
   });
 
   const getPaymentStatus = () => {
+    // Render payment status
     let {SUCCESS, REFUNDED, REFUND_IN_PROGRESS} = paymentStatus;
     let Icon = GreenPaidCheck;
     let label = Strings.paidSuccessfully;

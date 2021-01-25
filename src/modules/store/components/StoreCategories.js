@@ -37,6 +37,7 @@ const StoreCategories = (props) => {
   const HEADER_HEIGHT = EStyleSheet.value('230vrem');
 
   const renderSticky = () => {
+    // Search Bar appear when scrolled down state
     return (
       <Animated.View
         style={[
@@ -62,6 +63,7 @@ const StoreCategories = (props) => {
   };
 
   const storeHeader = () => (
+    // Store Details Header in unscrolled state
     <Animated.View
       style={{
         transform: [

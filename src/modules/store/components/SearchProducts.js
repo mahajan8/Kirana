@@ -66,7 +66,7 @@ const SearchProducts = (props) => {
     }
 
     let {brands, categories, price_sort} = filters;
-
+    // Add Filters in params for chosen Filters
     if (brands.length) {
       pars.conditions = [
         ...pars.conditions,
@@ -100,6 +100,7 @@ const SearchProducts = (props) => {
   };
 
   const onChangeSearchText = (query) => {
+    // Search after user Stops typing and searched word length > 2
     if (query.length > 2) {
       clearTimeout(debounceTimer.current);
       debounceTimer.current = setTimeout(() => {
@@ -186,6 +187,7 @@ const SearchProducts = (props) => {
           onMomentumScrollBegin={() => setEndReachCallable(false)}
           onEndReachedThreshold={0.1}
           onEndReached={() => {
+            // Load Search products if list end reached and more products available
             if (
               !endReachCallable &&
               storeSearchProducts.length < storeSeachCount

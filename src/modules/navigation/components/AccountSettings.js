@@ -36,6 +36,7 @@ const AccountSettings = (props) => {
   });
 
   const verifyOtp = () => (
+    //Render Otp Layout
     <View>
       <Text style={styles.heading}>{Strings.enterNewNumber}</Text>
       <Otp
@@ -67,6 +68,7 @@ const AccountSettings = (props) => {
   );
 
   const changeNumber = () => (
+    // Render Number Input Layout
     <View>
       <Text style={styles.heading}>{Strings.verifyNumber}</Text>
       <Input
@@ -83,6 +85,7 @@ const AccountSettings = (props) => {
   );
 
   const viewNumber = () => (
+    //Render Current Number with change button
     <View style={[styles.rowContainer, styles.numberContainer]}>
       <View>
         <Text style={styles.numberLabel}>{Strings.mobileNumber}</Text>
@@ -98,6 +101,7 @@ const AccountSettings = (props) => {
   );
 
   const renderByType = () => {
+    // Render Page by viewType passed in params.
     switch (viewType) {
       case 1:
         return changeNumber();

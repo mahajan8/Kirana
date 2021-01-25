@@ -47,6 +47,7 @@ const Cart = (props) => {
     }
   }, [location]);
 
+  // Load Cart Products
   const getCartItems = () => {
     let pars = {
       longitude: location.lng,
@@ -56,6 +57,7 @@ const Cart = (props) => {
   };
   const {first_name, mobile} = props.userDetails;
 
+  //Confirm Order and pay
   const confirmOrder = () => {
     const pars = {
       address_id: location.id,
@@ -116,13 +118,14 @@ const Cart = (props) => {
               <View style={styles.listItemSeperator} />
             )}
             ListHeaderComponent={
+              // Render Cart Header
               list.length && (
                 <CartListHeader
                   overWeight={is_overweight ? max_weight_limit_kg : false}
                   storeName={store ? store.name : null}
                   addMore={() => {
                     props.selectStore(store);
-                    // Actions.replace('store');
+                    // Check for if store is in navigation stack
                     let storeRoute = Actions.state.routes.some(
                       (obj) => obj.routeName === 'store',
                     );
@@ -136,6 +139,7 @@ const Cart = (props) => {
               )
             }
             ListFooterComponent={
+              // List Footer Component
               list.length && (
                 <CartListFooter
                   instructions={instructions}
@@ -164,6 +168,7 @@ const Cart = (props) => {
           />
 
           {list.length ? (
+            // Selected Address Bottom Component
             <CartSelectedAddress
               addAddress={() => {
                 setAddressModal(true);
@@ -178,6 +183,8 @@ const Cart = (props) => {
           ) : null}
         </View>
       )}
+
+      {/* Modal for displaying addresses */}
       <AddressListModal
         visible={addressModal}
         setVisible={setAddressModal}

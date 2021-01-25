@@ -48,6 +48,7 @@ const CartSelectedAddress = (props) => {
                   styles.addAddressSub,
                   !deliverable && styles.notDeliverable,
                 ]}>
+                {/* Check for address deliverable  */}
                 {deliverable
                   ? address.block_address + ' ' + address.landmark
                   : Strings.cartNotDeliverable}
@@ -65,6 +66,7 @@ const CartSelectedAddress = (props) => {
           )}
         </View>
 
+        {/* Add Button if address not deliverable  */}
         {location.id && deliverable ? (
           <Pressable
             onPress={props.addAddress}
@@ -81,6 +83,7 @@ const CartSelectedAddress = (props) => {
           />
         )}
       </View>
+
       {location.id && deliverable && (
         <View style={styles.paymentButtonContainer}>
           {loading ? (

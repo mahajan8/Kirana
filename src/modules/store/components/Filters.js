@@ -115,7 +115,6 @@ const Filters = (props) => {
   };
 
   const applyFilters = () => {
-    // {"key":"SEARCH_BY_BRAND","value":"Tata","context":null}
     let brands = selectedBrands.map((item) => filterBrands[item]);
     let categories = selectedCategories.map(
       (item) => filterCategories[item].id,

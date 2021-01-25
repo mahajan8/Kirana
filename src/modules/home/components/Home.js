@@ -26,6 +26,7 @@ import store from '../../../utils/Store';
 import {orderStatus} from '../../../utils/values/Values';
 import CurrentOrders from './CurrentOrders';
 
+// Socket Configuration
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
   subscribeKey: AppConfig[environment].pubnutSubscribeKey,
@@ -57,6 +58,7 @@ const Home = (props) => {
   }, [pubnub, channels]);
 
   const handleMessage = async (event) => {
+    // Handler function for order Change from Socket Listener
     const {type, payload} = event.message;
 
     let {id, status, store_name} = payload.order;
@@ -155,6 +157,7 @@ const Home = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // load stores if list end reached and more stores are available
           if (!endReachCallable && stores.length < storeCount) {
             loadStores(stores.length);
             setEndReachCallable(true);
@@ -165,6 +168,7 @@ const Home = (props) => {
         ListEmptyComponent={renderListEmptyComponent}
       />
 
+      {/* Active Orders Component  */}
       <CurrentOrders />
 
       <HomeLocationCheck

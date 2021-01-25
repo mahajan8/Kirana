@@ -79,6 +79,7 @@ const Rating = (props) => {
             ))}
           </View>
 
+          {/* Show Input if stars less than 5 */}
           {groceryStars > 0 && groceryStars < 5 && (
             <Input
               value={groceryReason}

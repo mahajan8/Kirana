@@ -44,6 +44,7 @@ const OrderList = (props) => {
   };
 
   const getActiveOrders = () => {
+    // Get Active Orders list
     let {
       ORDER_PLACED,
       ORDER_ACCEPTED,
@@ -90,6 +91,7 @@ const OrderList = (props) => {
     }
 
     props.getOrders(data, (results, total) => {
+      // Set Active Orders in Reducer
       if (storeOrders) {
         props.setStoreActiveOrders(results);
       } else {
@@ -99,6 +101,7 @@ const OrderList = (props) => {
   };
 
   const getPastOrders = (start = 0) => {
+    // Get Past Orders list
     let {
       ORDER_DELIVERED,
       ORDER_CANCELLED,
@@ -141,6 +144,7 @@ const OrderList = (props) => {
     }
 
     props.getOrders(data, (results, total) => {
+      // Set Past Orders in Reducer
       if (storeOrders) {
         props.setStorePastOrders(results, total);
       } else {
@@ -156,6 +160,7 @@ const OrderList = (props) => {
   );
 
   const renderActiveList = () => (
+    // Active Orders List Component
     <FlatList
       data={storeOrders ? storeActiveOrders : activeOrders}
       renderItem={({item}) => (
@@ -210,6 +215,7 @@ const OrderList = (props) => {
       onMomentumScrollBegin={() => setEndReachCallable(false)}
       onEndReachedThreshold={0.1}
       onEndReached={() => {
+        // Load more past orders if list end reached and more orders available
         if (
           !endReachCallable &&
           ((!storeOrders && pastOrders.length < totalCount) ||

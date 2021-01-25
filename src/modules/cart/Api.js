@@ -11,6 +11,7 @@ export const getCart = (pars) => {
       const success = !res.data.error;
       if (success) {
         const {cart} = res.data.data;
+        // Store Cart Items in CartReducer
         dispatch(setCartDetails(cart));
       } else {
         alert(res.data.message);
@@ -26,6 +27,7 @@ export const createOrder = (pars, callback) => {
       const success = !res.data.error;
       if (success) {
         const {reference_id} = res.data.data.payment;
+        // Return generated Reference id for Razorpay Payment
         callback(reference_id);
       } else {
         alert(res.data.message);
@@ -40,6 +42,7 @@ export const placeOrder = (pars) => {
       const success = !res.data.error;
       if (success) {
         const {cart} = res.data.data;
+        // Place order and update cart Items in Reducer
         dispatch(setCartDetails(cart));
       }
       Actions.paymentStatus({success});
