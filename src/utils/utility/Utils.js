@@ -262,14 +262,14 @@ export const handleNotificationClick = (event) => {
 
   switch (redirection_type) {
     case orderDetails:
-      store.dispatch(setSelectedOrderId(order_id));
-      Actions.reset('orderDetails');
+      dispatch(setSelectedOrderId(order_id));
+      Actions.orderDetails();
       break;
     case orderRating:
-      Actions.reset('rating', {order: {order_id, store_name}});
+      Actions.rating({order: {order_id, store_name}});
       break;
     case orderTracking:
-      Actions.reset('trackOrder', {orderId: order_id});
+      Actions.trackOrder({orderId: order_id});
       break;
   }
 };
