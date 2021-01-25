@@ -38,8 +38,14 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       this.getFcmToken();
     }
-    CleverTap.recordEvent('iOS event');
-    // this.initializeListeners();
+    // CleverTap.addListener(
+    //   CleverTap.CleverTapPushNotificationClicked,
+    //   (event) => {
+    //     console.log(JSON.stringify(event));
+    //   },
+    // );
+    // CleverTap.recordEvent('iOS event');
+    this.initializeListeners();
   }
   configureSDK = () => {
     CleverTap.createNotificationChannel(
