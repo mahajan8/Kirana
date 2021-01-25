@@ -8,6 +8,8 @@ import {removeAuthToken} from './LocalStore';
 import {logoutUser} from '../../modules/authentication/AuthActions';
 import store from '../Store';
 import {Colors} from '../values/Colors';
+import {notificationType} from '../values/Values';
+import {setSelectedOrderId} from '../../modules/orders/OrderActions';
 const {dispatch} = store;
 
 export const clipText = (text, limit) => {
@@ -252,4 +254,22 @@ export const decodePolyline = (t, e) => {
   return (d = d.map(function (t) {
     return {latitude: t[0], longitude: t[1]};
   }));
+};
+
+export const handleNotificationClick = (event) => {
+  let {redirection_type, store_id, store_name, order_id, order_status} = event;
+  let {orderDetails, orderRating, orderTracking} = notificationType;
+
+  switch (redirection_type) {
+    case orderDetails:
+      store.dispatch(setSelectedOrderId(order_id));
+      Actions.reset('orderDetails');
+      break;
+    case orderRating:
+      Actions.reset('rating', {order: {order_id, store_name}});
+      break;
+    case orderTracking:
+      Actions.reset('trackOrder', {orderId: order_id});
+      break;
+  }
 };

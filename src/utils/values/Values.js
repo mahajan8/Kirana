@@ -96,6 +96,12 @@ export const orderStatusBubbles = [
     labelColor: '#0b5460',
   },
   {
+    orderStatus: orderStatus.ORDER_OUT_FOR_DELIVERY,
+    backgroundColor: '#d1ecf1',
+    borderColor: '#b5e4eb',
+    labelColor: '#0b5460',
+  },
+  {
     orderStatus: orderStatus.ORDER_DELIVERED,
     backgroundColor: '#d5edda',
     borderColor: '#c2e6cb',
@@ -126,3 +132,9 @@ export const orderStatusBubbles = [
     labelColor: '#731c23',
   },
 ];
+
+export const notificationType = {
+  orderDetails: 'ORDER_DETAILS',
+  orderTracking: 'ORDER_TRACKING',
+  orderRating: 'ORDER_RATING',
+};

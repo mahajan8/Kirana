@@ -7,6 +7,7 @@ import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
+import {handleNotificationClick} from './src/utils/utility/Utils';
 
 // import * as Sentry from '@sentry/react-native';
 
@@ -45,6 +46,7 @@ export default class App extends Component {
     //   },
     // );
     // CleverTap.recordEvent('iOS event');
+
     this.initializeListeners();
   }
   configureSDK = () => {
@@ -91,6 +93,7 @@ export default class App extends Component {
         //alert('Notification Click from App', event);
         console.log('Notification Click from App', event);
         //alert('Notification Click from App');
+        handleNotificationClick(event);
       },
     );
   };
