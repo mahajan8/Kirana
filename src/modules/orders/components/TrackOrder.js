@@ -73,7 +73,11 @@ const TrackOrder = (props) => {
         <Tracking trackStatus={trackStatus} storeName={store_name} />
 
         {props.orderDetails ? (
-          <TrackOrderInfo trackStatus={trackStatus} order={props.order} />
+          <TrackOrderInfo
+            trackStatus={trackStatus}
+            order={props.order}
+            orderRejected={() => setShowRejectedModal(true)}
+          />
         ) : (
           <TrackInfoShimmer />
         )}

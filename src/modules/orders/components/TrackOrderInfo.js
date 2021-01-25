@@ -104,6 +104,10 @@ const TrackOrderInfo = (props) => {
 
     if (type === statusUpdate && payload.order.id === id) {
       props.setOrderDetails(payload.order);
+
+      if (payload.order.status === orderStatus.ORDER_REJECTED) {
+        props.orderRejected();
+      }
     }
   };
 
