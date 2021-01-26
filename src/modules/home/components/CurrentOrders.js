@@ -73,7 +73,8 @@ const CurrentOrders = (props) => {
               Actions.orderDetails();
               props.setSelectedOrderId(singleOrder.id);
             } else {
-              Actions.trackOrder({orderId: singleOrder.id});
+              Actions.trackOrder();
+              props.setSelectedOrderId(singleOrder.id);
             }
           }}
         />

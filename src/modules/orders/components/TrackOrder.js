@@ -36,14 +36,15 @@ const pubnub = new PubNub({
 });
 
 const TrackOrder = (props) => {
-  let {store_name} = props.orderDetails ? props.orderDetails : {};
+  let {orderDetails, selectedOrderId} = props.orderReducer;
+  let {store_name} = orderDetails ? orderDetails : {};
 
   const [showRejectedModal, setShowRejectedModal] = useState(false);
 
   useEffect(() => {
     // getPolyline();
     let pars = {
-      order_id: props.orderId,
+      order_id: selectedOrderId,
     };
     props.getOrderDetails(pars);
 
@@ -73,10 +74,9 @@ const TrackOrder = (props) => {
 
         <Tracking trackStatus={trackStatus} storeName={store_name} />
 
-        {props.orderDetails ? (
+        {orderDetails ? (
           <TrackOrderInfo
             trackStatus={trackStatus}
-            order={props.order}
             orderRejected={() => setShowRejectedModal(true)}
           />
         ) : (
@@ -93,7 +93,7 @@ const TrackOrder = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  orderDetails: state.orderReducer.orderDetails,
+  orderReducer: state.orderReducer,
 });
 
 const mapDispatchToProps = {

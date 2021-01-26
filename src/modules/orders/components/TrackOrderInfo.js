@@ -210,7 +210,6 @@ const TrackOrderInfo = (props) => {
           {/* TODO: Add Right arrow image if needed */}
           <Pressable
             onPress={() => {
-              props.setSelectedOrderId(id);
               Actions.orderDetails();
             }}>
             <Text style={styles.orderDetails}>

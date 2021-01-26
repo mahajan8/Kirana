@@ -112,7 +112,8 @@ const OrderListItem = (props) => {
             if (past) {
               reOrderItems();
             } else {
-              Actions.trackOrder({orderId: item.id});
+              props.setSelectedOrderId(item.id);
+              Actions.trackOrder();
             }
           }}
         />

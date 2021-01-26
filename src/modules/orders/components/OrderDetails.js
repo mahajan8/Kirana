@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, RefreshControl} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import OrderHeader from './OrderHeader';
 import {styles} from '../../orders/styles/orderDetailStyles';
@@ -158,9 +158,9 @@ const OrderDetails = (props) => {
       case ORDER_DELIVERY_ASSIGNED:
       case ORDER_OUT_FOR_DELIVERY:
         if (isAfterTracking()) {
-          Actions.popTo('trackOrder', {orderId: id});
+          Actions.popTo('trackOrder');
         } else {
-          Actions.trackOrder({orderId: id});
+          Actions.trackOrder();
         }
         break;
       case ORDER_CANCELLED:
@@ -200,9 +200,9 @@ const OrderDetails = (props) => {
                 acceptReject();
               } else {
                 if (isAfterTracking()) {
-                  Actions.popTo('trackOrder', {orderId: id});
+                  Actions.popTo('trackOrder');
                 } else {
-                  Actions.trackOrder({orderId: id});
+                  Actions.trackOrder();
                 }
               }
             }}
@@ -269,6 +269,15 @@ const OrderDetails = (props) => {
         }
         ListFooterComponent={orderDetails && renderListFooter()}
         ListEmptyComponent={<OrderDetailShimmer />}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={() => {
+              props.setOrderDetails(null);
+              fetchDetails();
+            }}
+          />
+        }
       />
 
       {orderDetails && (
