@@ -88,11 +88,13 @@ const TrackOrderInfo = (props) => {
   }, [status]);
 
   useEffect(() => {
+    // Subscribe to channels and add listener to socket changes.
     let listener = {message: handleMessage};
     PubNubClient.subscribe({channels});
     PubNubClient.addListener(listener);
 
     return () => {
+      // Unsubscribe channels and remove listener on component unmount
       PubNubClient.unsubscribe({channels});
       PubNubClient.removeListener(listener);
     };
@@ -140,6 +142,7 @@ const TrackOrderInfo = (props) => {
     if (collapsed) {
       setCollapsed(false);
     }
+    // Toggle Collapsed status and animate maxHeight of Order status view.
 
     Animated.timing(animCollapsed, {
       toValue: animCollapsed._value ? 0 : 1,
@@ -160,6 +163,7 @@ const TrackOrderInfo = (props) => {
     let Icon = GreenPaidCheck;
     let label = Strings.paidSuccessfully;
 
+    // Set icon and label w.r.t payment status
     if (payment) {
       switch (payment.status) {
         case SUCCESS:
@@ -177,6 +181,7 @@ const TrackOrderInfo = (props) => {
       }
     }
 
+    // Return selected icon and label to display payment status
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.paymentStatus}>{label}</Text>

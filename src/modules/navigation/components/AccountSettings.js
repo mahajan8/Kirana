@@ -136,6 +136,8 @@ const AccountSettings = (props) => {
           country_code: '+91',
           user_type: 30,
         };
+
+        // Api Call to send otp to changed number
         props.sendOtpToChangeNumber(pars, () => {
           if (!resend) {
             Actions.accountSettings({viewType: 2, number: number});
@@ -152,6 +154,8 @@ const AccountSettings = (props) => {
           new_mobile: props.number,
           otp_code: otp.current.submitOTP(),
         };
+
+        // Api Call to verify otp from changed number
         props.verifyOtpChangeNumber(pars, () => setError(true));
       }
     }

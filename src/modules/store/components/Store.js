@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import SafeArea from '../../commons/components/SafeArea';
 import {Strings} from '../../../utils/values/Strings';
 import {Dimensions, View, Text, Pressable} from 'react-native';
@@ -14,7 +13,7 @@ import Explore from './Explore';
 import StoreOrders from './StoreOrders';
 import StoreCategories from './StoreCategories';
 import {ripple} from '../../../utils/utility/Utils';
-import { Colors } from '../../../utils/values/Colors';
+import {Colors} from '../../../utils/values/Colors';
 
 // TODO: Add Icons for Explore
 let routes = [
@@ -50,6 +49,7 @@ const Store = (props) => {
   };
 
   const renderTabBar = () => {
+    // Tab bar layout Component where routes are mapped to display all available tabs with icons
     return (
       <View style={[commonStyles.shadow, styles.tabRow]}>
         {routes.map((item, index) => {

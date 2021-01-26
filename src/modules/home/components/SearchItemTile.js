@@ -30,6 +30,7 @@ const SearchItemTile = (props) => {
 
   const updateQuantity = (increment = true) => {
     if (store && selectedStore.id !== store.id && !replaceAlert) {
+      // If cart contains items from different store, Show replacement modal
       setReplaceAlert(true);
     } else {
       setReplaceAlert(false);
@@ -38,6 +39,7 @@ const SearchItemTile = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
+      // Api call to update product quantity
       props.updateProductQuantity(pars);
     }
   };
@@ -74,6 +76,7 @@ const SearchItemTile = (props) => {
         </Text>
 
         {loadingProductId !== product_id ? (
+          // Plus and Minus button to update quantity
           <View style={styles.rowContainer}>
             <Pressable
               android_ripple={ripple}
@@ -100,6 +103,8 @@ const SearchItemTile = (props) => {
           <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </View>
+
+      {/* Modal alert for cart replacement */}
       <AlertModal
         visible={replaceAlert}
         setVisible={setReplaceAlert}

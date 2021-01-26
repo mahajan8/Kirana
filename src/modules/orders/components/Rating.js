@@ -65,6 +65,8 @@ const Rating = (props) => {
 
         <View style={styles.container}>
           <Text style={styles.ratingTitle}>{Strings.rateGrocery}</Text>
+
+          {/* Show stars for grocery rating */}
           <View style={styles.starsContainer}>
             {stars.map((item, index) => (
               <Pressable
@@ -79,7 +81,7 @@ const Rating = (props) => {
             ))}
           </View>
 
-          {/* Show Input if stars less than 5 */}
+          {/* Show Input if grocery stars less than 5 */}
           {groceryStars > 0 && groceryStars < 5 && (
             <Input
               value={groceryReason}
@@ -91,6 +93,8 @@ const Rating = (props) => {
           )}
 
           <Text style={styles.ratingTitle}>{Strings.rateDelivery}</Text>
+
+          {/* Show stars for delivery rating */}
           <View style={styles.starsContainer}>
             {stars.map((item, index) => (
               <Pressable
@@ -105,6 +109,7 @@ const Rating = (props) => {
             ))}
           </View>
 
+          {/* Show Input if delivery stars less than 5 */}
           {deliveryStars > 0 && deliveryStars < 5 && (
             <Input
               value={deliveryReason}

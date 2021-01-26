@@ -76,6 +76,7 @@ const StoreCategories = (props) => {
     </Animated.View>
   );
 
+  // Interpolated variables to create animations
   const headerOpacity = scroll.interpolate({
     inputRange: [0, HEADER_HEIGHT],
     outputRange: [1, 0],

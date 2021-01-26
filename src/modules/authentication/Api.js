@@ -31,7 +31,7 @@ export const verifyOtp = (pars, error) => {
     instance.post(Urls.verifyOtp, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        // Save API token and go to home
+        // Save API token and navigate to home
         const {is_new_user, api_token} = res.data.data;
         dispatch(setToken(api_token));
         setAuthToken(api_token);

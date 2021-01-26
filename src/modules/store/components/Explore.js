@@ -18,12 +18,14 @@ const Explore = (props) => {
     const pars = {
       store_id: selectedStore.id,
     };
+    // Store Categories API Call
     props.getStoreCategories(pars);
   }, []);
 
   let {selectedStore} = props.homeReducer;
 
   const renderCategory = (item) => (
+    // Category Layout Component
     <Pressable
       android_ripple={ripple}
       style={styles.categoryContainer}

@@ -24,7 +24,7 @@ const ProductDetails = (props) => {
     product_images,
     product_brand,
     product_id,
-  } = props.item;
+  } = props.item; //Destructed item object to get product details
 
   const [replaceAlert, setReplaceAlert] = useState(false);
   const {selectedStore} = props.homeState;
@@ -42,6 +42,7 @@ const ProductDetails = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
+      //Api call to update product quantity
       props.updateProductQuantity(pars);
     }
   };
@@ -75,6 +76,7 @@ const ProductDetails = (props) => {
         ]}>
         {loadingProductId !== product_id ? (
           cartProductObj ? (
+            // Plus and Minus button to update quantity
             <View style={styles.counterContainer}>
               <Pressable
                 android_ripple={ripple}
@@ -97,6 +99,7 @@ const ProductDetails = (props) => {
               </Pressable>
             </View>
           ) : (
+            //Add button
             <Button
               label={Strings.addToCart}
               Style={styles.buttonStyle}

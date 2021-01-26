@@ -24,6 +24,7 @@ const VerifyOtp = (props) => {
 
   const verify = () => {
     if (otp.current.submitOTP()) {
+      // If otp is complete, Call Verify Otp Api
       let pars = {
         mobile: props.number,
         otp_code: otp.current.submitOTP(),
@@ -40,13 +41,16 @@ const VerifyOtp = (props) => {
     };
 
     props.sendOtp(pars);
+    // Resend Otp and Reset timer and otp input
     otp.current.clear();
     setSeconds(30);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (seconds) setSeconds(seconds - 1);
+      if (seconds) {
+        setSeconds(seconds - 1);
+      }
     }, 1000);
     return () => clearInterval(interval);
   });

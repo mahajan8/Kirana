@@ -40,14 +40,14 @@ const Cart = (props) => {
     is_deliverable,
     max_weight_limit_kg,
     estimated_time_in_mins,
-  } = cart;
+  } = cart; //Destructuring cart object from cartReducer
   useEffect(() => {
+    // If location present in homeReducer, load cart items.
     if (location) {
       getCartItems();
     }
   }, [location]);
 
-  // Load Cart Products
   const getCartItems = () => {
     let pars = {
       longitude: location.lng,
@@ -57,7 +57,6 @@ const Cart = (props) => {
   };
   const {first_name, mobile} = props.userDetails;
 
-  //Confirm Order and pay
   const confirmOrder = () => {
     const pars = {
       address_id: location.id,
@@ -65,8 +64,12 @@ const Cart = (props) => {
       instructions: instructions,
     };
     setPaymentLoading(true);
+
+    // Create order and get Order ID
     props.createOrder(pars, (orderId) => {
       setPaymentLoading(false);
+
+      // Set Order ID to Razorpay Options
       let options = {
         description: '',
         image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
@@ -82,8 +85,10 @@ const Cart = (props) => {
         theme: {color: Colors.themeGreen},
       };
 
+      // Open Razorpay SDK to handle payment
       RazorpayCheckout.open(options)
         .then((razorpayData) => {
+          // Get Reference key from razorpay and place order.
           const data = {
             payment_reference_id: orderId,
             property: razorpayData,
@@ -95,6 +100,49 @@ const Cart = (props) => {
         });
     });
   };
+
+  const renderListHeader = () => (
+    <CartListHeader
+      overWeight={is_overweight ? max_weight_limit_kg : false}
+      storeName={store ? store.name : null}
+      addMore={() => {
+        props.selectStore(store);
+        // Check for if store is in navigation stack
+        let storeRoute = Actions.state.routes.some(
+          (obj) => obj.routeName === 'store',
+        );
+        if (storeRoute) {
+          Actions.popTo('store');
+        } else {
+          Actions.replace('store');
+        }
+      }}
+    />
+  );
+
+  const renderListFooter = () => (
+    <CartListFooter
+      instructions={instructions}
+      setInstructions={setInstructions}
+      estimatedTime={estimated_time_in_mins}
+    />
+  );
+
+  const renderListEmptyComponent = () => (
+    <View style={styles.fullContainer}>
+      <View style={styles.listEmptyContainer}>
+        <CartEmptyImage />
+        <Text style={styles.cartEmptyTitle}>{Strings.cartEmptyTitle}</Text>
+        <Text style={styles.cartEmptySubTitle}>
+          {Strings.cartEmptySubTitle}
+        </Text>
+      </View>
+      <BottomButton
+        label={Strings.addProducts}
+        onPress={() => Actions.popTo('_home')}
+      />
+    </View>
+  );
 
   let list = Object.values(product_list);
 
@@ -117,54 +165,9 @@ const Cart = (props) => {
             ItemSeparatorComponent={() => (
               <View style={styles.listItemSeperator} />
             )}
-            ListHeaderComponent={
-              // Render Cart Header
-              list.length && (
-                <CartListHeader
-                  overWeight={is_overweight ? max_weight_limit_kg : false}
-                  storeName={store ? store.name : null}
-                  addMore={() => {
-                    props.selectStore(store);
-                    // Check for if store is in navigation stack
-                    let storeRoute = Actions.state.routes.some(
-                      (obj) => obj.routeName === 'store',
-                    );
-                    if (storeRoute) {
-                      Actions.popTo('store');
-                    } else {
-                      Actions.replace('store');
-                    }
-                  }}
-                />
-              )
-            }
-            ListFooterComponent={
-              // List Footer Component
-              list.length && (
-                <CartListFooter
-                  instructions={instructions}
-                  setInstructions={setInstructions}
-                  estimatedTime={estimated_time_in_mins}
-                />
-              )
-            }
-            ListEmptyComponent={
-              <View style={styles.fullContainer}>
-                <View style={styles.listEmptyContainer}>
-                  <CartEmptyImage />
-                  <Text style={styles.cartEmptyTitle}>
-                    {Strings.cartEmptyTitle}
-                  </Text>
-                  <Text style={styles.cartEmptySubTitle}>
-                    {Strings.cartEmptySubTitle}
-                  </Text>
-                </View>
-                <BottomButton
-                  label={Strings.addProducts}
-                  onPress={() => Actions.popTo('_home')}
-                />
-              </View>
-            }
+            ListHeaderComponent={list.length && renderListHeader}
+            ListFooterComponent={list.length && renderListFooter}
+            ListEmptyComponent={renderListEmptyComponent}
           />
 
           {list.length ? (

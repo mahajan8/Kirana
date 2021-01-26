@@ -16,7 +16,7 @@ const OrderItem = (props) => {
     item_quantity,
     product_images,
     old_order_product,
-  } = props.item;
+  } = props.item; //Destructuring item to get order item details
 
   const [showOriginal, setShowOriginal] = useState(false);
 
@@ -38,6 +38,7 @@ const OrderItem = (props) => {
             {getKeyByValue(unitsShortName, product_packaging)}
           </Text>
 
+          {/* Show view orignal button if product is replaced by store */}
           {old_order_product ? (
             <View style={styles.rowContainer}>
               <View style={styles.seperator} />

@@ -107,7 +107,7 @@ const SearchStoreProducts = (props) => {
             <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
           )}
           keyExtractor={(item, index) => `store${index}`}
-          ListHeaderComponent={searchedStoresCount && renderHeader()}
+          ListHeaderComponent={searchedStoresCount && renderHeader}
           ListEmptyComponent={getEmptyState()}
           contentContainerStyle={styles.list}
           onMomentumScrollBegin={() => setEndReachCallable(false)}
