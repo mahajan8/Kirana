@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Pressable, Animated, Easing} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/trackOrderInfoStyles';
@@ -7,7 +7,6 @@ import GreenPaidCheck from '../../../assets/images/map_paid_successful.svg';
 import PurpleCheck from '../../../assets/images/purple_check.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {orderStatus, paymentStatus} from '../../../utils/values/Values';
-import {useEffect} from 'react/cjs/react.development';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {setOrderDetails, setSelectedOrderId} from '../OrderActions';
