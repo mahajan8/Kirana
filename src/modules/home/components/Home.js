@@ -41,17 +41,20 @@ const Home = (props) => {
   const [channels] = useState([userDetails.id]);
 
   useEffect(() => {
+    // If location present in homeReducer load stores for the location
     if (location) {
       loadStores(0);
     }
   }, [location]);
 
   useEffect(() => {
+    // Subscribe to channels and add listener for Socket Change
     let listener = {message: handleMessage};
     pubnub.subscribe({channels});
     pubnub.addListener(listener);
 
     return () => {
+      // Unsubscribe channels and remove listener when component unmounts
       pubnub.unsubscribe({channels});
       pubnub.removeListener(listener);
     };
@@ -61,12 +64,14 @@ const Home = (props) => {
     // Handler function for order Change from Socket Listener
     const {type, payload} = event.message;
 
-    let {id, status, store_name} = payload.order;
+    let {id, status, store_name, store_id, order_code} = payload.order;
 
     let order = {
       id,
       status,
       store_name,
+      store_id,
+      order_code,
     };
 
     let {currentOrders} = store.getState().homeReducer;
@@ -77,11 +82,14 @@ const Home = (props) => {
 
     if (i >= 0) {
       if (status === orderStatus.ORDER_DELIVERED) {
+        // Remove from Currently Active Orders if Order Delivered
         newCurrentOrders.splice(i, 1);
       } else if (status !== newCurrentOrders[i].status) {
+        // Update Status of Order if status is changed
         newCurrentOrders[i] = order;
       }
     } else {
+      // Add to currently active orders if not exits already, and status is not delivered.
       if (status !== orderStatus.ORDER_DELIVERED) {
         newCurrentOrders.push(order);
       }

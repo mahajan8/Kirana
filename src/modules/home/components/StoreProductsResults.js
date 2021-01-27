@@ -94,6 +94,45 @@ const SearchProductResults = (props) => {
     props.searchStoreProducts(pars);
   };
 
+  const renderListEmpty = () =>
+    props.loading ? (
+      <StoreProductPlaceholder count={4} />
+    ) : (
+      <View style={styles.emptyListContainer}>
+        {/* TODO: Change Image  */}
+        <NoAddressImage
+          width={EStyleSheet.value('270rem')}
+          height={EStyleSheet.value('123rem')}
+        />
+        <Text style={styles.noSearchResults}>{Strings.noSearchResults}</Text>
+      </View>
+    );
+
+  const renderListFooter = () => (
+    <View style={styles.listLoaderContainer}>
+      <LoaderError
+        hideLoader={!storeProducts.length}
+        retry={() => getProducts(storeProducts.length)}
+      />
+    </View>
+  );
+
+  const renderListHeader = () =>
+    storeProductsCount && !props.loading ? (
+      <View>
+        {productIds ? (
+          <Text style={styles.searchResultsHeading}>
+            {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
+          </Text>
+        ) : (
+          <Text style={styles.searchResultsHeading}>
+            {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
+            {searchedText}
+          </Text>
+        )}
+      </View>
+    ) : null;
+
   let FilterIcon =
     filters.brands.length ||
     filters.price_sort !== null ||
@@ -132,39 +171,8 @@ const SearchProductResults = (props) => {
           <SearchItemTile item={item} index={index} />
         )}
         keyExtractor={(item, index) => `store${index}`}
-        ListHeaderComponent={
-          storeProductsCount &&
-          !props.loading && (
-            <View>
-              {productIds ? (
-                <Text style={styles.searchResultsHeading}>
-                  {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
-                </Text>
-              ) : (
-                <Text style={styles.searchResultsHeading}>
-                  {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
-                  {searchedText}
-                </Text>
-              )}
-            </View>
-          )
-        }
-        ListEmptyComponent={
-          props.loading ? (
-            <StoreProductPlaceholder count={4} />
-          ) : (
-            <View style={styles.emptyListContainer}>
-              {/* TODO: Change Image  */}
-              <NoAddressImage
-                width={EStyleSheet.value('270rem')}
-                height={EStyleSheet.value('123rem')}
-              />
-              <Text style={styles.noSearchResults}>
-                {Strings.noSearchResults}
-              </Text>
-            </View>
-          )
-        }
+        ListHeaderComponent={renderListHeader}
+        ListEmptyComponent={renderListEmpty}
         contentContainerStyle={styles.list}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
@@ -175,14 +183,7 @@ const SearchProductResults = (props) => {
             setEndReachCallable(true);
           }
         }}
-        ListFooterComponent={
-          <View style={styles.listLoaderContainer}>
-            <LoaderError
-              hideLoader={!storeProducts.length}
-              retry={() => getProducts(storeProducts.length)}
-            />
-          </View>
-        }
+        ListFooterComponent={renderListFooter}
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       />
       <View style={styles.buttonContainer}>

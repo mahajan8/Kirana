@@ -30,6 +30,7 @@ const ProductsList = (props) => {
     props.clearProducts();
     getProducts();
 
+    // Clear products when component unmounts
     return () => props.clearProducts();
   }, [filters]);
 

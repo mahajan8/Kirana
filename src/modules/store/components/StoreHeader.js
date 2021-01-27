@@ -1,15 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  ImageBackground,
-  Image,
-  Pressable,
-  FlatList,
-} from 'react-native';
-import SafeArea from '../../commons/components/SafeArea';
+import React from 'react';
+import {View, Text, ImageBackground, Image, Pressable} from 'react-native';
 import {styles} from '../styles/storeProductsStyles';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Actions} from 'react-native-router-flux';
@@ -18,12 +8,8 @@ import Search from '../../../assets/images/search.svg';
 import BackArrow from '../../../assets/images/white_back.svg';
 import LocationIcon from '../../../assets/images/white_location.svg';
 import {Strings} from '../../../utils/values/Strings';
-import List from './StoreProductsListing';
 import {connect} from 'react-redux';
-import {getStoreDetails} from '../Api';
-import ListPlaceHolder from './ListPlaceHolder';
 import CartCounter from '../../commons/components/CartCounter';
-import {setCategoryProducts, setStoreDetails} from '../StoreActions';
 
 let backgroundImage = require('../../../assets/images/store_background.png');
 
@@ -98,10 +84,6 @@ const mapStateToProps = (state) => ({
   storeReducer: state.storeReducer,
 });
 
-const mapDispatchToProps = {
-  getStoreDetails,
-  setCategoryProducts,
-  setStoreDetails,
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(StoreHeader);

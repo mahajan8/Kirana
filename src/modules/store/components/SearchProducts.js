@@ -31,7 +31,7 @@ const SearchProducts = (props) => {
     storeDetails,
     storeSearchProducts,
     storeSeachCount,
-  } = props.storeReducer;
+  } = props.storeReducer; // Destructuring storeReducer to get searched products
 
   useEffect(() => {
     if (searchInput) {
@@ -40,6 +40,7 @@ const SearchProducts = (props) => {
       input.current.focus();
       props.clearStoreSearchProducts();
     }
+    // Clear searched products when unmounting
     return () => props.clearStoreSearchProducts();
   }, [filters]);
 
@@ -100,7 +101,7 @@ const SearchProducts = (props) => {
   };
 
   const onChangeSearchText = (query) => {
-    // Search after user Stops typing and searched word length > 2
+    // Search after user stops typing and searched word length > 2
     if (query.length > 2) {
       clearTimeout(debounceTimer.current);
       debounceTimer.current = setTimeout(() => {

@@ -23,6 +23,7 @@ const StoreSubCategories = (props) => {
       store_id: storeDetails.id,
       category_id: props.categoryId,
     };
+    // Clear subcategory products and Call Api to get products
     props.setSubcategoryProducts([]);
     props.getProductsByCategory(params);
   }, []);
@@ -32,6 +33,34 @@ const StoreSubCategories = (props) => {
       return {name: item.name, id: item.id};
     });
   };
+
+  const renderListHeader = () => (
+    <View>
+      <FlatList
+        data={getSubCategoryList()}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        renderItem={({item, index}) => (
+          <Pressable
+            android_ripple={ripple}
+            style={styles.bubble}
+            key={`bubble${item.name}`}
+            onPress={() =>
+              Actions.productsList({
+                subCategoryName: item.name,
+                subCategoryId: item.id,
+              })
+            }>
+            <Text style={styles.bubbleLabel}>{item.name}</Text>
+          </Pressable>
+        )}
+        contentContainerStyle={styles.horizontalListContainer}
+        keyExtractor={(item, index) => `bubbles${index}`}
+      />
+      <View style={styles.seperator} />
+    </View>
+  );
+
   return (
     <SafeArea>
       <CartHeader
@@ -74,32 +103,7 @@ const StoreSubCategories = (props) => {
           />
         )}
         keyExtractor={(item, index) => `subCategoryProducts${index}`}
-        ListHeaderComponent={() => (
-          <View>
-            <FlatList
-              data={getSubCategoryList()}
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              renderItem={({item, index}) => (
-                <Pressable
-                  android_ripple={ripple}
-                  style={styles.bubble}
-                  key={`bubble${item.name}`}
-                  onPress={() =>
-                    Actions.productsList({
-                      subCategoryName: item.name,
-                      subCategoryId: item.id,
-                    })
-                  }>
-                  <Text style={styles.bubbleLabel}>{item.name}</Text>
-                </Pressable>
-              )}
-              contentContainerStyle={styles.horizontalListContainer}
-              keyExtractor={(item, index) => `bubbles${index}`}
-            />
-            <View style={styles.seperator} />
-          </View>
-        )}
+        ListHeaderComponent={renderListHeader}
       />
     </SafeArea>
   );

@@ -42,11 +42,13 @@ const List = (props) => {
       <View
         style={[styles.listContainer, hideBorderTop && {borderTopWidth: 0}]}>
         {renderHeader()}
+        {/* Horizontal Product List */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {horizontalList.map((item, index) => {
             if (item.viewAll) {
+              // View all button after 5 products
               return (
-                <View style={styles.productContainer} key={`viewAll`}>
+                <View style={styles.productContainer} key={'viewAll'}>
                   <Button
                     Style={styles.viewAllButton}
                     labelStyle={styles.viewAllLabel}

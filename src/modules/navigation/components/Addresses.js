@@ -28,6 +28,7 @@ const Addresses = (props) => {
   }, []);
 
   const renderAddress = (item) => {
+    // Address Tile Layout
     let {type, block_address, location, landmark, id} = item;
 
     return (
@@ -63,6 +64,7 @@ const Addresses = (props) => {
   };
 
   const deleteModal = () => {
+    // Modal Alert for Address Delete
     let type =
       deleteId !== null &&
       addresses[addresses.findIndex((obj) => obj.id === deleteId)].type;

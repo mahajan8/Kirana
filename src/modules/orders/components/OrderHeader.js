@@ -97,6 +97,7 @@ const OrderHeader = (props) => {
     let label = null;
     let {ORDER_REJECTED, ORDER_CANCELLED, ORDER_UPDATED} = orderStatus;
 
+    // Show info label by order status
     switch (status) {
       case ORDER_REJECTED:
         label = Strings.orderRejectedRefundInfo;
@@ -144,11 +145,14 @@ const OrderHeader = (props) => {
           <Text style={styles.orderId} numberOfLines={1}>
             {Strings.orderId} - {code}
           </Text>
+
+          {/* Show current order status */}
           {getOrderStatusBubble()}
         </View>
 
         <Text style={styles.orderTime}>{moment(created_on).format('lll')}</Text>
 
+        {/* Show payment status in case or refund */}
         {payment &&
           (payment.status === paymentStatus.REFUND_IN_PROGRESS ||
             payment.status === paymentStatus.REFUNDED) &&

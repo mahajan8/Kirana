@@ -149,6 +149,7 @@ const AddAddress = (props) => {
         <View style={styles.saveAddressContainer}>
           <Text style={styles.saveAddressText}>{Strings.saveAddressAs}</Text>
           <View style={styles.buttonsContainer}>
+            {/* Address Type Buttons */}
             {typesList.map((type) => (
               <Button
                 key={`addressTypeButton${type}`}
