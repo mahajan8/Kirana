@@ -10,13 +10,19 @@ import SplashLogo from '../../../assets/images/splash-logo.svg';
 import {getAuthToken} from '../../../utils/utility/LocalStore';
 import {getUserDetails} from '../../home/Api';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {setToken} from '../../authentication/AuthActions';
+import {setToken, setTest} from '../../authentication/AuthActions';
 import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {setLocation} from '../../onboarding/OnboardingActions';
 import {getAddressFromLocation} from '../../commons/Api';
 import Geolocation from 'react-native-geolocation-service';
 import CleverTap from 'clevertap-react-native';
+import store from '../../../utils/Store';
 
+CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
+  //alert('Notification Click from App', event);
+  const {dispatch} = store;
+  dispatch(setTest(event));
+});
 const Splash = (props) => {
   useEffect(() => {
     handleNavigation();
@@ -88,7 +94,9 @@ const Splash = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  test: state.authReducer.test,
+});
 
 const mapDispatchToProps = {
   getUserDetails,

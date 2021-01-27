@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import {Urls} from '../../utils/utility/Urls';
-import {getFormBody} from '../../utils/utility/Utils';
+import {getFormBody, handleNotificationClick} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {
   setUserDetails,
@@ -13,6 +13,7 @@ import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
 import {setCartDetails} from '../cart/CartActions';
 import CleverTap from 'clevertap-react-native';
+import store from '../../utils/Store';
 
 export const getUserDetails = (newUser = false) => {
   return (dispatch) => {
@@ -63,10 +64,13 @@ export const getUserDetails = (newUser = false) => {
           });
         }
         //If last order rating not completed navigate to rating screen.
-        if (last_order_rating) {
-          Actions.reset('drawer');
-        } else {
-          Actions.reset('rating', {order: last_order_data});
+        const {test} = store.getState().authReducer;
+        Actions.reset('drawer');
+        if (!last_order_rating) {
+          Actions.push('rating', {order: last_order_data});
+        }
+        if (test) {
+          handleNotificationClick(test);
         }
       } else {
         alert(res.data.message);
