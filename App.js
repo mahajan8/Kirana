@@ -7,23 +7,16 @@ import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
-import {handleNotificationClick} from './src/utils/utility/Utils';
+import {
+  handleNotificationClick,
+  setDimensions,
+} from './src/utils/utility/Utils';
 
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
   dsn:
     'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167',
-});
-
-// Extended Style Sheet Configuration
-let {height, width} = Dimensions.get('window');
-let [trueWidth, trueHeight] =
-  width > height ? [height, width] : [width, height];
-
-EStyleSheet.build({
-  $rem: trueWidth / 360,
-  $vrem: trueHeight / 700,
 });
 
 export default class App extends Component {
@@ -35,6 +28,7 @@ export default class App extends Component {
     }
     Text.defaultProps.allowFontScaling = false;
     this.configureSDK();
+    setDimensions();
   }
   async componentDidMount() {
     if (Platform.OS === 'android') {
