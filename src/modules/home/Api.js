@@ -7,6 +7,7 @@ import {
   appendStores,
   clearStores,
   appendSearchedStores,
+  setCurrentOrders,
 } from './HomeActions';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
@@ -25,11 +26,26 @@ export const getUserDetails = (newUser = false) => {
           user_details,
           last_order_rating,
           last_order_data,
+          active_orders,
         } = response;
+        //Set Addresses, Cart List and user details in respective Reducers
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
-        console.log(user_details);
+
+        let activeOrders = active_orders.map((item) => {
+          let {order_code, order_id, order_status, store_id, store_name} = item;
+          return {
+            order_code,
+            id: order_id,
+            status: order_status,
+            store_id,
+            store_name,
+          };
+        });
+        //Set Currently Active Orders
+        dispatch(setCurrentOrders(activeOrders));
+
         const {email, id, first_name, mobile} = user_details;
         if (newUser) {
           CleverTap.onUserLogin({
@@ -46,6 +62,7 @@ export const getUserDetails = (newUser = false) => {
             Phone: mobile,
           });
         }
+        //If last order rating not completed navigate to rating screen.
         if (last_order_rating) {
           Actions.reset('drawer');
         } else {

@@ -15,11 +15,14 @@ const TrackOrderInfoCollapsed = (props) => {
     trackStatus,
   } = props;
   let currentObj = {};
+
   if (status === orderStatus.ORDER_PARTIALLY_ACCEPTED) {
+    // Display order Accepted in case of Partially accepted.
     currentObj = trackingList.find(
       (obj) => obj.orderStatus === orderStatus.ORDER_ACCEPTED,
     );
   } else {
+    // Set currentObj to object from trackingList with corresponding status to display.
     currentObj = trackingList[trackStatus];
   }
   let {title, subTitle} = currentObj;

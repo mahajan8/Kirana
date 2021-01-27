@@ -56,6 +56,7 @@ const Tracking = (props) => {
       .start();
   };
 
+  // Animate Marker on Polyline
   const animateLeg = (steps) => {
     let totalDuration = 0;
     steps.forEach((step, index) => {
@@ -68,6 +69,7 @@ const Tracking = (props) => {
     });
   };
 
+  // Get Polyline for Map between 2 points
   const getPolyline = () => {
     fetch(url)
       .then((res) => res.json())
@@ -83,7 +85,7 @@ const Tracking = (props) => {
   const getMarker = (type = 0) => {
     let showTime =
       (trackStatus === 2 && type === 0) || (trackStatus === 3 && type === 1);
-
+    // Get marker by address type.
     return (
       <Marker coordinate={type === 0 ? start : end}>
         <View style={styles.markerContainer}>

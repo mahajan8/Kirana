@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Pressable, Animated, Easing} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/trackOrderInfoStyles';
@@ -7,7 +7,6 @@ import GreenPaidCheck from '../../../assets/images/map_paid_successful.svg';
 import PurpleCheck from '../../../assets/images/purple_check.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {orderStatus, paymentStatus} from '../../../utils/values/Values';
-import {useEffect} from 'react/cjs/react.development';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {setOrderDetails, setSelectedOrderId} from '../OrderActions';
@@ -89,21 +88,28 @@ const TrackOrderInfo = (props) => {
   }, [status]);
 
   useEffect(() => {
+    // Subscribe to channels and add listener to socket changes.
     let listener = {message: handleMessage};
     PubNubClient.subscribe({channels});
     PubNubClient.addListener(listener);
 
     return () => {
+      // Unsubscribe channels and remove listener on component unmount
       PubNubClient.unsubscribe({channels});
       PubNubClient.removeListener(listener);
     };
   }, [PubNubClient, channels]);
 
   const handleMessage = (event) => {
+    // Handler function for Socket Order Changes
     const {type, payload} = event.message;
 
     if (type === statusUpdate && payload.order.id === id) {
       props.setOrderDetails(payload.order);
+
+      if (payload.order.status === orderStatus.ORDER_REJECTED) {
+        props.orderRejected();
+      }
     }
   };
 
@@ -136,6 +142,7 @@ const TrackOrderInfo = (props) => {
     if (collapsed) {
       setCollapsed(false);
     }
+    // Toggle Collapsed status and animate maxHeight of Order status view.
 
     Animated.timing(animCollapsed, {
       toValue: animCollapsed._value ? 0 : 1,
@@ -151,15 +158,17 @@ const TrackOrderInfo = (props) => {
   });
 
   const getPaymentStatus = () => {
+    // Render payment status
     let {SUCCESS, REFUNDED, REFUND_IN_PROGRESS} = paymentStatus;
     let Icon = GreenPaidCheck;
     let label = Strings.paidSuccessfully;
 
+    // Set icon and label w.r.t payment status
     if (payment) {
       switch (payment.status) {
         case SUCCESS:
           Icon = GreenPaidCheck;
-          label = Strings.paid;
+          label = Strings.paidSuccessfully;
           break;
         case REFUND_IN_PROGRESS:
           Icon = PurpleCheck;
@@ -172,6 +181,7 @@ const TrackOrderInfo = (props) => {
       }
     }
 
+    // Return selected icon and label to display payment status
     return (
       <View style={styles.rowContainer}>
         <Text style={styles.paymentStatus}>{label}</Text>
@@ -204,7 +214,6 @@ const TrackOrderInfo = (props) => {
           {/* TODO: Add Right arrow image if needed */}
           <Pressable
             onPress={() => {
-              props.setSelectedOrderId(id);
               Actions.orderDetails();
             }}>
             <Text style={styles.orderDetails}>

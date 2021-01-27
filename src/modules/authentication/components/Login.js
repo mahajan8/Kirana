@@ -15,13 +15,13 @@ import Input from '../../commons/components/Input';
 import Header from '../../commons/components/Header';
 import {styles} from '../styles/loginStyle';
 import {valid, Validation} from '../../../utils/utility/Validations';
-import Loader from '../../commons/components/Loader';
 import {sendOtp} from '../Api';
 import {connect} from 'react-redux';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {Colors} from '../../../utils/values/Colors';
 import {Urls} from '../../../utils/utility/Urls';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 const Login = (props) => {
   const [number, setNumber] = useState('');
@@ -108,7 +108,7 @@ const Login = (props) => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-      <Loader show={props.loading} />
+      <LoaderError retry={login} />
     </SafeArea>
   );
 };

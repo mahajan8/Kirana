@@ -27,7 +27,7 @@ const OrderListItem = (props) => {
     delivery_address_type,
     payment,
     id,
-  } = item;
+  } = item; //Destructuring item to get order Item details.
 
   const reOrderItems = () => {
     let pars = {
@@ -42,6 +42,7 @@ const OrderListItem = (props) => {
     let Icon = GreenCheck;
     let label = Strings.paid;
 
+    // Set icon and label w.r.t payment status
     if (payment) {
       switch (payment.status) {
         case SUCCESS:
@@ -59,6 +60,7 @@ const OrderListItem = (props) => {
       }
     }
 
+    // Return selected icon with label in a component
     return (
       <View style={styles.rowContainer}>
         <Icon style={styles.icons} />
@@ -112,7 +114,8 @@ const OrderListItem = (props) => {
             if (past) {
               reOrderItems();
             } else {
-              Actions.trackOrder({orderId: item.id});
+              props.setSelectedOrderId(item.id);
+              Actions.trackOrder();
             }
           }}
         />

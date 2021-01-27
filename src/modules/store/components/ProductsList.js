@@ -12,10 +12,10 @@ import {connect} from 'react-redux';
 import {searchStoreProducts} from '../Api';
 import ProductBox from './ProductBox';
 import ListPlaceHolder from './ListPlaceHolder';
-import Loader from '../../commons/components/Loader';
 import {clearProducts} from '../StoreActions';
 import CartHeader from '../../commons/components/CartHeader';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -30,6 +30,7 @@ const ProductsList = (props) => {
     props.clearProducts();
     getProducts();
 
+    // Clear products when component unmounts
     return () => props.clearProducts();
   }, [filters]);
 
@@ -53,7 +54,7 @@ const ProductsList = (props) => {
     };
 
     let {brands, price_sort} = filters;
-
+    // Add filters in params for chosen filters
     if (brands.length) {
       pars.conditions = [
         ...pars.conditions,
@@ -78,7 +79,7 @@ const ProductsList = (props) => {
 
   const renderLoader = () => (
     <View style={styles.listLoaderContainer}>
-      <Loader show={products.length ? props.loading : false} />
+      <LoaderError hideLoader={!products.length} />
     </View>
   );
 
@@ -129,6 +130,7 @@ const ProductsList = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // Load products if list end reached and more products available
           if (!endReachCallable && products.length < totalProductCount) {
             getProducts(products.length);
             setEndReachCallable(true);

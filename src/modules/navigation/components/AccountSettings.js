@@ -12,10 +12,10 @@ import SafeArea from '../../commons/components/SafeArea';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {sendOtpToChangeNumber, verifyOtpChangeNumber} from '../Api';
 import {styles} from '../styles/accountSettingStyles';
-import Loader from '../../commons/components/Loader';
 import ErrorIcon from '../../../assets/images/error_icon.svg';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import BottomButton from '../../commons/components/BottomButton';
+import LoaderError from '../../commons/components/LoaderError';
 
 const AccountSettings = (props) => {
   let {viewType, userDetails} = props;
@@ -36,6 +36,7 @@ const AccountSettings = (props) => {
   });
 
   const verifyOtp = () => (
+    //Render Otp Layout
     <View>
       <Text style={styles.heading}>{Strings.enterNewNumber}</Text>
       <Otp
@@ -67,6 +68,7 @@ const AccountSettings = (props) => {
   );
 
   const changeNumber = () => (
+    // Render Number Input Layout
     <View>
       <Text style={styles.heading}>{Strings.verifyNumber}</Text>
       <Input
@@ -83,6 +85,7 @@ const AccountSettings = (props) => {
   );
 
   const viewNumber = () => (
+    //Render Current Number with change button
     <View style={[styles.rowContainer, styles.numberContainer]}>
       <View>
         <Text style={styles.numberLabel}>{Strings.mobileNumber}</Text>
@@ -98,6 +101,7 @@ const AccountSettings = (props) => {
   );
 
   const renderByType = () => {
+    // Render Page by viewType passed in params.
     switch (viewType) {
       case 1:
         return changeNumber();
@@ -132,6 +136,8 @@ const AccountSettings = (props) => {
           country_code: '+91',
           user_type: 30,
         };
+
+        // Api Call to send otp to changed number
         props.sendOtpToChangeNumber(pars, () => {
           if (!resend) {
             Actions.accountSettings({viewType: 2, number: number});
@@ -148,6 +154,8 @@ const AccountSettings = (props) => {
           new_mobile: props.number,
           otp_code: otp.current.submitOTP(),
         };
+
+        // Api Call to verify otp from changed number
         props.verifyOtpChangeNumber(pars, () => setError(true));
       }
     }
@@ -185,7 +193,7 @@ const AccountSettings = (props) => {
           onPress={onSubmit}
         />
       )}
-      <Loader show={props.loading} />
+      <LoaderError retry={onSubmit} />
     </SafeArea>
   );
 };

@@ -19,6 +19,9 @@ export const addUpdateAddress = (pars, callback) => {
         let addresses = Actions.state.routes.some(
           (obj) => obj.routeName === 'addresses',
         );
+
+        // If added address through address list, go back to address screen
+        // If added address throguh cart list, go back to cart screen
         let cart = Actions.state.routes.some((obj) => obj.routeName === 'cart');
         if (addresses) {
           Actions.popTo('addresses');
@@ -42,6 +45,7 @@ export const getAddresses = () => {
       const success = !res.data.error;
 
       if (success) {
+        // Store Address list in Reducer
         dispatch(setAddress(res.data.data));
       } else {
         alert(res.data.message);
@@ -57,6 +61,7 @@ export const deleteAddress = (pars) => {
     instance.post(Urls.deleteAddress, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
+        // Fetch new address list after delete address
         dispatch(getAddresses());
       } else {
         alert(res.data.message);

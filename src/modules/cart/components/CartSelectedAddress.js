@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, Pressable, ActivityIndicator} from 'react-native';
 import {styles} from '../styles/cartSelectedAddressStyles';
 import AddressDownArrow from '../../../assets/images/cart_address_down_arrow.svg';
@@ -48,6 +48,7 @@ const CartSelectedAddress = (props) => {
                   styles.addAddressSub,
                   !deliverable && styles.notDeliverable,
                 ]}>
+                {/* Check for address deliverable  */}
                 {deliverable
                   ? address.block_address + ' ' + address.landmark
                   : Strings.cartNotDeliverable}
@@ -66,6 +67,7 @@ const CartSelectedAddress = (props) => {
         </View>
 
         {location.id && deliverable ? (
+          // Change button to change address
           <Pressable
             onPress={props.addAddress}
             android_ripple={ripple}
@@ -73,6 +75,7 @@ const CartSelectedAddress = (props) => {
             <Text style={styles.change}>{Strings.change}</Text>
           </Pressable>
         ) : (
+          // Add Button if address not deliverable
           <Button
             label={Strings.add}
             Style={styles.addButton}
@@ -81,6 +84,7 @@ const CartSelectedAddress = (props) => {
           />
         )}
       </View>
+
       {location.id && deliverable && (
         <View style={styles.paymentButtonContainer}>
           {loading ? (

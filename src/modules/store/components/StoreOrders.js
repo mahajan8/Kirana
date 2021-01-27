@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import {Pressable, View, Text, Dimensions} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {connect} from 'react-redux';
-import {getOrders} from '../../orders/Api';
 import OrderList from '../../orders/components/OrderList';
 import {TabView} from 'react-native-tab-view';
 import {Strings} from '../../../utils/values/Strings';
@@ -24,10 +22,10 @@ let routes = [
 let initialLayout = {height: 0, width: Dimensions.get('window').width};
 
 const StoreOrders = (props) => {
-  let {selectedStore} = props.homeReducer;
   const [tabIndex, setTabIndex] = useState(0);
 
   const renderTabBar = () => {
+    // Tab layout for store orders and all orders.
     return (
       <View style={styles.tabContainer}>
         <View style={styles.tabRow}>
@@ -65,7 +63,7 @@ const StoreOrders = (props) => {
 
   return (
     <SafeArea>
-      {/* <OrderList storeId={selectedStore.id} /> */}
+      {/* Top Tab Bar */}
       <TabView
         navigationState={{
           ...{routes},

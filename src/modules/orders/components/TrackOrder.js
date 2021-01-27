@@ -27,20 +27,24 @@ import {environment} from '../../../config/EnvConfig';
 // 5 - Rejected
 let trackStatus = 2;
 
+// Socket Config
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
   subscribeKey: AppConfig[environment].pubnutSubscribeKey,
+  subscribeRequestTimeout: 60000,
+  presenceTimeout: 122,
 });
 
 const TrackOrder = (props) => {
-  let {store_name} = props.orderDetails ? props.orderDetails : {};
+  let {orderDetails, selectedOrderId} = props.orderReducer;
+  let {store_name} = orderDetails ? orderDetails : {};
 
   const [showRejectedModal, setShowRejectedModal] = useState(false);
 
   useEffect(() => {
     // getPolyline();
     let pars = {
-      order_id: props.orderId,
+      order_id: selectedOrderId,
     };
     props.getOrderDetails(pars);
 
@@ -70,8 +74,11 @@ const TrackOrder = (props) => {
 
         <Tracking trackStatus={trackStatus} storeName={store_name} />
 
-        {props.orderDetails ? (
-          <TrackOrderInfo trackStatus={trackStatus} order={props.order} />
+        {orderDetails ? (
+          <TrackOrderInfo
+            trackStatus={trackStatus}
+            orderRejected={() => setShowRejectedModal(true)}
+          />
         ) : (
           <TrackInfoShimmer />
         )}
@@ -86,7 +93,7 @@ const TrackOrder = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  orderDetails: state.orderReducer.orderDetails,
+  orderReducer: state.orderReducer,
 });
 
 const mapDispatchToProps = {

@@ -24,10 +24,14 @@ import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
 import store from '../../../utils/Store';
 import {orderStatus} from '../../../utils/values/Values';
+import CurrentOrders from './CurrentOrders';
 
+// Socket Configuration
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
   subscribeKey: AppConfig[environment].pubnutSubscribeKey,
+  subscribeRequestTimeout: 60000,
+  presenceTimeout: 122,
 });
 
 const Home = (props) => {
@@ -37,53 +41,62 @@ const Home = (props) => {
   const [channels] = useState([userDetails.id]);
 
   useEffect(() => {
+    // If location present in homeReducer load stores for the location
     if (location) {
       loadStores(0);
     }
   }, [location]);
 
-  // useEffect(() => {
-  //   let listener = {message: handleMessage};
-  //   pubnub.subscribe({channels});
-  //   pubnub.addListener(listener);
+  useEffect(() => {
+    // Subscribe to channels and add listener for Socket Change
+    let listener = {message: handleMessage};
+    pubnub.subscribe({channels});
+    pubnub.addListener(listener);
 
-  //   return () => {
-  //     pubnub.unsubscribe({channels});
-  //     pubnub.removeListener(listener);
-  //   };
-  // }, [pubnub, channels]);
+    return () => {
+      // Unsubscribe channels and remove listener when component unmounts
+      pubnub.unsubscribe({channels});
+      pubnub.removeListener(listener);
+    };
+  }, [pubnub, channels]);
 
-  // const handleMessage = async (event) => {
-  //   const {type, payload} = event.message;
+  const handleMessage = async (event) => {
+    // Handler function for order Change from Socket Listener
+    const {type, payload} = event.message;
 
-  //   let {id, status, store_name} = payload.order;
+    let {id, status, store_name, store_id, order_code} = payload.order;
 
-  //   let order = {
-  //     id,
-  //     status,
-  //     store_name,
-  //   };
+    let order = {
+      id,
+      status,
+      store_name,
+      store_id,
+      order_code,
+    };
 
-  //   let {currentOrders} = store.getState().homeReducer;
+    let {currentOrders} = store.getState().homeReducer;
 
-  //   let i = currentOrders.findIndex((obj) => obj.id === id);
+    let i = currentOrders.findIndex((obj) => obj.id === id);
 
-  //   let newCurrentOrders = [...currentOrders];
+    let newCurrentOrders = [...currentOrders];
 
-  //   if (i >= 0) {
-  //     if (status === orderStatus.ORDER_DELIVERED) {
-  //       newCurrentOrders.splice(i, 1);
-  //     } else if (status !== newCurrentOrders[i].status) {
-  //       newCurrentOrders[i] = order;
-  //     }
-  //   } else {
-  //     if (status !== orderStatus.ORDER_DELIVERED) {
-  //       newCurrentOrders.push(order);
-  //     }
-  //   }
+    if (i >= 0) {
+      if (status === orderStatus.ORDER_DELIVERED) {
+        // Remove from Currently Active Orders if Order Delivered
+        newCurrentOrders.splice(i, 1);
+      } else if (status !== newCurrentOrders[i].status) {
+        // Update Status of Order if status is changed
+        newCurrentOrders[i] = order;
+      }
+    } else {
+      // Add to currently active orders if not exits already, and status is not delivered.
+      if (status !== orderStatus.ORDER_DELIVERED) {
+        newCurrentOrders.push(order);
+      }
+    }
 
-  //   props.setCurrentOrders(newCurrentOrders);
-  // };
+    props.setCurrentOrders(newCurrentOrders);
+  };
 
   const searchProductHeader = () => {
     return (
@@ -103,6 +116,7 @@ const Home = (props) => {
       </View>
     );
   };
+
   const loadStores = (start) => {
     const data = {
       start,
@@ -112,6 +126,7 @@ const Home = (props) => {
     };
     props.getStores(data);
   };
+
   const onStoreClick = (store) => {
     props.selectStore(store);
     Actions.store();
@@ -150,6 +165,7 @@ const Home = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // load stores if list end reached and more stores are available
           if (!endReachCallable && stores.length < storeCount) {
             loadStores(stores.length);
             setEndReachCallable(true);
@@ -159,11 +175,16 @@ const Home = (props) => {
         contentContainerStyle={styles.list}
         ListEmptyComponent={renderListEmptyComponent}
       />
+
+      {/* Active Orders Component  */}
+      {/*<CurrentOrders />*/}
+
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}
         setLocation={props.setLocation}
         selectedLocation={location}
       />
+
       <SearchLocationModal
         visible={searchVisible}
         setVisible={setSearchVisible}

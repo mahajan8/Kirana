@@ -14,8 +14,8 @@ import NoAddressImage from '../../../assets/images/empty_address.svg';
 import {getAddresses, deleteAddress} from '../Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
-import Loader from '../../commons/components/Loader';
 import AlertModal from '../../commons/components/AlertModal';
+import LoaderError from '../../commons/components/LoaderError';
 
 const Addresses = (props) => {
   let {addresses} = props.navigationReducer;
@@ -28,6 +28,7 @@ const Addresses = (props) => {
   }, []);
 
   const renderAddress = (item) => {
+    // Address Tile Layout
     let {type, block_address, location, landmark, id} = item;
 
     return (
@@ -63,6 +64,7 @@ const Addresses = (props) => {
   };
 
   const deleteModal = () => {
+    // Modal Alert for Address Delete
     let type =
       deleteId !== null &&
       addresses[addresses.findIndex((obj) => obj.id === deleteId)].type;
@@ -143,7 +145,9 @@ const Addresses = (props) => {
           keyExtractor={(item, index) => `address${index}`}
         />
       </View>
-      <Loader show={props.loading} />
+
+      <LoaderError retry={props.getAddresses} />
+
       {deleteModal()}
     </SafeArea>
   );

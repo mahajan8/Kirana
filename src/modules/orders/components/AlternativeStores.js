@@ -11,7 +11,6 @@ import {selectStore} from '../../home/HomeActions';
 import {styles} from '../styles/alternativeStoresStyles';
 import NoStores from '../../../assets/images/stores_empty_image.svg';
 import {Strings} from '../../../utils/values/Strings';
-import Button from '../../commons/components/Button';
 import {getAlternativeStores} from '../Api';
 import {clearAlternativeStores} from '../OrderActions';
 
@@ -74,6 +73,7 @@ const AlternativeStores = (props) => {
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // Load stores if list end reached and more stores available.
           if (
             !endReachCallable &&
             alternativeStores.length < alternativeStoresCount

@@ -335,6 +335,8 @@ PODS:
     - React-Core
   - react-native-maps (0.27.1):
     - React
+  - react-native-netinfo (5.9.10):
+    - React-Core
   - react-native-razorpay (2.2.2):
     - razorpay-pod
     - React
@@ -479,6 +481,7 @@ DEPENDENCIES:
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-razorpay (from `../node_modules/react-native-razorpay`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -580,6 +583,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-picker"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-razorpay:
     :path: "../node_modules/react-native-razorpay"
   React-RCTActionSheet:
@@ -674,7 +679,8 @@ SPEC CHECKSUMS:
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
   react-native-image-picker: 32d1ad2c0024ca36161ae0d5c2117e2d6c441f11
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
-  react-native-razorpay: 4e851d32acf8147ae5799321e749b3e2d137e1a3
+  react-native-netinfo: 30fb89fa913c342be82a887b56e96be6d71201dd
+  react-native-razorpay: bb19c0aa50ee004ddb4b51615f07f3435aae4901
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
   React-RCTBlob: 0b284339cbe4b15705a05e2313a51c6d8b51fa40

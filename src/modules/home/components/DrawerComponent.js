@@ -32,6 +32,7 @@ let options = [
 ];
 
 const actions = (index) => {
+  // Switch case for Drawer option Selected
   switch (index) {
     case 0:
       Actions.myOrders();
@@ -92,17 +93,20 @@ const DrawerComponent = (props) => {
           </Text>
         </Pressable>
       </View>
+
       <Pressable style={styles.banner} android_ripple={ripple}>
         <FreeDelivery
           width={EStyleSheet.value('56rem')}
           height={EStyleSheet.value('37rem')}
         />
+
         <View style={styles.freeDeliveryTextContainer}>
           <Text style={styles.freeDelivery}>{Strings.getFreeDelivery}</Text>
           <Text style={styles.freeDeliverySub}>
             {Strings.drawerFreeDeliverySub}
           </Text>
         </View>
+
         <View style={styles.arrow}>
           <RightArrow
             width={EStyleSheet.value('12rem')}
@@ -110,6 +114,8 @@ const DrawerComponent = (props) => {
           />
         </View>
       </Pressable>
+
+      {/* Map options to render Drawer Items */}
       {options.map((item, index) => (
         <View key={`$option${item.label}`}>
           {(index === 3 || index === 5 || index === 7) && (

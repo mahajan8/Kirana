@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, RefreshControl} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import OrderHeader from './OrderHeader';
 import {styles} from '../../orders/styles/orderDetailStyles';
@@ -19,12 +19,11 @@ import {
 import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import OrderDetailShimmer from './OrderDetailShimmer';
-import Loader from '../../commons/components/Loader';
+import LoaderError from '../../commons/components/LoaderError';
 
 const OrderDetails = (props) => {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const {orderDetails, selectedOrderId} = props.orderReducer;
-
   let {
     instructions,
     final_amount,
@@ -116,6 +115,7 @@ const OrderDetails = (props) => {
   };
 
   const getButtonLabel = () => {
+    // Button Text according to order Status
     let {
       ORDER_ACCEPTED,
       ORDER_DELIVERY_ASSIGNED,
@@ -141,6 +141,7 @@ const OrderDetails = (props) => {
   };
 
   const onButtonPress = () => {
+    // Button Action according to order Status
     let {
       ORDER_ACCEPTED,
       ORDER_DELIVERY_ASSIGNED,
@@ -157,9 +158,9 @@ const OrderDetails = (props) => {
       case ORDER_DELIVERY_ASSIGNED:
       case ORDER_OUT_FOR_DELIVERY:
         if (isAfterTracking()) {
-          Actions.popTo('trackOrder', {orderId: id});
+          Actions.popTo('trackOrder');
         } else {
-          Actions.trackOrder({orderId: id});
+          Actions.trackOrder();
         }
         break;
       case ORDER_CANCELLED:
@@ -173,6 +174,7 @@ const OrderDetails = (props) => {
   };
 
   const getBottomButton = () => {
+    // Bottom Buttons Layout
     let {ORDER_PLACED, ORDER_UPDATED} = orderStatus;
     if (status === ORDER_PLACED || status === ORDER_UPDATED) {
       let update = status === ORDER_UPDATED ? true : false;
@@ -198,9 +200,9 @@ const OrderDetails = (props) => {
                 acceptReject();
               } else {
                 if (isAfterTracking()) {
-                  Actions.popTo('trackOrder', {orderId: id});
+                  Actions.popTo('trackOrder');
                 } else {
-                  Actions.trackOrder({orderId: id});
+                  Actions.trackOrder();
                 }
               }
             }}
@@ -219,6 +221,7 @@ const OrderDetails = (props) => {
   };
 
   const renderListFooter = () => (
+    //List Footer Component
     <View style={styles.listFooter}>
       {instructions ? (
         <View style={styles.instructionsContainer}>
@@ -253,6 +256,7 @@ const OrderDetails = (props) => {
         renderItem={({item}) => <OrderItem item={item} />}
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
         ListHeaderComponent={
+          // List Header Component
           orderDetails && (
             <View style={styles.listHeader}>
               <OrderHeader
@@ -265,6 +269,15 @@ const OrderDetails = (props) => {
         }
         ListFooterComponent={orderDetails && renderListFooter()}
         ListEmptyComponent={<OrderDetailShimmer />}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={() => {
+              props.setOrderDetails(null);
+              fetchDetails();
+            }}
+          />
+        }
       />
 
       {orderDetails && (
@@ -282,11 +295,7 @@ const OrderDetails = (props) => {
         button2Press={cancel}
       />
 
-      {orderDetails && props.loading && (
-        <View style={styles.loaderContainer}>
-          <Loader show={true} />
-        </View>
-      )}
+      <LoaderError hideLoader={orderDetails ? false : true} />
     </SafeArea>
   );
 };

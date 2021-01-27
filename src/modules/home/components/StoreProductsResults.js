@@ -10,7 +10,6 @@ import NoAddressImage from '../../../assets/images/empty_address.svg';
 import SearchItemTile from './SearchItemTile';
 import {connect} from 'react-redux';
 import {searchStoreProducts} from '../../store/Api';
-import Loader from '../../commons/components/Loader';
 import StoreProductPlaceholder from './StoreProductPlaceholder';
 import {Actions} from 'react-native-router-flux';
 import ActiveFilter from '../../../assets/images/active-filter.svg';
@@ -18,6 +17,7 @@ import Filter from '../../../assets/images/filter.svg';
 import Button from '../../commons/components/Button';
 import {clearStoreProducts} from '../HomeActions';
 import {ripple} from '../../../utils/utility/Utils';
+import LoaderError from '../../commons/components/LoaderError';
 
 let defaultFilters = {brands: [], categories: [], price_sort: null};
 
@@ -61,6 +61,7 @@ const SearchProductResults = (props) => {
 
     let {brands, categories, price_sort} = filters;
 
+    //Add Changed Filters to params
     if (brands.length) {
       pars.conditions = [
         ...pars.conditions,
@@ -92,6 +93,45 @@ const SearchProductResults = (props) => {
     }
     props.searchStoreProducts(pars);
   };
+
+  const renderListEmpty = () =>
+    props.loading ? (
+      <StoreProductPlaceholder count={4} />
+    ) : (
+      <View style={styles.emptyListContainer}>
+        {/* TODO: Change Image  */}
+        <NoAddressImage
+          width={EStyleSheet.value('270rem')}
+          height={EStyleSheet.value('123rem')}
+        />
+        <Text style={styles.noSearchResults}>{Strings.noSearchResults}</Text>
+      </View>
+    );
+
+  const renderListFooter = () => (
+    <View style={styles.listLoaderContainer}>
+      <LoaderError
+        hideLoader={!storeProducts.length}
+        retry={() => getProducts(storeProducts.length)}
+      />
+    </View>
+  );
+
+  const renderListHeader = () =>
+    storeProductsCount && !props.loading ? (
+      <View>
+        {productIds ? (
+          <Text style={styles.searchResultsHeading}>
+            {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
+          </Text>
+        ) : (
+          <Text style={styles.searchResultsHeading}>
+            {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
+            {searchedText}
+          </Text>
+        )}
+      </View>
+    ) : null;
 
   let FilterIcon =
     filters.brands.length ||
@@ -131,53 +171,19 @@ const SearchProductResults = (props) => {
           <SearchItemTile item={item} index={index} />
         )}
         keyExtractor={(item, index) => `store${index}`}
-        ListHeaderComponent={
-          storeProductsCount &&
-          !props.loading && (
-            <View>
-              {productIds ? (
-                <Text style={styles.searchResultsHeading}>
-                  {Strings.alternativeStoreItemsAvailable} {selectedStore.name}
-                </Text>
-              ) : (
-                <Text style={styles.searchResultsHeading}>
-                  {Strings.found} {storeProductsCount} {Strings.itemsMatching}{' '}
-                  {searchedText}
-                </Text>
-              )}
-            </View>
-          )
-        }
-        ListEmptyComponent={
-          props.loading ? (
-            <StoreProductPlaceholder count={4} />
-          ) : (
-            <View style={styles.emptyListContainer}>
-              {/* TODO: Change Image  */}
-              <NoAddressImage
-                width={EStyleSheet.value('270rem')}
-                height={EStyleSheet.value('123rem')}
-              />
-              <Text style={styles.noSearchResults}>
-                {Strings.noSearchResults}
-              </Text>
-            </View>
-          )
-        }
+        ListHeaderComponent={renderListHeader}
+        ListEmptyComponent={renderListEmpty}
         contentContainerStyle={styles.list}
         onMomentumScrollBegin={() => setEndReachCallable(false)}
         onEndReachedThreshold={0.1}
         onEndReached={() => {
+          // Load products if list end reached and more products available.
           if (!endReachCallable && storeProducts.length < storeProductsCount) {
             getProducts(storeProducts.length);
             setEndReachCallable(true);
           }
         }}
-        ListFooterComponent={
-          <View style={styles.listLoaderContainer}>
-            <Loader show={storeProducts.length ? props.loading : false} />
-          </View>
-        }
+        ListFooterComponent={renderListFooter}
         ItemSeparatorComponent={() => <View style={styles.itemSeperator} />}
       />
       <View style={styles.buttonContainer}>

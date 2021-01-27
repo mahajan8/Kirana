@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList} from 'react-native';
-import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/orderListStyles';
 import {Strings} from '../../../utils/values/Strings';
 import {connect} from 'react-redux';
 import {getOrders} from '../Api';
-import Loader from '../../commons/components/Loader';
 import OrderListItem from './OrderListItem';
 import {orderStatus} from '../../../utils/values/Values';
 import {clearOrders, setActiveOrders, setPastOrders} from '../OrderActions';
@@ -19,6 +17,7 @@ import OrderListShimmer from './OrderListShimmer';
 import CartEmpty from '../../../assets/images/empty_cart.svg';
 import {Actions} from 'react-native-router-flux';
 import Button from '../../commons/components/Button';
+import LoaderError from '../../commons/components/LoaderError';
 
 const OrderList = (props) => {
   const [endReachCallable, setEndReachCallable] = useState(true);
@@ -45,6 +44,7 @@ const OrderList = (props) => {
   };
 
   const getActiveOrders = () => {
+    // Get Active Orders list
     let {
       ORDER_PLACED,
       ORDER_ACCEPTED,
@@ -91,6 +91,7 @@ const OrderList = (props) => {
     }
 
     props.getOrders(data, (results, total) => {
+      // Set Active Orders in Reducer
       if (storeOrders) {
         props.setStoreActiveOrders(results);
       } else {
@@ -100,6 +101,7 @@ const OrderList = (props) => {
   };
 
   const getPastOrders = (start = 0) => {
+    // Get Past Orders list
     let {
       ORDER_DELIVERED,
       ORDER_CANCELLED,
@@ -142,6 +144,7 @@ const OrderList = (props) => {
     }
 
     props.getOrders(data, (results, total) => {
+      // Set Past Orders in Reducer
       if (storeOrders) {
         props.setStorePastOrders(results, total);
       } else {
@@ -157,6 +160,7 @@ const OrderList = (props) => {
   );
 
   const renderActiveList = () => (
+    // Active Orders List Component
     <FlatList
       data={storeOrders ? storeActiveOrders : activeOrders}
       renderItem={({item}) => (
@@ -180,15 +184,11 @@ const OrderList = (props) => {
       ? true
       : false;
 
-    if (props.loading && showLoader) {
-      return (
-        <View style={styles.listLoaderContainer}>
-          <Loader show={true} />
-        </View>
-      );
-    } else {
-      return null;
-    }
+    return (
+      <View style={styles.listLoaderContainer}>
+        <LoaderError hideLoader={!showLoader} />
+      </View>
+    );
   };
 
   let showActiveHeader = storeOrders
@@ -215,6 +215,7 @@ const OrderList = (props) => {
       onMomentumScrollBegin={() => setEndReachCallable(false)}
       onEndReachedThreshold={0.1}
       onEndReached={() => {
+        // Load more past orders if list end reached and more orders available
         if (
           !endReachCallable &&
           ((!storeOrders && pastOrders.length < totalCount) ||

@@ -14,6 +14,7 @@ import {styles} from '../styles/addressListModalStyles';
 const AddressListModal = (props) => {
   let {visible, setVisible, location, addresses} = props;
 
+  //Address Box Layout
   const renderAddress = (item) => {
     let {id, type, block_address, landmark} = item;
     return (

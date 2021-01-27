@@ -30,18 +30,13 @@ const Filters = (props) => {
   const [filterIndex, setFilterIndex] = useState(
     filterBrands.length < 2 ? (filterCategories.length < 2 ? 2 : 1) : 0,
   );
+  // If options in a Filter Category < 2, then initialize the filterIndex to the next index.
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedSort, setSelectedSort] = useState(null);
 
   useEffect(() => {
-    if (filterBrands.length < 2) {
-      if (filterCategories.length < 2) {
-        setFilterIndex(2);
-      } else {
-        setFilterIndex(1);
-      }
-    }
+    // Check and initialize filters already selected.
     let {brands, categories, price_sort} = props.filters;
     let selected_brands = brands.map((item) => {
       let i = filterBrands.findIndex((obj) => obj === item);
@@ -57,6 +52,7 @@ const Filters = (props) => {
   }, []);
 
   const getChecked = (index) => {
+    // Retrun Checked/Unchecked box for brand and categories and Radio button for sort
     if (filterIndex === 2) {
       return selectedSort === index ? <RadioSelected /> : <RadioUnselected />;
     } else {
@@ -77,7 +73,7 @@ const Filters = (props) => {
 
   const toggleSelectFilter = (index) => {
     let arr = [];
-
+    // Selecting filter type to make change
     switch (filterIndex) {
       case 0:
         arr = selectedBrands;
@@ -90,6 +86,7 @@ const Filters = (props) => {
         break;
     }
 
+    // Toggle/Select another option
     if (filterIndex !== 2) {
       if (arr.includes(index)) {
         let selectedIndex = arr.findIndex((i) => i === index);
@@ -101,6 +98,7 @@ const Filters = (props) => {
       arr = index;
     }
 
+    //Save back to the selected filter type
     switch (filterIndex) {
       case 0:
         setSelectedBrands([...arr]);
@@ -115,7 +113,6 @@ const Filters = (props) => {
   };
 
   const applyFilters = () => {
-    // {"key":"SEARCH_BY_BRAND","value":"Tata","context":null}
     let brands = selectedBrands.map((item) => filterBrands[item]);
     let categories = selectedCategories.map(
       (item) => filterCategories[item].id,
@@ -127,6 +124,7 @@ const Filters = (props) => {
       categories: categories,
       price_sort: priceSort,
     };
+    // Send selected filters to previous screen to make api call with said fiters.
     Actions.pop();
     props.saveFilters(filters);
   };
@@ -157,6 +155,7 @@ const Filters = (props) => {
               (index === 0 && filterBrands.length < 2) ||
               (index === 1 && filterCategories.length < 2)
             ) {
+              // If selected filter options are less than 2, don't show filter
               return null;
             } else {
               return (

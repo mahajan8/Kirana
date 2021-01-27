@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, Platform, Text} from 'react-native';
+import {Dimensions, Platform, Text, DeviceEventEmitter} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
@@ -7,6 +7,7 @@ import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
+import {handleNotificationClick} from './src/utils/utility/Utils';
 
 import * as Sentry from '@sentry/react-native';
 
@@ -39,10 +40,10 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       this.getFcmToken();
     }
-    CleverTap.recordEvent('New event for iOS');
-    // this.initializeListeners();
+    this.initializeListeners();
   }
   configureSDK = () => {
+    CleverTap.setDebugLevel(3);
     CleverTap.createNotificationChannel(
       'pushChannel',
       'Channel name',
@@ -86,13 +87,25 @@ export default class App extends Component {
         //alert('Notification Click from App', event);
         console.log('Notification Click from App', event);
         //alert('Notification Click from App');
+        handleNotificationClick(event);
       },
     );
   };
+  componentWillUnmount() {
+    if (DeviceEventEmitter) {
+      DeviceEventEmitter.removeAllListeners();
+    }
+
+    CleverTap.removeListener(CleverTap.CleverTapPushNotificationClicked);
+  }
   render() {
+    let notificationPayload = this.props
+      .UIApplicationLaunchOptionsRemoteNotificationKey;
     return (
       <Provider store={store}>
-        <AppRouter />
+        <AppRouter
+          notificationPayload={notificationPayload ? notificationPayload : null}
+        />
       </Provider>
     );
   }

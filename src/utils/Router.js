@@ -35,11 +35,15 @@ import OrderCancelled from '../modules/orders/components/OrderCancelled';
 import AlternativeStores from '../modules/orders/components/AlternativeStores';
 import Rating from '../modules/orders/components/Rating';
 
-const AppRouter = () => {
+const AppRouter = (notificationPayload) => {
   return (
     <Router backAndroidHandler={() => {}}>
       <Stack key="root" hideNavBar>
-        <Scene key="splash" component={Splash} />
+        <Scene
+          key="splash"
+          component={Splash}
+          notificationPayload={notificationPayload}
+        />
         <Scene key="introduction" component={Introduction} />
         <Scene key="selectLanguage" component={SelectLanguage} />
         <Scene key="login" component={Login} />

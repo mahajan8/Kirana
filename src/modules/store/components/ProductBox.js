@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -27,7 +26,8 @@ const ProductBox = (props) => {
     product_images,
     product_brand,
     product_id,
-  } = item;
+  } = item; //Destructured item object to get product details
+
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;
   const cartProductObj = product_list[product_id];
@@ -43,6 +43,7 @@ const ProductBox = (props) => {
         quantity: increment ? 1 : -1,
         store_id: selectedStore.id,
       };
+      // Api call to update product quantity
       props.updateProductQuantity(pars);
     }
   };
@@ -75,6 +76,7 @@ const ProductBox = (props) => {
       <Pressable style={styles.bottomContainer}>
         {loadingProductId !== product_id ? (
           cartProductObj ? (
+            // Plus and Minus button to update quantity
             <View
               style={[
                 styles.counterContainer,
@@ -106,6 +108,7 @@ const ProductBox = (props) => {
               </Pressable>
             </View>
           ) : (
+            //Add button
             <Button
               label={Strings.plusAdd}
               Style={[styles.buttonStyle, vertical && styles.verticalButton]}

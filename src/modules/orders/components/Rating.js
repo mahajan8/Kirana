@@ -12,7 +12,7 @@ import BottomButton from '../../commons/components/BottomButton';
 import {commonStyles} from '../../commons/styles/commonStyles';
 import {submitOrderRating} from '../Api';
 import {connect} from 'react-redux';
-import Loader from '../../commons/components/Loader';
+import LoaderError from '../../commons/components/LoaderError';
 
 let stars = [1, 2, 3, 4, 5];
 
@@ -65,6 +65,8 @@ const Rating = (props) => {
 
         <View style={styles.container}>
           <Text style={styles.ratingTitle}>{Strings.rateGrocery}</Text>
+
+          {/* Show stars for grocery rating */}
           <View style={styles.starsContainer}>
             {stars.map((item, index) => (
               <Pressable
@@ -79,6 +81,7 @@ const Rating = (props) => {
             ))}
           </View>
 
+          {/* Show Input if grocery stars less than 5 */}
           {groceryStars > 0 && groceryStars < 5 && (
             <Input
               value={groceryReason}
@@ -90,6 +93,8 @@ const Rating = (props) => {
           )}
 
           <Text style={styles.ratingTitle}>{Strings.rateDelivery}</Text>
+
+          {/* Show stars for delivery rating */}
           <View style={styles.starsContainer}>
             {stars.map((item, index) => (
               <Pressable
@@ -104,6 +109,7 @@ const Rating = (props) => {
             ))}
           </View>
 
+          {/* Show Input if delivery stars less than 5 */}
           {deliveryStars > 0 && deliveryStars < 5 && (
             <Input
               value={deliveryReason}
@@ -120,7 +126,7 @@ const Rating = (props) => {
         disabled={getDisabled()}
         onPress={submitRating}
       />
-      <Loader show={props.loading} />
+      <LoaderError retry={submitRating} />
     </SafeArea>
   );
 };

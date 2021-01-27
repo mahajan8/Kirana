@@ -19,6 +19,7 @@ export const getOrders = (pars, callback) => {
       const success = !res.data.error;
       if (success) {
         const {total_count, results} = res.data.data;
+        // Return orders and total count of orders
         callback(results, total_count);
       } else {
         alert(res.data.message);
@@ -34,6 +35,7 @@ export const getOrderDetails = (pars) => {
     instance.post(Urls.getOrderDetails, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
+        // Set details in OrderReducer
         dispatch(setOrderDetails(res.data.data));
       } else {
         alert(res.data.message);
@@ -88,6 +90,7 @@ export const repeatOrder = (pars, callback) => {
       const success = !res.data.error;
       if (success) {
         const {cart} = res.data.data;
+        // Set Cart Items and navigate to cart
         dispatch(setCartDetails(cart));
         Actions.cart();
       } else {
@@ -107,7 +110,7 @@ export const acceptRejectOrder = (pars, callback) => {
         let params = {
           order_id: pars.order_id,
         };
-
+        // Get updated order details
         dispatch(getOrderDetails(params));
         callback();
       } else {

@@ -10,6 +10,8 @@ import moment from 'moment';
 import {styles} from '../styles/storeInfoTileStyles';
 
 const StoreInfoTile = (props) => {
+  //Store Tile Layout
+
   let {
     name,
     location,

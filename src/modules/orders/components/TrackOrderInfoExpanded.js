@@ -23,21 +23,26 @@ const TrackOrderInfoExpanded = (props) => {
   let currentObj = trackingList.find((obj) => obj.orderStatus === status);
 
   if (status === ORDER_UPDATED) {
+    // If order is Awaiting approval from customer, add Awaiting approval in expanded list.
     trackingArray.splice(1, 0, currentObj);
   } else if (status === ORDER_REJECTED || status === ORDER_CANCELLED) {
+    // If order is rejected or cancelled, add rejected or cancelled after order placed in expanded list.
     trackingArray.splice(1, trackingArray.length, currentObj);
   }
 
   if (status === ORDER_PARTIALLY_ACCEPTED) {
+    // Display order Accepted in case of Partially accepted.
     currentObj = trackingArray.findIndex(
       (obj) => obj.orderStatus === ORDER_ACCEPTED,
     );
   } else {
+    // Set currentObj to object from trackingArray with corresponding status to display.
     currentObj = trackingArray.findIndex((obj) => obj.orderStatus === status);
   }
 
   return (
     <View style={styles.expandedContainer}>
+      {/* trackingArray mapped to show all order states. */}
       {trackingArray.map((item, index) => {
         let current = currentObj === index ? true : false;
         let statusHistory = status_history.find((obj) => obj.status === status);
@@ -51,16 +56,19 @@ const TrackOrderInfoExpanded = (props) => {
             key={`OrderTrackStatus${index}`}>
             <View style={styles.trackingCircleContainer}>
               {current ? (
+                // Green and white circle to display current status of the order
                 <View style={styles.outerCircle}>
                   <View style={styles.innerCircle} />
                   <View style={styles.transparentCurrentCircle} />
                 </View>
               ) : index < currentObj ? (
+                // Checked icon if the status is already completed
                 <GreenCheck
                   width={EStyleSheet.value('14rem')}
                   height={EStyleSheet.value('14rem')}
                 />
               ) : (
+                // Empty circle pending order status
                 <View style={styles.upcomingStatusCircle} />
               )}
               {index !== trackingArray.length - 1 && (

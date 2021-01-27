@@ -27,11 +27,16 @@ const CurrentOrders = (props) => {
 
     let singleOrder = currentOrders[0];
 
-    let awaitingConfirmation =
-      singleOrder.status === orderStatus.ORDER_UPDATED ? true : false;
+    let awaitingConfirmation = currentOrders.some(
+      (obj) => obj.status === orderStatus.ORDER_UPDATED,
+    );
 
     return (
-      <View style={[styles.container]}>
+      <View
+        style={[
+          styles.container,
+          awaitingConfirmation && styles.greenBackground,
+        ]}>
         {renderTrackingCircle()}
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>
@@ -43,7 +48,11 @@ const CurrentOrders = (props) => {
                 )}`}
           </Text>
           <Text style={styles.subTitle}>
-            {multiple ? Strings.multipleStores : singleOrder.store_name}
+            {multiple
+              ? awaitingConfirmation
+                ? Strings.multipleApprovalNeeded
+                : Strings.multipleStores
+              : singleOrder.store_name}
           </Text>
         </View>
         <Button
@@ -51,7 +60,7 @@ const CurrentOrders = (props) => {
             multiple
               ? Strings.viewOrders
               : awaitingConfirmation
-              ? Strings.viewDetails
+              ? Strings.approveOrder
               : Strings.trackOrder
           }
           Style={styles.buttonStyle}
@@ -64,7 +73,8 @@ const CurrentOrders = (props) => {
               Actions.orderDetails();
               props.setSelectedOrderId(singleOrder.id);
             } else {
-              Actions.trackOrder({orderId: singleOrder.id});
+              Actions.trackOrder();
+              props.setSelectedOrderId(singleOrder.id);
             }
           }}
         />

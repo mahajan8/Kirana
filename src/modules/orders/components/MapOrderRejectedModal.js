@@ -7,6 +7,7 @@ import OrderRejected from '../../../assets/images/payment_failed.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
+import {Actions} from 'react-native-router-flux';
 
 const MapOrderRejectedModal = (props) => {
   let {visible, setVisible} = props;
@@ -34,7 +35,10 @@ const MapOrderRejectedModal = (props) => {
             Style={styles.buttonStyle}
             labelStyle={styles.buttonLabel}
             label={Strings.tryOtherStores}
-            onPress={() => setVisible(false)}
+            onPress={() => {
+              Actions.alternativeStores();
+              setVisible(false);
+            }}
           />
         </View>
       </Pressable>

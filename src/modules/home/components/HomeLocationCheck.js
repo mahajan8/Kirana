@@ -33,12 +33,14 @@ const HomeLocationCheck = (props) => {
   let {setLocation, selectedLocation, location} = props;
 
   useEffect(() => {
+    // If location not already selected, check for location permission
     if (!location) {
       checkPermission();
     }
   }, []);
 
   const checkPermission = () => {
+    // Show Modal if location permission not provided, get Current location if granted.
     if (Platform.OS === 'android') {
       PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -66,6 +68,7 @@ const HomeLocationCheck = (props) => {
   };
 
   const getPermission = async () => {
+    //Request Location Premission and get Current Location if permission granted.
     try {
       if (Platform.OS === 'android') {
         const granted = await PermissionsAndroid.request(
@@ -94,6 +97,7 @@ const HomeLocationCheck = (props) => {
   };
 
   const getLocation = () => {
+    //Get Current coordinates and fetch address from coordinates
     props.setLoading(true);
     Geolocation.getCurrentPosition(
       (info) => {

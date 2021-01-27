@@ -51,7 +51,7 @@ export const styles = EStyleSheet.create({
     flexGrow: 1,
   },
   listLoaderContainer: {
-    marginTop: '20vrem',
+    marginTop: '30vrem',
   },
   searchResultsHeading: {
     fontSize: '12rem',

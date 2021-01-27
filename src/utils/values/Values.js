@@ -38,15 +38,15 @@ export const orderStatus = {
 export const orderStatusLabels = {
   ORDER_INITIATED: 10,
   ORDER_NOT_PLACED: 15,
-  New: 20,
+  Placed: 20,
   Overdue: 25,
-  'Awaiting Confirmation': 30,
+  Modified: 30,
   Rejected: 40,
   Cancelled: 50,
-  Preparing: 60,
-  'Preparing (Partial Order)': 70,
-  Dispatched: 80,
-  ORDER_OUT_FOR_DELIVERY: 90,
+  Accepted: 60,
+  'Accepted (Partial)': 70,
+  'On Route': 80,
+  'On Route ': 90,
   Completed: 100,
 };
 
@@ -96,6 +96,12 @@ export const orderStatusBubbles = [
     labelColor: '#0b5460',
   },
   {
+    orderStatus: orderStatus.ORDER_OUT_FOR_DELIVERY,
+    backgroundColor: '#d1ecf1',
+    borderColor: '#b5e4eb',
+    labelColor: '#0b5460',
+  },
+  {
     orderStatus: orderStatus.ORDER_DELIVERED,
     backgroundColor: '#d5edda',
     borderColor: '#c2e6cb',
@@ -126,3 +132,9 @@ export const orderStatusBubbles = [
     labelColor: '#731c23',
   },
 ];
+
+export const notificationType = {
+  orderDetails: 'ORDER_DETAILS',
+  orderTracking: 'ORDER_TRACKING',
+  orderRating: 'ORDER_RATING',
+};

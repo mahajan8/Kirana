@@ -67,6 +67,9 @@ export const Strings = {
   filter: 'Filter',
   clearAll: 'Clear All',
   apply: 'Apply',
+  refresh: 'Refresh',
+  oops: 'Oops!',
+  somethingWentWrong: 'Something went wrong.',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -300,4 +303,9 @@ export const Strings = {
   multipleStores: 'Multiple stores',
   activeOrdersCount: (count) => 'You have ' + count + ' active orders.',
   viewDetails: 'View Details',
+  approveOrder: 'Approve Order',
+  noConnection: 'Connectivity Error',
+  noInternetSub:
+    'Slow or no internet connection.\nPlease check your connectivity.',
+  multipleApprovalNeeded: 'One of the order needs approval',
 };

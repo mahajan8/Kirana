@@ -13,7 +13,9 @@ export const sendOtp = (pars) => {
     instance.post(Urls.sendOtp, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        if (Actions.currentScene != 'otp') Actions.otp({number: pars.mobile});
+        if (Actions.currentScene !== 'otp') {
+          Actions.otp({number: pars.mobile});
+        }
         // alert(res.data.data.otp);
       } else {
         alert(res.data.message);
@@ -29,7 +31,7 @@ export const verifyOtp = (pars, error) => {
     instance.post(Urls.verifyOtp, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        // Actions.otp({number: pars.mobile})
+        // Save API token and navigate to home
         const {is_new_user, api_token} = res.data.data;
         dispatch(setToken(api_token));
         setAuthToken(api_token);
