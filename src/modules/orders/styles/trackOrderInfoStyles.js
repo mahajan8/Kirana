@@ -11,7 +11,7 @@ export const styles = EStyleSheet.create({
   },
   orderInfoContainer: {
     paddingVertical: '12vrem',
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingRight: '12rem',
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
@@ -55,7 +55,7 @@ export const styles = EStyleSheet.create({
     marginHorizontal: '4rem',
   },
   trackingInfoContainer: {
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingRight: '12rem',
     // height: '73rem',
   },
@@ -114,13 +114,13 @@ export const styles = EStyleSheet.create({
     paddingLeft: '17rem',
     paddingVertical: '16vrem',
     backgroundColor: Colors.white,
-    paddingRight: '16rem',
+    paddingRight: '$spacingNormal',
   },
   expandedStatus: {
     fontSize: '12rem',
     fontFamily: Fonts.regular,
     color: Colors.lightGray,
-    lineHeight: '16rem',
+    lineHeight: '$spacingNormal',
     marginLeft: '17rem',
   },
   expandedCurrentStatus: {
@@ -156,8 +156,8 @@ export const styles = EStyleSheet.create({
   },
   expandedArrowIcon: {
     position: 'absolute',
-    right: '16rem',
-    top: '16rem',
+    right: '$spacingNormal',
+    top: '$spacingNormal',
   },
   downArrow: {
     transform: [{rotateX: '180deg'}],

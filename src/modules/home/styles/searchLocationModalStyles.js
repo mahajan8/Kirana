@@ -7,9 +7,9 @@ export const styles = EStyleSheet.create({
   },
   innerContainer: {
     backgroundColor: Colors.white,
-    borderTopLeftRadius: '15rem',
-    borderTopRightRadius: '15rem',
-    paddingTop: '14vrem',
+    borderTopLeftRadius: '$spacingNormal',
+    borderTopRightRadius: '$spacingNormal',
+    paddingTop: '$spacingExtraMedium',
     width: '100%',
     height: '80%',
   },

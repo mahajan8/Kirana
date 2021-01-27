@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   searchContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     paddingVertical: '15rem',
     backgroundColor: Colors.white,
     flexDirection: 'row',
@@ -26,7 +26,7 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.semiBold,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
-    margin: '16rem',
+    margin: '$spacingNormal',
   },
   categoryContainer: {
     backgroundColor: Colors.white,
@@ -46,7 +46,7 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     letterSpacing: '-0.13rem',
     color: Colors.titleText,
-    margin: '16rem',
+    margin: '$spacingNormal',
     position: 'absolute',
     bottom: 0,
   },

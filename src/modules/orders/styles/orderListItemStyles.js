@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   sectionHeaderContainer: {
     backgroundColor: Colors.lightBlue,
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingVertical: '8vrem',
     width: '100%',
   },
@@ -15,7 +15,7 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
   },
   orderContainer: {
-    padding: '16rem',
+    padding: '$spacingNormal',
   },
   rowContainer: {
     flexDirection: 'row',
@@ -73,7 +73,7 @@ export const styles = EStyleSheet.create({
     height: '100%',
     borderWidth: 0.8,
     borderStyle: 'dashed',
-    marginHorizontal: '16rem',
+    marginHorizontal: '$spacingNormal',
     borderRadius: 1,
     borderColor: Colors.darkGray,
   },

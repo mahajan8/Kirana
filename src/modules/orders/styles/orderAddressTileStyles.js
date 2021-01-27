@@ -35,7 +35,7 @@ export const styles = EStyleSheet.create({
     height: '100%',
     borderWidth: 0.8,
     borderStyle: 'dashed',
-    marginHorizontal: '16rem',
+    marginHorizontal: '$spacingNormal',
     borderRadius: 1,
     borderColor: Colors.darkGray,
   },

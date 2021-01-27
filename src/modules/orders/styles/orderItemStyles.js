@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     flexDirection: 'row',
   },
   itemCount: {

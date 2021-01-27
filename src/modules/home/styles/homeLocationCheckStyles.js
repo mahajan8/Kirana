@@ -4,39 +4,39 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingHorizontal: '20rem',
+    paddingHorizontal: '$spacingExtraNormal',
   },
   innerContainer: {
     backgroundColor: Colors.white,
-    borderRadius: '15rem',
-    paddingTop: '30vrem',
+    borderRadius: '$spacingNormal',
+    paddingTop: '$spacingLessHuge',
     alignItems: 'center',
   },
   title: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.darkGreen,
-    marginBottom: '10vrem',
+    marginBottom: '$spacingSuperSmall',
   },
   subText: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.subTitleText,
-    lineHeight: '20rem',
+    lineHeight: '$spacingExtraNormal',
     letterSpacing: '0.2rem',
-    marginBottom: '20vrem',
+    marginBottom: '$spacingExtraNormal',
     textAlign: 'center',
     width: '250rem',
   },
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: '10vrem',
+    paddingVertical: '$spacingSuperSmall',
     width: '100%',
     justifyContent: 'center',
   },
   locaitonIcon: {
-    marginBottom: '23vrem',
+    marginBottom: '$spacingLarge',
   },
   seperator: {
     width: '100%',
@@ -44,11 +44,11 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.seperatorColor,
   },
   buttonsText: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '0.2rem',
-    marginLeft: '6rem',
+    marginLeft: '$spacingSmallExtreme',
   },
   searchText: {
     color: Colors.titleText,

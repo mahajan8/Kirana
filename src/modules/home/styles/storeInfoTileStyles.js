@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingVertical: '10vrem',
+    paddingVertical: '$spacingSuperSmall',
     alignItems: 'flex-start',
   },
   rowContainer: {
@@ -14,49 +14,49 @@ export const styles = EStyleSheet.create({
   storeImage: {
     width: '70rem',
     height: '70rem',
-    borderRadius: '8rem',
-    marginRight: '16rem',
+    borderRadius: '$spacingSmall',
+    marginRight: '$spacingNormal',
   },
   storeName: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
-    marginTop: '7rem',
+    marginTop: '$spacingSmallExtreme',
   },
   storeLocation: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.2rem',
     color: Colors.lightGray,
-    marginBottom: '4vrem',
+    marginBottom: '$spacingTiny',
   },
   details: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
     letterSpacing: '-0.17rem',
     color: Colors.darkGray,
   },
   star: {
-    marginRight: '3rem',
+    marginRight: '$spacingTiny',
   },
   seperator: {
     width: '1rem',
     backgroundColor: '#e0e0e0',
-    marginHorizontal: '7rem',
-    height: '12vrem',
+    marginHorizontal: '$spacingTiny',
+    height: '$spacingMedium',
   },
   storeClosedContainer: {
     backgroundColor: '#f8d7da',
-    borderRadius: '3rem',
-    padding: '5rem',
-    marginLeft: '6rem',
+    borderRadius: '$spacingTiny',
+    padding: '$spacingTiny',
+    marginLeft: '$spacingSmallExtreme',
   },
   storeClosedText: {
     color: '#731c23',
-    fontSize: '8rem',
+    fontSize: '$fontTinyExtreme',
     fontFamily: Fonts.medium,
-    marginLeft: '4rem',
+    marginLeft: '$spacingTiny',
   },
   storeShopContainer: {
     backgroundColor: '#dcebfe',

@@ -37,7 +37,7 @@ export const styles = EStyleSheet.create({
     letterSpacing: '0.2rem',
     color: Colors.darkGray,
     width: '258rem',
-    marginTop: '16rem',
+    marginTop: '$spacingNormal',
   },
   buttonStyle: {
     marginTop: '24rem',

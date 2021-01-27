@@ -6,30 +6,30 @@ export const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     // alignItems: 'center',
-    marginBottom: '24vrem',
+    marginBottom: '$spacingLarge',
   },
   storeImageContainer: {
     width: '70rem',
     height: '70rem',
-    borderRadius: '8rem',
-    marginRight: '16rem',
+    borderRadius: '$spacingSmall',
+    marginRight: '$spacingNormal',
     backgroundColor: Colors.placeHolder,
   },
   storeName: {
     backgroundColor: Colors.placeHolder,
     width: '120rem',
-    marginBottom: '3rem',
-    height: '15vrem',
+    marginBottom: '$spacingTiny',
+    height: '$spacingExtraMedium',
   },
   storeLocation: {
     width: '70rem',
     backgroundColor: Colors.placeHolder,
-    height: '15vrem',
-    marginBottom: '3rem',
+    height: '$spacingExtraMedium',
+    marginBottom: '$spacingTiny',
   },
   storeDetails: {
     width: '50rem',
     backgroundColor: Colors.placeHolder,
-    height: '15vrem',
+    height: '$spacingExtraMedium',
   },
 });

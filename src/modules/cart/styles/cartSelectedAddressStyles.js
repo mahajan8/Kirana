@@ -7,9 +7,9 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
   },
   container: {
-    paddingVertical: '10vrem',
-    paddingLeft: '16rem',
-    paddingRight: '13rem',
+    paddingVertical: '$spacingSuperSmall',
+    paddingLeft: '$spacingNormal',
+    paddingRight: '$spacingExtraMedium',
     backgroundColor: Colors.white,
     shadowOffset: {width: 0, height: -3},
     shadowOpacity: 0.1,
@@ -29,7 +29,7 @@ export const styles = EStyleSheet.create({
     marginTop: '2rem',
   },
   addAddressContainer: {
-    marginLeft: '10rem',
+    marginLeft: '$spacingSuperSmall',
     flex: 1,
   },
   addButton: {
@@ -55,11 +55,11 @@ export const styles = EStyleSheet.create({
   },
   notDeliverableContainer: {
     alignItems: 'center',
-    paddingVertical: '12vrem',
+    paddingVertical: '$spacingMedium',
   },
   paymentButtonContainer: {
-    paddingVertical: '10vrem',
-    paddingHorizontal: '16rem',
+    paddingVertical: '$spacingSuperSmall',
+    paddingHorizontal: '$spacingNormal',
     shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.05,
     shadowRadius: 2,

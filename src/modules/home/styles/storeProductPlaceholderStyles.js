@@ -6,42 +6,42 @@ export const styles = EStyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     // alignItems: 'center',
-    marginBottom: '24vrem',
+    marginBottom: '$spacingLarge',
   },
   productImageContainer: {
     height: '65rem',
     width: '65rem',
     backgroundColor: Colors.placeHolder,
-    marginRight: '12rem',
+    marginRight: '$spacingMedium',
   },
   productName: {
     backgroundColor: Colors.placeHolder,
     width: '120rem',
-    marginBottom: '3rem',
-    height: '15vrem',
+    marginBottom: '$spacingTiny',
+    height: '$spacingExtraMedium',
   },
   productWeight: {
-    width: '30rem',
+    width: '$spacingLessHuge',
     backgroundColor: Colors.placeHolder,
-    height: '15vrem',
+    height: '$spacingExtraMedium',
   },
   rightContainer: {
     flex: 1,
     alignItems: 'flex-end',
-    paddingTop: '3rem',
+    paddingTop: '$spacingTiny',
   },
   price: {
     width: '50rem',
     backgroundColor: Colors.placeHolder,
-    height: '15vrem',
-    marginBottom: '10vrem',
+    height: '$spacingExtraMedium',
+    marginBottom: '$spacingSuperSmall',
   },
   productDetialsContainer: {
-    paddingTop: '3rem',
+    paddingTop: '$spacingTiny',
   },
   buttonsContainer: {
     width: '70rem',
     backgroundColor: Colors.placeHolder,
-    height: '20vrem',
+    height: '$spacingExtraNormal',
   },
 });

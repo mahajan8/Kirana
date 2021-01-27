@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   sectionHeaderContainer: {
     backgroundColor: Colors.lightBlue,
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingVertical: '8vrem',
     width: '100%',
   },

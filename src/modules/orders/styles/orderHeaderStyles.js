@@ -6,7 +6,7 @@ export const styles = EStyleSheet.create({
   container: {
     backgroundColor: Colors.lightBlue,
     paddingTop: '13vrem',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     paddingBottom: '15vrem',
   },
   orderInfoRow: {
@@ -64,10 +64,10 @@ export const styles = EStyleSheet.create({
     paddingVertical: '14vrem',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: '16rem',
+    paddingRight: '$spacingNormal',
   },
   bottomContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
   },
   infoText: {
     marginLeft: '10rem',

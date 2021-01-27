@@ -19,7 +19,7 @@ export const styles = EStyleSheet.create({
   },
   storeInfoContainer: {
     alignItems: 'center',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     paddingTop: '10vrem',
     paddingBottom: '12vrem',
   },
@@ -52,7 +52,7 @@ export const styles = EStyleSheet.create({
   },
   searchView: {
     backgroundColor: Colors.white,
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     borderRadius: '8rem',
     paddingVertical: '12vrem',
     width: '100%',

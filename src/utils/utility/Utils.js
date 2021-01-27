@@ -298,7 +298,7 @@ export const setDimensions = () => {
     $fontExtraNormal: '18rem',
     $fontNormal: '16rem',
     $fontSmall: '14rem',
-    $fontTine: '12rem',
+    $fontTiny: '12rem',
     $fontSuperTiny: '10rem',
     $fontTinyExtreme: '8rem',
 
@@ -307,7 +307,7 @@ export const setDimensions = () => {
     $spacingSuperColossal: '80rem',
     $spacingColossal: '76rem',
     $spacingExtraMassive: '72rem',
-    $spacingMassing: '54rem',
+    $spacingMassive: '54rem',
     $spacingVeryHuge: '48rem',
     $spacingExtraHuge: '40rem',
     $spacingMediumHuge: '36rem',

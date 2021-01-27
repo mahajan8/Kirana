@@ -5,17 +5,17 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   searchResultsHeading: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '-0.19rem',
-    marginBottom: '20vrem',
-    lineHeight: '18rem',
+    marginBottom: '$spacingExtraNormal',
+    lineHeight: '$spacingNormalMedium',
   },
   list: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     flexGrow: 1,
-    paddingTop: '16vrem',
+    paddingTop: '$spacingNormal',
   },
   emptyListContainer: {
     flex: 1,
@@ -23,48 +23,48 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   noSearchResults: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
-    lineHeight: '20rem',
+    lineHeight: '$spacingExtraNormal',
     letterSpacing: '0.2rem',
     color: Colors.subTitleText,
-    marginTop: '20vrem',
+    marginTop: '$spacingExtraNormal',
     width: '200rem',
     textAlign: 'center',
   },
   storeName: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     color: Colors.titleText,
     fontFamily: Fonts.semiBold,
   },
   storeLocation: {
-    fontSize: '11rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.lightGray,
-    lineHeight: '12rem',
+    lineHeight: '$spacingMedium',
   },
   headerContainer: {
-    paddingVertical: '8vrem',
+    paddingVertical: '$spacingSmall',
   },
   commonSearchesContainer: {
-    paddingHorizontal: '20rem',
-    paddingTop: '16vrem',
+    paddingHorizontal: '$spacingExtraNormal',
+    paddingTop: '$spacingNormal',
   },
   commonSearchItem: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
     letterSpacing: '0.28rem',
     color: Colors.titleText,
-    marginVertical: '8vrem',
+    marginVertical: '$spacingSmall',
   },
   commonSearchHeading: {
-    marginBottom: '6vrem',
+    marginBottom: '$spacingSmallExtreme',
   },
   listLoaderContainer: {
-    marginVertical: '20vrem',
+    marginVertical: '$spacingExtraNormal',
   },
   buttonContainer: {
-    paddingVertical: '8vrem',
+    paddingVertical: '$spacingSmall',
     backgroundColor: Colors.white,
     shadowOffset: {width: 0, height: -3},
     shadowOpacity: 0.1,
@@ -72,9 +72,9 @@ export const styles = EStyleSheet.create({
     elevation: 5,
   },
   itemSeperator: {
-    height: '24vrem',
+    height: '$spacingLarge',
   },
   filterIcon: {
-    marginRight: '18rem',
+    marginRight: '$spacingNormalMedium',
   },
 });

@@ -7,7 +7,7 @@ export const styles = EStyleSheet.create({
     paddingTop: '16vrem',
   },
   list: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     flexGrow: 1,
     paddingTop: '20vrem',
   },

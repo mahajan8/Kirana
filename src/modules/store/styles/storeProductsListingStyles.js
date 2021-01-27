@@ -28,7 +28,7 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.white,
     paddingBottom: '15vrem',
     paddingTop: '11vrem',
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     borderBottomWidth: '1rem',
     borderColor: Colors.listBorderGray,
     borderTopWidth: '1rem',

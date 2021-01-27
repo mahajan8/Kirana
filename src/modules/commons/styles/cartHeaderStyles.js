@@ -5,11 +5,11 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    padding: '20rem',
+    padding: '$spacingExtraNormal',
     borderColor: Colors.seperatorColor,
-    paddingLeft: '20rem',
-    paddingRight: '16rem',
-    paddingVertical: '15rem',
+    paddingLeft: '$spacingExtraNormal',
+    paddingRight: '$spacingNormal',
+    paddingVertical: '$spacingNormal',
     backgroundColor: '#FFF',
     zIndex: 10,
   },
@@ -28,8 +28,8 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     fontSize: '14rem',
     fontFamily: Fonts.medium,
-    marginLeft: '6rem',
-    marginRight: '10rem',
+    marginLeft: '$spacingSmallExtreme',
+    marginRight: '$spacingSuperSmall',
   },
   headerRightContainer: {
     // flex: 1,
@@ -38,24 +38,24 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   locationContainer: {
-    marginLeft: '4rem',
+    marginLeft: '$spacingTiny',
     flex: 1,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     borderRadius: '8rem',
     height: '40vrem',
     flex: 1,
-    marginRight: '10rem',
+    marginRight: '$spacingSuperSmall',
   },
   textInput: {
     fontSize: '12rem',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
-    marginHorizontal: '10rem',
+    marginHorizontal: '$spacingSuperSmall',
     ...(Platform.OS === 'android' && {
       paddingVertical: 0,
       paddingHorizontal: 0,
@@ -63,7 +63,7 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   leftButton: {
-    marginRight: '16rem',
+    marginRight: '$spacingNormal',
   },
   headerShadow: {
     shadowOffset: {width: 0, height: 2},
@@ -78,7 +78,7 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
     fontSize: '16rem',
     fontFamily: Fonts.medium,
-    marginLeft: '4rem',
+    marginLeft: '$spacingTiny',
     flex: 1,
   },
 });

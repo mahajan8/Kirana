@@ -37,7 +37,7 @@ export const styles = EStyleSheet.create({
   buttonStyle: {
     width: '143rem',
     height: '50vrem',
-    marginHorizontal: '16rem',
+    marginHorizontal: '$spacingNormal',
   },
   buttonLabel: {
     fontSize: '14rem',
@@ -47,7 +47,7 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    marginHorizontal: '16rem',
+    marginHorizontal: '$spacingNormal',
   },
   counter: {
     width: '34rem',

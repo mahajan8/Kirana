@@ -5,8 +5,8 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    padding: '16vrem',
-    paddingTop: '12vrem',
+    padding: '$spacingNormal',
+    paddingTop: '$spacingMedium',
   },
   seperator: {
     height: '7vrem',
@@ -26,19 +26,19 @@ export const styles = EStyleSheet.create({
   },
   storeNameContainer: {
     justifyContent: 'space-between',
-    marginBottom: '4vrem',
+    marginBottom: '$spacingTiny',
   },
   addMore: {
     fontSize: '11rem',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
-    paddingVertical: '4vrem',
+    paddingVertical: '$spacingTiny',
   },
   instructionsInput: {
     fontSize: '12rem',
     fontFamily: Fonts.regular,
     // color: Colors.lightGray,
-    marginLeft: '10rem',
+    marginLeft: '$spacingSuperSmall',
     flex: 1,
     ...(Platform.OS === 'android' && {
       paddingVertical: 0,
@@ -46,8 +46,8 @@ export const styles = EStyleSheet.create({
     }),
   },
   detailsContainer: {
-    paddingHorizontal: '16rem',
-    paddingVertical: '10vrem',
+    paddingHorizontal: '$spacingNormal',
+    paddingVertical: '$spacingSuperSmall',
   },
   detailsText: {
     fontSize: '10rem',
@@ -58,15 +58,15 @@ export const styles = EStyleSheet.create({
     height: '24vrem',
   },
   itemContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
   },
   footerContainer: {
-    marginTop: '20vrem',
+    marginTop: '$spacingExtraNormal',
   },
   borderedContainer: {
     borderWidth: '1rem',
     borderStyle: 'dashed',
-    marginTop: '10vrem',
+    marginTop: '$spacingSuperSmall',
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
     marginBottom: '14vrem',
@@ -85,7 +85,7 @@ export const styles = EStyleSheet.create({
   },
   slicedAmount: {
     color: Colors.lightGray,
-    marginRight: '9rem',
+    marginRight: '$spacingSmall',
     textDecorationLine: 'line-through',
   },
   grandTotalLabel: {
@@ -100,7 +100,7 @@ export const styles = EStyleSheet.create({
     color: Colors.titleText,
   },
   priceSeperator: {
-    marginVertical: '6vrem',
+    marginVertical: '$spacingSmallExtreme',
     height: '1rem',
     backgroundColor: '#cacaca',
     opacity: 0.26,
@@ -120,7 +120,7 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   cartEmptyTitle: {
-    marginTop: '30vrem',
+    marginTop: '$spacingLessHuge',
     fontSize: '14rem',
     fontFamily: Fonts.semiBold,
     letterSpacing: '0.18rem',
@@ -131,17 +131,17 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.regular,
     letterSpacing: '0.2rem',
     color: Colors.darkGray,
-    lineHeight: '18rem',
+    lineHeight: '$spacingNormalMedium',
     width: '260rem',
     textAlign: 'center',
-    marginTop: '7vrem',
+    marginTop: '$spacingSmall',
   },
   list: {
     flexGrow: 1,
   },
   emptyButton: {
     position: 'absolute',
-    bottom: '20vrem',
+    bottom: '$spacingExtraNormal',
   },
   fullContainer: {
     flex: 1,

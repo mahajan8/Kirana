@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   headerContainer: {
     paddingVertical: '8vrem',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     backgroundColor: Colors.lightGreen,
   },
   headerText: {
@@ -50,13 +50,13 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.semiBold,
   },
   priceInfoContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     paddingTop: '8vrem',
   },
   instructionsContainer: {
     backgroundColor: '#fffde9',
-    paddingHorizontal: '16rem',
-    marginHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
+    marginHorizontal: '$spacingNormal',
     paddingVertical: '8vrem',
     borderRadius: '8rem',
     marginBottom: '20vrem',
@@ -87,7 +87,7 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
   },
   rowButton: {
     width: '150rem',

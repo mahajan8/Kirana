@@ -19,7 +19,7 @@ export const styles = EStyleSheet.create({
   },
   bubblesContainer: {
     paddingVertical: '10vrem',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     marginBottom: '8rem',
     backgroundColor: Colors.white,
     elevation: 3,
@@ -33,7 +33,7 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: '12rem',
     marginRight: '6rem',
     backgroundColor: '#ecf6ff',
-    borderRadius: '16rem',
+    borderRadius: '$spacingNormal',
     marginBottom: '10vrem',
     marginTop: '10rem',
   },
@@ -46,7 +46,7 @@ export const styles = EStyleSheet.create({
   listContainer: {
     backgroundColor: Colors.white,
     paddingVertical: '15vrem',
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     marginBottom: '8vrem',
     flexGrow: 1,
   },
@@ -61,7 +61,7 @@ export const styles = EStyleSheet.create({
     marginBottom: '20vrem',
   },
   list: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     flexGrow: 1,
     paddingTop: '16vrem',
   },

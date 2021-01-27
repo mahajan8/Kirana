@@ -20,7 +20,7 @@ export const styles = EStyleSheet.create({
     width: '100rem',
     backgroundColor: Colors.lightBlue,
     paddingTop: '9vrem',
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
   },
   filterName: {
     fontSize: '14rem',
@@ -50,7 +50,7 @@ export const styles = EStyleSheet.create({
   optionsText: {
     fontSize: '12rem',
     fontFamily: Fonts.regular,
-    lineHeight: '16rem',
+    lineHeight: '$spacingNormal',
     letterSpacing: '-0.1rem',
     color: Colors.subTitleText,
     marginLeft: '12rem',

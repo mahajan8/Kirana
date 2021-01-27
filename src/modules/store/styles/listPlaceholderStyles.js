@@ -6,7 +6,7 @@ export const styles = EStyleSheet.create({
   listContainer: {
     backgroundColor: Colors.white,
     paddingVertical: '15vrem',
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     marginBottom: '8vrem',
     alignSelf: 'center',
   },

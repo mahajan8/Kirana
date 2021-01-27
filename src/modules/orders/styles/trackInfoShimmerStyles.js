@@ -6,7 +6,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   orderInfoContainer: {
     paddingVertical: '12vrem',
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingRight: '12rem',
     justifyContent: 'space-between',
     backgroundColor: Colors.white,
@@ -48,7 +48,7 @@ export const styles = EStyleSheet.create({
     marginHorizontal: '4rem',
   },
   trackingInfoContainer: {
-    paddingLeft: '16rem',
+    paddingLeft: '$spacingNormal',
     paddingRight: '12rem',
     // height: '73rem',
   },

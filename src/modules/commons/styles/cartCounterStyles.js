@@ -5,8 +5,8 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingVertical: '4vrem',
-    paddingHorizontal: '10rem',
+    paddingVertical: '$spacingTiny',
+    paddingHorizontal: '$spacingSuperSmall',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: '50rem',
@@ -16,6 +16,6 @@ export const styles = EStyleSheet.create({
     fontSize: '14rem',
     fontFamily: Fonts.medium,
     color: Colors.white,
-    marginLeft: '5rem',
+    marginLeft: '$spacingSmallExtreme',
   },
 });

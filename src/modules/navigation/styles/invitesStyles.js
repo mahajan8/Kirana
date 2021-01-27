@@ -4,12 +4,12 @@ const {Colors} = require('../../../utils/values/Colors');
 
 export const styles = EStyleSheet.create({
   headingContainer: {
-    paddingVertical: '14vrem',
-    paddingRight: '16rem',
-    paddingLeft: '20rem',
+    paddingVertical: '$spacingExtraMedium',
+    paddingRight: '$spacingNormal',
+    paddingLeft: '$spacingExtraNormal',
     backgroundColor: Colors.lightGreen,
     justifyContent: 'space-between',
-    marginBottom: '20vrem',
+    marginBottom: '$spacingExtraNormal',
   },
   rowContainer: {
     flexDirection: 'row',
@@ -18,39 +18,39 @@ export const styles = EStyleSheet.create({
   rewarded: {
     color: Colors.darkGreen,
     fontFamily: Fonts.medium,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
   },
   inviteRow: {
     justifyContent: 'space-between',
-    paddingHorizontal: '16rem',
-    marginBottom: '16vrem',
+    paddingHorizontal: '$spacingNormal',
+    marginBottom: '$spacingNormal',
   },
   number: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   rewardDate: {
     fontFamily: Fonts.regular,
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     color: Colors.darkGray,
-    marginLeft: '4rem',
+    marginLeft: '$spacingTiny',
   },
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingHorizontal: '20rem',
-    paddingBottom: '25vrem',
+    paddingHorizontal: '$spacingExtraNormal',
+    paddingBottom: '$spacingExtraLarge',
   },
   bannerContainer: {
-    paddingHorizontal: '15rem',
-    paddingVertical: '6vrem',
+    paddingHorizontal: '$spacingNormal',
+    paddingVertical: '$spacingSmallExtreme',
     backgroundColor: Colors.lightBlue,
     justifyContent: 'space-between',
-    borderRadius: '10rem',
+    borderRadius: '$spacingSuperSmall',
   },
   nextFree: {
-    fontSize: '13rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.regular,
     color: '#466eb6',
     letterSpacing: '-0.05rem',

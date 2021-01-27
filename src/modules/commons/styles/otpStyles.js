@@ -10,7 +10,7 @@ export const styles = EStyleSheet.create({
     backgroundColor: '#FFF',
     textAlign: 'center',
     textAlignVertical: 'center',
-    fontSize: '18rem',
+    fontSize: '$fontExtraNormal',
     borderWidth: 1,
     borderColor: Colors.borderGray,
     borderRadius: '10rem',
@@ -26,6 +26,6 @@ export const styles = EStyleSheet.create({
     justifyContent: 'space-evenly',
     width: '100%',
     alignItems: 'center',
-    marginBottom: '10rem',
+    marginBottom: '$spacingSuperSmall',
   },
 });

@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   resendText: {
-    marginVertical: '20vrem',
+    marginVertical: '$spacingExtraNormal',
     fontSize: '12rem',
     letterSpacing: '0.2rem',
     textAlign: 'center',
@@ -18,13 +18,13 @@ export const styles = EStyleSheet.create({
     color: '#ea4e3c',
     letterSpacing: '0.22rem',
     fontFamily: Fonts.regular,
-    marginLeft: '7rem',
+    marginLeft: '$spacingSmall',
   },
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '8vrem',
-    paddingLeft: '20rem',
+    marginTop: '$spacingSmall',
+    paddingLeft: '$spacingExtraNormal',
   },
   bottomTextContainer: {
     flexDirection: 'row',

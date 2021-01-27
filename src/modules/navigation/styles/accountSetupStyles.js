@@ -10,13 +10,13 @@ export const styles = EStyleSheet.create({
   infoContainer: {
     backgroundColor: Colors.lightBlue,
     justifyContent: 'space-between',
-    paddingLeft: '20rem',
-    paddingRight: '16rem',
+    paddingLeft: '$spacingExtraNormal',
+    paddingRight: '$spacingNormal',
     // paddingVertical: '6vrem',
     // marginBottom: '30vrem',
   },
   headline: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.darkGreen,
   },
