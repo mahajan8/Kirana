@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, Platform, Text} from 'react-native';
+import {Dimensions, Platform, Text, DeviceEventEmitter} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
@@ -9,11 +9,12 @@ import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
 import {handleNotificationClick} from './src/utils/utility/Utils';
 
-// import * as Sentry from '@sentry/react-native';
+import * as Sentry from '@sentry/react-native';
 
-// Sentry.init({
-//   dsn: 'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167',
-// });
+Sentry.init({
+  dsn:
+    'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167',
+});
 
 // Extended Style Sheet Configuration
 let {height, width} = Dimensions.get('window');
@@ -39,17 +40,10 @@ export default class App extends Component {
     if (Platform.OS === 'android') {
       this.getFcmToken();
     }
-    // CleverTap.addListener(
-    //   CleverTap.CleverTapPushNotificationClicked,
-    //   (event) => {
-    //     console.log(JSON.stringify(event));
-    //   },
-    // );
-    // CleverTap.recordEvent('iOS event');
-
     this.initializeListeners();
   }
   configureSDK = () => {
+    CleverTap.setDebugLevel(3);
     CleverTap.createNotificationChannel(
       'pushChannel',
       'Channel name',
@@ -97,10 +91,21 @@ export default class App extends Component {
       },
     );
   };
+  componentWillUnmount() {
+    if (DeviceEventEmitter) {
+      DeviceEventEmitter.removeAllListeners();
+    }
+
+    CleverTap.removeListener(CleverTap.CleverTapPushNotificationClicked);
+  }
   render() {
+    let notificationPayload = this.props
+      .UIApplicationLaunchOptionsRemoteNotificationKey;
     return (
       <Provider store={store}>
-        <AppRouter />
+        <AppRouter
+          notificationPayload={notificationPayload ? notificationPayload : null}
+        />
       </Provider>
     );
   }

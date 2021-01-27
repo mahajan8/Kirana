@@ -3,14 +3,12 @@ package app.kiranakart.customer;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-import android.os.Bundle;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -22,15 +20,13 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
-// CleverTap imports
-import com.clevertap.react.CleverTapPackage;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.pushnotification.CTPushNotificationListener;
 
 public class MainApplication extends Application implements ReactApplication,CTPushNotificationListener {
+
   private static final String REACT_MODULE_NAME = "CleverTapReact";
   private static final String TAG = REACT_MODULE_NAME;
 
@@ -63,11 +59,11 @@ public class MainApplication extends Application implements ReactApplication,CTP
   @Override
   public void onCreate() {
     // Register the CleverTap ActivityLifecycleCallback; before calling super
-    CleverTapAPI.setUIEditorConnectionEnabled(false);
     ActivityLifecycleCallback.register(this);	
-    CleverTapAPI.getDefaultInstance(getApplicationContext()).enableDeviceNetworkInfoReporting(true);
     super.onCreate();
-    CleverTapAPI.getDefaultInstance(this).setCTPushNotificationListener(this);
+    CleverTapAPI cleverTapAPI = CleverTapAPI.getDefaultInstance(getApplicationContext());
+    cleverTapAPI.setDebugLevel(3);
+    cleverTapAPI.setCTPushNotificationListener(this);
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
@@ -102,7 +98,6 @@ public class MainApplication extends Application implements ReactApplication,CTP
       }
     }
   }
-
   @Override
   public void onNotificationClickedPayloadReceived(HashMap<String, Object> payload) {
       Log.e("MainApplication", "onNotificationClickedPayloadReceived called");

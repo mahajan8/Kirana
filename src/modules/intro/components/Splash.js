@@ -11,15 +11,17 @@ import {getAuthToken} from '../../../utils/utility/LocalStore';
 import {getUserDetails} from '../../home/Api';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {setToken} from '../../authentication/AuthActions';
-import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {setLocation} from '../../onboarding/OnboardingActions';
 import {getAddressFromLocation} from '../../commons/Api';
 import Geolocation from 'react-native-geolocation-service';
+import CleverTap from 'clevertap-react-native';
 
 const Splash = (props) => {
   useEffect(() => {
     handleNavigation();
   }, []);
+
   const handleNavigation = async () => {
     const token = await getAuthToken();
     if (token) {

@@ -20,58 +20,28 @@
       android:usesCleartextTraffic="true"
       android:requestLegacyExternalStorage="true" 
       android:theme="@style/AppTheme">
+
       <meta-data
           android:name="CLEVERTAP_ACCOUNT_ID"
           android:value="TEST-Z8W-8KW-ZZ6Z"/>
+      
       <meta-data
           android:name="CLEVERTAP_TOKEN"
           android:value="TEST-03b-0b1"/>
-  <!-- IMPORTANT: To force use Google AD ID to uniquely identify  users, use the following meta tag. GDPR mandates that if you are using this tag, there is prominent disclousure to your end customer in their application. Read more about GDPR here - https://clevertap.com/blog/in-preparation-of-gdpr-compliance/ -->
-      <!-- <meta-data
-          android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
-          android:value="1"/> -->
+      
       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY"/>
-      <meta-data
-        android:name="CLEVERTAP_BACKGROUND_SYNC"
-        android:value="1"/>
-      <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-      <meta-data android:name="FCM_SENDER_ID" android:value="id:654937786237"/>
-      <service android:name="MyFirebaseMessagingService">
-        <intent-filter>
-          <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-        </intent-filter>
-      </service>
       
-      <receiver
-          android:name="com.clevertap.android.sdk.pushnotification.CTPushNotificationReceiver"
-          android:exported="false"
-          android:enabled="true">
-      </receiver>
-      <!--use CTBackgroundIntentService to target users below Android 21 (Lollipop)-->
+      <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+      
       <service
-        android:name="com.clevertap.android.sdk.CTBackgroundIntentService"
-        android:exported="false">
-            <intent-filter>
-                <action android:name="com.clevertap.BG_EVENT"/>
-            </intent-filter>
+          android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService">
+          <intent-filter>
+              <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+          </intent-filter>
       </service>
 
-    <!--use CTBackgroundJobService to target users on and above Android 21 (Lollipop)-->
-      <service
-        android:name="com.clevertap.android.sdk.CTBackgroundJobService"
-        android:permission="android.permission.BIND_JOB_SERVICE"
-        android:exported="false"/>
-
-      <service
-      android:name="com.clevertap.android.sdk.CTNotificationIntentService"
-      android:exported="false">
-        <intent-filter>
-          <action android:name="com.clevertap.PUSH_EVENT"/>
-        </intent-filter>
-      </service>
-      <!-- <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" /> -->
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
