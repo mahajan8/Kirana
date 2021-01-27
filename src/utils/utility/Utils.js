@@ -267,7 +267,9 @@ export const handleNotificationClick = (event) => {
       Actions.orderDetails();
       break;
     case orderRating:
-      Actions.rating({order: {order_id, store_name}});
+      if (Actions.currentScene !== 'rating') {
+        Actions.rating({order: {order_id, store_name}});
+      }
       break;
     case orderTracking:
       dispatch(setSelectedOrderId(order_id));
