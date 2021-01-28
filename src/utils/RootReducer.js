@@ -5,6 +5,7 @@ import navigationReducer from '../modules/navigation/NavigationReducer';
 import storeReducer from '../modules/store/StoreReducer';
 import cartReducer from '../modules/cart/CartReducer';
 import orderReducer from '../modules/orders/OrderReducer';
+import {LOGOUT_USER} from '../modules/authentication/ActionTypes';
 
 const AppReducers = combineReducers({
   authReducer,
@@ -16,9 +17,9 @@ const AppReducers = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  // if (action.type === LOGOUT_USER) {
-  //   state = undefined;
-  // }
+  if (action.type === LOGOUT_USER) {
+    state = undefined;
+  }
   return AppReducers(state, action);
 };
 
