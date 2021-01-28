@@ -13,10 +13,10 @@ import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
 import {setCartDetails} from '../cart/CartActions';
 import CleverTap from 'clevertap-react-native';
-import store from '../../utils/Store';
+import {setNotificationPayload} from '../authentication/AuthActions';
 
 export const getUserDetails = (newUser = false) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     instance.get(Urls.getUserDetails).then((res) => {
       const success = !res.data.error;
       if (success) {
@@ -64,13 +64,14 @@ export const getUserDetails = (newUser = false) => {
           });
         }
         //If last order rating not completed navigate to rating screen.
-        const {test} = store.getState().authReducer;
+        const {notificationPayload} = getState().authReducer;
         Actions.reset('drawer');
         if (!last_order_rating) {
           Actions.push('rating', {order: last_order_data});
         }
-        if (test) {
-          handleNotificationClick(test);
+        if (notificationPayload) {
+          handleNotificationClick(notificationPayload);
+          dispatch(setNotificationPayload(null));
         }
       } else {
         alert(res.data.message);
