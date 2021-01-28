@@ -6,6 +6,7 @@ import {
   SET_NO_INTERNET,
   SET_API_ERROR,
   SET_TEST,
+  SET_NOTIFICATION_PAYLOAD,
 } from './ActionTypes';
 
 // Set Loading in Auth Reducer
@@ -44,7 +45,7 @@ export const setApiError = (data) => ({
 });
 
 // Set Api Error in Auth Reducer
-export const setTest = (data) => ({
-  type: SET_TEST,
+export const setNotificationPayload = (data) => ({
+  type: SET_NOTIFICATION_PAYLOAD,
   data,
 });
