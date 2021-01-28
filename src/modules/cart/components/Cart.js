@@ -96,7 +96,11 @@ const Cart = (props) => {
           props.placeOrder(data);
         })
         .catch((error) => {
-          Actions.paymentStatus({success: false});
+          const data = {
+            payment_reference_id: orderId,
+            property: null,
+          };
+          props.placeOrder(data, () => Actions.paymentStatus({success: false}));
         });
     });
   };
