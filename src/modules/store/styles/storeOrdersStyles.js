@@ -4,8 +4,8 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   tabContainer: {
-    paddingTop: '10vrem',
-    paddingBottom: '20vrem',
+    paddingTop: '$spacingSuperSmall',
+    paddingBottom: '$spacingExtraNormal',
     backgroundColor: Colors.white,
     justifyContent: 'center',
     alignItems: 'center',
@@ -14,16 +14,16 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Colors.lightGreen,
-    borderRadius: '8rem',
+    borderRadius: '$spacingSmall',
   },
   tabItemContainer: {
     alignItems: 'center',
-    paddingHorizontal: '15rem',
-    paddingVertical: '7vrem',
+    paddingHorizontal: '$spacingNormal',
+    paddingVertical: '$spacingSmall',
   },
   label: {
     fontFamily: Fonts.medium,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.09rem',
     color: Colors.darkGreen,
   },
@@ -31,7 +31,7 @@ export const styles = EStyleSheet.create({
     color: Colors.white,
   },
   selectedTab: {
-    borderRadius: '8rem',
+    borderRadius: '$spacingSmall',
     backgroundColor: Colors.themeGreen,
   },
 });

@@ -6,27 +6,27 @@ export const styles = EStyleSheet.create({
   sectionHeaderContainer: {
     backgroundColor: Colors.lightBlue,
     paddingLeft: '$spacingNormal',
-    paddingVertical: '8vrem',
+    paddingVertical: '$spacingSmall',
     width: '100%',
   },
   sectionName: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   listLoaderContainer: {
-    marginBottom: '30vrem',
+    marginBottom: '$spacingLessHuge',
   },
   list: {
     flexGrow: 1,
   },
   itemSeperator: {
-    height: '7vrem',
+    height: '$spacingSmall',
     backgroundColor: Colors.seperatorColor,
   },
   emptyListContainer: {
     flex: 1,
-    paddingBottom: '20vrem',
+    paddingBottom: '$spacingExtraNormal',
   },
   emptyListInnerContainer: {
     flex: 1,
@@ -34,20 +34,20 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     letterSpacing: '0.18rem',
-    marginTop: '30vrem',
+    marginTop: '$spacingLessHuge',
   },
   desc: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.darkGray,
     letterSpacing: '0.2rem',
-    lineHeight: '18rem',
+    lineHeight: '$spacingNormalMedium',
     width: '260rem',
     textAlign: 'center',
-    marginTop: '7vrem',
+    marginTop: '$spacingSmall',
   },
 });

@@ -6,11 +6,11 @@ export const styles = EStyleSheet.create({
   sectionHeaderContainer: {
     backgroundColor: Colors.lightBlue,
     paddingLeft: '$spacingNormal',
-    paddingVertical: '8vrem',
+    paddingVertical: '$spacingSmall',
     width: '100%',
   },
   sectionName: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
@@ -22,24 +22,24 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   dateContainer: {
-    marginBottom: '16vrem',
+    marginBottom: '$spacingNormal',
   },
   detailText: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   icons: {
-    marginRight: '10rem',
+    marginRight: '$spacingSuperSmall',
   },
   name: {
-    fontSize: '11rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   locationText: {
     fontFamily: Fonts.regular,
-    fontSize: '9rem',
+    fontSize: '$fontSuperTiny',
     color: Colors.lightGray,
     width: '118rem',
   },
@@ -50,19 +50,19 @@ export const styles = EStyleSheet.create({
     height: '1vrem',
     backgroundColor: '#cacaca',
     width: '100%',
-    marginTop: '14vrem',
-    marginBottom: '10vrem',
+    marginTop: '$spacingExtraMedium',
+    marginBottom: '$spacingSuperSmall',
   },
   trackContainer: {
     justifyContent: 'space-between',
   },
   trackButton: {
-    height: '30vrem',
+    height: '$spacingLessHuge',
     width: '92rem',
-    borderRadius: '6rem',
+    borderRadius: '$spacingSmallExtreme',
   },
   trackLabel: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     letterSpacing: '0.07rem',
   },
   greenText: {
@@ -78,6 +78,6 @@ export const styles = EStyleSheet.create({
     borderColor: Colors.darkGray,
   },
   listLoaderContainer: {
-    marginTop: '20vrem',
+    marginTop: '$spacingExtraNormal',
   },
 });

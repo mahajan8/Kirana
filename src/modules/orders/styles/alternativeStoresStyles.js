@@ -4,12 +4,12 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingTop: '16vrem',
+    paddingTop: '$spacingNormal',
   },
   list: {
     paddingHorizontal: '$spacingNormal',
     flexGrow: 1,
-    paddingTop: '20vrem',
+    paddingTop: '$spacingExtraNormal',
   },
   listEmptyContainer: {
     height: '100%',
@@ -17,21 +17,21 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   listEmptyHeadline: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
-    lineHeight: '21rem',
+    lineHeight: '$spacingExtraNormal',
     letterSpacing: '0.18rem',
     textAlign: 'center',
     color: Colors.titleText,
-    marginTop: '30vrem',
+    marginTop: '$spacingLessHuge',
     width: '220rem',
   },
   headline: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     letterSpacing: '-0.19rem',
-    marginBottom: '20vrem',
-    lineHeight: '18rem',
+    marginBottom: '$spacingExtraNormal',
+    lineHeight: '$spacingNormalMedium',
   },
 });
