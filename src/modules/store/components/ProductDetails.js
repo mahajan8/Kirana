@@ -10,6 +10,8 @@ import {unitsList} from '../../../utils/values/Values';
 import CartHeader from '../../commons/components/CartHeader';
 import Minus from '../../../assets/images/product_detail_minus.svg';
 import Plus from '../../../assets/images/product_detail_plus.svg';
+import DisabledMinus from '../../../assets/images/product_detail_minus_grey.svg';
+import DisabledPlus from '../../../assets/images/product_detail_plus_grey.svg';
 import {updateProductQuantity} from '../Api';
 import {connect} from 'react-redux';
 import AlertModal from '../../commons/components/AlertModal';
@@ -80,9 +82,11 @@ const ProductDetails = (props) => {
             <Pressable
               android_ripple={ripple}
               style={styles.counter}
+              disabled={loadingProductId === product_id}
               onPress={() => updateQuantity(false)}>
-              <Minus />
+              {loadingProductId !== product_id ? <Minus /> : <DisabledMinus />}
             </Pressable>
+
             <View style={styles.countTextContainer}>
               {loadingProductId !== product_id ? (
                 <Text style={styles.countText}>
@@ -101,8 +105,9 @@ const ProductDetails = (props) => {
             <Pressable
               style={styles.counter}
               onPress={updateQuantity}
+              disabled={loadingProductId === product_id}
               android_ripple={ripple}>
-              <Plus />
+              {loadingProductId !== product_id ? <Plus /> : <DisabledPlus />}
             </Pressable>
           </View>
         ) : (
