@@ -35,9 +35,8 @@ export const styles = EStyleSheet.create({
     color: '#666666',
   },
   buttonStyle: {
-    width: '143rem',
+    width: '90%',
     height: '50vrem',
-    marginHorizontal: '16rem',
   },
   buttonLabel: {
     fontSize: '14rem',
@@ -47,7 +46,9 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+    height: '70vrem',
     marginHorizontal: '16rem',
+    justifyContent: 'center',
   },
   counter: {
     width: '34rem',
@@ -63,7 +64,10 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: '#333333',
     letterSpacing: '-0.2rem',
-    marginHorizontal: '22rem',
+  },
+  countTextContainer: {
+    width: '50rem',
+    alignItems: 'center',
   },
   buttonsContainer: {
     backgroundColor: Colors.white,
@@ -77,7 +81,6 @@ export const styles = EStyleSheet.create({
   },
   loader: {
     alignSelf: 'center',
-    width: '160rem',
-    height: '36rem',
+    width: '57rem',
   },
 });

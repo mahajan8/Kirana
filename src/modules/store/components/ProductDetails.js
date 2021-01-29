@@ -74,41 +74,45 @@ const ProductDetails = (props) => {
           styles.counterContainer,
           styles.buttonsContainer,
         ]}>
-        {loadingProductId !== product_id ? (
-          cartProductObj ? (
-            // Plus and Minus button to update quantity
-            <View style={styles.counterContainer}>
-              <Pressable
-                android_ripple={ripple}
-                style={styles.counter}
-                onPress={() => updateQuantity(false)}>
-                <Minus />
-              </Pressable>
-
-              <Text style={styles.countText}>
-                {product_brand
-                  ? cartProductObj.item_quantity
-                  : cartProductObj.product_quantity_str}
-              </Text>
-
-              <Pressable
-                style={styles.counter}
-                onPress={updateQuantity}
-                android_ripple={ripple}>
-                <Plus />
-              </Pressable>
+        {cartProductObj ? (
+          // Plus and Minus button to update quantity
+          <View style={styles.counterContainer}>
+            <Pressable
+              android_ripple={ripple}
+              style={styles.counter}
+              onPress={() => updateQuantity(false)}>
+              <Minus />
+            </Pressable>
+            <View style={styles.countTextContainer}>
+              {loadingProductId !== product_id ? (
+                <Text style={styles.countText}>
+                  {product_brand
+                    ? cartProductObj.item_quantity
+                    : cartProductObj.product_quantity_str}
+                </Text>
+              ) : (
+                <ActivityIndicator
+                  color={Colors.themeGreen}
+                  style={styles.countText}
+                />
+              )}
             </View>
-          ) : (
-            //Add button
-            <Button
-              label={Strings.addToCart}
-              Style={styles.buttonStyle}
-              labelStyle={styles.labelStyle}
+
+            <Pressable
+              style={styles.counter}
               onPress={updateQuantity}
-            />
-          )
+              android_ripple={ripple}>
+              <Plus />
+            </Pressable>
+          </View>
         ) : (
-          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
+          //Add button
+          <Button
+            label={Strings.addToCart}
+            Style={styles.buttonStyle}
+            labelStyle={styles.labelStyle}
+            onPress={updateQuantity}
+          />
         )}
       </View>
       <AlertModal
