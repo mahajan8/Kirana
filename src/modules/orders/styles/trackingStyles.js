@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   mapView: {
-    height: '570vrem',
+    height: '80%',
     backgroundColor: 'gray',
   },
   map: {
