@@ -42,6 +42,14 @@ export const styles = EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  viewAllContainer: {
+    marginTop: '12vrem',
+    marginRight: '30rem',
+    width: '110rem',
+    height: '220vrem',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   viewAllButton: {
     width: '79rem',
     height: '31vrem',
