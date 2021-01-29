@@ -4,10 +4,11 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    // position: 'absolute',
-    // bottom: 0,
+    position: 'absolute',
+    bottom: 0,
     // left: 0,
     // right: 0,
+    width: '100%',
   },
   orderInfoContainer: {
     paddingVertical: '$spacingMedium',
@@ -57,6 +58,7 @@ export const styles = EStyleSheet.create({
   trackingInfoContainer: {
     paddingLeft: '$spacingNormal',
     paddingRight: '$spacingMedium',
+    backgroundColor: Colors.white,
     // height: '73rem',
   },
   trackingStatus: {
@@ -164,5 +166,8 @@ export const styles = EStyleSheet.create({
   },
   checkIcon: {
     marginLeft: '$spacingSmallExtreme',
+  },
+  collapsibleContainer: {
+    overflow: 'hidden',
   },
 });
