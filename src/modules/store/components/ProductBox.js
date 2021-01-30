@@ -29,6 +29,7 @@ const ProductBox = (props) => {
     product_brand,
     product_id,
   } = item; //Destructured item object to get product details
+  product_id = product_id.$oid;
 
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;

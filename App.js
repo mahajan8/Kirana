@@ -3,6 +3,7 @@ import {Dimensions, Platform, Text, DeviceEventEmitter} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
+import {environment} from './src/config/EnvConfig';
 import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
@@ -21,7 +22,7 @@ Sentry.init({
 appsFlyer.initSdk(
   {
     devKey: 'EXaY9ocjMHyDn25EZxDCCS',
-    isDebug: false,
+    isDebug: environment !== 'production',
     appId: '1549920826',
     onInstallConversionDataListener: true, //Optional
     onDeepLinkListener: true, //Optional
