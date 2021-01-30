@@ -68,7 +68,8 @@ const StoreHeader = (props) => {
         <Pressable
           android_ripple={ripple}
           style={[styles.rowContainer, styles.searchView]}
-          onPress={Actions.searchProducts}>
+          // onPress={Actions.searchProducts}>
+          onPress={() => Actions.algoliaSearch({storeId: storeDetails.id})}>
           <Search
             width={EStyleSheet.value('15rem')}
             height={EStyleSheet.value('15rem')}

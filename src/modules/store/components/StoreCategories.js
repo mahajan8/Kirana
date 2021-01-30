@@ -51,7 +51,8 @@ const StoreCategories = (props) => {
         <Pressable
           style={styles.searchContainer}
           android_ripple={ripple}
-          onPress={Actions.searchProducts}>
+          // onPress={Actions.searchProducts}>
+          onPress={() => Actions.algoliaSearch({storeId: selectedStore.id})}>
           <Search />
 
           <Text style={styles.searchText}>{Strings.searchProduct}</Text>
