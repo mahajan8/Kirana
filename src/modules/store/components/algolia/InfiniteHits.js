@@ -1,28 +1,10 @@
+// Foundations
 import React from 'react';
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
-import {connectInfiniteHits} from 'react-instantsearch-native';
 
-const styles = StyleSheet.create({
-  separator: {
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-  },
-  item: {
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  titleText: {
-    fontWeight: 'bold',
-  },
-  name: {
-    fontSize: 18,
-  },
-  price: {
-    fontWeight: '600',
-  },
-});
+// Hooks
+import {connectInfiniteHits} from 'react-instantsearch-native';
 
 const InfiniteHits = ({hits, hasMore, refine}) => {
   console.log(hits);
@@ -54,5 +36,26 @@ InfiniteHits.propTypes = {
   hasMore: PropTypes.bool.isRequired,
   refine: PropTypes.func.isRequired,
 };
+
+const styles = StyleSheet.create({
+  separator: {
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+  },
+  item: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  titleText: {
+    fontWeight: 'bold',
+  },
+  name: {
+    fontSize: 18,
+  },
+  price: {
+    fontWeight: '600',
+  },
+});
 
 export default connectInfiniteHits(InfiniteHits);

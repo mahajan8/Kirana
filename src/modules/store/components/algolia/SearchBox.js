@@ -1,36 +1,46 @@
+// Foundations
 import React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {View, TextInput, Pressable} from 'react-native';
 import PropTypes from 'prop-types';
+
+// import {Actions} from 'react-native-router-flux';
+// import Filter from '../../../../assets/images/filter.svg';
+// import {ripple} from '../../../../utils/utility/Utils';
+// import {styles} from '../../styles/productSubStyles';
+
+// Hooks
 import {connectSearchBox} from 'react-instantsearch-native';
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-  input: {
-    height: 48,
-    padding: 12,
-    fontSize: 16,
-    backgroundColor: '#fff',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
-});
+// Components
+import CartHeader from '../../../commons/components/CartHeader';
 
 const SearchBox = ({currentRefinement, refine}) => {
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
+    <View>
+      <CartHeader
+        search
+        onSearchChange={(value) => refine(value)}
+        searchValue={currentRefinement}
+        onCrossPress={() => refine('')}
+        // headerRight={
+        //   <Pressable
+        //     style={styles.filterIcon}
+        //     android_ripple={ripple}
+        //     // TODO: make filetrs
+        //     onPress={() =>
+        //       alert(
+        //         'No filters available yet, sorry! This feature is on its way. Email support@kiranakart.app for more info.',
+        //       )
+        //     }>
+        //     <Filter />
+        //   </Pressable>
+        // }
+      />
+      {/* <TextInput
         onChangeText={(value) => refine(value)}
         value={currentRefinement}
         placeholder=""
-      />
+      /> */}
     </View>
   );
 };
