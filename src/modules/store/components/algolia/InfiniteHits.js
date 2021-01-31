@@ -16,26 +16,29 @@ const InfiniteHits = ({hits, hasMore, refine}) => {
     <FlatList
       data={hits}
       onEndReached={() => hasMore && refine()}
-      renderItem={({item, index}) => (
-        <ProductBox
-          key={item.id}
-          vertical
-          onPress={() => Actions.productDetails({subCategoryName: '', item})}
-          item={item}
-        />
-        // <View style={styles.item}>
-        //   <View>
-        //     <Text style={styles.name} numberOfLines={1}>
-        //       {item.product_name}
-        //     </Text>
-        //     <Text>{item.product_quantity}</Text>
-        //   </View>
-        //   <View>
-        //     <Text style={styles.price}>₹ {item.product_price}</Text>
-        //   </View>
-        // </View>
-      )}
+      renderItem={({item, index}) => {
+        return (
+          <ProductBox
+            key={item._id.$oid}
+            vertical
+            onPress={() => Actions.productDetails({subCategoryName: '', item})}
+            item={item}
+          />
+          // <View style={styles.item}>
+          //   <View>
+          //     <Text style={styles.name} numberOfLines={1}>
+          //       {item.product_name}
+          //     </Text>
+          //     <Text>{item.product_quantity}</Text>
+          //   </View>
+          //   <View>
+          //     <Text style={styles.price}>₹ {item.product_price}</Text>
+          //   </View>
+          // </View>
+        );
+      }}
       numColumns={2}
+      keyExtractor={(item) => item._id.$oid}
       contentContainerStyle={[styles.listContainer]}
     />
   );
