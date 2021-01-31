@@ -29,7 +29,10 @@ const ProductBox = (props) => {
     product_brand,
     product_id,
   } = item; //Destructured item object to get product details
-  product_id = product_id.$oid;
+  // typeof product_id is an "object" {$oid: "24xhexstring"} when props.item (item) is received through Algolia
+  if (typeof product_id !== 'string') {
+    product_id = product_id.$oid;
+  }
 
   const {selectedStore} = props.homeState;
   const {product_list, store} = props.cartState.cart;

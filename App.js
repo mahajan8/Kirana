@@ -35,6 +35,12 @@ appsFlyer.initSdk(
   },
 );
 
+var onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
+  (data) => {
+    console.log(`AppsFlyer On Install Converstion Failure: ${data}`);
+  },
+);
+
 // Extended Style Sheet Configuration
 let {height, width} = Dimensions.get('window');
 let [trueWidth, trueHeight] =
