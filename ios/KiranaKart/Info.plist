@@ -41,10 +41,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow background location access</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow location access</string>
-  <key>NSLocationAlwaysUsageDescription</key>
-  <string>Allow background location access</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow Photo Library</string>
 	<key>UIAppFonts</key>
