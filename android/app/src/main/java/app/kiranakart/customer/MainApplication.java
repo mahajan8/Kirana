@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
  
-import org.unimodules.adapters.react.ModuleRegistryAdapter;
-import org.unimodules.adapters.react.ReactModuleRegistryProvider;
-import org.unimodules.core.interfaces.SingletonModule;
 import android.os.Handler;
 import android.os.Looper;
 import com.facebook.react.bridge.Arguments;
@@ -30,6 +27,12 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.pushnotification.CTPushNotificationListener;
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+import org.unimodules.core.interfaces.SingletonModule;
+import android.net.Uri;
+import expo.modules.updates.UpdatesController;
+import javax.annotation.Nullable;
 
 public class MainApplication extends Application implements ReactApplication,CTPushNotificationListener {
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
@@ -64,6 +67,24 @@ public class MainApplication extends Application implements ReactApplication,CTP
         protected String getJSMainModuleName() {
           return "index";
         }
+
+        @Override
+        protected @Nullable String getJSBundleFile() {
+          if (BuildConfig.DEBUG) {
+            return super.getJSBundleFile();
+          } else {
+            return UpdatesController.getInstance().getLaunchAssetFile();
+          }
+        }
+ 
+        @Override
+        protected @Nullable String getBundleAssetName() {
+          if (BuildConfig.DEBUG) {
+            return super.getBundleAssetName();
+          } else {
+            return UpdatesController.getInstance().getBundleAssetName();
+          }
+        }
       };
 
   @Override
@@ -80,6 +101,9 @@ public class MainApplication extends Application implements ReactApplication,CTP
     cleverTapAPI.setDebugLevel(3);
     cleverTapAPI.setCTPushNotificationListener(this);
     SoLoader.init(this, /* native exopackage */ false);
+     if (!BuildConfig.DEBUG) {
+      UpdatesController.initialize(this);
+    }
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
