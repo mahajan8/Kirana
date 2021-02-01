@@ -19,7 +19,7 @@ const InfiniteHits = ({hits, hasMore, refine}) => {
       renderItem={({item, index}) => {
         return (
           <ProductBox
-            key={item._id.$oid}
+            key={item._id}
             vertical
             onPress={() => Actions.productDetails({subCategoryName: '', item})}
             item={item}
@@ -38,7 +38,7 @@ const InfiniteHits = ({hits, hasMore, refine}) => {
         );
       }}
       numColumns={2}
-      keyExtractor={(item) => item._id.$oid}
+      keyExtractor={(item) => item._id}
       contentContainerStyle={[styles.listContainer]}
     />
   );
