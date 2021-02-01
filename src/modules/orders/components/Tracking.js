@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, Dimensions, Animated} from 'react-native';
+import {View, Text, Dimensions, Animated, Platform} from 'react-native';
 import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
@@ -18,8 +18,8 @@ const LONGITUDE = 76.7357713;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-let start = {latitude: 19.0996905, longitude: 72.9142052};
-let end = {latitude: 19.108459, longitude: 72.924694};
+let start = {latitude: 30.690865, longitude: 76.757489};
+let end = {latitude: 30.724522, longitude: 76.768347};
 
 let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${end.latitude},${end.longitude}&key=AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY`;
 
@@ -32,6 +32,12 @@ const Tracking = (props) => {
   const [rotation] = useState(new Animated.Value(0));
 
   useEffect(() => {
+    map.current.fitToCoordinates([start, end], {
+      edgePadding:
+        Platform.OS === 'ios'
+          ? {top: 150, right: 150, bottom: 150, left: 150}
+          : {top: 300, right: 300, bottom: 300, left: 300},
+    });
     getPolyline();
   }, []);
 
@@ -61,7 +67,7 @@ const Tracking = (props) => {
     let brng = Math.atan2(y, x);
 
     brng = brng * (180 / PI);
-    brng = (brng + 360) % 360;
+    brng = brng % 360;
 
     return brng;
   };
@@ -168,9 +174,9 @@ const Tracking = (props) => {
     <Marker.Animated
       coordinate={markerCoordinate}
       // style={{}}
-      style={[styles.driverMarker, {transform: [{rotate: markerRotation}]}]}
+      style={[{transform: [{rotate: markerRotation}]}]}
       ref={marker}>
-      <View>
+      <View style={styles.driverMarker}>
         <Car width={50} height={50} rotate={40} />
       </View>
     </Marker.Animated>
@@ -182,12 +188,12 @@ const Tracking = (props) => {
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
         ref={map}
-        region={{
-          latitude: (start.latitude + end.latitude) / 2,
-          longitude: (start.longitude + end.longitude) / 2,
-          latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        }}
+        // region={{
+        //   latitude: (start.latitude + end.latitude) / 2,
+        //   longitude: (start.longitude + end.longitude) / 2,
+        //   latitudeDelta: 0.03,
+        //   longitudeDelta: 0.03,
+        // }}
         // onRegionChange={(region) => setRegion(region)}
       >
         {polyline.length ? (

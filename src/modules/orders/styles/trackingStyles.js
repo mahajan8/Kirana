@@ -43,10 +43,14 @@ export const styles = EStyleSheet.create({
     justifyContent: 'flex-end',
   },
   driverMarker: {
-    alignItems: 'center',
-    ...(Platform.OS === 'ios' && {
-      top: '-50%',
-    }),
+    // alignItems: 'center',
+    // ...(Platform.OS === 'android' && {
+    //   top: '-50%',
+    // }),
+    // position: 'absolute',
+    // left: 20,
+    // marginTop: 20
+    // backgroundColor: 'red'
   },
   markerIcon: {
     position: 'absolute',
