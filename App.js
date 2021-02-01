@@ -37,7 +37,9 @@ appsFlyer.initSdk(
 
 var onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
   (data) => {
-    console.log(`AppsFlyer On Install Converstion Failure: ${data}`);
+    console.log(
+      `AppsFlyer On Install Converstion Failure: ${JSON.stringify(data)}`,
+    );
   },
 );
 
