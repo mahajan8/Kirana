@@ -56,6 +56,9 @@
 		<string>Roboto-Light.ttf</string>
 		<string>Roboto-Medium.ttf</string>
 		<string>Roboto-Regular.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
