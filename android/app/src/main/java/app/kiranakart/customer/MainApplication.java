@@ -1,4 +1,5 @@
 package app.kiranakart.customer;
+import app.kiranakart.customer.generated.BasePackageList;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +7,12 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
+ 
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+import org.unimodules.core.interfaces.SingletonModule;
 import android.os.Handler;
 import android.os.Looper;
 import com.facebook.react.bridge.Arguments;
@@ -26,6 +32,7 @@ import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.pushnotification.CTPushNotificationListener;
 
 public class MainApplication extends Application implements ReactApplication,CTPushNotificationListener {
+  private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
 
   private static final String REACT_MODULE_NAME = "CleverTapReact";
   private static final String TAG = REACT_MODULE_NAME;
@@ -42,6 +49,14 @@ public class MainApplication extends Application implements ReactApplication,CTP
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
+          // packages.add(new MyReactNativePackage());
+          
+          // Add unimodules
+          List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+            new ModuleRegistryAdapter(mModuleRegistryProvider)
+          );
+          packages.addAll(unimodules);
+
           return packages;
         }
 
