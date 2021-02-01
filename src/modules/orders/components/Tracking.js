@@ -1,9 +1,11 @@
-import React, {useState, useRef} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useRef, useEffect} from 'react';
+import {View, Text, Dimensions, Animated} from 'react-native';
 import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
+import Car from '../../../assets/images/car.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
@@ -25,6 +27,13 @@ const Tracking = (props) => {
   let {trackStatus, storeName} = props;
   let map = useRef(null);
   let marker = useRef(null);
+  const [currentRotation, setCurrentRotation] = useState('0deg');
+  const [newRotation, setNewRotation] = useState('0deg');
+  const [rotation] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    getPolyline();
+  }, []);
 
   const [markerCoordinate, setMarkerCoordinate] = useState(
     new AnimatedRegion({
@@ -35,11 +44,44 @@ const Tracking = (props) => {
     }),
   );
 
+  const bearingBetweenLocations = (latLng1, latLng2) => {
+    let PI = Math.PI;
+    let lat1 = (latLng1.lat * PI) / 180;
+    let long1 = (latLng1.lng * PI) / 180;
+    let lat2 = (latLng2.lat * PI) / 180;
+    let long2 = (latLng2.lng * PI) / 180;
+
+    let dLon = long2 - long1;
+
+    let y = Math.sin(dLon) * Math.cos(lat2);
+    let x =
+      Math.cos(lat1) * Math.sin(lat2) -
+      Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+
+    let brng = Math.atan2(y, x);
+
+    brng = brng * (180 / PI);
+    brng = (brng + 360) % 360;
+
+    return brng;
+  };
+
   const [polyline, setPolyline] = useState([]);
   const [deliveryTime, setDeliveryTime] = useState('');
 
-  const animate = (endCoords, duration) => {
+  const animate = (endCoords, duration, bearing) => {
     // markerCoordinate.stopAnimation();
+    // console.log(bearing);
+    setNewRotation(bearing);
+    Animated.timing(rotation, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      setCurrentRotation(bearing);
+      rotation.setValue(0);
+    });
+
     const newCoordinate = {
       latitude: endCoords.lat,
       longitude: endCoords.lng,
@@ -60,12 +102,15 @@ const Tracking = (props) => {
   const animateLeg = (steps) => {
     let totalDuration = 0;
     steps.forEach((step, index) => {
-      let {end_location, duration} = step;
+      let {start_location, end_location, duration} = step;
+      let bearing = bearingBetweenLocations(start_location, end_location);
+      let delay = duration.value * 50 + 300;
+
       setTimeout(() => {
-        animate(end_location, duration.value * 50);
+        animate(end_location, delay, bearing + 'deg');
       }, totalDuration);
 
-      totalDuration += duration.value * 50;
+      totalDuration += delay;
     });
   };
 
@@ -114,10 +159,19 @@ const Tracking = (props) => {
     );
   };
 
+  const markerRotation = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [currentRotation, newRotation],
+  });
+
   const getDriver = () => (
-    <Marker.Animated coordinate={markerCoordinate} ref={marker}>
-      <View style={styles.driverMarker}>
-        <TrackMarker />
+    <Marker.Animated
+      coordinate={markerCoordinate}
+      // style={{}}
+      style={[styles.driverMarker, {transform: [{rotate: markerRotation}]}]}
+      ref={marker}>
+      <View>
+        <Car width={50} height={50} rotate={40} />
       </View>
     </Marker.Animated>
   );
@@ -140,7 +194,7 @@ const Tracking = (props) => {
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
 
-        {/* {getDriver()} */}
+        {getDriver()}
 
         {getMarker(1)}
 

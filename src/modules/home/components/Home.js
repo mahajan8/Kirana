@@ -177,7 +177,7 @@ const Home = (props) => {
       />
 
       {/* Active Orders Component  */}
-      {/*<CurrentOrders />*/}
+      <CurrentOrders />
 
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}

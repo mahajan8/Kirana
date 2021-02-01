@@ -4,9 +4,13 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.lightBlue,
+    backgroundColor: Colors.white,
     paddingHorizontal: '$spacingNormal',
     flexDirection: 'row',
+    shadowOffset: {width: 0, height: -2},
+    shadowRadius: 2,
+    shadowOpacity: 0.1,
+    elevation: 10,
   },
   outerCircle: {
     backgroundColor: Colors.themeGreen,
@@ -39,34 +43,31 @@ export const styles = EStyleSheet.create({
     width: '$spacingNormal',
   },
   title: {
-    fontSize: '$fontNormal',
-    fontFamily: Fonts.semiBold,
+    fontSize: '$fontSmall',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   subTitle: {
-    fontSize: '$fontTiny',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
-    color: Colors.subTitleText,
-    marginTop: '$spacingSuperSmall',
+    color: Colors.darkGray,
+    marginTop: '$spacingTinyExtreme',
   },
   detailsContainer: {
-    paddingVertical: '$spacingExtraNormal',
+    paddingVertical: '$spacingNormal',
     marginLeft: '$spacingNormal',
     flex: 1,
   },
   buttonStyle: {
     height: '$spacingLessHuge',
-    width: null,
-    paddingHorizontal: '$spacingSuperSmall',
+    width: '92rem',
     marginLeft: '$spacingSuperSmall',
     borderRadius: '$spacingSmallExtreme',
-    backgroundColor: 'transparent',
-    borderColor: Colors.themeGreen,
   },
   buttonLabel: {
-    fontSize: '$fontSmall',
+    fontSize: '$fontSuperTiny',
   },
-  greenBackground: {
-    backgroundColor: Colors.lightGreen,
+  awaitingBackground: {
+    backgroundColor: Colors.lightBlue,
   },
 });

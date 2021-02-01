@@ -31,21 +31,43 @@ const CurrentOrders = (props) => {
       (obj) => obj.status === orderStatus.ORDER_UPDATED,
     );
 
+    const getTitle = () => {
+      const {
+        ORDER_PLACED,
+        ORDER_ACCEPTED,
+        ORDER_PARTIALLY_ACCEPTED,
+        ORDER_UPDATED,
+        ORDER_OUT_FOR_DELIVERY,
+        ORDER_DELIVERY_ASSIGNED,
+      } = orderStatus;
+
+      switch (singleOrder.status) {
+        case ORDER_PLACED:
+          return Strings.orderPlaced;
+        case ORDER_ACCEPTED:
+        case ORDER_PARTIALLY_ACCEPTED:
+          return Strings.orderAccepted;
+        case ORDER_UPDATED:
+          return Strings.currentOrderModified;
+        case ORDER_DELIVERY_ASSIGNED:
+          return Strings.currentOrderPicking;
+        case ORDER_OUT_FOR_DELIVERY:
+          return Strings.currentOrderPicked;
+      }
+    };
+
     return (
       <View
         style={[
           styles.container,
-          awaitingConfirmation && styles.greenBackground,
+          awaitingConfirmation && styles.awaitingBackground,
         ]}>
         {renderTrackingCircle()}
         <View style={styles.detailsContainer}>
           <Text style={styles.title}>
             {multiple
               ? Strings.activeOrdersCount(currentOrders.length)
-              : `${Strings.yourOrderIs}: ${getKeyByValue(
-                  orderStatusLabels,
-                  singleOrder.status,
-                )}`}
+              : getTitle()}
           </Text>
           <Text style={styles.subTitle}>
             {multiple
@@ -64,7 +86,6 @@ const CurrentOrders = (props) => {
               : Strings.trackOrder
           }
           Style={styles.buttonStyle}
-          bordered
           labelStyle={styles.buttonLabel}
           onPress={() => {
             if (multiple) {
