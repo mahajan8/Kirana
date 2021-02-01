@@ -1,5 +1,5 @@
 export const Fonts = {
-  regular: 'Roboto-Regular',
-  medium: 'Roboto-Medium',
-  semiBold: 'Roboto-Bold',
+  regular: 'Montserrat-Regular',
+  medium: 'Montserrat-Medium',
+  semiBold: 'Montserrat-Bold',
 };
