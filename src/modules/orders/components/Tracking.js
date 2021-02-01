@@ -38,7 +38,8 @@ const Tracking = (props) => {
           ? {top: 150, right: 150, bottom: 150, left: 150}
           : {top: 300, right: 300, bottom: 300, left: 300},
     });
-    getPolyline();
+    // getPolyline();
+    return markerCoordinate.stopAnimation();
   }, []);
 
   const [markerCoordinate, setMarkerCoordinate] = useState(
@@ -200,7 +201,7 @@ const Tracking = (props) => {
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
 
-        {getDriver()}
+        {/* {getDriver()} */}
 
         {getMarker(1)}
 

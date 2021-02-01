@@ -45,7 +45,7 @@ export const getUserDetails = (newUser = false) => {
           };
         });
         //Set Currently Active Orders
-        dispatch(setCurrentOrders(activeOrders));
+        dispatch(setCurrentOrders([activeOrders[0]]));
 
         const {email, id, first_name, mobile} = user_details;
         if (newUser) {
