@@ -20,6 +20,7 @@ import {getAddressFromLocation} from '../../commons/Api';
 import Geolocation from 'react-native-geolocation-service';
 import CleverTap from 'clevertap-react-native';
 import store from '../../../utils/Store';
+import {handleNotificationClick} from '../../../utils/utility/Utils';
 
 CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
   console.log('Notification Click from App', event);
@@ -28,6 +29,13 @@ CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
 });
 const Splash = (props) => {
   useEffect(() => {
+    console.log(JSON.stringify(props.notificationPayload.notificationPayload));
+    if (props.notificationPayload.notificationPayload) {
+      props.setNotificationPayload(
+        props.notificationPayload.notificationPayload,
+      );
+      //handleNotificationClick(props.notificationPayload.notificationPayload);
+    }
     handleNavigation();
   }, []);
 
@@ -105,6 +113,7 @@ const mapDispatchToProps = {
   getUserDetails,
   setToken,
   setLocation,
+  setNotificationPayload,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Splash);

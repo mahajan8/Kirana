@@ -78,7 +78,9 @@ export default class App extends Component {
       CleverTap.CleverTapPushNotificationClicked,
       (event) => {
         console.log('Notification Click from App', event);
-        handleNotificationClick(event);
+        handleNotificationClick(
+          Platform.OS === 'ios' ? event.customExtras : event,
+        );
       },
     );
   };
@@ -92,6 +94,8 @@ export default class App extends Component {
   render() {
     let notificationPayload = this.props
       .UIApplicationLaunchOptionsRemoteNotificationKey;
+
+    console.log('Killed-notificationPayload', notificationPayload);
     return (
       <Provider store={store}>
         <AppRouter
