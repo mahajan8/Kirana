@@ -38,24 +38,13 @@ appsFlyer.initSdk(
     console.error(error);
   },
 );
-
-var onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
+const onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
   (data) => {
     console.log(
       `AppsFlyer On Install Converstion Failure: ${JSON.stringify(data)}`,
     );
   },
 );
-
-// Extended Style Sheet Configuration
-let {height, width} = Dimensions.get('window');
-let [trueWidth, trueHeight] =
-  width > height ? [height, width] : [width, height];
-
-EStyleSheet.build({
-  $rem: trueWidth / 360,
-  $vrem: trueHeight / 700,
-});
 
 export default class App extends Component {
   constructor(props) {
@@ -66,6 +55,7 @@ export default class App extends Component {
     }
     Text.defaultProps.allowFontScaling = false;
     this.configureSDK();
+    // Set EStyleSheet global variables and settings
     setDimensions();
   }
   async componentDidMount() {
