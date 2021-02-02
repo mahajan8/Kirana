@@ -114,14 +114,16 @@ const ProductBox = (props) => {
           </View>
         ) : (
           //Add button
-          <Button
-            label={Strings.plusAdd}
-            Style={[styles.buttonStyle, vertical && styles.verticalButton]}
-            labelStyle={styles.addLabel}
-            onPress={updateQuantity}
-          />
+          (loadingProductId !== product_id) ? <Button
+          label={Strings.plusAdd}
+          Style={[styles.buttonStyle, vertical && styles.verticalButton]}
+          labelStyle={styles.addLabel}
+          onPress={updateQuantity}
+        /> : <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </Pressable>
+
+      
 
       <AlertModal
         visible={replaceAlert}
