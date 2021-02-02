@@ -1,9 +1,11 @@
-import React, {useState, useRef} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useRef, useEffect} from 'react';
+import {View, Text, Dimensions, Animated, Platform} from 'react-native';
 import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
+import Car from '../../../assets/images/car.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
@@ -16,8 +18,8 @@ const LONGITUDE = 76.7357713;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-let start = {latitude: 19.0996905, longitude: 72.9142052};
-let end = {latitude: 19.108459, longitude: 72.924694};
+let start = {latitude: 30.690865, longitude: 76.757489};
+let end = {latitude: 30.724522, longitude: 76.768347};
 
 let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${end.latitude},${end.longitude}&key=AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY`;
 
@@ -25,6 +27,20 @@ const Tracking = (props) => {
   let {trackStatus, storeName} = props;
   let map = useRef(null);
   let marker = useRef(null);
+  const [currentRotation, setCurrentRotation] = useState('0deg');
+  const [newRotation, setNewRotation] = useState('0deg');
+  const [rotation] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    map.current.fitToCoordinates([start, end], {
+      edgePadding:
+        Platform.OS === 'ios'
+          ? {top: 150, right: 150, bottom: 150, left: 150}
+          : {top: 300, right: 300, bottom: 300, left: 300},
+    });
+    // getPolyline();
+    return markerCoordinate.stopAnimation();
+  }, []);
 
   const [markerCoordinate, setMarkerCoordinate] = useState(
     new AnimatedRegion({
@@ -35,11 +51,44 @@ const Tracking = (props) => {
     }),
   );
 
+  const bearingBetweenLocations = (latLng1, latLng2) => {
+    let PI = Math.PI;
+    let lat1 = (latLng1.lat * PI) / 180;
+    let long1 = (latLng1.lng * PI) / 180;
+    let lat2 = (latLng2.lat * PI) / 180;
+    let long2 = (latLng2.lng * PI) / 180;
+
+    let dLon = long2 - long1;
+
+    let y = Math.sin(dLon) * Math.cos(lat2);
+    let x =
+      Math.cos(lat1) * Math.sin(lat2) -
+      Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+
+    let brng = Math.atan2(y, x);
+
+    brng = brng * (180 / PI);
+    brng = brng % 360;
+
+    return brng;
+  };
+
   const [polyline, setPolyline] = useState([]);
   const [deliveryTime, setDeliveryTime] = useState('');
 
-  const animate = (endCoords, duration) => {
+  const animate = (endCoords, duration, bearing) => {
     // markerCoordinate.stopAnimation();
+    // console.log(bearing);
+    setNewRotation(bearing);
+    Animated.timing(rotation, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      setCurrentRotation(bearing);
+      rotation.setValue(0);
+    });
+
     const newCoordinate = {
       latitude: endCoords.lat,
       longitude: endCoords.lng,
@@ -60,12 +109,15 @@ const Tracking = (props) => {
   const animateLeg = (steps) => {
     let totalDuration = 0;
     steps.forEach((step, index) => {
-      let {end_location, duration} = step;
+      let {start_location, end_location, duration} = step;
+      let bearing = bearingBetweenLocations(start_location, end_location);
+      let delay = duration.value * 50 + 300;
+
       setTimeout(() => {
-        animate(end_location, duration.value * 50);
+        animate(end_location, delay, bearing + 'deg');
       }, totalDuration);
 
-      totalDuration += duration.value * 50;
+      totalDuration += delay;
     });
   };
 
@@ -114,10 +166,19 @@ const Tracking = (props) => {
     );
   };
 
+  const markerRotation = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [currentRotation, newRotation],
+  });
+
   const getDriver = () => (
-    <Marker.Animated coordinate={markerCoordinate} ref={marker}>
+    <Marker.Animated
+      coordinate={markerCoordinate}
+      // style={{}}
+      style={[{transform: [{rotate: markerRotation}]}]}
+      ref={marker}>
       <View style={styles.driverMarker}>
-        <TrackMarker />
+        <Car width={50} height={50} rotate={40} />
       </View>
     </Marker.Animated>
   );
@@ -128,12 +189,12 @@ const Tracking = (props) => {
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
         ref={map}
-        region={{
-          latitude: (start.latitude + end.latitude) / 2,
-          longitude: (start.longitude + end.longitude) / 2,
-          latitudeDelta: 0.03,
-          longitudeDelta: 0.03,
-        }}
+        // region={{
+        //   latitude: (start.latitude + end.latitude) / 2,
+        //   longitude: (start.longitude + end.longitude) / 2,
+        //   latitudeDelta: 0.03,
+        //   longitudeDelta: 0.03,
+        // }}
         // onRegionChange={(region) => setRegion(region)}
       >
         {polyline.length ? (

@@ -5,15 +5,15 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   listContainer: {
     backgroundColor: Colors.white,
-    paddingVertical: '15vrem',
-    paddingLeft: '16rem',
-    marginBottom: '8vrem',
+    paddingVertical: '$spacingNormal',
+    paddingLeft: '$spacingNormal',
+    marginBottom: '$spacingSmall',
     alignSelf: 'center',
   },
   productContainer: {
     backgroundColor: Colors.white,
-    marginTop: '12vrem',
-    marginRight: '30rem',
+    marginTop: '$spacingMedium',
+    marginRight: '$spacingLessHuge',
     width: '110rem',
   },
   productVerticalContainer: {
@@ -25,21 +25,21 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.placeHolder,
   },
   productPrice: {
-    width: '80rem',
-    height: '15vrem',
+    width: '$spacingSuperColossal',
+    height: '$spacingNormal',
     backgroundColor: Colors.placeHolder,
-    marginTop: '8vrem',
+    marginTop: '$spacingSmall',
   },
   productName: {
     width: '100%',
     backgroundColor: Colors.placeHolder,
-    marginVertical: '5rem',
-    height: '12vrem',
+    marginVertical: '$spacingSmallExtreme',
+    height: '$spacingMedium',
   },
   productWeight: {
-    width: '50rem',
+    width: '$spacingMassive',
     backgroundColor: Colors.placeHolder,
-    marginBottom: '30vrem',
-    height: '12vrem',
+    marginBottom: '$spacingLessHuge',
+    height: '$spacingMedium',
   },
 });

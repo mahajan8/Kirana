@@ -29,6 +29,18 @@ let paymentStatusList = [
     borderColor: '#cfc7f4',
     labelColor: '#5445bd',
   },
+  {
+    paymentStatus: paymentStatus.PARTIAL_REFUND_IN_PROGRESS,
+    backgroundColor: '#e4deff',
+    borderColor: '#cfc7f4',
+    labelColor: '#5445bd',
+  },
+  {
+    paymentStatus: paymentStatus.PARTIALLY_REFUNDED,
+    backgroundColor: '#e4deff',
+    borderColor: '#cfc7f4',
+    labelColor: '#5445bd',
+  },
 ];
 
 const OrderHeader = (props) => {
@@ -154,8 +166,7 @@ const OrderHeader = (props) => {
 
         {/* Show payment status in case or refund */}
         {payment &&
-          (payment.status === paymentStatus.REFUND_IN_PROGRESS ||
-            payment.status === paymentStatus.REFUNDED) &&
+          payment.status !== paymentStatus.SUCCESS &&
           getOrderStatusBubble(payment.status)}
       </View>
 

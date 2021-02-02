@@ -1,5 +1,5 @@
 import {Actions} from 'react-native-router-flux';
-import {Linking, Platform} from 'react-native';
+import {Dimensions, Linking, Platform} from 'react-native';
 import {Strings} from '../values/Strings';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
@@ -10,6 +10,7 @@ import store from '../Store';
 import {Colors} from '../values/Colors';
 import {notificationType} from '../values/Values';
 import {setSelectedOrderId} from '../../modules/orders/OrderActions';
+import EStyleSheet from 'react-native-extended-stylesheet';
 const {dispatch} = store;
 
 export const clipText = (text, limit) => {
@@ -266,11 +267,67 @@ export const handleNotificationClick = (event) => {
       Actions.orderDetails();
       break;
     case orderRating:
-      Actions.rating({order: {order_id, store_name}});
+      if (Actions.currentScene !== 'rating') {
+        Actions.rating({order: {order_id, store_name}});
+      }
       break;
     case orderTracking:
       dispatch(setSelectedOrderId(order_id));
       Actions.trackOrder();
       break;
   }
+};
+
+export const setDimensions = () => {
+  let {height, width} = Dimensions.get('window');
+  let [trueWidth, trueHeight] =
+    width > height ? [height, width] : [width, height];
+
+  EStyleSheet.build({
+    $rem: trueWidth / 360,
+    $vrem: trueHeight / 700,
+
+    // Font Dimensions
+    $fontExtraHugeHeader: '44rem',
+    $fontExtraHugeSubheader: '42rem',
+    $fontHugeHeader: '40rem',
+    $fontXXHuge: '36rem',
+    $fontXHuge: '32rem',
+    $fontExtraHuge: '28rem',
+    $fontHuge: '24rem',
+    $fontExtraLarge: '22rem',
+    $fontLarge: '20rem',
+    $fontExtraNormal: '18rem',
+    $fontNormal: '16rem',
+    $fontSmall: '14rem',
+    $fontTiny: '12rem',
+    $fontSuperTiny: '10rem',
+    $fontTinyExtreme: '8rem',
+
+    // Spacing Dimensions
+    $spacingTitan: '100rem',
+    $spacingSuperColossal: '80rem',
+    $spacingColossal: '76rem',
+    $spacingExtraMassive: '72rem',
+    $spacingMassive: '54rem',
+    $spacingVeryHuge: '48rem',
+    $spacingExtraHuge: '40rem',
+    $spacingMediumHuge: '36rem',
+    $spacingHuge: '32rem',
+    $spacingLessHuge: '30rem',
+    $spacingVeryLarge: '28rem',
+    $spacingExtraLarge: '26rem',
+    $spacingLarge: '24rem',
+    $spacingSuperNormal: '22rem',
+    $spacingExtraNormal: '20rem',
+    $spacingNormalMedium: '18rem',
+    $spacingNormal: '16rem',
+    $spacingExtraMedium: '14rem',
+    $spacingMedium: '12rem',
+    $spacingSuperSmall: '10rem',
+    $spacingSmall: '8rem',
+    $spacingSmallExtreme: '6rem',
+    $spacingTiny: '4rem',
+    $spacingTinyExtreme: '2rem',
+  });
 };

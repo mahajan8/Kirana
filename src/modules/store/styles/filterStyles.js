@@ -4,12 +4,12 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   clearAllButton: {
-    width: '75rem',
-    height: '30vrem',
-    borderRadius: '6rem',
+    width: '$spacingColossal',
+    height: '$spacingLessHuge',
+    borderRadius: '$spacingSmallExtreme',
   },
   clearAllLabel: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     letterSpacing: '0.07rem',
   },
   container: {
@@ -17,13 +17,13 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   filterContainer: {
-    width: '100rem',
+    width: '$spacingTitan',
     backgroundColor: Colors.lightBlue,
-    paddingTop: '9vrem',
-    paddingHorizontal: '16rem',
+    paddingTop: '$spacingSuperSmall',
+    paddingHorizontal: '$spacingNormal',
   },
   filterName: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.regular,
     color: Colors.subTitleText,
   },
@@ -32,28 +32,28 @@ export const styles = EStyleSheet.create({
     color: '#1b1f21',
   },
   filterNameContainer: {
-    paddingVertical: '13vrem',
+    paddingVertical: '$spacingExtraMedium',
   },
   listContainer: {
-    paddingVertical: '10vrem',
-    paddingHorizontal: '20rem',
+    paddingVertical: '$spacingSuperSmall',
+    paddingHorizontal: '$spacingExtraNormal',
   },
   optionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: '15vrem',
+    paddingVertical: '$spacingNormal',
   },
   itemSeperator: {
     height: '1vrem',
     backgroundColor: Colors.seperatorColor,
   },
   optionsText: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
-    lineHeight: '16rem',
+    lineHeight: '$spacingNormal',
     letterSpacing: '-0.1rem',
     color: Colors.subTitleText,
-    marginLeft: '12rem',
+    marginLeft: '$spacingMedium',
   },
   seletedOption: {
     fontFamily: Fonts.medium,
@@ -61,7 +61,7 @@ export const styles = EStyleSheet.create({
   },
   buttonContainer: {
     backgroundColor: Colors.white,
-    paddingVertical: '15vrem',
+    paddingVertical: '$spacingNormal',
   },
   listOuterContainer: {
     flex: 1,

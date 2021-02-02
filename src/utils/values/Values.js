@@ -61,11 +61,11 @@ export const paymentStatus = {
 };
 
 export const paymentStatusLabels = {
-  PENDING: 10,
-  SUCCESS: 20,
-  FAILED: 30,
-  PARTIAL_REFUND_IN_PROGRESS: 40,
-  PARTIALLY_REFUNDED: 50,
+  'Payment Pending': 10,
+  'Paid Successfully': 20,
+  'Payment Failed': 30,
+  'Partial Refund Processing': 40,
+  'Partial Refund Completed': 50,
   'Refund In Progress': 60,
   'Refund Completed': 70,
 };

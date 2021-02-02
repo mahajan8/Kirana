@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingBottom: '22vrem',
+    paddingBottom: '$spacingSuperNormal',
     justifyContent: 'flex-end',
   },
   innerContainer: {
@@ -12,30 +12,30 @@ export const styles = EStyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#FFF',
     borderRadius: '5rem',
-    paddingHorizontal: '20rem',
-    paddingTop: '16vrem',
+    paddingHorizontal: '$spacingExtraNormal',
+    paddingTop: '$spacingNormal',
   },
   titleView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '20vrem',
+    marginBottom: '$spacingExtraNormal',
   },
   titleText: {
     color: Colors.darkGreen,
-    lineHeight: '24rem',
-    fontSize: '14rem',
+    lineHeight: '$spacingLarge',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
   },
   optionsView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: '30rem',
+    marginBottom: '$spacingLessHuge',
   },
   optionsText: {
     color: Colors.darkGray,
-    fontSize: '12rem',
-    marginLeft: '12rem',
+    fontSize: '$fontTiny',
+    marginLeft: '$spacingMedium',
     fontFamily: Fonts.medium,
   },
 });

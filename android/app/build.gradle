@@ -194,6 +194,7 @@ dependencies {
 
     addUnimodulesDependencies()
 
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation(project(':react-native-maps')){  
        exclude group: 'com.google.android.gms', module: 'play-services-base'
        exclude group: 'com.google.android.gms', module: 'play-services-maps'
@@ -202,7 +203,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.facebook.fresco:fresco:2.0.0'
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
-    implementation "com.google.firebase:firebase-messaging:20.2.4"
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
     implementation "com.clevertap.android:clevertap-android-sdk:4.0.0"
     implementation "com.android.installreferrer:installreferrer:2.1"
     

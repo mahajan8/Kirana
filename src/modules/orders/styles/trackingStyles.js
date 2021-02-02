@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   mapView: {
-    flex: 1,
+    height: '80%',
     backgroundColor: 'gray',
   },
   map: {
@@ -14,7 +14,7 @@ export const styles = EStyleSheet.create({
   },
   deliveryTime: {
     fontFamily: Fonts.semiBold,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     color: Colors.darkGreen,
     textAlign: 'center',
     position: 'absolute',
@@ -22,35 +22,39 @@ export const styles = EStyleSheet.create({
   },
   minutes: {
     fontFamily: Fonts.medium,
-    fontSize: '8rem',
+    fontSize: '$fontTinyExtreme',
     letterSpacing: '-0.2rem',
   },
   markerLabelContainer: {
-    borderRadius: '2rem',
+    borderRadius: '$spacingTinyExtreme',
   },
   markerLabel: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
-    paddingHorizontal: '12rem',
-    paddingVertical: '6vrem',
+    paddingHorizontal: '$spacingMedium',
+    paddingVertical: '$spacingSmallExtreme',
     backgroundColor: Colors.white,
   },
   markerContainer: {
-    height: '100rem',
-    width: '100rem',
+    height: '$spacingTitan',
+    width: '$spacingTitan',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
   driverMarker: {
-    alignItems: 'center',
-    ...(Platform.OS === 'ios' && {
-      top: '-50%',
-    }),
+    // alignItems: 'center',
+    // ...(Platform.OS === 'android' && {
+    //   top: '-50%',
+    // }),
+    // position: 'absolute',
+    // left: 20,
+    // marginTop: 20
+    // backgroundColor: 'red'
   },
   markerIcon: {
     position: 'absolute',
     alignSelf: 'center',
-    top: '8rem',
+    top: '$spacingSmall',
   },
 });

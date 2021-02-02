@@ -115,7 +115,8 @@ const TrackOrderInfo = (props) => {
 
   const getOrderTrackingStatus = () => {
     return (
-      <Animated.View style={{maxHeight: maxHeight}}>
+      <Animated.View
+        style={[{maxHeight: maxHeight}, styles.collapsibleContainer]}>
         {trackStatus >= 0 ? (
           collapsed ? (
             <TrackOrderInfoCollapsed
@@ -154,7 +155,7 @@ const TrackOrderInfo = (props) => {
 
   const maxHeight = animCollapsed.interpolate({
     inputRange: [0, 1],
-    outputRange: [EStyleSheet.value('73vrem'), EStyleSheet.value('225vrem')],
+    outputRange: [EStyleSheet.value('75vrem'), EStyleSheet.value('250vrem')],
   });
 
   const getPaymentStatus = () => {

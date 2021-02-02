@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   scrollContainer: {
-    paddingBottom: '20vrem',
+    paddingBottom: '$spacingExtraNormal',
     flexGrow: 1,
   },
   mapView: {
@@ -15,27 +15,27 @@ export const styles = EStyleSheet.create({
     height: '100%',
   },
   saveAddressText: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     color: Colors.lightGray,
   },
   saveAddressContainer: {
-    marginLeft: '20rem',
-    marginTop: '24vrem',
+    marginLeft: '$spacingExtraNormal',
+    marginTop: '$spacingLarge',
   },
   buttonsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '8rem',
-    marginBottom: '40vrem',
+    marginTop: '$spacingSmall',
+    marginBottom: '$spacingExtraHuge',
   },
   buttonStyle: {
     width: '70rem',
     height: '37vrem',
-    borderRadius: '7rem',
-    marginRight: '10rem',
+    borderRadius: '$spacingSmall',
+    marginRight: '$spacingSuperSmall',
   },
   buttonLabel: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
   },
   unSelectedLabel: {
     color: Colors.darkGray,
@@ -49,30 +49,30 @@ export const styles = EStyleSheet.create({
     justifyContent: 'space-between',
   },
   locationTitle: {
-    fontSize: '16rem',
+    fontSize: '$fontNormal',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
     width: '200rem',
-    marginLeft: '6rem',
+    marginLeft: '$spacingSmallExtreme',
   },
   locationSub: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.titleText,
     width: '250rem',
   },
   locationContainer: {
-    paddingHorizontal: '20rem',
-    marginTop: '28vrem',
+    paddingHorizontal: '$spacingExtraNormal',
+    marginTop: '$spacingVeryLarge',
   },
   changeButton: {
     width: '65rem',
-    height: '27vrem',
-    borderRadius: '6rem',
+    height: '$spacingVeryLarge',
+    borderRadius: '$spacingSmallExtreme',
     backgroundColor: Colors.lightGreen,
   },
   changeButtonLabel: {
-    fontSize: '10rem',
+    fontSize: '$spacingSuperSmall',
     color: Colors.themeGreen,
   },
 });

@@ -13,25 +13,25 @@ export const styles = EStyleSheet.create({
   noInternetTitle: {
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     letterSpacing: '0.18rem',
-    marginTop: '40vrem',
+    marginTop: '$spacingExtraHuge',
   },
   noInternetSub: {
     fontFamily: Fonts.regular,
     color: Colors.darkGray,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.2rem',
-    lineHeight: '18rem',
-    marginTop: '7vrem',
-    marginBottom: '22vrem',
+    lineHeight: '$spacingNormalMedium',
+    marginTop: '$spacingSmall',
+    marginBottom: '$spacingSuperNormal',
   },
   buttonStyle: {
-    height: '36vrem',
+    height: '$spacingMediumHuge',
     width: '92rem',
   },
   buttonLabel: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.09rem',
   },
 });

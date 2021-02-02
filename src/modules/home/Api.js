@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import {Urls} from '../../utils/utility/Urls';
-import {getFormBody} from '../../utils/utility/Utils';
+import {getFormBody, handleNotificationClick} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {
   setUserDetails,
@@ -13,9 +13,10 @@ import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
 import {setCartDetails} from '../cart/CartActions';
 import CleverTap from 'clevertap-react-native';
+import {setNotificationPayload} from '../authentication/AuthActions';
 
 export const getUserDetails = (newUser = false) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     instance.get(Urls.getUserDetails).then((res) => {
       const success = !res.data.error;
       if (success) {
@@ -63,10 +64,14 @@ export const getUserDetails = (newUser = false) => {
           });
         }
         //If last order rating not completed navigate to rating screen.
-        if (last_order_rating) {
-          Actions.reset('drawer');
-        } else {
-          Actions.reset('rating', {order: last_order_data});
+        const {notificationPayload} = getState().authReducer;
+        Actions.reset('drawer');
+        if (!last_order_rating) {
+          Actions.push('rating', {order: last_order_data});
+        }
+        if (notificationPayload) {
+          handleNotificationClick(notificationPayload);
+          dispatch(setNotificationPayload(null));
         }
       } else {
         alert(res.data.message);

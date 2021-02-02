@@ -3,26 +3,23 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
-  tabSpacing: {
-    marginLeft: '80rem',
-  },
   tabRow: {
     flexDirection: 'row',
-    paddingHorizontal: '25rem',
+    paddingHorizontal: '$spacingExtraLarge',
     backgroundColor: Colors.white,
     justifyContent: 'space-between',
   },
   tabItemContainer: {
     alignItems: 'center',
-    paddingVertical: '10vrem',
-    paddingHorizontal: '15rem',
+    paddingVertical: '$spacingSuperSmall',
+    paddingHorizontal: '$spacingNormal',
   },
   label: {
     fontFamily: Fonts.medium,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.2rem',
     color: Colors.lightGray,
-    marginTop: '4vrem',
+    marginTop: '$spacingTiny',
   },
   selectedLabel: {
     color: Colors.themeGreen,

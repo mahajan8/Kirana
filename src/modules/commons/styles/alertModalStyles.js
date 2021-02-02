@@ -5,30 +5,30 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   modalContainer: {
     justifyContent: 'center',
-    paddingHorizontal: '20rem',
+    paddingHorizontal: '$spacingExtraNormal',
   },
   innerContainer: {
     backgroundColor: '#FFF',
     borderRadius: '15rem',
     overflow: 'hidden',
-    paddingHorizontal: '20rem',
-    paddingVertical: '25vrem',
+    paddingHorizontal: '$spacingExtraNormal',
+    paddingVertical: '$spacingLarge',
   },
   heading: {
     color: Colors.darkGreen,
-    lineHeight: '24rem',
+    lineHeight: '$spacingLarge',
     letterSpacing: '0.2rem',
     fontSize: '16rem',
     fontFamily: Fonts.semiBold,
   },
   desc: {
     color: Colors.subTitleText,
-    lineHeight: '19rem',
+    lineHeight: '$spacingNormalMedium',
     letterSpacing: '0.2rem',
     fontSize: '12rem',
     fontFamily: Fonts.regular,
-    marginTop: '10rem',
-    marginBottom: '25rem',
+    marginTop: '$spacingSuperSmall',
+    marginBottom: '$spacingLarge',
   },
   button: {
     width: '122rem',

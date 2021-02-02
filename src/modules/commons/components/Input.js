@@ -44,7 +44,7 @@ const Input = (props) => {
 
   let size = anim.interpolate({
     inputRange: [0, 1],
-    outputRange: [dp(15), dp(13)],
+    outputRange: [dp(14), dp(12)],
   });
 
   // const eye =

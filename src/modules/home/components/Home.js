@@ -80,8 +80,12 @@ const Home = (props) => {
 
     let newCurrentOrders = [...currentOrders];
 
+    const {ORDER_DELIVERED, ORDER_CANCELLED, ORDER_REJECTED} = orderStatus;
+
+    let removeStatus = [ORDER_DELIVERED, ORDER_CANCELLED, ORDER_REJECTED];
+
     if (i >= 0) {
-      if (status === orderStatus.ORDER_DELIVERED) {
+      if (removeStatus.includes(status)) {
         // Remove from Currently Active Orders if Order Delivered
         newCurrentOrders.splice(i, 1);
       } else if (status !== newCurrentOrders[i].status) {
@@ -90,7 +94,7 @@ const Home = (props) => {
       }
     } else {
       // Add to currently active orders if not exits already, and status is not delivered.
-      if (status !== orderStatus.ORDER_DELIVERED) {
+      if (!removeStatus.includes(status)) {
         newCurrentOrders.push(order);
       }
     }
@@ -177,7 +181,7 @@ const Home = (props) => {
       />
 
       {/* Active Orders Component  */}
-      {/*<CurrentOrders />*/}
+      <CurrentOrders />
 
       <HomeLocationCheck
         onSearchPress={() => setSearchVisible(true)}

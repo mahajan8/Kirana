@@ -8,8 +8,12 @@ import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
-import {handleNotificationClick} from './src/utils/utility/Utils';
 import appsFlyer from 'react-native-appsflyer';
+import {
+  handleNotificationClick,
+  setDimensions,
+} from './src/utils/utility/Utils';
+
 import * as Sentry from '@sentry/react-native';
 
 // Sentry Configuration
@@ -62,6 +66,7 @@ export default class App extends Component {
     }
     Text.defaultProps.allowFontScaling = false;
     this.configureSDK();
+    setDimensions();
   }
   async componentDidMount() {
     if (Platform.OS === 'android') {

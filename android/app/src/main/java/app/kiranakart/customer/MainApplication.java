@@ -96,8 +96,9 @@ public class MainApplication extends Application implements ReactApplication,CTP
   public void onCreate() {
     // Register the CleverTap ActivityLifecycleCallback; before calling super
     ActivityLifecycleCallback.register(this);	
+    CleverTapAPI.getDefaultInstance(getApplicationContext()).enableDeviceNetworkInfoReporting(true);
     super.onCreate();
-    CleverTapAPI cleverTapAPI = CleverTapAPI.getDefaultInstance(getApplicationContext());
+    CleverTapAPI cleverTapAPI = CleverTapAPI.getDefaultInstance(this);
     cleverTapAPI.setDebugLevel(3);
     cleverTapAPI.setCTPushNotificationListener(this);
     SoLoader.init(this, /* native exopackage */ false);

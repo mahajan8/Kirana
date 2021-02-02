@@ -4,37 +4,37 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   searchContainer: {
-    paddingHorizontal: '16rem',
-    paddingVertical: '15rem',
+    paddingHorizontal: '$spacingNormal',
+    paddingVertical: '$spacingNormal',
     backgroundColor: Colors.white,
     flexDirection: 'row',
     alignItems: 'center',
   },
   searchProduct: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.grayText,
     flex: 1,
-    marginLeft: '12rem',
+    marginLeft: '$spacingMedium',
   },
   container: {
     backgroundColor: '#f7f7f7',
     flex: 1,
   },
   heading: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     letterSpacing: '-0.1rem',
     color: Colors.titleText,
-    margin: '16rem',
+    margin: '$spacingNormal',
   },
   categoryContainer: {
     backgroundColor: Colors.white,
     height: '174rem',
     width: '174rem',
     justifyContent: 'space-between',
-    marginRight: '4rem',
-    marginBottom: '4vrem',
+    marginRight: '$spacingTiny',
+    marginBottom: '$spacingTiny',
   },
   categoryImage: {
     alignSelf: 'flex-end',
@@ -42,16 +42,16 @@ export const styles = EStyleSheet.create({
     width: '100%',
   },
   categoryName: {
-    fontSize: '15rem',
+    fontSize: '$fontNormal',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.13rem',
     color: Colors.titleText,
-    margin: '16rem',
+    margin: '$spacingNormal',
     position: 'absolute',
     bottom: 0,
   },
   list: {
-    marginLeft: '4rem',
+    marginLeft: '$spacingTiny',
     flexGrow: 1,
   },
 });

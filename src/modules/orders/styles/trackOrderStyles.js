@@ -5,20 +5,20 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   title: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
   },
   subTitle: {
-    fontSize: '11rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.lightGray,
   },
   titleContainer: {
-    marginLeft: '13rem',
+    marginLeft: '$spacingExtraMedium',
   },
   needHelp: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     color: Colors.themeGreen,
     letterSpacing: '0.1rem',
     fontFamily: Fonts.medium,

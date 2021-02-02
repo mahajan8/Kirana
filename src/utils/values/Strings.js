@@ -308,4 +308,7 @@ export const Strings = {
   noInternetSub:
     'Slow or no internet connection.\nPlease check your connectivity.',
   multipleApprovalNeeded: 'One of the order needs approval',
+  currentOrderPicked: 'Order Picked up',
+  currentOrderPicking: 'Picking up your order',
+  currentOrderModified: 'Your Order is Modified',
 };

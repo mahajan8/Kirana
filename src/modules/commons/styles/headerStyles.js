@@ -4,29 +4,29 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    padding: '20rem',
+    padding: '$spacingExtraNormal',
     borderColor: Colors.seperatorColor,
     // borderBottomWidth: 1,
-    marginBottom: '35rem',
+    marginBottom: '$spacingMediumHuge',
     backgroundColor: Colors.white,
     zIndex: 10,
   },
   container2: {
-    paddingVertical: '12rem',
+    paddingVertical: '$spacingMedium',
     marginBottom: 0,
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     height: '56rem',
     justifyContent: 'center',
   },
   title: {
     color: Colors.titleText,
-    fontSize: '18rem',
+    fontSize: '$fontExtraNormal',
     fontFamily: Fonts.medium,
-    marginTop: '12vrem',
+    marginTop: '$spacingMedium',
   },
   subTitle: {
     color: Colors.subTitleText,
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.2rem',
     fontFamily: Fonts.regular,
   },
@@ -37,9 +37,9 @@ export const styles = EStyleSheet.create({
   },
   type1Title: {
     color: Colors.titleText,
-    fontSize: '16rem',
+    fontSize: '$fontNormal',
     fontFamily: Fonts.medium,
-    marginLeft: '16rem',
+    marginLeft: '$spacingNormal',
   },
   headerRightContainer: {
     flex: 1,

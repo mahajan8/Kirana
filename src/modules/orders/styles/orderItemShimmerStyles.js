@@ -4,40 +4,40 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    paddingHorizontal: '16rem',
-    marginTop: '20vrem',
+    paddingHorizontal: '$spacingNormal',
+    marginTop: '$spacingExtraNormal',
     flexDirection: 'row',
     alignItems: 'center',
   },
   quantityText: {
-    height: '19vrem',
-    width: '25rem',
+    height: '$spacingExtraNormal',
+    width: '$spacingExtraLarge',
     backgroundColor: Colors.placeHolder,
-    marginRight: '6rem',
+    marginRight: '$spacingSmallExtreme',
   },
   orderImage: {
     height: '65rem',
     width: '65rem',
-    borderRadius: '8rem',
+    borderRadius: '$spacingSmall',
     backgroundColor: Colors.placeHolder,
-    marginRight: '12rem',
+    marginRight: '$spacingMedium',
   },
   itemName: {
-    height: '18vrem',
+    height: '$spacingNormalMedium',
     width: '150rem',
     backgroundColor: Colors.placeHolder,
   },
   itemName2: {
-    height: '18vrem',
+    height: '$spacingNormalMedium',
     width: '80rem',
     backgroundColor: Colors.placeHolder,
-    marginTop: '3rem',
+    marginTop: '$spacingTiny',
   },
   itemQuantity: {
-    height: '17vrem',
-    width: '20rem',
+    height: '$spacingNormalMedium',
+    width: '$spacingExtraNormal',
     backgroundColor: Colors.placeHolder,
-    marginTop: '3rem',
+    marginTop: '$spacingTiny',
   },
   checkView: {
     alignItems: 'flex-end',
@@ -45,9 +45,9 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   price: {
-    height: '20vrem',
-    width: '40rem',
+    height: '$spacingExtraNormal',
+    width: '$spacingExtraHuge',
     backgroundColor: Colors.placeHolder,
-    marginTop: '15vrem',
+    marginTop: '$spacingNormal',
   },
 });

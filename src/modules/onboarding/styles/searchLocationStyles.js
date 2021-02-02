@@ -5,6 +5,6 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   headerContainer: {
     marginBottom: 0,
-    paddingBottom: '5rem',
+    paddingBottom: '$spacingSmallExtreme',
   },
 });

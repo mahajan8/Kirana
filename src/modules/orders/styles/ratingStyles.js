@@ -5,27 +5,27 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   headingContainer: {
     backgroundColor: Colors.lightBlue,
-    paddingVertical: '17vrem',
-    paddingHorizontal: '20rem',
+    paddingVertical: '$spacingNormalMedium',
+    paddingHorizontal: '$spacingExtraNormal',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   heading: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
-    lineHeight: '22rem',
+    lineHeight: '$spacingSuperNormal',
     color: Colors.titleText,
     width: '200rem',
   },
   ratingTitle: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
-    marginTop: '30vrem',
+    marginTop: '$spacingLessHuge',
   },
   starsContainer: {
-    marginTop: '13vrem',
+    marginTop: '$spacingExtraMedium',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -34,13 +34,13 @@ export const styles = EStyleSheet.create({
     flex: 1,
   },
   star: {
-    marginRight: '15rem',
+    marginRight: '$spacingExtraMedium',
   },
   inputContainer: {
-    height: '80vrem',
+    height: '$spacingSuperColossal',
   },
   inputDelivery: {
-    height: '80vrem',
-    marginBottom: '30vrem',
+    height: '$spacingSuperColossal',
+    marginBottom: '$spacingLessHuge',
   },
 });

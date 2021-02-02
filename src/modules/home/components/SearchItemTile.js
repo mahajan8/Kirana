@@ -111,9 +111,9 @@ const SearchItemTile = (props) => {
         heading={Strings.replaceHeading}
         desc={
           Strings.replaceDesc1 +
-          store?.name +
+          (store && store.name) +
           Strings.replaceDesc2 +
-          selectedStore.name
+          (selectedStore && selectedStore.name)
         }
         label1={Strings.no}
         label2={Strings.yesDiscard}

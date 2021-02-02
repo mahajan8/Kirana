@@ -43,6 +43,7 @@ const AppRouter = (notificationPayload) => {
         <Scene
           key="splash"
           component={Splash}
+          initial={true}
           notificationPayload={notificationPayload}
         />
         <Scene key="introduction" component={Introduction} />

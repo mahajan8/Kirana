@@ -12,24 +12,24 @@ export const commonStyles = EStyleSheet.create({
   buttonBottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingBottom: '20vrem',
+    paddingBottom: '$spacingExtraNormal',
     width: '100%',
-    marginTop: '30rem',
+    marginTop: '$spacingLessHuge',
   },
   hitSlop: {
-    top: '5rem',
-    bottom: '5rem',
-    right: '5rem',
-    left: '5rem',
+    top: '$spacingSmallExtreme',
+    bottom: '$spacingSmallExtreme',
+    right: '$spacingSmallExtreme',
+    left: '$spacingSmallExtreme',
   },
   scrollContainer: {
     flexGrow: 1,
   },
   bottomButtonContainer: {
     width: '100%',
-    paddingTop: '10rem',
+    paddingTop: '$spacingSuperSmall',
     bottom: 0,
     backgroundColor: Colors.white,
-    paddingBottom: '20rem',
+    paddingBottom: '$spacingExtraNormal',
   },
 });

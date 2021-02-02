@@ -4,6 +4,7 @@ import {
   SET_DISABLE_LOADING,
   SET_NO_INTERNET,
   SET_API_ERROR,
+  SET_NOTIFICATION_PAYLOAD,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   disableLoading: false,
   apiError: false,
   noInternet: false,
+  notificationPayload: null,
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +42,11 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         apiError: action.data,
+      };
+    case SET_NOTIFICATION_PAYLOAD:
+      return {
+        ...state,
+        notificationPayload: action.data,
       };
     default:
       return state;

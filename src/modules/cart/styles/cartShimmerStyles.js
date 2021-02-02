@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    padding: '16vrem',
+    padding: '$spacingNormal',
   },
   seperator: {
     height: '7vrem',
@@ -45,14 +45,14 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.placeHolder,
   },
   detailsContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
     paddingVertical: '10vrem',
   },
   listItemSeperator: {
     height: '24vrem',
   },
   itemContainer: {
-    paddingHorizontal: '16rem',
+    paddingHorizontal: '$spacingNormal',
   },
   footerContainer: {
     marginTop: '20vrem',
@@ -60,13 +60,13 @@ export const styles = EStyleSheet.create({
   borderedContainer: {
     borderWidth: '1rem',
     borderStyle: 'dashed',
-    marginTop: '10vrem',
+    marginTop: '$spacingSuperSmall',
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
     marginBottom: '14vrem',
   },
   priceSeperator: {
-    marginVertical: '6vrem',
+    marginVertical: '$spacingSmallExtreme',
     height: '1rem',
     backgroundColor: '#cacaca',
     opacity: 0.26,

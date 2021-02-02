@@ -4,15 +4,19 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   container: {
-    backgroundColor: Colors.lightBlue,
-    paddingHorizontal: '16rem',
+    backgroundColor: Colors.white,
+    paddingHorizontal: '$spacingNormal',
     flexDirection: 'row',
+    shadowOffset: {width: 0, height: -2},
+    shadowRadius: 2,
+    shadowOpacity: 0.1,
+    elevation: 10,
   },
   outerCircle: {
     backgroundColor: Colors.themeGreen,
-    height: '16rem',
-    width: '16rem',
-    borderRadius: '8rem',
+    height: '$spacingNormal',
+    width: '$spacingNormal',
+    borderRadius: '$spacingSmall',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -20,12 +24,12 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.white,
     height: '7rem',
     width: '7rem',
-    borderRadius: '4rem',
+    borderRadius: '$spacingTiny',
   },
   line: {
     width: '1rem',
     backgroundColor: Colors.borderGray,
-    height: '18vrem',
+    height: '$spacingNormalMedium',
   },
   dottedLine: {
     flex: 1,
@@ -36,37 +40,34 @@ export const styles = EStyleSheet.create({
   },
   trackingCircleContainer: {
     alignItems: 'center',
-    width: '16rem',
+    width: '$spacingNormal',
   },
   title: {
-    fontSize: '15rem',
-    fontFamily: Fonts.semiBold,
+    fontSize: '$fontSmall',
+    fontFamily: Fonts.medium,
     color: Colors.titleText,
   },
   subTitle: {
-    fontSize: '12rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
-    color: Colors.subTitleText,
-    marginTop: '10rem',
+    color: Colors.darkGray,
+    marginTop: '$spacingTinyExtreme',
   },
   detailsContainer: {
-    paddingVertical: '20vrem',
-    marginLeft: '16rem',
+    paddingVertical: '$spacingNormal',
+    marginLeft: '$spacingNormal',
     flex: 1,
   },
   buttonStyle: {
-    height: '30rem',
-    width: null,
-    paddingHorizontal: '10rem',
-    marginLeft: '10rem',
-    borderRadius: '6rem',
-    backgroundColor: 'transparent',
-    borderColor: Colors.themeGreen,
+    height: '$spacingLessHuge',
+    width: '92rem',
+    marginLeft: '$spacingSuperSmall',
+    borderRadius: '$spacingSmallExtreme',
   },
   buttonLabel: {
-    fontSize: '13rem',
+    fontSize: '$fontSuperTiny',
   },
-  greenBackground: {
-    backgroundColor: Colors.lightGreen,
+  awaitingBackground: {
+    backgroundColor: Colors.lightBlue,
   },
 });
