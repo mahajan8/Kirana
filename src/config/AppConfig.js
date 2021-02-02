@@ -20,6 +20,7 @@ export const AppConfig = {
 
   staging: {
     baseUrl: 'http://15.206.252.200/api/',
+
     // mediaBaseUrl: 'https://d3unaxpny5psa2.cloudfront.net/',
     storageBaseUrl: 'https://kiranakart-dev.s3.ap-south-1.amazonaws.com/',
     googlePlacesKey: 'AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc',
@@ -31,21 +32,8 @@ export const AppConfig = {
     // otpTimer: 40,
     pubnubPublishKey: 'pub-c-6c6b32d6-708f-4785-8ccb-065b045836d3',
     pubnutSubscribeKey: 'sub-c-db75dc12-5a14-11eb-95c0-3253a07b53cf',
-    algoliaShortKey: '2BRKLSMSWI',
-    algoliaLongKey: 'fce1b4320fd83ddc7af437d46b6fb93d',
-    algoliaIndexName: 'dev_STOREPRODUCTS',
   },
   production: {
-    baseUrl: 'https://api.kiranakart.app/api/',
-    // mediaBaseUrl: 'https://d3unaxpny5psa2.cloudfront.net/',
-    storageBaseUrl: 'https://cdn.kiranakart.app/',
-    googlePlacesKey: 'AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc',
-    razorpayKey: 'rzp_test_whorR3ZOEdCg5w',
-    pubnubPublishKey: 'pub-c-6c6b32d6-708f-4785-8ccb-065b045836d3',
-    pubnutSubscribeKey: 'sub-c-db75dc12-5a14-11eb-95c0-3253a07b53cf',
-    algoliaShortKey: '2BRKLSMSWI',
-    algoliaLongKey: 'fce1b4320fd83ddc7af437d46b6fb93d',
-    algoliaIndexName: 'dev_STOREPRODUCTS',
     // baseUrl: 'https://api.girltribe.app/api',
     // mediaBaseUrl: 'https://media.girltribe.app/',
     // storageBaseUrl: 'https://storage.girltribe.app/',
