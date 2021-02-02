@@ -9,6 +9,7 @@ import BackArrow from '../../../assets/images/white_back.svg';
 import LocationIcon from '../../../assets/images/white_location.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {connect} from 'react-redux';
+import {commonStyles} from '../../commons/styles/commonStyles';
 import CartCounter from '../../commons/components/CartCounter';
 
 let backgroundImage = require('../../../assets/images/store_background.png');
@@ -34,7 +35,7 @@ const StoreHeader = (props) => {
       <View style={styles.darkBg} />
       <View style={styles.storeInfoContainer}>
         <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-          <Pressable style={styles.backArrow} onPress={Actions.pop}>
+          <Pressable style={styles.backArrow} onPress={Actions.pop} hitSlop={commonStyles.hitSlop}>
             <BackArrow />
           </Pressable>
           <View>
