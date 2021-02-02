@@ -66,7 +66,7 @@ const ProductBox = (props) => {
           {Strings.currency}{' '}
           {cartProductObj ? cartProductObj.total_price : store_price}
         </Text>
-        <Text style={styles.name} numberOfLines={1}>
+        <Text style={styles.name} numberOfLines={2}>
           {product_name}
         </Text>
         <Text style={styles.weight}>

@@ -32,6 +32,7 @@ export const Urls = {
   submitOrderRating: '/commerce/order/add-order-rating',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
+  googlePolyline: 'https://maps.googleapis.com/maps/api/directions/json',
 };
 
 // Postman Collection : https://www.getpostman.com/collections/ded852ca8b6569f7f386

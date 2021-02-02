@@ -1,6 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useRef, useEffect} from 'react';
-import {View, Text, Dimensions, Animated, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Animated,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
@@ -9,6 +16,8 @@ import Car from '../../../assets/images/car.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
+import {getDirectionsPolyline} from '../Api';
+import Button from '../../commons/components/Button';
 
 const screen = Dimensions.get('window');
 
@@ -21,7 +30,17 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let start = {latitude: 30.690865, longitude: 76.757489};
 let end = {latitude: 30.724522, longitude: 76.768347};
 
-let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${end.latitude},${end.longitude}&key=AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY`;
+let route = [
+  {latitude: 30.689255, longitude: 76.752116},
+  {latitude: 30.694215, longitude: 76.760036},
+  {latitude: 30.698167, longitude: 76.766196},
+  {latitude: 30.701152, longitude: 76.771036},
+  {latitude: 30.703926, longitude: 76.770596},
+  {latitude: 30.708592, longitude: 76.768494},
+  {latitude: 30.713762, longitude: 76.776658},
+  {latitude: 30.719773, longitude: 76.773823},
+  end,
+];
 
 const Tracking = (props) => {
   let {trackStatus, storeName} = props;
@@ -30,6 +49,7 @@ const Tracking = (props) => {
   const [currentRotation, setCurrentRotation] = useState('0deg');
   const [newRotation, setNewRotation] = useState('0deg');
   const [rotation] = useState(new Animated.Value(0));
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     map.current.fitToCoordinates([start, end], {
@@ -38,11 +58,23 @@ const Tracking = (props) => {
           ? {top: 150, right: 150, bottom: 150, left: 150}
           : {top: 300, right: 300, bottom: 300, left: 300},
     });
-    // getPolyline();
-    return markerCoordinate.stopAnimation();
+
+    // getDirectionsFromCurrent();
+    return () => markerCoordinate.stopAnimation();
   }, []);
 
-  const [markerCoordinate, setMarkerCoordinate] = useState(
+  const navigate = () => {
+    if (currentIndex < route.length) {
+      markerCoordinate.stopAnimation();
+
+      animateToCurrent(route[currentIndex]);
+      // getDirectionsFromCurrent(route[currentIndex]);
+
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const [markerCoordinate] = useState(
     new AnimatedRegion({
       latitude: start.latitude,
       longitude: start.longitude,
@@ -119,19 +151,46 @@ const Tracking = (props) => {
 
       totalDuration += delay;
     });
+
+    setTimeout(() => {
+      let current = {
+        latitude: markerCoordinate.latitude._value,
+        longitude: markerCoordinate.longitude._value,
+      };
+      getDirectionsFromCurrent(current);
+    }, totalDuration);
   };
 
-  // Get Polyline for Map between 2 points
-  const getPolyline = () => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        let {overview_polyline, legs} = res.routes[0];
+  const animateToCurrent = (current) => {
+    let initial = {
+      latitude: markerCoordinate.latitude._value,
+      longitude: markerCoordinate.longitude._value,
+    };
 
-        setPolyline(decodePolyline(overview_polyline.points));
-        animateLeg(legs[0].steps);
-        setDeliveryTime(legs[0].duration.text);
-      });
+    let pars = {
+      initial,
+      final: current,
+    };
+
+    getDirectionsPolyline(pars, (res) => {
+      let {legs} = res.routes[0];
+
+      animateLeg(legs[0].steps);
+    });
+  };
+
+  const getDirectionsFromCurrent = (current) => {
+    let pars = {
+      initial: current ? current : start,
+      final: end,
+    };
+
+    getDirectionsPolyline(pars, (res) => {
+      let {overview_polyline, legs} = res.routes[0];
+
+      setPolyline(decodePolyline(overview_polyline.points));
+      setDeliveryTime(legs[0].duration.text);
+    });
   };
 
   const getMarker = (type = 0) => {
@@ -185,6 +244,9 @@ const Tracking = (props) => {
 
   return (
     <View style={styles.mapView}>
+      {/* <TouchableOpacity onPress={navigate}>
+        <Text style={{alignSelf: 'center'}}>Press</Text>
+      </TouchableOpacity> */}
       <MapView
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -201,7 +263,7 @@ const Tracking = (props) => {
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
 
-        {/* {getDriver()} */}
+        {getDriver()}
 
         {getMarker(1)}
 
