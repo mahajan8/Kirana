@@ -10,8 +10,8 @@ export const styles = EStyleSheet.create({
     paddingRight: '$spacingExtraMedium',
   },
   listLabel: {
-    fontFamily: Fonts.medium,
-    fontSize: '$fontTiny',
+    fontFamily: Fonts.semiBold,
+    fontSize: '$fontNormal',
     color: Colors.titleText,
     letterSpacing: '-0.17rem',
   },
