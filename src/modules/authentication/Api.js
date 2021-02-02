@@ -16,7 +16,9 @@ export const sendOtp = (pars) => {
         if (Actions.currentScene !== 'otp') {
           Actions.otp({number: pars.mobile});
         }
-        // alert(res.data.data.otp);
+        if (pars.mobile === '9873581432') {
+          alert(res.data.data.otp);
+        }
       } else {
         alert(res.data.message);
       }

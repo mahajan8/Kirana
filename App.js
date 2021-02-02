@@ -3,10 +3,12 @@ import {Dimensions, Platform, Text, DeviceEventEmitter} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
+import {environment} from './src/config/EnvConfig';
 import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
+import appsFlyer from 'react-native-appsflyer';
 import {
   handleNotificationClick,
   setDimensions,
@@ -14,9 +16,45 @@ import {
 
 import * as Sentry from '@sentry/react-native';
 
+// Sentry Configuration
 Sentry.init({
   dsn:
     'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167',
+});
+
+// AppsFlyer Configuration
+appsFlyer.initSdk(
+  {
+    devKey: 'EXaY9ocjMHyDn25EZxDCCS',
+    isDebug: environment !== 'production',
+    appId: '1549920826',
+    onInstallConversionDataListener: true, //Optional
+    onDeepLinkListener: true, //Optional
+  },
+  (result) => {
+    console.log(result);
+  },
+  (error) => {
+    console.error(error);
+  },
+);
+
+var onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
+  (data) => {
+    console.log(
+      `AppsFlyer On Install Converstion Failure: ${JSON.stringify(data)}`,
+    );
+  },
+);
+
+// Extended Style Sheet Configuration
+let {height, width} = Dimensions.get('window');
+let [trueWidth, trueHeight] =
+  width > height ? [height, width] : [width, height];
+
+EStyleSheet.build({
+  $rem: trueWidth / 360,
+  $vrem: trueHeight / 700,
 });
 
 export default class App extends Component {

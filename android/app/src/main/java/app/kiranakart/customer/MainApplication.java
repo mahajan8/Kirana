@@ -1,4 +1,5 @@
 package app.kiranakart.customer;
+import app.kiranakart.customer.generated.BasePackageList;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +7,9 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
+ 
 import android.os.Handler;
 import android.os.Looper;
 import com.facebook.react.bridge.Arguments;
@@ -24,8 +27,15 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.pushnotification.CTPushNotificationListener;
+import org.unimodules.adapters.react.ModuleRegistryAdapter;
+import org.unimodules.adapters.react.ReactModuleRegistryProvider;
+import org.unimodules.core.interfaces.SingletonModule;
+import android.net.Uri;
+import expo.modules.updates.UpdatesController;
+import javax.annotation.Nullable;
 
 public class MainApplication extends Application implements ReactApplication,CTPushNotificationListener {
+  private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(new BasePackageList().getPackageList(), null);
 
   private static final String REACT_MODULE_NAME = "CleverTapReact";
   private static final String TAG = REACT_MODULE_NAME;
@@ -42,12 +52,38 @@ public class MainApplication extends Application implements ReactApplication,CTP
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
+          // packages.add(new MyReactNativePackage());
+          
+          // Add unimodules
+          List<ReactPackage> unimodules = Arrays.<ReactPackage>asList(
+            new ModuleRegistryAdapter(mModuleRegistryProvider)
+          );
+          packages.addAll(unimodules);
+
           return packages;
         }
 
         @Override
         protected String getJSMainModuleName() {
           return "index";
+        }
+
+        @Override
+        protected @Nullable String getJSBundleFile() {
+          if (BuildConfig.DEBUG) {
+            return super.getJSBundleFile();
+          } else {
+            return UpdatesController.getInstance().getLaunchAssetFile();
+          }
+        }
+ 
+        @Override
+        protected @Nullable String getBundleAssetName() {
+          if (BuildConfig.DEBUG) {
+            return super.getBundleAssetName();
+          } else {
+            return UpdatesController.getInstance().getBundleAssetName();
+          }
         }
       };
 
@@ -66,6 +102,9 @@ public class MainApplication extends Application implements ReactApplication,CTP
     cleverTapAPI.setDebugLevel(3);
     cleverTapAPI.setCTPushNotificationListener(this);
     SoLoader.init(this, /* native exopackage */ false);
+     if (!BuildConfig.DEBUG) {
+      UpdatesController.initialize(this);
+    }
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
 
