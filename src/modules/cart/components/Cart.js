@@ -48,6 +48,8 @@ const Cart = (props) => {
     }
   }, [location]);
 
+  console.log(JSON.stringify(product_list));
+
   const getCartItems = () => {
     let pars = {
       longitude: location.lng,

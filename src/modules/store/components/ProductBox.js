@@ -15,6 +15,7 @@ import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
 import {Actions} from 'react-native-router-flux';
 import {Colors} from '../../../utils/values/Colors';
+import FastImage from 'react-native-fast-image';
 
 const ProductBox = (props) => {
   const [replaceAlert, setReplaceAlert] = useState(false);
@@ -56,13 +57,21 @@ const ProductBox = (props) => {
       <Pressable
         // android_ripple={ripple}
         onPress={() => Actions.productDetails({item})}>
-        <Image
+        {/* <Image
           source={{
             uri: getMediaUrl(
               product_images.length ? product_images[0].path : null,
             ),
           }}
           style={styles.productImage}
+        /> */}
+        <FastImage
+        source={{
+          uri: getMediaUrl(
+            product_images.length ? encodeURI(product_images[0].path) : null,
+          ),
+        }}
+        style={styles.productImage}
         />
         <Text style={styles.price}>
           {Strings.currency}{' '}
