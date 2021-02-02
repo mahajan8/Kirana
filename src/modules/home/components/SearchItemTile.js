@@ -52,14 +52,6 @@ const SearchItemTile = (props) => {
         // android_ripple={ripple}
         onPress={() => Actions.productDetails({item: props.item})}>
         <View style={styles.productImageContainer}>
-          {/* <Image
-            style={styles.productImage}
-            source={{
-              uri: getMediaUrl(
-                product_images.length ? product_images[0].path : null,
-              ),
-            }}
-          /> */}
        <FastImage
         source={{
           uri: getMediaUrl(

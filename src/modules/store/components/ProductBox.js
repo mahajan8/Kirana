@@ -57,14 +57,6 @@ const ProductBox = (props) => {
       <Pressable
         // android_ripple={ripple}
         onPress={() => Actions.productDetails({item})}>
-        {/* <Image
-          source={{
-            uri: getMediaUrl(
-              product_images.length ? product_images[0].path : null,
-            ),
-          }}
-          style={styles.productImage}
-        /> */}
         <FastImage
         source={{
           uri: getMediaUrl(
@@ -75,7 +67,8 @@ const ProductBox = (props) => {
         />
         <Text style={styles.price}>
           {Strings.currency}{' '}
-          {cartProductObj ? cartProductObj.total_price : store_price}
+          {/* {cartProductObj ? cartProductObj.total_price : store_price} This shows multiplied price */}
+          {store_price}
         </Text>
         <Text style={styles.name} numberOfLines={1}>
           {product_name}
