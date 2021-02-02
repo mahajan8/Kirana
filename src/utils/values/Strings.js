@@ -193,7 +193,7 @@ export const Strings = {
   enterNewNumber: 'Please enter your new mobile number',
   changeNumber: 'Change Mobile Number',
   verifyNumber: 'Verify your phone number',
-  groceryCategories: 'Grocery Categories',
+  groceryCategories: 'Departments in ',
   paid: 'Paid',
   paidSuccessfully: 'Paid Successfully',
   trackOrder: 'Track Order',

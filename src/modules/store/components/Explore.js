@@ -24,8 +24,9 @@ const Explore = (props) => {
 
   let {selectedStore} = props.homeReducer;
 
+  // Category Layout Component
   const renderCategory = (item) => (
-    // Category Layout Component
+    <View style={styles.categoryContainerParent}>
     <Pressable
       android_ripple={ripple}
       style={styles.categoryContainer}
@@ -43,6 +44,7 @@ const Explore = (props) => {
       />
       <Text style={styles.categoryName}>{item.name}</Text>
     </Pressable>
+    </View>
   );
 
   return (
@@ -58,7 +60,7 @@ const Explore = (props) => {
         <CartCounter />
       </Pressable>
       <View style={styles.container}>
-        <Text style={styles.heading}>{Strings.groceryCategories}</Text>
+        <Text style={styles.heading}>{Strings.groceryCategories}{selectedStore.name}</Text>
         <FlatList
           data={props.storeCategories}
           keyExtractor={(item, index) => `categories${index}`}
