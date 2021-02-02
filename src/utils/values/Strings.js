@@ -1,5 +1,5 @@
 export const Strings = {
-  supportEmail: 'support@kiranakart.com',
+  supportEmail: 'support@kiranakart.app',
 
   introTitle1: 'Groceries delivered instantly',
   introTitle2: 'Shop from your trusted Kiranas',
