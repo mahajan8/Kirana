@@ -16,7 +16,7 @@ let options = [
   {
     Icon: Phone,
     title: Strings.phoneNumber,
-    sub: '+91 8591233907',
+    sub: '+91 85912 33907',
     iconBg: '#0072f0',
   },
   {

@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
+import {ripple} from '../../../utils/utility/Utils';
 import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/trackOrderStyles';
@@ -69,7 +70,9 @@ const TrackOrder = (props) => {
               <Text style={styles.subTitle}>{store_name}</Text>
             </View>
           }
-          headerRight={<Text style={styles.needHelp}>{Strings.needHelp}</Text>}
+          headerRight={<Pressable android_ripple={ripple} onPress={Actions.support}>
+          <Text style={styles.needHelp}>{Strings.needHelp}</Text>
+        </Pressable>}
         />
 
         <Tracking trackStatus={trackStatus} storeName={store_name} />

@@ -148,7 +148,7 @@ const OrderHeader = (props) => {
             <Back style={styles.backIcon} />
           </Pressable>
 
-          <Pressable android_ripple={ripple}>
+          <Pressable android_ripple={ripple} onPress={Actions.support}>
             <Text style={styles.needHelp}>{Strings.needHelp}</Text>
           </Pressable>
         </View>
