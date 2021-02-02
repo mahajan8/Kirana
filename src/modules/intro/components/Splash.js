@@ -27,10 +27,9 @@ CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
 });
 const Splash = (props) => {
   useEffect(() => {
-    if (props.notificationPayload.notificationPayload) {
-      props.setNotificationPayload(
-        props.notificationPayload.notificationPayload,
-      );
+    const {notificationPayload} = props.notificationPayload;
+    if (notificationPayload) {
+      props.setNotificationPayload(notificationPayload);
     }
     handleNavigation();
   }, []);
