@@ -32,6 +32,10 @@ export const Urls = {
   submitOrderRating: '/commerce/order/add-order-rating',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
+  storePlayStoreLink:
+  'https://play.google.com/store/apps/details?id=app.kiranakart.store',
+  storeAppStoreLink:
+  'https://apps.apple.com/us/app/kiranakart-for-shopkeepers/id1547417992',
 };
 
 // Postman Collection : https://www.getpostman.com/collections/ded852ca8b6569f7f386
