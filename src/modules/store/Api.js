@@ -121,3 +121,22 @@ export const updateProductQuantity = (pars, callback) => {
     });
   };
 };
+
+export const deleteProductFromCart = (pars, callback) => {
+  return (dispatch) => {
+    dispatch(setDisableLoading(true));
+    dispatch(setLoadingProduct(pars.product_id));
+    var formBody = getFormBody(pars);
+
+    instance.post(Urls.addUpdateItemToCart, formBody).then((res) => {
+      const success = !res.data.error;
+      dispatch(setLoadingProduct(null));
+      if (success) {
+        const {cart} = res.data.data;
+        dispatch(setCartDetails(cart));
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+};

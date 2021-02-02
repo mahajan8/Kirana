@@ -5,7 +5,7 @@ import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';
 import {connect} from 'react-redux';
-import {updateProductQuantity} from '../../store/Api';
+import {updateProductQuantity, deleteProductFromCart} from '../../store/Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/searchItemTileStyles';
 import {Colors} from '../../../utils/values/Colors';
@@ -20,6 +20,7 @@ const SearchItemTile = (props) => {
     product_images,
     product_id,
     product_brand,
+    in_stock_product,
   } = props.item;
 
   const [replaceAlert, setReplaceAlert] = useState(false);
@@ -44,12 +45,27 @@ const SearchItemTile = (props) => {
     }
   };
 
+  const deleteItem = () => {
+    const pars = {
+      product_id,
+      quantity: -1,
+      store_id: selectedStore.id,
+    };
+
+    // Api call to update product quantity
+    props.deleteProductFromCart(pars);
+  };
+
+  let isOutStock = props.cart && !in_stock_product;
+
   return (
     <View style={[styles.rowContainer]}>
       <Pressable
         style={[styles.rowContainer]}
         // android_ripple={ripple}
-        onPress={() => Actions.productDetails({item: props.item})}>
+        onPress={() =>
+          !isOutStock && Actions.productDetails({item: props.item})
+        }>
         <View style={styles.productImageContainer}>
           <Image
             style={styles.productImage}
@@ -70,35 +86,45 @@ const SearchItemTile = (props) => {
         </View>
       </Pressable>
       <View style={styles.rightContainer}>
-        <Text style={styles.price}>
-          {Strings.currency}{' '}
-          {cartProductObj ? cartProductObj.total_price : store_price}
-        </Text>
+        {isOutStock ? (
+          <Text style={styles.outStock}>{Strings.outOfStock}</Text>
+        ) : (
+          <Text style={styles.price}>
+            {Strings.currency}{' '}
+            {cartProductObj ? cartProductObj.total_price : store_price}
+          </Text>
+        )}
 
         {loadingProductId !== product_id ? (
           // Plus and Minus button to update quantity
-          <View style={styles.rowContainer}>
-            <Pressable
-              android_ripple={ripple}
-              style={styles.quantityButton}
-              onPress={() => updateQuantity(false)}>
-              <Text style={styles.quantityButtonIcons}>-</Text>
+          isOutStock ? (
+            <Pressable onPress={deleteItem}>
+              <Text style={styles.delete}>{Strings.delete}</Text>
             </Pressable>
-            <Text style={styles.quantityText}>
-              {cartProductObj
-                ? product_brand
-                  ? cartProductObj.item_quantity
-                  : cartProductObj.product_quantity_str
-                : 0}
-            </Text>
+          ) : (
+            <View style={styles.rowContainer}>
+              <Pressable
+                android_ripple={ripple}
+                style={styles.quantityButton}
+                onPress={() => updateQuantity(false)}>
+                <Text style={styles.quantityButtonIcons}>-</Text>
+              </Pressable>
+              <Text style={styles.quantityText}>
+                {cartProductObj
+                  ? product_brand
+                    ? cartProductObj.item_quantity
+                    : cartProductObj.product_quantity_str
+                  : 0}
+              </Text>
 
-            <Pressable
-              style={styles.quantityButton}
-              onPress={updateQuantity}
-              android_ripple={ripple}>
-              <Text style={styles.quantityButtonIcons}>+</Text>
-            </Pressable>
-          </View>
+              <Pressable
+                style={styles.quantityButton}
+                onPress={updateQuantity}
+                android_ripple={ripple}>
+                <Text style={styles.quantityButtonIcons}>+</Text>
+              </Pressable>
+            </View>
+          )
         ) : (
           <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
@@ -157,6 +183,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   updateProductQuantity,
+  deleteProductFromCart,
 };
 // export default ;
 export default connect(
