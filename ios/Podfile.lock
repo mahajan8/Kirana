@@ -10,7 +10,7 @@ PODS:
   - clevertap-react-native (0.5.0):
     - CleverTap-iOS-SDK (~> 3.9.1)
     - React
-  - CocoaAsyncSocket (7.6.4)
+  - CocoaAsyncSocket (7.6.5)
   - CocoaLibEvent (1.0.0)
   - DoubleConversion (1.1.6)
   - EXConstants (9.3.5):
@@ -177,7 +177,7 @@ PODS:
   - Permission-LocationWhenInUse (3.0.0):
     - RNPermissions
   - PromisesObjC (1.2.12)
-  - razorpay-pod (1.1.10)
+  - razorpay-pod (1.1.11)
   - RCTRequired (0.63.3)
   - RCTTypeSafety (0.63.3):
     - FBLazyVector (= 0.63.3)
@@ -733,7 +733,7 @@ SPEC CHECKSUMS:
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CleverTap-iOS-SDK: 37872a91bdac5da30e7d268c7f571ae894be4298
   clevertap-react-native: 2ac030374ae68065b4db344f6357a60df702d117
-  CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   EXConstants: 54d0bf04319d1692c6c7bc03ca151ef7a71705a4
@@ -767,7 +767,7 @@ SPEC CHECKSUMS:
   Permission-LocationAlways: c083f45f28c4b78ddc6f9668cf1a984d879a80ec
   Permission-LocationWhenInUse: e2b8c40ce0f3675a521f26787ab47ebb9bace503
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  razorpay-pod: ee8dc073c65baee8df6e8c4275b1c989bab614a2
+  razorpay-pod: 968635ba3bed4572f5ea9fe72be705225dcbce48
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
   React: f36e90f3ceb976546e97df3403e37d226f79d0e3
