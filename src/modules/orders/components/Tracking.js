@@ -5,12 +5,13 @@ import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
-import Car from '../../../assets/images/car.svg';
+import Bike from '../../../assets/images/bike.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
 import {getDirectionsPolyline} from '../Api';
 import {orderStatus} from '../../../utils/values/Values';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const screen = Dimensions.get('window');
 
@@ -266,7 +267,10 @@ const Tracking = (props) => {
       style={[{transform: [{rotate: markerRotation}]}]}
       ref={marker}>
       <View style={styles.driverMarker}>
-        <Car width={50} height={50} />
+        <Bike
+          width={EStyleSheet.value('30rem')}
+          height={EStyleSheet.value('30rem')}
+        />
       </View>
     </Marker.Animated>
   );
