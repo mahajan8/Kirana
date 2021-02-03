@@ -48,7 +48,7 @@ const TrackOrder = (props) => {
     latitude: null,
     longitude: null,
   });
-  const [channels] = useState(['60032280e15cf1656ca3d8b8']);
+  const [channels] = useState([props.userDetails.id]);
 
   useEffect(() => {
     // getPolyline();
@@ -84,7 +84,6 @@ const TrackOrder = (props) => {
     // Handler function for Socket Order Changes
     const {type, payload} = event.message;
     let {id} = store.getState().orderReducer.orderDetails;
-    console.log(JSON.stringify(event));
     if (payload.order.id === id) {
       if (type === statusUpdate) {
         props.setOrderDetails(payload.order);
