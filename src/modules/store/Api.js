@@ -128,7 +128,7 @@ export const deleteProductFromCart = (pars, callback) => {
     dispatch(setLoadingProduct(pars.product_id));
     var formBody = getFormBody(pars);
 
-    instance.post(Urls.addUpdateItemToCart, formBody).then((res) => {
+    instance.post(Urls.deleteCartItem, formBody).then((res) => {
       const success = !res.data.error;
       dispatch(setLoadingProduct(null));
       if (success) {

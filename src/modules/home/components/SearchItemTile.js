@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, memo} from 'react';
 import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
 import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
@@ -48,11 +47,10 @@ const SearchItemTile = (props) => {
   const deleteItem = () => {
     const pars = {
       product_id,
-      quantity: -1,
-      store_id: selectedStore.id,
+      store_id: store.id,
     };
 
-    // Api call to update product quantity
+    // Api call to delete product from cart
     props.deleteProductFromCart(pars);
   };
 

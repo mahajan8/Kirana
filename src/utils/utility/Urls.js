@@ -30,6 +30,7 @@ export const Urls = {
   repeatOrderToCart: '/commerce/cart/repeat-order-to-cart',
   acceptRejectOrder: '/commerce/order/accept-reject-consumer-order',
   submitOrderRating: '/commerce/order/add-order-rating',
+  deleteCartItem: '/commerce/cart/delete-item-from-cart',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
   googlePolyline: 'https://maps.googleapis.com/maps/api/directions/json',

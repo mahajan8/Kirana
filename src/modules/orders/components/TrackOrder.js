@@ -14,9 +14,10 @@ import {setOrderDetails} from '../OrderActions';
 import {Actions} from 'react-native-router-flux';
 import Tracking from './Tracking';
 import PubNub from 'pubnub';
-import {PubNubProvider} from 'pubnub-react';
 import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
+import {orderStatus} from '../../../utils/values/Values';
+import store from '../../../utils/Store';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -26,6 +27,9 @@ import {environment} from '../../../config/EnvConfig';
 // 4 - Delivered
 // 5 - Rejected
 let trackStatus = 2;
+
+const statusUpdate = 'ORDER_STATUS_UPDATE';
+const driverStatus = 'DRIVER_STATUS_UPDATE';
 
 // Socket Config
 const pubnub = new PubNub({
@@ -40,6 +44,11 @@ const TrackOrder = (props) => {
   let {store_name} = orderDetails ? orderDetails : {};
 
   const [showRejectedModal, setShowRejectedModal] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  const [channels] = useState([props.userDetails.id]);
 
   useEffect(() => {
     // getPolyline();
@@ -58,42 +67,75 @@ const TrackOrder = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    // Subscribe to channels and add listener for Socket Change
+    let listener = {message: handleMessage};
+    pubnub.subscribe({channels});
+    pubnub.addListener(listener);
+
+    return () => {
+      // Unsubscribe channels and remove listener when component unmounts
+      pubnub.unsubscribe({channels});
+      pubnub.removeListener(listener);
+    };
+  }, [pubnub, channels]);
+
+  const handleMessage = (event) => {
+    // Handler function for Socket Order Changes
+    const {type, payload} = event.message;
+    let {id} = store.getState().orderReducer.orderDetails;
+    if (payload.order.id === id) {
+      if (type === statusUpdate) {
+        props.setOrderDetails(payload.order);
+
+        if (payload.order.status === orderStatus.ORDER_REJECTED) {
+          setShowRejectedModal(true);
+        }
+      } else if (type === driverStatus) {
+        setCurrentLocation({
+          latitude: payload.latitude,
+          longitude: payload.longitude,
+        });
+      }
+    }
+  };
+
   return (
     <SafeArea>
-      <PubNubProvider client={pubnub}>
-        <Header
-          type={1}
-          titleComp={
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>{Strings.trackOrder}</Text>
-              <Text style={styles.subTitle}>{store_name}</Text>
-            </View>
-          }
-          headerRight={<Text style={styles.needHelp}>{Strings.needHelp}</Text>}
-        />
+      <Header
+        type={1}
+        titleComp={
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{Strings.trackOrder}</Text>
+            <Text style={styles.subTitle}>{store_name}</Text>
+          </View>
+        }
+        headerRight={<Text style={styles.needHelp}>{Strings.needHelp}</Text>}
+      />
 
-        <Tracking trackStatus={trackStatus} storeName={store_name} />
+      <Tracking
+        trackStatus={trackStatus}
+        storeName={store_name}
+        currentLocation={currentLocation}
+      />
 
-        {orderDetails ? (
-          <TrackOrderInfo
-            trackStatus={trackStatus}
-            orderRejected={() => setShowRejectedModal(true)}
-          />
-        ) : (
-          <TrackInfoShimmer />
-        )}
-        {/* <Button onPress={getPolyline} /> */}
-        <MapOrderRejectedModal
-          visible={showRejectedModal}
-          setVisible={setShowRejectedModal}
-        />
-      </PubNubProvider>
+      {orderDetails ? (
+        <TrackOrderInfo trackStatus={trackStatus} />
+      ) : (
+        <TrackInfoShimmer />
+      )}
+      {/* <Button onPress={getPolyline} /> */}
+      <MapOrderRejectedModal
+        visible={showRejectedModal}
+        setVisible={setShowRejectedModal}
+      />
     </SafeArea>
   );
 };
 
 const mapStateToProps = (state) => ({
   orderReducer: state.orderReducer,
+  userDetails: state.homeReducer.userDetails,
 });
 
 const mapDispatchToProps = {

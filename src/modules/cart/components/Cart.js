@@ -30,7 +30,7 @@ const Cart = (props) => {
   const [paymentLoading, setPaymentLoading] = useState(false);
 
   let {cart} = props.cartReducer;
-console.log(cart)
+
   let {
     total_cost_price,
     delivery_fee,

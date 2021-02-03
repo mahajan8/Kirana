@@ -10,7 +10,6 @@ import {orderStatus, paymentStatus} from '../../../utils/values/Values';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {setOrderDetails, setSelectedOrderId} from '../OrderActions';
-import {usePubNub} from 'pubnub-react';
 import TrackOrderInfoExpanded from './TrackOrderInfoExpanded';
 import TrackOrderInfoCollapsed from './TrackOrderInfoCollapsed';
 import Phone from '../../../assets/images/order_detail_call.svg';
@@ -63,12 +62,8 @@ let trackingList = [
   },
 ];
 
-const statusUpdate = 'ORDER_STATUS_UPDATE';
-const driverUpdate = 'DRIVER_STATUS_UPDATE';
-
 const TrackOrderInfo = (props) => {
   let {orderDetails} = props;
-  const PubNubClient = usePubNub();
 
   let {
     item_quantity_count,
@@ -76,50 +71,17 @@ const TrackOrderInfo = (props) => {
     status,
     status_history,
     payment,
-    id,
     delivery,
   } = orderDetails ? orderDetails : {};
 
   const [collapsed, setCollapsed] = useState(true);
   const [animCollapsed] = useState(new Animated.Value(0));
   const [trackStatus, setTrackStatus] = useState(-1);
-  const [channels] = useState([props.userDetails.id]);
 
   useEffect(() => {
     let i = trackingList.findIndex((obj) => obj.orderStatus === status);
     setTrackStatus(i);
   }, [status]);
-
-  useEffect(() => {
-    // Subscribe to channels and add listener to socket changes.
-    let listener = {message: handleMessage};
-    PubNubClient.subscribe({channels});
-    PubNubClient.addListener(listener);
-
-    return () => {
-      // Unsubscribe channels and remove listener on component unmount
-      PubNubClient.unsubscribe({channels});
-      PubNubClient.removeListener(listener);
-    };
-  }, [PubNubClient, channels]);
-
-  const handleMessage = (event) => {
-    // Handler function for Socket Order Changes
-    const {type, payload} = event.message;
-
-    if (payload.order.id === id) {
-      if (type === statusUpdate) {
-        console.log(payload);
-        props.setOrderDetails(payload.order);
-
-        if (payload.order.status === orderStatus.ORDER_REJECTED) {
-          props.orderRejected();
-        }
-      } else if (type === driverUpdate) {
-        console.log(payload);
-      }
-    }
-  };
 
   const getOrderTrackingStatus = () => {
     return (
