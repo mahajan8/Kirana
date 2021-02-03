@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_ORDERS,
   SET_ALTERNATE_DETAILS,
   SET_ALTERNATIVE_STORES,
+  SET_CURRENT_LOCATION,
   SET_ORDER_DETAILS,
   SET_PAST_ORDERS,
   SET_SELECTED_ORDER_ID,
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   productIds: [],
   orderDeliveryLocation: null,
   selectedOrderId: null,
+  currentLocation: {latitude: null, longitude: null},
 };
 
 const OrderReducer = (state = INITIAL_STATE, action) => {
@@ -76,6 +78,12 @@ const OrderReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedOrderId: action.orderId,
+      };
+    }
+    case SET_CURRENT_LOCATION: {
+      return {
+        ...state,
+        currentLocation: action.location,
       };
     }
     default:

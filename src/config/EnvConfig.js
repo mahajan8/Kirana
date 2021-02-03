@@ -1,3 +1,3 @@
 import {Environment} from './AppConfig';
 
-export const environment = Environment.staging;
+export const environment = Environment.production;

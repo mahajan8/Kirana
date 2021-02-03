@@ -312,4 +312,5 @@ export const Strings = {
   currentOrderPicking: 'Picking up your order',
   currentOrderModified: 'Your Order is Modified',
   outOfStock: 'Out of stock',
+  deliveryPartner: 'Delivery Partner',
 };

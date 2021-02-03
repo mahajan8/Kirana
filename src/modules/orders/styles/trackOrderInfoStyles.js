@@ -170,4 +170,31 @@ export const styles = EStyleSheet.create({
   collapsibleContainer: {
     overflow: 'hidden',
   },
+  deliveryPartnerInfo: {
+    paddingVertical: '$spacingNormal',
+    paddingHorizontal: '$spacingNormal',
+    borderTopWidth: '$spacingTinyExtreme',
+    borderColor: '#e0e0e0',
+    backgroundColor: Colors.white,
+  },
+  deliveryPartnerImage: {
+    width: '20rem',
+    height: '20rem',
+    borderRadius: '10rem',
+    marginRight: '12rem',
+    marginLeft: '2rem',
+  },
+  deliveryPartnerName: {
+    fontSize: '14rem',
+    fontFamily: Fonts.medium,
+    color: Colors.titleText,
+  },
+  deliveryPartner: {
+    fontSize: '9rem',
+    fontFamily: Fonts.regular,
+    color: Colors.darkGray,
+  },
+  deliveryPartnerNameContainer: {
+    flex: 1,
+  },
 });

@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_ORDERS,
   SET_ALTERNATE_DETAILS,
   SET_ALTERNATIVE_STORES,
+  SET_CURRENT_LOCATION,
   SET_ORDER_DETAILS,
   SET_PAST_ORDERS,
   SET_SELECTED_ORDER_ID,
@@ -56,4 +57,9 @@ export const setAlternateDetails = (products, location) => ({
 export const setSelectedOrderId = (orderId) => ({
   type: SET_SELECTED_ORDER_ID,
   orderId,
+});
+
+export const setCurrentLocation = (location) => ({
+  type: SET_CURRENT_LOCATION,
+  location,
 });
