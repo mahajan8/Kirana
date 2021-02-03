@@ -115,11 +115,7 @@ const TrackOrder = (props) => {
 
       <Tracking storeName={store_name} currentLocation={currentLocation} />
 
-      {orderDetails ? (
-        <TrackOrderInfo trackStatus={trackStatus} />
-      ) : (
-        <TrackInfoShimmer />
-      )}
+      {orderDetails ? <TrackOrderInfo /> : <TrackInfoShimmer />}
       {/* <Button onPress={getPolyline} /> */}
       <MapOrderRejectedModal
         visible={showRejectedModal}

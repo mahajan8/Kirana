@@ -65,6 +65,7 @@ const Tracking = (props) => {
     : {};
   let orderPicked =
     status === orderStatus.ORDER_OUT_FOR_DELIVERY ? true : false;
+  let orderDelivered = status === orderStatus.ORDER_DELIVERED ? true : false;
 
   useEffect(() => {
     if (orderDetails) {
@@ -77,6 +78,9 @@ const Tracking = (props) => {
         longitude: delivery_address_location.lng,
       });
 
+      if (orderDelivered) {
+        focusMap(true);
+      }
       // getDirectionsFromCurrent();
     }
 
@@ -85,12 +89,7 @@ const Tracking = (props) => {
 
   useEffect(() => {
     if (storeLocation.latitude && deliveryLocation.latitude) {
-      map.current.fitToCoordinates([storeLocation, deliveryLocation], {
-        edgePadding:
-          Platform.OS === 'ios'
-            ? {top: 150, right: 150, bottom: 150, left: 150}
-            : {top: 300, right: 300, bottom: 300, left: 300},
-      });
+      focusMap(true);
     }
   }, [deliveryLocation, storeLocation]);
 
@@ -98,13 +97,7 @@ const Tracking = (props) => {
     if (currentLocation.latitude) {
       if (markerCoordinate.latitude._value) {
         markerCoordinate.stopAnimation();
-
-        map.current.fitToCoordinates([storeLocation, deliveryLocation], {
-          edgePadding:
-            Platform.OS === 'ios'
-              ? {top: 150, right: 150, bottom: 150, left: 150}
-              : {top: 300, right: 300, bottom: 300, left: 300},
-        });
+        focusMap();
         animateToCurrent();
       } else {
         markerCoordinate
@@ -117,6 +110,27 @@ const Tracking = (props) => {
       }
     }
   }, [currentLocation]);
+
+  const focusMap = (full = false) => {
+    let current = {
+      latitude: markerCoordinate.latitude._value,
+      longitude: markerCoordinate.longitude._value,
+    };
+
+    let coords1 = full ? storeLocation : current;
+    let coords2 = full
+      ? deliveryLocation
+      : orderPicked
+      ? deliveryLocation
+      : storeLocation;
+
+    map.current.fitToCoordinates([coords1, coords2], {
+      edgePadding:
+        Platform.OS === 'ios'
+          ? {top: 150, right: 150, bottom: 150, left: 150}
+          : {top: 300, right: 300, bottom: 300, left: 300},
+    });
+  };
 
   const bearingBetweenLocations = (latLng1, latLng2) => {
     let PI = Math.PI;
@@ -296,11 +310,11 @@ const Tracking = (props) => {
         // }}
         // onRegionChange={(region) => setRegion(region)}
       >
-        {polyline.length ? (
+        {polyline.length && !orderDelivered ? (
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
 
-        {getDriver()}
+        {!orderDelivered && getDriver()}
 
         {deliveryLocation.latitude && getMarker(1)}
 
