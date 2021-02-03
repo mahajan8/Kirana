@@ -36,7 +36,7 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 // ];
 
 const Tracking = (props) => {
-  let {trackStatus, storeName, orderDetails, currentLocation} = props;
+  let {storeName, orderDetails, currentLocation} = props;
   let map = useRef(null);
   let marker = useRef(null);
   const [currentRotation, setCurrentRotation] = useState('0deg');
@@ -99,6 +99,12 @@ const Tracking = (props) => {
       if (markerCoordinate.latitude._value) {
         markerCoordinate.stopAnimation();
 
+        map.current.fitToCoordinates([storeLocation, deliveryLocation], {
+          edgePadding:
+            Platform.OS === 'ios'
+              ? {top: 150, right: 150, bottom: 150, left: 150}
+              : {top: 300, right: 300, bottom: 300, left: 300},
+        });
         animateToCurrent();
       } else {
         markerCoordinate
@@ -262,7 +268,6 @@ const Tracking = (props) => {
   const getDriver = () => (
     <Marker.Animated
       coordinate={markerCoordinate}
-      // style={{}}
       style={[{transform: [{rotate: markerRotation}]}]}
       ref={marker}>
       <View style={styles.driverMarker}>

@@ -113,11 +113,7 @@ const TrackOrder = (props) => {
         headerRight={<Text style={styles.needHelp}>{Strings.needHelp}</Text>}
       />
 
-      <Tracking
-        trackStatus={trackStatus}
-        storeName={store_name}
-        currentLocation={currentLocation}
-      />
+      <Tracking storeName={store_name} currentLocation={currentLocation} />
 
       {orderDetails ? (
         <TrackOrderInfo trackStatus={trackStatus} />
