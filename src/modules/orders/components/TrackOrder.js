@@ -84,18 +84,19 @@ const TrackOrder = (props) => {
     // Handler function for Socket Order Changes
     const {type, payload} = event.message;
     let {id} = store.getState().orderReducer.orderDetails;
+    if (payload.order.id === id) {
+      if (type === statusUpdate) {
+        props.setOrderDetails(payload.order);
 
-    if (type === statusUpdate && payload.order.id === id) {
-      props.setOrderDetails(payload.order);
-
-      if (payload.order.status === orderStatus.ORDER_REJECTED) {
-        setShowRejectedModal(true);
+        if (payload.order.status === orderStatus.ORDER_REJECTED) {
+          setShowRejectedModal(true);
+        }
+      } else if (type === driverStatus) {
+        setCurrentLocation({
+          latitude: payload.latitude,
+          longitude: payload.longitude,
+        });
       }
-    } else if (type === driverStatus && payload.order_id === id) {
-      setCurrentLocation({
-        latitude: payload.latitude,
-        longitude: payload.longitude,
-      });
     }
   };
 
