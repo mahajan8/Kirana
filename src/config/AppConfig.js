@@ -40,7 +40,7 @@ export const AppConfig = {
     // mediaBaseUrl: 'https://d3unaxpny5psa2.cloudfront.net/',
     storageBaseUrl: 'https://cdn.kiranakart.app/',
     googlePlacesKey: 'AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc',
-    razorpayKey: 'rzp_test_whorR3ZOEdCg5w',
+    razorpayKey: 'rzp_live_m95QnB92XOQmua',
     pubnubPublishKey: 'pub-c-875ecaec-1a56-4d89-9f22-cc156c47bacc',
     pubnutSubscribeKey: 'sub-c-f9275340-5d3d-11eb-8c5b-2e0ea7dd7f9a',
     algoliaShortKey: '2BRKLSMSWI',
