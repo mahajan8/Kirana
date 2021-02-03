@@ -224,8 +224,7 @@ const Tracking = (props) => {
   };
 
   const getMarker = (type = 0) => {
-    let showTime =
-      (trackStatus === 2 && type === 0) || (trackStatus === 3 && type === 1);
+    let showTime = (type === 0 && !orderPicked) || (type === 1 && orderPicked);
     // Get marker by address type.
     return (
       <Marker coordinate={type === 0 ? storeLocation : deliveryLocation}>
