@@ -77,8 +77,9 @@ export default class App extends Component {
     CleverTap.addListener(
       CleverTap.CleverTapPushNotificationClicked,
       (event) => {
-        console.log('Notification Click from App', event);
-        handleNotificationClick(event);
+        handleNotificationClick(
+          Platform.OS === 'ios' ? event.customExtras : event,
+        );
       },
     );
   };

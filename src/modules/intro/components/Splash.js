@@ -22,12 +22,15 @@ import CleverTap from 'clevertap-react-native';
 import store from '../../../utils/Store';
 
 CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
-  console.log('Notification Click from App', event);
   const {dispatch} = store;
   dispatch(setNotificationPayload(event));
 });
 const Splash = (props) => {
   useEffect(() => {
+    const {notificationPayload} = props.notificationPayload;
+    if (notificationPayload) {
+      props.setNotificationPayload(notificationPayload);
+    }
     handleNavigation();
   }, []);
 
@@ -35,7 +38,6 @@ const Splash = (props) => {
     const token = await getAuthToken();
     if (token) {
       checkPermission();
-      // props.getUserDetails();
       props.setToken(token);
     } else {
       Actions.reset('introduction');
@@ -105,6 +107,7 @@ const mapDispatchToProps = {
   getUserDetails,
   setToken,
   setLocation,
+  setNotificationPayload,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Splash);
