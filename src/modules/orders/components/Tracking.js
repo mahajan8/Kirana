@@ -279,19 +279,20 @@ const Tracking = (props) => {
     outputRange: [currentRotation, newRotation],
   });
 
-  const getDriver = () => (
-    <Marker.Animated
-      coordinate={markerCoordinate}
-      style={[{transform: [{rotate: markerRotation}]}]}
-      ref={marker}>
-      <View style={styles.driverMarker}>
-        <Bike
-          width={EStyleSheet.value('30rem')}
-          height={EStyleSheet.value('30rem')}
-        />
-      </View>
-    </Marker.Animated>
-  );
+  const getDriver = () =>
+    markerCoordinate.latitude._value ? (
+      <Marker.Animated
+        coordinate={markerCoordinate}
+        style={[{transform: [{rotate: markerRotation}]}]}
+        ref={marker}>
+        <View style={styles.driverMarker}>
+          <Bike
+            width={EStyleSheet.value('30rem')}
+            height={EStyleSheet.value('30rem')}
+          />
+        </View>
+      </Marker.Animated>
+    ) : null;
 
   return (
     <View style={styles.mapView}>

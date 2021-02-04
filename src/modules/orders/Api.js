@@ -10,9 +10,8 @@ import {
 import {setCartDetails} from '../cart/CartActions';
 import {Actions} from 'react-native-router-flux';
 import {getUserDetails} from '../home/Api';
-import {AppConfig} from '../../config/AppConfig';
-import {environment} from '../../config/EnvConfig';
 import axios from 'axios';
+import {selectStore} from '../home/HomeActions';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -94,6 +93,7 @@ export const repeatOrder = (pars, callback) => {
       if (success) {
         const {cart} = res.data.data;
         // Set Cart Items and navigate to cart
+        dispatch(selectStore(cart.store));
         dispatch(setCartDetails(cart));
         Actions.cart();
       } else {
