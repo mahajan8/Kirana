@@ -110,14 +110,16 @@ const ProductDetails = (props) => {
               {loadingProductId !== product_id ? <Plus /> : <DisabledPlus />}
             </Pressable>
           </View>
-        ) : (
-          //Add button
+        ) : //Add button
+        loadingProductId !== product_id ? (
           <Button
             label={Strings.addToCart}
             Style={styles.buttonStyle}
             labelStyle={styles.labelStyle}
             onPress={updateQuantity}
           />
+        ) : (
+          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </View>
       <AlertModal

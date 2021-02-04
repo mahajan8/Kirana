@@ -66,15 +66,17 @@ const SearchItemTile = (props) => {
           !isOutStock && Actions.productDetails({item: props.item})
         }>
         <View style={styles.productImageContainer}>
-       <FastImage
-        source={{
-          uri: getMediaUrl(
-            product_images.length ? encodeURI(product_images[0].path) : null,
-          ),
-          priority: FastImage.priority.normal,
-        }}
-        style={styles.productImage}
-        />
+          <FastImage
+            source={{
+              uri: getMediaUrl(
+                product_images.length
+                  ? encodeURI(product_images[0].path)
+                  : null,
+              ),
+              priority: FastImage.priority.normal,
+            }}
+            style={styles.productImage}
+          />
         </View>
 
         <View style={styles.productDetialsContainer}>

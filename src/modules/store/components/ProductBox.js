@@ -58,12 +58,12 @@ const ProductBox = (props) => {
         // android_ripple={ripple}
         onPress={() => Actions.productDetails({item})}>
         <FastImage
-        source={{
-          uri: getMediaUrl(
-            product_images.length ? encodeURI(product_images[0].path) : null,
-          ),
-        }}
-        style={styles.productImage}
+          source={{
+            uri: getMediaUrl(
+              product_images.length ? encodeURI(product_images[0].path) : null,
+            ),
+          }}
+          style={styles.productImage}
         />
         <Text style={styles.price}>
           {Strings.currency}{' '}
@@ -112,18 +112,18 @@ const ProductBox = (props) => {
               {loadingProductId !== product_id ? <Plus /> : <DisabledPlus />}
             </Pressable>
           </View>
+        ) : //Add button
+        loadingProductId !== product_id ? (
+          <Button
+            label={Strings.plusAdd}
+            Style={[styles.buttonStyle, vertical && styles.verticalButton]}
+            labelStyle={styles.addLabel}
+            onPress={updateQuantity}
+          />
         ) : (
-          //Add button
-          (loadingProductId !== product_id) ? <Button
-          label={Strings.plusAdd}
-          Style={[styles.buttonStyle, vertical && styles.verticalButton]}
-          labelStyle={styles.addLabel}
-          onPress={updateQuantity}
-        /> : <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
+          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </Pressable>
-
-      
 
       <AlertModal
         visible={replaceAlert}
