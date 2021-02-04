@@ -21,7 +21,7 @@ const ModalContainer = (props) => {
         }
       }}
       transparent={true}
-      animationType="none">
+      animationType="fade">
       <Pressable
         activeOpacity={1}
         style={[styles.modalContainer, containerStyle && containerStyle]}
