@@ -40,6 +40,7 @@ const Cart = (props) => {
     is_deliverable,
     max_weight_limit_kg,
     estimated_time_in_mins,
+    has_out_of_stock,
   } = cart; //Destructuring cart object from cartReducer
   useEffect(() => {
     // If location present in homeReducer, load cart items.
@@ -181,7 +182,7 @@ const Cart = (props) => {
               totalAmount={total_cost_price + delivery_fee}
               loading={paymentLoading}
               confirmOrder={confirmOrder}
-              overWeight={is_overweight}
+              payDisable={is_overweight || has_out_of_stock}
             />
           ) : null}
         </View>

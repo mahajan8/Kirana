@@ -72,4 +72,16 @@ export const styles = EStyleSheet.create({
     alignSelf: 'flex-end',
     marginEnd: '$spacingLessHuge',
   },
+  outStock: {
+    fontSize: '$fontSmall',
+    fontFamily: Fonts.medium,
+    color: '#333333',
+    marginBottom: '$spacingSuperSmall',
+  },
+  delete: {
+    fontSize: '$fontTiny',
+    fontFamily: Fonts.regular,
+    color: 'red',
+    textDecorationLine: 'underline',
+  },
 });

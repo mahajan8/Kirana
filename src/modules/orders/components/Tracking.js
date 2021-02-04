@@ -5,51 +5,132 @@ import {styles} from '../styles/trackingStyles';
 import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
-import Car from '../../../assets/images/car.svg';
+import Bike from '../../../assets/images/bike.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
 import {decodePolyline} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
+import {getDirectionsPolyline} from '../Api';
+import {orderStatus} from '../../../utils/values/Values';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const screen = Dimensions.get('window');
 
 const ASPECT_RATIO = screen.width / screen.height;
-const LATITUDE = 30.702598;
-const LONGITUDE = 76.7357713;
+// const LATITUDE = 30.702598;
+// const LONGITUDE = 76.7357713;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-let start = {latitude: 30.690865, longitude: 76.757489};
-let end = {latitude: 30.724522, longitude: 76.768347};
+// let start = {latitude: 30.690865, longitude: 76.757489};
+// let end = {latitude: 30.724522, longitude: 76.768347};
 
-let url = `https://maps.googleapis.com/maps/api/directions/json?origin=${start.latitude},${start.longitude}&destination=${end.latitude},${end.longitude}&key=AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY`;
+// let route = [
+//   {latitude: 30.689255, longitude: 76.752116},
+//   {latitude: 30.694215, longitude: 76.760036},
+//   {latitude: 30.698167, longitude: 76.766196},
+//   {latitude: 30.701152, longitude: 76.771036},
+//   {latitude: 30.703926, longitude: 76.770596},
+//   {latitude: 30.708592, longitude: 76.768494},
+//   {latitude: 30.713762, longitude: 76.776658},
+//   {latitude: 30.719773, longitude: 76.773823},
+// ];
 
 const Tracking = (props) => {
-  let {trackStatus, storeName} = props;
+  let {storeName, orderDetails, currentLocation} = props;
   let map = useRef(null);
   let marker = useRef(null);
   const [currentRotation, setCurrentRotation] = useState('0deg');
   const [newRotation, setNewRotation] = useState('0deg');
   const [rotation] = useState(new Animated.Value(0));
+  const [storeLocation, setStoreLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+  const [deliveryLocation, setDeliveryLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+
+  const [markerCoordinate] = useState(
+    new AnimatedRegion({
+      latitude: 0,
+      longitude: 0,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }),
+  );
+
+  let {delivery_address_location, store_location, status} = orderDetails
+    ? orderDetails
+    : {};
+  let orderPicked =
+    status === orderStatus.ORDER_OUT_FOR_DELIVERY ? true : false;
+  let orderDelivered = status === orderStatus.ORDER_DELIVERED ? true : false;
 
   useEffect(() => {
-    map.current.fitToCoordinates([start, end], {
+    if (orderDetails) {
+      setStoreLocation({
+        latitude: store_location.lat,
+        longitude: store_location.lng,
+      });
+      setDeliveryLocation({
+        latitude: delivery_address_location.lat,
+        longitude: delivery_address_location.lng,
+      });
+
+      if (orderDelivered) {
+        focusMap(true);
+      }
+      // getDirectionsFromCurrent();
+    }
+
+    return () => markerCoordinate.stopAnimation();
+  }, [orderDetails]);
+
+  useEffect(() => {
+    if (storeLocation.latitude && deliveryLocation.latitude) {
+      focusMap(true);
+    }
+  }, [deliveryLocation, storeLocation]);
+
+  useEffect(() => {
+    if (currentLocation.latitude) {
+      if (markerCoordinate.latitude._value) {
+        markerCoordinate.stopAnimation();
+        focusMap();
+        animateToCurrent();
+      } else {
+        markerCoordinate
+          .timing({
+            ...currentLocation,
+            duration: 10,
+            useNativeDriver: false,
+          })
+          .start();
+      }
+    }
+  }, [currentLocation]);
+
+  const focusMap = (full = false) => {
+    let current = {
+      latitude: markerCoordinate.latitude._value,
+      longitude: markerCoordinate.longitude._value,
+    };
+
+    let coords1 = full ? storeLocation : current;
+    let coords2 = full
+      ? deliveryLocation
+      : orderPicked
+      ? deliveryLocation
+      : storeLocation;
+
+    map.current.fitToCoordinates([coords1, coords2], {
       edgePadding:
         Platform.OS === 'ios'
           ? {top: 150, right: 150, bottom: 150, left: 150}
           : {top: 300, right: 300, bottom: 300, left: 300},
     });
-    // getPolyline();
-    return markerCoordinate.stopAnimation();
-  }, []);
-
-  const [markerCoordinate, setMarkerCoordinate] = useState(
-    new AnimatedRegion({
-      latitude: start.latitude,
-      longitude: start.longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-    }),
-  );
+  };
 
   const bearingBetweenLocations = (latLng1, latLng2) => {
     let PI = Math.PI;
@@ -119,27 +200,56 @@ const Tracking = (props) => {
 
       totalDuration += delay;
     });
+
+    setTimeout(() => {
+      getDirectionsFromCurrent();
+    }, totalDuration);
   };
 
-  // Get Polyline for Map between 2 points
-  const getPolyline = () => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        let {overview_polyline, legs} = res.routes[0];
+  const animateToCurrent = () => {
+    let initial = {
+      latitude: markerCoordinate.latitude._value,
+      longitude: markerCoordinate.longitude._value,
+    };
 
-        setPolyline(decodePolyline(overview_polyline.points));
-        animateLeg(legs[0].steps);
-        setDeliveryTime(legs[0].duration.text);
-      });
+    let pars = {
+      initial,
+      final: currentLocation,
+    };
+
+    getDirectionsPolyline(pars, (res) => {
+      let {legs} = res.routes[0];
+
+      animateLeg(legs[0].steps);
+    });
+  };
+
+  const getDirectionsFromCurrent = () => {
+    let current = {
+      latitude: markerCoordinate.latitude._value,
+      longitude: markerCoordinate.longitude._value,
+    };
+
+    let pars = {
+      initial: current,
+      final: orderPicked ? deliveryLocation : storeLocation,
+    };
+
+    getDirectionsPolyline(pars, (res) => {
+      let {overview_polyline, legs} = res.routes[0];
+
+      setPolyline(decodePolyline(overview_polyline.points));
+      setDeliveryTime(legs[0].duration.text);
+    });
   };
 
   const getMarker = (type = 0) => {
     let showTime =
-      (trackStatus === 2 && type === 0) || (trackStatus === 3 && type === 1);
+      deliveryTime &&
+      ((type === 0 && !orderPicked) || (type === 1 && orderPicked));
     // Get marker by address type.
     return (
-      <Marker coordinate={type === 0 ? start : end}>
+      <Marker coordinate={type === 0 ? storeLocation : deliveryLocation}>
         <View style={styles.markerContainer}>
           <View>
             <TrackMarker />
@@ -171,20 +281,26 @@ const Tracking = (props) => {
     outputRange: [currentRotation, newRotation],
   });
 
-  const getDriver = () => (
-    <Marker.Animated
-      coordinate={markerCoordinate}
-      // style={{}}
-      style={[{transform: [{rotate: markerRotation}]}]}
-      ref={marker}>
-      <View style={styles.driverMarker}>
-        <Car width={50} height={50} rotate={40} />
-      </View>
-    </Marker.Animated>
-  );
+  const getDriver = () =>
+    markerCoordinate.latitude._value ? (
+      <Marker.Animated
+        coordinate={markerCoordinate}
+        style={[{transform: [{rotate: markerRotation}]}]}
+        ref={marker}>
+        <View style={styles.driverMarker}>
+          <Bike
+            width={EStyleSheet.value('30rem')}
+            height={EStyleSheet.value('30rem')}
+          />
+        </View>
+      </Marker.Animated>
+    ) : null;
 
   return (
     <View style={styles.mapView}>
+      {/* <TouchableOpacity onPress={navigate}>
+        <Text style={{alignSelf: 'center'}}>Press</Text>
+      </TouchableOpacity> */}
       <MapView
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -197,15 +313,15 @@ const Tracking = (props) => {
         // }}
         // onRegionChange={(region) => setRegion(region)}
       >
-        {polyline.length ? (
+        {polyline.length && !orderDelivered ? (
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
 
-        {/* {getDriver()} */}
+        {!orderDelivered && getDriver()}
 
-        {getMarker(1)}
+        {deliveryLocation.latitude && getMarker(1)}
 
-        {getMarker(0)}
+        {storeLocation.latitude && getMarker(0)}
       </MapView>
     </View>
   );

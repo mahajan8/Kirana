@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
-import {View, Text, Pressable, Animated, Easing} from 'react-native';
+import {View, Text, Pressable, Animated, Easing, Linking} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import {styles} from '../styles/trackOrderInfoStyles';
 import GreenPaidCheck from '../../../assets/images/map_paid_successful.svg';
@@ -10,9 +10,9 @@ import {orderStatus, paymentStatus} from '../../../utils/values/Values';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {setOrderDetails, setSelectedOrderId} from '../OrderActions';
-import {usePubNub} from 'pubnub-react';
 import TrackOrderInfoExpanded from './TrackOrderInfoExpanded';
 import TrackOrderInfoCollapsed from './TrackOrderInfoCollapsed';
+import Phone from '../../../assets/images/order_detail_call.svg';
 
 let trackingList = [
   {
@@ -62,11 +62,8 @@ let trackingList = [
   },
 ];
 
-const statusUpdate = 'ORDER_STATUS_UPDATE';
-
 const TrackOrderInfo = (props) => {
   let {orderDetails} = props;
-  const PubNubClient = usePubNub();
 
   let {
     item_quantity_count,
@@ -74,44 +71,17 @@ const TrackOrderInfo = (props) => {
     status,
     status_history,
     payment,
-    id,
+    delivery,
   } = orderDetails ? orderDetails : {};
 
   const [collapsed, setCollapsed] = useState(true);
   const [animCollapsed] = useState(new Animated.Value(0));
   const [trackStatus, setTrackStatus] = useState(-1);
-  const [channels] = useState([props.userDetails.id]);
 
   useEffect(() => {
     let i = trackingList.findIndex((obj) => obj.orderStatus === status);
     setTrackStatus(i);
   }, [status]);
-
-  useEffect(() => {
-    // Subscribe to channels and add listener to socket changes.
-    let listener = {message: handleMessage};
-    PubNubClient.subscribe({channels});
-    PubNubClient.addListener(listener);
-
-    return () => {
-      // Unsubscribe channels and remove listener on component unmount
-      PubNubClient.unsubscribe({channels});
-      PubNubClient.removeListener(listener);
-    };
-  }, [PubNubClient, channels]);
-
-  const handleMessage = (event) => {
-    // Handler function for Socket Order Changes
-    const {type, payload} = event.message;
-
-    if (type === statusUpdate && payload.order.id === id) {
-      props.setOrderDetails(payload.order);
-
-      if (payload.order.status === orderStatus.ORDER_REJECTED) {
-        props.orderRejected();
-      }
-    }
-  };
 
   const getOrderTrackingStatus = () => {
     return (
@@ -155,7 +125,7 @@ const TrackOrderInfo = (props) => {
 
   const maxHeight = animCollapsed.interpolate({
     inputRange: [0, 1],
-    outputRange: [EStyleSheet.value('75vrem'), EStyleSheet.value('250vrem')],
+    outputRange: [EStyleSheet.value('100vrem'), EStyleSheet.value('250vrem')],
   });
 
   const getPaymentStatus = () => {
@@ -187,18 +157,52 @@ const TrackOrderInfo = (props) => {
       <View style={styles.rowContainer}>
         <Text style={styles.paymentStatus}>{label}</Text>
 
-        <Icon
-          style={styles.checkIcon}
-          width={EStyleSheet.value('26rem')}
-          height={EStyleSheet.value('26rem')}
-        />
+        {Icon && (
+          <Icon
+            style={styles.checkIcon}
+            width={EStyleSheet.value('26rem')}
+            height={EStyleSheet.value('26rem')}
+          />
+        )}
       </View>
     );
+  };
+
+  const deliveryInfo = () => {
+    // Render Delivery Agent Info
+    let {ORDER_DELIVERY_ASSIGNED} = orderStatus;
+    if (status === ORDER_DELIVERY_ASSIGNED && delivery.property) {
+      let {rider_name, rider_contact} = delivery.property;
+      return (
+        <View style={[styles.deliveryPartnerInfo, styles.rowContainer]}>
+          {/* <Image
+            source={{uri: getMediaUrl(null)}}
+            style={styles.deliveryPartnerImage}
+          /> */}
+          <View style={styles.deliveryPartnerNameContainer}>
+            <Text style={styles.deliveryPartnerName}>{rider_name}</Text>
+            <Text style={styles.deliveryPartner}>
+              {Strings.deliveryPartner}
+            </Text>
+          </View>
+          <Pressable
+            onPress={() => {
+              Linking.openURL(`tel:+91${rider_contact}`);
+            }}>
+            <Phone
+              width={EStyleSheet.value('14rem')}
+              height={EStyleSheet.value('14rem')}
+            />
+          </Pressable>
+        </View>
+      );
+    }
   };
 
   return (
     <View style={styles.container}>
       {getOrderTrackingStatus()}
+      {deliveryInfo()}
 
       <View style={[styles.rowContainer, styles.orderInfoContainer]}>
         <View>

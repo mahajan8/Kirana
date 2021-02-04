@@ -11,6 +11,8 @@
 #import "CleverTap.h"
 #import "CleverTapReactManager.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import <UserNotifications/UserNotifications.h>
+#import <React/RCTLinkingManager.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -46,7 +48,8 @@ static void InitializeFlipper(UIApplication *application) {
   [GMSServices provideAPIKey:@"AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY"];
   [self registerForPush];
     // integrate CleverTap SDK using the autoIntegrate option
-  [CleverTap autoIntegrate];
+//  [CleverTap autoIntegrate];
+  [[CleverTapReactManager sharedInstance] applicationDidLaunchWithOptions:launchOptions];
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
@@ -123,25 +126,15 @@ static void InitializeFlipper(UIApplication *application) {
 
 //------- Implemented for manual Integration ----------------
 
-// iOS 8 and below
-- (void) application:(UIApplication *)application
-    didReceiveRemoteNotification:(NSDictionary *)userInfo {
-      [[CleverTap sharedInstance] handleNotificationWithData:userInfo];
-    }
-- (void) application:(UIApplication *)application
-    didReceiveLocalNotification:(UILocalNotification *)notification {
-      [[CleverTap sharedInstance] handleNotificationWithData:notification];
-    }
-    
 // For iOS 8 and iOS 9
 - (void) application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier
-forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)(void))completionHandler {
+    forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
         [[CleverTap sharedInstance] handleNotificationWithData:notification];
         if (completionHandler) completionHandler();
     }
     
 - (void) application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier
-forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))completionHandler {
+    forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler {
         [[CleverTap sharedInstance] handleNotificationWithData:userInfo];
         if (completionHandler) completionHandler();
 }
@@ -155,7 +148,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 /** For iOS 10 and above - Background **/
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
 didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void (^)(void))completionHandler {
+         withCompletionHandler:(void (^)())completionHandler {
     
     /** For iOS 10 and above.
      Use this method to perform the tasks associated with your app’s custom actions. When the user responds to a notification, the system calls this method with the results. You use this method to perform the task associated with that action, if at all. At the end of your implementation, you must call the completionHandler block to let the system know that you are done processing the notification.
@@ -172,6 +165,13 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     [[CleverTap sharedInstance] handleNotificationWithData:response.notification.request.content.userInfo];
     
     completionHandler();
+}
+
+//Handle Deeplink
+-(BOOL) application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    return [RCTLinkingManager application:app openURL:url options:options];
+    
 }
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

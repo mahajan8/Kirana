@@ -22,6 +22,7 @@ const OrderCancelled = (props) => {
       <Button
         label={Strings.tryOtherStores}
         onPress={() => Actions.alternativeStores()}
+        Style={styles.buttonStyle}
       />
     </SafeArea>
   );

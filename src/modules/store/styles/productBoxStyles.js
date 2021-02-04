@@ -12,7 +12,7 @@ export const styles = EStyleSheet.create({
     marginTop: '$spacingNormal',
     marginRight: '$spacingLessHuge',
     width: '110rem',
-    height: '200vrem',
+    // height: '210vrem',
   },
   verticalContainer: {
     width: '150rem',
@@ -71,6 +71,7 @@ export const styles = EStyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
+    marginTop: '16rem',
   },
   addLabel: {
     fontSize: '$spacingMedium',

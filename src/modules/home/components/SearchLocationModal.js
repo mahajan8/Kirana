@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import ModalContainer from '../../commons/components/ModalContainer';
 import Search from '../../onboarding/components/SearchLocation';
 import {styles} from '../styles/searchLocationModalStyles';
@@ -7,18 +7,14 @@ import {styles} from '../styles/searchLocationModalStyles';
 const SearchLocationModal = (props) => {
   let {visible, setVisible, setLocation, cancellable} = props;
 
-  const onBack = () => {
-    if (cancellable) {
-      setVisible(false);
-    }
-  };
-
   return (
     <ModalContainer
       visible={visible}
       setVisible={setVisible}
       containerStyle={styles.container}
-      cancellable={cancellable}>
+      cancellable={cancellable}
+      animationType={'fade'}>
+      {/* animation type passed from hore, types are fade,slide and none  */}
       <Pressable style={styles.innerContainer}>
         <Search
           modal

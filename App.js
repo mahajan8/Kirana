@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, Platform, Text, DeviceEventEmitter} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import {Platform, Text, DeviceEventEmitter} from 'react-native';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
 import {environment} from './src/config/EnvConfig';
@@ -106,10 +105,9 @@ export default class App extends Component {
     CleverTap.addListener(
       CleverTap.CleverTapPushNotificationClicked,
       (event) => {
-        //alert('Notification Click from App', event);
-        console.log('Notification Click from App', event);
-        //alert('Notification Click from App');
-        handleNotificationClick(event);
+        handleNotificationClick(
+          Platform.OS === 'ios' ? event.customExtras : event,
+        );
       },
     );
   };

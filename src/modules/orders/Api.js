@@ -10,6 +10,8 @@ import {
 import {setCartDetails} from '../cart/CartActions';
 import {Actions} from 'react-native-router-flux';
 import {getUserDetails} from '../home/Api';
+import axios from 'axios';
+import {selectStore} from '../home/HomeActions';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -91,6 +93,7 @@ export const repeatOrder = (pars, callback) => {
       if (success) {
         const {cart} = res.data.data;
         // Set Cart Items and navigate to cart
+        dispatch(selectStore(cart.store));
         dispatch(setCartDetails(cart));
         Actions.cart();
       } else {
@@ -133,4 +136,33 @@ export const submitOrderRating = (pars, callback) => {
       }
     });
   };
+};
+
+export const getDirectionsPolyline = (pars, callback, err) => {
+  let {initial, final} = pars;
+
+  let params = {
+    origin: initial.latitude + ',' + initial.longitude,
+    destination: final.latitude + ',' + final.longitude,
+    // key: AppConfig[environment].googlePlacesKey,
+    key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
+  };
+
+  var data =
+    '?' +
+    Object.keys(params)
+      .map((key) => key + '=' + params[key])
+      .join('&');
+
+  axios
+    .get(Urls.googlePolyline + data)
+    .then((res) => {
+      callback(res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+      if (err) {
+        err(error);
+      }
+    });
 };

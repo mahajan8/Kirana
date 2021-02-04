@@ -30,4 +30,7 @@ export const styles = EStyleSheet.create({
     left: '$spacingExtraNormal',
     top: '$spacingExtraNormal',
   },
+  buttonStyle: {
+    marginBottom: '$spacingExtraNormal',
+  },
 });
