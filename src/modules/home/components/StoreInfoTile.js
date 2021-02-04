@@ -19,6 +19,7 @@ const StoreInfoTile = (props) => {
     distance_in_kms,
     online,
     open_time,
+    logo
   } = props.store;
   let {onPress} = props;
 
@@ -28,7 +29,7 @@ const StoreInfoTile = (props) => {
       style={[styles.rowContainer, styles.container]}
       onPress={onPress && onPress}
       activeOpacity={1}>
-      <Image style={styles.storeImage} source={{uri: getMediaUrl(null)}} />
+      <Image style={styles.storeImage} source={{uri: getMediaUrl(logo?.path ?? null)}} />
       <View>
         <Text style={styles.storeName}>{name}</Text>
         <Text style={styles.storeLocation}>{location.short_address}</Text>

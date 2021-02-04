@@ -11,7 +11,7 @@ export const styles = EStyleSheet.create({
   },
   listLabel: {
     fontFamily: Fonts.semiBold,
-    fontSize: '$fontNormal',
+    fontSize: '$fontSmall',
     color: Colors.titleText,
     letterSpacing: '-0.17rem',
   },
