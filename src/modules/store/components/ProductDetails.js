@@ -48,7 +48,6 @@ const ProductDetails = (props) => {
       props.updateProductQuantity(pars);
     }
   };
-
   return (
     <SafeArea>
       <CartHeader title={product_name} />
@@ -56,7 +55,9 @@ const ProductDetails = (props) => {
         <Image
           source={{
             uri: getMediaUrl(
-              product_images.length ? encodeURI(product_images[0].path) : null,
+              product_images.length
+                ? encodeURIComponent(product_images[0].path)
+                : null,
             ),
           }}
           style={styles.productImage}

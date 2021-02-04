@@ -21,7 +21,7 @@ export const getUserDetails = (newUser = false) => {
       const success = !res.data.error;
       if (success) {
         const response = res.data.data;
-        console.log(res.data)
+        console.log(res.data);
         const {
           address_list,
           cart_data,

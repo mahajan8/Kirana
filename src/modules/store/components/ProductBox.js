@@ -60,7 +60,9 @@ const ProductBox = (props) => {
         <FastImage
           source={{
             uri: getMediaUrl(
-              product_images.length ? encodeURI(product_images[0].path) : null,
+              product_images.length
+                ? encodeURIComponent(product_images[0].path)
+                : null,
             ),
           }}
           style={styles.productImage}
