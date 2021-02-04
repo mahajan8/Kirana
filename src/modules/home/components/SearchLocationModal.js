@@ -14,6 +14,7 @@ const SearchLocationModal = (props) => {
       containerStyle={styles.container}
       cancellable={cancellable}
       animationType={'fade'}>
+      {/* animation type passed from hore, types are fade,slide and none  */}
       <Pressable style={styles.innerContainer}>
         <Search
           modal
