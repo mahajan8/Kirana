@@ -5,8 +5,7 @@ import {styles} from '../styles/cartStyles';
 import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartPaymentDetails from './CartPaymentDetails';
 
-const CartListFooter = (props) => {
-  let {instructions, setInstructions, estimatedTime} = props;
+const CartListFooter = ({instructions, setInstructions, estimatedTime}) => {
 
   return (
     <View style={styles.footerContainer}>
