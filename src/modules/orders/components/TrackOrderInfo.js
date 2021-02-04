@@ -125,7 +125,7 @@ const TrackOrderInfo = (props) => {
 
   const maxHeight = animCollapsed.interpolate({
     inputRange: [0, 1],
-    outputRange: [EStyleSheet.value('75vrem'), EStyleSheet.value('250vrem')],
+    outputRange: [EStyleSheet.value('100vrem'), EStyleSheet.value('250vrem')],
   });
 
   const getPaymentStatus = () => {

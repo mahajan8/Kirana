@@ -10,6 +10,7 @@ const ModalContainer = (props) => {
     children,
     containerStyle,
     cancellable = true,
+    animationType = 'none',
   } = props;
 
   return (
@@ -21,7 +22,7 @@ const ModalContainer = (props) => {
         }
       }}
       transparent={true}
-      animationType="fade">
+      animationType={animationType}>
       <Pressable
         activeOpacity={1}
         style={[styles.modalContainer, containerStyle && containerStyle]}
@@ -41,6 +42,7 @@ ModalContainer.propTypes = {
   setVisible: PropTypes.func,
   containerStyle: PropTypes.object,
   cancellable: PropTypes.bool,
+  animationType: PropTypes.oneOf(['none', 'fade', 'slide']),
 };
 
 export default ModalContainer;
