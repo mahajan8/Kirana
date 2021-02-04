@@ -17,7 +17,7 @@ let backgroundImage = require('../../../assets/images/store_background.png');
 const StoreHeader = (props) => {
   let {storeDetails} = props.storeReducer;
 
-  let {owner_data, location, name} = storeDetails;
+  let {owner_data, location, name, logo} = storeDetails;
 
   let isLoaded = storeDetails.name ? true : false;
 
@@ -26,6 +26,10 @@ const StoreHeader = (props) => {
       ? owner_data.profile_photo.path
       : null
     : null;
+
+  if (profilePhoto === null) {
+    profilePhoto = logo?.path ?? null;
+  }
 
   return (
     <ImageBackground
