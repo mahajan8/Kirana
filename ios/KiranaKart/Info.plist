@@ -42,11 +42,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Allow background location access</string>
+	<string>KiranaKart required your location to recommend kirana stores in your area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow location access</string>
+	<string>KiranaKart required your location to recommend kirana stores in your area</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow Photo Library</string>
+	<string>KiranaKart requires access to your photo library if you want to upload a profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Medium.ttf</string>
