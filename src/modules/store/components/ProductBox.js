@@ -5,14 +5,17 @@ import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsList} from '../../../utils/values/Values';
 import Button from '../../commons/components/Button';
-import MinusButton from '../../../assets/images/minus_button.svg';
-import PlusButton from '../../../assets/images/plus_button.svg';
+import Minus from '../../../assets/images/product_detail_minus.svg';
+import Plus from '../../../assets/images/product_detail_plus.svg';
+import DisabledMinus from '../../../assets/images/product_detail_minus_grey.svg';
+import DisabledPlus from '../../../assets/images/product_detail_plus_grey.svg';
 import {connect} from 'react-redux';
 import {updateProductQuantity} from '../Api';
 import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/productBoxStyles';
 import {Actions} from 'react-native-router-flux';
 import {Colors} from '../../../utils/values/Colors';
+import FastImage from 'react-native-fast-image';
 
 const ProductBox = (props) => {
   const [replaceAlert, setReplaceAlert] = useState(false);
@@ -54,17 +57,18 @@ const ProductBox = (props) => {
       <Pressable
         // android_ripple={ripple}
         onPress={() => Actions.productDetails({item})}>
-        <Image
-          source={{
-            uri: getMediaUrl(
-              product_images.length ? product_images[0].path : null,
-            ),
-          }}
-          style={styles.productImage}
+        <FastImage
+        source={{
+          uri: getMediaUrl(
+            product_images.length ? encodeURI(product_images[0].path) : null,
+          ),
+        }}
+        style={styles.productImage}
         />
         <Text style={styles.price}>
           {Strings.currency}{' '}
-          {cartProductObj ? cartProductObj.total_price : store_price}
+          {/* {cartProductObj ? cartProductObj.total_price : store_price} This shows multiplied price */}
+          {store_price}
         </Text>
         <Text style={styles.name} numberOfLines={2}>
           {product_name}
@@ -74,52 +78,52 @@ const ProductBox = (props) => {
         </Text>
       </Pressable>
       <Pressable style={styles.bottomContainer}>
-        {loadingProductId !== product_id ? (
-          cartProductObj ? (
-            // Plus and Minus button to update quantity
-            <View
-              style={[
-                styles.counterContainer,
-                vertical && styles.verticalButton,
-              ]}>
-              <Pressable
-                android_ripple={ripple}
-                style={styles.counter}
-                onPress={() => updateQuantity(false)}>
-                <MinusButton
-                  width={EStyleSheet.value('25rem')}
-                  height={EStyleSheet.value('25rem')}
-                />
-              </Pressable>
+        {cartProductObj ? (
+          // Plus and Minus button to update quantity
+          <View
+            style={[
+              styles.counterContainer,
+              vertical && styles.verticalButton,
+            ]}>
+            <Pressable
+              android_ripple={ripple}
+              style={styles.counter}
+              onPress={() => updateQuantity(false)}>
+              {loadingProductId !== product_id ? <Minus /> : <DisabledMinus />}
+            </Pressable>
+
+            {loadingProductId !== product_id ? (
               <Text style={styles.countText}>
                 {product_brand
                   ? cartProductObj.item_quantity
                   : cartProductObj.product_quantity_str}
               </Text>
+            ) : (
+              <ActivityIndicator
+                color={Colors.themeGreen}
+                style={styles.loader}
+              />
+            )}
 
-              <Pressable
-                style={styles.counter}
-                onPress={updateQuantity}
-                android_ripple={ripple}>
-                <PlusButton
-                  width={EStyleSheet.value('25rem')}
-                  height={EStyleSheet.value('25rem')}
-                />
-              </Pressable>
-            </View>
-          ) : (
-            //Add button
-            <Button
-              label={Strings.plusAdd}
-              Style={[styles.buttonStyle, vertical && styles.verticalButton]}
-              labelStyle={styles.addLabel}
+            <Pressable
+              style={styles.counter}
               onPress={updateQuantity}
-            />
-          )
+              android_ripple={ripple}>
+              {loadingProductId !== product_id ? <Plus /> : <DisabledPlus />}
+            </Pressable>
+          </View>
         ) : (
-          <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
+          //Add button
+          (loadingProductId !== product_id) ? <Button
+          label={Strings.plusAdd}
+          Style={[styles.buttonStyle, vertical && styles.verticalButton]}
+          labelStyle={styles.addLabel}
+          onPress={updateQuantity}
+        /> : <ActivityIndicator color={Colors.themeGreen} style={styles.loader} />
         )}
       </Pressable>
+
+      
 
       <AlertModal
         visible={replaceAlert}

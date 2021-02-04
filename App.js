@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {Platform, Text, DeviceEventEmitter} from 'react-native';
 import {Provider} from 'react-redux';
 import AppRouter from './src/utils/Router';
+import {environment} from './src/config/EnvConfig';
 import store from './src/utils/Store';
 import CleverTap from 'clevertap-react-native';
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
+import appsFlyer from 'react-native-appsflyer';
 import {
   handleNotificationClick,
   setDimensions,
@@ -13,10 +15,35 @@ import {
 
 import * as Sentry from '@sentry/react-native';
 
+// Sentry Configuration
 Sentry.init({
   dsn:
     'https://474fb48af2bf47f3bb6c2f5de0c162a9@o488021.ingest.sentry.io/5591167',
 });
+
+// AppsFlyer Configuration
+appsFlyer.initSdk(
+  {
+    devKey: 'EXaY9ocjMHyDn25EZxDCCS',
+    isDebug: environment !== 'production',
+    appId: '1549920826',
+    onInstallConversionDataListener: true, //Optional
+    onDeepLinkListener: true, //Optional
+  },
+  (result) => {
+    console.log(result);
+  },
+  (error) => {
+    console.error(error);
+  },
+);
+const onInstallConversionFailure = appsFlyer.onInstallConversionFailure(
+  (data) => {
+    console.log(
+      `AppsFlyer On Install Converstion Failure: ${JSON.stringify(data)}`,
+    );
+  },
+);
 
 export default class App extends Component {
   constructor(props) {
@@ -27,6 +54,7 @@ export default class App extends Component {
     }
     Text.defaultProps.allowFontScaling = false;
     this.configureSDK();
+    // Set EStyleSheet global variables and settings
     setDimensions();
   }
   async componentDidMount() {

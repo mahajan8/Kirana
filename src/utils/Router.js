@@ -26,6 +26,7 @@ import Store from '../modules/store/components/Store';
 import Filters from '../modules/store/components/Filters';
 import StoreCategories from '../modules/store/components/StoreCategories';
 import SearchProducts from '../modules/store/components/SearchProducts';
+import AlgoliaSearch from '../modules/store/components/algolia/AlgoliaSearch';
 import Cart from '../modules/cart/components/Cart';
 import PaymentStatus from '../modules/cart/components/PaymentStatus';
 import OrderDetails from '../modules/orders/components/OrderDetails';
@@ -68,6 +69,7 @@ const AppRouter = (notificationPayload) => {
         <Scene key="store" component={Store} />
         <Scene key="filters" component={Filters} />
         <Scene key="searchProducts" component={SearchProducts} />
+        <Scene key="algoliaSearch" component={AlgoliaSearch} />
         <Scene key="cart" component={Cart} />
         <Scene key="paymentStatus" component={PaymentStatus} />
         <Scene key="searchProducts" component={SearchProducts} />

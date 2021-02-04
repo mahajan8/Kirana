@@ -34,6 +34,10 @@ export const Urls = {
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
   googlePolyline: 'https://maps.googleapis.com/maps/api/directions/json',
+  storePlayStoreLink:
+  'https://play.google.com/store/apps/details?id=app.kiranakart.store',
+  storeAppStoreLink:
+  'https://apps.apple.com/us/app/kiranakart-for-shopkeepers/id1547417992',
 };
 
 // Postman Collection : https://www.getpostman.com/collections/ded852ca8b6569f7f386

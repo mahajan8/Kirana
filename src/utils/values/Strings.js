@@ -1,5 +1,5 @@
 export const Strings = {
-  supportEmail: 'support@kiranakart.com',
+  supportEmail: 'support@kiranakart.app',
 
   introTitle1: 'Groceries delivered instantly',
   introTitle2: 'Shop from your trusted Kiranas',
@@ -193,7 +193,7 @@ export const Strings = {
   enterNewNumber: 'Please enter your new mobile number',
   changeNumber: 'Change Mobile Number',
   verifyNumber: 'Verify your phone number',
-  groceryCategories: 'Grocery Categories',
+  groceryCategories: 'Departments in ',
   paid: 'Paid',
   paidSuccessfully: 'Paid Successfully',
   trackOrder: 'Track Order',

@@ -9,6 +9,7 @@ import AlertModal from '../../commons/components/AlertModal';
 import {styles} from '../styles/searchItemTileStyles';
 import {Colors} from '../../../utils/values/Colors';
 import {Actions} from 'react-native-router-flux';
+import FastImage from 'react-native-fast-image';
 
 const SearchItemTile = (props) => {
   let {
@@ -65,14 +66,15 @@ const SearchItemTile = (props) => {
           !isOutStock && Actions.productDetails({item: props.item})
         }>
         <View style={styles.productImageContainer}>
-          <Image
-            style={styles.productImage}
-            source={{
-              uri: getMediaUrl(
-                product_images.length ? product_images[0].path : null,
-              ),
-            }}
-          />
+       <FastImage
+        source={{
+          uri: getMediaUrl(
+            product_images.length ? encodeURI(product_images[0].path) : null,
+          ),
+          priority: FastImage.priority.normal,
+        }}
+        style={styles.productImage}
+        />
         </View>
 
         <View style={styles.productDetialsContainer}>

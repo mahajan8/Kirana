@@ -13,7 +13,7 @@ const List = (props) => {
 
   useEffect(() => {
     setHorizontalList(
-      list.length > 5 ? [...list.slice(0, 5), {viewAll: true}] : list,
+      list.length > 9 ? [...list.slice(0, 9), {viewAll: true}] : list,
     );
   }, []);
   const renderHeader = () =>
@@ -46,9 +46,9 @@ const List = (props) => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {horizontalList.map((item, index) => {
             if (item.viewAll) {
-              // View all button after 5 products
+              // View all button after 9 products
               return (
-                <View style={styles.productContainer} key={'viewAll'}>
+                <View style={styles.viewAllContainer} key={'viewAll'}>
                   <Button
                     Style={styles.viewAllButton}
                     labelStyle={styles.viewAllLabel}
