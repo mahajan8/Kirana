@@ -45,7 +45,7 @@ const Tracking = (props) => {
     longitude: 72.877053,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
-  })
+  });
 
   const [markerCoordinate] = useState(
     new AnimatedRegion({
@@ -105,7 +105,10 @@ const Tracking = (props) => {
             duration: 10,
             useNativeDriver: false,
           })
-          .start();
+          .start(() => {
+            focusMap();
+            getDirectionsFromCurrent();
+          });
       }
     }
   }, [currentLocation]);
