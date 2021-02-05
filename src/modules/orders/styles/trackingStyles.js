@@ -31,11 +31,11 @@ export const styles = EStyleSheet.create({
   },
   markerLabel: {
     fontSize: '$fontTiny',
-    fontFamily: Fonts.semiBold,
+    fontFamily: Fonts.bold,
     color: Colors.titleText,
     paddingHorizontal: '$spacingMedium',
-    paddingVertical: '$spacingSmallExtreme',
-    backgroundColor: Colors.white,
+    // paddingVertical: '$spacingSmallExtreme',
+    // backgroundColor: Colors.white,
   },
   markerContainer: {
     height: '$spacingTitan',

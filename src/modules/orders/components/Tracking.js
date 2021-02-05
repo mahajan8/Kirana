@@ -20,7 +20,6 @@ const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.35012;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-
 const Tracking = (props) => {
   let {orderDetails, currentLocation} = props;
   let map = useRef(null);

@@ -18,7 +18,6 @@ import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
 import {orderStatus} from '../../../utils/values/Values';
 import store from '../../../utils/Store';
-import moment from 'moment';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -122,6 +121,7 @@ const TrackOrder = (props) => {
           setShowRejectedModal(true);
         }
       } else if (type === driverStatus) {
+        console.log(JSON.stringify(event))
         setCurrentLocation({
           latitude: payload.latitude,
           longitude: payload.longitude,
