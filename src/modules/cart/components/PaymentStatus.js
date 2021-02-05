@@ -7,12 +7,14 @@ import PaymentFailed from '../../../assets/images/payment_failed.svg';
 import {Strings} from '../../../utils/values/Strings';
 import BottomButton from '../../commons/components/BottomButton';
 import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {setSelectedOrderId} from '../../orders/OrderActions';
 
 const PaymentStatus = (props) => {
-  let {success} = props;
+  let {success, orderId} = props;
   let backHandler = useRef(null);
 
-  const handleOnPress = () => {
+  const handleBackPress = () => {
     if (success) {
       Actions.popTo('_home');
     } else {
@@ -24,7 +26,7 @@ const PaymentStatus = (props) => {
     backHandler.current = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
-        handleOnPress();
+        handleBackPress();
         return true;
       },
     );
@@ -46,10 +48,23 @@ const PaymentStatus = (props) => {
       </View>
       <BottomButton
         label={success ? Strings.gotIt : Strings.tryAgain}
-        onPress={handleOnPress}
+        onPress={() => {
+          if (success) {
+            Actions.trackOrder();
+            props.setSelectedOrderId(orderId);
+          } else {
+            Actions.pop();
+          }
+        }}
       />
     </SafeArea>
   );
 };
 
-export default PaymentStatus;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  setSelectedOrderId,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentStatus);

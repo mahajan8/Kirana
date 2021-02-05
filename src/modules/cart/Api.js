@@ -36,19 +36,19 @@ export const createOrder = (pars, callback) => {
   };
 };
 
-export const placeOrder = (pars, callback) => {
+export const placeOrder = (pars) => {
   return (dispatch) => {
     instance.post(Urls.placeOrder, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
       if (success) {
-        const {cart} = res.data.data;
+        const {cart, order} = res.data.data;
         // Place order and update cart Items in Reducer
+
         dispatch(setCartDetails(cart));
-        if (callback) {
-          callback();
-        }
+        Actions.paymentStatus({success, orderId: order.id});
+      } else {
+        Actions.paymentStatus({success: false});
       }
-      Actions.paymentStatus({success});
     });
   };
 };

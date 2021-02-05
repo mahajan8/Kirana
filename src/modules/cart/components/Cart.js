@@ -101,7 +101,7 @@ const Cart = (props) => {
             payment_reference_id: orderId,
             property: null,
           };
-          props.placeOrder(data, () => Actions.paymentStatus({success: false}));
+          props.placeOrder(data);
         });
     });
   };

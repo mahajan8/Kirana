@@ -70,6 +70,7 @@ export const Strings = {
   refresh: 'Refresh',
   oops: 'Oops!',
   somethingWentWrong: 'Something went wrong.',
+  store: 'Store',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',

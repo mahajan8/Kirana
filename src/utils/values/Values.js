@@ -36,8 +36,8 @@ export const orderStatus = {
 };
 
 export const orderStatusLabels = {
-  ORDER_INITIATED: 10,
-  ORDER_NOT_PLACED: 15,
+  Initiated: 10,
+  'Not Placed': 15,
   Placed: 20,
   Overdue: 25,
   Modified: 30,

@@ -17,8 +17,9 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontTiny',
     color: Colors.darkGreen,
     textAlign: 'center',
-    position: 'absolute',
-    alignSelf: 'center',
+    // position: 'absolute',
+    // alignSelf: 'center',
+    // top: '$spacingSmall',
   },
   minutes: {
     fontFamily: Fonts.medium,
@@ -53,8 +54,15 @@ export const styles = EStyleSheet.create({
     // backgroundColor: 'red'
   },
   markerIcon: {
+    // position: 'absolute',
+    // alignSelf: 'center',
+    // top: '$spacingSmall',
+  },
+  markerInnerContainer: {
     position: 'absolute',
-    alignSelf: 'center',
-    top: '$spacingSmall',
+    height: '30rem',
+    width: '30rem',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

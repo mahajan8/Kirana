@@ -32,7 +32,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY"];
+  [GMSServices provideAPIKey:@"AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc"];
   [self registerForPush];
     // integrate CleverTap SDK using the autoIntegrate option
 //  [CleverTap autoIntegrate];

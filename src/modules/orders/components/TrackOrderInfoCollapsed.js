@@ -46,7 +46,9 @@ const TrackOrderInfoCollapsed = (props) => {
     <View style={[styles.rowContainer, styles.trackingInfoContainer]}>
       {renderTrackingCircle()}
       <View style={styles.trackingStatus}>
-        <Text style={styles.trackingStatusLabel}>{title}</Text>
+        <Text style={styles.trackingStatusLabel} numberOfLines={1}>
+          {title}
+        </Text>
         <Text style={styles.trackingStatusSub}>
           {subTitle ? subTitle : updatedAt}
         </Text>

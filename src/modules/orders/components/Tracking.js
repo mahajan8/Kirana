@@ -7,33 +7,23 @@ import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
 import Bike from '../../../assets/images/bike.svg';
 import HomeIcon from '../../../assets/images/map_home.svg';
-import {decodePolyline} from '../../../utils/utility/Utils';
+import {decodePolyline, getKeyByValue} from '../../../utils/utility/Utils';
 import {connect} from 'react-redux';
 import {getDirectionsPolyline} from '../Api';
-import {orderStatus} from '../../../utils/values/Values';
+import {addressTypes, orderStatus} from '../../../utils/values/Values';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {Strings} from '../../../utils/values/Strings';
 
 const screen = Dimensions.get('window');
 
 const ASPECT_RATIO = screen.width / screen.height;
 // const LATITUDE = 30.702598;
 // const LONGITUDE = 76.7357713;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.35012;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 // let start = {latitude: 30.690865, longitude: 76.757489};
 // let end = {latitude: 30.724522, longitude: 76.768347};
-
-// let route = [
-//   {latitude: 30.689255, longitude: 76.752116},
-//   {latitude: 30.694215, longitude: 76.760036},
-//   {latitude: 30.698167, longitude: 76.766196},
-//   {latitude: 30.701152, longitude: 76.771036},
-//   {latitude: 30.703926, longitude: 76.770596},
-//   {latitude: 30.708592, longitude: 76.768494},
-//   {latitude: 30.713762, longitude: 76.776658},
-//   {latitude: 30.719773, longitude: 76.773823},
-// ];
 
 const Tracking = (props) => {
   let {storeName, orderDetails, currentLocation} = props;
@@ -60,9 +50,12 @@ const Tracking = (props) => {
     }),
   );
 
-  let {delivery_address_location, store_location, status} = orderDetails
-    ? orderDetails
-    : {};
+  let {
+    delivery_address_location,
+    store_location,
+    status,
+    delivery_address_type,
+  } = orderDetails ? orderDetails : {};
   let orderPicked =
     status === orderStatus.ORDER_OUT_FOR_DELIVERY ? true : false;
   let orderDelivered = status === orderStatus.ORDER_DELIVERED ? true : false;
@@ -158,8 +151,6 @@ const Tracking = (props) => {
   const [deliveryTime, setDeliveryTime] = useState('');
 
   const animate = (endCoords, duration, bearing) => {
-    // markerCoordinate.stopAnimation();
-    // console.log(bearing);
     setNewRotation(bearing);
     Animated.timing(rotation, {
       toValue: 1,
@@ -253,22 +244,28 @@ const Tracking = (props) => {
         <View style={styles.markerContainer}>
           <View>
             <TrackMarker />
-            {showTime ? (
-              <Text style={styles.deliveryTime}>
-                {deliveryTime.split(' ')[0]}
-                {'\n'}
-                <Text style={styles.minutes}>{deliveryTime.split(' ')[1]}</Text>
-              </Text>
-            ) : type === 0 ? (
-              <StoreIcon style={styles.markerIcon} />
-            ) : (
-              <HomeIcon style={styles.markerIcon} />
-            )}
+            <View style={styles.markerInnerContainer}>
+              {showTime ? (
+                <Text style={styles.deliveryTime}>
+                  {deliveryTime.split(' ')[0]}
+                  {'\n'}
+                  <Text style={styles.minutes}>
+                    {deliveryTime.split(' ')[1]}
+                  </Text>
+                </Text>
+              ) : type === 0 ? (
+                <StoreIcon style={styles.markerIcon} />
+              ) : (
+                <HomeIcon style={styles.markerIcon} />
+              )}
+            </View>
           </View>
 
           <View style={styles.markerLabelContainer}>
             <Text style={styles.markerLabel}>
-              {type === 0 ? storeName : 'Home'}
+              {type === 0
+                ? Strings.store
+                : getKeyByValue(addressTypes, delivery_address_type)}
             </Text>
           </View>
         </View>
@@ -305,14 +302,12 @@ const Tracking = (props) => {
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
         ref={map}
-        // region={{
-        //   latitude: (start.latitude + end.latitude) / 2,
-        //   longitude: (start.longitude + end.longitude) / 2,
-        //   latitudeDelta: 0.03,
-        //   longitudeDelta: 0.03,
-        // }}
-        // onRegionChange={(region) => setRegion(region)}
-      >
+        region={{
+          latitude: 19.093229,
+          longitude: 72.877053,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }}>
         {polyline.length && !orderDelivered ? (
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}
