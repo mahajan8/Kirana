@@ -12,6 +12,8 @@ import {Actions} from 'react-native-router-flux';
 import {getUserDetails} from '../home/Api';
 import axios from 'axios';
 import {selectStore} from '../home/HomeActions';
+import {AppConfig} from '../../config/AppConfig';
+import {environment} from '../../config/EnvConfig';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -144,8 +146,8 @@ export const getDirectionsPolyline = (pars, callback, err) => {
   let params = {
     origin: initial.latitude + ',' + initial.longitude,
     destination: final.latitude + ',' + final.longitude,
-    // key: AppConfig[environment].googlePlacesKey,
-    key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
+    key: AppConfig[environment].googlePlacesKey,
+    // key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
   };
 
   var data =
