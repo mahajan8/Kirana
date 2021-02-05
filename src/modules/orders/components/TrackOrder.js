@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {View, Text} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
-import {ripple} from '../../../utils/utility/Utils';
 import Header from '../../commons/components/Header';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/trackOrderStyles';
@@ -19,6 +18,7 @@ import {AppConfig} from '../../../config/AppConfig';
 import {environment} from '../../../config/EnvConfig';
 import {orderStatus} from '../../../utils/values/Values';
 import store from '../../../utils/Store';
+import moment from 'moment';
 
 // TrackingStatus ->
 // 0 - Placed
@@ -55,7 +55,37 @@ const TrackOrder = (props) => {
     let pars = {
       order_id: selectedOrderId,
     };
-    props.getOrderDetails(pars);
+    props.getOrderDetails(pars, (startTime) => {
+      pubnub.fetchMessages(
+        {
+          channels: [channels],
+          // start: startTime,
+          // end: moment().unix() * 10000000,
+          count: 200,
+        },
+        (status, response) => {
+          if (!status.error && response) {
+            let {id} = store.getState().orderReducer.orderDetails;
+            let payload = response.channels[channels];
+            payload = payload.filter(
+              (item) =>
+                item.message.type === driverStatus &&
+                item.message.payload.order.id === id,
+            );
+            if (payload.length) {
+              const latestPayload = payload.reduce((prev, current) =>
+                +prev.timetoken > +current.timetoken ? prev : current,
+              );
+              const {latitude, longitude} = latestPayload.message.payload;
+              setCurrentLocation({
+                latitude,
+                longitude,
+              });
+            }
+          }
+        },
+      );
+    });
 
     return () => {
       let detailsRoute = Actions.state.routes.some(
@@ -92,7 +122,6 @@ const TrackOrder = (props) => {
           setShowRejectedModal(true);
         }
       } else if (type === driverStatus) {
-        console.log(JSON.stringify(event))
         setCurrentLocation({
           latitude: payload.latitude,
           longitude: payload.longitude,
@@ -108,7 +137,9 @@ const TrackOrder = (props) => {
         titleComp={
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{Strings.trackOrder}</Text>
-            <Text style={styles.subTitle}>{store_name}</Text>
+            <Text style={styles.subTitle} numberOfLines={1}>
+              {store_name}
+            </Text>
           </View>
         }
         headerRight={<Text style={styles.needHelp}>{Strings.needHelp}</Text>}

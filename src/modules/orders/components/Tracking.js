@@ -17,16 +17,12 @@ import {Strings} from '../../../utils/values/Strings';
 const screen = Dimensions.get('window');
 
 const ASPECT_RATIO = screen.width / screen.height;
-// const LATITUDE = 30.702598;
-// const LONGITUDE = 76.7357713;
 const LATITUDE_DELTA = 0.35012;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-// let start = {latitude: 30.690865, longitude: 76.757489};
-// let end = {latitude: 30.724522, longitude: 76.768347};
 
 const Tracking = (props) => {
-  let {storeName, orderDetails, currentLocation} = props;
+  let {orderDetails, currentLocation} = props;
   let map = useRef(null);
   let marker = useRef(null);
   const [currentRotation, setCurrentRotation] = useState('0deg');
@@ -39,12 +35,6 @@ const Tracking = (props) => {
   const [deliveryLocation, setDeliveryLocation] = useState({
     latitude: null,
     longitude: null,
-  });
-  const [region, setRegion] = useState({
-    latitude: 19.093229,
-    longitude: 72.877053,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
   });
 
   const [markerCoordinate] = useState(
@@ -246,6 +236,7 @@ const Tracking = (props) => {
   const getMarker = (type = 0) => {
     let showTime =
       deliveryTime &&
+      !orderDelivered &&
       ((type === 0 && !orderPicked) || (type === 1 && orderPicked));
     // Get marker by address type.
     return (
@@ -311,8 +302,12 @@ const Tracking = (props) => {
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
         ref={map}
-        region={region}
-        onRegionChangeComplete={setRegion}>
+        initialRegion={{
+          latitude: 19.093229,
+          longitude: 72.877053,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }}>
         {polyline.length && !orderDelivered ? (
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}

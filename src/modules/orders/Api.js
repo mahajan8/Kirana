@@ -14,6 +14,7 @@ import axios from 'axios';
 import {selectStore} from '../home/HomeActions';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
+import moment from 'moment';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -32,7 +33,7 @@ export const getOrders = (pars, callback) => {
   };
 };
 
-export const getOrderDetails = (pars) => {
+export const getOrderDetails = (pars, callback) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
@@ -40,7 +41,13 @@ export const getOrderDetails = (pars) => {
       const success = !res.data.error;
       if (success) {
         // Set details in OrderReducer
-        dispatch(setOrderDetails(res.data.data));
+        const {data} = res.data;
+        dispatch(setOrderDetails(data));
+        let startTimeToken =
+          moment(data.delivery?.delivery_start_time).unix() * 10000000;
+        if (callback) {
+          callback(startTimeToken);
+        }
       } else {
         alert(res.data.message);
       }

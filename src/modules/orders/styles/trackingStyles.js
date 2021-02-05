@@ -31,7 +31,7 @@ export const styles = EStyleSheet.create({
   },
   markerLabel: {
     fontSize: '$fontTiny',
-    fontFamily: Fonts.medium,
+    fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     paddingHorizontal: '$spacingMedium',
     paddingVertical: '$spacingSmallExtreme',

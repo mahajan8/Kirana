@@ -1,4 +1,3 @@
-import {Platform} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
@@ -13,6 +12,7 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.lightGray,
+    width: '200rem',
   },
   titleContainer: {
     marginLeft: '$spacingExtraMedium',
