@@ -27,7 +27,6 @@ import store from '../../../utils/Store';
 // 3 - Picked Up
 // 4 - Delivered
 // 5 - Rejected
-let trackStatus = 2;
 
 const statusUpdate = 'ORDER_STATUS_UPDATE';
 const driverStatus = 'DRIVER_STATUS_UPDATE';

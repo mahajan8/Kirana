@@ -40,6 +40,12 @@ const Tracking = (props) => {
     latitude: null,
     longitude: null,
   });
+  const [region, setRegion] = useState({
+    latitude: 19.093229,
+    longitude: 72.877053,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  })
 
   const [markerCoordinate] = useState(
     new AnimatedRegion({
@@ -302,12 +308,8 @@ const Tracking = (props) => {
         // provider={PROVIDER_GOOGLE}
         style={styles.map}
         ref={map}
-        region={{
-          latitude: 19.093229,
-          longitude: 72.877053,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}>
+        region={region}
+        onRegionChangeComplete={setRegion}>
         {polyline.length && !orderDelivered ? (
           <Polyline coordinates={polyline} strokeWidth={2} />
         ) : null}

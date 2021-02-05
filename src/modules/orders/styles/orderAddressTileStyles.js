@@ -14,12 +14,13 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.titleText,
+    width: '120rem',
   },
   locationText: {
     fontFamily: Fonts.regular,
     fontSize: '$fontSuperTiny',
     color: Colors.lightGray,
-    width: '118rem',
+    width: '120rem',
   },
   storeDetailsContainer: {
     flex: 1,

@@ -50,7 +50,8 @@
     "react-native-unimodules": "^0.12.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "rn-tourguide": "^2.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
