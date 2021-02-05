@@ -35,6 +35,7 @@ const Tracking = (props) => {
     latitude: null,
     longitude: null,
   });
+  const [pickupTimeLoaded, setPickupTimeLoaded] = useState(false);
 
   const [markerCoordinate] = useState(
     new AnimatedRegion({
@@ -229,6 +230,9 @@ const Tracking = (props) => {
 
       setPolyline(decodePolyline(overview_polyline.points));
       setDeliveryTime(legs[0].duration.text);
+      if (orderPicked && !pickupTimeLoaded) {
+        setPickupTimeLoaded(true);
+      }
     });
   };
 
@@ -236,7 +240,8 @@ const Tracking = (props) => {
     let showTime =
       deliveryTime &&
       !orderDelivered &&
-      ((type === 0 && !orderPicked) || (type === 1 && orderPicked));
+      ((type === 0 && !orderPicked) ||
+        (type === 1 && orderPicked && pickupTimeLoaded));
     // Get marker by address type.
     return (
       <Marker coordinate={type === 0 ? storeLocation : deliveryLocation}>
