@@ -24,6 +24,7 @@ const Tracking = (props) => {
   let {orderDetails, currentLocation} = props;
   let map = useRef(null);
   let marker = useRef(null);
+  let pickedUp = useRef(null);
   const [currentRotation, setCurrentRotation] = useState('0deg');
   const [newRotation, setNewRotation] = useState('0deg');
   const [rotation] = useState(new Animated.Value(0));
@@ -35,7 +36,6 @@ const Tracking = (props) => {
     latitude: null,
     longitude: null,
   });
-  const [pickupTimeLoaded, setPickupTimeLoaded] = useState(false);
 
   const [markerCoordinate] = useState(
     new AnimatedRegion({
@@ -55,6 +55,14 @@ const Tracking = (props) => {
   let orderPicked =
     status === orderStatus.ORDER_OUT_FOR_DELIVERY ? true : false;
   let orderDelivered = status === orderStatus.ORDER_DELIVERED ? true : false;
+
+  useEffect(() => {
+    if (!pickedUp.current && orderPicked) {
+      focusMap();
+      getDirectionsFromCurrent();
+    }
+    pickedUp.current = orderPicked;
+  }, [status]);
 
   useEffect(() => {
     if (orderDetails) {
@@ -230,9 +238,6 @@ const Tracking = (props) => {
 
       setPolyline(decodePolyline(overview_polyline.points));
       setDeliveryTime(legs[0].duration.text);
-      if (orderPicked && !pickupTimeLoaded) {
-        setPickupTimeLoaded(true);
-      }
     });
   };
 
@@ -240,8 +245,7 @@ const Tracking = (props) => {
     let showTime =
       deliveryTime &&
       !orderDelivered &&
-      ((type === 0 && !orderPicked) ||
-        (type === 1 && orderPicked && pickupTimeLoaded));
+      ((type === 0 && !orderPicked) || (type === 1 && orderPicked));
     // Get marker by address type.
     return (
       <Marker coordinate={type === 0 ? storeLocation : deliveryLocation}>
