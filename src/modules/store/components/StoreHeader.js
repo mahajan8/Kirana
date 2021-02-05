@@ -9,6 +9,7 @@ import BackArrow from '../../../assets/images/white_back.svg';
 import LocationIcon from '../../../assets/images/white_location.svg';
 import {Strings} from '../../../utils/values/Strings';
 import {connect} from 'react-redux';
+import {commonStyles} from '../../commons/styles/commonStyles';
 import CartCounter from '../../commons/components/CartCounter';
 
 let backgroundImage = require('../../../assets/images/store_background.png');
@@ -16,7 +17,7 @@ let backgroundImage = require('../../../assets/images/store_background.png');
 const StoreHeader = (props) => {
   let {storeDetails} = props.storeReducer;
 
-  let {owner_data, location, name} = storeDetails;
+  let {owner_data, location, name, logo} = storeDetails;
 
   let isLoaded = storeDetails.name ? true : false;
 
@@ -26,6 +27,10 @@ const StoreHeader = (props) => {
       : null
     : null;
 
+  if (profilePhoto === null) {
+    profilePhoto = logo?.path ?? null;
+  }
+
   return (
     <ImageBackground
       source={backgroundImage}
@@ -34,7 +39,7 @@ const StoreHeader = (props) => {
       <View style={styles.darkBg} />
       <View style={styles.storeInfoContainer}>
         <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-          <Pressable style={styles.backArrow} onPress={Actions.pop}>
+          <Pressable style={styles.backArrow} onPress={Actions.pop} hitSlop={commonStyles.hitSlop}>
             <BackArrow />
           </Pressable>
           <View>
@@ -68,7 +73,8 @@ const StoreHeader = (props) => {
         <Pressable
           android_ripple={ripple}
           style={[styles.rowContainer, styles.searchView]}
-          onPress={Actions.searchProducts}>
+          // onPress={Actions.searchProducts}>
+          onPress={() => Actions.algoliaSearch({storeId: storeDetails.id})}>
           <Search
             width={EStyleSheet.value('15rem')}
             height={EStyleSheet.value('15rem')}

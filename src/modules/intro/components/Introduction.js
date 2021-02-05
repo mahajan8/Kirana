@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Dimensions, Pressable, Linking, Platform} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/introStyle';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -11,6 +11,7 @@ import {Strings} from '../../../utils/values/Strings';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import Button from '../../commons/components/Button';
 import {commonStyles} from '../../commons/styles/commonStyles';
+import {Urls} from '../../../utils/utility/Urls';
 import LocationCheck from '../../commons/components/LocationCheck';
 
 let pages = [
@@ -24,6 +25,15 @@ let deviceWidth = Dimensions.get('window').width;
 const Onboarding = () => {
   const [active, setactive] = useState(0);
   const carousel = useRef(null);
+
+  const joinAsShop = () => {
+    if (Platform.OS === 'ios') {
+      Linking.openURL(Urls.storeAppStoreLink);
+    }
+    else {
+      Linking.openURL(Urls.storePlayStoreLink);
+    }
+  };
 
   const renderItem = ({item, index}) => {
     return (
@@ -89,7 +99,7 @@ const Onboarding = () => {
         />
         <Text style={styles.ownStore}>
           {Strings.ownStore}
-          <Text style={styles.greenText}> {Strings.joinAsShop}</Text>
+          <Pressable onPress={joinAsShop}><Text style={styles.greenText}> {Strings.joinAsShop}</Text></Pressable>
         </Text>
       </View>
       <LocationCheck />

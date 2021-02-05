@@ -24,7 +24,7 @@ const OrderItem = (props) => {
     <View style={styles.container}>
       <Text style={styles.itemCount}>{item_quantity} x</Text>
       <Image
-        source={{uri: getMediaUrl(product_images[0].path)}}
+        source={{uri: getMediaUrl(encodeURI(product_images[0].path))}}
         style={styles.itemImage}
       />
       <View>

@@ -75,6 +75,7 @@ const Search = (props) => {
       query={{
         key: AppConfig[environment].googlePlacesKey,
         language: 'en',
+        components: 'country:in',
         // types: '(localities)',
       }}
       renderLeftButton={() => (

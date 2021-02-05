@@ -17,10 +17,10 @@ export const commonStyles = EStyleSheet.create({
     marginTop: '$spacingLessHuge',
   },
   hitSlop: {
-    top: '$spacingSmallExtreme',
-    bottom: '$spacingSmallExtreme',
-    right: '$spacingSmallExtreme',
-    left: '$spacingSmallExtreme',
+    top: '$spacingMedium',
+    bottom: '$spacingMedium',
+    right: '$spacingMedium',
+    left: '$spacingMedium',
   },
   scrollContainer: {
     flexGrow: 1,

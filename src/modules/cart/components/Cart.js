@@ -49,6 +49,7 @@ const Cart = (props) => {
     }
   }, [location]);
 
+
   const getCartItems = () => {
     let pars = {
       longitude: location.lng,
@@ -125,13 +126,6 @@ const Cart = (props) => {
     />
   );
 
-  const renderListFooter = () => (
-    <CartListFooter
-      instructions={instructions}
-      setInstructions={setInstructions}
-      estimatedTime={estimated_time_in_mins}
-    />
-  );
 
   const renderListEmptyComponent = () => (
     <View style={styles.fullContainer}>
@@ -171,7 +165,9 @@ const Cart = (props) => {
               <View style={styles.listItemSeperator} />
             )}
             ListHeaderComponent={list.length && renderListHeader}
-            ListFooterComponent={list.length && renderListFooter}
+            ListFooterComponent={list.length && <CartListFooter instructions={instructions}
+            setInstructions={setInstructions}
+            estimatedTime={estimated_time_in_mins} />}
             ListEmptyComponent={renderListEmptyComponent}
           />
 

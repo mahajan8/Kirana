@@ -16,7 +16,7 @@ let options = [
   {
     Icon: Phone,
     title: Strings.phoneNumber,
-    sub: '+91 8300998300',
+    sub: '+91 85912 33907',
     iconBg: '#0072f0',
   },
   {
@@ -37,10 +37,10 @@ const CustomerSupport = (props) => {
   const helpAction = (index) => {
     switch (index) {
       case 0:
-        Linking.openURL(`tel:${'+91 8300998300'}`);
+        Linking.openURL(`tel:${'+91 8591233907'}`);
         break;
       case 1:
-        Linking.openURL(`whatsapp://send?phone=${'+91 8300998300'}`);
+        Linking.openURL(`whatsapp://send?phone=${'+91 8591233907'}`);
         break;
       case 2:
         Linking.openURL(`mailto:${Strings.supportEmail}`);
