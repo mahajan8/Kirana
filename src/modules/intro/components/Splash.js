@@ -70,7 +70,6 @@ const Splash = (props) => {
   const getLocation = () => {
     Geolocation.getCurrentPosition(
       (info) => {
-        console.log('HELLO');
         const {latitude, longitude} = info.coords;
         let pars = {
           lat: latitude,
@@ -83,7 +82,6 @@ const Splash = (props) => {
       },
       (error) => {
         console.error(error);
-        console.log('ERROR');
         props.getUserDetails();
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 1000000},

@@ -49,7 +49,6 @@ const Cart = (props) => {
     }
   }, [location]);
 
-
   const getCartItems = () => {
     let pars = {
       longitude: location.lng,
@@ -74,7 +73,7 @@ const Cart = (props) => {
       // Set Order ID to Razorpay Options
       let options = {
         description: '',
-        image: 'https://cdn.kiranakart.app/static/logo/splash-logo-2.png',
+        image: 'https://admin.kiranakart.app/mobile-images/kiranakart.png',
         currency: 'INR',
         key: AppConfig[environment].razorpayKey,
         amount: String(total_cost_price + delivery_fee),
@@ -126,7 +125,6 @@ const Cart = (props) => {
     />
   );
 
-
   const renderListEmptyComponent = () => (
     <View style={styles.fullContainer}>
       <View style={styles.listEmptyContainer}>
@@ -165,9 +163,15 @@ const Cart = (props) => {
               <View style={styles.listItemSeperator} />
             )}
             ListHeaderComponent={list.length && renderListHeader}
-            ListFooterComponent={list.length && <CartListFooter instructions={instructions}
-            setInstructions={setInstructions}
-            estimatedTime={estimated_time_in_mins} />}
+            ListFooterComponent={
+              list.length && (
+                <CartListFooter
+                  instructions={instructions}
+                  setInstructions={setInstructions}
+                  estimatedTime={estimated_time_in_mins}
+                />
+              )
+            }
             ListEmptyComponent={renderListEmptyComponent}
           />
 

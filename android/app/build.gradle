@@ -136,8 +136,8 @@ android {
         applicationId "app.kiranakart.customer"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2021020501
+        versionName "1.1"
         multiDexEnabled true
     }
     splits {
