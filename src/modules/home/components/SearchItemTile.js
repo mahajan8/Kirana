@@ -70,7 +70,7 @@ const SearchItemTile = (props) => {
             source={{
               uri: getMediaUrl(
                 product_images.length
-                  ? encodeURI(product_images[0].path)
+                  ? encodeURIComponent(product_images[0].path)
                   : null,
               ),
               priority: FastImage.priority.normal,
