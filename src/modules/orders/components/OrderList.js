@@ -124,7 +124,7 @@ const OrderList = (props) => {
             ORDER_DELIVERED,
             ORDER_CANCELLED,
             ORDER_REJECTED,
-            ORDER_NOT_PLACED,
+            // ORDER_NOT_PLACED,
           ],
           context: null,
         },

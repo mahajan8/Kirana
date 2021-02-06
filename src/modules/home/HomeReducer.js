@@ -11,9 +11,8 @@ import {
   APPEND_STORE_PRODUCTS,
   SELECT_STORE,
   APPEND_USER_DETAILS,
-  APPEND_CURRENT_ORDERS,
-  REMOVE_FROM_CURRENT_ORDERS,
   SET_CURRENT_ORDERS,
+  SET_NEW_USER,
 } from './ActionTypes';
 
 const INITIAL_STATE = {
@@ -29,6 +28,7 @@ const INITIAL_STATE = {
   storeProductCount: null,
   selectedStore: null,
   currentOrders: [],
+  isNewUser: false,
 };
 
 const HomeReducer = (state = INITIAL_STATE, action) => {
@@ -104,6 +104,12 @@ const HomeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentOrders: action.data,
+      };
+    }
+    case SET_NEW_USER: {
+      return {
+        ...state,
+        isNewUser: action.data,
       };
     }
     default:

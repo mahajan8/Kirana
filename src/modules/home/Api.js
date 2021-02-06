@@ -8,6 +8,7 @@ import {
   clearStores,
   appendSearchedStores,
   setCurrentOrders,
+  setNewUser,
 } from './HomeActions';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from '../navigation/NavigationActions';
@@ -31,6 +32,7 @@ export const getUserDetails = (newUser = false) => {
           active_orders,
         } = response;
         //Set Addresses, Cart List and user details in respective Reducers
+        dispatch(setNewUser(newUser));
         dispatch(setAddress(address_list));
         dispatch(setCartDetails(cart_data));
         dispatch(setUserDetails(user_details));
@@ -66,7 +68,7 @@ export const getUserDetails = (newUser = false) => {
         }
         //If last order rating not completed navigate to rating screen.
         const {notificationPayload} = getState().authReducer;
-        Actions.reset('drawer');
+        Actions.reset('drawer', {newUser});
         if (!last_order_rating) {
           Actions.push('rating', {order: last_order_data});
         }

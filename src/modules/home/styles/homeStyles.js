@@ -14,7 +14,7 @@ export const styles = EStyleSheet.create({
     paddingLeft: '$spacingNormal',
     borderRadius: '$spacingSmall',
     height: '$spacingExtraHuge',
-    marginBottom: '$spacingExtraNormal',
+    marginVertical: '$spacingNormal',
   },
   textInput: {
     fontSize: '$fontTiny',
@@ -28,6 +28,7 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
     marginBottom: '$spacingTinyExtreme',
+    marginTop: '$spacingTiny',
   },
   list: {
     paddingHorizontal: '$spacingNormal',

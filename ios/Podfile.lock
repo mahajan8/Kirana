@@ -569,13 +569,13 @@ DEPENDENCIES:
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
-  - "UMCore (from `../node_modules/@unimodules/core/ios`)"
+  - "UMCore (from `../node_modules/isomorphic-webcrypto/node_modules/@unimodules/core/ios`)"
   - UMFaceDetectorInterface (from `../node_modules/unimodules-face-detector-interface/ios`)
   - UMFileSystemInterface (from `../node_modules/unimodules-file-system-interface/ios`)
   - UMFontInterface (from `../node_modules/unimodules-font-interface/ios`)
   - UMImageLoaderInterface (from `../node_modules/unimodules-image-loader-interface/ios`)
   - UMPermissionsInterface (from `../node_modules/unimodules-permissions-interface/ios`)
-  - "UMReactNativeAdapter (from `../node_modules/@unimodules/react-native-adapter/ios`)"
+  - "UMReactNativeAdapter (from `../node_modules/isomorphic-webcrypto/node_modules/@unimodules/react-native-adapter/ios`)"
   - UMSensorsInterface (from `../node_modules/unimodules-sensors-interface/ios`)
   - UMTaskManagerInterface (from `../node_modules/unimodules-task-manager-interface/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -728,7 +728,7 @@ EXTERNAL SOURCES:
   UMConstantsInterface:
     :path: "../node_modules/unimodules-constants-interface/ios"
   UMCore:
-    :path: "../node_modules/@unimodules/core/ios"
+    :path: "../node_modules/isomorphic-webcrypto/node_modules/@unimodules/core/ios"
   UMFaceDetectorInterface:
     :path: "../node_modules/unimodules-face-detector-interface/ios"
   UMFileSystemInterface:
@@ -740,7 +740,7 @@ EXTERNAL SOURCES:
   UMPermissionsInterface:
     :path: "../node_modules/unimodules-permissions-interface/ios"
   UMReactNativeAdapter:
-    :path: "../node_modules/@unimodules/react-native-adapter/ios"
+    :path: "../node_modules/isomorphic-webcrypto/node_modules/@unimodules/react-native-adapter/ios"
   UMSensorsInterface:
     :path: "../node_modules/unimodules-sensors-interface/ios"
   UMTaskManagerInterface:

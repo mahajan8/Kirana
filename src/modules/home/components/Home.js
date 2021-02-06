@@ -26,6 +26,11 @@ import store from '../../../utils/Store';
 import {orderStatus} from '../../../utils/values/Values';
 import CurrentOrders from './CurrentOrders';
 
+import {
+  TourGuideProvider, // Main provider
+  TourGuideZone, // Main wrapper of highlight component
+} from 'rn-tourguide';
+
 // Socket Configuration
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
@@ -37,7 +42,13 @@ const pubnub = new PubNub({
 const Home = (props) => {
   const [searchVisible, setSearchVisible] = useState(false);
   const [endReachCallable, setEndReachCallable] = useState(true);
-  const {stores, storeCount, location, userDetails} = props.homeReducer;
+  const {
+    stores,
+    storeCount,
+    location,
+    userDetails,
+    isNewUser,
+  } = props.homeReducer;
   const [channels] = useState([userDetails.id]);
 
   useEffect(() => {
@@ -80,9 +91,19 @@ const Home = (props) => {
 
     let newCurrentOrders = [...currentOrders];
 
-    const {ORDER_DELIVERED, ORDER_CANCELLED, ORDER_REJECTED} = orderStatus;
+    const {
+      ORDER_DELIVERED,
+      ORDER_CANCELLED,
+      ORDER_REJECTED,
+      ORDER_NOT_PLACED,
+    } = orderStatus;
 
-    let removeStatus = [ORDER_DELIVERED, ORDER_CANCELLED, ORDER_REJECTED];
+    let removeStatus = [
+      ORDER_DELIVERED,
+      ORDER_CANCELLED,
+      ORDER_REJECTED,
+      ORDER_NOT_PLACED,
+    ];
 
     if (i >= 0) {
       if (removeStatus.includes(status)) {
@@ -104,18 +125,20 @@ const Home = (props) => {
 
   const searchProductHeader = () => {
     return (
-      <View style={styles.container}>
-        <Pressable
-          activeOpacity={0.5}
-          style={styles.searchContainer}
-          onPress={Actions.searchStoreProducts}
-          android_ripple={ripple}>
-          <Search
-            width={EStyleSheet.value('14rem')}
-            height={EStyleSheet.value('14rem')}
-          />
-          <Text style={styles.textInput}>{Strings.searchProduct}</Text>
-        </Pressable>
+      <View>
+        <TourGuideZone zone={1} shape={'rectangle'} text={Strings.tourSearch}>
+          <Pressable
+            activeOpacity={0.5}
+            style={styles.searchContainer}
+            onPress={Actions.searchStoreProducts}
+            android_ripple={ripple}>
+            <Search
+              width={EStyleSheet.value('14rem')}
+              height={EStyleSheet.value('14rem')}
+            />
+            <Text style={styles.textInput}>{Strings.searchProduct}</Text>
+          </Pressable>
+        </TourGuideZone>
         <Text style={styles.nearbyText}>{Strings.nearbyStores}</Text>
       </View>
     );
@@ -154,48 +177,65 @@ const Home = (props) => {
     );
 
   return (
-    <SafeArea>
-      <CartHeader
-        location={location}
-        selectLocation={() => setSearchVisible(true)}
-        drawer
-      />
-      <FlatList
-        data={stores}
-        renderItem={({item}) => (
-          <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
-        )}
-        keyExtractor={(item, index) => `store${index}`}
-        onMomentumScrollBegin={() => setEndReachCallable(false)}
-        onEndReachedThreshold={0.1}
-        onEndReached={() => {
-          // load stores if list end reached and more stores are available
-          if (!endReachCallable && stores.length < storeCount) {
-            loadStores(stores.length);
-            setEndReachCallable(true);
+    <TourGuideProvider
+      startAtMount={isNewUser}
+      {...{borderRadius: 16}}
+      androidStatusBarVisible={true}>
+      <SafeArea>
+        <CartHeader
+          location={location}
+          selectLocation={() => setSearchVisible(true)}
+          drawer
+        />
+        <FlatList
+          data={stores}
+          renderItem={({item, index}) =>
+            index === 0 ? (
+              <TourGuideZone
+                zone={2}
+                shape={'rectangle'}
+                text={Strings.tourStore}>
+                <StoreInfoTile
+                  store={item}
+                  onPress={() => onStoreClick(item)}
+                />
+              </TourGuideZone>
+            ) : (
+              <StoreInfoTile store={item} onPress={() => onStoreClick(item)} />
+            )
           }
-        }}
-        ListHeaderComponent={stores.length && searchProductHeader}
-        contentContainerStyle={styles.list}
-        ListEmptyComponent={renderListEmptyComponent}
-      />
+          keyExtractor={(item, index) => `store${index}`}
+          onMomentumScrollBegin={() => setEndReachCallable(false)}
+          onEndReachedThreshold={0.1}
+          onEndReached={() => {
+            // load stores if list end reached and more stores are available
+            if (!endReachCallable && stores.length < storeCount) {
+              loadStores(stores.length);
+              setEndReachCallable(true);
+            }
+          }}
+          ListHeaderComponent={stores.length && searchProductHeader}
+          contentContainerStyle={styles.list}
+          ListEmptyComponent={renderListEmptyComponent}
+        />
 
-      {/* Active Orders Component  */}
-      <CurrentOrders />
+        {/* Active Orders Component  */}
+        <CurrentOrders />
 
-      <HomeLocationCheck
-        onSearchPress={() => setSearchVisible(true)}
-        setLocation={props.setLocation}
-        selectedLocation={location}
-      />
+        <HomeLocationCheck
+          onSearchPress={() => setSearchVisible(true)}
+          setLocation={props.setLocation}
+          selectedLocation={location}
+        />
 
-      <SearchLocationModal
-        visible={searchVisible}
-        setVisible={setSearchVisible}
-        setLocation={props.setLocation}
-        cancellable={location ? true : false}
-      />
-    </SafeArea>
+        <SearchLocationModal
+          visible={searchVisible}
+          setVisible={setSearchVisible}
+          setLocation={props.setLocation}
+          cancellable={location ? true : false}
+        />
+      </SafeArea>
+    </TourGuideProvider>
   );
 };
 const mapStateToProps = (state) => ({

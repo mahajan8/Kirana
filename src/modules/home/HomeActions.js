@@ -9,6 +9,7 @@ import {
   SELECT_STORE,
   APPEND_USER_DETAILS,
   SET_CURRENT_ORDERS,
+  SET_NEW_USER,
 } from './ActionTypes';
 
 // Set user details in Home Reducer
@@ -68,5 +69,11 @@ export const appendUserDetails = (userDetails) => ({
 // Set Current Active Orders in Home Reducer
 export const setCurrentOrders = (data) => ({
   type: SET_CURRENT_ORDERS,
+  data,
+});
+
+// Set Current Active Orders in Home Reducer
+export const setNewUser = (data) => ({
+  type: SET_NEW_USER,
   data,
 });

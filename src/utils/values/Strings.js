@@ -314,4 +314,6 @@ export const Strings = {
   currentOrderModified: 'Your Order is Modified',
   outOfStock: 'Out of stock',
   deliveryPartner: 'Delivery Partner',
+  tourSearch: 'Search for Products in Stores',
+  tourStore: 'Open Store to add products to cart',
 };
