@@ -29,8 +29,7 @@ const Onboarding = () => {
   const joinAsShop = () => {
     if (Platform.OS === 'ios') {
       Linking.openURL(Urls.storeAppStoreLink);
-    }
-    else {
+    } else {
       Linking.openURL(Urls.storePlayStoreLink);
     }
   };
@@ -99,7 +98,9 @@ const Onboarding = () => {
         />
         <Text style={styles.ownStore}>
           {Strings.ownStore}
-          <Pressable onPress={joinAsShop}><Text style={styles.greenText}> {Strings.joinAsShop}</Text></Pressable>
+          <Pressable onPress={joinAsShop}>
+            <Text style={styles.greenText}> {Strings.joinAsShop}</Text>
+          </Pressable>
         </Text>
       </View>
       <LocationCheck />
