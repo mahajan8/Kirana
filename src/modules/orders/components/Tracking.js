@@ -57,7 +57,7 @@ const Tracking = (props) => {
   let orderDelivered = status === orderStatus.ORDER_DELIVERED ? true : false;
 
   useEffect(() => {
-    if (!pickedUp.current && orderPicked) {
+    if (!pickedUp.current && orderPicked && deliveryLocation.latitude) {
       focusMap();
       getDirectionsFromCurrent();
     }

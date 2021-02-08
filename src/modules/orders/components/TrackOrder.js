@@ -121,7 +121,7 @@ const TrackOrder = (props) => {
           setShowRejectedModal(true);
         }
       } else if (type === driverStatus) {
-        console.log(JSON.stringify(event))
+        console.log(JSON.stringify(event));
         setCurrentLocation({
           latitude: payload.latitude,
           longitude: payload.longitude,
