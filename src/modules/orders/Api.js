@@ -42,6 +42,7 @@ export const getOrderDetails = (pars, callback) => {
       if (success) {
         // Set details in OrderReducer
         const {data} = res.data;
+        console.log(JSON.stringify(data));
         dispatch(setOrderDetails(data));
         let startTimeToken =
           moment(data.delivery?.delivery_start_time).unix() * 10000000;

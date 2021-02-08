@@ -170,8 +170,12 @@ const TrackOrderInfo = (props) => {
 
   const deliveryInfo = () => {
     // Render Delivery Agent Info
-    let {ORDER_DELIVERY_ASSIGNED} = orderStatus;
-    if (status === ORDER_DELIVERY_ASSIGNED && delivery.property) {
+    let {ORDER_DELIVERY_ASSIGNED, ORDER_OUT_FOR_DELIVERY} = orderStatus;
+    if (
+      (status === ORDER_DELIVERY_ASSIGNED ||
+        status === ORDER_OUT_FOR_DELIVERY) &&
+      delivery.property
+    ) {
       let {rider_name, rider_contact} = delivery.property;
       return (
         <View style={[styles.deliveryPartnerInfo, styles.rowContainer]}>
