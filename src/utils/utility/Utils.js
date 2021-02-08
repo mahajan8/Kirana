@@ -9,7 +9,10 @@ import {logoutUser} from '../../modules/authentication/AuthActions';
 import store from '../Store';
 import {Colors} from '../values/Colors';
 import {notificationType} from '../values/Values';
-import {setSelectedOrderId} from '../../modules/orders/OrderActions';
+import {
+  setOrderDetails,
+  setSelectedOrderId,
+} from '../../modules/orders/OrderActions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 const {dispatch} = store;
 
@@ -262,11 +265,58 @@ export const decodePolyline = (t, e) => {
 export const handleNotificationClick = (event) => {
   let {redirection_type, store_id, store_name, order_id, order_status} = event;
   let {orderDetails, orderRating, orderTracking} = notificationType;
+  let {selectedOrderId} = store.getState().orderReducer;
+  let {routes} = Actions.state;
+  let trackRoute = 'trackOrder';
+  let detailsRoute = 'orderDetails';
+
+  let isSameOrder = selectedOrderId === order_id;
+  let isCurrent = (routeName) => Actions.currentScene === routeName;
+  let isSceneInStack = (routeName) =>
+    routes.some((obj) => obj.routeName === routeName);
+
+  let popToList = (callback) => {
+    let i = routes.findIndex(
+      (obj) => obj.routeName === trackRoute || obj.routeName === detailsRoute,
+    );
+    let route = routes[i - 1].routeName;
+    Actions.popTo(route);
+    dispatch(setOrderDetails(null));
+    callback && setTimeout(() => callback(), 100);
+  };
+
+  let navigate = (routeName) => {
+    dispatch(setSelectedOrderId(order_id));
+    Actions[routeName]();
+  };
+
+  let refreshDetails = () => {
+    dispatch(setSelectedOrderId(null));
+    dispatch(setSelectedOrderId(order_id));
+  };
 
   switch (redirection_type) {
     case orderDetails:
-      dispatch(setSelectedOrderId(order_id));
-      Actions.orderDetails();
+      if (isSameOrder) {
+        if (isCurrent(detailsRoute)) {
+          refreshDetails();
+        } else if (isCurrent(trackRoute)) {
+          if (isSceneInStack(detailsRoute)) {
+            Actions.popTo(detailsRoute);
+            refreshDetails();
+          } else {
+            navigate(detailsRoute);
+          }
+        } else {
+          navigate(detailsRoute);
+        }
+      } else {
+        if (isSceneInStack(detailsRoute) || isSceneInStack(trackRoute)) {
+          popToList(() => navigate(detailsRoute));
+        } else {
+          navigate(detailsRoute);
+        }
+      }
       break;
     case orderRating:
       if (Actions.currentScene !== 'rating') {
@@ -274,8 +324,25 @@ export const handleNotificationClick = (event) => {
       }
       break;
     case orderTracking:
-      dispatch(setSelectedOrderId(order_id));
-      Actions.trackOrder();
+      if (isSameOrder) {
+        if (!isCurrent(trackRoute)) {
+          if (isCurrent(detailsRoute)) {
+            if (isSceneInStack(trackRoute)) {
+              Actions.popTo(trackRoute);
+            } else {
+              navigate(trackRoute);
+            }
+          } else {
+            navigate(trackRoute);
+          }
+        }
+      } else {
+        if (isSceneInStack(detailsRoute) || isSceneInStack(trackRoute)) {
+          popToList(() => navigate(trackRoute));
+        } else {
+          navigate(trackRoute);
+        }
+      }
       break;
   }
 };
