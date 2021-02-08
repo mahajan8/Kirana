@@ -38,13 +38,15 @@ const OrderDetails = (props) => {
   } = orderDetails ? orderDetails : {};
 
   useEffect(() => {
-    fetchDetails();
+    if (selectedOrderId) {
+      fetchDetails();
+    }
     return () => {
       if (!isAfterTracking()) {
         props.setOrderDetails(null);
       }
     };
-  }, []);
+  }, [selectedOrderId]);
 
   const isAfterTracking = () => {
     let trackingRoute = Actions.state.routes.some(

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import {View, Text, Pressable, Animated, Easing, Linking} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
@@ -223,7 +222,14 @@ const TrackOrderInfo = (props) => {
           {/* TODO: Add Right arrow image if needed */}
           <Pressable
             onPress={() => {
-              Actions.orderDetails();
+              let detailsRoute = Actions.state.routes.some(
+                (obj) => obj.routeName === 'orderDetails',
+              );
+              if (detailsRoute) {
+                Actions.popTo('orderDetails');
+              } else {
+                Actions.orderDetails();
+              }
             }}>
             <Text style={styles.orderDetails}>
               {Strings.orderDetails} {'>'}
