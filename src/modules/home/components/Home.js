@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {View, Text, Pressable, FlatList} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
@@ -50,11 +50,15 @@ const Home = (props) => {
     isNewUser,
   } = props.homeReducer;
   const [channels] = useState([userDetails.id]);
+  const tourLoaded = useRef(false);
 
   useEffect(() => {
     // If location present in homeReducer load stores for the location
     if (location) {
       loadStores(0);
+      setTimeout(() => {
+        tourLoaded.current = true;
+      }, 1000);
     }
   }, [location]);
 
@@ -178,7 +182,7 @@ const Home = (props) => {
 
   return (
     <TourGuideProvider
-      startAtMount={isNewUser}
+      startAtMount={isNewUser && !tourLoaded.current}
       {...{borderRadius: 16}}
       androidStatusBarVisible={true}>
       <SafeArea>
