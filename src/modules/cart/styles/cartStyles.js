@@ -9,12 +9,12 @@ export const styles = EStyleSheet.create({
     paddingTop: '$spacingMedium',
   },
   seperator: {
-    height: '7vrem',
+    height: '$spacingSmallExtreme',
     backgroundColor: Colors.seperatorColor,
     width: '100%',
   },
   grayHeading: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     letterSpacing: '-0.2rem',
     color: Colors.darkGray,
@@ -29,13 +29,13 @@ export const styles = EStyleSheet.create({
     marginBottom: '$spacingTiny',
   },
   addMore: {
-    fontSize: '11rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
     paddingVertical: '$spacingTiny',
   },
   instructionsInput: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     // color: Colors.lightGray,
     marginLeft: '$spacingSuperSmall',
@@ -50,12 +50,12 @@ export const styles = EStyleSheet.create({
     paddingVertical: '$spacingSuperSmall',
   },
   detailsText: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
   listItemSeperator: {
-    height: '24vrem',
+    height: '$spacingLarge',
   },
   itemContainer: {
     paddingHorizontal: '$spacingNormal',
@@ -69,17 +69,17 @@ export const styles = EStyleSheet.create({
     marginTop: '$spacingSuperSmall',
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
-    marginBottom: '14vrem',
+    marginBottom: '$spacingExtraMedium',
     borderRadius: 0.1,
   },
   priceLabel: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
     letterSpacing: '-0.07rem',
     color: Colors.darkGray,
   },
   amount: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
     color: Colors.titleText,
   },
@@ -90,12 +90,12 @@ export const styles = EStyleSheet.create({
   },
   grandTotalLabel: {
     fontFamily: Fonts.medium,
-    fontSize: '13rem',
+    fontSize: '$fontSmall',
     letterSpacing: '-0.09rem',
     color: Colors.titleText,
   },
   grandTotalAmount: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
   },
@@ -121,13 +121,13 @@ export const styles = EStyleSheet.create({
   },
   cartEmptyTitle: {
     marginTop: '$spacingLessHuge',
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     letterSpacing: '0.18rem',
     color: Colors.titleText,
   },
   cartEmptySubTitle: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     letterSpacing: '0.2rem',
     color: Colors.darkGray,

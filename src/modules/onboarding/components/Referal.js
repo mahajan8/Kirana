@@ -39,8 +39,8 @@ const Referal = (props) => {
               bordered
               Icon={
                 <Whatsapp
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('12rem')}
+                  width={EStyleSheet.value('$spacingMedium')}
+                  height={EStyleSheet.value('$spacingMedium')}
                 />
               }
             />
@@ -51,8 +51,8 @@ const Referal = (props) => {
               bordered
               Icon={
                 <Share
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('12rem')}
+                  width={EStyleSheet.value('$spacingMedium')}
+                  height={EStyleSheet.value('$spacingMedium')}
                 />
               }
             />
@@ -73,8 +73,8 @@ const Referal = (props) => {
           success && (
             <Tick
               style={styles.greenTick}
-              width={EStyleSheet.value('18rem')}
-              height={EStyleSheet.value('18rem')}
+              width={EStyleSheet.value('$spacingNormalMedium')}
+              height={EStyleSheet.value('$spacingNormalMedium')}
             />
           )
         }

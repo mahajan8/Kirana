@@ -72,8 +72,8 @@ const StoreSubCategories = (props) => {
               android_ripple={ripple}
               style={styles.headerSearchIcon}>
               <Search
-                width={EStyleSheet.value('16rem')}
-                height={EStyleSheet.value('16rem')}
+                width={EStyleSheet.value('$spacingNormal')}
+                height={EStyleSheet.value('$spacingNormal')}
               />
             </Pressable>
           </View>

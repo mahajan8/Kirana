@@ -19,7 +19,7 @@ const StoreInfoTile = (props) => {
     distance_in_kms,
     online,
     open_time,
-    logo
+    logo,
   } = props.store;
   let {onPress} = props;
 
@@ -29,7 +29,10 @@ const StoreInfoTile = (props) => {
       style={[styles.rowContainer, styles.container]}
       onPress={onPress && onPress}
       activeOpacity={1}>
-      <Image style={styles.storeImage} source={{uri: getMediaUrl(logo?.path ?? null)}} />
+      <Image
+        style={styles.storeImage}
+        source={{uri: getMediaUrl(logo?.path ?? null)}}
+      />
       <View>
         <Text style={styles.storeName}>{name}</Text>
         <Text style={styles.storeLocation}>{location.short_address}</Text>
@@ -38,8 +41,8 @@ const StoreInfoTile = (props) => {
             <View style={styles.rowContainer}>
               <Star
                 style={styles.star}
-                width={EStyleSheet.value('10rem')}
-                height={EStyleSheet.value('10rem')}
+                width={EStyleSheet.value('$spacingSuperSmall')}
+                height={EStyleSheet.value('$spacingSuperSmall')}
               />
               <Text style={styles.details}>{rating.toFixed(2)}</Text>
               <View style={styles.seperator} />
@@ -50,8 +53,8 @@ const StoreInfoTile = (props) => {
             <View style={styles.rowContainer}>
               <View style={[styles.storeClosedContainer, styles.rowContainer]}>
                 <StoreClosed
-                  width={EStyleSheet.value('8rem')}
-                  height={EStyleSheet.value('8rem')}
+                  width={EStyleSheet.value('$spacingSmall')}
+                  height={EStyleSheet.value('$spacingSmall')}
                 />
                 <Text style={styles.storeClosedText}>
                   {Strings.storeClosed}
@@ -64,8 +67,8 @@ const StoreInfoTile = (props) => {
                   styles.rowContainer,
                 ]}>
                 <StoreShop
-                  width={EStyleSheet.value('8rem')}
-                  height={EStyleSheet.value('8rem')}
+                  width={EStyleSheet.value('$spacingSmall')}
+                  height={EStyleSheet.value('$spacingSmall')}
                 />
                 <Text style={[styles.storeClosedText, styles.storeShopText]}>
                   {Strings.orderNowGetAt +

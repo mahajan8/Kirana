@@ -127,8 +127,8 @@ const Addresses = (props) => {
               bordered
               Icon={
                 <PlusIcon
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('12rem')}
+                  width={EStyleSheet.value('$spacingMedium')}
+                  height={EStyleSheet.value('$spacingMedium')}
                 />
               }
               onPress={Actions.addressSearch}

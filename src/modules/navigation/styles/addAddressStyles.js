@@ -30,7 +30,7 @@ export const styles = EStyleSheet.create({
   },
   buttonStyle: {
     width: '70rem',
-    height: '37vrem',
+    height: '$spacingMediumHuge',
     borderRadius: '$spacingSmall',
     marginRight: '$spacingSuperSmall',
   },

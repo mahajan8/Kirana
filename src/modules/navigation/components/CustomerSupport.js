@@ -58,8 +58,8 @@ const CustomerSupport = (props) => {
           onPress={() => helpAction(index)}>
           <View style={[styles.imageContainer, {backgroundColor: iconBg}]}>
             <Icon
-              width={EStyleSheet.value('16rem')}
-              height={EStyleSheet.value('16rem')}
+              width={EStyleSheet.value('$spacingNormal')}
+              height={EStyleSheet.value('$spacingNormal')}
             />
           </View>
           <View style={styles.helpOptionTextContainer}>
@@ -68,8 +68,8 @@ const CustomerSupport = (props) => {
           </View>
 
           <RightArrow
-            width={EStyleSheet.value('10rem')}
-            height={EStyleSheet.value('10rem')}
+            width={EStyleSheet.value('$spacingSuperSmall')}
+            height={EStyleSheet.value('$spacingSuperSmall')}
           />
         </Pressable>
         {index < options.length - 1 && <View style={styles.seperator} />}

@@ -34,7 +34,7 @@ const Button = (props) => {
               : Colors.white,
           },
           labelStyle && labelStyle,
-          Icon && {marginLeft: EStyleSheet.value('6rem')},
+          Icon && {marginLeft: EStyleSheet.value('$spacingSmallExtreme')},
         ]}>
         {label}
       </Text>

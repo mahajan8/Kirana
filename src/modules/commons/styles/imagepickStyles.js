@@ -11,7 +11,7 @@ export const styles = EStyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     backgroundColor: '#FFF',
-    borderRadius: '5rem',
+    borderRadius: '$spacingSmallExtreme',
     paddingHorizontal: '$spacingExtraNormal',
     paddingTop: '$spacingNormal',
   },

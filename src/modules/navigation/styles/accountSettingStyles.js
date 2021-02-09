@@ -21,7 +21,7 @@ export const styles = EStyleSheet.create({
     color: Colors.darkGreen,
   },
   changeButton: {
-    width: '75rem',
+    width: '$spacingColossal',
     height: '$spacingLessHuge',
     borderRadius: '$spacingSmallExtreme',
     backgroundColor: Colors.lightGreen,

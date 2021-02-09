@@ -31,6 +31,8 @@ import {
   TourGuideZone, // Main wrapper of highlight component
 } from 'rn-tourguide';
 
+const statusUpdate = 'ORDER_STATUS_UPDATE';
+
 // Socket Configuration
 const pubnub = new PubNub({
   publishKey: AppConfig[environment].pubnubPublishKey,
@@ -79,52 +81,54 @@ const Home = (props) => {
     // Handler function for order Change from Socket Listener
     const {type, payload} = event.message;
 
-    let {id, status, store_name, store_id, order_code} = payload.order;
+    if (type === statusUpdate) {
+      let {id, status, store_name, store_id, order_code} = payload.order;
 
-    let order = {
-      id,
-      status,
-      store_name,
-      store_id,
-      order_code,
-    };
+      let order = {
+        id,
+        status,
+        store_name,
+        store_id,
+        order_code,
+      };
 
-    let {currentOrders} = store.getState().homeReducer;
+      let {currentOrders} = store.getState().homeReducer;
 
-    let i = currentOrders.findIndex((obj) => obj.id === id);
+      let i = currentOrders.findIndex((obj) => obj.id === id);
 
-    let newCurrentOrders = [...currentOrders];
+      let newCurrentOrders = [...currentOrders];
 
-    const {
-      ORDER_DELIVERED,
-      ORDER_CANCELLED,
-      ORDER_REJECTED,
-      ORDER_NOT_PLACED,
-    } = orderStatus;
+      const {
+        ORDER_DELIVERED,
+        ORDER_CANCELLED,
+        ORDER_REJECTED,
+        ORDER_NOT_PLACED,
+      } = orderStatus;
 
-    let removeStatus = [
-      ORDER_DELIVERED,
-      ORDER_CANCELLED,
-      ORDER_REJECTED,
-      ORDER_NOT_PLACED,
-    ];
+      let removeStatus = [
+        ORDER_DELIVERED,
+        ORDER_CANCELLED,
+        ORDER_REJECTED,
+        ORDER_NOT_PLACED,
+      ];
 
-    if (i >= 0) {
-      if (removeStatus.includes(status)) {
-        // Remove from Currently Active Orders if Order Delivered
-        newCurrentOrders.splice(i, 1);
-      } else if (status !== newCurrentOrders[i].status) {
-        // Update Status of Order if status is changed
-        newCurrentOrders[i] = order;
+      if (i >= 0) {
+        if (removeStatus.includes(status)) {
+          // Remove from Currently Active Orders if Order Delivered
+          newCurrentOrders.splice(i, 1);
+        } else if (status !== newCurrentOrders[i].status) {
+          // Update Status of Order if status is changed
+          newCurrentOrders[i] = order;
+        }
+      } else {
+        // Add to currently active orders if not exits already, and status is not delivered.
+        if (!removeStatus.includes(status)) {
+          newCurrentOrders.push(order);
+        }
       }
-    } else {
-      // Add to currently active orders if not exits already, and status is not delivered.
-      if (!removeStatus.includes(status)) {
-        newCurrentOrders.push(order);
-      }
+
+      props.setCurrentOrders(newCurrentOrders);
     }
-
-    props.setCurrentOrders(newCurrentOrders);
   };
 
   const searchProductHeader = () => {
@@ -137,8 +141,8 @@ const Home = (props) => {
             onPress={Actions.searchStoreProducts}
             android_ripple={ripple}>
             <Search
-              width={EStyleSheet.value('14rem')}
-              height={EStyleSheet.value('14rem')}
+              width={EStyleSheet.value('$spacingExtraMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
             />
             <Text style={styles.textInput}>{Strings.searchProduct}</Text>
           </Pressable>

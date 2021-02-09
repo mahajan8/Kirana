@@ -60,8 +60,8 @@ export const styles = EStyleSheet.create({
   },
   markerInnerContainer: {
     position: 'absolute',
-    height: '30rem',
-    width: '30rem',
+    height: '$spacingLessHuge',
+    width: '$spacingLessHuge',
     justifyContent: 'center',
     alignItems: 'center',
   },

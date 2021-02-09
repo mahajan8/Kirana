@@ -13,7 +13,7 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontExtraNormal',
     borderWidth: 1,
     borderColor: Colors.borderGray,
-    borderRadius: '10rem',
+    borderRadius: '$spacingSuperSmall',
     color: Colors.titleText,
     fontFamily: Fonts.medium,
     ...(Platform.OS == 'android' && {

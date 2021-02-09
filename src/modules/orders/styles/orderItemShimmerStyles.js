@@ -29,7 +29,7 @@ export const styles = EStyleSheet.create({
   },
   itemName2: {
     height: '$spacingNormalMedium',
-    width: '80rem',
+    width: '$spacingSuperColossal',
     backgroundColor: Colors.placeHolder,
     marginTop: '$spacingTiny',
   },

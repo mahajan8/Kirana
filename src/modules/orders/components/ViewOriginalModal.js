@@ -21,8 +21,8 @@ const ViewOriginalModal = (props) => {
 
           <Pressable onPress={() => setVisible(false)}>
             <Cross
-              width={EStyleSheet.value('14rem')}
-              height={EStyleSheet.value('14rem')}
+              width={EStyleSheet.value('$spacingExtraMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
             />
           </Pressable>
         </View>

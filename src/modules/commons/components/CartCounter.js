@@ -22,8 +22,8 @@ const CartCounter = (props) => {
       onPress={onCartClicked}
       android_ripple={ripple}>
       <Cart
-        width={EStyleSheet.value('14rem')}
-        height={EStyleSheet.value('14rem')}
+        width={EStyleSheet.value('$spacingExtraMedium')}
+        height={EStyleSheet.value('$spacingExtraMedium')}
       />
       <Text style={styles.count}>{item_quantity_count}</Text>
     </Pressable>

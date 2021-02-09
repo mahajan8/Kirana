@@ -60,14 +60,14 @@ const CartHeader = (props) => {
         {drawer ? (
           <Menu
             style={styles.leftButton}
-            width={EStyleSheet.value('18rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
         ) : (
           <Back
             style={styles.leftButton}
-            width={EStyleSheet.value('18rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
         )}
       </Pressable>
@@ -79,8 +79,8 @@ const CartHeader = (props) => {
       ) : search ? (
         <View style={styles.searchContainer}>
           <Search
-            width={EStyleSheet.value('14rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingExtraMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <TextInput
             style={styles.textInput}
@@ -101,8 +101,8 @@ const CartHeader = (props) => {
           style={[styles.locationContainer, styles.rowContainer]}
           onPress={selectLocation && selectLocation}>
           <Location
-            width={EStyleSheet.value('12rem')}
-            height={EStyleSheet.value('12rem')}
+            width={EStyleSheet.value('$spacingMedium')}
+            height={EStyleSheet.value('$spacingMedium')}
           />
           <Text style={styles.locationTitle}>
             {location

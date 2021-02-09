@@ -16,7 +16,7 @@ export const styles = EStyleSheet.create({
   },
   innerContainer: {
     backgroundColor: Colors.white,
-    borderRadius: '15rem',
+    borderRadius: '$spacingNormal',
     paddingVertical: '$spacingExtraNormal',
     paddingHorizontal: '$spacingLessHuge',
   },
@@ -43,7 +43,7 @@ export const styles = EStyleSheet.create({
   buttonStyle: {
     width: '122rem',
     height: '$spacingMediumHuge',
-    borderRadius: '6rem',
+    borderRadius: '$spacingSmallExtreme',
   },
   buttonLabel: {
     fontSize: '$spacingSuperSmall',

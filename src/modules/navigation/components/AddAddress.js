@@ -100,8 +100,8 @@ const AddAddress = (props) => {
             <Marker coordinate={{latitude: lat, longitude: lng}}>
               <CustomMarker
                 style={styles.marker}
-                width={EStyleSheet.value('42rem')}
-                height={EStyleSheet.value('42rem')}
+                width={EStyleSheet.value('$spacingExtraHuge')}
+                height={EStyleSheet.value('$spacingExtraHuge')}
               />
             </Marker>
           </MapView>
@@ -112,8 +112,8 @@ const AddAddress = (props) => {
           <View style={styles.rowContainer}>
             <View style={styles.rowContainer}>
               <Location
-                width={EStyleSheet.value('12rem')}
-                height={EStyleSheet.value('14rem')}
+                width={EStyleSheet.value('$spacingMedium')}
+                height={EStyleSheet.value('$spacingExtraMedium')}
               />
               <Text style={styles.locationTitle} numberOfLines={1}>
                 {formatted_address}

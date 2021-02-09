@@ -124,7 +124,10 @@ const TrackOrderInfo = (props) => {
 
   const maxHeight = animCollapsed.interpolate({
     inputRange: [0, 1],
-    outputRange: [EStyleSheet.value('100vrem'), EStyleSheet.value('250vrem')],
+    outputRange: [
+      EStyleSheet.value('$spacingTitan'),
+      EStyleSheet.value('250vrem'),
+    ],
   });
 
   const getPaymentStatus = () => {
@@ -159,8 +162,8 @@ const TrackOrderInfo = (props) => {
         {Icon && (
           <Icon
             style={styles.checkIcon}
-            width={EStyleSheet.value('26rem')}
-            height={EStyleSheet.value('26rem')}
+            width={EStyleSheet.value('$spacingExtraLarge')}
+            height={EStyleSheet.value('$spacingExtraLarge')}
           />
         )}
       </View>
@@ -193,8 +196,8 @@ const TrackOrderInfo = (props) => {
               Linking.openURL(`tel:+91${rider_contact}`);
             }}>
             <Phone
-              width={EStyleSheet.value('14rem')}
-              height={EStyleSheet.value('14rem')}
+              width={EStyleSheet.value('$spacingExtraMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
             />
           </Pressable>
         </View>

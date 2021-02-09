@@ -47,7 +47,7 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
     flex: 1,
     height: '70vrem',
-    marginHorizontal: '16rem',
+    marginHorizontal: '$spacingNormal',
     justifyContent: 'center',
   },
   counter: {

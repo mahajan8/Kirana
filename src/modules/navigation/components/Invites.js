@@ -22,8 +22,8 @@ const Invites = () => {
         <Text style={styles.number}>7900171608</Text>
         <View style={styles.rowContainer}>
           <Check
-            width={EStyleSheet.value('14rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingExtraMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <Text style={styles.rewardDate}>Rewarded on 05 Oct</Text>
         </View>
@@ -32,8 +32,8 @@ const Invites = () => {
         <Text style={styles.number}>7900171608</Text>
         <View style={styles.rowContainer}>
           <Check
-            width={EStyleSheet.value('14rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingExtraMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <Text style={styles.rewardDate}>Rewarded on 05 Oct</Text>
         </View>

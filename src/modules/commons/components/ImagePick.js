@@ -27,9 +27,9 @@ const ImagePick = (props) => {
       options,
       (response) => {
         if (response.didCancel) {
-          console.log('User cancelled image picker');
+          // console.log('User cancelled image picker');
         } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
+          // console.log('ImagePicker Error: ', response.error);
         } else {
           onSelectImage(response);
           setVisible(false);
@@ -51,8 +51,8 @@ const ImagePick = (props) => {
             onPress={() => setVisible(false)}
             hitSlop={commonStyles.hitSlop}>
             <Cross
-              width={EStyleSheet.value('14rem')}
-              height={EStyleSheet.value('14vrem')}
+              width={EStyleSheet.value('$spacingExtraMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
             />
           </Pressable>
         </View>
@@ -62,8 +62,8 @@ const ImagePick = (props) => {
           style={styles.optionsView}
           onPress={() => openImagePicker(0)}>
           <Camera
-            width={EStyleSheet.value('17rem')}
-            height={EStyleSheet.value('13vrem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <Text style={styles.optionsText}>{Strings.camera}</Text>
         </Pressable>
@@ -73,8 +73,8 @@ const ImagePick = (props) => {
           style={styles.optionsView}
           onPress={() => openImagePicker(1)}>
           <Camera
-            width={EStyleSheet.value('17rem')}
-            height={EStyleSheet.value('13vrem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <Text style={styles.optionsText}>{Strings.gallery}</Text>
         </Pressable>

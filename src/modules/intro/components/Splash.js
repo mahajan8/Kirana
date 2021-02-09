@@ -92,7 +92,7 @@ const Splash = (props) => {
     <SafeArea statusBarColor={Colors.themeGreen}>
       <View style={styles.container}>
         <SplashLogo
-          height={EStyleSheet.value('40rem')}
+          height={EStyleSheet.value('$spacingExtraHuge')}
           width={EStyleSheet.value('210rem')}
         />
       </View>

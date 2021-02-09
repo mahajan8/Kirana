@@ -35,8 +35,8 @@ const ReferModal = (props) => {
               labelStyle={styles.buttonLabel}
               Icon={
                 <Whatsapp
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('12rem')}
+                  width={EStyleSheet.value('$spacingMedium')}
+                  height={EStyleSheet.value('$spacingMedium')}
                 />
               }
             />
@@ -47,8 +47,8 @@ const ReferModal = (props) => {
               bordered
               Icon={
                 <Share
-                  width={EStyleSheet.value('12rem')}
-                  height={EStyleSheet.value('12rem')}
+                  width={EStyleSheet.value('$spacingMedium')}
+                  height={EStyleSheet.value('$spacingMedium')}
                 />
               }
             />

@@ -17,16 +17,16 @@ export const styles = EStyleSheet.create({
     elevation: 5,
   },
   addAddressHeading: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     color: Colors.titleText,
   },
   addAddressSub: {
     letterSpacing: '0.17rem',
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     fontFamily: Fonts.regular,
     color: Colors.darkGray,
-    marginTop: '2rem',
+    marginTop: '$spacingTinyExtreme',
   },
   addAddressContainer: {
     marginLeft: '$spacingSuperSmall',
@@ -34,18 +34,18 @@ export const styles = EStyleSheet.create({
   },
   addButton: {
     width: '83rem',
-    height: '30vrem',
-    borderRadius: '6rem',
+    height: '$spacingLessHuge',
+    borderRadius: '$spacingSmallExtreme',
   },
   addButtonLabel: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
   },
   addressType: {
     fontFamily: Fonts.semiBold,
     textTransform: 'uppercase',
   },
   change: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.medium,
     color: Colors.themeGreen,
   },
@@ -71,10 +71,10 @@ export const styles = EStyleSheet.create({
     height: '44vrem',
   },
   loader: {
-    height: '50rem',
+    height: '$spacingMassive',
   },
   changeButton: {
-    height: '18vrem',
+    height: '$spacingNormalMedium',
     justifyContent: 'center',
   },
 });

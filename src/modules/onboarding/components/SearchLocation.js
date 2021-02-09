@@ -81,8 +81,8 @@ const Search = (props) => {
       renderLeftButton={() => (
         <SearchIcon
           style={styles.searchLogo}
-          width={EStyleSheet.value('14rem')}
-          height={EStyleSheet.value('14rem')}
+          width={EStyleSheet.value('$spacingExtraMedium')}
+          height={EStyleSheet.value('$spacingExtraMedium')}
         />
       )}
       styles={{
@@ -195,8 +195,8 @@ const Search = (props) => {
                 style={styles.addressImageContainer}
                 source={require('../../../assets/images/address_background.jpg')}>
                 <AddressIcon
-                  width={EStyleSheet.value('21rem')}
-                  height={EStyleSheet.value('24rem')}
+                  width={EStyleSheet.value('$spacingExtraNormal')}
+                  height={EStyleSheet.value('$spacingLarge')}
                 />
               </ImageBackground>
               <View>

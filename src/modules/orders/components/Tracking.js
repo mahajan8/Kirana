@@ -294,8 +294,8 @@ const Tracking = (props) => {
         ref={marker}>
         <View style={styles.driverMarker}>
           <Bike
-            width={EStyleSheet.value('30rem')}
-            height={EStyleSheet.value('30rem')}
+            width={EStyleSheet.value('$spacingLessHuge')}
+            height={EStyleSheet.value('$spacingLessHuge')}
           />
         </View>
       </Marker.Animated>

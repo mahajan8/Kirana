@@ -76,8 +76,8 @@ const StoreHeader = (props) => {
           // onPress={Actions.searchProducts}>
           onPress={() => Actions.algoliaSearch({storeId: storeDetails.id})}>
           <Search
-            width={EStyleSheet.value('15rem')}
-            height={EStyleSheet.value('15rem')}
+            width={EStyleSheet.value('$spacingNormal')}
+            height={EStyleSheet.value('$spacingNormal')}
           />
           <Text style={styles.searchText}>{Strings.searchProduct}</Text>
         </Pressable>

@@ -9,14 +9,14 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     marginTop: '$spacingLessHuge',
     color: Colors.title,
     letterSpacing: '0.18rem',
   },
   subTitle: {
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     lineHeight: '$spacingNormalMedium',
     letterSpacing: '0.2rem',

@@ -20,7 +20,7 @@ export const styles = EStyleSheet.create({
     width: '150rem',
   },
   productImage: {
-    height: '100rem',
+    height: '$spacingTitan',
     width: '100%',
     backgroundColor: Colors.placeHolder,
   },
