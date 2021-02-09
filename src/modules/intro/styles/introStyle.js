@@ -55,7 +55,6 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontTiny',
     color: '#424242',
     alignSelf: 'center',
-    marginTop: '$spacingExtraNormal',
     fontFamily: Fonts.medium,
   },
   greenText: {
@@ -65,5 +64,11 @@ export const styles = EStyleSheet.create({
   splashLogo: {
     width: '210rem',
     height: '$spacingExtraHuge',
+  },
+  shopkeeperContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '$spacingExtraNormal',
+    justifyContent: 'center',
   },
 });
