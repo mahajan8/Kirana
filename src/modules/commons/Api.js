@@ -9,24 +9,16 @@ import {Strings} from '../../utils/values/Strings';
 
 export const uploadMedia = (pars, fnc) => {
   return (dispatch) => {
-    instance
-      .post(Urls.upload, pars)
-      .then((res) => {
-        dispatch(setLoading(false));
-
-        const success = !res.data.error;
-        if (success) {
-          if (fnc) {
-            fnc(res.data.data);
-          }
-        } else {
-          alert(res.data.message);
+    instance.post(Urls.upload, pars).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        if (fnc) {
+          fnc(res.data.data);
         }
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(setLoading(false));
-      });
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
 };
 

@@ -39,23 +39,16 @@ export const getProductsByCategory = (pars) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
 
-    instance
-      .post(Urls.getProductsByCategory, formBody)
-      .then((res) => {
-        dispatch(setLoading(false));
-        const success = !res.data.error;
-        if (success) {
-          // Set Subcategories in reducer
-          const {store_products} = res.data.data;
-          dispatch(setSubcategoryProducts(store_products));
-        } else {
-          alert(res.data.message);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch(setLoading(false));
-      });
+    instance.post(Urls.getProductsByCategory, formBody).then((res) => {
+      const success = !res.data.error;
+      if (success) {
+        // Set Subcategories in reducer
+        const {store_products} = res.data.data;
+        dispatch(setSubcategoryProducts(store_products));
+      } else {
+        alert(res.data.message);
+      }
+    });
   };
 };
 

@@ -26,7 +26,11 @@ const PaymentStatus = (props) => {
     backHandler.current = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
-        handleBackPress();
+        if (Actions.currentScene === 'paymentStatus') {
+          handleBackPress();
+        } else {
+          Actions.pop();
+        }
         return true;
       },
     );
