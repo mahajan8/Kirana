@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {View, Text} from 'react-native';
 import {Strings} from '../../../utils/values/Strings';
 import Header from '../../commons/components/Header';
@@ -41,6 +41,7 @@ const pubnub = new PubNub({
 const TrackOrder = (props) => {
   let {orderDetails, selectedOrderId} = props.orderReducer;
   let {store_name} = orderDetails ? orderDetails : {};
+  let publishTimerId = useRef(null);
 
   const [showRejectedModal, setShowRejectedModal] = useState(false);
   const [currentLocation, setCurrentLocation] = useState({
@@ -54,7 +55,8 @@ const TrackOrder = (props) => {
     let pars = {
       order_id: selectedOrderId,
     };
-    props.getOrderDetails(pars, (startTime) => {
+    props.getOrderDetails(pars, (startTime, publishRequired, publishData) => {
+      //pubnub history call for getting latest location of already dispatched/on the way order's
       pubnub.fetchMessages(
         {
           channels: [channels],
@@ -84,6 +86,22 @@ const TrackOrder = (props) => {
           }
         },
       );
+
+      // pubnub periodic publish for we fast
+      if (publishRequired) {
+        publishTimerId.current = setInterval(() => {
+          pubnub.publish({
+            message: {
+              type: 'GET_DRIVER_LOCATION',
+              payload: {
+                delivery: publishData.delivery,
+                user_id: props.userDetails.id,
+              },
+            },
+            channel: publishData.channel,
+          });
+        }, 30000);
+      }
     });
 
     return () => {
@@ -104,6 +122,7 @@ const TrackOrder = (props) => {
 
     return () => {
       // Unsubscribe channels and remove listener when component unmounts
+      clearInterval(publishTimerId.current);
       pubnub.unsubscribe({channels});
       pubnub.removeListener(listener);
     };
@@ -121,10 +140,14 @@ const TrackOrder = (props) => {
           setShowRejectedModal(true);
         }
       } else if (type === driverStatus) {
-        setCurrentLocation({
-          latitude: payload.latitude,
-          longitude: payload.longitude,
-        });
+        const {latitude, longitude} = payload;
+        console.log({payload});
+        if (latitude && longitude) {
+          setCurrentLocation({
+            latitude: payload.latitude,
+            longitude: payload.longitude,
+          });
+        }
       }
     }
   };

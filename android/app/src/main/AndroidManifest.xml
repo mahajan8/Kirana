@@ -23,20 +23,20 @@
       <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="https://exp.host/@kiranakart-app/kiranakart" />
       <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="38.0.0" />
 
-      <meta-data
+      <!-- <meta-data
           android:name="CLEVERTAP_ACCOUNT_ID"
           android:value="TEST-Z8W-8KW-ZZ6Z"/>
       
       <meta-data
           android:name="CLEVERTAP_TOKEN"
-          android:value="TEST-03b-0b1"/>
-      <!-- <meta-data
+          android:value="TEST-03b-0b1"/> -->
+      <meta-data
           android:name="CLEVERTAP_ACCOUNT_ID"
           android:value="W8W-8KW-ZZ6Z"/>
       
       <meta-data
           android:name="CLEVERTAP_TOKEN"
-          android:value="03b-0b0"/> -->
+          android:value="03b-0b0"/>
       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc"/>
