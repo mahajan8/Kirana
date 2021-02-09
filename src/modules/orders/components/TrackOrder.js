@@ -107,25 +107,16 @@ const TrackOrder = (props) => {
       !publishTimerId.current
     ) {
       publishTimerId.current = setInterval(() => {
-        pubnub.publish(
-          {
-            message: {
-              type: 'GET_DRIVER_LOCATION',
-              payload: {
-                delivery: orderDetails.delivery,
-                user_id: props.userDetails.id,
-              },
+        pubnub.publish({
+          message: {
+            type: 'GET_DRIVER_LOCATION',
+            payload: {
+              delivery: orderDetails.delivery,
+              user_id: props.userDetails.id,
             },
-            channel: orderDetails.channel,
           },
-          function (status, response) {
-            if (status.error) {
-              console.log('publishing failed w/ status: ', status);
-            } else {
-              console.log('message published w/ server response: ', response);
-            }
-          },
-        );
+          channel: orderDetails.channel,
+        });
       }, 30000);
     }
   }, [orderDetails]);
