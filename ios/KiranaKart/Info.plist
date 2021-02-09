@@ -23,9 +23,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CleverTapAccountID</key>
-	<string>TEST-Z8W-8KW-ZZ6Z</string>
+	<string>W8W-8KW-ZZ6Z</string>
 	<key>CleverTapToken</key>
-	<string>TEST-03b-0b1</string>
+	<string>03b-0b0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
