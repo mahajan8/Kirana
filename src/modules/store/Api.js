@@ -53,7 +53,6 @@ export const getProductsByCategory = (pars) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setLoading(false));
       });
   };

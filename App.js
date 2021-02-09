@@ -80,28 +80,13 @@ export default class App extends Component {
       firebase.app(); // if already initialized, use that one
     }
     const fcmToken = await messaging().getToken();
-    console.log('FCM Token', fcmToken);
     if (fcmToken) {
       CleverTap.setPushToken('FCM-Token', fcmToken);
     } else {
-      console.log('FCM Token', 'No Token Received');
+      // console.log('FCM Token', 'No Token Received');
     }
   };
   initializeListeners = () => {
-    CleverTap.addListener(
-      CleverTap.CleverTapInAppNotificationButtonTapped,
-      (event) => {
-        console.log('Event', event);
-      },
-    );
-
-    CleverTap.addListener(
-      CleverTap.CleverTapInAppNotificationDismissed,
-      (event) => {
-        console.log('Event', event);
-      },
-    );
-
     CleverTap.addListener(
       CleverTap.CleverTapPushNotificationClicked,
       (event) => {

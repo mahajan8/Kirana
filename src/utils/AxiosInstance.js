@@ -48,7 +48,6 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
     let {disableLoading} = store.getState().authReducer;
 
     if (disableLoading) {
@@ -88,7 +87,6 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log('SERVER', error);
     let {disableLoading} = store.getState().authReducer;
 
     // if (!store.getState().errorReducer.disable) {

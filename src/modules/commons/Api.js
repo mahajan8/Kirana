@@ -24,7 +24,6 @@ export const uploadMedia = (pars, fnc) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setLoading(false));
       });
   };
@@ -88,7 +87,6 @@ export const getAddressFromLocation = (pars, callback, err) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       err(error);
     });
 };
