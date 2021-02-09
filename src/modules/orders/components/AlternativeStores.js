@@ -60,10 +60,7 @@ const AlternativeStores = (props) => {
 
   return (
     <SafeArea>
-      <CartHeader
-        location={orderDeliveryLocation}
-        selectLocation={() => console.log('location Change')}
-      />
+      <CartHeader location={orderDeliveryLocation} selectLocation={() => {}} />
       <FlatList
         data={alternativeStores}
         renderItem={({item}) => (

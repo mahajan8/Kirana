@@ -75,11 +75,10 @@ const HomeLocationCheck = (props) => {
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('Granted');
           setVisible(false);
           getLocation();
         } else {
-          console.log('Denied');
+          // console.log('Denied');
         }
       } else {
         request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then((result) => {
@@ -117,7 +116,6 @@ const HomeLocationCheck = (props) => {
       },
       (error) => {
         props.setLoading(false);
-        console.log(error);
       },
     );
   };

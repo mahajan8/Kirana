@@ -129,7 +129,7 @@ const Search = (props) => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         getLocation();
       } else {
-        console.log('Location permission denied');
+        // console.log('Location permission denied');
       }
     }
   };
@@ -158,7 +158,6 @@ const Search = (props) => {
       },
       (error) => {
         props.setLoading(false);
-        console.log(error);
       },
     );
   };

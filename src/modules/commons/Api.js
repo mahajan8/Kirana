@@ -80,7 +80,6 @@ export const getAddressFromLocation = (pars, callback, err) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       err(error);
     });
 };

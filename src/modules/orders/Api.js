@@ -169,7 +169,6 @@ export const getDirectionsPolyline = (pars, callback, err) => {
       callback(res.data);
     })
     .catch((error) => {
-      console.log(error);
       if (err) {
         err(error);
       }
