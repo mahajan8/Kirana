@@ -15,7 +15,6 @@ import {selectStore} from '../home/HomeActions';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
 import moment from 'moment';
-import {orderStatus} from '../../utils/values/Values';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -47,14 +46,7 @@ export const getOrderDetails = (pars, callback) => {
         let startTimeToken =
           moment(data.delivery?.delivery_start_time).unix() * 10000000;
         if (callback) {
-          const {channel, status, delivery} = data;
-          const {call_for_driver_status} = delivery;
-          const publishRequired =
-            call_for_driver_status &&
-            (status === orderStatus.ORDER_DELIVERY_ASSIGNED ||
-              status === orderStatus.ORDER_OUT_FOR_DELIVERY);
-          const publishData = {delivery, channel};
-          callback(startTimeToken, publishRequired, publishData);
+          callback(startTimeToken);
         }
       } else {
         alert(res.data.message);

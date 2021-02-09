@@ -55,7 +55,7 @@ const TrackOrder = (props) => {
     let pars = {
       order_id: selectedOrderId,
     };
-    props.getOrderDetails(pars, (startTime, publishRequired, publishData) => {
+    props.getOrderDetails(pars, (startTime) => {
       //pubnub history call for getting latest location of already dispatched/on the way order's
       pubnub.fetchMessages(
         {
@@ -86,22 +86,6 @@ const TrackOrder = (props) => {
           }
         },
       );
-
-      // pubnub periodic publish for we fast
-      if (publishRequired) {
-        publishTimerId.current = setInterval(() => {
-          pubnub.publish({
-            message: {
-              type: 'GET_DRIVER_LOCATION',
-              payload: {
-                delivery: publishData.delivery,
-                user_id: props.userDetails.id,
-              },
-            },
-            channel: publishData.channel,
-          });
-        }, 30000);
-      }
     });
 
     return () => {
@@ -114,6 +98,37 @@ const TrackOrder = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    // pubnub periodic publish for we fast
+    if (
+      (orderDetails?.status === orderStatus.ORDER_DELIVERY_ASSIGNED ||
+        orderDetails?.status === orderStatus.ORDER_OUT_FOR_DELIVERY) &&
+      orderDetails?.delivery.call_for_driver_status &&
+      !publishTimerId.current
+    ) {
+      publishTimerId.current = setInterval(() => {
+        pubnub.publish(
+          {
+            message: {
+              type: 'GET_DRIVER_LOCATION',
+              payload: {
+                delivery: orderDetails.delivery,
+                user_id: props.userDetails.id,
+              },
+            },
+            channel: orderDetails.channel,
+          },
+          function (status, response) {
+            if (status.error) {
+              console.log('publishing failed w/ status: ', status);
+            } else {
+              console.log('message published w/ server response: ', response);
+            }
+          },
+        );
+      }, 30000);
+    }
+  }, [orderDetails]);
   useEffect(() => {
     // Subscribe to channels and add listener for Socket Change
     let listener = {message: handleMessage};
@@ -141,7 +156,6 @@ const TrackOrder = (props) => {
         }
       } else if (type === driverStatus) {
         const {latitude, longitude} = payload;
-        console.log({payload});
         if (latitude && longitude) {
           setCurrentLocation({
             latitude: payload.latitude,
