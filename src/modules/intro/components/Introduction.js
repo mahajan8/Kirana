@@ -1,5 +1,12 @@
 import React, {useState, useRef} from 'react';
-import {View, Text, Dimensions, Pressable, Linking, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Pressable,
+  Linking,
+  Platform,
+} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {styles} from '../styles/introStyle';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -96,12 +103,12 @@ const Onboarding = () => {
             // }
           }}
         />
-        <Text style={styles.ownStore}>
-          {Strings.ownStore}
+        <View style={styles.shopkeeperContainer}>
+          <Text style={styles.ownStore}>{Strings.ownStore}</Text>
           <Pressable onPress={joinAsShop}>
             <Text style={styles.greenText}> {Strings.joinAsShop}</Text>
           </Pressable>
-        </Text>
+        </View>
       </View>
       <LocationCheck />
     </SafeArea>
