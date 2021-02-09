@@ -2,7 +2,12 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {View, Text, Dimensions, Animated, Platform} from 'react-native';
 import {styles} from '../styles/trackingStyles';
-import MapView, {Marker, AnimatedRegion, Polyline} from 'react-native-maps';
+import MapView, {
+  Marker,
+  AnimatedRegion,
+  Polyline,
+  PROVIDER_GOOGLE,
+} from 'react-native-maps';
 import TrackMarker from '../../../assets/images/track_marker.svg';
 import StoreIcon from '../../../assets/images/map_store.svg';
 import Bike from '../../../assets/images/bike.svg';

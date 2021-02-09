@@ -60,6 +60,7 @@ export const styles = EStyleSheet.create({
   },
   markerInnerContainer: {
     position: 'absolute',
+    alignSelf: 'center',
     height: '$spacingLessHuge',
     width: '$spacingLessHuge',
     justifyContent: 'center',
