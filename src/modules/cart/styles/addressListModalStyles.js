@@ -9,8 +9,8 @@ export const styles = EStyleSheet.create({
   innerContainer: {
     height: '90%',
     backgroundColor: Colors.white,
-    borderTopLeftRadius: '15rem',
-    borderTopRightRadius: '15rem',
+    borderTopLeftRadius: '$spacingNormal',
+    borderTopRightRadius: '$spacingNormal',
     overflow: 'hidden',
   },
   headingContainer: {
@@ -22,7 +22,7 @@ export const styles = EStyleSheet.create({
     justifyContent: 'space-between',
   },
   heading: {
-    fontSize: '16rem',
+    fontSize: '$fontNormal',
     fontFamily: Fonts.medium,
     lineHeight: '$spacingLarge',
     color: Colors.darkGreen,
@@ -37,27 +37,26 @@ export const styles = EStyleSheet.create({
     marginTop: '$spacingTinyExtreme',
   },
   addressType: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
     color: Colors.black2,
     textTransform: 'uppercase',
   },
   address: {
     marginTop: '$spacingTinyExtreme',
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     fontFamily: Fonts.regular,
     lineHeight: '$spacingExtraNormal',
     letterSpacing: '0.2rem',
     color: Colors.darkGray,
   },
   addNewAddress: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.themeGreen,
     marginLeft: '$spacingExtraNormal',
   },
   list: {
-    // paddingBottom: '20vrem',
     paddingVertical: '$spacingNormal',
     flexGrow: 1,
   },

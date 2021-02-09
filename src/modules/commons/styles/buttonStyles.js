@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   button: {
-    borderRadius: '10rem',
+    borderRadius: '$spacingSuperSmall',
     height: '50vrem',
     justifyContent: 'center',
     alignItems: 'center',
@@ -14,7 +14,7 @@ export const styles = EStyleSheet.create({
     flexDirection: 'row',
   },
   label: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
   },
   disabledButton: {

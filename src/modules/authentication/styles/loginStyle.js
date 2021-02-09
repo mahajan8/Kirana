@@ -4,7 +4,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
   termsText: {
-    fontSize: '10rem',
+    fontSize: '$fontSuperTiny',
     lineHeight: '$spacingNormalMedium',
     textAlign: 'center',
     fontFamily: Fonts.regular,
@@ -39,7 +39,7 @@ export const styles = EStyleSheet.create({
   },
   codeValue: {
     fontFamily: Fonts.medium,
-    fontSize: '19rem',
+    fontSize: '$fontExtraNormal',
     color: Colors.black,
   },
   numberInputContainer: {

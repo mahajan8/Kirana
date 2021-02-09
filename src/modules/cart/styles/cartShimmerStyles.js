@@ -7,13 +7,13 @@ export const styles = EStyleSheet.create({
     padding: '$spacingNormal',
   },
   seperator: {
-    height: '7vrem',
+    height: '$spacingSmall',
     backgroundColor: Colors.seperatorColor,
     width: '100%',
   },
   heading: {
-    height: '16vrem',
-    width: '100rem',
+    height: '$spacingNormal',
+    width: '$spacingTitan',
     backgroundColor: Colors.placeHolder,
   },
   rowContainer: {
@@ -22,40 +22,40 @@ export const styles = EStyleSheet.create({
   },
   storeNameContainer: {
     justifyContent: 'space-between',
-    marginBottom: '10vrem',
+    marginBottom: '$spacingSuperSmall',
   },
   addMore: {
-    height: '16vrem',
+    height: '$spacingNormal',
     width: '60rem',
     backgroundColor: Colors.placeHolder,
   },
   instructions: {
-    height: '16vrem',
+    height: '$spacingNormal',
     width: '300rem',
     backgroundColor: Colors.placeHolder,
   },
   deliveryTime: {
-    height: '14vrem',
+    height: '$spacingExtraMedium',
     width: '200rem',
     backgroundColor: Colors.placeHolder,
   },
   savings: {
-    height: '14vrem',
+    height: '$spacingExtraMedium',
     width: '200rem',
     backgroundColor: Colors.placeHolder,
   },
   detailsContainer: {
     paddingHorizontal: '$spacingNormal',
-    paddingVertical: '10vrem',
+    paddingVertical: '$spacingSuperSmall',
   },
   listItemSeperator: {
-    height: '24vrem',
+    height: '$spacingLarge',
   },
   itemContainer: {
     paddingHorizontal: '$spacingNormal',
   },
   footerContainer: {
-    marginTop: '20vrem',
+    marginTop: '$spacingExtraNormal',
   },
   borderedContainer: {
     borderWidth: '1rem',
@@ -63,7 +63,7 @@ export const styles = EStyleSheet.create({
     marginTop: '$spacingSuperSmall',
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
-    marginBottom: '14vrem',
+    marginBottom: '$spacingExtraMedium',
   },
   priceSeperator: {
     marginVertical: '$spacingSmallExtreme',
@@ -75,22 +75,22 @@ export const styles = EStyleSheet.create({
     justifyContent: 'space-between',
   },
   label: {
-    height: '14vrem',
-    width: '70rem',
+    height: '$spacingExtraMedium',
+    width: '$spacingExtraMassive',
     backgroundColor: Colors.placeHolder,
   },
   price: {
-    height: '14vrem',
-    width: '40rem',
+    height: '$spacingExtraMedium',
+    width: '$spacingExtraHuge',
     backgroundColor: Colors.placeHolder,
   },
   grandLabel: {
-    height: '20vrem',
+    height: '$spacingExtraNormal',
     width: '90rem',
     backgroundColor: Colors.placeHolder,
   },
   grandPrice: {
-    height: '20vrem',
+    height: '$spacingExtraNormal',
     width: '60rem',
     backgroundColor: Colors.placeHolder,
   },

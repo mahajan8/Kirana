@@ -56,8 +56,8 @@ const LocationCheck = (props) => {
         <View style={styles.innerContainer}>
           <View style={styles.rowContainer}>
             <LocationIcon
-              width={EStyleSheet.value('18rem')}
-              height={EStyleSheet.value('18rem')}
+              width={EStyleSheet.value('$spacingNormalMedium')}
+              height={EStyleSheet.value('$spacingNormalMedium')}
             />
             <Text style={styles.title}>{Strings.locationOff}</Text>
           </View>

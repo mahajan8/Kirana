@@ -13,7 +13,7 @@ export const styles = EStyleSheet.create({
     backgroundColor: Colors.themeGreen,
   },
   count: {
-    fontSize: '14rem',
+    fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
     color: Colors.white,
     marginLeft: '$spacingSmallExtreme',

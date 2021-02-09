@@ -17,8 +17,8 @@ const Language = () => {
     if (selected == option) {
       return (
         <Radio
-          height={EStyleSheet.value('20vrem')}
-          width={EStyleSheet.value('20rem')}
+          height={EStyleSheet.value('$spacingExtraNormal')}
+          width={EStyleSheet.value('$spacingExtraNormal')}
         />
       );
     } else {

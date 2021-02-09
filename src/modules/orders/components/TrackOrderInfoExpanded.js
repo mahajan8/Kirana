@@ -64,8 +64,8 @@ const TrackOrderInfoExpanded = (props) => {
               ) : index < currentObj ? (
                 // Checked icon if the status is already completed
                 <GreenCheck
-                  width={EStyleSheet.value('14rem')}
-                  height={EStyleSheet.value('14rem')}
+                  width={EStyleSheet.value('$spacingExtraMedium')}
+                  height={EStyleSheet.value('$spacingExtraMedium')}
                 />
               ) : (
                 // Empty circle pending order status

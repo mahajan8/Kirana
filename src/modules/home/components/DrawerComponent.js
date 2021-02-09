@@ -96,8 +96,8 @@ const DrawerComponent = (props) => {
 
       <Pressable style={styles.banner} android_ripple={ripple}>
         <FreeDelivery
-          width={EStyleSheet.value('56rem')}
-          height={EStyleSheet.value('37rem')}
+          width={EStyleSheet.value('$spacingMassive')}
+          height={EStyleSheet.value('$spacingMediumHuge')}
         />
 
         <View style={styles.freeDeliveryTextContainer}>
@@ -109,8 +109,8 @@ const DrawerComponent = (props) => {
 
         <View style={styles.arrow}>
           <RightArrow
-            width={EStyleSheet.value('12rem')}
-            height={EStyleSheet.value('12rem')}
+            width={EStyleSheet.value('$spacingMedium')}
+            height={EStyleSheet.value('$spacingMedium')}
           />
         </View>
       </Pressable>

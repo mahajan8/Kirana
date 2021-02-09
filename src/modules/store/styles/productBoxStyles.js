@@ -71,7 +71,7 @@ export const styles = EStyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginTop: '16rem',
+    marginTop: '$spacingNormal',
   },
   addLabel: {
     fontSize: '$spacingMedium',

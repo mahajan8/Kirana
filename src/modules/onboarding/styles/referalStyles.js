@@ -39,7 +39,7 @@ export const styles = EStyleSheet.create({
   },
   buttonStyle: {
     width: '134rem',
-    height: '36vrem',
+    height: '$spacingMediumHuge',
     backgroundColor: 'transparent',
     borderRadius: '$spacingSmallExtreme',
   },

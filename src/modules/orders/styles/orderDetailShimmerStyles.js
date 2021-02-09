@@ -28,7 +28,7 @@ export const styles = EStyleSheet.create({
   },
   orderTime: {
     height: '$spacingNormal',
-    width: '70rem',
+    width: '$spacingExtraMassive',
     backgroundColor: Colors.placeHolder,
     marginTop: '$spacingTiny',
   },
@@ -44,7 +44,7 @@ export const styles = EStyleSheet.create({
   },
   orderItemsListText: {
     height: '$spacingNormalMedium',
-    width: '80rem',
+    width: '$spacingSuperColossal',
     backgroundColor: Colors.placeHolder,
   },
   seperator: {
@@ -64,7 +64,7 @@ export const styles = EStyleSheet.create({
   },
   chargesText: {
     height: '$spacingNormal',
-    width: '70rem',
+    width: '$spacingExtraMassive',
     backgroundColor: Colors.placeHolder,
   },
   charges: {

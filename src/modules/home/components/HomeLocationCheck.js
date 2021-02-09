@@ -137,8 +137,8 @@ const HomeLocationCheck = (props) => {
 
         <Pressable style={styles.rowContainer} onPress={getPermission}>
           <CurrentLocation
-            width={EStyleSheet.value('12rem')}
-            height={EStyleSheet.value('12rem')}
+            width={EStyleSheet.value('$spacingMedium')}
+            height={EStyleSheet.value('$spacingMedium')}
           />
           <Text style={styles.buttonsText}>{Strings.turnOnLocation}</Text>
         </Pressable>

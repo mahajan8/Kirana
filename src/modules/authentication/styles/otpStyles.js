@@ -5,7 +5,7 @@ import {Fonts} from '../../../utils/values/Fonts';
 export const styles = EStyleSheet.create({
   resendText: {
     marginVertical: '$spacingExtraNormal',
-    fontSize: '12rem',
+    fontSize: '$fontTiny',
     letterSpacing: '0.2rem',
     textAlign: 'center',
     fontFamily: Fonts.medium,
@@ -14,7 +14,7 @@ export const styles = EStyleSheet.create({
     color: Colors.themeGreen,
   },
   errorMessage: {
-    fontSize: '11rem',
+    fontSize: '$fontSuperTiny',
     color: '#ea4e3c',
     letterSpacing: '0.22rem',
     fontFamily: Fonts.regular,

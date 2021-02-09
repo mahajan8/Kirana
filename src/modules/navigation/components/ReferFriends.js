@@ -16,13 +16,13 @@ const ReferFriends = () => {
     <SafeArea>
       <View style={styles.imageContainer}>
         <ReferImage
-          width={EStyleSheet.value('286rem')}
-          height={EStyleSheet.value('176rem')}
+          width={EStyleSheet.value('290rem')}
+          height={EStyleSheet.value('170rem')}
         />
         <Pressable style={styles.backButton} onPress={Actions.pop}>
           <Back
-            width={EStyleSheet.value('16rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingNormal')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
         </Pressable>
       </View>
@@ -38,8 +38,8 @@ const ReferFriends = () => {
               labelStyle={styles.buttonLabel}
               Icon={
                 <Whatsapp
-                  width={EStyleSheet.value('16rem')}
-                  height={EStyleSheet.value('16rem')}
+                  width={EStyleSheet.value('$spacingNormal')}
+                  height={EStyleSheet.value('$spacingNormal')}
                 />
               }
             />
@@ -50,8 +50,8 @@ const ReferFriends = () => {
               bordered
               Icon={
                 <Share
-                  width={EStyleSheet.value('16rem')}
-                  height={EStyleSheet.value('16rem')}
+                  width={EStyleSheet.value('$spacingNormal')}
+                  height={EStyleSheet.value('$spacingNormal')}
                 />
               }
             />

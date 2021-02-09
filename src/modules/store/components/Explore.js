@@ -27,23 +27,23 @@ const Explore = (props) => {
   // Category Layout Component
   const renderCategory = (item) => (
     <View style={styles.categoryContainerParent}>
-    <Pressable
-      android_ripple={ripple}
-      style={styles.categoryContainer}
-      onPress={() =>
-        Actions.storeSubCategories({
-          categoryName: item.name,
-          categoryId: item.id,
-        })
-      }>
-      <Image
-        style={styles.categoryImage}
-        source={{
-          uri: getMediaUrl(item.attachment ? item.attachment.path : null),
-        }}
-      />
-      <Text style={styles.categoryName}>{item.name}</Text>
-    </Pressable>
+      <Pressable
+        android_ripple={ripple}
+        style={styles.categoryContainer}
+        onPress={() =>
+          Actions.storeSubCategories({
+            categoryName: item.name,
+            categoryId: item.id,
+          })
+        }>
+        <Image
+          style={styles.categoryImage}
+          source={{
+            uri: getMediaUrl(item.attachment ? item.attachment.path : null),
+          }}
+        />
+        <Text style={styles.categoryName}>{item.name}</Text>
+      </Pressable>
     </View>
   );
 
@@ -53,14 +53,17 @@ const Explore = (props) => {
         style={[styles.searchContainer, commonStyles.shadow]}
         onPress={Actions.searchProducts}>
         <Search
-          width={EStyleSheet.value('14rem')}
-          height={EStyleSheet.value('14rem')}
+          width={EStyleSheet.value('$spacingExtraMedium')}
+          height={EStyleSheet.value('$spacingExtraMedium')}
         />
         <Text style={styles.searchProduct}>{Strings.searchProduct}...</Text>
         <CartCounter />
       </Pressable>
       <View style={styles.container}>
-        <Text style={styles.heading}>{Strings.groceryCategories}{selectedStore.name}</Text>
+        <Text style={styles.heading}>
+          {Strings.groceryCategories}
+          {selectedStore.name}
+        </Text>
         <FlatList
           data={props.storeCategories}
           keyExtractor={(item, index) => `categories${index}`}

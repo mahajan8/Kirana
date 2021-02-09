@@ -13,8 +13,8 @@ const OrderDetailShimmer = () => {
       <View style={styles.container}>
         <View style={styles.headerRow}>
           <Back
-            width={EStyleSheet.value('18rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
           <View style={styles.helpText} />
         </View>

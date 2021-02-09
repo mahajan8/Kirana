@@ -44,8 +44,8 @@ const Header = (props) => {
           }}
           hitSlop={commonStyles.hitSlop}>
           <Back
-            width={EStyleSheet.value('18rem')}
-            height={EStyleSheet.value('14rem')}
+            width={EStyleSheet.value('$spacingNormalMedium')}
+            height={EStyleSheet.value('$spacingExtraMedium')}
           />
         </Pressable>
 

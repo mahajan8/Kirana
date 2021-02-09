@@ -59,13 +59,13 @@ const Filters = (props) => {
       let selected = filterIndex === 0 ? selectedBrands : selectedCategories;
       return selected.includes(index) ? (
         <Checked
-          width={EStyleSheet.value('16rem')}
-          height={EStyleSheet.value('16rem')}
+          width={EStyleSheet.value('$spacingNormal')}
+          height={EStyleSheet.value('$spacingNormal')}
         />
       ) : (
         <Unchecked
-          width={EStyleSheet.value('16rem')}
-          height={EStyleSheet.value('16rem')}
+          width={EStyleSheet.value('$spacingNormal')}
+          height={EStyleSheet.value('$spacingNormal')}
         />
       );
     }

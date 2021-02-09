@@ -21,8 +21,8 @@ const MapOrderRejectedModal = (props) => {
         <View style={styles.imageContainer}>
           <Pressable style={styles.crossIcon}>
             <Cross
-              width={EStyleSheet.value('14rem')}
-              height={EStyleSheet.value('14rem')}
+              width={EStyleSheet.value('$spacingExtraMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
             />
           </Pressable>
           <OrderRejected />

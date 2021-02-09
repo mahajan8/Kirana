@@ -43,8 +43,8 @@ export const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   viewAllContainer: {
-    marginTop: '12vrem',
-    marginRight: '30rem',
+    marginTop: '$spacingMedium',
+    marginRight: '$spacingLessHuge',
     width: '110rem',
     height: '220vrem',
     justifyContent: 'center',

@@ -55,8 +55,8 @@ const Picker = (props) => {
               onPress={() => setVisible(false)}
               android_ripple={ripple}>
               <Cross
-                width={EStyleSheet.value('14rem')}
-                height={EStyleSheet.value('14vrem')}
+                width={EStyleSheet.value('$spacingExtraMedium')}
+                height={EStyleSheet.value('$spacingExtraMedium')}
               />
             </Pressable>
           </View>
@@ -79,8 +79,8 @@ const Picker = (props) => {
                 </Text>
                 {value == index && (
                   <Check
-                    width={EStyleSheet.value('17rem')}
-                    height={EStyleSheet.value('12rem')}
+                    width={EStyleSheet.value('$spacingNormalMedium')}
+                    height={EStyleSheet.value('$spacingMedium')}
                   />
                 )}
               </Pressable>
