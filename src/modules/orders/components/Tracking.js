@@ -18,6 +18,7 @@ import {getDirectionsPolyline} from '../Api';
 import {addressTypes, orderStatus} from '../../../utils/values/Values';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
+import {Colors} from '../../../utils/values/Colors';
 
 const screen = Dimensions.get('window');
 
@@ -41,6 +42,11 @@ const Tracking = (props) => {
     latitude: null,
     longitude: null,
   });
+
+  const [deliveryPolyline, setDeliveryPolyline] = useState([]);
+  const [deliveryTime, setDeliveryTime] = useState('');
+  const [pickupPolyline, setPickupPolyline] = useState([]);
+  const [pickupTime, setPickupTime] = useState('');
 
   const [markerCoordinate] = useState(
     new AnimatedRegion({
@@ -159,9 +165,6 @@ const Tracking = (props) => {
     return brng;
   };
 
-  const [polyline, setPolyline] = useState([]);
-  const [deliveryTime, setDeliveryTime] = useState('');
-
   const animate = (endCoords, duration, bearing) => {
     setNewRotation(bearing);
     Animated.timing(rotation, {
@@ -240,15 +243,23 @@ const Tracking = (props) => {
 
     getDirectionsPolyline(pars, (res) => {
       let {overview_polyline, legs} = res.routes[0];
+      let polyline = decodePolyline(overview_polyline.points);
+      let time = legs[0].duration.text;
 
-      setPolyline(decodePolyline(overview_polyline.points));
-      setDeliveryTime(legs[0].duration.text);
+      if (orderPicked) {
+        setDeliveryPolyline(polyline);
+        setDeliveryTime(time);
+      } else {
+        setPickupPolyline(polyline);
+        setPickupTime(time);
+      }
     });
   };
 
   const getMarker = (type = 0) => {
+    let duration = orderPicked ? deliveryTime : pickupTime;
     let showTime =
-      deliveryTime &&
+      duration &&
       !orderDelivered &&
       ((type === 0 && !orderPicked) || (type === 1 && orderPicked));
     // Get marker by address type.
@@ -260,11 +271,9 @@ const Tracking = (props) => {
             <View style={styles.markerInnerContainer}>
               {showTime ? (
                 <Text style={styles.deliveryTime}>
-                  {deliveryTime.split(' ')[0]}
+                  {duration.split(' ')[0]}
                   {'\n'}
-                  <Text style={styles.minutes}>
-                    {deliveryTime.split(' ')[1]}
-                  </Text>
+                  <Text style={styles.minutes}>{duration.split(' ')[1]}</Text>
                 </Text>
               ) : type === 0 ? (
                 <StoreIcon style={styles.markerIcon} />
@@ -321,8 +330,13 @@ const Tracking = (props) => {
           latitudeDelta: LATITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA,
         }}>
-        {polyline.length && !orderDelivered ? (
-          <Polyline coordinates={polyline} strokeWidth={2} />
+        {(deliveryPolyline.length || pickupPolyline.length) &&
+        !orderDelivered ? (
+          <Polyline
+            coordinates={orderPicked ? deliveryPolyline : pickupPolyline}
+            strokeWidth={4}
+            strokeColor={Colors.themeGreen}
+          />
         ) : null}
 
         {!orderDelivered && getDriver()}
