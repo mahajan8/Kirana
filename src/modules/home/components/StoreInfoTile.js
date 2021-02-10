@@ -33,8 +33,10 @@ const StoreInfoTile = (props) => {
         style={styles.storeImage}
         source={{uri: getMediaUrl(logo?.path ?? null)}}
       />
-      <View>
-        <Text style={styles.storeName}>{name}</Text>
+      <View style={styles.storeDetailsContainer}>
+        <Text style={styles.storeName} numberOfLines={2}>
+          {name}
+        </Text>
         <Text style={styles.storeLocation}>{location.short_address}</Text>
         <View style={styles.rowContainer}>
           {online && (

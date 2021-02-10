@@ -17,6 +17,9 @@ export const styles = EStyleSheet.create({
     borderRadius: '$spacingSmall',
     marginRight: '$spacingNormal',
   },
+  storeDetailsContainer: {
+    flex: 1,
+  },
   storeName: {
     fontSize: '$fontSmall',
     fontFamily: Fonts.medium,
