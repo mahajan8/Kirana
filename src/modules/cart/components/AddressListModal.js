@@ -30,7 +30,7 @@ const AddressListModal = (props) => {
         ) : (
           <RadioUnSelected style={styles.radio} />
         )}
-        <View>
+        <View style={styles.addressDetails}>
           <Text style={styles.addressType}>
             {getKeyByValue(addressTypes, type)}
           </Text>
@@ -38,6 +38,15 @@ const AddressListModal = (props) => {
             {block_address} {landmark}
           </Text>
         </View>
+
+        <Pressable
+          style={styles.editContainer}
+          onPress={() => {
+            setVisible(false);
+            Actions.addAddress({id, location: item.location, item});
+          }}>
+          <RadioSelected />
+        </Pressable>
       </Pressable>
     );
   };

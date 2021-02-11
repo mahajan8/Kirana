@@ -49,6 +49,7 @@ export const styles = EStyleSheet.create({
     lineHeight: '$spacingExtraNormal',
     letterSpacing: '0.2rem',
     color: Colors.darkGray,
+    flex: 1,
   },
   addNewAddress: {
     fontSize: '$fontSmall',
@@ -64,5 +65,12 @@ export const styles = EStyleSheet.create({
     marginVertical: '$spacingExtraMedium',
     paddingVertical: '$spacingSuperSmall',
     width: '200rem',
+  },
+  editContainer: {
+    justifyContent: 'center',
+    marginLeft: '16rem',
+  },
+  addressDetails: {
+    flex: 1,
   },
 });
