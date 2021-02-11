@@ -10,6 +10,7 @@ import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import {Actions} from 'react-native-router-flux';
 import {styles} from '../styles/addressListModalStyles';
+import {setLocation} from '../../onboarding/OnboardingActions';
 
 const AddressListModal = (props) => {
   let {visible, setVisible, location, addresses} = props;
@@ -87,8 +88,11 @@ const AddressListModal = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
+  location: state.homeReducer.location,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setLocation,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressListModal);

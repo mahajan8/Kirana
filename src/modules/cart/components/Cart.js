@@ -22,12 +22,14 @@ import {environment} from '../../../config/EnvConfig';
 import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
+import {setCartDetails} from '../CartActions';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
-  const [location, setLocation] = useState(props.location);
   const [instructions, setInstructions] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
+
+  let {userDetails, location} = props.homeReducer;
 
   let {cart} = props.cartReducer;
 
@@ -42,6 +44,7 @@ const Cart = (props) => {
     estimated_time_in_mins,
     has_out_of_stock,
   } = cart; //Destructuring cart object from cartReducer
+
   useEffect(() => {
     // If location present in homeReducer, load cart items.
     if (location) {
@@ -56,7 +59,7 @@ const Cart = (props) => {
     };
     props.getCart(pars);
   };
-  const {first_name, mobile} = props.userDetails;
+  const {first_name, mobile} = userDetails;
 
   const confirmOrder = () => {
     const pars = {
@@ -67,7 +70,7 @@ const Cart = (props) => {
     setPaymentLoading(true);
 
     // Create order and get Order ID
-    props.createOrder(pars, (orderId) => {
+    props.createOrder(pars, (referenceId, orderId) => {
       setPaymentLoading(false);
 
       // Set Order ID to Razorpay Options
@@ -78,7 +81,7 @@ const Cart = (props) => {
         key: AppConfig[environment].razorpayKey,
         amount: String(total_cost_price + delivery_fee),
         name: first_name || '',
-        order_id: orderId,
+        order_id: referenceId,
         prefill: {
           contact: mobile,
           name: first_name || '',
@@ -90,18 +93,31 @@ const Cart = (props) => {
       RazorpayCheckout.open(options)
         .then((razorpayData) => {
           // Get Reference key from razorpay and place order.
-          const data = {
-            payment_reference_id: orderId,
-            property: razorpayData,
+          // const data = {
+          //   payment_reference_id: orderId,
+          //   property: razorpayData,
+          // };
+          // props.placeOrder(data);
+
+          const cartData = {
+            ...cart,
+            item_quantity_count: 0,
+            product_list: {},
+            store: null,
+            store_id: null,
           };
-          props.placeOrder(data);
+
+          props.setCartDetails(cartData);
+          Actions.paymentStatus({success: true, orderId});
         })
         .catch((error) => {
-          const data = {
-            payment_reference_id: orderId,
-            property: null,
-          };
-          props.placeOrder(data);
+          // const data = {
+          //   payment_reference_id: referenceId,
+          //   property: null,
+          // };
+          // props.placeOrder(data);
+
+          Actions.paymentStatus({success: false});
         });
     });
   };
@@ -193,12 +209,7 @@ const Cart = (props) => {
       )}
 
       {/* Modal for displaying addresses */}
-      <AddressListModal
-        visible={addressModal}
-        setVisible={setAddressModal}
-        setLocation={setLocation}
-        location={location}
-      />
+      <AddressListModal visible={addressModal} setVisible={setAddressModal} />
 
       {/* <Loader show={props.loading} /> */}
     </SafeArea>
@@ -207,9 +218,8 @@ const Cart = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
-  location: state.homeReducer.location,
+  homeReducer: state.homeReducer,
   cartReducer: state.cartReducer,
-  userDetails: state.homeReducer.userDetails,
 });
 
 const mapDispatchToProps = {
@@ -217,6 +227,7 @@ const mapDispatchToProps = {
   selectStore,
   createOrder,
   placeOrder,
+  setCartDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

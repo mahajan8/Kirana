@@ -26,9 +26,10 @@ export const createOrder = (pars, callback) => {
     instance.post(Urls.createOrder, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
       if (success) {
-        const {reference_id} = res.data.data.payment;
+        const {payment, order} = res.data.data;
+
         // Return generated Reference id for Razorpay Payment
-        callback(reference_id);
+        callback(payment.reference_id, order.id);
       } else {
         alert(res.data.message);
       }
@@ -43,7 +44,6 @@ export const placeOrder = (pars) => {
       if (success) {
         const {cart, order} = res.data.data;
         // Place order and update cart Items in Reducer
-
         dispatch(setCartDetails(cart));
         Actions.paymentStatus({success, orderId: order.id});
       } else {
