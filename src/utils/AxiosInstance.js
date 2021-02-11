@@ -18,6 +18,7 @@ import {
 } from '../modules/authentication/AuthActions';
 // import {toggleCommentLoading} from '../modules/home/Actions';
 import NetInfo from '@react-native-community/netinfo';
+import {logout} from './utility/Utils';
 
 const instance = axios.create({
   baseURL: AppConfig[environment].baseUrl,
@@ -104,7 +105,7 @@ instance.interceptors.response.use(
     } else if (error.response.status === API_ERROR) {
       dispatch(setApiError(true));
     } else if (error.response.status === UNAUTHORIZED) {
-      dispatch(setApiError(true));
+      logout();
     } else {
       dispatch(setApiError(true));
     }
