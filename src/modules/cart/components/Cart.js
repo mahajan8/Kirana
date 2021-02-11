@@ -22,16 +22,17 @@ import {environment} from '../../../config/EnvConfig';
 import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
-import {setCartDetails} from '../CartActions';
+import {setCartDetails, setCartLocation} from '../CartActions';
+import {saveData, getData} from '../../../utils/utility/LocalStore';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [instructions, setInstructions] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
 
-  let {userDetails, location} = props.homeReducer;
+  let {userDetails} = props.homeReducer;
 
-  let {cart} = props.cartReducer;
+  let {cart, cartLocation} = props.cartReducer;
 
   let {
     total_cost_price,
@@ -46,16 +47,39 @@ const Cart = (props) => {
   } = cart; //Destructuring cart object from cartReducer
 
   useEffect(() => {
+    setInitialLocation();
+  }, []);
+
+  const setInitialLocation = async () => {
+    let addressId = await getData('last_address_id');
+
+    if (addressId) {
+      let address = props.addresses.find((obj) => obj.id === addressId);
+
+      if (address) {
+        let {id, type, location} = address;
+        let addressLocation = {...location, id, type};
+
+        props.setCartLocation(addressLocation);
+      } else {
+        props.setCartLocation(null);
+      }
+    } else {
+      props.setCartLocation(null);
+    }
+  };
+
+  useEffect(() => {
     // If location present in homeReducer, load cart items.
-    if (location) {
+    if (cartLocation) {
       getCartItems();
     }
-  }, [location]);
+  }, [cartLocation]);
 
   const getCartItems = () => {
     let pars = {
-      longitude: location.lng,
-      latitude: location.lat,
+      longitude: cartLocation.lng,
+      latitude: cartLocation.lat,
     };
     props.getCart(pars);
   };
@@ -63,7 +87,7 @@ const Cart = (props) => {
 
   const confirmOrder = () => {
     const pars = {
-      address_id: location.id,
+      address_id: cartLocation.id,
       payment_mode: 10,
       instructions: instructions,
     };
@@ -106,7 +130,7 @@ const Cart = (props) => {
             store: null,
             store_id: null,
           };
-
+          saveData('last_address_id', cartLocation.id);
           props.setCartDetails(cartData);
           Actions.paymentStatus({success: true, orderId});
         })
@@ -195,9 +219,13 @@ const Cart = (props) => {
             // Selected Address Bottom Component
             <CartSelectedAddress
               addAddress={() => {
-                setAddressModal(true);
+                if (props.addresses.length) {
+                  setAddressModal(true);
+                } else {
+                  Actions.addressSearch();
+                }
               }}
-              location={location}
+              location={cartLocation}
               deliverable={is_deliverable}
               totalAmount={total_cost_price + delivery_fee}
               loading={paymentLoading}
@@ -218,6 +246,7 @@ const Cart = (props) => {
 
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
+  addresses: state.navigationReducer.addresses,
   homeReducer: state.homeReducer,
   cartReducer: state.cartReducer,
 });
@@ -228,6 +257,7 @@ const mapDispatchToProps = {
   createOrder,
   placeOrder,
   setCartDetails,
+  setCartLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

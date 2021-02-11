@@ -10,10 +10,10 @@ import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import {Actions} from 'react-native-router-flux';
 import {styles} from '../styles/addressListModalStyles';
-import {setLocation} from '../../onboarding/OnboardingActions';
+import {setCartLocation} from '../CartActions';
 
 const AddressListModal = (props) => {
-  let {visible, setVisible, location, addresses} = props;
+  let {visible, setVisible, cartLocation, addresses} = props;
 
   //Address Box Layout
   const renderAddress = (item) => {
@@ -22,11 +22,11 @@ const AddressListModal = (props) => {
       <Pressable
         style={styles.addressContainer}
         onPress={() => {
-          props.setLocation({...item.location, id, type});
+          props.setCartLocation({...item.location, id, type});
           setVisible(false);
         }}
         android_ripple={ripple}>
-        {location.id === id ? (
+        {cartLocation && cartLocation.id === id ? (
           <RadioSelected style={styles.radio} />
         ) : (
           <RadioUnSelected style={styles.radio} />
@@ -88,11 +88,11 @@ const AddressListModal = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
-  location: state.homeReducer.location,
+  cartLocation: state.cartReducer.cartLocation,
 });
 
 const mapDispatchToProps = {
-  setLocation,
+  setCartLocation,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddressListModal);

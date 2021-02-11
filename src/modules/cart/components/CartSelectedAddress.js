@@ -19,8 +19,11 @@ const CartSelectedAddress = (props) => {
     confirmOrder,
     loading,
     payDisable,
+    cartLocation,
   } = props;
-  let address = addresses.find((obj) => obj.id === location.id);
+
+  let address =
+    cartLocation && addresses.find((obj) => obj.id === cartLocation.id);
 
   return (
     <View>
@@ -30,16 +33,16 @@ const CartSelectedAddress = (props) => {
           styles.rowContainer,
           !deliverable && styles.notDeliverableContainer,
         ]}>
-        {!location.id || deliverable ? <AddressDownArrow /> : <ErrorIcon />}
+        {!cartLocation || deliverable ? <AddressDownArrow /> : <ErrorIcon />}
 
         <View style={styles.addAddressContainer}>
-          {location.id && address ? (
+          {cartLocation && address ? (
             <View>
               {deliverable && (
                 <Text style={styles.addAddressHeading}>
                   {Strings.deliverTo}{' '}
                   <Text style={styles.addressType}>
-                    {getKeyByValue(addressTypes, location.type)}
+                    {getKeyByValue(addressTypes, cartLocation.type)}
                   </Text>
                 </Text>
               )}
@@ -66,7 +69,7 @@ const CartSelectedAddress = (props) => {
           )}
         </View>
 
-        {location.id && deliverable ? (
+        {cartLocation && deliverable ? (
           // Change button to change address
           <Pressable
             onPress={props.addAddress}
@@ -85,7 +88,7 @@ const CartSelectedAddress = (props) => {
         )}
       </View>
 
-      {location.id && deliverable && (
+      {cartLocation && deliverable && (
         <View style={styles.paymentButtonContainer}>
           {loading ? (
             <ActivityIndicator
@@ -109,6 +112,7 @@ const CartSelectedAddress = (props) => {
 
 const mapStateToProps = (state) => ({
   addresses: state.navigationReducer.addresses,
+  cartLocation: state.cartReducer.cartLocation,
 });
 
 const mapDispatchToProps = {};

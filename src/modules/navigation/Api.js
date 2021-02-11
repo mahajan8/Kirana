@@ -4,8 +4,8 @@ import {getFormBody} from '../../utils/utility/Utils';
 import instance from '../../utils/AxiosInstance';
 import {Actions} from 'react-native-router-flux';
 import {setAddress} from './NavigationActions';
-import {setLocation} from '../onboarding/OnboardingActions';
 import {appendUserDetails} from '../home/HomeActions';
+import {setCartLocation} from '../cart/CartActions';
 
 export const addUpdateAddress = (pars, callback) => {
   return (dispatch) => {
@@ -27,7 +27,7 @@ export const addUpdateAddress = (pars, callback) => {
           Actions.popTo('addresses');
         } else if (cart) {
           let {id, type, location} = res.data.data.user_address;
-          dispatch(setLocation({...location, id, type}));
+          dispatch(setCartLocation({...location, id, type}));
           Actions.popTo('cart');
         } else {
           Actions.drawer();
