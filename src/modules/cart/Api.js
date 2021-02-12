@@ -5,14 +5,15 @@ import {setCartDetails} from './CartActions';
 import {Actions} from 'react-native-router-flux';
 import {setDisableLoading} from '../authentication/AuthActions';
 
-export const getCart = (pars) => {
+export const getCart = (pars, callback) => {
   return (dispatch) => {
     instance.post(Urls.getCart, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
       if (success) {
         const {cart} = res.data.data;
         // Store Cart Items in CartReducer
-        dispatch(setCartDetails(cart));
+        // dispatch(setCartDetails(cart));
+        callback(cart);
       } else {
         alert(res.data.message);
       }

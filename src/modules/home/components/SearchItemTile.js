@@ -1,5 +1,5 @@
 import React, {useState, memo} from 'react';
-import {View, Text, Image, Pressable, ActivityIndicator} from 'react-native';
+import {View, Text, Pressable, ActivityIndicator} from 'react-native';
 import {getKeyByValue, getMediaUrl, ripple} from '../../../utils/utility/Utils';
 import {Strings} from '../../../utils/values/Strings';
 import {unitsShortName} from '../../../utils/values/Values';

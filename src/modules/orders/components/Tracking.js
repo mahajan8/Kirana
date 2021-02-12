@@ -223,7 +223,7 @@ const Tracking = (props) => {
       final: currentLocation,
     };
 
-    getDirectionsPolyline(pars, (res) => {
+    props.getDirectionsPolyline(pars, (res) => {
       let {legs} = res.routes[0];
 
       animateLeg(legs[0].steps);
@@ -241,7 +241,7 @@ const Tracking = (props) => {
       final: orderPicked ? deliveryLocation : storeLocation,
     };
 
-    getDirectionsPolyline(pars, (res) => {
+    props.getDirectionsPolyline(pars, (res) => {
       let {overview_polyline, legs} = res.routes[0];
       let polyline = decodePolyline(overview_polyline.points);
       let time = legs[0].duration.text;
@@ -353,6 +353,8 @@ const mapStateToProps = (state) => ({
   orderDetails: state.orderReducer.orderDetails,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getDirectionsPolyline,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tracking);

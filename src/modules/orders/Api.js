@@ -15,6 +15,7 @@ import {selectStore} from '../home/HomeActions';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
 import moment from 'moment';
+import {setLoading} from '../authentication/AuthActions';
 
 export const getOrders = (pars, callback) => {
   return (dispatch) => {
@@ -148,29 +149,33 @@ export const submitOrderRating = (pars, callback) => {
 };
 
 export const getDirectionsPolyline = (pars, callback, err) => {
-  let {initial, final} = pars;
+  return (dispatch) => {
+    let {initial, final} = pars;
 
-  let params = {
-    origin: initial.latitude + ',' + initial.longitude,
-    destination: final.latitude + ',' + final.longitude,
-    key: AppConfig[environment].googlePlacesKey,
-    // key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
+    let params = {
+      origin: initial.latitude + ',' + initial.longitude,
+      destination: final.latitude + ',' + final.longitude,
+      key: AppConfig[environment].googlePlacesKey,
+      // key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
+    };
+
+    var data =
+      '?' +
+      Object.keys(params)
+        .map((key) => key + '=' + params[key])
+        .join('&');
+    dispatch(setLoading(true));
+    axios
+      .get(Urls.googlePolyline + data)
+      .then((res) => {
+        dispatch(setLoading(false));
+        callback(res.data);
+      })
+      .catch((error) => {
+        dispatch(setLoading(false));
+        if (err) {
+          err(error);
+        }
+      });
   };
-
-  var data =
-    '?' +
-    Object.keys(params)
-      .map((key) => key + '=' + params[key])
-      .join('&');
-
-  axios
-    .get(Urls.googlePolyline + data)
-    .then((res) => {
-      callback(res.data);
-    })
-    .catch((error) => {
-      if (err) {
-        err(error);
-      }
-    });
 };

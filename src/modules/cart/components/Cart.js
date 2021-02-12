@@ -24,13 +24,14 @@ import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
 import {setCartDetails, setCartLocation} from '../CartActions';
 import {saveData, getData} from '../../../utils/utility/LocalStore';
+import {getDirectionsPolyline} from '../../orders/Api';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [instructions, setInstructions] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
 
-  let {userDetails} = props.homeReducer;
+  let {userDetails, selectedStore} = props.homeReducer;
 
   let {cart, cartLocation} = props.cartReducer;
 
@@ -44,6 +45,7 @@ const Cart = (props) => {
     max_weight_limit_kg,
     estimated_time_in_mins,
     has_out_of_stock,
+    deliverable_distance_kms,
   } = cart; //Destructuring cart object from cartReducer
 
   useEffect(() => {
@@ -77,11 +79,38 @@ const Cart = (props) => {
   }, [cartLocation]);
 
   const getCartItems = () => {
-    let pars = {
+    let initial = {
       longitude: cartLocation.lng,
       latitude: cartLocation.lat,
     };
-    props.getCart(pars);
+
+    let final = {
+      longitude: selectedStore.geo_location.coordinates[0],
+      latitude: selectedStore.geo_location.coordinates[1],
+    };
+
+    props.getDirectionsPolyline({initial, final}, (res) => {
+      let {distance, duration} = res.routes[0].legs[0];
+
+      let pars = {
+        longitude: cartLocation.lng,
+        latitude: cartLocation.lat,
+      };
+      props.getCart(pars, (cartDetails) => {
+        let googleDeliverable =
+          distance.value / 1000 < deliverable_distance_kms;
+        let googleETA = duration.value / 60;
+        let cartDeliverable = cartDetails.is_deliverable;
+        let deliverable = cartDeliverable && googleDeliverable;
+
+        cartDetails = {
+          ...cartDetails,
+          is_deliverable: deliverable,
+          estimated_time_in_mins: googleETA + 15,
+        };
+        props.setCartDetails(cartDetails);
+      });
+    });
   };
   const {first_name, mobile} = userDetails;
 
@@ -258,6 +287,7 @@ const mapDispatchToProps = {
   placeOrder,
   setCartDetails,
   setCartLocation,
+  getDirectionsPolyline,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
