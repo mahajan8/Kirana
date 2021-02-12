@@ -5,7 +5,8 @@ import {styles} from '../styles/cartStyles';
 import InstructionsIcon from '../../../assets/images/cart_instructions.svg';
 import CartPaymentDetails from './CartPaymentDetails';
 
-const CartListFooter = ({instructions, setInstructions, estimatedTime}) => {
+const CartListFooter = (props) => {
+  let {instructions, setInstructions, estimatedTime, isDeliverable} = props;
 
   return (
     <View style={styles.footerContainer}>
@@ -21,14 +22,18 @@ const CartListFooter = ({instructions, setInstructions, estimatedTime}) => {
         />
       </View>
 
-      <View style={styles.seperator} />
+      {isDeliverable ? (
+        <View>
+          <View style={styles.seperator} />
 
-      <View style={styles.detailsContainer}>
-        <Text style={styles.detailsText}>
-          {Strings.estimatedDeliveryTime} {Math.ceil(estimatedTime)}
-          {' minutes'}
-        </Text>
-      </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsText}>
+              {Strings.estimatedDeliveryTime} {Math.ceil(estimatedTime)}
+              {' minutes'}
+            </Text>
+          </View>
+        </View>
+      ) : null}
 
       <View style={styles.seperator} />
 

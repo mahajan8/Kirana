@@ -88,8 +88,17 @@ const Addresses = (props) => {
           let pars = {
             address_id: deleteId,
           };
-
           props.deleteAddress(pars);
+          let {location} = props;
+
+          if (location && location.id) {
+            let isSame = props.location.id === deleteId;
+
+            if (isSame) {
+              delete location.id;
+              delete location.type;
+            }
+          }
           setDeleteVisible(false);
           setDeleteId(null);
         }}
@@ -156,6 +165,7 @@ const Addresses = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.authReducer.loading,
   navigationReducer: state.navigationReducer,
+  location: state.homeReducer.location,
 });
 
 const mapDispatchToProps = {

@@ -10,7 +10,7 @@ import CartEmptyImage from '../../../assets/images/empty_address.svg';
 import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
-import {checkCartDeliverability, checkCartServisable, getCart} from '../Api';
+import {checkCartServisable, getCart} from '../Api';
 import {selectStore} from '../../home/HomeActions';
 import CartListHeader from './CartListHeader';
 import CartListFooter from './CartListFooter';
@@ -24,7 +24,6 @@ import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
 import {setCartDetails, setCartLocation} from '../CartActions';
 import {saveData, getData} from '../../../utils/utility/LocalStore';
-import {getDirectionsPolyline} from '../../orders/Api';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
@@ -236,6 +235,7 @@ const Cart = (props) => {
                   instructions={instructions}
                   setInstructions={setInstructions}
                   estimatedTime={estimated_time_in_mins}
+                  isDeliverable={is_deliverable}
                 />
               )
             }
@@ -285,8 +285,6 @@ const mapDispatchToProps = {
   placeOrder,
   setCartDetails,
   setCartLocation,
-  getDirectionsPolyline,
-  checkCartDeliverability,
   checkCartServisable,
 };
 
