@@ -71,6 +71,7 @@ export const Strings = {
   oops: 'Oops!',
   somethingWentWrong: 'Something went wrong.',
   store: 'Store',
+  select: 'Select',
 
   chooseLanguage: 'Choose Language',
   loginTitle: 'Enter your mobile number',
@@ -225,7 +226,10 @@ export const Strings = {
   plusAddMore: '+ Add more',
   overWeightCartText: (weight) =>
     'Max. weight limit is ' + weight + ' kg . Reduce items to proceed.',
-  cartNotDeliverable: 'Delivery address not servicable, please add new address',
+  cartNotDeliverable: (addressType) =>
+    "Delivery address '" +
+    addressType +
+    "' is not servicable, please select another address",
   cartEmptyTitle: 'All your grocery needs are a click away',
   cartEmptySubTitle: 'Your cart is empty. Add items from nearby stores. ',
   addProducts: 'Add products',
@@ -316,4 +320,5 @@ export const Strings = {
   deliveryPartner: 'Delivery Partner',
   tourSearch: 'Search for Products in Stores',
   tourStore: 'Open Store to add products to cart',
+  pleaseSelectAddress: 'Please select delivery address',
 };

@@ -146,4 +146,9 @@ export const styles = EStyleSheet.create({
   fullContainer: {
     flex: 1,
   },
+  deliveryTimeShimmer: {
+    height: '$spacingExtraMedium',
+    width: '200rem',
+    backgroundColor: Colors.placeHolder,
+  },
 });

@@ -13,6 +13,7 @@ export const getCart = (pars, callback) => {
     instance.post(Urls.getCart, getFormBody(pars)).then((res) => {
       const success = !res.data.error;
       if (success) {
+        dispatch(setDisableLoading(false));
         const {cart} = res.data.data;
         // Store Cart Items in CartReducer
         dispatch(setCartDetails(cart));
@@ -62,6 +63,7 @@ export const checkCartDeliverability = (pars, callback) => {
     instance
       .post(Urls.checkCartDeliverablity, getFormBody(pars))
       .then((res) => {
+        dispatch(setDisableLoading(false));
         const success = !res.data.error;
         if (success) {
           let {delivery_response} = res.data.data;
@@ -87,7 +89,7 @@ export const checkCartServisable = (pars, callback, err) => {
       Object.keys(params)
         .map((key) => key + '=' + params[key])
         .join('&');
-    dispatch(setLoading(true));
+    dispatch(setDisableLoading(check ? true : false));
 
     const setDetails = (leg, isDeliverable) => {
       let {distance, duration} = leg;
@@ -107,7 +109,6 @@ export const checkCartServisable = (pars, callback, err) => {
     axios
       .get(Urls.googlePolyline + data)
       .then((res) => {
-        dispatch(setLoading(false));
         let isDeliverable = false;
 
         let func = null;
@@ -128,7 +129,7 @@ export const checkCartServisable = (pars, callback, err) => {
         dispatch(func);
       })
       .catch((error) => {
-        dispatch(setLoading(false));
+        dispatch(setDisableLoading(false));
         if (err) {
           err(error);
         }

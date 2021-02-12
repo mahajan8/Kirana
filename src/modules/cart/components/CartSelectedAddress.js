@@ -54,7 +54,9 @@ const CartSelectedAddress = (props) => {
                 {/* Check for address deliverable  */}
                 {deliverable
                   ? address.block_address + ' ' + address.landmark
-                  : Strings.cartNotDeliverable}
+                  : Strings.cartNotDeliverable(
+                      getKeyByValue(addressTypes, cartLocation.type),
+                    )}
               </Text>
             </View>
           ) : (
@@ -80,7 +82,7 @@ const CartSelectedAddress = (props) => {
         ) : (
           // Add Button if address not deliverable
           <Button
-            label={Strings.add}
+            label={addresses.length ? Strings.select : Strings.add}
             Style={styles.addButton}
             labelStyle={styles.addButtonLabel}
             onPress={props.addAddress}

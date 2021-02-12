@@ -24,6 +24,8 @@ import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
 import {setCartDetails, setCartLocation} from '../CartActions';
 import {saveData, getData} from '../../../utils/utility/LocalStore';
+import {getKeyByValue} from '../../../utils/utility/Utils';
+import {addressTypes} from '../../../utils/values/Values';
 
 const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
@@ -105,9 +107,11 @@ const Cart = (props) => {
       check: selectedLocation ? false : true,
       deliverableDistance: deliverable_distance_kms,
     };
+    setPaymentLoading(true);
 
     props.checkCartServisable(pars, () => {
       cartLoaded.current = true;
+      setPaymentLoading(false);
     });
   };
 
@@ -236,6 +240,12 @@ const Cart = (props) => {
                   setInstructions={setInstructions}
                   estimatedTime={estimated_time_in_mins}
                   isDeliverable={is_deliverable}
+                  addressType={
+                    cartLocation
+                      ? getKeyByValue(addressTypes, cartLocation.type)
+                      : null
+                  }
+                  loading={paymentLoading}
                 />
               )
             }
