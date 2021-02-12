@@ -24,8 +24,9 @@ const StoreSubCategories = (props) => {
       category_id: props.categoryId,
     };
     // Clear subcategory products and Call Api to get products
-    props.setSubcategoryProducts([]);
     props.getProductsByCategory(params);
+
+    return () => props.setSubcategoryProducts([]);
   }, []);
 
   const getSubCategoryList = () => {

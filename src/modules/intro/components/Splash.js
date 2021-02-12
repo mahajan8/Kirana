@@ -20,6 +20,7 @@ import {getAddressFromLocation} from '../../commons/Api';
 import Geolocation from 'react-native-geolocation-service';
 import CleverTap from 'clevertap-react-native';
 import store from '../../../utils/Store';
+import LoaderError from '../../commons/components/LoaderError';
 
 CleverTap.addListener(CleverTap.CleverTapPushNotificationClicked, (event) => {
   const {dispatch} = store;
@@ -96,6 +97,7 @@ const Splash = (props) => {
           width={EStyleSheet.value('210rem')}
         />
       </View>
+      <LoaderError retry={handleNavigation} hideLoader />
     </SafeArea>
   );
 };

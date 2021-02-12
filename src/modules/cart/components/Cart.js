@@ -10,7 +10,7 @@ import CartEmptyImage from '../../../assets/images/empty_address.svg';
 import CartSelectedAddress from './CartSelectedAddress';
 import {connect} from 'react-redux';
 import AddressListModal from './AddressListModal';
-import {checkCartDeliverability, getCart} from '../Api';
+import {checkCartDeliverability, checkCartServisable, getCart} from '../Api';
 import {selectStore} from '../../home/HomeActions';
 import CartListHeader from './CartListHeader';
 import CartListFooter from './CartListFooter';
@@ -75,85 +75,40 @@ const Cart = (props) => {
       let addressLocation = {...location, id, type};
 
       props.setCartLocation(addressLocation);
-      getCartItems(addressLocation);
+      checkServiceable(addressLocation);
     } else {
       props.setCartLocation(null);
-      getCartItems(props.homeReducer.location);
+      checkServiceable(props.homeReducer.location);
     }
   };
 
   useEffect(() => {
     // If location present in homeReducer, load cart items.
     if (cartLoaded.current) {
-      checkDeliveribility();
+      checkServiceable();
     }
   }, [cartLocation]);
 
-  const getCartItems = (selectedLocation) => {
+  const checkServiceable = (selectedLocation) => {
+    let {lat, lng} = selectedLocation ? selectedLocation : cartLocation;
     let initial = {
-      longitude: selectedLocation.lng,
-      latitude: selectedLocation.lat,
+      longitude: lng,
+      latitude: lat,
     };
 
     let final = {
       longitude: selectedStore.geo_location.coordinates[0],
       latitude: selectedStore.geo_location.coordinates[1],
     };
-
-    props.getDirectionsPolyline({initial, final}, (res) => {
-      let {distance, duration} = res.routes[0].legs[0];
-
-      let pars = initial;
-      props.getCart(pars, (cartDetails) => {
-        let googleDeliverable =
-          distance.value / 1000 < deliverable_distance_kms;
-        let googleETA = duration.value / 60;
-        let cartDeliverable = cartDetails.is_deliverable;
-        let deliverable = cartDeliverable && googleDeliverable;
-
-        cartDetails = {
-          ...cartDetails,
-          is_deliverable: deliverable,
-          estimated_time_in_mins: googleETA + 15,
-        };
-        props.setCartDetails(cartDetails);
-        cartLoaded.current = true;
-      });
-    });
-  };
-
-  const checkDeliveribility = () => {
-    console.log('deliveribility');
-
-    let initial = {
-      longitude: cartLocation.lng,
-      latitude: cartLocation.lat,
+    let pars = {
+      initial,
+      final,
+      check: selectedLocation ? false : true,
+      deliverableDistance: deliverable_distance_kms,
     };
 
-    let final = {
-      longitude: selectedStore.geo_location.coordinates[0],
-      latitude: selectedStore.geo_location.coordinates[1],
-    };
-
-    props.getDirectionsPolyline({initial, final}, (res) => {
-      let {distance, duration} = res.routes[0].legs[0];
-
-      props.checkCartDeliverability(initial, (deliveryResponse) => {
-        let googleDeliverable =
-          distance.value / 1000 < deliverable_distance_kms;
-        let googleETA = duration.value / 60;
-
-        let cartDeliverable = deliveryResponse.is_deliverable;
-        let deliverable = cartDeliverable && googleDeliverable;
-        console.log(deliveryResponse)
-        let cartDetails = {
-          ...cart,
-          is_deliverable: deliverable,
-          estimated_time_in_mins: googleETA + 15,
-        };
-        props.setCartDetails(cartDetails);
-        cartLoaded.current = true;
-      });
+    props.checkCartServisable(pars, () => {
+      cartLoaded.current = true;
     });
   };
 
@@ -332,6 +287,7 @@ const mapDispatchToProps = {
   setCartLocation,
   getDirectionsPolyline,
   checkCartDeliverability,
+  checkCartServisable,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

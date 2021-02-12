@@ -3,7 +3,10 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import {setCartDetails} from './CartActions';
 import {Actions} from 'react-native-router-flux';
-import {setDisableLoading} from '../authentication/AuthActions';
+import {setDisableLoading, setLoading} from '../authentication/AuthActions';
+import {AppConfig} from '../../config/AppConfig';
+import {environment} from '../../config/EnvConfig';
+import axios from 'axios';
 
 export const getCart = (pars, callback) => {
   return (dispatch) => {
@@ -12,8 +15,7 @@ export const getCart = (pars, callback) => {
       if (success) {
         const {cart} = res.data.data;
         // Store Cart Items in CartReducer
-        // dispatch(setCartDetails(cart));
-        console.log('get cart');
+        dispatch(setCartDetails(cart));
         callback(cart);
       } else {
         alert(res.data.message);
@@ -61,10 +63,74 @@ export const checkCartDeliverability = (pars, callback) => {
       .post(Urls.checkCartDeliverablity, getFormBody(pars))
       .then((res) => {
         const success = !res.data.error;
-
         if (success) {
           let {delivery_response} = res.data.data;
           callback(delivery_response);
+        }
+      });
+  };
+};
+
+export const checkCartServisable = (pars, callback, err) => {
+  return (dispatch) => {
+    let {initial, final, deliverableDistance, check} = pars;
+
+    let params = {
+      origin: initial.latitude + ',' + initial.longitude,
+      destination: final.latitude + ',' + final.longitude,
+      key: AppConfig[environment].googlePlacesKey,
+      // key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
+    };
+
+    var data =
+      '?' +
+      Object.keys(params)
+        .map((key) => key + '=' + params[key])
+        .join('&');
+    dispatch(setLoading(true));
+
+    const setDetails = (leg, isDeliverable) => {
+      let {distance, duration} = leg;
+      let googleDeliverable = distance.value / 1000 < deliverableDistance;
+      let googleETA = duration.value / 60;
+
+      let deliverable = isDeliverable && googleDeliverable;
+      let cartDetails = {
+        is_deliverable: deliverable,
+        estimated_time_in_mins: googleETA + 15,
+      };
+
+      dispatch(setCartDetails(cartDetails));
+      callback();
+    };
+
+    axios
+      .get(Urls.googlePolyline + data)
+      .then((res) => {
+        dispatch(setLoading(false));
+        let isDeliverable = false;
+
+        let func = null;
+
+        let {legs} = res.data.routes[0];
+
+        if (check) {
+          func = checkCartDeliverability(initial, (response) => {
+            isDeliverable = response.is_deliverable;
+            setDetails(legs[0], isDeliverable);
+          });
+        } else {
+          func = getCart(initial, (response) => {
+            isDeliverable = response.is_deliverable;
+            setDetails(legs[0], isDeliverable);
+          });
+        }
+        dispatch(func);
+      })
+      .catch((error) => {
+        dispatch(setLoading(false));
+        if (err) {
+          err(error);
         }
       });
   };
