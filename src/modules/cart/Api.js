@@ -13,6 +13,7 @@ export const getCart = (pars, callback) => {
         const {cart} = res.data.data;
         // Store Cart Items in CartReducer
         // dispatch(setCartDetails(cart));
+        console.log('get cart');
         callback(cart);
       } else {
         alert(res.data.message);
@@ -51,5 +52,20 @@ export const placeOrder = (pars) => {
         Actions.paymentStatus({success: false});
       }
     });
+  };
+};
+
+export const checkCartDeliverability = (pars, callback) => {
+  return (dispatch) => {
+    instance
+      .post(Urls.checkCartDeliverablity, getFormBody(pars))
+      .then((res) => {
+        const success = !res.data.error;
+
+        if (success) {
+          let {delivery_response} = res.data.data;
+          callback(delivery_response);
+        }
+      });
   };
 };

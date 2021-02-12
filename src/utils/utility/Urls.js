@@ -31,13 +31,14 @@ export const Urls = {
   acceptRejectOrder: '/commerce/order/accept-reject-consumer-order',
   submitOrderRating: '/commerce/order/add-order-rating',
   deleteCartItem: '/commerce/cart/delete-item-from-cart',
+  checkCartDeliverablity: '/commerce/delivery/check-deliverabilty',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
   googlePolyline: 'https://maps.googleapis.com/maps/api/directions/json',
   storePlayStoreLink:
-  'https://play.google.com/store/apps/details?id=app.kiranakart.store',
+    'https://play.google.com/store/apps/details?id=app.kiranakart.store',
   storeAppStoreLink:
-  'https://apps.apple.com/us/app/kiranakart-for-shopkeepers/id1547417992',
+    'https://apps.apple.com/us/app/kiranakart-for-shopkeepers/id1547417992',
 };
 
 // Postman Collection : https://www.getpostman.com/collections/ded852ca8b6569f7f386
