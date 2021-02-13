@@ -51,7 +51,6 @@ export const styles = EStyleSheet.create({
   },
   notDeliverable: {
     color: '#e96c76',
-    width: '160rem',
   },
   notDeliverableContainer: {
     alignItems: 'center',

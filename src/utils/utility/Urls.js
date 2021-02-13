@@ -34,7 +34,7 @@ export const Urls = {
   checkCartDeliverablity: '/commerce/delivery/check-deliverabilty',
 
   googleGeocode: 'https://maps.googleapis.com/maps/api/geocode/json',
-  googlePolyline: 'https://maps.googleapis.com/maps/api/directions/jsonn',
+  googlePolyline: 'https://maps.googleapis.com/maps/api/directions/json',
   storePlayStoreLink:
     'https://play.google.com/store/apps/details?id=app.kiranakart.store',
   storeAppStoreLink:
