@@ -19,6 +19,7 @@ export const styles = EStyleSheet.create({
     letterSpacing: '-0.2rem',
     color: Colors.darkGray,
     textTransform: 'uppercase',
+    marginBottom: '$spacingSuperSmall',
   },
   rowContainer: {
     flexDirection: 'row',
@@ -66,11 +67,10 @@ export const styles = EStyleSheet.create({
   borderedContainer: {
     borderWidth: '1rem',
     borderStyle: 'dashed',
-    marginTop: '$spacingSuperSmall',
     borderColor: '#b5d3a6',
     backgroundColor: 'rgba(232,244,226, 0.5)',
-    marginBottom: '$spacingExtraMedium',
     borderRadius: 0.1,
+    marginBottom: '$spacingExtraMedium',
   },
   priceLabel: {
     fontSize: '$fontSuperTiny',

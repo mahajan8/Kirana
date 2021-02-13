@@ -12,14 +12,17 @@ const CartPaymentDetails = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.grayHeading}>{Strings.paymentDetails}</Text>
-      <View style={[styles.borderedContainer, styles.detailsContainer]}>
-        <Text style={styles.detailsText}>
-          {Strings.youSaved} {Strings.currency}{' '}
-          {third_party_delivery_fee - delivery_fee} {Strings.onThisBill}
-        </Text>
-      </View>
+      {third_party_delivery_fee && (
+        <View style={[styles.borderedContainer, styles.detailsContainer]}>
+          <Text style={styles.detailsText}>
+            {Strings.youSaved} {Strings.currency}{' '}
+            {third_party_delivery_fee - delivery_fee} {Strings.onThisBill}
+          </Text>
+        </View>
+      )}
 
       {/* Sub total */}
+
       <View style={[styles.rowContainer, styles.priceContainer]}>
         <Text style={styles.priceLabel}>{Strings.subTotal}</Text>
         <Text style={styles.amount}>
@@ -33,9 +36,11 @@ const CartPaymentDetails = (props) => {
       <View style={[styles.rowContainer, styles.priceContainer]}>
         <Text style={styles.priceLabel}>{Strings.deliveryCharge}</Text>
         <View style={styles.rowContainer}>
-          <Text style={[styles.amount, styles.slicedAmount]}>
-            {Strings.currency} {third_party_delivery_fee}
-          </Text>
+          {third_party_delivery_fee && (
+            <Text style={[styles.amount, styles.slicedAmount]}>
+              {Strings.currency} {third_party_delivery_fee}
+            </Text>
+          )}
           <Text style={styles.amount}>
             {Strings.currency} {delivery_fee}
           </Text>

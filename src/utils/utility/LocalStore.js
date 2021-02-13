@@ -20,25 +20,16 @@ export const setAuthToken = async (token) => {
   }
 };
 
-export const removeAuthToken = async (token) => {
+export const removeAuthToken = async () => {
   try {
     await AsyncStorage.removeItem('token');
   } catch (e) {
     console.log(e);
   }
 };
-
-export const saveData = async (key, value) => {
+export const getLastOrderedAddress = async () => {
   try {
-    await AsyncStorage.setItem(key, value);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getData = async (key) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
+    const value = await AsyncStorage.getItem('last_address_id');
     if (value !== null) {
       return value;
     }
@@ -48,9 +39,17 @@ export const getData = async (key) => {
   return null;
 };
 
-export const removeData = async (key) => {
+export const setLastOrderedAddress = async (addressId) => {
   try {
-    await AsyncStorage.removeItem(key);
+    await AsyncStorage.setItem('last_address_id', addressId);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const removeLastOrderedAddress = async () => {
+  try {
+    await AsyncStorage.removeItem('last_address_id');
   } catch (e) {
     console.log(e);
   }

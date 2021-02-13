@@ -4,7 +4,7 @@ import {Strings} from '../values/Strings';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
 import Urls from './Urls';
-import {removeAuthToken} from './LocalStore';
+import {removeAuthToken, removeLastOrderedAddress} from './LocalStore';
 import {logoutUser} from '../../modules/authentication/AuthActions';
 import store from '../Store';
 import {Colors} from '../values/Colors';
@@ -220,6 +220,7 @@ export const getDateObject = (timeString) => {
 export const logout = () => {
   dispatch(logoutUser());
   removeAuthToken();
+  removeLastOrderedAddress();
   Actions.reset('introduction');
 };
 

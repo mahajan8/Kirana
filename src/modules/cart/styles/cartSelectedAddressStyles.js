@@ -58,7 +58,6 @@ export const styles = EStyleSheet.create({
     paddingVertical: '$spacingMedium',
   },
   paymentButtonContainer: {
-    paddingVertical: '$spacingSuperSmall',
     paddingHorizontal: '$spacingNormal',
     shadowOffset: {width: 0, height: -1},
     shadowOpacity: 0.05,
@@ -69,6 +68,7 @@ export const styles = EStyleSheet.create({
   payButton: {
     width: '100%',
     height: '44vrem',
+    marginVertical: '$spacingSuperSmall',
   },
   loader: {
     height: '$spacingMassive',

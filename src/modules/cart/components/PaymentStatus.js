@@ -54,6 +54,7 @@ const PaymentStatus = (props) => {
         label={success ? Strings.gotIt : Strings.tryAgain}
         onPress={() => {
           if (success) {
+            Actions.popTo('_home');
             Actions.trackOrder();
             props.setSelectedOrderId(orderId);
           } else {

@@ -23,7 +23,10 @@ import RazorpayCheckout from 'react-native-razorpay';
 import {Colors} from '../../../utils/values/Colors';
 import {createOrder, placeOrder} from '../Api';
 import {setCartDetails, setCartLocation} from '../CartActions';
-import {saveData, getData} from '../../../utils/utility/LocalStore';
+import {
+  getLastOrderedAddress,
+  setLastOrderedAddress,
+} from '../../../utils/utility/LocalStore';
 import {getKeyByValue} from '../../../utils/utility/Utils';
 import {addressTypes} from '../../../utils/values/Values';
 
@@ -32,8 +35,7 @@ const Cart = (props) => {
   const [instructions, setInstructions] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [gmapApiLoading, setGmapMapLoading] = useState(false);
-
-  let cartLoaded = useRef(false);
+  const [cartLoaded, setCartLoaded] = useState(false);
 
   let {userDetails, selectedStore} = props.homeReducer;
 
@@ -51,18 +53,16 @@ const Cart = (props) => {
     max_weight_limit_kg,
     estimated_time_in_mins,
     has_out_of_stock,
-    deliverable_distance_kms,
   } = cart; //Destructuring cart object from cartReducer
-
   useEffect(() => {
     setInitialLocation();
     return () => props.setCartLocation(null);
   }, []);
 
   const setInitialLocation = async () => {
-    let addressId = await getData('last_address_id');
+    let addressId = await getLastOrderedAddress();
 
-    let address = -1;
+    let address;
 
     if (props.homeReducer.location.id) {
       address = props.addresses.find(
@@ -71,22 +71,22 @@ const Cart = (props) => {
     } else if (addressId) {
       address = props.addresses.find((obj) => obj.id === addressId);
     }
-
     if (address) {
       let {id, type, location} = address;
       let addressLocation = {...location, id, type};
-
       props.setCartLocation(addressLocation);
       checkServiceable(addressLocation);
     } else {
       props.setCartLocation(null);
-      checkServiceable(props.homeReducer.location);
+      props.getCart({}, () => {
+        setCartLoaded(true);
+      });
     }
   };
 
   useEffect(() => {
     // If location present in homeReducer, load cart items.
-    if (cartLoaded.current) {
+    if (cartLoaded && cartLocation) {
       checkServiceable();
     }
   }, [cartLocation]);
@@ -94,25 +94,28 @@ const Cart = (props) => {
   const checkServiceable = (selectedLocation) => {
     let {lat, lng} = selectedLocation ? selectedLocation : cartLocation;
     let initial = {
-      longitude: lng,
-      latitude: lat,
+      longitude: selectedStore.geo_location.coordinates[0],
+      latitude: selectedStore.geo_location.coordinates[1],
     };
 
     let final = {
-      longitude: selectedStore.geo_location.coordinates[0],
-      latitude: selectedStore.geo_location.coordinates[1],
+      longitude: lng,
+      latitude: lat,
     };
     let pars = {
       initial,
       final,
-      check: selectedLocation ? false : true,
-      deliverableDistance: deliverable_distance_kms,
+      cartLoaded: cartLoaded,
     };
-    setGmapMapLoading(true);
+    if (cartLoaded) {
+      setGmapMapLoading(true);
+    }
 
     props.checkCartServisable(pars, () => {
-      cartLoaded.current = true;
-      setGmapMapLoading(false);
+      setCartLoaded(true);
+      if (cartLoaded) {
+        setGmapMapLoading(false);
+      }
     });
   };
 
@@ -155,7 +158,7 @@ const Cart = (props) => {
             store: null,
             store_id: null,
           };
-          saveData('last_address_id', cartLocation.id);
+          setLastOrderedAddress(cartLocation.id);
           props.setCartDetails(cartData);
           Actions.paymentStatus({success: true, orderId});
         })
@@ -205,7 +208,7 @@ const Cart = (props) => {
   return (
     <SafeArea>
       <Header title={Strings.confirmOrder} type={1} />
-      {props.loading ? (
+      {!cartLoaded ? (
         <CartShimmer />
       ) : (
         <View style={styles.fullContainer}>
@@ -254,7 +257,8 @@ const Cart = (props) => {
               location={cartLocation}
               deliverable={is_deliverable}
               totalAmount={total_cost_price + delivery_fee}
-              loading={paymentLoading || gmapApiLoading}
+              paymentLoading={paymentLoading}
+              gmapApiLoading={gmapApiLoading}
               confirmOrder={confirmOrder}
               payDisable={is_overweight || has_out_of_stock}
             />

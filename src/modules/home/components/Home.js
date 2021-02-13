@@ -80,7 +80,7 @@ const Home = (props) => {
   const handleMessage = async (event) => {
     // Handler function for order Change from Socket Listener
     const {type, payload} = event.message;
-
+    console.log({event})
     if (type === statusUpdate) {
       let {id, status, store_name, store_id, order_code} = payload.order;
 

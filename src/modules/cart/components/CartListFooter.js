@@ -14,7 +14,6 @@ const CartListFooter = (props) => {
     addressType,
     loading,
   } = props;
-
   return (
     <View style={styles.footerContainer}>
       <View style={styles.seperator} />

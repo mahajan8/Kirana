@@ -3,7 +3,7 @@ import {Urls} from '../../utils/utility/Urls';
 import {getFormBody} from '../../utils/utility/Utils';
 import {setCartDetails} from './CartActions';
 import {Actions} from 'react-native-router-flux';
-import {setDisableLoading, setLoading} from '../authentication/AuthActions';
+import {setDisableLoading} from '../authentication/AuthActions';
 import {AppConfig} from '../../config/AppConfig';
 import {environment} from '../../config/EnvConfig';
 import axios from 'axios';
@@ -17,7 +17,9 @@ export const getCart = (pars, callback) => {
         const {cart} = res.data.data;
         // Store Cart Items in CartReducer
         dispatch(setCartDetails(cart));
-        callback(cart);
+        if (callback) {
+          callback(cart);
+        }
       } else {
         alert(res.data.message);
       }
@@ -73,15 +75,14 @@ export const checkCartDeliverability = (pars, callback) => {
   };
 };
 
-export const checkCartServisable = (pars, callback, err) => {
+export const checkCartServisable = (pars, callback) => {
   return (dispatch) => {
-    let {initial, final, deliverableDistance, check} = pars;
+    let {initial, final, cartLoaded} = pars;
 
     let params = {
       origin: initial.latitude + ',' + initial.longitude,
       destination: final.latitude + ',' + final.longitude,
       key: AppConfig[environment].googlePlacesKey,
-      // key: 'AIzaSyCaZ-qdhBgi_kndrL-2CCzLCL8rLn86eUY',
     };
 
     var data =
@@ -89,14 +90,15 @@ export const checkCartServisable = (pars, callback, err) => {
       Object.keys(params)
         .map((key) => key + '=' + params[key])
         .join('&');
-    dispatch(setDisableLoading(check ? true : false));
+    dispatch(setDisableLoading(cartLoaded ? true : false));
 
-    const setDetails = (leg, isDeliverable) => {
+    const setServicabilityData = (leg, cartData) => {
+      const {is_deliverable, deliverable_distance_kms} = cartData;
       let {distance, duration} = leg;
-      let googleDeliverable = distance.value / 1000 < deliverableDistance;
+      let googleDeliverable = distance.value / 1000 < deliverable_distance_kms;
       let googleETA = duration.value / 60;
 
-      let deliverable = isDeliverable && googleDeliverable;
+      let deliverable = is_deliverable && googleDeliverable;
       let cartDetails = {
         is_deliverable: deliverable,
         estimated_time_in_mins: googleETA + 15,
@@ -109,30 +111,33 @@ export const checkCartServisable = (pars, callback, err) => {
     axios
       .get(Urls.googlePolyline + data)
       .then((res) => {
-        let isDeliverable = false;
-
         let func = null;
 
         let {legs} = res.data.routes[0];
 
-        if (check) {
-          func = checkCartDeliverability(initial, (response) => {
-            isDeliverable = response.is_deliverable;
-            setDetails(legs[0], isDeliverable);
+        if (cartLoaded) {
+          func = checkCartDeliverability(final, (response) => {
+            setServicabilityData(legs[0], response);
           });
         } else {
-          func = getCart(initial, (response) => {
-            isDeliverable = response.is_deliverable;
-            setDetails(legs[0], isDeliverable);
+          func = getCart(final, (response) => {
+            setServicabilityData(legs[0], response);
           });
         }
         dispatch(func);
       })
       .catch((error) => {
-        dispatch(setDisableLoading(false));
-        if (err) {
-          err(error);
+        let func = null;
+        // alert(cartLoaded);
+        if (cartLoaded) {
+          func = checkCartDeliverability(final, (cartDetails) => {
+            dispatch(setCartDetails(cartDetails));
+            callback();
+          });
+        } else {
+          func = getCart(final, callback);
         }
+        dispatch(func);
       });
   };
 };

@@ -1,11 +1,4 @@
 import axios from 'axios';
-import {Actions} from 'react-native-router-flux';
-// import {
-//   loading,
-//   noInternet,
-//   apiError,
-//   disableLoading,
-// } from '../modules/commons/error/Actions';
 import {AppConfig} from '../config/AppConfig';
 import {environment} from '../config/EnvConfig';
 import {getAuthToken} from './utility/LocalStore';
@@ -16,7 +9,6 @@ import {
   setApiError,
   setNoInternet,
 } from '../modules/authentication/AuthActions';
-// import {toggleCommentLoading} from '../modules/home/Actions';
 import NetInfo from '@react-native-community/netinfo';
 import {logout} from './utility/Utils';
 
@@ -89,7 +81,7 @@ instance.interceptors.response.use(
   },
   function (error) {
     let {disableLoading} = store.getState().authReducer;
-
+    console.log(error)
     // if (!store.getState().errorReducer.disable) {
     //   dispatch(loading(false));
     // } else {
