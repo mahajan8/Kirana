@@ -7,4 +7,11 @@ export const styles = EStyleSheet.create({
     marginBottom: 0,
     paddingBottom: '$spacingSmallExtreme',
   },
+  loaderContainer: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

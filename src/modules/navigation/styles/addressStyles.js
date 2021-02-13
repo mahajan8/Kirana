@@ -117,4 +117,8 @@ export const styles = EStyleSheet.create({
   modalButtonsContainer: {
     justifyContent: 'space-between',
   },
+  addressTypeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });

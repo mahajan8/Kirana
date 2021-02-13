@@ -5,6 +5,7 @@ import {styles} from '../styles/ratingStyles';
 import HeaderImage from '../../../assets/images/rating_header_image.svg';
 import Star from '../../../assets/images/star.svg';
 import StarSelected from '../../../assets/images/star_filled.svg';
+import Cross from '../../../assets/images/cross.svg';
 import {Strings} from '../../../utils/values/Strings';
 import Input from '../../commons/components/Input';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
@@ -13,6 +14,7 @@ import {commonStyles} from '../../commons/styles/commonStyles';
 import {submitOrderRating} from '../Api';
 import {connect} from 'react-redux';
 import LoaderError from '../../commons/components/LoaderError';
+import {Actions} from 'react-native-router-flux';
 
 let stars = [1, 2, 3, 4, 5];
 
@@ -22,7 +24,9 @@ const Rating = (props) => {
   const [groceryReason, setGroceryReason] = useState('');
   const [deliveryReason, setDeliveryReason] = useState('');
 
-  let {order_id, store_name} = props.order;
+  // let {order_id, store_name} = props.order;
+  let order_id;
+  let store_name;
 
   const submitRating = () => {
     let pars = {
@@ -56,11 +60,19 @@ const Rating = (props) => {
         keyboardShouldPersistTaps={'handled'}
         style={commonStyles.scrollContainer}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.headingContainer}>
-          <Text style={styles.heading}>
-            {Strings.ratingHeading} {store_name}
-          </Text>
-          <HeaderImage />
+        <View style={styles.blueContainer}>
+          <Pressable
+            style={styles.cross}
+            onPress={Actions.pop}
+            hitSlop={commonStyles.hitSlop}>
+            <Cross />
+          </Pressable>
+          <View style={styles.headingContainer}>
+            <Text style={styles.heading}>
+              {Strings.ratingHeading} {store_name}
+            </Text>
+            <HeaderImage />
+          </View>
         </View>
 
         <View style={styles.container}>

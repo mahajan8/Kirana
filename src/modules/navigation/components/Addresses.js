@@ -11,6 +11,8 @@ import {styles} from '../styles/addressStyles';
 import {connect} from 'react-redux';
 import PlusIcon from '../../../assets/images/green_plus.svg';
 import NoAddressImage from '../../../assets/images/empty_address.svg';
+import WorkIcon from '../../../assets/images/work_address.svg';
+import HomeIcon from '../../../assets/images/home_address.svg';
 import {getAddresses, deleteAddress} from '../Api';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue} from '../../../utils/utility/Utils';
@@ -33,9 +35,13 @@ const Addresses = (props) => {
 
     return (
       <View style={styles.addressBox}>
-        <Text style={styles.addressType}>
-          {getKeyByValue(addressTypes, type)}
-        </Text>
+        <View style={styles.addressTypeContainer}>
+          <HomeIcon width={30} height={30} />
+          <Text style={styles.addressType}>
+            {getKeyByValue(addressTypes, type)}
+          </Text>
+        </View>
+
         <Text style={styles.locationText}>
           {block_address} {landmark}
         </Text>

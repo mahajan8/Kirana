@@ -3,13 +3,19 @@ import {Colors} from '../../../utils/values/Colors';
 import {Fonts} from '../../../utils/values/Fonts';
 
 export const styles = EStyleSheet.create({
-  headingContainer: {
+  blueContainer: {
     backgroundColor: Colors.lightBlue,
     paddingVertical: '$spacingNormalMedium',
     paddingHorizontal: '$spacingExtraNormal',
+  },
+  headingContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  cross: {
+    alignSelf: 'flex-end',
+    marginBottom: '$spacingNormalMedium',
   },
   heading: {
     fontSize: '$fontSmall',
