@@ -50,7 +50,7 @@ const ProductDetails = (props) => {
   };
   return (
     <SafeArea>
-      <CartHeader title={product_name} />
+      <CartHeader />
       <View style={styles.container}>
         <Image
           source={{

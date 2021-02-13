@@ -69,6 +69,9 @@ export const styles = EStyleSheet.create({
   editContainer: {
     justifyContent: 'center',
     marginLeft: '16rem',
+    fontSize: '$fontTiny',
+    color: Colors.themeGreen,
+    fontFamily: Fonts.semiBold,
   },
   addressDetails: {
     flex: 1,

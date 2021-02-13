@@ -31,6 +31,7 @@ const Cart = (props) => {
   const [addressModal, setAddressModal] = useState(false);
   const [instructions, setInstructions] = useState('');
   const [paymentLoading, setPaymentLoading] = useState(false);
+  const [gmapApiLoading, setGmapMapLoading] = useState(false);
 
   let cartLoaded = useRef(false);
 
@@ -107,11 +108,11 @@ const Cart = (props) => {
       check: selectedLocation ? false : true,
       deliverableDistance: deliverable_distance_kms,
     };
-    setPaymentLoading(true);
+    setGmapMapLoading(true);
 
     props.checkCartServisable(pars, () => {
       cartLoaded.current = true;
-      setPaymentLoading(false);
+      setGmapMapLoading(false);
     });
   };
 
@@ -147,12 +148,6 @@ const Cart = (props) => {
       RazorpayCheckout.open(options)
         .then((razorpayData) => {
           // Get Reference key from razorpay and place order.
-          // const data = {
-          //   payment_reference_id: orderId,
-          //   property: razorpayData,
-          // };
-          // props.placeOrder(data);
-
           const cartData = {
             ...cart,
             item_quantity_count: 0,
@@ -165,12 +160,6 @@ const Cart = (props) => {
           Actions.paymentStatus({success: true, orderId});
         })
         .catch((error) => {
-          // const data = {
-          //   payment_reference_id: referenceId,
-          //   property: null,
-          // };
-          // props.placeOrder(data);
-
           Actions.paymentStatus({success: false});
         });
     });
@@ -245,7 +234,7 @@ const Cart = (props) => {
                       ? getKeyByValue(addressTypes, cartLocation.type)
                       : null
                   }
-                  loading={paymentLoading}
+                  loading={gmapApiLoading}
                 />
               )
             }
@@ -265,7 +254,7 @@ const Cart = (props) => {
               location={cartLocation}
               deliverable={is_deliverable}
               totalAmount={total_cost_price + delivery_fee}
-              loading={paymentLoading}
+              loading={paymentLoading || gmapApiLoading}
               confirmOrder={confirmOrder}
               payDisable={is_overweight || has_out_of_stock}
             />

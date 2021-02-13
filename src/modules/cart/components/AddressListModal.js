@@ -5,7 +5,6 @@ import ModalContainer from '../../commons/components/ModalContainer';
 import Cross from '../../../assets/images/cross.svg';
 import RadioSelected from '../../../assets/images/filter_radio_selected.svg';
 import RadioUnSelected from '../../../assets/images/filter_radio_unselected.svg';
-import EditIcon from '../../../assets/images/edit.svg';
 import {connect} from 'react-redux';
 import {addressTypes} from '../../../utils/values/Values';
 import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
@@ -41,14 +40,14 @@ const AddressListModal = (props) => {
           </Text>
         </View>
 
-        <Pressable
+        <Text
           style={styles.editContainer}
           onPress={() => {
             setVisible(false);
             Actions.addAddress({id, location: item.location, item});
           }}>
-          <RadioSelected />
-        </Pressable>
+          Edit
+        </Text>
       </Pressable>
     );
   };
