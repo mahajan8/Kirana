@@ -71,7 +71,7 @@ const Cart = (props) => {
     } else if (addressId) {
       address = props.addresses.find((obj) => obj.id === addressId);
     }
-    if (address) {
+    if (address && selectedStore) {
       let {id, type, location} = address;
       let addressLocation = {...location, id, type};
       props.setCartLocation(addressLocation);
