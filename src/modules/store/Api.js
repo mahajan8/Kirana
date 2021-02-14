@@ -107,6 +107,11 @@ export const updateProductQuantity = (pars, callback) => {
       dispatch(setLoadingProduct(null));
       if (success) {
         const {cart} = res.data.data;
+        // deleteing following attrb from cart obj as they are taken by google api
+        delete cart.is_deliverable;
+        delete cart.deliverable_distance_kms;
+        delete cart.estimated_time_in_mins;
+        delete cart.third_party_delivery_fee;
         dispatch(setCartDetails(cart));
       } else {
         alert(res.data.message);
