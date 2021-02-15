@@ -140,7 +140,7 @@ export const submitOrderRating = (pars, callback) => {
     instance.post(Urls.submitOrderRating, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
-        dispatch(getUserDetails());
+        Actions.pop();
       } else {
         alert(res.data.message);
       }

@@ -24,9 +24,7 @@ const Rating = (props) => {
   const [groceryReason, setGroceryReason] = useState('');
   const [deliveryReason, setDeliveryReason] = useState('');
 
-  // let {order_id, store_name} = props.order;
-  let order_id;
-  let store_name;
+  let {order_id, store_name} = props.order;
 
   const submitRating = () => {
     let pars = {
