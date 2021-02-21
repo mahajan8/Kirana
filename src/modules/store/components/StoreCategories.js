@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {View, Pressable, Animated, Text} from 'react-native';
 import SafeArea from '../../commons/components/SafeArea';
 import {Actions} from 'react-native-router-flux';
@@ -30,11 +30,21 @@ const StoreCategories = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (props.tabPressed !== null) {
+      listRef.current.scrollToIndex({
+        index: 0,
+        viewPosition: 1,
+      });
+    }
+  }, [props.tabPressed]);
+
   let {categoryProducts} = props.storeReducer;
   let {selectedStore} = props.homeReducer;
 
   const [scroll] = useState(new Animated.Value(0));
   const HEADER_HEIGHT = EStyleSheet.value('230vrem');
+  let listRef = useRef(null);
 
   const renderSticky = () => {
     // Search Bar appear when scrolled down state
@@ -139,6 +149,7 @@ const StoreCategories = (props) => {
           {useNativeDriver: true},
         )}
         bounces={false}
+        ref={listRef}
       />
       {/*<CurrentOrders />*/}
     </SafeArea>

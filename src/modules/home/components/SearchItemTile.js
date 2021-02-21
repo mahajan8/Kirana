@@ -21,6 +21,7 @@ const SearchItemTile = (props) => {
     product_id,
     product_brand,
     in_stock_product,
+    product_price,
   } = props.item;
 
   const [replaceAlert, setReplaceAlert] = useState(false);
@@ -91,10 +92,20 @@ const SearchItemTile = (props) => {
         {isOutStock ? (
           <Text style={styles.outStock}>{Strings.outOfStock}</Text>
         ) : (
-          <Text style={styles.price}>
-            {Strings.currency}{' '}
-            {cartProductObj ? cartProductObj.total_price : store_price}
-          </Text>
+          <View style={styles.priceContainer}>
+            <Text style={styles.price}>
+              {Strings.currency}{' '}
+              {cartProductObj ? cartProductObj.total_price : store_price}
+            </Text>
+            {!props.cart && (
+              <Text style={styles.strikedPrice}>
+                {Strings.currency}{' '}
+                {cartProductObj
+                  ? cartProductObj.product_price * cartProductObj.item_quantity
+                  : product_price}
+              </Text>
+            )}
+          </View>
         )}
 
         {loadingProductId !== product_id ? (

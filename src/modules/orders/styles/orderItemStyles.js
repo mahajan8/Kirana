@@ -7,13 +7,18 @@ export const styles = EStyleSheet.create({
     paddingHorizontal: '$spacingNormal',
     flexDirection: 'row',
   },
+  quantityContainer: {
+    justifyContent: 'center',
+  },
   itemCount: {
     color: Colors.themeGreen,
     fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     letterSpacing: '-0.22rem',
-    alignSelf: 'center',
     width: '$spacingHuge',
+  },
+  strikedCount: {
+    textDecorationLine: 'line-through',
   },
   itemImage: {
     width: '65rem',

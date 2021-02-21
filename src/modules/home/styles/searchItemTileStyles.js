@@ -43,7 +43,18 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: '#333333',
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: '$spacingSuperSmall',
+  },
+  strikedPrice: {
+    fontSize: '$fontTiny',
+    fontFamily: Fonts.medium,
+    color: Colors.grayText,
+    textDecorationLine: 'line-through',
+    marginLeft: '$spacingTiny',
   },
   quantityButton: {
     width: '$spacingExtraNormal',
