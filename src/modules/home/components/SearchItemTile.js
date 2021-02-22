@@ -97,7 +97,7 @@ const SearchItemTile = (props) => {
               {Strings.currency}{' '}
               {cartProductObj ? cartProductObj.total_price : store_price}
             </Text>
-            {!props.cart && (
+            {!props.cart && product_price > store_price && (
               <Text style={styles.strikedPrice}>
                 {Strings.currency}{' '}
                 {cartProductObj

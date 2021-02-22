@@ -19,6 +19,7 @@ export const styles = EStyleSheet.create({
   },
   strikedCount: {
     textDecorationLine: 'line-through',
+    color: Colors.grayText,
   },
   itemImage: {
     width: '65rem',
