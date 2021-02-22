@@ -88,6 +88,6 @@ export const styles = EStyleSheet.create({
     fontFamily: Fonts.medium,
     color: Colors.grayText,
     textDecorationLine: 'line-through',
-    marginLeft: '$spacingTiny',
+    marginLeft: '$spacingSmallExtreme',
   },
 });

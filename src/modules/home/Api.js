@@ -104,7 +104,6 @@ export const getStores = (pars) => {
 export const searchProductInStores = (pars) => {
   return (dispatch) => {
     var formBody = getFormBody(pars);
-
     instance.post(Urls.searchProductInStores, formBody).then((res) => {
       const success = !res.data.error;
       if (success) {
