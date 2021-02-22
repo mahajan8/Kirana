@@ -23,13 +23,13 @@ const OrderItem = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.quantityContainer}>
-        <Text style={styles.itemCount}>{item_quantity} x</Text>
         {old_order_product &&
           old_order_product.item_quantity !== item_quantity && (
             <Text style={[styles.itemCount, styles.strikedCount]}>
               {old_order_product.item_quantity} x
             </Text>
           )}
+        <Text style={styles.itemCount}>{item_quantity} x</Text>
       </View>
       <Image
         source={{
