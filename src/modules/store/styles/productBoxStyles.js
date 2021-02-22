@@ -21,8 +21,6 @@ export const styles = EStyleSheet.create({
     fontSize: '$fontSmall',
     fontFamily: Fonts.semiBold,
     color: Colors.titleText,
-    marginTop: '$spacingSmall',
-    marginBottom: '$spacingTinyExtreme',
   },
   name: {
     fontSize: '$fontSuperTiny',
@@ -79,4 +77,17 @@ export const styles = EStyleSheet.create({
     letterSpacing: '-0.1rem',
   },
   loader: {alignSelf: 'center'},
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '$spacingSmall',
+    marginBottom: '$spacingTinyExtreme',
+  },
+  strikedPrice: {
+    fontSize: '$fontTiny',
+    fontFamily: Fonts.medium,
+    color: Colors.grayText,
+    textDecorationLine: 'line-through',
+    marginLeft: '$spacingTiny',
+  },
 });

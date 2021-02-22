@@ -29,6 +29,7 @@ const ProductBox = (props) => {
     product_images,
     product_brand,
     product_id,
+    product_price,
   } = item; //Destructured item object to get product details
 
   const {selectedStore} = props.homeState;
@@ -67,11 +68,20 @@ const ProductBox = (props) => {
           }}
           style={styles.productImage}
         />
-        <Text style={styles.price}>
-          {Strings.currency}{' '}
-          {/* {cartProductObj ? cartProductObj.total_price : store_price} This shows multiplied price */}
-          {store_price}
-        </Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>
+            {Strings.currency}{' '}
+            {/* {cartProductObj ? cartProductObj.total_price : store_price} This shows multiplied price */}
+            {store_price}
+          </Text>
+          {product_price > store_price && (
+            <Text style={styles.strikedPrice}>
+              {Strings.currency}{' '}
+              {/* {cartProductObj ? cartProductObj.total_price : store_price} This shows multiplied price */}
+              {product_price}
+            </Text>
+          )}
+        </View>
         <Text style={styles.name} numberOfLines={2}>
           {product_name}
         </Text>

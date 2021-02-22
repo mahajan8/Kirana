@@ -37,10 +37,11 @@ let initialLayout = {height: 0, width: Dimensions.get('window').width};
 
 const Store = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [shopPressToggle, setShopPressToggle] = useState(null);
   const renderScene = ({route}) => {
     switch (route.key) {
       case 'first':
-        return <StoreCategories />;
+        return <StoreCategories tabPressed={shopPressToggle} />;
       case 'second':
         return <Explore />;
       case 'third':
@@ -73,6 +74,9 @@ const Store = (props) => {
   };
 
   const onChangeTab = (index) => {
+    if (index === 0) {
+      setShopPressToggle(shopPressToggle === null ? false : !shopPressToggle);
+    }
     setTabIndex(index);
   };
   return (
