@@ -57,7 +57,6 @@ const SearchItemTile = (props) => {
   };
 
   let isOutStock = props.cart && !in_stock_product;
-  let showStriked = !props.cart && product_price > store_price;
 
   return (
     <View style={[styles.rowContainer]}>
@@ -98,7 +97,7 @@ const SearchItemTile = (props) => {
               {Strings.currency}{' '}
               {cartProductObj ? cartProductObj.total_price : store_price}
             </Text>
-            {showStriked && (
+            {!props.cart && (
               <Text style={styles.strikedPrice}>
                 {Strings.currency}{' '}
                 {cartProductObj
