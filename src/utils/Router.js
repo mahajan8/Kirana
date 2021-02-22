@@ -35,6 +35,7 @@ import MyOrders from '../modules/navigation/components/MyOrders';
 import OrderCancelled from '../modules/orders/components/OrderCancelled';
 import AlternativeStores from '../modules/orders/components/AlternativeStores';
 import Rating from '../modules/orders/components/Rating';
+import PaymentOptions from '../modules/cart/components/PaymentOptions';
 
 const AppRouter = (notificationPayload) => {
   return (
@@ -79,6 +80,7 @@ const AppRouter = (notificationPayload) => {
         <Scene key="orderCancelled" component={OrderCancelled} />
         <Scene key="alternativeStores" component={AlternativeStores} />
         <Scene key="rating" component={Rating} />
+        <Scene key="paymentOptions" component={PaymentOptions} />
         <Scene
           key="drawer"
           drawer={true}
