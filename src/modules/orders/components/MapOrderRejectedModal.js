@@ -8,6 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
 import {Actions} from 'react-native-router-flux';
+import {commonStyles} from '../../commons/styles/commonStyles';
 
 const MapOrderRejectedModal = (props) => {
   let {visible, setVisible} = props;
@@ -19,7 +20,7 @@ const MapOrderRejectedModal = (props) => {
       containerStyle={styles.modalContainer}>
       <Pressable style={styles.container} onPress={() => setVisible(false)}>
         <View style={styles.imageContainer}>
-          <Pressable style={styles.crossIcon}>
+          <Pressable style={styles.crossIcon} hitSlop={commonStyles.hitSlop}>
             <Cross
               width={EStyleSheet.value('$spacingExtraMedium')}
               height={EStyleSheet.value('$spacingExtraMedium')}

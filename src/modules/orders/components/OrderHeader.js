@@ -15,6 +15,7 @@ import {
 import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import moment from 'moment';
 import {Actions} from 'react-native-router-flux';
+import {commonStyles} from '../../commons/styles/commonStyles';
 
 let paymentStatusList = [
   {
@@ -144,7 +145,10 @@ const OrderHeader = (props) => {
     <View>
       <View style={styles.container}>
         <View style={styles.orderInfoRow}>
-          <Pressable onPress={Actions.pop} android_ripple={ripple}>
+          <Pressable
+            onPress={Actions.pop}
+            android_ripple={ripple}
+            hitSlop={commonStyles.hitSlop}>
             <Back style={styles.backIcon} />
           </Pressable>
 

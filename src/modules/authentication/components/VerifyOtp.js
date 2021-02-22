@@ -86,7 +86,10 @@ const VerifyOtp = (props) => {
               <Text style={styles.coloredText}>{'00:' + seconds}</Text>
             </Text>
           ) : (
-            <Pressable onPress={resend} android_ripple={ripple}>
+            <Pressable
+              onPress={resend}
+              android_ripple={ripple}
+              hitSlop={commonStyles.hitSlop}>
               <Text style={[styles.resendText, styles.coloredText]}>
                 {Strings.resend}
               </Text>

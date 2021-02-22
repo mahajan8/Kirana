@@ -11,6 +11,7 @@ import {getKeyByValue, ripple} from '../../../utils/utility/Utils';
 import {Actions} from 'react-native-router-flux';
 import {styles} from '../styles/addressListModalStyles';
 import {setCartLocation} from '../CartActions';
+import {commonStyles} from '../../commons/styles/commonStyles';
 
 const AddressListModal = (props) => {
   let {visible, setVisible, cartLocation, addresses} = props;
@@ -60,7 +61,9 @@ const AddressListModal = (props) => {
       <Pressable style={styles.innerContainer}>
         <View style={styles.headingContainer}>
           <Text style={styles.heading}>{Strings.selectDeliveryAddress}</Text>
-          <Pressable onPress={() => setVisible(false)}>
+          <Pressable
+            onPress={() => setVisible(false)}
+            hitSlop={commonStyles.hitSlop}>
             <Cross />
           </Pressable>
         </View>

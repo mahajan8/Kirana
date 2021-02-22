@@ -39,7 +39,10 @@ const StoreHeader = (props) => {
       <View style={styles.darkBg} />
       <View style={styles.storeInfoContainer}>
         <View style={[styles.rowContainer, styles.storeDetailsContainer]}>
-          <Pressable style={styles.backArrow} onPress={Actions.pop} hitSlop={commonStyles.hitSlop}>
+          <Pressable
+            style={styles.backArrow}
+            onPress={Actions.pop}
+            hitSlop={commonStyles.hitSlop}>
             <BackArrow />
           </Pressable>
           <View>

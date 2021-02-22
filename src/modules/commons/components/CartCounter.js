@@ -7,6 +7,7 @@ import {Actions} from 'react-native-router-flux';
 import {selectStore} from '../../home/HomeActions';
 import {ripple} from '../../../utils/utility/Utils';
 import {styles} from '../styles/cartCounterStyles';
+import {commonStyles} from '../styles/commonStyles';
 
 const CartCounter = (props) => {
   const {item_quantity_count, store} = props.cart;
@@ -20,6 +21,7 @@ const CartCounter = (props) => {
     <Pressable
       style={styles.container}
       onPress={onCartClicked}
+      hitSlop={commonStyles.hitSlop}
       android_ripple={ripple}>
       <Cart
         width={EStyleSheet.value('$spacingExtraMedium')}

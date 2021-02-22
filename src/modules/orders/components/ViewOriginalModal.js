@@ -6,6 +6,7 @@ import Cross from '../../../assets/images/cross.svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Strings} from '../../../utils/values/Strings';
 import OrderItem from './OrderItem';
+import {commonStyles} from '../../commons/styles/commonStyles';
 
 const ViewOriginalModal = (props) => {
   let {visible, setVisible, originalItem} = props;
@@ -19,7 +20,9 @@ const ViewOriginalModal = (props) => {
         <View style={styles.titleView}>
           <Text style={styles.titleText}>{Strings.originalItem}</Text>
 
-          <Pressable onPress={() => setVisible(false)}>
+          <Pressable
+            onPress={() => setVisible(false)}
+            hitSlop={commonStyles.hitSlop}>
             <Cross
               width={EStyleSheet.value('$spacingExtraMedium')}
               height={EStyleSheet.value('$spacingExtraMedium')}
