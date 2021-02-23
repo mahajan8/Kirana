@@ -26,7 +26,7 @@ const CartSelectedAddress = (props) => {
     cartLocation && addresses.find((obj) => obj.id === cartLocation.id);
 
   return (
-    <View>
+    <Pressable onPress={props.addAddress}>
       {!gmapApiLoading && (
         <View
           style={[
@@ -106,7 +106,7 @@ const CartSelectedAddress = (props) => {
           />
         ) : null}
       </View>
-    </View>
+    </Pressable>
   );
 };
 

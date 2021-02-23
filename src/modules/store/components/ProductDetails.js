@@ -16,6 +16,7 @@ import {updateProductQuantity} from '../Api';
 import {connect} from 'react-redux';
 import AlertModal from '../../commons/components/AlertModal';
 import {Colors} from '../../../utils/values/Colors';
+import {Actions} from 'react-native-router-flux';
 
 const ProductDetails = (props) => {
   let {
@@ -52,16 +53,25 @@ const ProductDetails = (props) => {
     <SafeArea>
       <CartHeader />
       <View style={styles.container}>
-        <Image
-          source={{
-            uri: getMediaUrl(
-              product_images.length
+        <Pressable
+          onPress={() =>
+            Actions.productImage({
+              image: product_images.length
                 ? encodeURIComponent(product_images[0].path)
                 : null,
-            ),
-          }}
-          style={styles.productImage}
-        />
+            })
+          }>
+          <Image
+            source={{
+              uri: getMediaUrl(
+                product_images.length
+                  ? encodeURIComponent(product_images[0].path)
+                  : null,
+              ),
+            }}
+            style={styles.productImage}
+          />
+        </Pressable>
         <Text style={styles.price}>
           {Strings.currency}{' '}
           {cartProductObj ? cartProductObj.total_price : store_price}
