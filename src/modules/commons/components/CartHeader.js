@@ -90,7 +90,9 @@ const CartHeader = (props) => {
             ref={inputRef}
           />
           {searchValue ? (
-            <Pressable onPress={() => onSearchChange('')}>
+            <Pressable
+              onPress={() => onSearchChange('')}
+              hitSlop={commonStyles.hitSlop}>
               <Cross />
             </Pressable>
           ) : null}

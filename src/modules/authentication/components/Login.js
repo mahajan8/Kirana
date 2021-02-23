@@ -93,13 +93,19 @@ const Login = (props) => {
             />
             <View style={styles.bottomTextContainer}>
               <Text style={styles.termsText}>{Strings.accepting}</Text>
-              <Pressable onPress={tncClick} android_ripple={ripple}>
+              <Pressable
+                onPress={tncClick}
+                android_ripple={ripple}
+                hitSlop={commonStyles.hitSlop}>
                 <Text style={[styles.termsText, styles.coloredText]}>
                   {Strings.terms}
                 </Text>
               </Pressable>
               <Text style={styles.termsText}>{Strings.and}</Text>
-              <Pressable onPress={privacyPolicyClick} android_ripple={ripple}>
+              <Pressable
+                onPress={privacyPolicyClick}
+                android_ripple={ripple}
+                hitSlop={commonStyles.hitSlop}>
                 <Text style={[styles.termsText, styles.coloredText]}>
                   {Strings.privacy}
                 </Text>

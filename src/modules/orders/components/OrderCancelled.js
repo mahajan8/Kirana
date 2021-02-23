@@ -7,12 +7,16 @@ import Back from '../../../assets/images/back-arrow.svg';
 import {Actions} from 'react-native-router-flux';
 import {Strings} from '../../../utils/values/Strings';
 import Button from '../../commons/components/Button';
+import {commonStyles} from '../../commons/styles/commonStyles';
 
 const OrderCancelled = (props) => {
   return (
     <SafeArea>
       <View style={styles.container}>
-        <Pressable onPress={Actions.pop} style={styles.backIcon}>
+        <Pressable
+          onPress={Actions.pop}
+          style={styles.backIcon}
+          hitSlop={commonStyles.hitSlop}>
           <Back />
         </Pressable>
         <OrderCancel />

@@ -7,6 +7,7 @@ import Check from '../../../assets/images/green_check.svg';
 import {styles} from '../styles/pickerStyles';
 import ModalContainer from './ModalContainer';
 import {ripple} from '../../../utils/utility/Utils';
+import {commonStyles} from '../styles/commonStyles';
 
 const Picker = (props) => {
   const {
@@ -53,7 +54,8 @@ const Picker = (props) => {
 
             <Pressable
               onPress={() => setVisible(false)}
-              android_ripple={ripple}>
+              android_ripple={ripple}
+              hitSlop={commonStyles.hitSlop}>
               <Cross
                 width={EStyleSheet.value('$spacingExtraMedium')}
                 height={EStyleSheet.value('$spacingExtraMedium')}

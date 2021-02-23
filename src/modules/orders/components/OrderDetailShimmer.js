@@ -1,21 +1,25 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Pressable} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Back from '../../../assets/images/back-arrow.svg';
 import {styles} from '../styles/orderDetailShimmerStyles';
 import OrderItemShimmer from './OrderItemShimmer';
 import FromIcon from '../../../assets/images/order_location_from.svg';
 import ToIcon from '../../../assets/images/order_location_to.svg';
+import {commonStyles} from '../../commons/styles/commonStyles';
+import {Actions} from 'react-native-router-flux';
 
 const OrderDetailShimmer = () => {
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.headerRow}>
-          <Back
-            width={EStyleSheet.value('$spacingNormalMedium')}
-            height={EStyleSheet.value('$spacingExtraMedium')}
-          />
+          <Pressable hitSlop={commonStyles.hitSlop} onPress={Actions.pop}>
+            <Back
+              width={EStyleSheet.value('$spacingNormalMedium')}
+              height={EStyleSheet.value('$spacingExtraMedium')}
+            />
+          </Pressable>
           <View style={styles.helpText} />
         </View>
 
