@@ -40,7 +40,7 @@
     "react-native-permissions": "^3.0.0",
     "react-native-razorpay": "^2.2.2",
     "react-native-reanimated": "^1.13.0",
-    "react-native-router-flux": "^4.2.0",
+    "react-native-router-flux": "git+https://github.com/kiranakart/react-native-router-flux.git",
     "react-native-screens": "^2.13.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-status-bar-height": "^2.6.0",
