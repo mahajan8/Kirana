@@ -37,6 +37,25 @@ const List = (props) => {
     <ProductBox key={`product${item + index}`} onPress={onPress} item={item} />
   );
 
+  const renderList = (item, index) => {
+    if (item.viewAll) {
+      // View all button after 9 products
+      return (
+        <View style={styles.viewAllContainer} key={'viewAll'}>
+          <Button
+            Style={styles.viewAllButton}
+            labelStyle={styles.viewAllLabel}
+            label={Strings.viewAll}
+            bordered
+            onPress={onMorePress && onMorePress}
+          />
+        </View>
+      );
+    } else {
+      return renderProduct(item, index);
+    }
+  };
+
   return (
     <View>
       <View
@@ -44,24 +63,9 @@ const List = (props) => {
         {renderHeader()}
         {/* Horizontal Product List */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {horizontalList.map((item, index) => {
-            if (item.viewAll) {
-              // View all button after 9 products
-              return (
-                <View style={styles.viewAllContainer} key={'viewAll'}>
-                  <Button
-                    Style={styles.viewAllButton}
-                    labelStyle={styles.viewAllLabel}
-                    label={Strings.viewAll}
-                    bordered
-                    onPress={onMorePress && onMorePress}
-                  />
-                </View>
-              );
-            } else {
-              return renderProduct(item, index);
-            }
-          })}
+          {horizontalList.length
+            ? horizontalList.map(renderList)
+            : list.map(renderList)}
         </ScrollView>
       </View>
       <View style={styles.seperator} />
