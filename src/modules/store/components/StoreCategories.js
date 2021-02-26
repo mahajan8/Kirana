@@ -35,7 +35,6 @@ const StoreCategories = (props) => {
       listRef.current.scrollToIndex({
         index: 0,
         viewPosition: 1,
-        animated: false,
       });
     }
   }, [props.tabPressed]);

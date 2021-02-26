@@ -2051,10 +2051,10 @@
     "query-string" "^6.13.6"
     "react-is" "^16.13.0"
 
-"@react-navigation/native@^3.8.3":
-  "integrity" "sha512-1yLd2pi8SK3wPC58mWZ5fjW5uYr1gmMN8YwjkA2qVjyVYfzzctRkoFDu8poO5UzxEIgf/4ns6ezBtKY1Q601UQ=="
-  "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-3.8.3.tgz"
-  "version" "3.8.3"
+"@react-navigation/native@^3.8.4":
+  "integrity" "sha512-gXSVcL7bfFDyVkvyg1FiAqTCIgZub5K1X/TZqURBs2CPqDpfX1OsCtB9D33eTF14SpbfgHW866btqrrxoCACfg=="
+  "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-3.8.4.tgz"
+  "version" "3.8.4"
   dependencies:
     "hoist-non-react-statics" "^3.3.2"
     "react-native-safe-area-view" "^0.14.9"
@@ -4895,6 +4895,11 @@
   "version" "7.0.1"
   dependencies:
     "to-regex-range" "^5.0.1"
+
+"filter-obj@^1.1.0":
+  "integrity" "sha1-mzERErxsYSehbgFsbF1/GeCAXFs="
+  "resolved" "https://registry.npmjs.org/filter-obj/-/filter-obj-1.1.0.tgz"
+  "version" "1.1.0"
 
 "finalhandler@1.1.2":
   "integrity" "sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA=="
@@ -8454,11 +8459,12 @@
   "version" "6.9.4"
 
 "query-string@^6.13.6":
-  "integrity" "sha512-CsGs8ZYb39zu0WLkeOhe0NMePqgYdAuCqxOYKDR5LVCytDZYMGx3Bb+xypvQvPHVPijRXB0HZNFllCzHRe4gEA=="
-  "resolved" "https://registry.npmjs.org/query-string/-/query-string-6.13.7.tgz"
-  "version" "6.13.7"
+  "integrity" "sha512-In3o+lUxlgejoVJgwEdYtdxrmlL0cQWJXj0+kkI7RWVo7hg5AhFtybeKlC9Dpgbr8eOC4ydpEh8017WwyfzqVQ=="
+  "resolved" "https://registry.npmjs.org/query-string/-/query-string-6.14.0.tgz"
+  "version" "6.14.0"
   dependencies:
     "decode-uri-component" "^0.2.0"
+    "filter-obj" "^1.1.0"
     "split-on-first" "^1.0.0"
     "strict-uri-encode" "^2.0.0"
 
@@ -8641,10 +8647,8 @@
   dependencies:
     "fbjs" "^1.0.0"
 
-"react-native-router-flux@^4.2.0":
-  "integrity" "sha512-ab6HZNKNfYhbk/UEiwSGOY6/lhikybOIGjL8CV9bQSLn2sNT1hkAJ1tRReQQVxHlgNI7N4oWfuH1ewk9rePsRA=="
-  "resolved" "https://registry.npmjs.org/react-native-router-flux/-/react-native-router-flux-4.2.0.tgz"
-  "version" "4.2.0"
+"react-native-router-flux@git+https://github.com/kiranakart/react-native-router-flux.git":
+  "resolved" "git+ssh://git@github.com/kiranakart/react-native-router-flux.git#f2ad8463faed047c9b2bb7a06ba2eb30022ce62f"
   dependencies:
     "@babel/runtime" "^7.6.0"
     "add" "^2.0.6"
@@ -8738,7 +8742,7 @@
     "unimodules-sensors-interface" "~5.4.0"
     "unimodules-task-manager-interface" "~5.4.0"
 
-"react-native@*", "react-native@0.63.3":
+"react-native@0.63.3":
   "integrity" "sha512-71wq13uNo5W8QVQnFlnzZ3AD+XgUBYGhpsxysQFW/hJ8GAt/J5o+Bvhy81FXichp6IBDJDh/JgfHH2gNji8dFA=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.63.3.tgz"
   "version" "0.63.3"
@@ -8772,9 +8776,9 @@
     "whatwg-fetch" "^3.0.0"
 
 "react-navigation-drawer@^2.2.1":
-  "integrity" "sha512-GvHHqH8Aw9yRpJ0xc/7sPxRoGs0CZu/01THRfwY+qzrP3mP/V0GeFnL5Y2+EFd5SLrKjbQho8GmP9SEX7xVrig=="
-  "resolved" "https://registry.npmjs.org/react-navigation-drawer/-/react-navigation-drawer-2.6.0.tgz"
-  "version" "2.6.0"
+  "integrity" "sha512-BKQSTpFPGVI3caFlIbY921NYTRDAf9XFCCmyy4aDlxZLI5FNh8FqzrG10voc5AGy7RegjLdNkkJa40ugu0I5jA=="
+  "resolved" "https://registry.npmjs.org/react-navigation-drawer/-/react-navigation-drawer-2.7.0.tgz"
+  "version" "2.7.0"
 
 "react-navigation-stack@^1.7.3":
   "integrity" "sha512-1gksFi/g/Lg9sBhgLlD0OiEB5xnatHb4C0eNMA5tli9cTVlhq375XNPIqOiTyftibBmjdApAsZFj5srUCoOu/w=="
@@ -8784,9 +8788,9 @@
     "prop-types" "^15.7.2"
 
 "react-navigation-tabs@^2.5.2":
-  "integrity" "sha512-0J4QiQ1V1e59gjW6rm2xFXVCEDcznuJUoKthFfEJMWjiaZNgZ2xzpdqhiIyq6KtVJx6o3OTwrgQrBhJMXNQW5Q=="
-  "resolved" "https://registry.npmjs.org/react-navigation-tabs/-/react-navigation-tabs-2.10.1.tgz"
-  "version" "2.10.1"
+  "integrity" "sha512-mrnHfTVKVvoy5AWJY3vLt6cQLZQlVLgGUykTZerFBdTmxC/rFdsv+y2ec+rmSNy7u5nX+hlQBFvm/MIJ7w01wQ=="
+  "resolved" "https://registry.npmjs.org/react-navigation-tabs/-/react-navigation-tabs-2.11.0.tgz"
+  "version" "2.11.0"
   dependencies:
     "hoist-non-react-statics" "^3.3.2"
     "react-lifecycles-compat" "^3.0.4"
@@ -8794,12 +8798,12 @@
     "react-native-tab-view" "^2.15.2"
 
 "react-navigation@^4.x":
-  "integrity" "sha512-tNBQQzbw0PVo9FLypQUUCISMcXW0wCW8oQeHtY0spWf35KC3IZHq/WcBm4E956wFsaqrDMGCUnyaVrxZNSuUGg=="
-  "resolved" "https://registry.npmjs.org/react-navigation/-/react-navigation-4.4.3.tgz"
-  "version" "4.4.3"
+  "integrity" "sha512-08Nzy1aKEd73496CsuzN49vLFmxPKYF5WpKGgGvkQ10clB79IRM2BtAfVl6NgPKuUM8FXq1wCsrjo/c5ftl5og=="
+  "resolved" "https://registry.npmjs.org/react-navigation/-/react-navigation-4.4.4.tgz"
+  "version" "4.4.4"
   dependencies:
     "@react-navigation/core" "^3.7.9"
-    "@react-navigation/native" "^3.8.3"
+    "@react-navigation/native" "^3.8.4"
 
 "react-redux@^7.2.2":
   "integrity" "sha512-8+CQ1EvIVFkYL/vu6Olo7JFLWop1qRUeb46sGtIMDCSpgwPQq8fPLpirIB0iTqFe9XYEFPHssdX8/UwN6pAkEA=="
@@ -8827,7 +8831,7 @@
     "react-is" "^16.8.6"
     "scheduler" "^0.19.1"
 
-"react@*", "react@16.13.1":
+"react@16.13.1":
   "integrity" "sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.13.1.tgz"
   "version" "16.13.1"
