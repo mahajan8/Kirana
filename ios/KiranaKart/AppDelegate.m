@@ -45,7 +45,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [GMSServices provideAPIKey:@"AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc"];
+  [GMSServices provideAPIKey:@"MAPS_API_KEY"];
   [self registerForPush];
     // integrate CleverTap SDK using the autoIntegrate option
 //  [CleverTap autoIntegrate];

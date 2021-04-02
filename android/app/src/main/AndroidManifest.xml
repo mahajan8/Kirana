@@ -39,7 +39,7 @@
           android:value="03b-0b0"/> -->
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyDfGkyVsGaqoBQsTAAttQH-p2sDuqHqAmc"/>
+        android:value="MAPS_API_KEY"/>
       <meta-data android:name="CLEVERTAP_USE_GOOGLE_AD_ID" android:value="1"/> 
       <meta-data android:name="FCM_SENDER_ID" android:value="id:654937786237"/>
       <meta-data android:name="CLEVERTAP_BACKGROUND_SYNC" android:value="1"/>
